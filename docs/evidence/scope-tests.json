@@ -1,0 +1,14 @@
+{
+  "recorded_at": "2026-11-02T00:55:46.615862+00:00",
+  "python": "3.12.14",
+  "command": "PYTHONPATH=src python3 -m unittest discover -s tests -q",
+  "tests": 209,
+  "passed": 209,
+  "failed": 0,
+  "previous_regressions": 193,
+  "new_contracts": 16,
+  "live_source_evidence": "scope-primary-snapshots.json",
+  "real_100_company_financial_acceptance": false,
+  "scope_approved": 0,
+  "remote_actions_run": false
+}

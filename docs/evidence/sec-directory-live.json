@@ -1,0 +1,29 @@
+{
+  "attempted_at": "2026-11-01T17:56:37.753724+00:00",
+  "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+  "method": "direct Python HTTPS",
+  "real_financial_companies_validated": 0,
+  "status": "success",
+  "sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+  "bytes": 522995,
+  "directory_entries": 10430,
+  "retrieved_at": "2026-11-01T17:56:42.116453+00:00",
+  "identity_checks": [
+    {
+      "ticker": "AAPL",
+      "cik": "0000320193"
+    },
+    {
+      "ticker": "MSFT",
+      "cik": "0000789019"
+    },
+    {
+      "ticker": "NVDA",
+      "cik": "0001045810"
+    },
+    {
+      "ticker": "BRK-B",
+      "cik": "0001067983"
+    }
+  ]
+}

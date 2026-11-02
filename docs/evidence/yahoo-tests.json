@@ -1,0 +1,18 @@
+{
+  "recorded_at": "2026-11-01T19:43:11.468471+00:00",
+  "code_commit": "522f003ee07d53a2f014bef1d122f123e471bb46",
+  "python": "3.12.14",
+  "tests_run": 106,
+  "failures": 0,
+  "errors": 0,
+  "command": "PYTHONPATH=src python3 -m unittest discover -s tests -q",
+  "real_assets_cases": 3,
+  "yahoo_accepted": 1,
+  "sec_fallbacks_after_period_mismatch": 2,
+  "numeric_original_filing_matches": 3,
+  "yahoo_http_requests": 3,
+  "sec_http_requests": 0,
+  "remote_actions_run": false,
+  "all_four_sources_accepted": false,
+  "hundred_company_acceptance": false
+}

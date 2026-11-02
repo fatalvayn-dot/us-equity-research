@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "companies": [
+    {
+      "symbol": "NVDA",
+      "issuer_id": "0001045810",
+      "period_start": "2025-01-27",
+      "period_end": "2026-01-25",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure"
+      ],
+      "scope_status": "pending_scope",
+      "scope_reason": "fund_legal_type_and_sector_model_not_accepted",
+      "period_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "sha256": "d9135ae2801ec96e80398e2ddf0daa523b3a500ccf939ecf2ff150bdd13ab0dc",
+        "retrieved_at": "2026-11-02T02:12:31.172984+00:00",
+        "fixture": "tests/fixtures/annual/0001045810-0001045810-26-000021.html.gz"
+      }
+    },
+    {
+      "symbol": "AAPL",
+      "issuer_id": "0000320193",
+      "period_start": "2024-09-29",
+      "period_end": "2025-09-27",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure"
+      ],
+      "scope_status": "pending_scope",
+      "scope_reason": "fund_legal_type_and_sector_model_not_accepted",
+      "period_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "sha256": "056f733f13ff7407e64dc81fb96da3c3c55a6ba429bf094f57cb6bd472231f82",
+        "retrieved_at": "2026-11-02T02:12:34.616416+00:00",
+        "fixture": "tests/fixtures/annual/0000320193-0000320193-25-000079.html.gz"
+      }
+    },
+    {
+      "symbol": "MSFT",
+      "issuer_id": "0000789019",
+      "period_start": "2025-07-01",
+      "period_end": "2026-06-30",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure"
+      ],
+      "scope_status": "pending_scope",
+      "scope_reason": "fund_legal_type_and_sector_model_not_accepted",
+      "period_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "sha256": "a2e8af9a97a682ba3b408c9557ec6f0f3dbd4db6f600d310ae23ebe5b3c827a4",
+        "retrieved_at": "2026-11-02T02:12:38.475331+00:00",
+        "fixture": "tests/fixtures/annual/0000789019-0001193125-26-323660.html.gz"
+      }
+    },
+    {
+      "symbol": "GOOGL",
+      "issuer_id": "0001652044",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure"
+      ],
+      "scope_status": "pending_scope",
+      "scope_reason": "fund_legal_type_and_sector_model_not_accepted",
+      "period_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm",
+        "sha256": "bab3d2601c394c4b603fa4ae30165a65e123a37087a172c8e4146dba0c80ab82",
+        "retrieved_at": "2026-11-02T03:26:34.535812+00:00",
+        "fixture": "tests/fixtures/annual-batch/bab3d2601c394c4b603fa4ae30165a65e123a37087a172c8e4146dba0c80ab82.html.gz"
+      }
+    },
+    {
+      "symbol": "AMZN",
+      "issuer_id": "0001018724",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure"
+      ],
+      "scope_status": "pending_scope",
+      "scope_reason": "fund_legal_type_and_sector_model_not_accepted",
+      "period_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm",
+        "sha256": "3702599045ec83f3faca3186c42b62247d1ec0e3bdf47c7f8acc7305b858f139",
+        "retrieved_at": "2026-11-02T03:26:37.898566+00:00",
+        "fixture": "tests/fixtures/annual-batch/3702599045ec83f3faca3186c42b62247d1ec0e3bdf47c7f8acc7305b858f139.html.gz"
+      }
+    },
+    {
+      "symbol": "AVGO",
+      "issuer_id": "0001730168",
+      "period_start": "2024-11-04",
+      "period_end": "2025-11-02",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure"
+      ],
+      "scope_status": "pending_scope",
+      "scope_reason": "fund_legal_type_and_sector_model_not_accepted",
+      "period_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000121/avgo-20251102.htm",
+        "sha256": "789c977a9e365d8f6eb3d6b3e12cce52047fc0660128732643e6558d3422bfdb",
+        "retrieved_at": "2026-11-02T03:26:41.010589+00:00",
+        "fixture": "tests/fixtures/annual-batch/789c977a9e365d8f6eb3d6b3e12cce52047fc0660128732643e6558d3422bfdb.html.gz"
+      }
+    },
+    {
+      "symbol": "META",
+      "issuer_id": "0001326801",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure"
+      ],
+      "scope_status": "pending_scope",
+      "scope_reason": "fund_legal_type_and_sector_model_not_accepted",
+      "period_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/meta-20251231.htm",
+        "sha256": "5c4096ceb780d0fb52f3e3da5164ead16c58030223b453b0386ef2eb1bad8011",
+        "retrieved_at": "2026-11-02T03:26:45.341532+00:00",
+        "fixture": "tests/fixtures/annual-batch/5c4096ceb780d0fb52f3e3da5164ead16c58030223b453b0386ef2eb1bad8011.html.gz"
+      }
+    },
+    {
+      "symbol": "TSLA",
+      "issuer_id": "0001318605",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure"
+      ],
+      "scope_status": "pending_scope",
+      "scope_reason": "fund_legal_type_and_sector_model_not_accepted",
+      "period_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+        "sha256": "6613b0ffabe8e9b2668eef50f40540756bd4ef03e2f633d489ca83aa58b99729",
+        "retrieved_at": "2026-11-02T03:26:48.334467+00:00",
+        "fixture": "tests/fixtures/annual-batch/6613b0ffabe8e9b2668eef50f40540756bd4ef03e2f633d489ca83aa58b99729.html.gz"
+      }
+    }
+  ],
+  "scope_approved": false
+}

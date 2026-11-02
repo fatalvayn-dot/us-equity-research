@@ -1,0 +1,1232 @@
+# Development status
+
+## 2026-11-02 — GitHub import after access became available (latest)
+
+Target repository is now accessible with push/admin permission. Existing main
+commit de31dcbeaf131ab641e58a2601ff5f4cc28bc191 contains the initial README only;
+PROJECT_BRIEF and DEVELOPMENT_STATUS were absent. Open PR #1 was inspected at
+7905bac948df1e10b4184c0bcabe2c65828ed42c. Its independent quality module and five
+tests are preserved verbatim in this import; its branch was not overwritten.
+No Actions runs were returned for either inspected commit. No concurrent main
+change was observed before branching. radar-agent remains untouched because no
+authorized archive API is exposed. Repository is already public; visibility was
+not changed. No repository creation, force push or unrelated-root merge used.
+
+Imported the complete tracked v0.17.0 checkpoint (3d0c9b07b14ce788d5875ed82919d72730331cc8),
+recorded public response fixtures, original test evidence, project brief and
+three-version Python CI workflow onto a feature branch rooted at existing main.
+Operational SQLite caches, secrets, Git bundle and temporary files are excluded.
+Prior local history remains in the existing checkpoint rather than replacing
+the remote root. PR #1 provenance: https://github.com/fatalvayn-dot/us-equity-research/pull/1.
+
+Tests: 329/329 local unittest tests passed on Python 3.12.14 (324 checkpoint
+regressions plus 5 preserved PR #1 tests). This is an offline regression replay,
+not a new live financial verification. Remote Actions and PR/merge evidence
+will be recorded after publishing and checking the actual run.
+
+No new live requests or company acceptance. Stage 1 architecture/model/test
+baseline is imported; stage 2 remains partial and sector economics, valuation,
+risk, 100-company financial acceptance and all later gates remain incomplete.
+The previous status entries describe evidence at the time of each local run;
+their GitHub-access blocker is resolved by this import. Finnhub live validation
+still lacks an existing configured key. No paid service or permission requested.
+
+Next: validate remote CI and merge the import, then add sector/profile model
+eligibility using primary SEC metadata; unknown/bank/insurance/REIT/BDC profiles
+must not acquire generic cash-flow interpretation or investment approval.
+
+## 2026-11-02 — Traceable exact-input financial arithmetic (latest)
+
+Branch: feat/traceable-calculations, based on local 4f899d6 checkpoint.
+Code commit: e9761d0b1393c5d5a20152aec0742c1ff21dd957 (local only).
+Final checkpoint commit is in delivery CHECKPOINT.txt. Fresh target metadata
+returned 404; main, open PRs and Actions cannot be inspected. No repository-create/
+archive operation exposed; radar-agent untouched. No push/PR/merge/Actions run;
+remote evidence links unavailable. Version 15 retained ZIP passed all CRC checks
+and its status matched the clean local baseline before branching. No concurrent
+Git change observed. The prior truncated-ZIP issue is resolved for this baseline.
+
+Completed v0.17.0: frozen eight-formula arithmetic registry distinguishes exact
+NetIncomeLoss/ProfitLoss and contract-revenue/total-Revenues margins, OCF margins,
+and cash after PP&E vs ProductiveAssets payments. No implicit alternate field,
+calendar normalization, annualization, score threshold or owner-earnings label.
+Caller specifies CIK, exact duration, currency and aware cutoff. Each operand
+must match its literal field/accounting identity and FactRequest chronology,
+including publication and original retrieval. A raw-source SHA is required.
+Full input facts/provenance and semantic-review flags accompany results.
+
+Typed no-value outcomes cover missing fields, invalid identity/definition/period/
+currency, future observation/publication, missing source evidence, nonpositive
+ratio denominators, unsupported negative payment sign and excessive magnitude.
+Genuine zero payments and negative profit/cash arithmetic remain valid; nothing
+is floored, filled or clamped. Ratio results are dimensionless, with input
+currency retained separately; subtraction results retain currency. Decimal
+precision is local and sufficient for exact large-value subtraction. No global
+rounding state or financial provider fallback changes a calculation.
+
+Recorded eight-company sample: 64 explicitly requested formula variants, 24
+calculated_arithmetic_only results and 40 pending_data variants. The pending
+variants lack the exact requested operands, including intentional alternative
+accounting families; no replacement is attempted. All eight companies have
+three available arithmetic results. Inputs combine the prior source-archived
+facts and separately verified literal supplemental fields. No new financial
+HTTP request or live-source acceptance run. Cutoff covers original observed
+facts; this is not proof of historical-vintage/backtest eligibility.
+Evidence: calculation-sample.json, scripts/verify_calculations.py. Complete
+inputs, exact formula/date/currency/cutoff and original source hashes are retained.
+
+Every calculation explicitly keeps sector_model_supported, scope_approved and
+investment_approved false. This layer validates arithmetic and input contracts,
+not sector economics, valuation, risk ratings, statistical prediction or a
+100-point score. Cash after specified payments is not presented as a universally
+complete FCF or owner-earnings definition. Sector dispatch/eligibility must be
+validated before ratios can support investment interpretation. Existing source,
+legal-type, missing narrower fields and AMZN direct-liability gaps are unchanged.
+
+Tests: 324/324 local tests passed on Python 3.12.14 (309 regressions + 15 contracts).
+Coverage includes exact ratio/cash arithmetic, real zero vs missing, negative
+profit, denominator/sign guards, exact definition vs broader alias, cross-company/
+period/currency isolation, future-data cutoff rejection, provenance requirements,
+isolated Decimal precision and recorded-input reproducibility for all 24 results.
+Synthetic known-answer arithmetic tests and recorded replay are not sector-model
+acceptance or independent validation of economic usefulness. git diff --check
+passed. Evidence: calculation-tests.json. No remote Actions execution.
+
+Failures/limits: no test failure. Forty formula variants remain without numeric
+outputs because their exact required fields are unavailable. The original five
+narrow field gaps remain; no amount of supplemental arithmetic fills them.
+Sectors/financial institutions/REIT/BDC-specific treatment, market-price valuation,
+risk models and scoring are still absent. Existing GitHub/Finnhub configuration
+blockers unchanged. No paid service, new access, real-money action or new user
+operation requested. Archive delivery uses the verified unique-path builder;
+retained-byte comparison occurs separately after this commit.
+
+Acceptance: stage 1 offline verified/remote CI pending; stage 2 partial and
+four-source live acceptance pending. This is a stage-3 arithmetic prototype,
+not accepted stage 3: valuation/risk/sector validation missing and prior gate
+incomplete. No 100-company, active approved universe, scoring/backtest/full-universe
+or final acceptance. Partial arithmetic success is not full-system completion.
+
+Next concrete task: implement source-backed sector/profile eligibility and
+calculation dispatch, explicitly isolating banks, insurers, REITs/BDCs and unknown
+issuer types from generic cash-flow interpretation. Test profiles/readiness with
+real saved SEC metadata and unsupported-sector cases before any economic score.
+Continue affirmative fund/legal-type review, exact missing-field resolution and
+bounded annual-source expansion. Keep all acceptance gates explicit.
+
+---
+
+## 2026-11-02 — Distinct accounting fields and immutable checkpoint recovery (latest)
+
+Branch: feat/distinct-accounting-fields, based on local fe31d10 checkpoint.
+Code commit: 1332a97561d8d46bebd24c4c92e55df47392d0b6 (local only).
+Final checkpoint commit is in delivery CHECKPOINT.txt. Fresh target metadata
+returned 404; main, open PRs and Actions cannot be inspected. No repository-create
+or archive operation exposed; radar-agent untouched. No push/PR/merge/Actions;
+remote evidence links unavailable. Worktree was clean before branching; no
+concurrent Git edits observed.
+
+Checkpoint issue: latest materialized version 14 ZIP and the canonical local
+ZIP were both 27,687,574 bytes with ZIP header but missing/invalid central directory.
+Their cause of truncation is not established. Latest ZIP contents could not be
+compared with local status. Surviving Git HEAD fe31d10, source/evidence and prior
+valid version 13 materialization remained intact; the prior ZIP CRC check passed
+and all 296 baseline tests passed before adding new tests. Development continued
+from that known local committed history, not from a guessed reconstruction of
+corrupt bytes. Operational public evidence databases remain available separately.
+
+Completed v0.16.0: immutable FieldSpec registry owns nine exact accounting fields.
+Original revenue (ExcludingAssessedTax), net_income (NetIncomeLoss) and
+capital_expenditure (PP&E payments) are unchanged. New independent names:
+revenue_total→us-gaap:Revenues; profit_loss→us-gaap:ProfitLoss;
+productive_asset_cash_payments→us-gaap:PaymentsToAcquireProductiveAssets.
+SEC exact requests, CLI choices and explicit batch plans support them. No aliases,
+summing or automatic equivalence to the narrower concepts were introduced.
+Finnhub now explicitly rejects fields without a verified section mapping before
+HTTP, preventing a new registry entry from falling through into a KeyError.
+Yahoo/Nasdaq new fields remain explicitly unsupported; no unearned coverage claim.
+
+Accounting readiness checks exact required names/definitions, instant/duration
+shape and common issuer/end/currency/duration-start context. Mixed periods,
+companies/currencies and incorrectly keyed facts do not become complete model
+inputs. Missing narrower fields cannot be filled by broader facts in a mapping.
+New definitions retain semantic-model-review flags. Even complete inputs are
+model-validation-pending, with sector_model_supported and investment_approved false.
+No sector valuation model, financial score or suitability approval was generated.
+
+Recorded real-response verification: five new independently requested SEC fields
+from four companies matched the exact same literal concepts in original annual
+documents: NVDA Revenues and ProductiveAssets payments; GOOGL Revenues; AMZN
+ProductiveAssets payments; AVGO ProfitLoss. This is a recorded-response replay at
+original observation times, not a new live download. Yahoo returns unsupported,
+SEC valid; deferred lower providers are never constructed. No new financial HTTP
+request. Full facts include source, CIK, period, USD, filing/accession, original
+observation/publication, accounting definition and raw-response hash. Original
+filing URLs/hashes/timestamps/context evidence retained. Five prior narrower
+fields remain pending; old sample stays 43/48. Supplemental 5/5 distinct values
+must not be labelled as filling those five missing inputs or 100-company acceptance.
+Evidence: distinct-accounting-fields.json and scripts/verify_distinct_fields.py.
+
+Tests: 309/309 local tests passed on Python 3.12.14 (296 regressions + 13 contracts).
+Coverage includes immutable registry, unchanged old definitions, explicit plans,
+wrong-definition rejection, no alias fill, mixed company/period/currency context,
+instant/duration mismatch, unsupported sources before HTTP, exact five original
+matches and source stopping. git diff --check passed. Evidence:
+distinct-fields-tests.json. Local tests are not Actions or live four-provider tests.
+
+Added scripts/build_checkpoint.py to prevent upload-source path reuse: clean
+committed worktree required, unique output directory, complete verified Git bundle,
+known public SQLite backup/integrity checks, exclusive ZIP creation, full CRC and
+commit-marker verification, plus external SHA-256 manifest. Final archive tests
+and retained-copy verification happen after this status commit and are separate
+from the 309 unit/regression results. Preserve the immutable upload path; verify
+retained bytes before updating a convenience link. Do not infer ZIP health solely
+from tests of the local Python source. Future sessions must retain this procedure.
+
+Failures/limits: corrupt latest ZIP detected and explicitly retained as a failed
+attempt; rebuilding from valid source/Git avoids silently propagating it. No test
+failure. Only SEC bindings for the new literal concepts verified by recorded data;
+other mappings and Finnhub live remain unaccepted. Broader labels do not establish
+common-share profit attribution, tax or PP&E-only scope. AMZN direct total
+liabilities still unresolved, arithmetic candidate unapproved. No new paid service,
+privilege, credential exposure, real-money action or user request. Existing remote
+and Finnhub configuration blockers unchanged.
+
+Acceptance: stage 1 offline verified/remote CI pending; stage 2 partial. No sector
+model/scoring, 100-company financial acceptance, legal active universe, backtest,
+full-universe or final acceptance. Partial new fields do not complete stages 3–8.
+
+Next concrete task: consume explicitly selected accounting specifications in
+sector-aware financial calculations, with exact-definition/period comparability
+checks and no implicit alternate-field substitution. First implement and test a
+small calculation model on the verified sample while keeping source/model gates
+unaccepted. Continue affirmative legal-type review, AMZN liability-scope review
+and bounded expansion from the 90 unstarted annual documents. Always build/upload
+from a unique verified checkpoint path and validate the retained copy.
+
+---
+
+## 2026-11-02 — Original duration reconciliation and accounting-concept diagnostics (latest)
+
+Branch: feat/original-concept-diagnostics, based on local 70c194c checkpoint.
+Code commit: d16fa183f4399632e5702da5702496ef005fc74c (local only).
+Final checkpoint commit is in delivery CHECKPOINT.txt. Fresh target GitHub
+metadata check returned 404; main, PRs and Actions cannot be inspected. No
+repository-create/archive operation exposed; legacy radar-agent untouched.
+No push/PR/merge/Actions execution; remote evidence links unavailable. Version 13
+checkpoint matched clean local status before branching; no concurrent change found.
+
+Completed v0.15.0: isolated original iXBRL concept inventory and duration checker.
+It requires literal standard concept identity, CIK, exact start/end or instant,
+non-dimensional context and explicit USD unit/namespace. Known numeric transform
+namespaces, Decimal scale/sign, strict grouping and precision are validated.
+Conflicting context/unit IDs, missing IDs, nil/dash, unsupported presentation,
+unknown transform namespaces or competing values cannot silently yield a number.
+An unsupported requested-context duplicate cannot be hidden by one parseable fact.
+Absent concept, dimensional-only, period/scope mismatch and unsupported numeric/unit
+cases remain distinct. Diagnostic alternatives never enter the resolver as
+request-equivalent facts. No accepted data value or scoring rule was changed.
+
+Actual original-response replay: all 27 previously collected duration values
+(revenue/net income/operating cash flow/capex) for the eight-company sample matched
+exact original annual facts. Of 32 duration requests, five remain uncollected;
+there are zero numeric mismatches and zero unresolved original comparisons for
+the 27 collected values. Combined with the previous 15 instant balance matches,
+42 of the 43 collected sample values now have direct original-document numeric
+matches. The remaining AMZN direct Liabilities check remains unresolved. These
+are numeric checks, not complete financial/model/legal-type acceptance.
+Evidence: original-concept-diagnostics.json, archived annual fixtures, exact source
+URLs/hashes/original retrieval dates included. No new financial HTTP request was
+made: all diagnostics reuse previously recorded original source bytes and dates.
+
+The five gaps are now distinguished using original contexts: NVDA does not
+present the requested ExcludingAssessedTax revenue or PP&E-only cash capex concepts
+in the original annual document; it does present literal Revenues and
+PaymentsToAcquireProductiveAssets facts. GOOGL's requested ExcludingAssessedTax
+revenue appears only in dimensional contexts; consolidated Revenues is separate.
+AMZN has ProductiveAssets payments, not the requested PP&E-only concept. AVGO
+has ProfitLoss, not the requested NetIncomeLoss. Exact candidate amounts/context
+IDs/taxonomy identities are retained, without asserting semantic equivalence or
+replacing the five pending fields. This is not proof of global data absence;
+other unqueried sources or custom taxonomies may contain additional evidence.
+
+AMZN balance diagnostic: original LiabilitiesAndStockholdersEquity minus original
+StockholdersEquity gives 406977000000 USD, equal to the collected Nasdaq amount.
+Both operands are direct exact non-dimensional USD instant facts for 2025-12-31.
+The result is explicitly an arithmetic candidate requiring scope/mezzanine review,
+not a disclosed us-gaap:Liabilities fact, approved derivation or cleared original
+Liabilities match. Missing potential components are never assumed zero. Prior
+15/16 direct balance report remains unchanged; no retroactive success label.
+
+Tests: 296/296 local tests passed on Python 3.12.14 (280 regressions + 16 new
+contracts), including exact scale/sign/precision, dimensional/foreign-issuer
+isolation, no alternate-concept mapping, contradictory and unsupported duplicates,
+nil/continuation/unit/transform rejection, namespace/ID integrity, instant/duration
+separation, full eight-original-source replay and unaccepted arithmetic candidate.
+git diff --check passed. Evidence: concept-diagnostic-tests.json. No Actions or
+new live financial/source acceptance claimed.
+
+Failures/limits: no test failure. Five requested fields remain pending by design
+because alternative concepts are not established equivalents. AMZN direct total
+remains unresolved despite matching arithmetic candidate. Only constrained USD
+US-GAAP numeric transforms are supported; IFRS/custom taxonomies, continuations,
+long transition periods, legal type and sector models still require work. Current
+collected count remains 43/48. No API quota/error response was fabricated as absence.
+Existing remote/Finnhub configuration blockers unchanged; no new user action,
+paid service, permission, secret exposure or real-money operation.
+
+Acceptance: stage 1 offline verified/remote CI pending; stage 2 partial. Four-source
+live acceptance/Finnhub and broad mappings remain pending. No 100-company financial,
+active approved universe, sector-model/scoring/backtest/full-universe or final
+acceptance. Original numeric matches do not complete stages 3–8.
+
+Next concrete task: introduce explicitly distinct accounting field specifications
+for consolidated Revenues, ProfitLoss and ProductiveAssets cash payments, without
+aliasing them to the existing narrower fields. Test/provider-bind them with source
+provenance and sector-model readiness rules before using them in analysis. Review
+AMZN liability scope/mezzanine evidence before any approved derived liability.
+Continue bounded annual-source expansion and affirmative fund/legal-type checks.
+
+---
+
+## 2026-11-02 — Exact raw financial response archive and original balance checks (latest)
+
+Branch: feat/raw-response-archive, based on local 49484a2 checkpoint.
+Code commit: 39953494066d7f2fc6c3bf49342dbb5045c623b5 (local only).
+Final checkpoint commit is in delivery CHECKPOINT.txt. Fresh target metadata
+check returned 404; main, open PRs and Actions remain inaccessible. No repository
+create/archive operation exposed; radar-agent untouched. No push/PR/merge/Actions
+executed; remote evidence links unavailable. Version 12 checkpoint matched clean
+local status before branching. No concurrent local changes were observed.
+
+Completed v0.14.0: ResponseArchive stores content-addressed raw public response
+bytes plus separate exact URL/hash/original-time observations in transactional
+SQLite. Integrity is checked on read and duplicate writes; timestamp-specific
+lookup cannot substitute a later observation. ArchivedTransport captures successful
+bounded unauthenticated responses without request headers. Authenticated clients,
+non-public origins and credential-bearing query names are rejected before I/O.
+Archive write failure now has distinct evidence_error status, not API_ERROR.
+Finnhub/authenticated capture is not accepted or silently enabled.
+
+Optional archive wiring preserves lazy Yahoo→SEC→Nasdaq→Finnhub resolution and
+first-valid stopping. ArchivedCompanyFacts records original disk/memory SEC
+snapshots too, with no artificial retrieval refresh or extra HTTP request.
+The legacy/default resolver behavior is retained when no archive is supplied.
+Scripts export content-addressed compressed bodies and complete observations;
+no API credential or request header is in these artifacts.
+
+Actual live ordered sample: fresh financial collection for the same eight
+companies again yielded 43 collected/48 requested fields, five pending as before.
+All 43 accepted facts now have exact archived main financial response, identity
+and (where required) unit evidence at the original observation instants. Nineteen
+public observations exported with raw bytes. Original SEC cached observations
+were imported without changing their timestamps; Yahoo/Nasdaq current responses
+were captured as requested. This proves coverage for this new run, not retroactive
+recovery of every missing raw byte from prior runs. Financial report retains its
+actual pre-release policy version; final package is v0.14.0. No numeric/scoring
+rule or missing-data standard was relaxed to obtain coverage.
+Evidence: archived-eight-financial.json, financial-response-{manifest,coverage}.json.
+All-reference coverage is true for 43 facts; this is not 43 independent filing
+value checks, a historical availability database or financial model acceptance.
+
+Independent original annual iXBRL balances: 16 Assets/Liabilities comparisons for
+eight companies, 15 exact Decimal matches and one unresolved original-concept
+check. AMZN Liabilities (Nasdaq collected 406977000000 USD, 2025-12-31) could not
+be extracted by the narrow original us-gaap:Liabilities parser. This is invalid_data
+in the original-check path, not a proven numeric mismatch or an accepted match.
+No accounting-identity reconstruction, tag substitution, zero or invented value
+was used. Exact original source URL/hash/time/fixture accompanies each check.
+Evidence: eight-original-balances.json. Five added companies now have limited
+original balance evidence; income/cash-flow, legal type and sector model checks
+remain unaccepted. Independent comparison reuses existing filing bytes and does
+not query lower-priority financial providers after a successful field result.
+
+Tests: 280/280 local tests passed on Python 3.12.14 (267 prior regressions + 13
+contracts). Coverage: restart/exact-time retrieval, body deduplication/integrity,
+credential/origin/header exclusions, archive failure classification, cached SEC
+capture without network/time refresh, every exact response reference for 43 facts,
+and separate unresolved balance result. git diff --check passed. Evidence:
+raw-response-tests.json. No remote Actions or final acceptance run.
+
+Failures/limits: one original-concept check unresolved as above; five financial
+fields still lack exact accepted values and Finnhub remains unconfigured/live
+unverified. Failed HTTP response bodies are not captured; authenticated-source
+capture needs separate handling and is deliberately unavailable. Archive is an
+evidence store, not provider freshness cache or a point-in-time/backtest database.
+Existing GitHub/Finnhub configuration blockers unchanged. No paid service, new
+permission, real-money action or new user requirement.
+
+Acceptance: stage 1 offline verified/remote CI pending; stage 2 partial. All
+100-company, legal active-universe, sector-model, scoring/backtest/full-universe
+and final gates remain unaccepted. Eight-company collection and 15 matches do
+not complete stages 3–8. No partial success is labelled full completion.
+
+Next concrete task: investigate original AMZN liability disclosure and the five
+unresolved exact-tag fields with explicit accounting-definition/unit evidence.
+Extend original-filing numeric checks beyond instant balances, keeping unsupported
+or custom taxonomies separate. Continue bounded annual-source expansion from the
+90 unstarted documents and affirmative fund/legal-type corroboration; preserve
+acceptance order and do not fabricate scores for incomplete companies.
+
+---
+
+## 2026-11-02 — Resumable annual documents and eight-company financial run (latest)
+
+Branch: feat/resumable-filing-documents, based on local a4ec919 checkpoint.
+Code commit: 8ca29c40c2c4e3af8967cd7c90187a243bf78e80 (local only).
+Final checkpoint commit is in delivery CHECKPOINT.txt. Target metadata freshly
+returned 404; main, open PRs and Actions cannot be inspected. Repository-create
+and archive operations remain absent; radar-agent untouched. No push/PR/merge/
+Actions occurred; remote evidence links unavailable. Version 11 checkpoint matched
+the clean local baseline before branching; no concurrent local change observed.
+
+Completed v0.13.0: FilingStore/DocumentRunner with exact issuer/filing/path/date
+validation before network I/O, raw-byte/source-hash/original-time SQLite checkpoints,
+six-hour freshness and a bounded new-request budget. Atomic per-document outcomes
+are versioned and saved separately from raw sources. Current parsers recompute
+from cached bytes; no old derived success silently bypasses changed code. Same-file
+renewable leases block concurrent work and expired-owner writes. KeyboardInterrupt
+keeps earlier committed sources/outcomes; hard kills may require lease expiry.
+Missing annual metadata, unsupported formats, unstarted jobs, source errors and
+independent period/share parser outcomes remain separate. Failed HTTP outcomes
+are persisted but not reused as successful raw sources.
+
+Actual original annual collection: 3 existing source fixtures were imported with
+original hashes/times, then 5 new annual reports were downloaded. The eight
+companies are NVDA, AAPL, MSFT, GOOGL, AMZN, AVGO, META and TSLA. All eight yield
+explicit annual period pairs and exact common-share contexts. Immediate repeat
+with max-new-documents=0 reused 8 raw sources, made zero transport GETs and
+recomputed both parsers. Full 100-candidate queue remains visible: 8 source
+checks, 90 annual documents not started, 2 without annual in recent metadata.
+No legal/fund-type approval follows from those eight common-title checks.
+Evidence: annual-document-{batch,resume}.json and content-addressed source fixtures.
+New-document count measures GET invocations including failures, excluding internal
+HTTP retries; unqueried documents are never marked attempted.
+
+Real financial collection using explicit annual periods: 48 field requests for
+8 companies; 43 collected and 5 pending. Sources of accepted facts: SEC 37,
+Yahoo Assets 5, Nasdaq 1. Every fact retains exact issuer/date/definition/unit,
+source URL/hash and observation/publication provenance. Pending fields: NVDA
+revenue/capex, GOOGL revenue, AMZN capex, AVGO net_income. In all five, SEC exact
+tag/period observations were absent, Yahoo/Nasdaq unsupported and Finnhub not
+configured. This is unresolved data, not proof that all sources lack it. No zero,
+substitute tag, invented score or complete-company approval was supplied.
+The financial CLI returned exit 2, as expected for pending fields.
+
+Immediate financial resume reused all 48 outcomes, with 0 new fields and 0 HTTP
+GETs under a guard that would raise on any request (no substitute responses).
+Original evidence times retained. Evidence: annual-eight-financial{,-resume}.json,
+eight-financial-resume-proof.json and annual-eight-plan.json. The five missing
+outcomes use the existing short retry delay; they are not permanent exclusions.
+Eight SEC original response bodies/hashes/times are retained in expanded fixtures.
+Expanded Yahoo/Nasdaq facts have URL/hash provenance, but not every new raw body
+was captured during this run; complete raw replay coverage for those observations
+is a next task. No independent original-filing numeric reconciliation for the
+five added companies is claimed. This is collection evidence, not financial-model
+or real 100-company acceptance.
+
+Tests: 267/267 local tests passed on Python 3.12.14 (253 regressions + 14 new
+contracts), including bounded restart, interruption, corrupt/stale source cache,
+persisted typed 429, active lease/expired writer rejection, path/origin/future
+validation, missing metadata vs unsupported document, no scope promotion, eight
+recorded source replays and 48-query plan readiness. git diff --check passed.
+Evidence: document-checkpoint-tests.json. No remote Actions run.
+
+Failures/limits: no new offline test failure. Five unresolved financial fields
+and the unconfigured fallback remain as described. Original bytes are retained
+for all annual sources and SEC snapshots; expanded Yahoo/Nasdaq raw coverage
+still incomplete. Document failure outcomes are diagnostic, not a retry scheduler;
+transport failure retries use the existing bounded transport. Separate database
+files do not share a lease. Existing GitHub/Finnhub-key blockers unchanged; no
+new user action, paid service, privilege or real-money operation requested.
+
+Acceptance: stage 1 offline verified/remote CI pending; stage 2 partial. Finnhub
+live, broad source mappings and full source replay remain unaccepted. Stages 3–8,
+100-company financial validation, legal active universe, sector models/scoring,
+backtests/full-universe/final acceptance remain unaccepted. No partial result is
+labelled complete.
+
+Next concrete task: add durable raw-response capture for expanded Yahoo/Nasdaq
+observations and independent original-filing numeric checks for the five added
+companies. Investigate the five exact-tag gaps without substitution assumptions.
+Continue annual-document collection with bounded new work from the remaining
+90 records, retain legal-type/fund/sector uncertainty, and build the verified
+100-company sample only after source/model acceptance gates pass.
+
+---
+
+## 2026-11-02 — Original annual duration contexts (latest)
+
+Branch: feat/annual-period-contexts, based on local 30a8736 checkpoint.
+Code commit: 9fca96df1b8ed3e3bb4986a71842e77913b9ef83 (local only).
+Final checkpoint commit is recorded in delivery CHECKPOINT.txt. No remote
+commit/PR/Actions links exist. Target metadata freshly returned 404; main, PRs
+and Actions remain inaccessible. Repository-create/archive operations are still
+not exposed; radar-agent untouched. Version 10 checkpoint matched clean local
+status before branching. No concurrent local changes were present.
+
+Completed v0.12.0: exact annual duration evidence from original filing contexts.
+Requires non-dimensional issuer CIK, exact annual document type, FY focus and
+matching DocumentPeriodEndDate in the same duration context. One unique explicit
+start/end pair required; competing starts, missing starts, quarterly focus, wrong
+identity, nil/truncated/future-mismatched contexts and durations over 550 days
+remain unsupported. No fiscal start is calculated from a calendar or report end.
+Multiple equivalent contexts can corroborate the same pair. Inline English date
+normalization is shared with the registered-security parser.
+
+Fixed an observed nested nonNumeric bug: an untracked inner CurrentFiscalYearEndDate
+closed the tracked outer DocumentPeriodEndDate too soon, losing its year. A fact
+stack now retains parent/child text correctly. Unsupported continuedAt/exclude
+content fails rather than being guessed. The existing three quarterly filing
+regressions remain successful. This remains a narrow evidence parser, not a
+complete XBRL engine or a fund/legal-type classifier.
+
+Real requests: three original annual HTML filings were freshly downloaded from
+submission-derived www.sec.gov archive URLs; hashes, retrieval instants and full
+compressed bytes retained. NVDA 10-K: 2025-01-27 to 2026-01-25; AAPL 10-K:
+2024-09-29 to 2025-09-27; MSFT 10-K: 2025-07-01 to 2026-06-30. Context starts
+are explicit and match the prior three-company extraction's annual starts.
+These are the same three sample companies, not three additional accepted firms.
+
+Initial live parse: three period contexts, zero registered-share matches; the
+nested-date truncation caused invalid_data in cover validation. Original outcomes
+are retained in annual-filings-live.json. After correction, replaying those same
+recorded bytes with original provenance yielded three exact period pairs and
+three registered common-share matches, with zero additional HTTP requests.
+Corrected replay is separate: annual-filings-replay.json. No new live request is
+implied by that replay. No source was relabelled or fiscal date fabricated.
+
+Prepared annual-three-plan.json with explicit durations for income/cash-flow and
+instant dates for Assets/Liabilities. All scope statuses remain pending. No
+financial value requests were executed in this run; no new four-provider or
+100-company financial acceptance. No fund exclusion, sector model or investment
+suitability follows from a common-share title/document period.
+
+Tests: 253/253 local tests passed on Python 3.12.14 (239 prior regressions and
+14 new contracts), including explicit week-calendar starts, same-context FY,
+wrong issuer, nil/dimensional/truncated content, competing starts, unsupported
+continuation, nested date text, three original annual documents and an exact
+six-field plan with instant/duration separation. git diff --check passed.
+Evidence: annual-context-tests.json. These are not remote Actions results.
+
+Failed attempts and limits: initial nested date parse invalid_data retained and
+fixed as above. Only three of 98 annual-document candidates were requested; the
+other 95 were not queried. Two earlier candidates still lack base annual records
+in the recent submissions window. Legal fund/BDC/REIT classification and broad
+registered-class/foreign-accounting support remain unresolved. Over-550-day
+transition periods and unsupported inline transformations require later work.
+Existing remote and Finnhub-key blockers unchanged. No paid service, new access,
+secret exposure or real-money action. No PR/push/merge/Actions execution occurred.
+
+Acceptance: stage 1 offline verified/remote CI pending. Stage 2 partial; Finnhub
+live and broader financial mappings still unaccepted. Annual sample evidence
+does not complete stages 3–8 or a 100-company financial test. Active approved
+universe, sector models, scoring/backtests and final acceptance remain pending.
+
+Next concrete task: extend bounded annual-document evidence collection to the
+remaining candidate queue with persisted per-document outcomes/reuse, and add
+primary fund/legal-type corroboration. Use the validated period pairs to collect
+financial facts via the existing ordered resolver, retaining missing/unsupported
+foreign and sector cases; keep acceptance gates and scope approvals separate.
+
+---
+
+## 2026-11-02 — SEC submissions and registered-share evidence (latest)
+
+Branch: feat/sec-submissions-evidence, based on local e5ba25c checkpoint.
+Code commit: 2a2cd8d53f60fb306af9f249348ba6696a9adcf6 (local only).
+Final checkpoint commit is in delivery CHECKPOINT.txt. No remote commit/PR/Actions
+links: target metadata freshly returned 404; main, open PRs and Actions could not
+be inspected. No repository-create/archive tool exposed; legacy project untouched.
+No remote push, PR, merge or Actions execution. Version 9 checkpoint matched the
+clean local baseline before branching; no concurrent local changes were present.
+
+Completed v0.11.0: bounded SEC submissions adapter with exact CIK/origin checks,
+strict complete column alignment, duplicate accession rejection, explicit annual
+report-end selection, safe primary-document URLs, raw entity/SIC labels and
+original source bytes/hash/time. Six-hour SQLite metadata cache persists original
+observations across restarts. Corrupt entries refresh safely. Additional history
+pointers are counted but not queried; recent-window absence is not global absence.
+10-K/20-F/40-F kept distinct; amendments do not create a new annual period. Legacy
+non-HTML documents are labelled unsupported, never fed to an HTML parser.
+Acceptance time labels are preserved raw, never used as intraday/backtest truth.
+
+Added a narrow original-filing cover parser: exact issuer, document date/type,
+and same-context registered symbol/common-title/exchange evidence, including
+share-class contexts. DEI namespace is checked; supported inline English date
+transformation is explicit. Non-common notes/preferred/depositary/units sharing
+a ticker cannot supply common-share evidence. Raw checkbox labels are retained
+without interpreting their rendered glyphs as booleans. This is corroboration,
+not fund exclusion, legal-type approval, sector-model approval or a scope grant.
+
+Real metadata collection: all 100 candidate CIK responses were downloaded and
+retained as compressed fixtures on 2026-11-02. First pass: 99 parsed and TTE
+invalid_data due to a legacy .paper document in older recent-window history.
+After the narrow unsupported-format correction, repeated collection used 99
+original-observation cache entries and one new TTE transport GET. All 100 then
+matched exact symbols/CIKs; 98 have explicit annual report-end dates. Two have
+no base annual in the returned recent window; they remain unresolved and older
+pages were not tried. No annual start or reporting currency was inferred.
+Evidence: sample100-submissions-{first-pass,live}.json and 100 raw fixtures.
+This is metadata validation only; no new 100-company financial values or source
+financial acceptance. Entity type operating/other and SIC descriptions are raw
+labels; BDC/REIT/fund distinctions need further primary evidence/model review.
+
+Prepared an unapproved 98-company/196-instant-query draft using only the explicit
+annual ends. USD is a requested unit, not inferred reporting currency. Duration
+starts remain unknown, two candidates remain queued, all scope statuses pending.
+No draft financial query was executed in this run. Evidence:
+sample-annual-end-plan.json, scripts/prepare_annual_end_plan.py.
+
+Registered security corroboration: existing AAPL/MSFT/NVDA quarterly filing bytes
+were replayed; all three yielded one exact common-share title/symbol/exchange
+match. MSFT notes sharing its ticker were excluded from the common-title join.
+Exact quarterly dates: AAPL 2026-06-27, MSFT 2026-09-30, NVDA 2026-07-26.
+These differ from prior annual balance-sheet comparison dates. Original source
+URL/hash/retrieval/fixture provenance is included in registered-share-replay.json.
+No new live filing download or additional company financial acceptance is claimed.
+
+Tests: 239/239 local tests passed on Python 3.12.14 (209 regressions + 30 new
+contracts). Coverage includes source identity, column drift, unsafe documents,
+future periods, unsupported legacy files, exact-end annual selection, snapshot
+cache restart/expiry/corruption, per-class cover joins, wrong issuer/date/form,
+inline dates, nil/conflicting facts, three original filings, all 100 recorded
+metadata responses and the 98-company instant-only plan. git diff --check passed.
+Evidence: submissions-tests.json. Local tests are not Actions or final acceptance.
+
+Failed attempts: TTE legacy paper metadata initially rejected; fixed and retried
+with new response, retaining first-pass evidence. Initial cover trial used annual
+comparison dates against quarterly documents and was rejected; corrected to each
+document's explicit quarterly date, never relabelled annual. Network collection
+continued independently of this parser work. No fabricated zero, secret, paid
+service, new privilege or real-money action. Existing remote/key blockers unchanged.
+
+Acceptance: stage 1 offline verified/remote CI pending; stage 2 partial (Finnhub
+live still unverified; limited field coverage). All 100 still require legal-type
+corroboration; 98 report ends are not a completed financial analysis. Stages 3–8,
+100-company financial acceptance, scoring/backtests/full universe remain unaccepted.
+
+Next concrete task: collect bounded original annual-document evidence for the
+candidate queue, corroborate registered common classes and fund/legal-type flags,
+and extract explicit fiscal start/end pairs from appropriate filing contexts.
+Retain foreign-accounting/financial/REIT/BDC cases for sector-specific treatment.
+Then execute exact-period financial batches with missing-data reconciliation;
+do not mark stage 4 accepted before preceding source/model acceptance gates.
+
+---
+
+## 2026-11-02 — Primary listing evidence for the 100-candidate queue (latest)
+
+Branch: feat/listing-scope-evidence, based on local 15dbb18 checkpoint.
+Code commit: 0a48728484ec062d218c6c6bb3b20e8e9336e753 (local only).
+Final checkpoint commit is in delivery CHECKPOINT.txt. Remote commit/PR/Actions
+URLs unavailable; no remote push, PR, merge or Actions execution occurred.
+
+Session checks: target repository metadata freshly returned 404. Main, PRs and
+Actions cannot be inspected. Available GitHub tools still lack repository-create
+and archive operations; radar-agent remains untouched. Library version 8 status
+matched the clean local baseline before the separate feature branch was opened.
+No concurrent local change was present. Existing repository/Finnhub-key blockers
+are unchanged and do not prevent this concrete offline/live code work.
+
+Completed v0.10.0: explicit validated HTTP Accept media type (JSON default,
+text/plain for directories, HTML optional), official Nasdaq Trader HTTPS mirror
+fallback, exact-source URL/hash/time preservation and separately recorded attempts.
+Fallback stops after the first valid parse. Otherlisted's observed empty legacy
+seven-field footer is accepted narrowly; eight-field data rows stay strict.
+Fund terms in the issuer portion of a name now remain pending classification,
+even when its security suffix says Common Stock.
+
+Added scope.audit_sample and opt-in live/offline replay script. Sample symbol/CIK,
+ETF/test flags, primary exchange, vendor-provided aliases, SEC identity, source
+freshness and ambiguity are checked separately. Stale exclusions are not promoted
+to current scope decisions. Complete listing evidence remains legal-type pending;
+no approved scope, financial acceptance or investment score can be emitted.
+
+Actual live requests on 2026-11-02: FTP-host HTTPS files still returned 503.
+Official www.nasdaqtrader.com/dynamic/SymDir endpoints initially returned 406
+with application/json. The same explicit endpoints succeeded with text/plain.
+Nasdaq-listed response: 5,616 rows, sha256 b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168.
+Other-listed response: 7,670 rows, sha256 ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398.
+Fresh SEC directory retrieval also succeeded; exact original response bytes,
+URLs/timestamps and attempt outcomes are preserved in scope-primary-snapshots.json
+and compressed fixtures. Both file creation labels are 1030202618:01 (2026-10-30),
+with no timezone inferred. They satisfy the explicit four-calendar-day freshness
+policy at the 2026-11-02 observation; intraday tradability is not verified.
+
+All 13,286 listing rows were retained and partitioned: 4,886 common-share
+candidates, 3,245 excluded instruments, 405 pending classification, 266 pending
+identity, 37 test issues and 4,447 out-of-scope-exchange rows. Candidates are not
+an approved active common universe. All 100 unique-CIK sample candidates matched
+positive listing flags and SEC identity; all 100 remain
+listing_evidence_complete_legal_type_pending. Fund legal status and affirmative
+share-class corroboration are still required. No financial requests were made
+for the additional 97 candidates in this run; no 100-company financial acceptance.
+
+Tests: 209/209 local tests passed on Python 3.12.14 (193 regressions + 16 contracts).
+New tests cover Accept/header injection, both source endpoints and stopping,
+malformed primary fallback, strict legacy footer variant, full recorded directory
+partition without lost rows, 100 exact identities, stale/colliding/mismatched
+scope and fund-word quarantine. Offline replay at the recorded observation time
+matched the live sample and partition counts. git diff --check passed. Evidence:
+scope-tests.json, sample100-scope-audit.json, sample100-scope-replay.json.
+No synthetic fixture is counted as live-source evidence. No remote CI run.
+
+Failed attempts retained: primary endpoint 503, initial mirror 406, and first
+full otherlisted parse invalid_data because the vendor footer has one fewer
+empty column than its data/header. The parser was corrected only for that
+observed case, then both live files and recorded-response tests passed. No
+missing data was fabricated or replaced by zero. No credential or paid service.
+
+Acceptance: stage 1 remains offline-verified/remote CI pending. Stage 2 remains
+partial (Finnhub live unverified and limited financial mappings). Stage 4 is not
+accepted: listing prechecks are not full financial validation. Stages 3–8,
+scoring/backtest/full universe/final acceptance remain unaccepted.
+
+Next concrete task: add SEC submissions/annual-filing evidence for legal issuer
+and registered common-share class, with fund/BDC/REIT distinctions retained and
+unknown evidence quarantined. Extract explicit fiscal periods for the remaining
+97 candidates from validated source records, then prepare bounded financial
+collection. Do not infer legal type from ETF=N or fiscal dates from a calendar.
+
+---
+
+## 2026-11-02 — Resumable multi-company evidence runner (latest)
+
+Branch: feat/resumable-batch, based on local 3de8418 checkpoint.
+Code commit: b7a4bfc8acff78df20d3c273ccd0cab0bc07c615 (local only).
+Final checkpoint commit is in delivery CHECKPOINT.txt; remote commit/PR/Actions
+links unavailable. No GitHub push, PR, merge or Actions run occurred.
+
+Completed: v0.9.0 SQLite per-field evidence checkpoints, exact-query/policy keys,
+original-observation TTL, short missing/error retry delay, checksum plus semantic
+validation, bounded new work, interruption recovery and owner/expiry write leases.
+Added explicit-date research-batch plan/CLI with atomic JSON output and lazy
+identity/provider construction. Source failures and identity/configuration
+failures stay typed; exception text and credential objects are never persisted.
+Out-of-scope work is skipped. Scope-approved status is not implemented; complete
+facts never imply an approved security, score, or 100-company acceptance.
+
+Tests: 193/193 passed on Python 3.12.14 (173 regressions + 20 new contracts).
+Coverage includes persisted restart, KeyboardInterrupt, expiry based on original
+observation, checksum/semantic corruption, concurrent/expired writer rejection,
+policy change, source failure isolation, exact plans and zero-work CLI behavior.
+A synthetic 100-company/200-field test verifies bookkeeping only. No synthetic
+company is counted as real validation. git diff --check passed. Evidence:
+docs/evidence/batch-tests.json. Local tests are not remote Actions.
+
+Real execution: the CLI processed 18 exact-period queries for AAPL/MSFT/NVDA.
+First bounded run saved 3 fields; resumed run reused those 3 and processed 15.
+Results: 16 collected, 2 pending (NVDA exact revenue and capex absent). Yahoo
+was called for Assets; valid existing SEC disk snapshots were reused for SEC
+financial fields. This run does not claim fresh SEC financial HTTP downloads.
+First run made 2 transport GET calls, second 3. The immediate third run reused
+all 18 saved outcomes with zero new fields and zero transport GET calls,
+including zero identity-directory requests. Two pending outcomes remain pending
+and retry after five minutes. All three reports returned exit 2 as expected.
+Evidence: batch-three-{bounded,resumed,reused}.json, batch-resume-live.json.
+Measurement counts HttpTransport.get invocations, not internal HTTP retry attempts.
+No Finnhub financial network call or key was available/used.
+
+Prepared a deterministic 100-unique-CIK audit queue from recorded Nasdaq screener
+and exact SEC ticker joins. Explicit common/ordinary name hints select candidates;
+they are not legal-class, ETF/fund, test/active or current listing proof. All 100
+remain scope-pending, 3 have previously checked exact financial periods, 97 do
+not. No 100-company financial test has run. Reproducible script and hashes:
+scripts/prepare_sample100.py, docs/evidence/sample100-audit-queue.json.
+
+Session checks: target repository metadata still 404; main, open PRs and Actions
+cannot be inspected. No repository-create/archive operations exposed; legacy
+radar-agent unchanged. Restored version 7 checkpoint matched local clean baseline
+before branching; no local concurrent work was present. Existing remote/key
+configuration blockers persist, with no new user action requested.
+
+Acceptance: stage 1 offline-verified, remote CI pending. Stage 2 partial; Finnhub
+live validation and broader source coverage remain unaccepted. Three-company
+field/resume evidence is not completed financial analysis or a verified active
+universe. Stages 3–8, including real 100-company acceptance, remain unaccepted.
+
+Failures/limits: no test failure in this run. Two genuine exact-period/tag gaps
+remain; no zero or substitute tag inserted. Batch field cache is current-evidence
+only; not a point-in-time backtest. Same-file leases do not coordinate separate
+checkpoint files; a hard kill can require lease expiry (15 minutes). Financial
+models/scoring and sector-specific acceptance are still absent. Operational
+checkpoint DB is preserved separately inside delivery archive; provider raw-cache
+files are not included, so expired evidence may require new source requests.
+
+Next concrete task: verify affirmative active listing/common-share/ETF/test
+exclusion evidence for the 100-candidate audit queue using primary-source free
+directories or filing corroboration; keep unresolved names quarantined. Fetch
+and retain explicit fiscal-period evidence for remaining candidates, then run
+bounded batches and reconcile missing fields. Do not label stage 4 complete
+before earlier financial/source acceptance gates and real validation pass.
+
+---
+
+## 2026-11-02 — Nasdaq balance sheets and ordered research CLI (latest)
+
+Branch: feat/nasdaq-financials, based on local 6b8f357 checkpoint.
+Code commit: 757df68e4997e842c51129f76db1d9f7dbf3442d (local only; GitHub URL unavailable).
+Final checkpoint commit is recorded in delivery CHECKPOINT.txt.
+
+Completed: Nasdaq Financials API adapter for exact-date Total Assets and Total
+Liabilities, with separate official per-stock unit-page validation. Explicit
+visible USD Thousands evidence drives Decimal multiplier 1,000; '$' alone is
+never a currency/scale proof. Added safe numeric/period/duplicate/missing handling,
+unit/API/identity URL/hash provenance and separate timestamps through SQLite.
+Extended the narrow original iXBRL instant checker to Liabilities; Assets wrapper
+and prior regressions retained. No income/cash-flow start date or EPS scale inferred.
+
+Added lazy four-source wiring and research-fact command. Provider factories,
+transports and Finnhub environment configuration are touched only when reached
+in Yahoo→SEC→Nasdaq→Finnhub order. An invalid lower-priority factory cannot block
+an earlier success. Configuration failures remain distinct from data absence.
+The CLI verifies identity before financial collection and emits source attempts,
+cutoff and facts; it does not emit investment scores or approval.
+
+Tests: 173/173 passed on Python 3.12.14. New coverage: 14 Nasdaq financial and
+five lazy pipeline tests, including source-unit captions, symbol/period/currency,
+no guessed zeros, exact original filing replay, cache provenance, lower-source
+stopping and bad credential factory isolation. Diff checks passed; no test failed.
+Evidence: docs/evidence/nasdaq-financial-tests.json. Remote Actions not run.
+
+Real verification: AAPL, MSFT and NVDA Nasdaq JSON and their official financial
+HTML pages fetched successfully. API values lack explicit unit scale; all three
+pages explicitly declared USD Thousands. Six instant values (Assets/Liabilities)
+matched original SEC filing contexts after scaling, with exact report dates
+retained (AAPL 2025-09-27, MSFT 2026-06-30, NVDA 2026-01-25). Unit/header/source
+checks and all original response bytes are recorded in
+nasdaq-financial-live.json and the six compressed Nasdaq fixtures. These are
+three limited company balance-sheet checks, not full financial analyses.
+
+Live end-to-end CLI: AAPL research-fact returned Yahoo period_mismatch → SEC valid
+and 359241000000 USD Assets for 2025-09-27. It stopped before Nasdaq/Finnhub
+financial client construction; valid SEC disk snapshot reused. Identity metadata
+lookup is distinct from a lower-priority financial query. Sanitized output:
+docs/evidence/ordered-cli-live.json. No Nasdaq period was calendar-aligned to Yahoo.
+
+GitHub: target metadata fresh check still 404. Main/PR/Actions inaccessible;
+no remote push, PR or merge. Creation/archive capabilities remain absent; legacy
+project untouched. Worktree clean and Library version 6 matched local status
+before branching. Existing repository/key configuration actions are unchanged.
+No new paid service, access permission or real-money action requested.
+
+Acceptance: stage 1 offline-verified/remote CI pending. Stage 2 partial: SEC
+sample financials, Yahoo Assets and Nasdaq two instant fields have live sample
+evidence; Finnhub still lacks existing-key runtime configuration/live response
+acceptance. Whole Nasdaq/whole-source financial models not accepted. Active
+common universe, 100-company, financial models/scoring, backtest, expansion and
+final acceptance remain unaccepted. Later stages are not marked complete.
+
+Limitations: Nasdaq supports only two instant fields. No publication timestamp
+in the payload; availability uses completed observation evidence. Distinct
+API/unit times remain preserved. Memory TTL only for Nasdaq; persistent cache,
+filing-triggered refresh and broader mappings pending. Unit captions cannot be
+reused for EPS/ratios or other currencies/pages. SEC/Finnhub/Nasdaq still require
+sector-appropriate financial model validation. Directory HTTP 503 and legal
+fund/activity corroboration gaps remain; discovery rows are not approved scope.
+
+Next concrete task: build a resumable multi-company evidence/readiness runner
+with explicit scope status and per-field missing/unsupported/error results.
+Start from the three verified samples, then prepare a 100-company sample with
+positive listing/common-share identity evidence and separate unresolved scope
+queue. Persist completed observations and avoid re-querying accepted source
+facts or lower-priority providers. This is coverage/preflight, not 100-company
+acceptance until scope, sources and financial checks are actually met. Retry
+transient Trader directory access later, and run Finnhub real validation when
+its existing key is configured. Import onto target main through feature PR/CI
+when available, without force-pushing unrelated local history.
+
+## 2026-11-02 — Finnhub reported-financial contracts (latest)
+
+Branch: feat/finnhub-reported, based on local cb06e2e checkpoint.
+Code commit: 5a4ef5b1440cf85c4f63ad1aa8b6a9b022837238 (local only; no GitHub URL).
+Final documentation checkpoint is recorded in delivery CHECKPOINT.txt.
+
+Completed: existing-key configuration via FINNHUB_API_KEY/FINNHUB_TOKEN,
+credential-hidden repr/conflict validation, Finnhub-only token header transport,
+no credential-bearing source URLs, echoed-token body rejection and typed
+access/quota errors. Added reported-financial adapter contracts for six exact
+GAAP concepts, CIK/period/unit/frequency/filing validation, explicit unsupported
+unitless/segmented/scaled records, conservative availability and memory caching.
+Added finnhub-fact CLI with no-network not_configured response when key absent.
+Prepared a manual GitHub Finnhub single-field workflow using the target repo
+FINNHUB_API_KEY secret; inputs are quoted via environment variables and output
+is sanitized. YAML was parsed and checked locally; workflow has NOT run remotely.
+The strict per-concept array parser is a contract prototype, not a verified
+current API report shape: the vendor report schema is loosely typed.
+
+Tests: 154/154 passed on Python 3.12.14, including 21 new synthetic Finnhub/header/
+configuration/CLI/priority/cache/provenance/period tests and all prior source
+replays. Diff checks passed. No unit test failed. Diagnostics now exit nonzero when
+no valid fact is collected, so access errors cannot yield a green smoke job.
+Final runtime code commit: 43b288e4eac1f0811e50e3c59d0370c39445f98a. Test evidence:
+docs/evidence/finnhub-tests.json. Production runtime still has no added dependency.
+Official SDK/OpenAPI references were reviewed; a temporary dev script inspected
+the schema, without copying the SDK into the project.
+
+Real preflight: neither supported environment variable is configured in this
+execution environment. Finnhub network calls=0, transport_created=false,
+status=not_configured, confirmed_absent=false. Evidence:
+docs/evidence/finnhub-preflight.json. Do not describe this as a failed network
+request, an absent financial metric, an account without a key, or live acceptance.
+The user's prior key may exist elsewhere; no legacy secret was read, copied,
+printed or requested in plaintext. An existing key must be made available to
+this new project's runner before real Finnhub validation can happen. No paid
+subscription or new permission was requested or enabled.
+
+Other live checks: both Nasdaq Trader files retried once with bounded HTTP and
+still returned HTTP 503. Safe URL/status/reason evidence is in
+nasdaq-directory-retry.json. Treat as transient and keep the previously separate
+6,954-row discovery snapshot; do not promote it to active-common-share acceptance.
+
+GitHub: target metadata fresh check remains 404; main/open PR/Actions inaccessible.
+No remote push, PR or merge. Creation/archive capabilities remain unavailable;
+legacy project untouched. Worktree was clean; Library version 5 matched local
+status before branching. Existing repository blocker has not changed.
+
+Acceptance: stage 1 offline-verified/remote CI pending. Stage 2 remains partial:
+SEC small-sample financials, Yahoo Assets, Nasdaq discovery and Finnhub synthetic
+contracts. Finnhub live/account response and Nasdaq financial connection are
+unaccepted. Active common universe, 100-company, financial models/scoring,
+backtest, expansion and final acceptance (stages 3–8) remain unaccepted. No
+investment score, recommendation, valuation or trade produced.
+
+Limitations: Finnhub's live statement row shape, entitlement and units cannot
+be established without the existing key in this runner. Contract parser rejects
+unsupported legacy maps instead of guessing currency/scale. Memory TTL only;
+Finnhub disk cache and filing refresh pending. Naive acceptedDate is not guessed
+as UTC; conservative filing-date availability remains. Token header support is
+confirmed in the official SDK, but this run performed no authenticated call.
+
+Next concrete task: implement a bounded Nasdaq financial-statement fetcher and
+inspect real period/currency/scale/issuer metadata. Add field mapping only where
+that evidence is sufficient; preserve unsupported/unconfigured states elsewhere.
+Retry transient Trader files on a later run and corroborate active/common/fund
+scope before the 100-company sample. When an existing Finnhub key is accessible,
+run a small real reported-financial reconciliation and adjust the strict parser
+from observed evidence, without upgrading services. Do not ask for a new key or
+new permission when an existing runner configuration suffices. Import onto target
+main via a feature PR/CI when available, never force-push unrelated root history.
+
+## 2026-11-01 — Nasdaq discovery and universe contracts (latest)
+
+Branch: feat/nasdaq-universe, based on local 28d98db checkpoint.
+Code commit: 6ff7771419446159ab80a46466f23709f04f2c45 (local only, no GitHub URL).
+Delivery CHECKPOINT.txt records the final documentation checkpoint.
+
+Completed: strict Nasdaq Trader listed/otherlisted directory parsers, source
+footer/date/provenance retention, documented exchange and flag handling,
+conservative instrument-name rules, exact SEC identity/exchange corroboration,
+cross-directory collision protection and exhaustive row partitioning. Unknown
+types/flags/identity stay pending. No final active Security is fabricated from
+membership/name evidence; candidates still require independent scope checks.
+Added bounded, pagination-checked Nasdaq screener discovery adapter and CLI.
+Added safe enumerated HTTP/DNS/TLS/network/timeout diagnostics with HTTP codes.
+
+Tests: 133/133 passing on Python 3.12.14, including the original financial/live
+fixture regressions, 16 Trader parser/universe contract tests, discovery count/
+pagination/duplicates/schema bounds, real 6,954-row replay, padded symbol
+collision checks, error sanitization and CLI configuration guard. Diff checks
+passed. Evidence: docs/evidence/nasdaq-tests.json. No remote CI result exists.
+
+Real data: Nasdaq public screener returned 6,954 records; complete count and
+unique-symbol checks passed. 6,560 symbols matched SEC exactly; 394 remain
+unmatched (not silently discarded). Raw ETX/ECC symbols had ASCII padding;
+trimmed only the surrounding padding while retaining raw_symbol and original
+bytes. Response source label was 'Last price as of Oct 29, 2026'; this is not
+verified listing freshness. Snapshot URL/time/SHA: nasdaq-discovery-live.json;
+compressed full response: tests/fixtures/nasdaq-discovery-diagnostic.json.gz.
+
+Real blockers/failures: both Nasdaq Trader files failed on the web directory
+and documented file-host HTTPS paths. A diagnostic file-host retry, after
+improved error reporting, identified HTTP 503. Nasdaq screener API worked as a
+separate weaker fallback; no IP/header/auth circumvention was attempted.
+First full screener parse rejected two padded symbols, and one replay test
+failed. Diagnosed the saved raw response, implemented reversible ASCII trim
+with normalization-collision rejection, then the complete 133-test suite passed.
+No field value, period date or share-class punctuation was guessed.
+
+GitHub: target metadata still 404. No main/PR/Actions inspection, remote push,
+PR or merge possible. Creation/archive tools remain unavailable and legacy repo
+unchanged. Local worktree was clean; Library version 4 matched local status
+before branching. Existing repository blocker is unchanged; no repeated request.
+
+Acceptance: stage 1 offline-verified, remote CI pending. Stage 2 remains partial:
+SEC small sample + Yahoo Assets + Nasdaq discovery; Nasdaq financial extraction
+and Finnhub are not accepted. Trader file access remains unverified. The public
+screener lacks explicit exchange, ETF/test flag, activity and security-type
+metadata, so none of its 6,954 rows is automatically a verified active-common
+share. The complete active US universe is NOT accepted. 100-company and stages
+3–8 remain incomplete. No score, valuation, ranking or trade was produced.
+
+Limitations: Trader name rules create candidates, not legal fund-type proof;
+funds may use common-share descriptions. No complete halt/delisting or historical
+universe dataset. Screener labels/total counts do not solve those gaps. Its
+symbol padding normalization preserves raw evidence. Nasdaq financial data is
+still absent from the field resolver, explicitly unconfigured rather than tried.
+
+Next concrete task: add Finnhub provider contracts and explicit existing-key
+configuration with sanitized access/quota handling; probe only if already
+configured, without buying services or granting new access. Also implement a
+small Nasdaq financial-statement adapter only if period/unit/identity evidence
+is sufficient. Retry transient Trader files on a later run; do not substitute
+screener discovery for active-common-share acceptance. Reconcile pending scope
+and SEC identities before building the 100-company research sample. When target
+repo exists, import onto main via feature PR and CI, without force-pushing the
+unrelated local root history.
+
+## 2026-11-01 — Yahoo Assets and ordered live fallback (latest)
+
+Branch: feat/yahoo-sec-fallback, based on local 4c7e9fc checkpoint.
+Code commit: 522f003ee07d53a2f014bef1d122f123e471bb46 (local only; no GitHub URL).
+Final checkpoint commit is recorded in delivery CHECKPOINT.txt.
+
+Completed: Yahoo annualTotalAssets adapter with exact date/currency/symbol and
+fresh SEC symbol/CIK binding. Facts retain vendor field, Yahoo response checksum,
+identity proof URL/time/hash and conservative first-observed availability.
+Yahoo duration and other financial concepts explicitly report unsupported_field.
+Added period_mismatch status for same-month wrong-day observations. Successful
+Yahoo snapshots are reused in memory; identity proof survives SQLite roundtrip.
+
+Fixed live collection chronology: the earlier fixed-cutoff API rejected newly
+fetched responses when retrieval followed request creation. Added cutoff-free
+FactQuery and resolve_current: prepare only the next source, set cutoff after
+its response, validate, and stop before preparing later sources on success.
+The fixed historical FactRequest path never advances its cutoff. SEC adapter
+and SEC diagnostic CLI use the live preparation boundary without eager lower
+priority source fetches. Existing historical protections remain tested.
+
+Tests: 106/106 passed on Python 3.12.14. Tests cover first-valid stopping before
+SEC prepare/fetch, cutoff timing, unchanged fixed historical cutoff, provider
+failures, period mismatch, identity evidence, currency/numerics, unsupported
+fields, cache reuse and full three-case recorded Yahoo→SEC integration replay.
+Original SEC/filing regression evidence is retained. Diff checks passed.
+Evidence: docs/evidence/yahoo-tests.json and docs/evidence/yahoo-sec-live.json.
+
+Real validation: three Yahoo requests succeeded. AAPL Yahoo date 2025-09-30 did
+not match requested SEC period 2025-09-27, and NVDA similarly had a different day;
+both fell back to SEC. MSFT matched exact date 2026-06-30 and stopped at Yahoo.
+All three numeric Assets values matched earlier original-filing checks. SEC
+fallback used existing valid disk snapshots, with zero additional SEC HTTP
+requests. This validates three Assets cases, not a complete company analysis
+or every Yahoo financial field. Original response bytes are in the Yahoo *.gz
+fixtures with date/URL/hash in the evidence report.
+
+Failed attempts/corrections: raw GitHub-source browsing returned DisabledError;
+the upstream GitHub page worked. The initial live-report comparison used string
+representations, falsely flagging MSFT scientific versus integer formatting as
+a mismatch; corrected to Decimal equality and covered by real-response replay.
+No source values were changed. AAPL/NVDA period differences were deliberately
+not corrected, calendar-aligned or silently accepted. No unit test failed.
+
+GitHub: target repo fresh metadata check still 404; main/PR/Actions inaccessible.
+No remote push, PR or merge. Creation/archive tools remain absent; legacy repo
+untouched. Local worktree was clean and Library version 3 matched status before
+branching. Existing repository blocker is unchanged, not a new user request.
+
+Acceptance: stage 1 offline-verified/remote CI pending. Stage 2 partial: SEC
+small-sample financial extraction plus Yahoo Assets with ordered fallback;
+Nasdaq/Finnhub and broader Yahoo mappings pending. 100-company and stages 3–8
+remain unaccepted. No score, ranking or investment recommendation produced.
+
+Limitations: Yahoo endpoint is undocumented; no credential/cookie/proxy bypass
+was used. Only assets supported; no inferred duration start, accounting alias
+or calendar date adjustment. Yahoo publication time is unknown, so retrieval
+is used as first-observed availability. Yahoo cache is memory-only; SEC retains
+its six-hour disk cache. Identity requires a fresh SEC snapshot (one day).
+No complete live universe or historical vintage dataset has been accepted.
+
+Next concrete task: implement Nasdaq source integration and verify active
+common-share universe metadata without admitting ETFs/funds/warrants/preferred
+or unknown instrument types. Test source error handling and record real endpoint
+results. Then extend exact Yahoo mappings only with reliable period/definition
+evidence; keep unsupported fields explicit and verify Nasdaq/Finnhub before
+calling stage 2 complete. Import checkpoint onto target main via feature PR
+when repository becomes available, without force-pushing unrelated history.
+
+## 2026-11-01 — SEC companyfacts and source-filing reconciliation (latest)
+
+Branch: feat/sec-companyfacts, based on local 6aae3302 checkpoint.
+Code commit: 8b72d157b7fcc1678a42d07f2ce3c0c0dde0384c (local only; GitHub URL unavailable).
+Final checkpoint commit is recorded in the delivery archive CHECKPOINT.txt.
+
+Completed: six exact US-GAAP financial mappings, instant/duration and currency
+validation, filing accession/date/raw SHA provenance, precise Decimal JSON,
+conservative availability, current-vintage historical rejection, and atomic
+six-hour company snapshot disk/memory cache with integrity verification.
+Existing field resolver preserves Yahoo priority and reports it unconfigured
+in SEC-only diagnostics. Added sec-fact CLI and SQLite filing-metadata roundtrip.
+Added narrow original-iXBRL Assets verifier and compressed recorded fixtures.
+
+Tests: 88/88 passed on Python 3.12.14, including original regression suite,
+period/unit/identity/future/missing/unsupported handling, cache restart/expiry/
+corruption, priority tests, replay of three full companyfacts snapshots and
+three original filing documents. Diff check passed. Cached live-data CLI check
+passed without another SEC download. Evidence: docs/evidence/companyfacts-tests.json
+and docs/evidence/sec-fact-cli.json. No failed test attempt in this session.
+
+Live data: AAPL, MSFT and NVDA companyfacts retrieved successfully. Exact selected
+periods yielded 16/18 requested monetary fields; two NVDA annual concepts
+(revenue excluding assessed tax and the selected property/plant/equipment cash
+payment tag) had no exact observation. No substitute, zero or fabricated value
+was introduced. Assets for all three companies matched their original SEC
+iXBRL filing contexts. Some contexts are comparative balances in later 10-Qs;
+these are identified by the actual accession, not mislabeled as original 10-Ks.
+Other extracted fields have NOT been independently reconciled to original filings.
+Timestamps/URLs/hashes/values are in docs/evidence/companyfacts-live.json;
+original response/document bytes are in tests/fixtures/*.gz. There are three
+limited real-data checks, not three fully accepted company investment analyses.
+
+GitHub: new repository metadata again returned 404. Main/PR/Actions unavailable;
+no remote branch, push, PR or merge. Creation/archive capabilities remain absent.
+Legacy project untouched. Local worktree was clean before branching and current
+Library version 2 matched its status file, so no divergent checkpoint was used.
+Previously reported repository action remains unchanged; no repeated request.
+
+Acceptance: stage 1 offline-tested/remote CI pending. Stage 2 partially
+implemented: SEC directory plus financial extraction verified on a small sample;
+Yahoo/Nasdaq/Finnhub financial adapters are still pending. All four sources are
+not accepted. Stages 3–8, 100-company acceptance and final system completion
+remain unaccepted. No score, valuation or investment recommendation produced.
+
+Limitations and unsuccessful lookups: two exact NVDA annual fields unresolved;
+only three Assets values independently checked. No general XBRL engine, no
+IFRS/financial-sector model, no tag-equivalence guessing, no exact intraday SEC
+acceptance timestamp, no historical vintage dataset. Filing date is conservatively
+mapped to the next day at 05:00 UTC. Cache refresh uses TTL or explicit refresh;
+filing-triggered invalidation and conditional GET remain pending. These limits
+must not be interpreted as financial distress or exclusion from the universe.
+
+Next concrete task: implement and test the first-priority Yahoo financial
+adapter with exact issuer/period/definition provenance and explicit access/quota
+failure classification; verify on a small real sample, then integrate ordered
+Yahoo→SEC fallback. Keep unconfigured sources explicit. Evaluate unresolved
+NVDA concepts using documented semantic mappings, without silently substituting
+incompatible tags. Retain SEC asset reconciliation as regression evidence.
+When the repo is available, import onto its main in a feature branch, run CI,
+open PR and merge verified work without force-pushing unrelated local history.
+
+## 2026-11-01 — SEC identity and HTTP transport (latest)
+
+Branch: feat/sec-identity-transport, based on local 8bbd132 checkpoint.
+Code commit: 07155884e4c3d81c604293dcd13c5f3faad9cbea (local, no GitHub commit URL available).
+Documentation checkpoint hash is recorded in archive CHECKPOINT.txt.
+
+Completed: HTTPS source-host restrictions, redirect refusal, identifying
+User-Agent, per-socket timeout and between-read deadline checks, 2 requests/sec
+in-process shared limiter, bounded retries/response sizes, Retry-After handling,
+access/quota/timeout/API failure separation and sanitized errors. Added strict
+SEC directory schema/identity parser, exact class-symbol matching, checksums,
+CLI lookup, and real-response replay fixture.
+
+Tests: 60/60 passing, Python 3.12.14. Evidence:
+docs/evidence/sec-transport-tests.json; original 37 regression tests retained.
+Unit/synthetic integration + full recorded-response replay passed. Diff check
+passed. Remote CI has not run. First transport test run 58/58; CLI and
+recorded-response tests increased the final total to 60/60. No failing tests.
+
+Real validation: direct Python HTTPS succeeded at 2026-11-01T17:56:42Z.
+SEC returned 522,995 bytes and 10,430 directory entries. AAPL, MSFT, NVDA,
+BRK-B CIK identities checked against expected identifiers. Raw response checksum
+and results: docs/evidence/sec-directory-live.json. Original response:
+tests/fixtures/sec-directory-recorded.json. The SEC's own access policy and
+schema were checked on its official site before implementation. No financial
+metric was collected. These 10,430 entries are NOT an active-common-share count.
+Security type and active status are not inferred from the SEC directory.
+
+GitHub: fresh new-repository check still returned 404. Creation/archive tools
+remain unavailable; main, PRs and Actions cannot be inspected for this target.
+No remote push, PR or merge. Previously reported repository blocker is unchanged;
+no repeat user action request. Legacy repository untouched. The workspace
+was clean before the new branch; no other local changes were detected.
+
+Stage 1 remains offline-verified with remote CI pending. Stage 2 has one
+live-tested identity adapter, not four accepted financial connections.
+Financial-model, 100-company, score, backtest, expansion and final acceptance
+stages remain incomplete. Financial companies validated: 0.
+
+Limitations: socket-operation timeout is not a hard wall-clock process kill;
+read deadline checked between buffered reads. Share the same limiter across
+concurrent SEC clients; independent processes need central orchestration.
+The directory is not guaranteed complete/accurate by SEC and needs independent
+listing/type corroboration. Current snapshot is dated, not a historical universe.
+
+Next concrete task: implement SEC companyfacts ingestion and canonical
+accounting-tag/period/unit mappings with fixture tests. Connect the existing
+first-valid resolver without skipping Yahoo priority; add a controlled live
+metric reconciliation for a few known CIKs, clearly short of the 100-company
+acceptance gate. Also integrate filing-aware caching to prevent repeated full
+downloads. When target repo becomes available, import onto its main in a feature
+branch, run CI and create a normal PR without force-pushing unrelated history.
+
+## 2026-11-01 — offline foundation checkpoint
+
+Branch: feat/auditable-foundation. Repository target: fatalvayn-dot/us-equity-research.
+
+### Completed
+
+Inspected the provided starter ZIP and retained its seven regression tests.
+Added packaging metadata, immutable identity/fact/request models, exact
+accounting-period/currency/identity matching, publication/retrieval cutoffs,
+ordered provider resolution with typed failures, SQLite accepted-fact cache,
+score weights/readiness policy, CLI status, architecture/scope/resume docs,
+and a GitHub Actions test matrix. Tests: 37/37 passed on Python 3.12.14,
+including synthetic resolver-to-cache integration. CLI status and diff check passed.
+Evidence: docs/evidence/foundation-tests.json. Fixture tests are not live evidence.
+
+### GitHub and commits
+
+GitHub connection succeeded. get_repo returned 404 for the new repository;
+owner repository listing returned only radar-agent. The connected tools expose
+neither repository creation nor archive-setting operations; gh CLI is absent.
+No new repository main, PR or Actions results could be inspected. No remote
+branch, PR, commit push or merge occurred. Foundation commit: 0cbdc14db5862a9dd721f2dd598ed1187301f535 (local only).
+Final checkpoint commit is recorded in CHECKPOINT.txt in the delivery archive. The archive includes a Git bundle.
+
+radar-agent remains private, unarchived and unchanged by this session. Admin
+permission was visible, but no available archive operation was exposed.
+
+### Acceptance gates
+
+1. Architecture/models/test infrastructure: offline tests passed; remote CI pending.
+2. Four live connections: not implemented/accepted.
+3. Financial models: not implemented/accepted.
+4. 100-company real test: 0 companies; not started.
+5. Scoring/ranking: weights only, no scores.
+6. Historical testing: protective cutoff only, no backtest.
+7. 500/1,000/full universe: not started.
+8. Final regression/performance/live acceptance: not accepted.
+
+### Failed attempts and limitations
+
+- New repository metadata: 404; cannot distinguish nonexistent from inaccessible
+  with absolute certainty. Accessible repository inventory contains only old repo.
+- Initial Library attribute application omitted workspace_path; corrected with
+  complete required fields and succeeded. Starter content was preserved.
+- One documentation patch was rejected before writing due to duplicate README
+  operations; reapplied as valid separate operations.
+- No real network financial response was requested. No live source was counted
+  as connected or tested. No numerical acceptance threshold is validated yet.
+- Cache is standalone; incremental provider integration and revision tracking pending.
+- Original core API is deprecated and must not feed the new live pipeline.
+
+### Next concrete task
+
+Create the private target repository with an initial README using an available
+repository-creation operation, then import this checkpoint into a feature branch.
+Run CI, open/review PR and merge only after verification. If creation remains
+unavailable, ask only for repository creation; preserve completed local work.
+Next code task: implement a bounded, rate-limited HTTP transport and SEC issuer
+mapping adapter with recorded-response contract tests, then run real identity
+checks. Full-source connection acceptance follows only with real evidence.
+
+### Scheduled continuation
+
+The previous development automation was paused successfully. A separate enabled
+hourly US Equity development automation was created successfully, using timezone
+Africa/Mogadishu. New task: 6ae7781d799c8191a98d1442d0d6ec58. Its prompt
+references persistent checkpoint libfile_c2f0ce03b15481918f6006f57cf4e7aa.
+No future run has been observed yet. Each trigger is a separate session, not
+continuous execution. Suppress identical blocker notifications. Repository
+creation remains the only requested user action; offline development can continue.

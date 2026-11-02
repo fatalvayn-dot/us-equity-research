@@ -1,0 +1,58 @@
+{
+  "recorded_at": "2026-11-01T23:37:53.147590+00:00",
+  "runs": [
+    {
+      "name": "bounded",
+      "exit_code": 2,
+      "summary": {
+        "companies": 3,
+        "field_states": {
+          "collected": 3,
+          "not_started": 15
+        },
+        "new_fields": 3,
+        "reused_fields": 0
+      },
+      "transport_get_calls_by_host": {
+        "www.sec.gov": 1,
+        "query1.finance.yahoo.com": 1
+      }
+    },
+    {
+      "name": "resumed",
+      "exit_code": 2,
+      "summary": {
+        "companies": 3,
+        "field_states": {
+          "collected": 16,
+          "pending_data": 2
+        },
+        "new_fields": 15,
+        "reused_fields": 3
+      },
+      "transport_get_calls_by_host": {
+        "www.sec.gov": 1,
+        "query1.finance.yahoo.com": 2
+      }
+    },
+    {
+      "name": "reused",
+      "exit_code": 2,
+      "summary": {
+        "companies": 3,
+        "field_states": {
+          "collected": 16,
+          "pending_data": 2
+        },
+        "new_fields": 0,
+        "reused_fields": 18
+      },
+      "transport_get_calls_by_host": {}
+    }
+  ],
+  "request_measure": "HttpTransport.get calls, excluding internal retries; provider disk-cache hits have no GET",
+  "third_run_zero_transport_calls": true,
+  "live_financial_acceptance": false,
+  "hundred_company_accepted": false,
+  "active_universe_accepted": false
+}

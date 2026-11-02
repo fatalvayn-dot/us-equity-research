@@ -1,0 +1,474 @@
+{
+  "mode": "ordered Yahoo unsupported then recorded SEC exact response replay at original observation; original annual comparison",
+  "observations": [
+    {
+      "symbol": "NVDA",
+      "field": "revenue_total",
+      "fact": {
+        "issuer_id": "0001045810",
+        "field": "revenue_total",
+        "value": "215938000000",
+        "source": "SEC",
+        "period_start": "2025-01-27",
+        "period_end": "2026-01-25",
+        "currency": "USD",
+        "unit": "currency",
+        "retrieved_at": "2026-11-02T03:28:21.436088+00:00",
+        "available_at": "2026-02-26T05:00:00+00:00",
+        "accounting_definition": "us-gaap:Revenues",
+        "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+        "filing_accession": "0001045810-26-000021",
+        "filed_on": "2026-02-25",
+        "raw_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+        "source_field": null,
+        "identity_evidence_url": null,
+        "identity_evidence_sha256": null,
+        "identity_observed_at": null,
+        "unit_evidence_url": null,
+        "unit_evidence_sha256": null,
+        "unit_observed_at": null,
+        "data_observed_at": null,
+        "source_multiplier": null
+      },
+      "attempts": [
+        {
+          "source": "Yahoo",
+          "status": "unsupported_field",
+          "attempted_at": "2026-11-02T03:28:21.436088+00:00",
+          "detail": "",
+          "cached": false
+        },
+        {
+          "source": "SEC",
+          "status": "valid",
+          "attempted_at": "2026-11-02T03:28:21.436088+00:00",
+          "detail": "",
+          "cached": false
+        }
+      ],
+      "original": {
+        "concept": "us-gaap:Revenues",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "215938000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "215938000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "215938000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "215938000000"
+          }
+        ],
+        "present_facts": 51,
+        "other_period_facts": 34,
+        "dimensional_facts": 14,
+        "unsupported_facts": 0
+      },
+      "original_source": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "sha256": "d9135ae2801ec96e80398e2ddf0daa523b3a500ccf939ecf2ff150bdd13ab0dc",
+        "retrieved_at": "2026-11-02T02:12:31.172984+00:00",
+        "fixture": "tests/fixtures/annual/0001045810-0001045810-26-000021.html.gz"
+      },
+      "status": "matched",
+      "readiness": {
+        "status": "data_complete_model_validation_pending",
+        "missing_fields": [],
+        "definition_mismatches": [],
+        "context_conflict": false,
+        "semantic_model_review_fields": [
+          "revenue_total"
+        ],
+        "sector_model_supported": false,
+        "investment_approved": false
+      }
+    },
+    {
+      "symbol": "NVDA",
+      "field": "productive_asset_cash_payments",
+      "fact": {
+        "issuer_id": "0001045810",
+        "field": "productive_asset_cash_payments",
+        "value": "6042000000",
+        "source": "SEC",
+        "period_start": "2025-01-27",
+        "period_end": "2026-01-25",
+        "currency": "USD",
+        "unit": "currency",
+        "retrieved_at": "2026-11-02T03:28:21.436088+00:00",
+        "available_at": "2026-02-26T05:00:00+00:00",
+        "accounting_definition": "us-gaap:PaymentsToAcquireProductiveAssets",
+        "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+        "filing_accession": "0001045810-26-000021",
+        "filed_on": "2026-02-25",
+        "raw_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+        "source_field": null,
+        "identity_evidence_url": null,
+        "identity_evidence_sha256": null,
+        "identity_observed_at": null,
+        "unit_evidence_url": null,
+        "unit_evidence_sha256": null,
+        "unit_observed_at": null,
+        "data_observed_at": null,
+        "source_multiplier": null
+      },
+      "attempts": [
+        {
+          "source": "Yahoo",
+          "status": "unsupported_field",
+          "attempted_at": "2026-11-02T03:28:21.436088+00:00",
+          "detail": "",
+          "cached": false
+        },
+        {
+          "source": "SEC",
+          "status": "valid",
+          "attempted_at": "2026-11-02T03:28:21.436088+00:00",
+          "detail": "",
+          "cached": false
+        }
+      ],
+      "original": {
+        "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "6042000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "6042000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "original_source": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "sha256": "d9135ae2801ec96e80398e2ddf0daa523b3a500ccf939ecf2ff150bdd13ab0dc",
+        "retrieved_at": "2026-11-02T02:12:31.172984+00:00",
+        "fixture": "tests/fixtures/annual/0001045810-0001045810-26-000021.html.gz"
+      },
+      "status": "matched",
+      "readiness": {
+        "status": "data_complete_model_validation_pending",
+        "missing_fields": [],
+        "definition_mismatches": [],
+        "context_conflict": false,
+        "semantic_model_review_fields": [
+          "productive_asset_cash_payments"
+        ],
+        "sector_model_supported": false,
+        "investment_approved": false
+      }
+    },
+    {
+      "symbol": "GOOGL",
+      "field": "revenue_total",
+      "fact": {
+        "issuer_id": "0001652044",
+        "field": "revenue_total",
+        "value": "402836000000",
+        "source": "SEC",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "currency": "USD",
+        "unit": "currency",
+        "retrieved_at": "2026-11-02T03:28:56.060634+00:00",
+        "available_at": "2026-02-06T05:00:00+00:00",
+        "accounting_definition": "us-gaap:Revenues",
+        "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+        "filing_accession": "0001652044-26-000018",
+        "filed_on": "2026-02-05",
+        "raw_sha256": "ec4a3095d634583925b5ea450db8a5ed974dc48f6f1b4f594022310bc78d4032",
+        "source_field": null,
+        "identity_evidence_url": null,
+        "identity_evidence_sha256": null,
+        "identity_observed_at": null,
+        "unit_evidence_url": null,
+        "unit_evidence_sha256": null,
+        "unit_observed_at": null,
+        "data_observed_at": null,
+        "source_multiplier": null
+      },
+      "attempts": [
+        {
+          "source": "Yahoo",
+          "status": "unsupported_field",
+          "attempted_at": "2026-11-02T03:28:56.060634+00:00",
+          "detail": "",
+          "cached": false
+        },
+        {
+          "source": "SEC",
+          "status": "valid",
+          "attempted_at": "2026-11-02T03:28:56.060634+00:00",
+          "detail": "",
+          "cached": false
+        }
+      ],
+      "original": {
+        "concept": "us-gaap:Revenues",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "402836000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "402836000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "402836000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "402836000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "402836000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "402836000000"
+          }
+        ],
+        "present_facts": 18,
+        "other_period_facts": 12,
+        "dimensional_facts": 1,
+        "unsupported_facts": 0
+      },
+      "original_source": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm",
+        "sha256": "bab3d2601c394c4b603fa4ae30165a65e123a37087a172c8e4146dba0c80ab82",
+        "retrieved_at": "2026-11-02T03:26:34.535812+00:00",
+        "fixture": "tests/fixtures/annual-batch/bab3d2601c394c4b603fa4ae30165a65e123a37087a172c8e4146dba0c80ab82.html.gz"
+      },
+      "status": "matched",
+      "readiness": {
+        "status": "data_complete_model_validation_pending",
+        "missing_fields": [],
+        "definition_mismatches": [],
+        "context_conflict": false,
+        "semantic_model_review_fields": [
+          "revenue_total"
+        ],
+        "sector_model_supported": false,
+        "investment_approved": false
+      }
+    },
+    {
+      "symbol": "AMZN",
+      "field": "productive_asset_cash_payments",
+      "fact": {
+        "issuer_id": "0001018724",
+        "field": "productive_asset_cash_payments",
+        "value": "131819000000",
+        "source": "SEC",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "currency": "USD",
+        "unit": "currency",
+        "retrieved_at": "2026-11-02T03:29:06.267409+00:00",
+        "available_at": "2026-02-07T05:00:00+00:00",
+        "accounting_definition": "us-gaap:PaymentsToAcquireProductiveAssets",
+        "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+        "filing_accession": "0001018724-26-000004",
+        "filed_on": "2026-02-06",
+        "raw_sha256": "acddb7c0a6973a1fd08372de3b292298a34eae7f42a7eedc4bdebd3ac659c8fd",
+        "source_field": null,
+        "identity_evidence_url": null,
+        "identity_evidence_sha256": null,
+        "identity_observed_at": null,
+        "unit_evidence_url": null,
+        "unit_evidence_sha256": null,
+        "unit_observed_at": null,
+        "data_observed_at": null,
+        "source_multiplier": null
+      },
+      "attempts": [
+        {
+          "source": "Yahoo",
+          "status": "unsupported_field",
+          "attempted_at": "2026-11-02T03:29:06.267409+00:00",
+          "detail": "",
+          "cached": false
+        },
+        {
+          "source": "SEC",
+          "status": "valid",
+          "attempted_at": "2026-11-02T03:29:06.267409+00:00",
+          "detail": "",
+          "cached": false
+        }
+      ],
+      "original": {
+        "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "131819000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "131819000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "original_source": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm",
+        "sha256": "3702599045ec83f3faca3186c42b62247d1ec0e3bdf47c7f8acc7305b858f139",
+        "retrieved_at": "2026-11-02T03:26:37.898566+00:00",
+        "fixture": "tests/fixtures/annual-batch/3702599045ec83f3faca3186c42b62247d1ec0e3bdf47c7f8acc7305b858f139.html.gz"
+      },
+      "status": "matched",
+      "readiness": {
+        "status": "data_complete_model_validation_pending",
+        "missing_fields": [],
+        "definition_mismatches": [],
+        "context_conflict": false,
+        "semantic_model_review_fields": [
+          "productive_asset_cash_payments"
+        ],
+        "sector_model_supported": false,
+        "investment_approved": false
+      }
+    },
+    {
+      "symbol": "AVGO",
+      "field": "profit_loss",
+      "fact": {
+        "issuer_id": "0001730168",
+        "field": "profit_loss",
+        "value": "23126000000",
+        "source": "SEC",
+        "period_start": "2024-11-04",
+        "period_end": "2025-11-02",
+        "currency": "USD",
+        "unit": "currency",
+        "retrieved_at": "2026-11-02T03:29:21.978529+00:00",
+        "available_at": "2025-12-19T05:00:00+00:00",
+        "accounting_definition": "us-gaap:ProfitLoss",
+        "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001730168.json",
+        "filing_accession": "0001730168-25-000121",
+        "filed_on": "2025-12-18",
+        "raw_sha256": "3bdb6644c12addf1e63c4dc861008d7804fbf3d3f5aa6eb9b97f72c0e89a7adf",
+        "source_field": null,
+        "identity_evidence_url": null,
+        "identity_evidence_sha256": null,
+        "identity_observed_at": null,
+        "unit_evidence_url": null,
+        "unit_evidence_sha256": null,
+        "unit_observed_at": null,
+        "data_observed_at": null,
+        "source_multiplier": null
+      },
+      "attempts": [
+        {
+          "source": "Yahoo",
+          "status": "unsupported_field",
+          "attempted_at": "2026-11-02T03:29:21.978529+00:00",
+          "detail": "",
+          "cached": false
+        },
+        {
+          "source": "SEC",
+          "status": "valid",
+          "attempted_at": "2026-11-02T03:29:21.978529+00:00",
+          "detail": "",
+          "cached": false
+        }
+      ],
+      "original": {
+        "concept": "us-gaap:ProfitLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2024",
+        "status": "exact_original_value",
+        "value": "23126000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "23126000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "23126000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "23126000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "23126000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "23126000000"
+          }
+        ],
+        "present_facts": 18,
+        "other_period_facts": 12,
+        "dimensional_facts": 1,
+        "unsupported_facts": 0
+      },
+      "original_source": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000121/avgo-20251102.htm",
+        "sha256": "789c977a9e365d8f6eb3d6b3e12cce52047fc0660128732643e6558d3422bfdb",
+        "retrieved_at": "2026-11-02T03:26:41.010589+00:00",
+        "fixture": "tests/fixtures/annual-batch/789c977a9e365d8f6eb3d6b3e12cce52047fc0660128732643e6558d3422bfdb.html.gz"
+      },
+      "status": "matched",
+      "readiness": {
+        "status": "data_complete_model_validation_pending",
+        "missing_fields": [],
+        "definition_mismatches": [],
+        "context_conflict": false,
+        "semantic_model_review_fields": [
+          "profit_loss"
+        ],
+        "sector_model_supported": false,
+        "investment_approved": false
+      }
+    }
+  ],
+  "summary": {
+    "new_distinct_facts": 5,
+    "original_matches": 5,
+    "network_requests": 0
+  },
+  "old_narrow_fields_filled": false,
+  "automatic_aliasing": false,
+  "sector_model_accepted": false,
+  "hundred_company_accepted": false
+}

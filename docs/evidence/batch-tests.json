@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-11-01T23:38:48.102811+00:00",
+  "python": "3.12.14",
+  "command": "PYTHONPATH=src python3 -m unittest discover -s tests -q",
+  "tests": 193,
+  "passed": 193,
+  "failed": 0,
+  "coverage": [
+    "16 batch interruption/checkpoint/lease contracts",
+    "4 explicit-plan/CLI/failure tests",
+    "173 previous regression tests"
+  ],
+  "synthetic_100_company_test": true,
+  "real_100_company_acceptance": false,
+  "remote_actions_run": false
+}

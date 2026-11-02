@@ -1,0 +1,40 @@
+{
+  "recorded_at": "2026-11-01T20:37:36.204538+00:00",
+  "status": "success",
+  "records": 6954,
+  "source_asof_label": "Last price as of Oct 29, 2026",
+  "pages": [
+    {
+      "url": "https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=10000&offset=0",
+      "sha256": "846b0e6069d76d64e9e702202c9f42f4619304b0e2f5876e4aa88c90ef6e5c86",
+      "retrieved_at": "2026-11-01T20:36:46.771628+00:00",
+      "fixture": "tests/fixtures/nasdaq-discovery-diagnostic.json.gz",
+      "limit": 10000,
+      "offset": 0
+    }
+  ],
+  "ascii_padded_symbols": [
+    {
+      "raw_symbol": "ETX           ",
+      "symbol": "ETX"
+    },
+    {
+      "raw_symbol": "ECC           ",
+      "symbol": "ECC"
+    }
+  ],
+  "sec_exact_symbol_matches": 6560,
+  "sec_exact_symbol_unmatched": 394,
+  "identity_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+  "active_common_universe_accepted": false,
+  "financial_connection_accepted": false,
+  "initial_parse_attempt": {
+    "recorded_at": "2026-11-01T20:35:46.727137+00:00",
+    "active_common_universe_accepted": false,
+    "financial_connection_accepted": false,
+    "status": "invalid_data",
+    "reason": null,
+    "http_status": null
+  },
+  "scope_note": "Discovery only; no explicit exchange, ETF flag, test flag, active status or full security-type evidence. Last-price asof is not listing asof."
+}
