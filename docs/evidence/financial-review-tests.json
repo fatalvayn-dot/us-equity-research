@@ -1,0 +1,18 @@
+{
+  "date_utc": "2026-11-02",
+  "python": "3.12.14",
+  "command": "PYTHONPATH=src python -m unittest discover -s tests -q",
+  "tests": 529,
+  "failures": 0,
+  "errors": 0,
+  "elapsed_seconds": 58.418,
+  "mode": "local_offline_unit_regression_and_recorded_source_integration",
+  "new_tests": 16,
+  "recorded_candidates": 100,
+  "fresh_financial_companies_validated_this_session": 0,
+  "scored_companies": 0,
+  "mvp_accepted": false,
+  "initial_targeted_failure": "two typed-fact integration errors; corrected reconstruction without relaxing validation",
+  "cli_html_generation": "passed",
+  "diff_check": "passed"
+}

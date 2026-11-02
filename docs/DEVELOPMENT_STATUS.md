@@ -1,5 +1,87 @@
 # Development status
 
+## 2026-11-02 — Portable research browser and non-compensating financial review (latest)
+
+Branch: feat/financial-risk-assessment, based on main
+2a27a6dc405ccfe31ce02df2e00f9e85a25c8253. Checked remote heads and main, open
+PRs (none), PROJECT_BRIEF/status/AGENTS and prior exact-head Actions
+41498364737 (success, Python 3.11/3.12/3.13). No conflicting work observed.
+Legacy repository untouched. User reconfirmed autonomous technical decisions
+and working-prototype priority. No new permissions, service or automation.
+
+Completed v0.26.0: portable searchable/filterable HTML research browser with
+100 candidate cards, exact periods, 843 collected values, 576 calculations,
+source links/hashes and explicit missing/attempted-source states. Open
+docs/evidence/risk100/report.html locally. Regenerate JSON/Markdown/HTML using
+the README research-report command. No server, external script or installation
+is needed to inspect the saved HTML. CLI output destinations are checked for
+input/output collisions and written atomically per file. Escaped issuer/source
+text cannot inject markup into the page.
+
+Added financial-review-v1: exact Assets/Liabilities balance deficit and same-
+annual-period loss plus operating cash outflow require mandatory review.
+Operating losses and classified current balance shortfall are watch signals.
+Each check revalidates issuer, definition, currency, period, chronology and raw
+source hash. Explicit annual 350–380-day periods and a 550-day period-end age
+guard prevent quarterly/ancient figures passing as current annual checks.
+Missing/invalid evidence remains unresolved; a critical trigger takes priority
+over favorable or incomplete other checks. No insolvency finding, debt proxy,
+sector approval or overall risk clearance is inferred. Original inputs and
+observation times are preserved. All investment scores/ranks remain absent.
+
+Recorded 100-candidate replay: 4 mandatory reviews (ABBV/PM/DELL/MCD reported
+balance deficits), 44 unresolved quantitative screens and 52 without a trigger
+in these four checks. Watch signals: 20 current balance shortfalls and two
+operating losses, overlapping company categories. Zero network requests for
+this reassessment. These are not a fresh financial run, original-statement
+independent revalidation of all 843 values, or live acceptance. Original 83
+common-share cover matches still do not establish the required current active
+100-share universe. Four check outcomes are screening-policy hypotheses, not
+calibrated risk probabilities. Details: docs/FINANCIAL_REVIEW.md.
+
+Tests: final 529/529 full local regression passed on Python 3.12.14 (58.418s),
+including 16 new assessment/browser/CLI tests. Earlier 528-test full regression
+also passed (58.411s). Remote matrix is checked before merge. Coverage includes critical-over-missing
+precedence, favorable-other-figure non-compensation, zero vs missing, exact
+identity/currency/concept/period/hash, old/future data, input immutability,
+invalid-company isolation, HTML escaping, CLI collision refusal and deterministic
+100-candidate artifact reconstruction. Initial 13-test run had two integration
+errors from decoding already typed report facts; corrected by reconstructing
+Fact directly, with no financial-validation relaxation. All 13 then passed.
+One trailing README blank line found by diff check was removed.
+
+Live valuation diagnostics: four bounded single-attempt GET invocations across
+two Yahoo and two Nasdaq endpoints. Both Yahoo endpoints and Nasdaq info timed
+out. Nasdaq summary returned a market-cap string but lacked explicit currency
+and market timestamp for that field; it was not accepted as a valuation input.
+No raw response was archived for this diagnostic, so it is not replay/live
+financial acceptance evidence. No access workaround was attempted. Outcomes:
+docs/evidence/valuation-access-diagnostics.json. Public SEC financial-statement
+guide checked as conceptual documentation; thresholds are our research policy.
+The optional equity skill router's linked shared resources were unavailable;
+implementation followed this repository's authorized source/model contracts.
+
+Remaining/next concrete task: obtain source-bound market capitalization or
+class-compatible share-count/price inputs with explicit units, currency and
+observation times; implement versioned sector-eligible valuation and explained
+score components, then finish the verified 100-share sample and real acceptance
+run. No generic/special-sector score is approved by this change. The delivered
+HTML is a working evidence-inspection prototype, not the accepted ranked MVP.
+Commit/PR/exact CI links are recorded in the publication follow-up below and PR
+discussion. Do not report local tests as Actions or recorded inputs as live data.
+
+Publication: https://github.com/fatalvayn-dot/us-equity-research/pull/11
+Source commit: https://github.com/fatalvayn-dot/us-equity-research/commit/76bd7d78574cf3607fbfd0b376871c7bdbccb27d
+Source Actions: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41505752772
+Source CI passed: all 529 tests and CLI status on Python 3.11/3.12/3.13.
+All three job logs were inspected; test durations 33.846/62.743/63.620 seconds.
+Evidence: docs/evidence/financial-review-tests.json and financial-review-actions.json.
+Exact source tree 3d1ae7058b72f80676b94d0e28398adbaa736135 matched the local
+tested tree. Manual review checked source/period revalidation, critical-before-
+missing precedence, no risk clearance/model admission, escaped HTML content,
+output collision checks and retained numeric regression counts. Source CI
+and final documentation-head CI results are recorded before merge in PR #11.
+
 ## 2026-11-02 — Reference review and exact liquidity/operating inputs (latest)
 
 Branch: feat/liquidity-operating-analysis, based on main

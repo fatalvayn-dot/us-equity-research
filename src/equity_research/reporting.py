@@ -8,9 +8,10 @@ from datetime import date, datetime
 from .cache import decode_fact
 from .calculations import CALCULATIONS, calculate
 from .fields import SPECS
-from .models import FactRequest, SOURCE_ORDER, aware
+from .models import Fact, FactRequest, SOURCE_ORDER, aware
 from .policy import SCORE_WEIGHTS
 from .providers import Status
+from .assessment import assess_financials
 
 
 def _stamp(value):
@@ -130,6 +131,28 @@ def build_report(batch):
             result.update(status='invalid_evidence', fields=[], calculations=[], accepted_fact_count=0)
             result['evidence_errors'].append('identity_period_definition_chronology_or_provider_contract_failed')
         companies.append(result)
+    for company in companies:
+        # Use only the freshly validated fields above, never caller-supplied
+        # risk flags, scores, profiles or model approvals from the batch.
+        facts = {f['query']['field']: Fact(**f['fact']) for f in company['fields'] if f['fact']}
+        # Invalid company identities must remain isolated report errors, rather
+        # than aborting all other companies during assessment validation.
+        if company['status'] == 'invalid_evidence':
+            company['financial_assessment'] = dict(policy_version='financial-review-v1',
+                quantitative_gate='invalid_evidence', checks=[], overall_risk_cleared=False,
+                investment_approved=False)
+        else:
+            company['financial_assessment'] = assess_financials(facts,
+                issuer_id=company['issuer_id'],
+                period_start=date.fromisoformat(company['period_start']) if company.get('period_start') else None,
+                period_end=date.fromisoformat(company['period_end']) if company.get('period_end') else None,
+                currency=company.get('currency', 'USD'), as_of=cutoff)
+        gate = company['financial_assessment']['quantitative_gate']
+        company['score_blockers'] = ['verified_common_share_scope_required', 'accepted_sector_model_required',
+            'source_bound_valuation_required', 'complete_validated_score_components_required',
+            'qualitative_risk_review_required']
+        if gate != 'no_screen_trigger': company['score_blockers'].insert(0, gate)
+        company['score_components']['risk']['status'] = gate if gate != 'no_screen_trigger' else 'qualitative_and_sector_review_required'
     states = Counter(c['status'] for c in companies)
     return dict(schema_version=1, report_kind='research_readiness_with_exact_arithmetic', as_of=cutoff.isoformat(),
                 companies=companies, ranking=[], score_weights=dict(SCORE_WEIGHTS),
@@ -137,6 +160,7 @@ def build_report(batch):
                     accepted_facts=sum(c['accepted_fact_count'] for c in companies),
                     arithmetic_results=sum(r['value'] is not None for c in companies for r in c['calculations']),
                     scored_companies=0),
+                financial_review_summary=dict(Counter(c['financial_assessment']['quantitative_gate'] for c in companies)),
                 mvp_accepted=False, hundred_company_accepted=False,
                 acceptance_gaps=['100_company_live_financial_run', 'verified_common_share_scope',
                                  'validated_sector_scoring', 'market_price_and_prior_period_inputs'],
@@ -161,6 +185,16 @@ def render_markdown(report):
             lines.extend(['', 'Unattempted financial collection: '+cell(c['pending_reason'])+'.', ''])
         if c.get('deferred_fields'):
             lines.extend(['', 'Unattempted duration fields (period unresolved): '+cell(', '.join(c['deferred_fields']))+'.', ''])
+        if c.get('financial_assessment'):
+            assessment = c['financial_assessment']
+            lines.extend(['Financial review gate: '+cell(assessment['quantitative_gate'])+'.', '',
+                          '| Financial check | Result | Interpretation |', '| --- | --- | --- |'])
+            for check in assessment['checks']:
+                reason = check['explanation']
+                if check['missing_fields']: reason += ' Missing: '+', '.join(check['missing_fields'])+'.'
+                if check['rejections']: reason += ' Rejected: '+', '.join(r['field']+': '+r['reason'] for r in check['rejections'])+'.'
+                lines.append('| '+' | '.join(cell(v) for v in (check['check'], check['status'], reason))+' |')
+            lines.extend(['', 'Scoring withheld: '+cell('; '.join(c['score_blockers']))+'.', ''])
         lines.extend(['| Field | Value and currency | Source | Period | Definition | Raw SHA-256 | Observed at | Attempts |',
                       '| --- | --- | --- | --- | --- | --- | --- | --- |'])
         for f in c['fields']:

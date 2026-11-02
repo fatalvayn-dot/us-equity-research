@@ -38,6 +38,7 @@ def main():
     parser.add_argument("--input")
     parser.add_argument("--prior-input")
     parser.add_argument("--markdown")
+    parser.add_argument("--html")
     parser.add_argument("--candidates")
     parser.add_argument("--state-dir")
     parser.add_argument("--max-new-documents",type=int,default=100)
@@ -80,7 +81,9 @@ def main():
         from .reporting import build_report, render_markdown
         if not args.input or not args.output or (args.command == "comparative-report" and not args.prior_input):
             parser.error("report requires --input, --output and comparative-report also --prior-input")
-        paths = [p for p in (args.input, args.output, args.markdown, args.prior_input if args.command == "comparative-report" else None) if p]
+        if args.html and args.command != 'research-report':
+            parser.error('--html currently supports research-report only')
+        paths = [p for p in (args.input, args.output, args.markdown, args.html, args.prior_input if args.command == "comparative-report" else None) if p]
         if len({str(Path(p).resolve()) for p in paths}) != len(paths):
             parser.error("input and report destinations must be distinct")
         def save(path, content):
@@ -105,6 +108,9 @@ def main():
                 report=build_report(read_batch(args.input))
             save(args.output,json.dumps(report,default=encode,indent=2)+"\n")
             if args.markdown:save(args.markdown,render_markdown(report))
+            if args.html:
+                from .report_html import render_html
+                save(args.html,render_html(report))
             print(json.dumps(report['summary']))
         except (ValueError,KeyError,TypeError,OSError) as exc:
             print(json.dumps(dict(status="report_error",error_type=type(exc).__name__,mvp_accepted=False)))

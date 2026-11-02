@@ -695,3 +695,31 @@ is implied by these arithmetic counts.
 The pinned [TRADE28 review](docs/reviews/TRADE28_REVIEW.md) covers license,
 dependencies, scanner/analyst/news/risk/simulation methods and security limits.
 The reference was not installed or executed; no third-party code was copied.
+# Open the research prototype
+
+The portable browser at `docs/evidence/risk100/report.html` contains the dated
+100-candidate snapshot with searchable symbols/CIKs, financial review filters,
+calculations, exact source links and hashes. Download/open that HTML file in a
+browser. It needs no server or external scripts. It is an inspection prototype;
+investment scores and MVP acceptance remain pending.
+
+Rebuild the report from the retained input, without network requests:
+
+```bash
+PYTHONPATH=src python -m equity_research research-report \
+  --input docs/evidence/liquidity100/batch.json.gz \
+  --output data/prototype/report.json \
+  --markdown data/prototype/report.md \
+  --html data/prototype/report.html
+```
+
+Open `data/prototype/report.html`. Run `PYTHONPATH=src python -m unittest discover -s tests -q`
+to test the implementation. This command reuses recorded financial observations;
+it does not refresh live financial statements or quotes.
+
+Financial review v1 flags reported liabilities above assets and combined annual
+loss/operating cash outflow for mandatory review. Operating loss/current balance
+shortfall are watch signals. Missing or rejected operands leave a check unresolved.
+Favorable other figures cannot remove a mandatory review. These are versioned
+screening hypotheses, not insolvency findings, accepted sector models or complete
+risk clearance. See `docs/FINANCIAL_REVIEW.md` for definitions and limits.
