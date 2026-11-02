@@ -1,0 +1,17 @@
+{
+  "date_utc": "2026-11-02",
+  "mode": "bounded_direct_access_diagnostics_not_financial_acceptance",
+  "symbol": "AAPL",
+  "attempts_per_endpoint": 1,
+  "timeout_seconds": 5,
+  "budget_seconds": 10,
+  "observations": [
+    {"url": "https://query1.finance.yahoo.com/v7/finance/quote?symbols=AAPL", "status": "timeout"},
+    {"url": "https://query1.finance.yahoo.com/v10/finance/quoteSummary/AAPL?modules=price", "status": "timeout"},
+    {"url": "https://api.nasdaq.com/api/quote/AAPL/summary?assetclass=stocks", "status": "response_received_but_valuation_unverified", "retrieved_at": "2026-11-02T18:51:30.492754+00:00", "bytes": 1185, "reason": "market_cap_field_has_no_explicit_currency_or_market_timestamp_in_this_response"},
+    {"url": "https://api.nasdaq.com/api/quote/AAPL/info?assetclass=stocks", "status": "timeout"}
+  ],
+  "accepted_valuation_values": 0,
+  "raw_body_archived": false,
+  "limitations": ["session diagnostic outcomes, not reusable raw-response validation", "bounded transport budget is not a hard wall-clock process kill", "no authentication, quota bypass, host rotation or new access used"]
+}
