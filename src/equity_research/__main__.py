@@ -96,8 +96,9 @@ def main():
             args.comparison_input if args.command=='score-report' else None) if p]
         if len({str(Path(p).resolve()) for p in paths}) != len(paths):
             parser.error("input and report destinations must be distinct")
-        if args.command in ('valuation-report','score-report') and any(Path(bundle).resolve() in Path(p).resolve().parents
-                for bundle in (args.source_bundle,args.market_bundle) if bundle for p in (args.output,args.markdown) if p):
+        if args.command in ('valuation-report','score-report') and any(
+                Path(bundle).resolve() == Path(p).resolve() or Path(bundle).resolve() in Path(p).resolve().parents
+                for bundle in (args.source_bundle,args.market_bundle) if bundle for p in (args.output,args.markdown,args.html) if p):
             parser.error('report destination must not overwrite source bundle contents')
         def save(path, content):
             target=Path(path);target.parent.mkdir(parents=True,exist_ok=True)

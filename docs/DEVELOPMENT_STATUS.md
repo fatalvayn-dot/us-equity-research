@@ -1,5 +1,38 @@
 # Development status
 
+## 2026-11-03 — Publish scored pilot and protect HTML source evidence
+
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/13
+Published source commit: https://github.com/fatalvayn-dot/us-equity-research/commit/21935908f498efbf0169c10da713e538579bac31
+Tested source tree 51119acd8e5fc94ef2592f5ea3ad1488a2f26f0e matches local
+25ba568 exactly. Main remained bb6b21c, no other open PR at session start;
+prior Actions 41518212940 passed. Read PROJECT_BRIEF, status and AGENTS.
+
+Source CI: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41538732876
+All 576 tests and CLI status passed on Python 3.11 (82.209s), 3.12 (85.780s),
+3.13 (84.965s). Current-session local baseline: 576/576, 69.481s on 3.12.14.
+These are offline recorded-source/unit/integration regressions, not CI live
+financial collection. Source replay retains the pilot's original cutoff and
+2 scored/98 unscored/4 critical-review counts; no new live 100-company claim.
+
+Manual review of scoring admission, literal financial definitions, critical
+risk precedence, dated-share assumptions, history statistics, HTML escaping,
+CLI paths and reproduction found a concrete defect: HTML destinations were
+omitted from the source-bundle overwrite guard. Fixed all three destinations
+(JSON/Markdown/HTML), including bundle root and nested paths for both SEC and
+market bundles. One added regression checks 12 combinations with byte-preserved
+sentinels and refusal before any report write. Targeted test passed (0.989s).
+No source evidence was overwritten. Final local regression passed 577/577
+(69.754s, Python 3.12.14); exact final-head CI is checked before merge.
+Unrelated temporary files preserved and excluded from publication.
+
+Remaining blocker: original 100-candidate sample has only 83 common-cover
+matches, 97 valuation bundles remain unqueried and sector model coverage is
+limited. Next implement bounded configurable source collection for an explicit
+verified 100-common-share plan, then actual end-to-end acceptance. Do not
+normalize missing scores or claim all-100 coverage from this two-score pilot.
+Legacy repo untouched; no paid access, credentials, orders or portfolio work.
+
 ## 2026-11-03 — First explained research scores and portable ranked pilot (latest)
 
 Branch: feat/explainable-research-score, based on main

@@ -28,6 +28,30 @@ def sources():return list(read_bundle(ROOT/'tests/fixtures/valuation-sources'))+
 
 
 class RecordedScoreTests(unittest.TestCase):
+    def test_all_report_destinations_preserve_both_raw_source_bundles(self):
+        env={**os.environ,'PYTHONPATH':str(ROOT/'src')}
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);bundles=[root/'sec',root/'market']
+            for folder in bundles:
+                folder.mkdir();(folder/'manifest.json').write_bytes(b'original raw evidence')
+            for bundle in bundles:
+                for destination in ('--output','--markdown','--html'):
+                    for target in (bundle,bundle/'manifest.json'):
+                        with self.subTest(bundle=bundle.name,destination=destination,target=target.name):
+                            out=root/'report.json'
+                            cmd=[sys.executable,'-m','equity_research','score-report',
+                                '--input',str(root/'financial.json'),'--comparison-input',str(root/'current.json'),
+                                '--prior-input',str(root/'prior.json'),'--source-bundle',str(bundles[0]),
+                                '--market-bundle',str(bundles[1]),'--as-of','2026-11-02T21:33:48+00:00',
+                                '--output',str(out)]
+                            if destination=='--output':cmd[-1]=str(target)
+                            else:cmd.extend([destination,str(target)])
+                            refused=subprocess.run(cmd,env=env,capture_output=True,text=True)
+                            self.assertEqual(refused.returncode,2)
+                            self.assertIn('must not overwrite source bundle contents',refused.stderr)
+                            self.assertEqual((bundle/'manifest.json').read_bytes(),b'original raw evidence')
+                            self.assertFalse(out.exists())
+
     def test_two_ranked_pilot_hypotheses_four_critical_reviews_no_mvp_or_investment_approval(self):
         r=report();self.assertEqual(r['summary'],dict(candidates=100,scored_companies=2,critical_review=4,unscored=98))
         self.assertEqual([(x['symbol'],Decimal(x['score'])) for x in r['ranking']],[('MSFT',Decimal('66.5')),('AAPL',Decimal('53'))])
