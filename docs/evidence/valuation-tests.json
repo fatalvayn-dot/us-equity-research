@@ -1,0 +1,20 @@
+{
+  "date_utc": "2026-11-02",
+  "python": "3.12.14",
+  "command": "PYTHONPATH=src python -m unittest discover -s tests -q",
+  "tests": 553,
+  "failures": 0,
+  "errors": 0,
+  "elapsed_seconds": 58.166,
+  "new_tests": 24,
+  "mode": "local_offline_unit_regression_recorded_source_and_cli_integration",
+  "source_observations_replayed": 13,
+  "recorded_share_filings_reconciled": 3,
+  "annual_values_independently_confirmed": 10,
+  "indicative_ratios": 7,
+  "scored_companies": 0,
+  "mvp_accepted": false,
+  "initial_recorded_test_failure": "expected 9 confirmations; actual 10 includes NVDA OCF without complete PP&E metric; expectation corrected",
+  "cli_replay": "passed",
+  "diff_check": "passed"
+}

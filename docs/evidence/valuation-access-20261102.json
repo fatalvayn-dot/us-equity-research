@@ -1,0 +1,16 @@
+{
+  "date_utc": "2026-11-02",
+  "mode": "bounded_access_diagnostics_separate_from_thirteen_observation_valuation_sample",
+  "get_invocations": 5,
+  "internal_transport_retries_excluded": true,
+  "outcomes": [
+    {"url": "https://query1.finance.yahoo.com/v7/finance/quote?symbols=AAPL", "status": "timeout"},
+    {"url": "https://query1.finance.yahoo.com/v10/finance/quoteSummary/AAPL?modules=price", "status": "access_denied"},
+    {"url": "https://data.sec.gov/submissions/CIK0000320193.json", "status": "timeout"},
+    {"url": "https://data.sec.gov/submissions/CIK0000789019.json", "status": "public_response_archived"},
+    {"url": "https://api.nasdaq.com/api/quote/AAPL/info?assetclass=stocks", "status": "public_response_archived", "limitations": "Common Stock label observed but quote currency null; no market-cap or scope approval"}
+  ],
+  "source_bundle": "tests/fixtures/valuation-access-sources",
+  "direct_market_cap_values_accepted": 0,
+  "access_workarounds_used": false
+}
