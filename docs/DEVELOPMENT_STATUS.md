@@ -1,5 +1,66 @@
 # Development status
 
+## 2026-11-02 — MVP priority reset and user-facing research report (latest)
+
+Branch: feat/mvp-research-report, based on main ec0907754fff80027e7cdb0e2fb6dac0c09893e8
+(PR #5 merge). Main fetched and clean; no open PRs; prior Actions 41433339549
+successful. No concurrent main update observed. Legacy repository untouched.
+PROJECT_BRIEF updated to the user's approved 48-hour usable-MVP objective,
+target 2026-11-04 without guarantee. Full four-source acceptance, 500/1000/all-US,
+comprehensive backtests and complete specialized models are deferred. User
+usefulness confirmation is required after MVP acceptance before expansion.
+No broad legal-taxonomy work was added in this session.
+
+Completed v0.21.0: research-report CLI exports deterministic JSON and Markdown
+from the actual resumable research-batch schema, requiring no network or key.
+Report revalidates exact issuer, accounting definition, currency, period,
+publication/retrieval cutoff, raw hash and first-valid source-attempt sequence.
+Duplicate issuers cannot inflate company coverage; mixed periods or duplicate
+fields cannot silently overwrite an operand. Malformed evidence invalidates the
+affected company while other companies continue. Report files are atomically
+replaced individually; input/output path collisions are rejected. Export exit
+success is explicitly separate from MVP acceptance.
+
+Reports show full original financial facts/source URLs/raw hashes/observed and
+available timestamps, actual provider attempts (including unstarted/missing/
+configuration states), exact calculation operands/formulas/values and explicit
+score-component blockers. Six weights remain 20/20/20/15/15/10. No generic
+sector approvals or numeric scores are manufactured: pending scope/model,
+missing market prices, comparable prior periods and risk-model gaps remain
+visible. Caller-injected score/scope approval cannot create a ranked company.
+Out-of-scope companies never receive calculation/rank output.
+
+Recorded eight-company example: 43 accepted contract-valid input facts, 17 exact
+arithmetic results, 8 review-required companies and 0 scores/ranks. The extra
+supplemental accounting fields in earlier diagnostic scripts are intentionally
+not aliased into this six-field collection. Original cutoff is retained. No new
+provider/financial HTTP request and no 100-company real run this session. This
+is a usable report/export increment, not MVP completion. Evidence: mvp-report-
+eight.json/.md. Reproduce with the README research-report command.
+
+Tests: 400/400 local unittest tests passed on Python 3.12.14 (383 regressions +
+17 new tests). CLI JSON/Markdown export and git diff --check passed. Evidence:
+mvp-report-tests.json. Coverage includes recorded 43-fact replay, missing vs
+unstarted, isolated invalid-company handling, wrong issuer/definition/period/
+currency, future timestamps, missing hash, source-order/first-valid contracts,
+coverage deduplication, scope injection and safe export destinations. No test
+failure. GitHub Actions run 41436593541 passed 400 tests and CLI status on
+each Python 3.11/3.12/3.13; logs inspected.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/6
+Code commit: https://github.com/fatalvayn-dot/us-equity-research/commit/8607815ea4c37f7ac0111238db923433d39db65d
+Actions: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41436593541
+Published tree 940f56e31f8529454c5a7244d84f70d870968935 matched the locally
+tested tree. Documentation follow-up CI is checked before merging; final merge
+result is recorded in the PR discussion.
+
+Remaining MVP blocker: no 100-company live financial run, no accepted generic
+sector scoring/model/scope path, no required market-price/prior-period inputs.
+Next concrete code task: connect bounded live 100-candidate collection and
+original-response archiving to one MVP command, reporting unresolved periods as
+explicit unattempted jobs; then implement a testable generic-sector score model
+with explicit required inputs/eligibility, leaving special/unknown issuers in
+review. Continue highest-priority pipeline/report work before specialized models.
+
 ## 2026-11-02 — Positive original registration-cover evidence (latest)
 
 Branch: feat/registration-legal-evidence, based on main bec07410ff367dd581a84a213d6e10172c073e7b

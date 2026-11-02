@@ -1,3 +1,28 @@
+# Current delivery priority — approved 48-hour MVP (2026-11-02)
+
+Target date: 2026-11-04, a delivery objective rather than a guarantee. The first
+usable release must run reproducibly on at least 100 real US common-share
+candidates, calculate exact sourced financial ratios, rank only companies with
+sufficient verified evidence using traceable 100-point hypothesis scores, report
+errors/missing data and provide rerun commands plus successful CI. Do not claim
+MVP acceptance if these conditions are not met. No fabricated or zero-filled
+missing scores. No generic model approval for unknown/bank/insurance/REIT/BDC
+profiles without an accepted sector model.
+
+Priority: end-to-end SEC/Yahoo pipeline with exact identity/period, appropriate
+classification/ratios, evidence-based scoring/report, then 100-company real
+acceptance and performance/documentation. Yahoo -> SEC -> Nasdaq -> Finnhub
+first-valid order remains mandatory. Unavailable later providers do not block
+partial collection; show actual attempts and configuration/availability gaps.
+Full four-provider live acceptance is deferred from the MVP acceptance gate.
+
+Defer 500/1000/all-US expansion, comprehensive backtests, all specialized sector
+models, portfolio/shadow portfolio and trading. No old radar repository changes.
+After the MVP passes its own gates, obtain the user's usefulness assessment
+before expanding. The full-system roadmap below remains a later target and
+must not be confused with MVP completion. Source provenance, active-common-share
+scope, missing-data honesty and no paid/new-access/money rules remain binding.
+
 # Authoritative scope
 
 New repository: fatalvayn-dot/us-equity-research. Legacy:
