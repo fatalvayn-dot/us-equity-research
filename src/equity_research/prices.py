@@ -52,7 +52,9 @@ def _identity(response, cik, symbol, as_of, ttl):
         raise ValueError('canonical nonzero issuer required')
     if not aware(as_of) or not aware(response.retrieved_at):
         raise ProviderFailure(Status.INVALID_DATA)
-    if not timedelta(0) <= as_of - response.retrieved_at <= ttl:
+    if response.retrieved_at > as_of:
+        raise PriceFailure(PriceIssue.FUTURE_OBSERVATION)
+    if as_of - response.retrieved_at > ttl:
         raise PriceFailure(PriceIssue.STALE_IDENTITY)
     entry = parse_directory(response).lookup(symbol, expected_cik=cik)
     if entry is None: raise ProviderFailure(Status.SYMBOL_MISMATCH)

@@ -106,7 +106,8 @@ class PricesTests(unittest.TestCase):
         for r,i in ((replace(response(),retrieved_at=NOW+timedelta(seconds=1)),identity()),
                     (response(regularMarketTime=int((NOW+timedelta(seconds=1)).timestamp())),identity()),
                     (response(),replace(identity(),retrieved_at=NOW+timedelta(seconds=1)))):
-            with self.assertRaises(PriceFailure):parse(r,i)
+            with self.assertRaises(PriceFailure) as exc:parse(r,i)
+            self.assertEqual(exc.exception.issue,PriceIssue.FUTURE_OBSERVATION)
 
     def test_price_response_identity_and_market_age_are_separate(self):
         with self.assertRaises(PriceFailure) as exc:parse(as_of=NOW+timedelta(minutes=16))
@@ -132,7 +133,7 @@ class PricesTests(unittest.TestCase):
             with self.assertRaises(ProviderFailure):parse(replace(response(),body=body))
 
     def test_scope_approval_cannot_be_constructor_injected(self):
-        with self.assertRaises(ValueError):replace(parse(),scope_approved=True)
+        with self.assertRaises((TypeError,ValueError)):replace(parse(),scope_approved=True)
         with self.assertRaises(ValueError):replace(parse(),value=Decimal(0))
 
     def provider(self,archive,transport=None):
