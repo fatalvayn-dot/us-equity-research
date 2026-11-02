@@ -1,5 +1,67 @@
 # Development status
 
+## 2026-11-02 — Positive original registration-cover evidence (latest)
+
+Branch: feat/registration-legal-evidence, based on main bec07410ff367dd581a84a213d6e10172c073e7b
+(PR #4 merge). Main fetched, worktree clean at start, no open PRs, prior Actions
+run 41421991631 successful. No concurrent main update observed. radar-agent
+untouched; no authorized archive API exposed.
+
+Completed v0.20.0: a separate registration_legal_evidence path for literal
+N-2/N-2/A/N-2ASR cover labels. Caller must specify disclosure date; same-day
+start/end duration, issuer CIK and DocumentType plus EntityCentralIndexKey must
+share a verified non-dimensional context. No annual FY focus or fiscal-year
+start is inferred. The cover label is kept distinct from the EDGAR submission
+form: a POS EX amendment may contain DocumentType=N-2. No EDGAR form code is
+invented from that label. Wrong issuer/date/form/endpoint, future observation,
+dimensional contexts and cross-context anchor joins fail closed.
+
+Added narrowly verified registration boolean transforms: SEC boolballotbox maps
+U+2610 to false, U+2611/U+2612 to true; XBRL 2020/2022 fixed-true/fixed-false use
+constant semantics. Exact namespace binding is mandatory, including rebinding
+rejection. Unsupported encoding/characters remain without value. Annual parser
+behavior is preserved: it still does not guess unsupported transforms. Shared
+literal disclosure decoder retains duplicate/conflict/missing/nil semantics and
+raw source/context/text/format evidence. No economic, legal or scope approval.
+
+New source validation: two official SEC issuer documents downloaded successfully
+with bounded 15-second requests and 6,000,001-byte reads (42,312 and 63,681 bytes).
+Both original responses are saved as deterministic gzip fixtures with exact
+URL/SHA/retrieval time. This is fresh retrieval of existing disclosures, not proof
+of current status. CIK 0001902649: context date 2026-08-21, DocumentType=N-2/A,
+BDC reported true / registered closed-end flag false. CIK 0002031545: context
+date 2026-10-01, DocumentType=N-2, BDC reported false / registered closed-end true.
+Four literal flags reproduced from exact original bytes. Evidence:
+registration-source-manifest.json, registration-legal-replay.json and
+scripts/verify_registration_legal.py. These documents are legal-disclosure test
+examples, not additions to the active-common-share universe or investment list.
+
+Old eight-annual replay remains identical: zero reported targeted disclosures,
+24 unknown fields. No old missing field filled by an unrelated registration.
+No financial-value HTTP requests; two new issuer-document downloads. REIT
+narrative extraction remains unsupported and legal-type coverage incomplete.
+No 100-company financial acceptance or accepted sector model is claimed.
+
+Tests: 383/383 local unittest tests passed on Python 3.12.14 (365 regressions +
+18 new tests). Both replay scripts and git diff --check passed. Evidence:
+registration-legal-tests.json. Coverage includes original SEC positive/negative
+flags, namespace-bound ballot/constant transforms, absent vs false, duplicates,
+wrong endpoint/CIK/form/date, future cutoff, dimensions, annual-vs-registration
+separation and original hash/time retention. Exploratory import command lacked
+PYTHONPATH and failed; corrected to PYTHONPATH=src. No regression/test failure.
+Remote PR/Actions evidence will be added after verification.
+
+Primary transform references checked 2026-11-02:
+https://www.sec.gov/files/edgar/filer-information/specifications/xbrl-guide-2026-08-14.pdf
+https://www.xbrl.org/Specification/inlineXBRL-transformationRegistry/REC-2020-02-12/inlineXBRL-transformationRegistry-REC-2020-02-12.html
+https://www.xbrl.org/Specification/inlineXBRL-transformationRegistry/REC-2022-02-16/inlineXBRL-transformationRegistry-REC-2022-02-16.html
+
+Next concrete task: obtain explicit REIT annual-report narrative evidence for
+Welltower with issuer/period/source anchoring and review status, then connect
+positive/unknown legal disclosures to auditable universe exclusion/review outcomes.
+Keep scope approval separate and do not extrapolate old registration status.
+All stage acceptance gates beyond the tested infrastructure remain incomplete.
+
 ## 2026-11-02 — Literal annual legal-status disclosures (latest)
 
 Branch: feat/annual-legal-evidence, based on main 8f000e4fa319aeeb01bf153e0b66be436aa9556d

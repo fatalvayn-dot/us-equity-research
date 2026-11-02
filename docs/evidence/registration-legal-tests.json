@@ -1,0 +1,12 @@
+{
+  "command": "PYTHONPATH=src python3 -m unittest discover -s tests -q",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "tests_run": 383,
+  "failures": 0,
+  "errors": 0,
+  "new_tests": 18,
+  "regression_tests": 365,
+  "mode": "local_offline_regression_plus_recorded_original_document_replay",
+  "new_financial_requests": 0,
+  "new_issuer_document_downloads": 2
+}
