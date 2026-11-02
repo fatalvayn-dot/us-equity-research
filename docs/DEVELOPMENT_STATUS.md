@@ -90,6 +90,19 @@ acceptance. Original universe still has only 83 common-share cover matches;
 bundles remain unqueried, special/unknown models remain unapproved, all scores
 and ranks absent, and MVP acceptance remains FALSE. No 500+ expansion or P3/P4.
 
+Publication: https://github.com/fatalvayn-dot/us-equity-research/pull/12
+Source commit: https://github.com/fatalvayn-dot/us-equity-research/commit/f85867bc73d12862db6f7b3121d800d14b8d0bf4
+Source Actions: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41517767392
+All 553 tests plus CLI status passed on Python 3.11/3.12/3.13; all job logs
+inspected (53.268/59.317/56.780 seconds). Source tree
+033198f0e627c1e28fffd60bb160eeaee8fb6d67 matched the local tested tree.
+Manual review checked source order vs independent confirmation, exact class/
+unit/period matching, missing/negative/rounding rules, protected outputs, fresh
+vs recorded evidence and the prohibition on interpreting indications as approved
+scores/fair values. Documentation-head CI and merge SHA are recorded in PR #12.
+The first upload-manifest read failed because the transient helper was absent;
+it was recreated before any remote mutation. No repository data was lost.
+
 ## 2026-11-02 — Portable research browser and non-compensating financial review (latest)
 
 Branch: feat/financial-risk-assessment, based on main

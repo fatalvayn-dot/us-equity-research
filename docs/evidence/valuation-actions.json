@@ -1,0 +1,15 @@
+{
+  "repository": "fatalvayn-dot/us-equity-research",
+  "pull_request": 12,
+  "commit": "f85867bc73d12862db6f7b3121d800d14b8d0bf4",
+  "workflow_run_id": 41517767392,
+  "url": "https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41517767392",
+  "conclusion": "success",
+  "jobs": [
+    {"python": "3.11", "job_id": 125525594800, "tests": 553, "seconds": 53.268, "conclusion": "success", "logs_inspected": true},
+    {"python": "3.12", "job_id": 125525594201, "tests": 553, "seconds": 59.317, "conclusion": "success", "logs_inspected": true},
+    {"python": "3.13", "job_id": 125525594788, "tests": 553, "seconds": 56.780, "conclusion": "success", "logs_inspected": true}
+  ],
+  "cli_status": "passed_all_jobs",
+  "mode": "remote_offline_regression_not_live_acceptance"
+}
