@@ -1,5 +1,104 @@
 # Development status
 
+## 2026-11-03 — First explained research scores and portable ranked pilot (latest)
+
+Branch: feat/explainable-research-score, based on main
+bb6b21ca09c9806fd24b4544cd94c5f39539e601 (PR #12 merge). Read main, current
+PROJECT_BRIEF/status/AGENTS, comparative/valuation/provider code; no open or
+conflicting PR at start. Prior exact-head Actions 41518212940 successful.
+Main/remote checks and local source state agreed. Legacy untouched; no paid
+service, new permission, broker, portfolio, access workaround or automation.
+
+Completed v0.28.0: technology-research-v1 with explicit SIC 3571/3674/7372 routes,
+six 20/20/20/15/15/10 components and versioned published threshold hypotheses.
+Eligibility is derived from raw operating-issuer metadata, original common-share
+class/count evidence, recent US USD quote and latest available annual period.
+Explicit BDC/fund/shell or unsupported/conflicting known disclosures override
+an apparently supported SIC. Missing tags stay unknown, never false. Other
+financial/special/unknown sector models remain unscored. All nine required annual
+facts and prior comparable contract revenue are independently confirmed against
+recent SEC snapshots. Caller scores/approvals/calculations cannot grant admission.
+
+Critical financial review overrides all component points. Missing or unresolved
+required evidence withholds the entire total; no available-weight normalization.
+Literal contract revenue/PP&E payments remain required: no Revenues/Productive-
+Assets/ProfitLoss alias. Valuation uses an explicitly labeled stress scenario:
+dated disclosed shares plus one precision quantum, then 25% extra shares. This
+is not an observed count, statistical confidence interval or complete capital-
+change clearance. A returned split since disclosure requires review, not an
+automatic share adjustment. Fair value and investment approval remain absent.
+
+New daily-history adapter: exact issuer/symbol/USD/US exchange/window, bounded
+200–400 ordered complete rows, >=300 calendar days/>=200 completed sessions,
+no >10-day gaps, 15-minute source age, share-to-quote window and future rejection.
+Exclude the quote day from statistics, even after the close. Observed risk uses
+adjusted-close sample return volatility x sqrt(252) and last-63-session median
+close x reported volume. Low liquidity (<USD5m) or >20% quote/history price
+disagreement blocks totals. Absence of a split record does not clear issuance,
+buybacks or all capital events. Historical statistics are not forecasts.
+
+New score-report CLI reproduces JSON/Markdown/HTML from explicit input batches,
+public source bundles and cutoff, without network calls. Input/bundle collision
+protection retained. Portable Turkish HTML browser shows ranking, per-component
+points, exact financial inputs/periods/source hashes and all unscored reasons.
+Open docs/evidence/score-pilot/report.html. Model rules/limits:
+docs/RESEARCH_SCORE_MODEL.md; reproduction and bounded live commands in README.
+Status CLI now clarifies that it does not probe providers and that zero full-MVP
+acceptances does not mean zero individual source checks. No false completion.
+
+PILOT cutoff 2026-11-02T21:33:48.135379+00:00 (2026-11-03 local): retained
+100-candidate financial and 80-issuer current/prior comparison batches plus
+recent retained SEC source snapshots and seven new market observations. Calls:
+3 Yahoo quotes, 3 Yahoo one-year daily histories and 1 SEC directory invocation,
+excluding internal retries. Base 13-observation valuation bundle reused without
+changing dates; overlay is tests/fixtures/score-market-sources/. One earlier
+MSFT history availability probe was separate, not included in these seven calls.
+No subscription CSV, credentials or authenticated endpoint used. Official SEC
+SIC and Yahoo adjusted-close definitions checked; score thresholds are our
+research hypotheses, not SEC/Yahoo endorsements or calibrated investment success.
+
+Result: 100 candidates, 2 research scores (MSFT 66.5, AAPL 53.0), 98 unscored,
+including 4 critical financial reviews. Both scored companies have 9 confirmed
+annual inputs plus a confirmed prior revenue value; six components sum exactly
+to the published total. NVIDIA's required contract revenue and PP&E inputs were
+absent, so it remained unscored. Remaining 97 valuation bundles were unqueried
+in this bounded pilot. These are dated annual inputs, not fresh full-100 financial
+updates, TTM or a complete investment-risk review. Risk/value/strength separate.
+
+Live helper integration was then verified in a separate state/cohort. It now
+seeds dated observations and refreshes expired SEC/price data through the existing
+collector, rather than permanently using six-hour-expired fixtures. That cohort
+reused recent SEC/identity caches (0 GETs), fetched 3 quotes +3 histories, then
+repeated with ZERO source/quote/identity/history GETs and unchanged sourced values,
+times, component points, metrics and ranking. Separate replayable market bundle
+and evidence: tests/fixtures/score-helper-market-sources/ and
+docs/evidence/score-pilot/live-helper-validation.json. Financial annual/comparative
+inputs remain recorded; new annual periods/conflicts correctly require updates.
+
+Tests: final 576/576 full local regressions passed on Python 3.12.14 (69.131s),
+including 23 new scoring/history/recorded/CLI tests. Earlier 575-test full run
+also passed (65.909s). Remote matrix is checked before merge. Includes exact raw-source replay,
+independent statistics-reference calculations, all six point sums, source/model
+admission, financial critical-vs-favorable precedence, missing/negative/zero,
+sector/legal/split/liquidity/price mismatches, future/stale/gapped/null data,
+quote expiry removing scores, counter-injected approvals, escaped native/JSON
+HTML and protected CLI destinations. Initial 6-test recorded run had one HTML
+formatting error on JSON-serialized Decimal strings; corrected rendering to
+accept both native Decimal and serialized numbers without changing finance.
+All 6 then passed. No financial/statistical/primary-source reconciliation failure.
+Diff and CLI checks passed. An unrelated temporary worktree file was preserved
+and excluded from staging; no user changes were removed.
+
+Remaining/next concrete task: complete a verified active 100-common-share sample
+(original record has only 83 cover matches), collect missing valuation/history
+sources for supported eligible issuers, refresh annual/comparative batches where
+needed and perform the actual 100-company acceptance run. Keep unsupported/
+special models and incomplete firms unranked; a separately verified semiconductor
+literal-Revenues/productive-cash-payment model may be developed, never an alias.
+These pilot scores are not a completed MVP or an investment recommendation.
+Full sector coverage, qualitative risk, strategy performance and all-100 active
+share acceptance remain unverified. P2/P3/P4 deferred; no invented percentage.
+
 ## 2026-11-02 — Original-filing-bound shares and valuation indications (latest)
 
 Branch: feat/market-cap-valuation, based on main

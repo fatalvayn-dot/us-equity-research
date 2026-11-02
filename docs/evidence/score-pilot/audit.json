@@ -1,0 +1,28 @@
+{
+  "evidence_cutoff": "2026-11-02T21:33:48.135379+00:00",
+  "history_get_invocations": 3,
+  "quote_get_invocations": 3,
+  "identity_get_invocations": 1,
+  "events": [
+    {
+      "symbol": "AAPL",
+      "status": "history_body_collected",
+      "raw_sha256": "defdace4310fd1ece3d9969e26a460e48b015483d6b6048f678a404a8de6af55",
+      "retrieved_at": "2026-11-02T21:33:39.535636+00:00"
+    },
+    {
+      "symbol": "MSFT",
+      "status": "history_body_collected",
+      "raw_sha256": "6c5bc821c4526b0dbb96d6de6be4334bdbbce636ef1cdc66ddae0e428ea5c3ae",
+      "retrieved_at": "2026-11-02T21:33:43.883620+00:00"
+    },
+    {
+      "symbol": "NVDA",
+      "status": "history_body_collected",
+      "raw_sha256": "9e9740d31239a82ff180bff0141976378c7e19f8532468f1ba261f3195692aaf",
+      "retrieved_at": "2026-11-02T21:33:48.095483+00:00"
+    }
+  ],
+  "mode": "live_market_refresh_with_recorded_financial_inputs",
+  "fresh_100_company_acceptance": false
+}

@@ -1,0 +1,19 @@
+{
+  "session_date_local": "2026-11-03",
+  "python": "3.12.14",
+  "command": "PYTHONPATH=src python -m unittest discover -s tests -q",
+  "tests": 576,
+  "new_tests": 23,
+  "failures": 0,
+  "errors": 0,
+  "elapsed_seconds": 69.131,
+  "mode": "local_offline_regression_recorded_source_statistics_and_cli_integration",
+  "pilot_candidates": 100,
+  "pilot_scored_companies": 2,
+  "critical_review_companies": 4,
+  "mvp_accepted": false,
+  "initial_recorded_test_failure": "HTML formatter received serialized Decimal strings; rendering corrected without financial changes",
+  "independent_statistics_reference": "passed",
+  "live_helper_and_zero_get_resume": "verified_separately_not_counted_as_CI_live_calls",
+  "diff_check": "passed"
+}

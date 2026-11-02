@@ -1,0 +1,39 @@
+{
+  "initial_get_invocations": {
+    "sec_source_get_invocations": 0,
+    "quote_get_invocations": 3,
+    "identity_get_invocations": 0,
+    "history_get_invocations": 3
+  },
+  "resume_get_invocations": {
+    "sec_source_get_invocations": 0,
+    "quote_get_invocations": 0,
+    "identity_get_invocations": 0,
+    "history_get_invocations": 0
+  },
+  "original_sources_times_components_metrics_and_ranking_unchanged": true,
+  "before_cutoff": "2026-11-02T21:58:48.760051+00:00",
+  "after_cutoff": "2026-11-02T22:00:30.893629+00:00",
+  "ranking": [
+    {
+      "rank": 1,
+      "symbol": "MSFT",
+      "issuer_id": "0000789019",
+      "score": "66.5",
+      "model_id": "prepackaged_software_v1"
+    },
+    {
+      "rank": 2,
+      "symbol": "AAPL",
+      "issuer_id": "0000320193",
+      "score": "53.0",
+      "model_id": "electronic_computers_v1"
+    }
+  ],
+  "source_bundles": [
+    "tests/fixtures/valuation-sources",
+    "tests/fixtures/score-helper-market-sources"
+  ],
+  "cohort": "separate_live_helper_integration_not_primary_pilot_capture",
+  "mvp_accepted": false
+}

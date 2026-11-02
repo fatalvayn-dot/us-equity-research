@@ -21,7 +21,7 @@ from .pipeline import research_resolver
 
 def main():
     parser = argparse.ArgumentParser(description="US Equity Research foundation")
-    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report", "comparative-report", "valuation-report", "price-run", "mvp-run"])
+    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report", "comparative-report", "valuation-report", "score-report", "price-run", "mvp-run"])
     parser.add_argument("--user-agent", default=os.environ.get("SEC_USER_AGENT"))
     parser.add_argument("--symbol", action="append", default=[])
     parser.add_argument("--cik")
@@ -40,6 +40,8 @@ def main():
     parser.add_argument("--markdown")
     parser.add_argument("--html")
     parser.add_argument("--source-bundle")
+    parser.add_argument("--market-bundle")
+    parser.add_argument("--comparison-input")
     parser.add_argument("--as-of")
     parser.add_argument("--candidates")
     parser.add_argument("--state-dir")
@@ -77,20 +79,25 @@ def main():
                 sqlite_error=getattr(exc,'sqlite_errorname',None),mvp_accepted=False)))
             raise SystemExit(2) from None
         return
-    if args.command in ("research-report", "comparative-report", "valuation-report"):
+    if args.command in ("research-report", "comparative-report", "valuation-report", "score-report"):
         from pathlib import Path
         import tempfile
         from .reporting import build_report, render_markdown
         if not args.input or not args.output or (args.command == "comparative-report" and not args.prior_input):
             parser.error("report requires --input, --output and comparative-report also --prior-input")
-        if args.command=='valuation-report' and (not args.source_bundle or not args.as_of):
-            parser.error('valuation-report requires --source-bundle and explicit --as-of evidence cutoff')
-        if args.html and args.command != 'research-report':
-            parser.error('--html currently supports research-report only')
-        paths = [p for p in (args.input, args.output, args.markdown, args.html, args.prior_input if args.command == "comparative-report" else None) if p]
+        if args.command in ('valuation-report','score-report') and (not args.source_bundle or not args.as_of):
+            parser.error('valuation/score report requires --source-bundle and explicit --as-of evidence cutoff')
+        if args.command=='score-report' and not all((args.market_bundle,args.comparison_input,args.prior_input)):
+            parser.error('score-report requires --market-bundle, --comparison-input and --prior-input')
+        if args.html and args.command not in ('research-report','score-report'):
+            parser.error('--html supports research-report or score-report only')
+        paths = [p for p in (args.input,args.output,args.markdown,args.html,
+            args.prior_input if args.command in ("comparative-report","score-report") else None,
+            args.comparison_input if args.command=='score-report' else None) if p]
         if len({str(Path(p).resolve()) for p in paths}) != len(paths):
             parser.error("input and report destinations must be distinct")
-        if args.command=='valuation-report' and any(Path(args.source_bundle).resolve() in Path(p).resolve().parents for p in (args.output,args.markdown) if p):
+        if args.command in ('valuation-report','score-report') and any(Path(bundle).resolve() in Path(p).resolve().parents
+                for bundle in (args.source_bundle,args.market_bundle) if bundle for p in (args.output,args.markdown) if p):
             parser.error('report destination must not overwrite source bundle contents')
         def save(path, content):
             target=Path(path);target.parent.mkdir(parents=True,exist_ok=True)
@@ -106,7 +113,14 @@ def main():
                 import gzip
                 body = Path(path).read_bytes()
                 return json.loads(gzip.decompress(body) if str(path).endswith('.gz') else body)
-            if args.command=='valuation-report':
+            if args.command=='score-report':
+                from datetime import datetime
+                from .scoring import build_score_report,render_score_markdown
+                from .evidence_bundle import read_bundle
+                responses=list(read_bundle(args.source_bundle))+list(read_bundle(args.market_bundle))
+                report=build_score_report(read_batch(args.input),read_batch(args.comparison_input),read_batch(args.prior_input),responses,as_of=datetime.fromisoformat(args.as_of))
+                render_markdown=render_score_markdown
+            elif args.command=='valuation-report':
                 from datetime import datetime
                 from .valuation import build_valuation_report,render_valuation_markdown
                 from .evidence_bundle import read_bundle
@@ -121,7 +135,10 @@ def main():
             save(args.output,json.dumps(report,default=encode,indent=2)+"\n")
             if args.markdown:save(args.markdown,render_markdown(report))
             if args.html:
-                from .report_html import render_html
+                if args.command=='score-report':
+                    from .score_html import render_score_html as render_html
+                else:
+                    from .report_html import render_html
                 save(args.html,render_html(report))
             print(json.dumps(report['summary']))
         except (ValueError,KeyError,TypeError,OSError) as exc:
@@ -244,11 +261,14 @@ def main():
                           "financial_acceptance": False}, indent=2))
         return
     print(json.dumps({"version": __version__, "stage": "mvp_inputs_incomplete", "live_providers": [],
+                      "source_status_mode": "status_command_does_not_probe_providers",
                       "implemented_identity_adapters": ["SEC"],
                       "implemented_financial_adapters": ["Yahoo assets only", "SEC", "Nasdaq assets and liabilities", "Finnhub reported contracts; live unverified"],
                       "implemented_market_data_adapters": ["Yahoo regular-session price; scope/model approval pending"],
                       "implemented_discovery_adapters": ["Nasdaq screener"],
+                      "implemented_research_models": ["technology-research-v1: SIC 3571, 3674, 7372; research hypotheses only"],
                       "real_companies_validated": 0, "score_weights": dict(SCORE_WEIGHTS),
+                      "real_companies_validated_scope": "full_MVP_acceptance_not_individual_source_checks",
                       "production_accepted": False}, indent=2))
 
 
