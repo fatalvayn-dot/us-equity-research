@@ -91,6 +91,12 @@ def build_report(batch):
                 raise ValueError('unverified scope approval cannot enter a report')
             result['scope_status'] = scope
             result['scope_reason'] = company['scope_reason']
+            result['deferred_fields'] = company.get('deferred_fields', [])
+            if not company['fields'] and company.get('pending_reason') in (
+                    'metadata_unavailable', 'symbol_mismatch', 'no_annual_in_recent_window', 'annual_period_unresolved'):
+                result.update(status='period_unresolved', pending_reason=company['pending_reason'], accepted_fact_count=0)
+                companies.append(result)
+                continue
             facts = {}; contexts = set(); starts = set(); seen = set()
             if not company['fields']:
                 raise ValueError('explicit requested fields required')
@@ -147,8 +153,14 @@ def render_markdown(report):
         count = sum(r['value'] is not None for r in c['calculations'])
         lines.append('| '+' | '.join(cell(v) for v in (c['symbol'], c['issuer_id'], c.get('period_end','unknown'), c['accepted_fact_count'], count, c['status'], 'unavailable'))+' |')
     for c in report['companies']:
-        lines.extend(['', '## '+cell(c['symbol']), '', 'Scope: '+cell(c.get('scope_reason','invalid evidence')), '',
-                      '| Field | Value and currency | Source | Period | Definition | Raw SHA-256 | Observed at | Attempts |',
+        lines.extend(['', '## '+cell(c['symbol']), '', 'Scope: '+cell(c.get('scope_reason','invalid evidence')), ''])
+        if c.get('sector_profile'):
+            lines.extend(['Sector review: '+cell(c['sector_profile']['profile'])+' ('+cell(c['sector_profile']['status'])+').', ''])
+        if c.get('pending_reason'):
+            lines.extend(['', 'Unattempted financial collection: '+cell(c['pending_reason'])+'.', ''])
+        if c.get('deferred_fields'):
+            lines.extend(['', 'Unattempted duration fields (period unresolved): '+cell(', '.join(c['deferred_fields']))+'.', ''])
+        lines.extend(['| Field | Value and currency | Source | Period | Definition | Raw SHA-256 | Observed at | Attempts |',
                       '| --- | --- | --- | --- | --- | --- | --- | --- |'])
         for f in c['fields']:
             fact = f['fact']; q = f['query']
@@ -161,4 +173,4 @@ def render_markdown(report):
         for r in c['calculations']:
             lines.append('| '+' | '.join(cell(v) for v in (r['formula'], r['value'] if r['value'] is not None else 'unavailable', r['unit'], r['status']))+' |')
         lines.extend(['', 'Score components: '+ '; '.join(cell(k)+': '+cell(v['status']) for k,v in c['score_components'].items())+'.', ''])
-    return '\n'.join(lines)+'\n'
+    return '\n'.join(lines).rstrip()+'\n'

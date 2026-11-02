@@ -5,6 +5,7 @@ __pycache__/
 build/
 dist/
 .env
+data/
 data/cache/
 data/raw/
 data/*.sqlite*

@@ -504,3 +504,53 @@ For a new collection use research-batch with an explicit issuer/period plan,
 then supply its JSON to research-report. The batch command remains resumable;
 unknown scope and missing data are carried into the report. See
 `docs/PROJECT_BRIEF.md` for the approved 48-hour MVP acceptance scope.
+
+
+## Live MVP collection and report
+
+```sh
+PYTHONPATH=src python -m equity_research mvp-run \
+  --candidates docs/evidence/sample100-audit-queue.json \
+  --state-dir data/mvp100 --user-agent "$SEC_USER_AGENT" \
+  --max-new-documents 100 --max-new-fields 900
+```
+
+Set SEC_USER_AGENT to an identifying project/contact string. No paid service is
+required. This command refreshes/caches SEC submissions, downloads bounded
+original annual documents, verifies explicit fiscal starts, collects ordered
+Yahoo/SEC/Nasdaq/Finnhub fields and writes `data/mvp100/report.json` and
+`report.md`. Run it again with the same state directory to resume. Completed
+facts retain their original observation times; pending failures retry after five
+minutes. With both work bounds zero, cached metadata/documents/accepted fields
+can be reported without new financial work; unresolved jobs remain explicit.
+Metadata still refreshes when its six-hour cache expires.
+
+No annual report means financial jobs are unattempted. An explicit annual end
+without a verified start supports only Assets/Liabilities; requested duration fields
+are deferred, never calendar-inferred. Scope and sector review remain separate
+from arithmetic. Export/run success does not mean the MVP acceptance gates pass.
+The pipeline records actual public GET invocations (excluding internal retries
+and private Finnhub transport), and checks every selected fact's financial,
+identity and unit evidence against exact archived response observations.
+
+To make portable public source recordings after the run completes:
+
+```sh
+PYTHONPATH=src python scripts/export_mvp_evidence.py \
+  --state-dir data/mvp100 --output docs/evidence/mvp100 \
+  --sources tests/fixtures/mvp100-sources
+```
+
+The export contains gzip JSONL observations split into hash-checked parts, not
+operational SQLite caches or headers. `read_bundle` reconstructs and validates
+original bytes/URLs/timestamps for recorded replay; replay is not a new live run.
+
+
+Recorded 2026-11-02 candidate-run evidence is in `docs/evidence/mvp100/report.md`.
+It has 100 candidates, 98 with financial queries, 96 with accepted input facts,
+536 facts, 272 exact arithmetic results and zero scores. It does not constitute
+MVP acceptance: common-share coverage, eligible scoring and price/prior-period
+inputs remain pending. Initial live run, expanded completion, recovery and
+zero-work resume are recorded separately. Large JSON exports use gzip with a
+`reports-manifest.json` of raw/stored hashes. Original 553 public observations
+are reconstructed with `read_bundle('tests/fixtures/mvp100-sources')`.
