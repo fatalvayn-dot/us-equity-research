@@ -21,7 +21,7 @@ from .pipeline import research_resolver
 
 def main():
     parser = argparse.ArgumentParser(description="US Equity Research foundation")
-    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report", "comparative-report", "price-run", "mvp-run"])
+    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report", "comparative-report", "valuation-report", "price-run", "mvp-run"])
     parser.add_argument("--user-agent", default=os.environ.get("SEC_USER_AGENT"))
     parser.add_argument("--symbol", action="append", default=[])
     parser.add_argument("--cik")
@@ -39,6 +39,8 @@ def main():
     parser.add_argument("--prior-input")
     parser.add_argument("--markdown")
     parser.add_argument("--html")
+    parser.add_argument("--source-bundle")
+    parser.add_argument("--as-of")
     parser.add_argument("--candidates")
     parser.add_argument("--state-dir")
     parser.add_argument("--max-new-documents",type=int,default=100)
@@ -75,17 +77,21 @@ def main():
                 sqlite_error=getattr(exc,'sqlite_errorname',None),mvp_accepted=False)))
             raise SystemExit(2) from None
         return
-    if args.command in ("research-report", "comparative-report"):
+    if args.command in ("research-report", "comparative-report", "valuation-report"):
         from pathlib import Path
         import tempfile
         from .reporting import build_report, render_markdown
         if not args.input or not args.output or (args.command == "comparative-report" and not args.prior_input):
             parser.error("report requires --input, --output and comparative-report also --prior-input")
+        if args.command=='valuation-report' and (not args.source_bundle or not args.as_of):
+            parser.error('valuation-report requires --source-bundle and explicit --as-of evidence cutoff')
         if args.html and args.command != 'research-report':
             parser.error('--html currently supports research-report only')
         paths = [p for p in (args.input, args.output, args.markdown, args.html, args.prior_input if args.command == "comparative-report" else None) if p]
         if len({str(Path(p).resolve()) for p in paths}) != len(paths):
             parser.error("input and report destinations must be distinct")
+        if args.command=='valuation-report' and any(Path(args.source_bundle).resolve() in Path(p).resolve().parents for p in (args.output,args.markdown) if p):
+            parser.error('report destination must not overwrite source bundle contents')
         def save(path, content):
             target=Path(path);target.parent.mkdir(parents=True,exist_ok=True)
             temporary=None
@@ -100,7 +106,13 @@ def main():
                 import gzip
                 body = Path(path).read_bytes()
                 return json.loads(gzip.decompress(body) if str(path).endswith('.gz') else body)
-            if args.command == 'comparative-report':
+            if args.command=='valuation-report':
+                from datetime import datetime
+                from .valuation import build_valuation_report,render_valuation_markdown
+                from .evidence_bundle import read_bundle
+                report=build_valuation_report(read_batch(args.input),read_bundle(args.source_bundle),as_of=datetime.fromisoformat(args.as_of))
+                render_markdown=render_valuation_markdown
+            elif args.command == 'comparative-report':
                 from .comparative import build_comparative_report, render_comparative_markdown
                 report = build_comparative_report(read_batch(args.input), read_batch(args.prior_input))
                 render_markdown = render_comparative_markdown

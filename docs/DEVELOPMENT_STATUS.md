@@ -1,5 +1,95 @@
 # Development status
 
+## 2026-11-02 — Original-filing-bound shares and valuation indications (latest)
+
+Branch: feat/market-cap-valuation, based on main
+dcb50c8d461ef7b71557ba4ef9cbb05d3d35536b (PR #11 merge). Read main status,
+PROJECT_BRIEF/AGENTS and source adapters. Remote heads matched local main; no
+open PR or conflicting work. Prior final-head Actions 41506243130 successful.
+Legacy untouched; no new project, credential, access workaround or automation.
+
+Completed v0.27.0: exact SEC DEI disclosed-share extraction, original primary
+filing/class reconciliation and source-bound capitalization/ratio indications.
+Shares are positive integral shares, not weighted-average/issued shares or
+monetary fields. Latest nonfuture exact DEI observations require the explicit
+share unit, filing availability, <=120-day date and <=6-hour source snapshot.
+SEC submissions/accession/form/filing date/primary URL and original 10-Q/10-K
+CIK, instant, non-dimensional shares unit/count and common-security cover must
+agree. Multi-ticker, class-labeled, dimensional, preferred/depositary or conflicting
+evidence is withheld. Precision and all source times/URLs/hashes are preserved.
+
+Indicative capitalization = sourced Yahoo regular-session USD price times dated
+original-filing-verified common shares. Three literal ratios: contract revenue,
+issuer NetIncomeLoss and OCF less PP&E payments divided by the indication.
+Missing operands remain absent, negative results remain negative. No Revenues,
+ProfitLoss or productive-asset-payment alias. Each available annual numerator is
+independently confirmed against fresh exact-period SEC companyfacts; conflicts
+block rather than replace the first selected source. Original field trails and
+Yahoo->SEC->Nasdaq->Finnhub priority remain intact. Derived capitalization is
+not a provider market-cap observation. Fair value, sector/scope approval and
+investment scores remain absent; capital changes since disclosure are unverified.
+
+New CLI: valuation-report --input --source-bundle --as-of --output --markdown.
+It evaluates provided raw observations with no network request, requires an
+explicit cutoff, rejects future/stale prices and protects bundle/input paths.
+Bounded three-company live verification helper reuses original-source caches
+and a run lease. Portable source export excludes operational SQLite. Reproduction
+commands and economic limitations: README and docs/DISCLOSED_SHARE_VALUATION.md.
+SEC's official API documentation was checked; no API key is required for these
+public endpoints. This is not a new investment model or a 100-share acceptance.
+
+REAL SAMPLE, cutoff 2026-11-02T20:00:15.589376+00:00: AAPL/MSFT/NVDA, three
+DEI counts matched exact original 10-Q disclosures (dated 2026-07-17,
+2026-10-22 and 2026-08-21 respectively). Ten available annual values matched
+fresh SEC companyfacts (AAPL 4, MSFT 4, NVDA 2); seven ratios calculated.
+Financial annual periods and first-selected facts remain from the retained
+recorded 100-candidate input, not a full refresh or TTM. Thirteen public source
+observations: nine SEC source GET invocations, three Yahoo quote GETs and one
+SEC directory GET (transport-internal retries excluded). Exact raw bundle:
+tests/fixtures/valuation-sources/. Report/audit/manifest: docs/evidence/valuation-sample/.
+The 100-candidate report has three indications, 97 pending source bundles (not
+queried by this sample), zero rejected and zero scores. All fair values absent.
+
+Immediate cache-only repetition: zero source, quote and identity GET invocations;
+all original prices, disclosed counts, source hashes/times, metrics and indicated
+capitalization values unchanged. Report evaluation cutoff advanced without
+relabeling source observations as fresh. Original capture audit/cutoff retained
+on export; later resume counters are separate. The initial helper looked for the
+price GET count at the wrong dictionary level; corrected exported top-level
+count from the preserved nested summary (3), with explicit correction trail.
+No source value/timestamp changed. Replay at +16 minutes rejects all three
+expired prices and cannot claim a current valuation.
+
+Separate access diagnostics: five bounded GET invocations. Yahoo v7 quote timed
+out; quoteSummary returned access_denied. First AAPL submissions attempt timed
+out; MSFT submissions and Nasdaq AAPL info succeeded. Nasdaq's Common Stock
+label was observed but quote currency was null, so it granted no market-cap or
+scope approval. Two successful public probe bodies archived separately at
+tests/fixtures/valuation-access-sources/. Direct provider market-cap values
+accepted: zero. These probes are additional to, not part of, the 13-observation
+sample. No quota bypass, host rotation, cookies, tokens or new access was used.
+
+Tests: final 553/553 full local regressions passed on Python 3.12.14 (58.166s),
+including 24 new valuation unit/recorded/CLI tests. Earlier 551-test full run also
+passed (59.857s), followed by the 24-test targeted run (5.235s). Remote matrix is
+checked before merge. Covers literal units/identity/periods, ambiguous/latest
+rows, stale/future/malformed source data, primary class/precision, SEC conflicts,
+calculation injection, Decimal precision, missing/negative cases, isolated bad
+companies, exact recorded reconstruction and CLI bundle protection. One recorded
+assertion initially expected nine available annual confirmations instead of ten
+(NVDA has an additional OCF operand without complete PP&E ratio); corrected the
+count, without changing validation or source values. No live share/financial
+reconciliation failure. Diff/CLI checks pass; publication links follow in PR.
+
+Remaining/next concrete task: validate the capital-change window and implement
+an explicit versioned nonfinancial-sector research score model using these
+source-bound inputs, with critical financial review overriding totals. Then
+collect the remaining verified common-share sample and run real 100-company
+acceptance. Original universe still has only 83 common-share cover matches;
+100 current active common shares are not accepted. 97 new valuation source
+bundles remain unqueried, special/unknown models remain unapproved, all scores
+and ranks absent, and MVP acceptance remains FALSE. No 500+ expansion or P3/P4.
+
 ## 2026-11-02 — Portable research browser and non-compensating financial review (latest)
 
 Branch: feat/financial-risk-assessment, based on main

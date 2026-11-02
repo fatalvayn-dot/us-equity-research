@@ -723,3 +723,34 @@ shortfall are watch signals. Missing or rejected operands leave a check unresolv
 Favorable other figures cannot remove a mandatory review. These are versioned
 screening hypotheses, not insolvency findings, accepted sector models or complete
 risk clearance. See `docs/FINANCIAL_REVIEW.md` for definitions and limits.
+
+## Disclosed-share valuation sample
+
+Three companies now have original-filing-verified dated shares joined to sourced
+USD quotes and exact annual financial operands. The readable result is
+`docs/evidence/valuation-sample/report.md`. These are indicative calculations,
+not current market-cap observations or fair values. Remaining 97 source bundles
+were not queried in this bounded sample; scores remain unavailable.
+
+Reproduce the exact recorded sample without network requests:
+
+```bash
+PYTHONPATH=src python -m equity_research valuation-report \
+  --input docs/evidence/liquidity100/batch.json.gz \
+  --source-bundle tests/fixtures/valuation-sources \
+  --as-of 2026-11-02T20:00:15.589376+00:00 \
+  --output data/valuation/report.json --markdown data/valuation/report.md
+```
+
+Collect/reuse the bounded AAPL/MSFT/NVDA live source sample with an identifying
+User-Agent; retain ignored incremental state and public raw evidence locally:
+
+```bash
+PYTHONPATH=src python scripts/verify_valuation_inputs.py \
+  --user-agent 'US Equity Research (https://github.com/fatalvayn-dot/us-equity-research)'
+```
+
+This checks shares/quotes and selected annual operands; it does not refresh the
+entire 100-company annual input batch. Use a separate state directory for a new
+sample, via `--state-dir`. Contracts and remaining model gates are documented in
+`docs/DISCLOSED_SHARE_VALUATION.md`.
