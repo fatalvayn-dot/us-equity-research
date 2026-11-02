@@ -512,7 +512,7 @@ unknown scope and missing data are carried into the report. See
 PYTHONPATH=src python -m equity_research mvp-run \
   --candidates docs/evidence/sample100-audit-queue.json \
   --state-dir data/mvp100 --user-agent "$SEC_USER_AGENT" \
-  --max-new-documents 100 --max-new-fields 600
+  --max-new-documents 100 --max-new-fields 900
 ```
 
 Set SEC_USER_AGENT to an identifying project/contact string. No paid service is
@@ -526,7 +526,7 @@ can be reported without new financial work; unresolved jobs remain explicit.
 Metadata still refreshes when its six-hour cache expires.
 
 No annual report means financial jobs are unattempted. An explicit annual end
-without a verified start supports only Assets/Liabilities; four duration fields
+without a verified start supports only Assets/Liabilities; requested duration fields
 are deferred, never calendar-inferred. Scope and sector review remain separate
 from arithmetic. Export/run success does not mean the MVP acceptance gates pass.
 The pipeline records actual public GET invocations (excluding internal retries
@@ -544,3 +544,13 @@ PYTHONPATH=src python scripts/export_mvp_evidence.py \
 The export contains gzip JSONL observations split into hash-checked parts, not
 operational SQLite caches or headers. `read_bundle` reconstructs and validates
 original bytes/URLs/timestamps for recorded replay; replay is not a new live run.
+
+
+Recorded 2026-11-02 candidate-run evidence is in `docs/evidence/mvp100/report.md`.
+It has 100 candidates, 98 with financial queries, 96 with accepted input facts,
+536 facts, 272 exact arithmetic results and zero scores. It does not constitute
+MVP acceptance: common-share coverage, eligible scoring and price/prior-period
+inputs remain pending. Initial live run, expanded completion, recovery and
+zero-work resume are recorded separately. Large JSON exports use gzip with a
+`reports-manifest.json` of raw/stored hashes. Original 553 public observations
+are reconstructed with `read_bundle('tests/fixtures/mvp100-sources')`.

@@ -20,7 +20,8 @@ from .sector_policy import assess_profile
 from .submissions import SecSubmissions
 from .transport import RateLimiter, Response
 
-FIELDS = ('revenue','assets','liabilities','net_income','operating_cash_flow','capital_expenditure')
+FIELDS = ('revenue','assets','liabilities','net_income','operating_cash_flow','capital_expenditure',
+          'revenue_total','profit_loss','productive_asset_cash_payments')
 
 
 def save_json(path, payload):
@@ -168,6 +169,8 @@ def run_mvp(payload, *, state_dir, user_agent, max_new_documents=100, max_new_fi
         save_json(root/'batch.json',batch);pulse()
         coverage=archive_coverage(batch,archive);save_json(root/'archive-coverage.json',coverage)
         report=build_report(batch)
+        report['report_generation_network_requests']=report.pop('new_network_requests')
+        report['collection_mode']='live_source_collection' if counts['public_transport_get_calls'] else 'cached_or_unattempted_collection'
         metadata_by_cik={r['issuer_id']:r for r in normalized}
         for company in report['companies']:
             meta=metadata_by_cik[company['issuer_id']]
@@ -177,6 +180,7 @@ def run_mvp(payload, *, state_dir, user_agent, max_new_documents=100, max_new_fi
             company['sector_profile']=assess_profile(source,issuer_id=company['issuer_id'],as_of=datetime.fromisoformat(report['as_of']))
         report['pipeline']=dict(requested_candidates=len(candidates),metadata_states=dict(Counter(r['status'] for r in metadata)),
             annual_document_summary=docs['summary'],financial_query_companies=len(plan['companies']),
+            companies_with_financial_facts=sum(c['accepted_fact_count']>0 for c in report['companies']),
             period_unresolved_companies=len(unresolved),deferred_duration_fields=sum(len(v) for v in deferred.values()),
             public_transport_get_calls=counts['public_transport_get_calls'],
             call_measure='public transport GET invocations, excluding internal retries and private Finnhub transport',

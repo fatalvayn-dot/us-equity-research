@@ -1,12 +1,14 @@
 {
   "command": "PYTHONPATH=src python3 -m unittest discover -s tests -q",
   "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
-  "tests_run": 420,
+  "tests_run": 426,
   "failures": 0,
   "errors": 0,
-  "new_mvp_tests": 13,
+  "new_mvp_tests": 14,
   "new_bundle_tests": 7,
+  "new_recorded_tests": 5,
   "regression_tests": 400,
-  "mode": "local_offline_unit_and_integration",
+  "seconds": 27.614,
+  "mode": "local_offline_unit_integration_and_recorded_real_run_replay",
   "mvp_accepted": false
 }

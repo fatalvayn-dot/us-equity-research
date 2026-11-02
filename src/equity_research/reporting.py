@@ -173,4 +173,4 @@ def render_markdown(report):
         for r in c['calculations']:
             lines.append('| '+' | '.join(cell(v) for v in (r['formula'], r['value'] if r['value'] is not None else 'unavailable', r['unit'], r['status']))+' |')
         lines.extend(['', 'Score components: '+ '; '.join(cell(k)+': '+cell(v['status']) for k,v in c['score_components'].items())+'.', ''])
-    return '\n'.join(lines)+'\n'
+    return '\n'.join(lines).rstrip()+'\n'

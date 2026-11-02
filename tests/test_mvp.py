@@ -2,6 +2,9 @@ import gzip
 import json
 import tempfile
 import unittest
+import sqlite3
+import io
+from contextlib import redirect_stdout
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from unittest.mock import patch
@@ -36,6 +39,18 @@ def recorded_http(transport,url):
 
 
 class MvpTests(unittest.TestCase):
+    def test_cli_sqlite_failure_is_safe_and_not_acceptance(self):
+        from equity_research.__main__ import main
+        with tempfile.TemporaryDirectory() as tmp:
+            candidates=Path(tmp)/'candidates.json';candidates.write_text(json.dumps(CANDIDATES))
+            argv=['equity-research','mvp-run','--candidates',str(candidates),'--user-agent','Synthetic fixture','--state-dir',tmp]
+            output=io.StringIO()
+            with patch('sys.argv',argv),patch('equity_research.mvp.run_mvp',side_effect=sqlite3.OperationalError('private-error-detail')),redirect_stdout(output):
+                with self.assertRaises(SystemExit) as exit_info:main()
+            self.assertEqual(exit_info.exception.code,2)
+            result=json.loads(output.getvalue());self.assertEqual(result['error_type'],'OperationalError')
+            self.assertFalse(result['mvp_accepted']);self.assertNotIn('private-error-detail',output.getvalue())
+
     def test_recorded_end_to_end_pipeline_archives_and_reports(self):
         with tempfile.TemporaryDirectory() as tmp, patch('equity_research.response_archive.ArchivedTransport.get',new=recorded_http):
             report=run_mvp(CANDIDATES,state_dir=tmp,user_agent='Synthetic offline fixture replay')
@@ -43,6 +58,9 @@ class MvpTests(unittest.TestCase):
             self.assertGreater(report['summary']['accepted_facts'],0)
             self.assertTrue(report['pipeline']['all_financial_references_archived'])
             self.assertEqual(report['summary']['scored_companies'],0)
+            self.assertEqual(report['report_generation_network_requests'],0)
+            self.assertNotIn('new_network_requests',report)
+            self.assertFalse(report['companies'][0]['sector_profile']['sector_model_supported'])
             for name in ('metadata.json','documents.json','plan.json','batch.json','report.json','report.md','archive-coverage.json'):
                 self.assertTrue((Path(tmp)/name).exists())
 
@@ -69,14 +87,16 @@ class MvpTests(unittest.TestCase):
     def test_no_document_start_only_queries_instants(self):
         plan,missing,deferred=financial_plan(metadata(),dict(companies=[]))
         self.assertEqual(plan['companies'][0]['fields'],['assets','liabilities'])
-        self.assertIsNone(plan['companies'][0]['period_start']);self.assertEqual(len(deferred[CIK]),4)
+        self.assertIsNone(plan['companies'][0]['period_start']);self.assertEqual(len(deferred[CIK]),7)
         self.assertEqual(missing,[])
 
     def test_exact_document_start_enables_duration_queries(self):
         row=metadata()[0];end=row['annual']['report_end']
         docs=dict(companies=[dict(issuer_id=CIK,period=dict(issuer_id=CIK,period_start='2024-09-29',period_end=end))])
         plan,_,deferred=financial_plan([row],docs)
-        self.assertEqual(len(plan['companies'][0]['fields']),6);self.assertEqual(deferred,{})
+        self.assertEqual(len(plan['companies'][0]['fields']),9)
+        self.assertTrue({'revenue','revenue_total','net_income','profit_loss','capital_expenditure','productive_asset_cash_payments'}.issubset(plan['companies'][0]['fields']))
+        self.assertEqual(deferred,{})
 
     def test_mismatched_document_end_rejected(self):
         docs=dict(companies=[dict(issuer_id=CIK,period=dict(issuer_id=CIK,period_start='2024-09-29',period_end='2020-01-01'))])
@@ -109,7 +129,7 @@ class MvpTests(unittest.TestCase):
     def test_zero_work_bound_never_infers_duration(self):
         with tempfile.TemporaryDirectory() as tmp, patch('equity_research.response_archive.ArchivedTransport.get',new=recorded_http):
             r=run_mvp(CANDIDATES,state_dir=tmp,user_agent='Synthetic fixture replay',max_new_documents=0,max_new_fields=0)
-            self.assertEqual(r['pipeline']['deferred_duration_fields'],4)
+            self.assertEqual(r['pipeline']['deferred_duration_fields'],7)
             self.assertEqual(r['summary']['accepted_facts'],0)
 
     def test_archive_coverage_requires_actual_matching_observation(self):

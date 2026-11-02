@@ -1,6 +1,7 @@
 import argparse
 import json
 import os
+import sqlite3
 from dataclasses import asdict
 from datetime import date
 
@@ -51,8 +52,9 @@ def main():
             run_mvp(json.loads(Path(args.candidates).read_text()),state_dir=args.state_dir,
                 user_agent=args.user_agent,max_new_documents=args.max_new_documents,
                 max_new_fields=args.max_new_fields,progress=progress)
-        except (ValueError,KeyError,TypeError,OSError,RunBusy,ProviderFailure) as exc:
-            print(json.dumps(dict(status="mvp_run_error",error_type=type(exc).__name__,mvp_accepted=False)))
+        except (ValueError,KeyError,TypeError,OSError,RunBusy,ProviderFailure,sqlite3.Error) as exc:
+            print(json.dumps(dict(status="mvp_run_error",error_type=type(exc).__name__,
+                sqlite_error=getattr(exc,'sqlite_errorname',None),mvp_accepted=False)))
             raise SystemExit(2) from None
         return
     if args.command == "research-report":

@@ -1,53 +1,89 @@
 # Development status
 
-## 2026-11-02 — Unified live MVP pipeline (in progress)
+## 2026-11-02 — Unified live 100-candidate pipeline and portable proof (latest)
 
 Branch: feat/mvp-live-pipeline, based on main a8eeba8362e520e5782b6c3075d23807757aa21e
-(PR #6 merge). Main fetched and clean at start; no open PRs; prior Actions run
-41436814684 passed. No concurrent work observed. Legacy repository untouched.
+(PR #6 merge). Main was fetched and clean; no open PRs at start, prior Actions
+41436814684 successful. No concurrent source work observed. Legacy untouched.
+Initial code commit: https://github.com/fatalvayn-dot/us-equity-research/commit/547ba4ed4b8caca14e38a8f85371a6e489d6cae4
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/7
+Initial 420-test PR CI run 41446482758 passed; final evidence CI pending.
 
-Completed v0.22.0 implementation: mvp-run connects fresh/cached SEC submissions,
-original annual-document period extraction, bounded resumable ordered financial
-collection, content-addressed raw-source archive and JSON/Markdown research report.
-Global run lease rejects concurrent writers; public requests renew the lease and
-share SEC pacing. Metadata/documents/facts retain original observation times on
-cache reuse. Exact symbol/CIK/annual end checks remain; missing annual reports
-produce explicit unattempted companies. An explicit annual end without verified
-start permits only Assets/Liabilities, deferring four duration fields. No fiscal
-calendar start is inferred. Existing Yahoo->SEC->Nasdaq->Finnhub first-valid order
-and typed failures remain intact. Source archive coverage verifies exact financial,
-identity and unit URL/hash/observation references. Private Finnhub responses are
-not archived; missing coverage stays visible. Public call counter excludes
-internal retries and private Finnhub transport and is labeled accordingly.
+Completed v0.22.0: mvp-run wires fresh/cached SEC metadata, exact original annual
+periods, bounded resumable Yahoo->SEC->Nasdaq->Finnhub fields, exact raw-reference
+archive checks, sector review labels and JSON/Markdown report. Global renewable
+run lease prevents conflicting writers; SEC clients share request pacing. Cached
+metadata/documents/facts retain their original observation times. Missing annuals
+are unattempted companies; explicit annual ends without a verified start support
+only instant Assets/Liabilities, with duration jobs explicitly deferred. No fiscal
+start is guessed. Nine literal fields include separate Revenues, ProfitLoss and
+ProductiveAssets payments, never aliases for narrower definitions. All economic,
+scope and investment approvals remain false; special/unknown profiles stay review.
 
-Added portable public-response gzip JSONL evidence bundles split into bounded
-hash-checked parts, preserving exact bytes/URL/time. No operational SQLite cache,
-request headers or credentials are exported. Export refuses active collections;
-reader validates all parts/body hashes/counts before yielding reconstructed data.
+REAL RUN, 2026-11-02: fresh SEC submissions completed for all 100 candidates.
+98 original annual downloads attempted: 93 available source bodies, 88 explicit
+annual periods, 83 registered common-share matches, 5 invalid-data source outcomes
+and 2 no-annual-in-recent-window outcomes. First six-field run completed with
+450 input facts and 151 arithmetic results; 482 public GET invocations, excluding
+internal retries/private Finnhub transport. Original first-run report and batch
+are preserved separately, including missing-data/provider attempts. This is a
+candidate run, not approval of 100 active common shares or financial acceptance.
 
-Tests: 420/420 local unittest tests passed (400 regressions +13 MVP tests +7
-bundle tests) on Python 3.12.14. Offline end-to-end fixture pipeline produces
-reports with exact archive coverage; immediate fixture rerun makes zero public
-GET calls. Tests cover work bounds, lease conflict/release, missing metadata/
-annual periods, instant-only fallback, period identity mismatch, zero-work bounds,
-archive absence, bundle round-trip/corruption/path escape/count/hash/determinism.
-No local test failures. Evidence: mvp-pipeline-tests.json. Fixture integration
-success is not live acceptance.
+Expanded exact-field completion resumed existing checkpoints. Final result:
+100 reported candidates, 98 companies with financial queries, 96 with at least
+one contract-valid financial fact, 536 facts and 272 exact arithmetic results.
+812 explicit field jobs: 536 collected and 276 pending_data. Ten companies lack
+a verified annual start, so 70 duration-field jobs remain unattempted. SPCX/XOM
+have no annual filing in the recent window and no financial query; TD/SNDK have
+financial attempts but no accepted facts. No global data absence is inferred.
+Current sector routes: 81 other-industry review, 10 bank signals, 3 insurance,
+5 other finance/real-estate and 1 REIT signal. Zero scored/ranked companies.
+Source/period/currency/accounting/observation/hash contracts are validated; this
+is not independent economic-model or financial-statement acceptance.
 
-Live 100-candidate run has started with the README command. Fresh SEC metadata
-completed for all 100. Annual phase completed: 98 downloads attempted, 93 sources
-available, 88 explicit annual periods, 83 registered common-share matches,
-5 invalid-data source outcomes and 2 no-annual-in-recent-window outcomes. Financial
-collection is still running; no final value/success count or 100-company financial
-acceptance is claimed in this checkpoint. Final live results, portable raw proof,
-resume evidence and remote CI will be recorded before merging.
+A zero-new-document/zero-new-field rerun retained all 536 facts and 272 arithmetic
+results with ZERO public GET calls. This is a same-state cached reproduction,
+not a second fresh-source live run. All selected financial/identity/unit evidence
+references resolve to exact raw observations. Portable proof: 553 observations,
+109,703,028 gzip bytes split into 210 bounded parts. Every part, complete bundle
+and reconstructed response body hash/count was verified. Evidence contains raw
+public responses/URLs/original timestamps, not operational SQLite caches, headers
+or credentials. Large JSON reports are losslessly gzip-stored with stored/raw
+hash manifests. Evidence: docs/evidence/mvp100/, tests/fixtures/mvp100-sources/;
+reproduce with README mvp-run/export commands. Source coverage is not a claim
+that every issuer's statements were independently reconciled or model-accepted.
 
-Remaining MVP gates: completed live financial run and evidence export, eligible
-generic-sector classification/scoring, required market-price/prior-period inputs,
-traceable nonmissing scores and final acceptance report. Current reports withhold
-all scores/approvals; banks/insurance/REIT/BDC/unknown remain review-required.
-Next: finish this bounded live run and verify its archived facts/resume, then add
-market/prior-period inputs and a validated generic-sector scoring contract.
+Failure/recovery: expanded completion hit sqlite3.OperationalError (readonly
+write) after preserving at least 716 field checkpoints. New connection write probe and
+financial integrity_check succeeded; cause not established, no permission change
+needed. Confirmed no MVP process running, recorded/released only the exact orphan
+financial lease, then resumed successfully. Recovery record is persisted. CLI
+now reports safe typed SQLite errors rather than raw exception detail. Initial
+publication assembly encountered nested runtime SQLite files; full data/ ignore
+was added before staging/upload, and no operational database was published.
+Staged diff check caught trailing blank lines in generated Markdown; the renderer
+and report hash manifest were corrected before publication.
+Report-stage zero network count was separated from actual collection GET counts;
+first report's legacy zero counter refers to report generation only.
+
+Tests: 426/426 local tests passed on Python 3.12.14 (400 regressions +14 pipeline/
+recovery tests +7 portable-bundle tests +5 recorded-real-run regressions), 27.614s.
+Offline fixture integration verifies pipeline, work bounds, exact period/identity,
+lease conflict/release, zero-call resume and raw archive coverage. Real-recorded
+regressions reproduce all 536 facts/272 arithmetic counts, verify report hashes,
+all original source references and period deferrals, and assert missing scores/
+no acceptance. Recorded replay in CI is not a new live run. git diff --check
+passed. Test evidence: mvp-pipeline-tests.json. Final PR CI/merge links will be
+recorded after checking the exact published head.
+
+Remaining MVP blockers: only 83 common-share class matches (not 100 approved
+active common shares), 2 unresolved annuals, 2 additional no-fact companies,
+unaccepted generic-sector eligibility/scoring, missing required market-price/
+comparable prior-period inputs. No fabricated scores and no MVP completion claim.
+Next concrete code task: add provenance-bound market-price and prior-period
+inputs plus a testable eligible generic-sector score contract; keep special/
+unknown/insufficient issuers unranked and complete the 100 common-share selection
+before acceptance. Broad sector taxonomy/backtests/500+ expansion remain deferred.
 
 ## 2026-11-02 — MVP priority reset and user-facing research report (latest)
 

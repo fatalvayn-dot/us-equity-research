@@ -1,0 +1,15 @@
+{
+  "error": "sqlite3.OperationalError: attempt to write a readonly database",
+  "fresh_connection_write_probe": "passed",
+  "financial_integrity_check": "ok",
+  "active_mvp_processes": 0,
+  "abandoned_leases": 1,
+  "cause": "not established; no file permission change was required",
+  "previous_lease_rows": [
+    [
+      "27932a205d8b4e23b94ca4e5af00dcfe",
+      "2026-11-02T13:13:53.145702+00:00"
+    ]
+  ],
+  "action": "release exact abandoned owner rows and resume preserved checkpoints"
+}

@@ -20,7 +20,7 @@ def write_bundle(archive, directory, *, part_bytes=524288):
     count=0
     try:
         with temporary.open('wb') as raw:
-            with gzip.GzipFile(fileobj=raw,filename='',mode='wb',mtime=0) as compressed:
+            with gzip.GzipFile(fileobj=raw,filename='',mode='wb',mtime=0,compresslevel=6) as compressed:
                 for row in archive.observations():
                     response=archive.get(row['url'],row['sha256'],datetime.fromisoformat(row['retrieved_at']))
                     if response is None:raise ValueError('source observation absent')
