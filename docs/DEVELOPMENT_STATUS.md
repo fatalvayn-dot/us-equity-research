@@ -1,5 +1,76 @@
 # Development status
 
+## 2026-11-02 — Literal annual legal-status disclosures (latest)
+
+Branch: feat/annual-legal-evidence, based on main 8f000e4fa319aeeb01bf153e0b66be436aa9556d
+(PR #3 merge). Fetched main, clean worktree, no open PRs; prior Actions run
+41417581200 succeeded. No concurrent main change observed. radar-agent untouched;
+no authorized archive operation is exposed.
+
+Completed v0.19.0: annual_legal_evidence extracts the literal SEC DEI
+EntityInvCompanyType and CEF BusinessDevelopmentCompanyFlag /
+RegisteredClosedEndFundFlag disclosures, independently and without legal/scope
+approval. The old lookalike EntityInvestmentCompanyType is not an alias. Official
+DEI/CEF 2026 schemas were downloaded as reference artifacts and retained with
+URL/hash/download completion times; the actual DEI enum includes N-5 as well as
+the literal token S-1 or S-3. Concept types and enum are checked against those
+recorded primary-source schemas in tests. No made-up REIT taxonomy flag.
+
+Evidence requires original annual HTML response at an exact issuer SEC Archives
+URL, original raw SHA and aware retrieval/cutoff. DocumentType, FY focus and end
+must establish one explicit non-dimensional issuer duration. Only disclosures in
+those exact verified annual document contexts may supply values. Inline XBRL,
+context and concept namespaces are checked; namespace rebinding, lookalike
+inline elements and forged context identifiers cannot supply legal disclosures.
+Source URL query/fragment and future retrieval are rejected. Source observations
+are never relabeled as earlier vintage. This remains report-specific evidence,
+not proof that a legal status persists to the present day.
+
+Literal true/false/1/0 and exact investment-company enum values are retained.
+Missing/nil remains unknown; conflicting duplicate values yield no value;
+unsupported transforms/text/namespaces yield no value. Same-value duplicates
+retain both evidence rows. Unknown continuations/exclusions/truncation fail
+closed. No free-text guessing, company-name classification or SIC override.
+Every legal/scope/investment approval flag remains false. REIT explicitly stays
+unsupported_requires_document_review: its extraction is not completed.
+
+Recorded replay: 8 original annual documents rehashed against existing evidence;
+0 reported legal disclosures, 24 unknown tagged fields, 8 unresolved REIT fields.
+This negative availability result is not evidence that these issuers are not
+investment companies/BDCs/REITs. The tag-only annual approach is insufficient to
+complete legal-type coverage. No new financial/issuer HTTP requests; only two
+fresh official taxonomy-reference downloads. Evidence: annual-legal-replay.json,
+legal-taxonomy-sources.json, scripts/verify_legal_evidence.py. Replay retained
+original retrieval times. No new live legal or 100-company financial acceptance.
+
+Tests: 365/365 local unittest tests passed on Python 3.12.14: 347 regressions +
+18 new tests. git diff --check passed. Evidence: annual-legal-tests.json.
+Coverage includes primary-schema contracts, true vs false vs unknown, duplicates,
+exact enum tokens, obsolete tag rejection, dimensions/unrelated contexts,
+namespace spoofing/rebinding, transform/nil handling, wrong issuer/form/endpoint,
+future retrieval, original source provenance and withheld approvals. First
+364-test run passed; final enum/dimensional/schema assertions passed at 365.
+No test failure. GitHub Actions run 41421812078 succeeded with 365 tests and
+CLI status on each Python 3.11/3.12/3.13; job logs inspected.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/4
+Code commit: https://github.com/fatalvayn-dot/us-equity-research/commit/54169db8a53b5e0ee2d2e240c9a7a491bdfde5cc
+Actions: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41421812078
+Published source tree 2db428352cac3483973a325d2ad1a8808ebf66f2 matched the
+locally tested tree. Documentation follow-up CI must also pass before merge;
+final merge evidence is recorded in the PR discussion.
+
+Primary references checked 2026-11-02:
+https://xbrl.sec.gov/dei/2026/dei-2026.xsd
+https://xbrl.sec.gov/cef/2026/cef-2026.xsd
+https://xbrl.sec.gov/cef/2026/cef-taxonomy-guide-2026-03-16.pdf
+
+Remaining gates unchanged: live four-source acceptance, legal type, accepted
+sector economics, valuation/risk and 100-company financial validation incomplete.
+Next concrete task: acquire positive original BDC/closed-end registration examples
+and add a separate disclosure-date-bound N-2 context path (not an annual-period
+inference), plus explicit REIT annual-report narrative evidence requiring review.
+Do not keep retrying absent annual tags or infer absence from missing disclosures.
+
 ## 2026-11-02 — SEC sector review routing and calculation guards (latest)
 
 Branch: feat/sector-model-guards, based on main f444ec76ad535f499a5ea92ba48948cbbaf7f1cf

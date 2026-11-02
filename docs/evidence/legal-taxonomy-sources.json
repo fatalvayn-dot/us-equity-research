@@ -1,0 +1,18 @@
+{
+  "sources": [
+    {
+      "url": "https://xbrl.sec.gov/dei/2026/dei-2026.xsd",
+      "fixture": "tests/fixtures/taxonomy/dei-2026.xsd",
+      "raw_sha256": "678f0bb9560a5c6a6679ecc134ead63e3a3b999946d1b8cfe59b29002098756e",
+      "download_completed_at": "2026-11-02T09:28:23.477260+00:00"
+    },
+    {
+      "url": "https://xbrl.sec.gov/cef/2026/cef-2026.xsd",
+      "fixture": "tests/fixtures/taxonomy/cef-2026.xsd",
+      "raw_sha256": "8a70a9dbdb5ad2f6dadec71d24e2b9fbf7b26b2b4e768a9c91990ec2c869d599",
+      "download_completed_at": "2026-11-02T09:28:26.405686+00:00"
+    }
+  ],
+  "meaning": "official taxonomy definitions only, not issuer legal verification",
+  "reference_downloads": 2
+}
