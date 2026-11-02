@@ -50,7 +50,14 @@ exact enum tokens, obsolete tag rejection, dimensions/unrelated contexts,
 namespace spoofing/rebinding, transform/nil handling, wrong issuer/form/endpoint,
 future retrieval, original source provenance and withheld approvals. First
 364-test run passed; final enum/dimensional/schema assertions passed at 365.
-No test failure. Remote PR/Actions evidence will be added after verification.
+No test failure. GitHub Actions run 41421812078 succeeded with 365 tests and
+CLI status on each Python 3.11/3.12/3.13; job logs inspected.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/4
+Code commit: https://github.com/fatalvayn-dot/us-equity-research/commit/54169db8a53b5e0ee2d2e240c9a7a491bdfde5cc
+Actions: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41421812078
+Published source tree 2db428352cac3483973a325d2ad1a8808ebf66f2 matched the
+locally tested tree. Documentation follow-up CI must also pass before merge;
+final merge evidence is recorded in the PR discussion.
 
 Primary references checked 2026-11-02:
 https://xbrl.sec.gov/dei/2026/dei-2026.xsd
