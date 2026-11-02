@@ -554,3 +554,44 @@ inputs remain pending. Initial live run, expanded completion, recovery and
 zero-work resume are recorded separately. Large JSON exports use gzip with a
 `reports-manifest.json` of raw/stored hashes. Original 553 public observations
 are reconstructed with `read_bundle('tests/fixtures/mvp100-sources')`.
+
+### Annual comparison inputs (recorded-source replay)
+
+```bash
+PYTHONPATH=src python scripts/verify_comparative_inputs.py \
+  --documents docs/evidence/mvp100/documents.json \
+  --sources tests/fixtures/mvp100-sources \
+  --output data/comparative-replay
+PYTHONPATH=src python -m equity_research comparative-report \
+  --input data/comparative-replay/current-batch.json.gz \
+  --prior-input data/comparative-replay/prior-batch.json.gz \
+  --output data/comparative-replay/research.json \
+  --markdown data/comparative-replay/research.md
+```
+
+This command replays original public responses offline. It preserves source
+observation timestamps, uses a current-session replay cutoff for adapter attempts and
+makes no live freshness or historical-vintage claim. Both batches still use the
+Yahoo -> SEC -> Nasdaq -> Finnhub first-valid resolver: the Yahoo duration-field
+adapter returns its actual local unsupported-field outcome; accepted SEC values
+stop fallback. No Yahoo financial HTTP request is invented. Discovery itself
+selects periods, not financial field winners, and records no provider attempts.
+The exported current/prior plans also work with `research-batch` for fresh ordered
+collection using an identifying User-Agent and separate output/checkpoints.
+
+Current periods are reparsed from original annual document contexts. Prior
+start/end dates must be literal observations in the same annual accession and
+same accounting concept, not inferred from `fy`, `fp` or a calendar frame. A
+conservative full-year comparison policy requires consecutive 350–380 day
+periods with at most seven days of duration difference. Stub/transition years,
+ambiguous dates, conflicting values and mismatched definitions stay unresolved.
+Separate literal accounting concepts remain separate fields.
+
+The comparative report revalidates both source-attempt trails before calculating
+`current / prior - 1`. SEC operands must share the same snapshot observation and
+filing accession. Zero/negative bases do not produce percentages. Every result
+retains full source-bound operands, and special/unknown sectors remain in
+review. These are arithmetic changes, not proof of organic growth, stable
+business perimeter, sector-model acceptance or numeric investment scores.
+The recorded evidence is in `docs/evidence/comparative100/`; the MVP remains
+unaccepted until all scope, price, scoring and real-acceptance gates pass.

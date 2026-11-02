@@ -21,7 +21,7 @@ from .pipeline import research_resolver
 
 def main():
     parser = argparse.ArgumentParser(description="US Equity Research foundation")
-    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report", "mvp-run"])
+    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report", "comparative-report", "mvp-run"])
     parser.add_argument("--user-agent", default=os.environ.get("SEC_USER_AGENT"))
     parser.add_argument("--symbol", action="append", default=[])
     parser.add_argument("--cik")
@@ -36,6 +36,7 @@ def main():
     parser.add_argument("--output")
     parser.add_argument("--max-new-fields",type=int)
     parser.add_argument("--input")
+    parser.add_argument("--prior-input")
     parser.add_argument("--markdown")
     parser.add_argument("--candidates")
     parser.add_argument("--state-dir",default="data/mvp")
@@ -57,13 +58,14 @@ def main():
                 sqlite_error=getattr(exc,'sqlite_errorname',None),mvp_accepted=False)))
             raise SystemExit(2) from None
         return
-    if args.command == "research-report":
+    if args.command in ("research-report", "comparative-report"):
         from pathlib import Path
         import tempfile
         from .reporting import build_report, render_markdown
-        if not args.input or not args.output:
-            parser.error("research-report requires --input batch.json and --output report.json")
-        if len({str(Path(p).resolve()) for p in (args.input,args.output,args.markdown) if p}) != (3 if args.markdown else 2):
+        if not args.input or not args.output or (args.command == "comparative-report" and not args.prior_input):
+            parser.error("report requires --input, --output and comparative-report also --prior-input")
+        paths = [p for p in (args.input, args.output, args.markdown, args.prior_input if args.command == "comparative-report" else None) if p]
+        if len({str(Path(p).resolve()) for p in paths}) != len(paths):
             parser.error("input and report destinations must be distinct")
         def save(path, content):
             target=Path(path);target.parent.mkdir(parents=True,exist_ok=True)
@@ -75,7 +77,16 @@ def main():
             finally:
                 if temporary and os.path.exists(temporary):os.unlink(temporary)
         try:
-            report=build_report(json.loads(Path(args.input).read_text()))
+            def read_batch(path):
+                import gzip
+                body = Path(path).read_bytes()
+                return json.loads(gzip.decompress(body) if str(path).endswith('.gz') else body)
+            if args.command == 'comparative-report':
+                from .comparative import build_comparative_report, render_comparative_markdown
+                report = build_comparative_report(read_batch(args.input), read_batch(args.prior_input))
+                render_markdown = render_comparative_markdown
+            else:
+                report=build_report(read_batch(args.input))
             save(args.output,json.dumps(report,default=encode,indent=2)+"\n")
             if args.markdown:save(args.markdown,render_markdown(report))
             print(json.dumps(report['summary']))
