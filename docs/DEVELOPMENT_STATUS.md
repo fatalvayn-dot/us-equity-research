@@ -21,8 +21,13 @@ the remote root. PR #1 provenance: https://github.com/fatalvayn-dot/us-equity-re
 
 Tests: 329/329 local unittest tests passed on Python 3.12.14 (324 checkpoint
 regressions plus 5 preserved PR #1 tests). This is an offline regression replay,
-not a new live financial verification. Remote Actions and PR/merge evidence
-will be recorded after publishing and checking the actual run.
+not a new live financial verification. GitHub Actions run 41410885189 completed successfully: Python 3.11, 3.12
+and 3.13 each passed 329 tests and the CLI status check. Logs were inspected.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/2
+Import commit: https://github.com/fatalvayn-dot/us-equity-research/commit/5ed373198f9462d2ca70cbeb36b0f81ec1861609
+Actions: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41410885189
+This documentation follow-up is checked separately before merging PR #2;
+its final merge result will also be recorded in the PR discussion.
 
 No new live requests or company acceptance. Stage 1 architecture/model/test
 baseline is imported; stage 2 remains partial and sector economics, valuation,
@@ -31,7 +36,12 @@ The previous status entries describe evidence at the time of each local run;
 their GitHub-access blocker is resolved by this import. Finnhub live validation
 still lacks an existing configured key. No paid service or permission requested.
 
-Next: validate remote CI and merge the import, then add sector/profile model
+Failed transport attempt: git.chatgpt-team.site requested unavailable credentials.
+Public GitHub fetch plus the authorized GitHub object/ref API succeeded instead.
+Published tree 3312580b94f6bc0cd045bc126acdccecc2804594 exactly matched the
+local tree tested above. No force push or authentication change was needed.
+
+Next: add sector/profile model
 eligibility using primary SEC metadata; unknown/bank/insurance/REIT/BDC profiles
 must not acquire generic cash-flow interpretation or investment approval.
 
