@@ -754,3 +754,43 @@ This checks shares/quotes and selected annual operands; it does not refresh the
 entire 100-company annual input batch. Use a separate state directory for a new
 sample, via `--state-dir`. Contracts and remaining model gates are documented in
 `docs/DISCLOSED_SHARE_VALUATION.md`.
+
+## Explained research-score prototype
+
+Open `docs/evidence/score-pilot/report.html` directly in a browser. It contains
+the 100-candidate pilot, two scored research hypotheses, per-component points,
+financial definitions, source evidence and explicit unscored/critical-review
+reasons. It is not an accepted 100-active-common-share MVP or an investment
+approval. Model coverage is limited to SEC SIC 3571/3674/7372. Published rules,
+required inputs and dated-share stress assumptions: `docs/RESEARCH_SCORE_MODEL.md`.
+
+Reproduce the exact recorded pilot with no network calls:
+
+```bash
+PYTHONPATH=src python -m equity_research score-report \
+  --input docs/evidence/liquidity100/batch.json.gz \
+  --comparison-input docs/evidence/comparative100/current-batch.json.gz \
+  --prior-input docs/evidence/comparative100/prior-batch.json.gz \
+  --source-bundle tests/fixtures/valuation-sources \
+  --market-bundle tests/fixtures/score-market-sources \
+  --as-of 2026-11-02T21:33:48.135379+00:00 \
+  --output data/research/report.json --markdown data/research/report.md \
+  --html data/research/report.html
+```
+
+The fixed cutoff reproduces a dated record; old quotes cannot become current
+scores by moving their observation times. The 15-minute quote/history TTL and
+six-hour SEC snapshot TTL still apply. Live sample refresh:
+
+```bash
+PYTHONPATH=src python scripts/verify_research_score.py \
+  --user-agent 'US Equity Research (https://github.com/fatalvayn-dot/us-equity-research)'
+```
+
+The bounded AAPL/MSFT/NVDA helper refreshes expired SEC/price inputs through the
+existing collector, then fetches/reuses one-year public chart JSON. It maintains
+ignored leased state, original response observations and reports under
+`data/research-score/`. It does not refresh the retained full 100-company annual
+or comparative batches. New annual periods/conflicts therefore require updated
+financial inputs and correctly withhold affected scores. No subscription CSV,
+API key, authentication workaround, portfolio or trade is used.

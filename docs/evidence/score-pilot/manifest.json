@@ -1,0 +1,49 @@
+{
+  "financial_inputs": [
+    {
+      "file": "docs/evidence/liquidity100/batch.json.gz",
+      "sha256": "75d6a55f8263322c2ceed0a1a8a57b5e43a369b2dda36146066ed5e3ea47b58f"
+    },
+    {
+      "file": "docs/evidence/comparative100/current-batch.json.gz",
+      "sha256": "9d1a44d30a510098a592f474e38e765a9bb425a38a3549f129311e8a9621c611"
+    },
+    {
+      "file": "docs/evidence/comparative100/prior-batch.json.gz",
+      "sha256": "f065d61bc6d8572474f4b698a31e7d828c7e71c4e6caa89714af56fe8fc03cd7"
+    }
+  ],
+  "raw_source_bundles": [
+    "tests/fixtures/valuation-sources",
+    "tests/fixtures/score-market-sources"
+  ],
+  "source_mode": "live_market_overlay_plus_recorded_financial_evidence",
+  "mvp_accepted": false,
+  "files": [
+    {
+      "file": "report.json.gz",
+      "bytes": 51722,
+      "sha256": "c22bcb86db8e6c83053addc5e6af8a2c53956afaafbbf7eccba1b39667e88db6"
+    },
+    {
+      "file": "report.md",
+      "bytes": 9320,
+      "sha256": "48069696cd51dae4c6c8ec6c4dcc5360819125a21a5eb626c403a9ced114151d"
+    },
+    {
+      "file": "report.html",
+      "bytes": 101825,
+      "sha256": "57192757d3142d5468f50130bccadfd4059b8542ccc1fdfd015f62d6bfa2d481"
+    },
+    {
+      "file": "audit.json",
+      "bytes": 950,
+      "sha256": "10f600fda6b419a261114749d5076e4d55a1cfb9b1b52cbb8df31a2f20f51738"
+    },
+    {
+      "file": "live-helper-validation.json",
+      "bytes": 1074,
+      "sha256": "52c47da8a4bdd246c3c4631e963f11f979ed3a112b677a11c7c18c89fa533002"
+    }
+  ]
+}
