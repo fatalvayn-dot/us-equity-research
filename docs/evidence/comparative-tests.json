@@ -8,5 +8,12 @@
   "new_tests": 31,
   "regressions": 426,
   "live_acceptance": false,
-  "ci_status": "pending"
+  "ci_status": "passed",
+  "ci_run": 41474272724,
+  "ci_commit": "61ed2678b27d1133de7387ee7553341b7c4f22cf",
+  "ci_python_versions": [
+    "3.11",
+    "3.12",
+    "3.13"
+  ]
 }

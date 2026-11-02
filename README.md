@@ -570,7 +570,7 @@ PYTHONPATH=src python -m equity_research comparative-report \
 ```
 
 This command replays original public responses offline. It preserves source
-observation timestamps, records replay attempts at the actual replay time and
+observation timestamps, uses a current-session replay cutoff for adapter attempts and
 makes no live freshness or historical-vintage claim. Both batches still use the
 Yahoo -> SEC -> Nasdaq -> Finnhub first-valid resolver: the Yahoo duration-field
 adapter returns its actual local unsupported-field outcome; accepted SEC values

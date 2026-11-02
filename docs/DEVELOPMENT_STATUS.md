@@ -51,7 +51,16 @@ CLI status and git diff --check passed. Evidence: comparative-tests.json.
 Initial new-test run found a duplicate test-helper argument (18 tests passed,
 1 error); corrected the fixture construction; subsequent 28-test and full457
 runs passed. No failed live API request or new access requirement this session.
-GitHub code/PR/CI links are added after publication and CI verification below.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/8
+Code commit: https://github.com/fatalvayn-dot/us-equity-research/commit/61ed2678b27d1133de7387ee7553341b7c4f22cf
+Actions: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41474272724
+GitHub Actions passed all 457 tests plus CLI status on Python 3.11/3.12/3.13;
+all three job logs inspected (24.568/20.476/32.720 seconds). This is recorded
+regression CI, not a new live run. The published tree
+4210bf47d52e06da97183830abb4b9c64d93b211 exactly matched the locally tested tree.
+All seven report artifact hashes also passed a separate integrity check.
+Documentation follow-up CI is checked before merge; exact-head CI and final
+merge SHA are recorded in PR #8 discussion.
 
 Remaining blockers: no provenance-bound current market price/class-share inputs,
 no accepted generic-sector scoring/eligibility path, only 83 common-share cover

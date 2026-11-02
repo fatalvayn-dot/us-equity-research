@@ -1,0 +1,31 @@
+{
+  "run_id": 41474272724,
+  "commit": "61ed2678b27d1133de7387ee7553341b7c4f22cf",
+  "url": "https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41474272724",
+  "conclusion": "success",
+  "evidence_kind": "recorded-source regression CI, not new live acceptance",
+  "jobs": [
+    {
+      "id": 125375598717,
+      "python": "3.11",
+      "tests": 457,
+      "seconds": 24.568,
+      "conclusion": "success"
+    },
+    {
+      "id": 125375599219,
+      "python": "3.12",
+      "tests": 457,
+      "seconds": 20.476,
+      "conclusion": "success"
+    },
+    {
+      "id": 125375599390,
+      "python": "3.13",
+      "tests": 457,
+      "seconds": 32.72,
+      "conclusion": "success"
+    }
+  ],
+  "job_logs_inspected": true
+}
