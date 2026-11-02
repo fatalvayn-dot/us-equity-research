@@ -1,5 +1,62 @@
 # Development status
 
+## 2026-11-02 — SEC sector review routing and calculation guards (latest)
+
+Branch: feat/sector-model-guards, based on main f444ec76ad535f499a5ea92ba48948cbbaf7f1cf
+(PR #2 merge). Main fetched and clean, no open PRs at session start. Prior PR
+Actions run 41411047536 succeeded across Python 3.11/3.12/3.13. No concurrent
+source change observed. Legacy radar-agent untouched; no archive API exposed.
+
+Completed v0.18.0: primary-response-bound sector review routing and a guarded
+calculation entry point. SEC submissions response must have exact CIK/endpoint,
+valid JSON/metadata, original raw hash and aware observation timestamp. Future
+metadata and observations older than six hours fail closed in the guarded path.
+SIC bank/insurance/6798 REIT signals receive distinct routes; other 67xx codes
+receive investment-vehicle review without claiming BDC/fund legal status. Other
+6xxx codes receive finance/real-estate review. Missing/malformed SIC is unknown;
+other industries still require economic model validation. Neither issuer name
+nor entityType=operating bypasses a financial SIC route. Untrusted source URLs
+are not persisted as evidence. No aliasing of financial facts or source fallback
+order was introduced. Existing calculate() remains arithmetic-only.
+
+calculate_with_sector_guard keeps exact-input arithmetic and its provenance
+separate from interpreted_value, which is withheld while no sector model is
+accepted. Specialized routes require an appropriate model; unknown profiles
+require evidence; other industries require model validation. All scope, generic
+cash-flow eligibility, sector model support and investment flags remain false.
+This is a routing/guard implementation, not accepted bank/insurance/REIT/BDC
+valuation or generic FCF methodology. SIC alone is not legal-type approval.
+
+Recorded replay: 100 original issuer responses rehashed against the existing
+source evidence; 81 other-industry review, 10 banking signals, 3 insurance signals,
+5 other finance/real-estate review, 1 REIT signal. Original observation times
+were retained. These are recorded responses, not newly fetched current profiles.
+All 64 exact calculation variants replayed: 24 arithmetic results, 40 without
+complete exact operands; zero economic interpretations or investment approvals.
+No new financial/provider HTTP requests, no 100-company financial acceptance.
+Evidence: docs/evidence/sector-policy-replay.json and scripts/verify_sector_policy.py.
+SIC route definitions were checked against the official SEC list on 2026-11-02:
+https://www.sec.gov/search-filings/standard-industrial-classification-sic-code-list
+The page is a reference for code meanings; broad routing ranges are our conservative
+review policy, not a SEC-supplied investment or legal classification model.
+
+Tests: 347/347 local unittest tests passed on Python 3.12.14 (329 regressions +
+18 new tests); git diff --check passed. Test evidence: sector-policy-tests.json.
+New coverage includes real recorded JPM/Chubb/Welltower/Goldman metadata, missing
+and malformed SIC, banking/insurance/REIT/investment signals, issuer/endpoint
+mismatch, duplicate JSON, stale/future timestamps, evidence preservation, exact
+cash arithmetic separated from withheld interpretation and missing operands.
+No test failures. Remote Actions/PR evidence will be recorded when available.
+
+Remaining gates unchanged: four-source live acceptance (Finnhub unverified),
+security legal type, economic sector models, valuation/risk and 100-company
+financial acceptance are incomplete; no ranking/backtest/full-universe claim.
+
+Next concrete task: extract explicit issuer-level SEC annual-document evidence
+for investment-company/BDC/REIT legal status with context/period checks; preserve
+unknown when absent or conflicting, then select and validate the first sector
+model independently of scope approval. Do not infer BDC absence from SIC.
+
 ## 2026-11-02 — GitHub import after access became available (latest)
 
 Target repository is now accessible with push/admin permission. Existing main
