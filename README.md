@@ -479,3 +479,28 @@ Recorded sample: 24 arithmetic results and 40 pending formula variants across
 eight companies, with no new HTTP request. Every result is arithmetic-only; sector
 model, scope and investment approval remain false. No valuation, risk rating or
 100-point score is implemented by this module. Stage 3 acceptance remains pending.
+
+
+## MVP report command
+
+Generate reproducible JSON and Markdown from an existing resumable collection:
+
+```sh
+PYTHONPATH=src python -m equity_research research-report \
+  --input docs/evidence/archived-eight-financial.json \
+  --output data/research-report.json --markdown data/research-report.md
+```
+
+This recorded eight-company example has 43 accepted input facts and 17 exact
+arithmetic results, with zero ranked companies. It is not a fresh live run or
+the 100-company acceptance report. Scope/sector approval, valuation prices,
+comparable prior-period inputs and score models remain pending. JSON includes
+full inputs/provenance and calculation operands; Markdown shows formulas,
+values, actual source attempts and reasons scores remain unavailable. No
+network call is made by research-report. An export success exit code means the
+files were produced, not that MVP acceptance passed.
+
+For a new collection use research-batch with an explicit issuer/period plan,
+then supply its JSON to research-report. The batch command remains resumable;
+unknown scope and missing data are carried into the report. See
+`docs/PROJECT_BRIEF.md` for the approved 48-hour MVP acceptance scope.

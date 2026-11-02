@@ -20,7 +20,7 @@ from .pipeline import research_resolver
 
 def main():
     parser = argparse.ArgumentParser(description="US Equity Research foundation")
-    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch"])
+    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report"])
     parser.add_argument("--user-agent", default=os.environ.get("SEC_USER_AGENT"))
     parser.add_argument("--symbol", action="append", default=[])
     parser.add_argument("--cik")
@@ -34,7 +34,35 @@ def main():
     parser.add_argument("--checkpoint",default="data/batch.sqlite")
     parser.add_argument("--output")
     parser.add_argument("--max-new-fields",type=int)
+    parser.add_argument("--input")
+    parser.add_argument("--markdown")
     args = parser.parse_args()
+    if args.command == "research-report":
+        from pathlib import Path
+        import tempfile
+        from .reporting import build_report, render_markdown
+        if not args.input or not args.output:
+            parser.error("research-report requires --input batch.json and --output report.json")
+        if len({str(Path(p).resolve()) for p in (args.input,args.output,args.markdown) if p}) != (3 if args.markdown else 2):
+            parser.error("input and report destinations must be distinct")
+        def save(path, content):
+            target=Path(path);target.parent.mkdir(parents=True,exist_ok=True)
+            temporary=None
+            try:
+                with tempfile.NamedTemporaryFile(mode="w",encoding="utf-8",dir=target.parent,delete=False) as handle:
+                    temporary=handle.name;handle.write(content);handle.flush();os.fsync(handle.fileno())
+                os.replace(temporary,target)
+            finally:
+                if temporary and os.path.exists(temporary):os.unlink(temporary)
+        try:
+            report=build_report(json.loads(Path(args.input).read_text()))
+            save(args.output,json.dumps(report,default=encode,indent=2)+"\n")
+            if args.markdown:save(args.markdown,render_markdown(report))
+            print(json.dumps(report['summary']))
+        except (ValueError,KeyError,TypeError,OSError) as exc:
+            print(json.dumps(dict(status="report_error",error_type=type(exc).__name__,mvp_accepted=False)))
+            raise SystemExit(2) from None
+        return
     if args.command == "research-batch":
         from pathlib import Path
         import tempfile
