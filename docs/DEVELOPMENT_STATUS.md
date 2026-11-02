@@ -46,7 +46,14 @@ New coverage includes real recorded JPM/Chubb/Welltower/Goldman metadata, missin
 and malformed SIC, banking/insurance/REIT/investment signals, issuer/endpoint
 mismatch, duplicate JSON, stale/future timestamps, evidence preservation, exact
 cash arithmetic separated from withheld interpretation and missing operands.
-No test failures. Remote Actions/PR evidence will be recorded when available.
+No test failures. GitHub Actions run 41417365684 completed successfully, with
+347 tests and CLI status passing on each of Python 3.11, 3.12 and 3.13; logs inspected.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/3
+Code commit: https://github.com/fatalvayn-dot/us-equity-research/commit/5a5d3989887d4f660cafef65275c457603f3fdcb
+Actions: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41417365684
+Source tree 165ec8c5572a6d3c3fad17f0380ff65047c9ab81 matched the locally tested
+tree exactly. Documentation follow-up CI is checked before merge; the final
+merge result is recorded in the PR discussion.
 
 Remaining gates unchanged: four-source live acceptance (Finnhub unverified),
 security legal type, economic sector models, valuation/risk and 100-company
