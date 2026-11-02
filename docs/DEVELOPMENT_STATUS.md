@@ -44,7 +44,14 @@ mvp-report-tests.json. Coverage includes recorded 43-fact replay, missing vs
 unstarted, isolated invalid-company handling, wrong issuer/definition/period/
 currency, future timestamps, missing hash, source-order/first-valid contracts,
 coverage deduplication, scope injection and safe export destinations. No test
-failure. Remote PR/CI evidence will be added after verification.
+failure. GitHub Actions run 41436593541 passed 400 tests and CLI status on
+each Python 3.11/3.12/3.13; logs inspected.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/6
+Code commit: https://github.com/fatalvayn-dot/us-equity-research/commit/8607815ea4c37f7ac0111238db923433d39db65d
+Actions: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41436593541
+Published tree 940f56e31f8529454c5a7244d84f70d870968935 matched the locally
+tested tree. Documentation follow-up CI is checked before merging; final merge
+result is recorded in the PR discussion.
 
 Remaining MVP blocker: no 100-company live financial run, no accepted generic
 sector scoring/model/scope path, no required market-price/prior-period inputs.
