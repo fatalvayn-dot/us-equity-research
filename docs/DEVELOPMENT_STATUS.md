@@ -2,6 +2,18 @@
 
 ## 2026-11-03 — Candidate-driven bounded source collection and Salesforce recovery
 
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/14
+Source commit: https://github.com/fatalvayn-dot/us-equity-research/commit/ae1d4cd3825d4176474843f71799ce005a89c708
+Tested source tree 668bf03ddf6588f034dc8cd9bf89637ee52b2766 matches local 59e09d5.
+Source CI: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41546191295
+All 595 tests and CLI status passed: Python 3.11/103.460s, 3.12/97.527s,
+3.13/95.194s. Exact final documentation head is checked before merge.
+Manual review: hard budget counts actual GET invocations, leases renew before
+source steps, failures do not become missing, identity/exchange mismatches block
+company-specific queries, classes require original disclosure, unselected historic
+numeric defects cannot replace latest values, and latest-invalid fallback is
+rejected. Source artifacts hold public bytes/URLs/times only; no SQLite or headers.
+
 Branch feat/bounded-valuation-collection from main 7e1d2be3fc68088b14c974ac307c90b3fdef8a7b
 (PR #13). Read PROJECT_BRIEF, status and AGENTS; remote main matched, no open
 PR at start; exact-head Actions 41539190808 passed 577 tests on three versions.
@@ -58,6 +70,12 @@ listing evidence to a 100-company plan. Then use bounded collector for missing
 valuation/history inputs and refresh required annual/comparative batches for a
 true end-to-end 100-company acceptance. Multi-class/ORCL-PD economics require a
 separate model; do not drop preferred shares into a common-share price ratio.
+Original unresolved covers (from docs/evidence/mvp100/documents.json): SPCX,
+XOM, NVS, HSBC, AZN, MUFG, TM, WFC, IBM, C, TD, TTE, DIS, VZ, NVO, UBS,
+BBVA. Several have raw documents but unresolved period/class; others have no
+original document or no annual in the recent window. These are triage states,
+not proof of inactivity or non-common status. Inspect exact original documents
+and listing instrument evidence before replacing a candidate.
 Old two-score pilot remains dated; no extra company score is claimed here.
 
 ## 2026-11-03 — Publish scored pilot and protect HTML source evidence
