@@ -1,0 +1,615 @@
+{
+  "facts": [
+    {
+      "symbol": "NVDA",
+      "field": "assets",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+          "sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:21.436088+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "NVDA",
+      "field": "liabilities",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+          "sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:21.436088+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "NVDA",
+      "field": "net_income",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+          "sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:21.436088+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "NVDA",
+      "field": "operating_cash_flow",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+          "sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:21.436088+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "field": "revenue",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+          "sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:27.722754+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "field": "assets",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+          "sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:27.722754+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "field": "liabilities",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+          "sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:27.722754+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "field": "net_income",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+          "sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:27.722754+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "field": "operating_cash_flow",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+          "sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:27.722754+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "field": "capital_expenditure",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+          "sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:27.722754+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "field": "revenue",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+          "sha256": "464cc12cc4796c90a6a0c709eb4920788aa7d4d5eee8b44f2d11d7d44804ae37",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:49.694980+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "field": "assets",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/MSFT?symbol=MSFT&type=annualTotalAssets&period1=1735689600&period2=1798761600",
+          "sha256": "6fdcfe06a83eeb0f292979286c8503ae564da010ed25cb988ed04feae9d639df",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:39:35.834241+00:00"
+        },
+        {
+          "kind": "identity",
+          "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+          "sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:39:26.022371+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "field": "liabilities",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+          "sha256": "464cc12cc4796c90a6a0c709eb4920788aa7d4d5eee8b44f2d11d7d44804ae37",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:49.694980+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "field": "net_income",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+          "sha256": "464cc12cc4796c90a6a0c709eb4920788aa7d4d5eee8b44f2d11d7d44804ae37",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:49.694980+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "field": "operating_cash_flow",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+          "sha256": "464cc12cc4796c90a6a0c709eb4920788aa7d4d5eee8b44f2d11d7d44804ae37",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:49.694980+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "field": "capital_expenditure",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+          "sha256": "464cc12cc4796c90a6a0c709eb4920788aa7d4d5eee8b44f2d11d7d44804ae37",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:49.694980+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "GOOGL",
+      "field": "assets",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/GOOGL?symbol=GOOGL&type=annualTotalAssets&period1=1704067200&period2=1767225600",
+          "sha256": "682dedef893fba2a1158828a3944ec4bb45ffcaa2bcf88d383135b25d0d35d93",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:39:38.672835+00:00"
+        },
+        {
+          "kind": "identity",
+          "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+          "sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:39:26.022371+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "GOOGL",
+      "field": "liabilities",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+          "sha256": "ec4a3095d634583925b5ea450db8a5ed974dc48f6f1b4f594022310bc78d4032",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:56.060634+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "GOOGL",
+      "field": "net_income",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+          "sha256": "ec4a3095d634583925b5ea450db8a5ed974dc48f6f1b4f594022310bc78d4032",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:56.060634+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "GOOGL",
+      "field": "operating_cash_flow",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+          "sha256": "ec4a3095d634583925b5ea450db8a5ed974dc48f6f1b4f594022310bc78d4032",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:56.060634+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "GOOGL",
+      "field": "capital_expenditure",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+          "sha256": "ec4a3095d634583925b5ea450db8a5ed974dc48f6f1b4f594022310bc78d4032",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:28:56.060634+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AMZN",
+      "field": "revenue",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+          "sha256": "acddb7c0a6973a1fd08372de3b292298a34eae7f42a7eedc4bdebd3ac659c8fd",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:06.267409+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AMZN",
+      "field": "assets",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/AMZN?symbol=AMZN&type=annualTotalAssets&period1=1704067200&period2=1767225600",
+          "sha256": "bae145608ee49633c55b37b2dfe70dbf997a8f1a0a8e4538fb77a2f1f5146ae1",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:39:41.269829+00:00"
+        },
+        {
+          "kind": "identity",
+          "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+          "sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:39:26.022371+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AMZN",
+      "field": "liabilities",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://api.nasdaq.com/api/company/AMZN/financials?frequency=1",
+          "sha256": "6b55028a8d2071d43469ccdb2d9d78244596163173c01af32329dfe9d70a492a",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:39:47.306665+00:00"
+        },
+        {
+          "kind": "identity",
+          "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+          "sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:39:26.022371+00:00"
+        },
+        {
+          "kind": "unit",
+          "url": "https://www.nasdaq.com/market-activity/stocks/amzn/financials",
+          "sha256": "9d2f1cc2da03f73a4e957b71bd91c493334065dc81eae795a88ded37214a3113",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:39:44.154359+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AMZN",
+      "field": "net_income",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+          "sha256": "acddb7c0a6973a1fd08372de3b292298a34eae7f42a7eedc4bdebd3ac659c8fd",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:06.267409+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AMZN",
+      "field": "operating_cash_flow",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+          "sha256": "acddb7c0a6973a1fd08372de3b292298a34eae7f42a7eedc4bdebd3ac659c8fd",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:06.267409+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AVGO",
+      "field": "revenue",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001730168.json",
+          "sha256": "3bdb6644c12addf1e63c4dc861008d7804fbf3d3f5aa6eb9b97f72c0e89a7adf",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:21.978529+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AVGO",
+      "field": "assets",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001730168.json",
+          "sha256": "3bdb6644c12addf1e63c4dc861008d7804fbf3d3f5aa6eb9b97f72c0e89a7adf",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:21.978529+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AVGO",
+      "field": "liabilities",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001730168.json",
+          "sha256": "3bdb6644c12addf1e63c4dc861008d7804fbf3d3f5aa6eb9b97f72c0e89a7adf",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:21.978529+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AVGO",
+      "field": "operating_cash_flow",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001730168.json",
+          "sha256": "3bdb6644c12addf1e63c4dc861008d7804fbf3d3f5aa6eb9b97f72c0e89a7adf",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:21.978529+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AVGO",
+      "field": "capital_expenditure",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001730168.json",
+          "sha256": "3bdb6644c12addf1e63c4dc861008d7804fbf3d3f5aa6eb9b97f72c0e89a7adf",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:21.978529+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "META",
+      "field": "revenue",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json",
+          "sha256": "b0d0d92870b68488cec086cffd83514f2cc6c80d3e8c4f91e192b17ce3e7c946",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:32.426520+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "META",
+      "field": "assets",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/META?symbol=META&type=annualTotalAssets&period1=1704067200&period2=1767225600",
+          "sha256": "7576598fccd615401396cfd619f4eea2f8847826828547a2a543f9d3f87a22ac",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:39:54.543606+00:00"
+        },
+        {
+          "kind": "identity",
+          "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+          "sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:39:26.022371+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "META",
+      "field": "liabilities",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json",
+          "sha256": "b0d0d92870b68488cec086cffd83514f2cc6c80d3e8c4f91e192b17ce3e7c946",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:32.426520+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "META",
+      "field": "net_income",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json",
+          "sha256": "b0d0d92870b68488cec086cffd83514f2cc6c80d3e8c4f91e192b17ce3e7c946",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:32.426520+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "META",
+      "field": "operating_cash_flow",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json",
+          "sha256": "b0d0d92870b68488cec086cffd83514f2cc6c80d3e8c4f91e192b17ce3e7c946",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:32.426520+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "META",
+      "field": "capital_expenditure",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json",
+          "sha256": "b0d0d92870b68488cec086cffd83514f2cc6c80d3e8c4f91e192b17ce3e7c946",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:32.426520+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "TSLA",
+      "field": "revenue",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+          "sha256": "c951e0ae2402dd8cf8f39319928adccc4196b997941fe40b0d4d6b8060802db1",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:38.439017+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "TSLA",
+      "field": "assets",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/TSLA?symbol=TSLA&type=annualTotalAssets&period1=1704067200&period2=1767225600",
+          "sha256": "bb1051d505c4152125d52a7209b8f97d46b2bd97464e636dba66fdf507340895",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:39:58.034195+00:00"
+        },
+        {
+          "kind": "identity",
+          "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+          "sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:39:26.022371+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "TSLA",
+      "field": "liabilities",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+          "sha256": "c951e0ae2402dd8cf8f39319928adccc4196b997941fe40b0d4d6b8060802db1",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:38.439017+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "TSLA",
+      "field": "net_income",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+          "sha256": "c951e0ae2402dd8cf8f39319928adccc4196b997941fe40b0d4d6b8060802db1",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:38.439017+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "TSLA",
+      "field": "operating_cash_flow",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+          "sha256": "c951e0ae2402dd8cf8f39319928adccc4196b997941fe40b0d4d6b8060802db1",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:38.439017+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "TSLA",
+      "field": "capital_expenditure",
+      "references": [
+        {
+          "kind": "financial",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+          "sha256": "c951e0ae2402dd8cf8f39319928adccc4196b997941fe40b0d4d6b8060802db1",
+          "exact_observation_found": true,
+          "observed_at": "2026-11-02T03:29:38.439017+00:00"
+        }
+      ]
+    }
+  ],
+  "all_references_archived": true,
+  "scope_approved": false,
+  "hundred_company_accepted": false
+}

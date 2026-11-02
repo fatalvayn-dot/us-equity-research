@@ -1,0 +1,53 @@
+{
+  "observed_at": "2026-11-02T00:54:15.207970+00:00",
+  "sources": [
+    {
+      "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+      "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+      "sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+      "fixture": "tests/fixtures/scope-nasdaqlisted.txt.gz"
+    },
+    {
+      "url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+      "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+      "sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+      "fixture": "tests/fixtures/scope-otherlisted.txt.gz"
+    },
+    {
+      "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+      "retrieved_at": "2026-11-02T00:54:15.115444+00:00",
+      "sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+      "fixture": "tests/fixtures/scope-sec-directory.json.gz"
+    }
+  ],
+  "attempts": [
+    {
+      "name": "nasdaqlisted",
+      "url": "https://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt",
+      "status": "api_error",
+      "reason": "http",
+      "http_status": 503
+    },
+    {
+      "name": "nasdaqlisted",
+      "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+      "status": "valid",
+      "sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+      "retrieved_at": "2026-11-02T00:53:59.905999+00:00"
+    },
+    {
+      "name": "otherlisted",
+      "url": "https://ftp.nasdaqtrader.com/SymbolDirectory/otherlisted.txt",
+      "status": "api_error",
+      "reason": "http",
+      "http_status": 503
+    },
+    {
+      "name": "otherlisted",
+      "url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+      "status": "valid",
+      "sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+      "retrieved_at": "2026-11-02T00:54:11.831691+00:00"
+    }
+  ]
+}

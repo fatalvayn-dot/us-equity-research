@@ -1,0 +1,3033 @@
+{
+  "schema_version": 1,
+  "policy_version": "0.13.0",
+  "generated_at": "2026-11-02T03:39:58.089302+00:00",
+  "companies": [
+    {
+      "symbol": "NVDA",
+      "issuer_id": "0001045810",
+      "scope_status": "pending_scope",
+      "scope_reason": "fund_legal_type_and_sector_model_not_accepted",
+      "readiness": "pending_fields_and_scope",
+      "fields": [
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "NVDA",
+            "issuer_id": "0001045810"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "currency": "USD",
+            "field": "revenue",
+            "issuer_id": "0001045810",
+            "period_end": "2026-01-25",
+            "period_start": "2025-01-27",
+            "unit": "currency"
+          },
+          "fact": null,
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:26.060949+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:26.062040+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "missing"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:26.121706+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Nasdaq",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:26.122886+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Finnhub",
+              "status": "not_configured"
+            }
+          ],
+          "as_of": null,
+          "state": "pending_data",
+          "completed_at": "2026-11-02T03:39:26.123058+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "NVDA",
+            "issuer_id": "0001045810"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Assets",
+            "currency": "USD",
+            "field": "assets",
+            "issuer_id": "0001045810",
+            "period_end": "2026-01-25",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Assets",
+            "available_at": "2026-08-27T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "assets",
+            "filed_on": "2026-08-26",
+            "filing_accession": "0001045810-26-000075",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001045810",
+            "period_end": "2026-01-25",
+            "period_start": null,
+            "raw_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+            "retrieved_at": "2026-11-02T03:28:21.436088+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "206803000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:26.128895+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "period_mismatch"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:29.833073+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:29.833089+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:29.841467+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "NVDA",
+            "issuer_id": "0001045810"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "currency": "USD",
+            "field": "liabilities",
+            "issuer_id": "0001045810",
+            "period_end": "2026-01-25",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "available_at": "2026-08-27T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "liabilities",
+            "filed_on": "2026-08-26",
+            "filing_accession": "0001045810-26-000075",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001045810",
+            "period_end": "2026-01-25",
+            "period_start": null,
+            "raw_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+            "retrieved_at": "2026-11-02T03:28:21.436088+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "49510000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:29.845096+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:29.845353+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:29.845453+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:29.855512+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "NVDA",
+            "issuer_id": "0001045810"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "currency": "USD",
+            "field": "net_income",
+            "issuer_id": "0001045810",
+            "period_end": "2026-01-25",
+            "period_start": "2025-01-27",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "available_at": "2026-02-26T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "net_income",
+            "filed_on": "2026-02-25",
+            "filing_accession": "0001045810-26-000021",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001045810",
+            "period_end": "2026-01-25",
+            "period_start": "2025-01-27",
+            "raw_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+            "retrieved_at": "2026-11-02T03:28:21.436088+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "120067000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:29.859268+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:29.859287+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:29.859310+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:29.861943+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "NVDA",
+            "issuer_id": "0001045810"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "currency": "USD",
+            "field": "operating_cash_flow",
+            "issuer_id": "0001045810",
+            "period_end": "2026-01-25",
+            "period_start": "2025-01-27",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "available_at": "2026-02-26T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "operating_cash_flow",
+            "filed_on": "2026-02-25",
+            "filing_accession": "0001045810-26-000021",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001045810",
+            "period_end": "2026-01-25",
+            "period_start": "2025-01-27",
+            "raw_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+            "retrieved_at": "2026-11-02T03:28:21.436088+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "102718000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:29.864876+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:29.864884+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:29.864895+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:29.867981+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "NVDA",
+            "issuer_id": "0001045810"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "currency": "USD",
+            "field": "capital_expenditure",
+            "issuer_id": "0001045810",
+            "period_end": "2026-01-25",
+            "period_start": "2025-01-27",
+            "unit": "currency"
+          },
+          "fact": null,
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:29.872088+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:29.872097+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "missing"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:29.872232+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Nasdaq",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:29.872243+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Finnhub",
+              "status": "not_configured"
+            }
+          ],
+          "as_of": null,
+          "state": "pending_data",
+          "completed_at": "2026-11-02T03:39:29.872333+00:00",
+          "reused": false
+        }
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "issuer_id": "0000320193",
+      "scope_status": "pending_scope",
+      "scope_reason": "fund_legal_type_and_sector_model_not_accepted",
+      "readiness": "data_complete_scope_pending",
+      "fields": [
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AAPL",
+            "issuer_id": "0000320193"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "currency": "USD",
+            "field": "revenue",
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": "2024-09-29",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "available_at": "2025-11-01T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "revenue",
+            "filed_on": "2025-10-31",
+            "filing_accession": "0000320193-25-000079",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": "2024-09-29",
+            "raw_sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+            "retrieved_at": "2026-11-02T03:28:27.722754+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "416161000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:29.882458+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:29.883459+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:29.946506+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:29.949341+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AAPL",
+            "issuer_id": "0000320193"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Assets",
+            "currency": "USD",
+            "field": "assets",
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Assets",
+            "available_at": "2026-08-01T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "assets",
+            "filed_on": "2026-07-31",
+            "filing_accession": "0000320193-26-000020",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": null,
+            "raw_sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+            "retrieved_at": "2026-11-02T03:28:27.722754+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "359241000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:29.952581+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "period_mismatch"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:32.763973+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:32.763988+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:32.772961+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AAPL",
+            "issuer_id": "0000320193"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "currency": "USD",
+            "field": "liabilities",
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "available_at": "2026-08-01T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "liabilities",
+            "filed_on": "2026-07-31",
+            "filing_accession": "0000320193-26-000020",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": null,
+            "raw_sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+            "retrieved_at": "2026-11-02T03:28:27.722754+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "285508000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:32.775944+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:32.775958+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:32.775973+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:32.785532+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AAPL",
+            "issuer_id": "0000320193"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "currency": "USD",
+            "field": "net_income",
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": "2024-09-29",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "available_at": "2025-11-01T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "net_income",
+            "filed_on": "2025-10-31",
+            "filing_accession": "0000320193-25-000079",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": "2024-09-29",
+            "raw_sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+            "retrieved_at": "2026-11-02T03:28:27.722754+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "112010000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:32.788831+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:32.788843+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:32.788858+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:32.791554+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AAPL",
+            "issuer_id": "0000320193"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "currency": "USD",
+            "field": "operating_cash_flow",
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": "2024-09-29",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "available_at": "2025-11-01T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "operating_cash_flow",
+            "filed_on": "2025-10-31",
+            "filing_accession": "0000320193-25-000079",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": "2024-09-29",
+            "raw_sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+            "retrieved_at": "2026-11-02T03:28:27.722754+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "111482000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:32.795011+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:32.795021+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:32.795034+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:32.797585+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AAPL",
+            "issuer_id": "0000320193"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "currency": "USD",
+            "field": "capital_expenditure",
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": "2024-09-29",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "available_at": "2025-11-01T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "capital_expenditure",
+            "filed_on": "2025-10-31",
+            "filing_accession": "0000320193-25-000079",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": "2024-09-29",
+            "raw_sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+            "retrieved_at": "2026-11-02T03:28:27.722754+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "12715000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:32.800965+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:32.800976+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:32.800991+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:32.803410+00:00",
+          "reused": false
+        }
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "issuer_id": "0000789019",
+      "scope_status": "pending_scope",
+      "scope_reason": "fund_legal_type_and_sector_model_not_accepted",
+      "readiness": "data_complete_scope_pending",
+      "fields": [
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "MSFT",
+            "issuer_id": "0000789019"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "currency": "USD",
+            "field": "revenue",
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": "2025-07-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "available_at": "2026-07-30T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "revenue",
+            "filed_on": "2026-07-29",
+            "filing_accession": "0001193125-26-323660",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": "2025-07-01",
+            "raw_sha256": "464cc12cc4796c90a6a0c709eb4920788aa7d4d5eee8b44f2d11d7d44804ae37",
+            "retrieved_at": "2026-11-02T03:28:49.694980+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "331839000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:32.812075+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:32.812962+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:32.878969+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:32.882432+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "MSFT",
+            "issuer_id": "0000789019"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Assets",
+            "currency": "USD",
+            "field": "assets",
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Assets",
+            "available_at": "2026-11-02T03:39:35.834241+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "assets",
+            "filed_on": null,
+            "filing_accession": null,
+            "identity_evidence_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+            "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+            "identity_observed_at": "2026-11-02T03:39:26.022371+00:00",
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": null,
+            "raw_sha256": "6fdcfe06a83eeb0f292979286c8503ae564da010ed25cb988ed04feae9d639df",
+            "retrieved_at": "2026-11-02T03:39:35.834241+00:00",
+            "source": "Yahoo",
+            "source_field": "annualTotalAssets",
+            "source_multiplier": null,
+            "source_url": "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/MSFT?symbol=MSFT&type=annualTotalAssets&period1=1735689600&period2=1798761600",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "7.58376E+11"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:32.885462+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:35.837847+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:35.838248+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "MSFT",
+            "issuer_id": "0000789019"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "currency": "USD",
+            "field": "liabilities",
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "available_at": "2026-10-29T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "liabilities",
+            "filed_on": "2026-10-28",
+            "filing_accession": "0001193125-26-436133",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": null,
+            "raw_sha256": "464cc12cc4796c90a6a0c709eb4920788aa7d4d5eee8b44f2d11d7d44804ae37",
+            "retrieved_at": "2026-11-02T03:28:49.694980+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "315989000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:35.842214+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:35.842232+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:35.842251+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:35.848782+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "MSFT",
+            "issuer_id": "0000789019"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "currency": "USD",
+            "field": "net_income",
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": "2025-07-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "available_at": "2026-07-30T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "net_income",
+            "filed_on": "2026-07-29",
+            "filing_accession": "0001193125-26-323660",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": "2025-07-01",
+            "raw_sha256": "464cc12cc4796c90a6a0c709eb4920788aa7d4d5eee8b44f2d11d7d44804ae37",
+            "retrieved_at": "2026-11-02T03:28:49.694980+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "133749000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:35.852610+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:35.852631+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:35.852648+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:35.856156+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "MSFT",
+            "issuer_id": "0000789019"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "currency": "USD",
+            "field": "operating_cash_flow",
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": "2025-07-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "available_at": "2026-07-30T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "operating_cash_flow",
+            "filed_on": "2026-07-29",
+            "filing_accession": "0001193125-26-323660",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": "2025-07-01",
+            "raw_sha256": "464cc12cc4796c90a6a0c709eb4920788aa7d4d5eee8b44f2d11d7d44804ae37",
+            "retrieved_at": "2026-11-02T03:28:49.694980+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "182935000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:35.860603+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:35.860619+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:35.860637+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:35.866484+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "MSFT",
+            "issuer_id": "0000789019"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "currency": "USD",
+            "field": "capital_expenditure",
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": "2025-07-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "available_at": "2026-07-30T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "capital_expenditure",
+            "filed_on": "2026-07-29",
+            "filing_accession": "0001193125-26-323660",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": "2025-07-01",
+            "raw_sha256": "464cc12cc4796c90a6a0c709eb4920788aa7d4d5eee8b44f2d11d7d44804ae37",
+            "retrieved_at": "2026-11-02T03:28:49.694980+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "115948000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:35.871166+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:35.871180+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:35.871196+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:35.874560+00:00",
+          "reused": false
+        }
+      ]
+    },
+    {
+      "symbol": "GOOGL",
+      "issuer_id": "0001652044",
+      "scope_status": "pending_scope",
+      "scope_reason": "fund_legal_type_and_sector_model_not_accepted",
+      "readiness": "pending_fields_and_scope",
+      "fields": [
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "GOOGL",
+            "issuer_id": "0001652044"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "currency": "USD",
+            "field": "revenue",
+            "issuer_id": "0001652044",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "unit": "currency"
+          },
+          "fact": null,
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:35.886683+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:35.887627+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "missing"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:35.939420+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Nasdaq",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:35.940489+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Finnhub",
+              "status": "not_configured"
+            }
+          ],
+          "as_of": null,
+          "state": "pending_data",
+          "completed_at": "2026-11-02T03:39:35.940652+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "GOOGL",
+            "issuer_id": "0001652044"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Assets",
+            "currency": "USD",
+            "field": "assets",
+            "issuer_id": "0001652044",
+            "period_end": "2025-12-31",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Assets",
+            "available_at": "2026-11-02T03:39:38.672835+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "assets",
+            "filed_on": null,
+            "filing_accession": null,
+            "identity_evidence_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+            "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+            "identity_observed_at": "2026-11-02T03:39:26.022371+00:00",
+            "issuer_id": "0001652044",
+            "period_end": "2025-12-31",
+            "period_start": null,
+            "raw_sha256": "682dedef893fba2a1158828a3944ec4bb45ffcaa2bcf88d383135b25d0d35d93",
+            "retrieved_at": "2026-11-02T03:39:38.672835+00:00",
+            "source": "Yahoo",
+            "source_field": "annualTotalAssets",
+            "source_multiplier": null,
+            "source_url": "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/GOOGL?symbol=GOOGL&type=annualTotalAssets&period1=1704067200&period2=1767225600",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "5.95281E+11"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:35.943848+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:38.674949+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:38.675234+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "GOOGL",
+            "issuer_id": "0001652044"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "currency": "USD",
+            "field": "liabilities",
+            "issuer_id": "0001652044",
+            "period_end": "2025-12-31",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "available_at": "2026-10-30T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "liabilities",
+            "filed_on": "2026-10-29",
+            "filing_accession": "0001652044-26-000084",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001652044",
+            "period_end": "2025-12-31",
+            "period_start": null,
+            "raw_sha256": "ec4a3095d634583925b5ea450db8a5ed974dc48f6f1b4f594022310bc78d4032",
+            "retrieved_at": "2026-11-02T03:28:56.060634+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "180016000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:38.678520+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:38.678532+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:38.678548+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:38.686361+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "GOOGL",
+            "issuer_id": "0001652044"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "currency": "USD",
+            "field": "net_income",
+            "issuer_id": "0001652044",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "available_at": "2026-02-06T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "net_income",
+            "filed_on": "2026-02-05",
+            "filing_accession": "0001652044-26-000018",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001652044",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "raw_sha256": "ec4a3095d634583925b5ea450db8a5ed974dc48f6f1b4f594022310bc78d4032",
+            "retrieved_at": "2026-11-02T03:28:56.060634+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "132170000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:38.689548+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:38.689558+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:38.689569+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:38.691627+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "GOOGL",
+            "issuer_id": "0001652044"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "currency": "USD",
+            "field": "operating_cash_flow",
+            "issuer_id": "0001652044",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "available_at": "2026-02-06T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "operating_cash_flow",
+            "filed_on": "2026-02-05",
+            "filing_accession": "0001652044-26-000018",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001652044",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "raw_sha256": "ec4a3095d634583925b5ea450db8a5ed974dc48f6f1b4f594022310bc78d4032",
+            "retrieved_at": "2026-11-02T03:28:56.060634+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "164713000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:38.694670+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:38.694678+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:38.694689+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:38.696713+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "GOOGL",
+            "issuer_id": "0001652044"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "currency": "USD",
+            "field": "capital_expenditure",
+            "issuer_id": "0001652044",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "available_at": "2026-02-06T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "capital_expenditure",
+            "filed_on": "2026-02-05",
+            "filing_accession": "0001652044-26-000018",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001652044",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "raw_sha256": "ec4a3095d634583925b5ea450db8a5ed974dc48f6f1b4f594022310bc78d4032",
+            "retrieved_at": "2026-11-02T03:28:56.060634+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "91447000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:38.700130+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:38.700140+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:38.700153+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:38.702203+00:00",
+          "reused": false
+        }
+      ]
+    },
+    {
+      "symbol": "AMZN",
+      "issuer_id": "0001018724",
+      "scope_status": "pending_scope",
+      "scope_reason": "fund_legal_type_and_sector_model_not_accepted",
+      "readiness": "pending_fields_and_scope",
+      "fields": [
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AMZN",
+            "issuer_id": "0001018724"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "currency": "USD",
+            "field": "revenue",
+            "issuer_id": "0001018724",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "available_at": "2026-02-07T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "revenue",
+            "filed_on": "2026-02-06",
+            "filing_accession": "0001018724-26-000004",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001018724",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "raw_sha256": "acddb7c0a6973a1fd08372de3b292298a34eae7f42a7eedc4bdebd3ac659c8fd",
+            "retrieved_at": "2026-11-02T03:29:06.267409+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "716924000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:38.710905+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:38.711797+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:38.772835+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:38.775834+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AMZN",
+            "issuer_id": "0001018724"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Assets",
+            "currency": "USD",
+            "field": "assets",
+            "issuer_id": "0001018724",
+            "period_end": "2025-12-31",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Assets",
+            "available_at": "2026-11-02T03:39:41.269829+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "assets",
+            "filed_on": null,
+            "filing_accession": null,
+            "identity_evidence_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+            "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+            "identity_observed_at": "2026-11-02T03:39:26.022371+00:00",
+            "issuer_id": "0001018724",
+            "period_end": "2025-12-31",
+            "period_start": null,
+            "raw_sha256": "bae145608ee49633c55b37b2dfe70dbf997a8f1a0a8e4538fb77a2f1f5146ae1",
+            "retrieved_at": "2026-11-02T03:39:41.269829+00:00",
+            "source": "Yahoo",
+            "source_field": "annualTotalAssets",
+            "source_multiplier": null,
+            "source_url": "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/AMZN?symbol=AMZN&type=annualTotalAssets&period1=1704067200&period2=1767225600",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "8.18042E+11"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:38.779364+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:41.272350+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:41.272662+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AMZN",
+            "issuer_id": "0001018724"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "currency": "USD",
+            "field": "liabilities",
+            "issuer_id": "0001018724",
+            "period_end": "2025-12-31",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "available_at": "2026-11-02T03:39:47.306665+00:00",
+            "currency": "USD",
+            "data_observed_at": "2026-11-02T03:39:47.306665+00:00",
+            "field": "liabilities",
+            "filed_on": null,
+            "filing_accession": null,
+            "identity_evidence_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+            "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+            "identity_observed_at": "2026-11-02T03:39:26.022371+00:00",
+            "issuer_id": "0001018724",
+            "period_end": "2025-12-31",
+            "period_start": null,
+            "raw_sha256": "6b55028a8d2071d43469ccdb2d9d78244596163173c01af32329dfe9d70a492a",
+            "retrieved_at": "2026-11-02T03:39:47.306665+00:00",
+            "source": "Nasdaq",
+            "source_field": "Total Liabilities",
+            "source_multiplier": "1000",
+            "source_url": "https://api.nasdaq.com/api/company/AMZN/financials?frequency=1",
+            "unit": "currency",
+            "unit_evidence_sha256": "9d2f1cc2da03f73a4e957b71bd91c493334065dc81eae795a88ded37214a3113",
+            "unit_evidence_url": "https://www.nasdaq.com/market-activity/stocks/amzn/financials",
+            "unit_observed_at": "2026-11-02T03:39:44.154359+00:00",
+            "value": "406977000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:41.275468+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:41.275480+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "missing"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:41.275508+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Nasdaq",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:47.309227+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:47.310894+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AMZN",
+            "issuer_id": "0001018724"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "currency": "USD",
+            "field": "net_income",
+            "issuer_id": "0001018724",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "available_at": "2026-02-07T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "net_income",
+            "filed_on": "2026-02-06",
+            "filing_accession": "0001018724-26-000004",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001018724",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "raw_sha256": "acddb7c0a6973a1fd08372de3b292298a34eae7f42a7eedc4bdebd3ac659c8fd",
+            "retrieved_at": "2026-11-02T03:29:06.267409+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "77670000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:47.313968+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:47.313983+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:47.313997+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:47.316999+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AMZN",
+            "issuer_id": "0001018724"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "currency": "USD",
+            "field": "operating_cash_flow",
+            "issuer_id": "0001018724",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "available_at": "2026-02-07T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "operating_cash_flow",
+            "filed_on": "2026-02-06",
+            "filing_accession": "0001018724-26-000004",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001018724",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "raw_sha256": "acddb7c0a6973a1fd08372de3b292298a34eae7f42a7eedc4bdebd3ac659c8fd",
+            "retrieved_at": "2026-11-02T03:29:06.267409+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "139514000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:47.319784+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:47.319794+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:47.319806+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:47.323050+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AMZN",
+            "issuer_id": "0001018724"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "currency": "USD",
+            "field": "capital_expenditure",
+            "issuer_id": "0001018724",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "unit": "currency"
+          },
+          "fact": null,
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:47.325957+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:47.325966+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "missing"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:47.326041+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Nasdaq",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:47.326048+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Finnhub",
+              "status": "not_configured"
+            }
+          ],
+          "as_of": null,
+          "state": "pending_data",
+          "completed_at": "2026-11-02T03:39:47.326169+00:00",
+          "reused": false
+        }
+      ]
+    },
+    {
+      "symbol": "AVGO",
+      "issuer_id": "0001730168",
+      "scope_status": "pending_scope",
+      "scope_reason": "fund_legal_type_and_sector_model_not_accepted",
+      "readiness": "pending_fields_and_scope",
+      "fields": [
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AVGO",
+            "issuer_id": "0001730168"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "currency": "USD",
+            "field": "revenue",
+            "issuer_id": "0001730168",
+            "period_end": "2025-11-02",
+            "period_start": "2024-11-04",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "available_at": "2025-12-19T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "revenue",
+            "filed_on": "2025-12-18",
+            "filing_accession": "0001730168-25-000121",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001730168",
+            "period_end": "2025-11-02",
+            "period_start": "2024-11-04",
+            "raw_sha256": "3bdb6644c12addf1e63c4dc861008d7804fbf3d3f5aa6eb9b97f72c0e89a7adf",
+            "retrieved_at": "2026-11-02T03:29:21.978529+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001730168.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "63887000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:47.338239+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:47.339175+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:47.377332+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:47.379475+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AVGO",
+            "issuer_id": "0001730168"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Assets",
+            "currency": "USD",
+            "field": "assets",
+            "issuer_id": "0001730168",
+            "period_end": "2025-11-02",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Assets",
+            "available_at": "2026-09-11T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "assets",
+            "filed_on": "2026-09-10",
+            "filing_accession": "0001730168-26-000080",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001730168",
+            "period_end": "2025-11-02",
+            "period_start": null,
+            "raw_sha256": "3bdb6644c12addf1e63c4dc861008d7804fbf3d3f5aa6eb9b97f72c0e89a7adf",
+            "retrieved_at": "2026-11-02T03:29:21.978529+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001730168.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "171092000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:47.382965+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "missing"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:51.783763+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:51.783780+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:51.789608+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AVGO",
+            "issuer_id": "0001730168"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "currency": "USD",
+            "field": "liabilities",
+            "issuer_id": "0001730168",
+            "period_end": "2025-11-02",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "available_at": "2026-09-11T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "liabilities",
+            "filed_on": "2026-09-10",
+            "filing_accession": "0001730168-26-000080",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001730168",
+            "period_end": "2025-11-02",
+            "period_start": null,
+            "raw_sha256": "3bdb6644c12addf1e63c4dc861008d7804fbf3d3f5aa6eb9b97f72c0e89a7adf",
+            "retrieved_at": "2026-11-02T03:29:21.978529+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001730168.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "89800000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:51.792785+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:51.792798+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:51.792812+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:51.798503+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AVGO",
+            "issuer_id": "0001730168"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "currency": "USD",
+            "field": "net_income",
+            "issuer_id": "0001730168",
+            "period_end": "2025-11-02",
+            "period_start": "2024-11-04",
+            "unit": "currency"
+          },
+          "fact": null,
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:51.801962+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:51.801974+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "missing"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:51.802015+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Nasdaq",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:51.802983+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Finnhub",
+              "status": "not_configured"
+            }
+          ],
+          "as_of": null,
+          "state": "pending_data",
+          "completed_at": "2026-11-02T03:39:51.803275+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AVGO",
+            "issuer_id": "0001730168"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "currency": "USD",
+            "field": "operating_cash_flow",
+            "issuer_id": "0001730168",
+            "period_end": "2025-11-02",
+            "period_start": "2024-11-04",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "available_at": "2025-12-19T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "operating_cash_flow",
+            "filed_on": "2025-12-18",
+            "filing_accession": "0001730168-25-000121",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001730168",
+            "period_end": "2025-11-02",
+            "period_start": "2024-11-04",
+            "raw_sha256": "3bdb6644c12addf1e63c4dc861008d7804fbf3d3f5aa6eb9b97f72c0e89a7adf",
+            "retrieved_at": "2026-11-02T03:29:21.978529+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001730168.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "27537000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:51.809924+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:51.809938+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:51.809957+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:51.812774+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "AVGO",
+            "issuer_id": "0001730168"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "currency": "USD",
+            "field": "capital_expenditure",
+            "issuer_id": "0001730168",
+            "period_end": "2025-11-02",
+            "period_start": "2024-11-04",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "available_at": "2025-12-19T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "capital_expenditure",
+            "filed_on": "2025-12-18",
+            "filing_accession": "0001730168-25-000121",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001730168",
+            "period_end": "2025-11-02",
+            "period_start": "2024-11-04",
+            "raw_sha256": "3bdb6644c12addf1e63c4dc861008d7804fbf3d3f5aa6eb9b97f72c0e89a7adf",
+            "retrieved_at": "2026-11-02T03:29:21.978529+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001730168.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "623000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:51.817078+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:51.817091+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:51.817163+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:51.819288+00:00",
+          "reused": false
+        }
+      ]
+    },
+    {
+      "symbol": "META",
+      "issuer_id": "0001326801",
+      "scope_status": "pending_scope",
+      "scope_reason": "fund_legal_type_and_sector_model_not_accepted",
+      "readiness": "data_complete_scope_pending",
+      "fields": [
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "META",
+            "issuer_id": "0001326801"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "currency": "USD",
+            "field": "revenue",
+            "issuer_id": "0001326801",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "available_at": "2026-01-30T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "revenue",
+            "filed_on": "2026-01-29",
+            "filing_accession": "0001628280-26-003942",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001326801",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "raw_sha256": "b0d0d92870b68488cec086cffd83514f2cc6c80d3e8c4f91e192b17ce3e7c946",
+            "retrieved_at": "2026-11-02T03:29:32.426520+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "200966000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:51.828035+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:51.828898+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:51.874942+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:51.876888+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "META",
+            "issuer_id": "0001326801"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Assets",
+            "currency": "USD",
+            "field": "assets",
+            "issuer_id": "0001326801",
+            "period_end": "2025-12-31",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Assets",
+            "available_at": "2026-11-02T03:39:54.543606+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "assets",
+            "filed_on": null,
+            "filing_accession": null,
+            "identity_evidence_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+            "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+            "identity_observed_at": "2026-11-02T03:39:26.022371+00:00",
+            "issuer_id": "0001326801",
+            "period_end": "2025-12-31",
+            "period_start": null,
+            "raw_sha256": "7576598fccd615401396cfd619f4eea2f8847826828547a2a543f9d3f87a22ac",
+            "retrieved_at": "2026-11-02T03:39:54.543606+00:00",
+            "source": "Yahoo",
+            "source_field": "annualTotalAssets",
+            "source_multiplier": null,
+            "source_url": "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/META?symbol=META&type=annualTotalAssets&period1=1704067200&period2=1767225600",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "3.66021E+11"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:51.880378+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:54.546609+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:54.546891+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "META",
+            "issuer_id": "0001326801"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "currency": "USD",
+            "field": "liabilities",
+            "issuer_id": "0001326801",
+            "period_end": "2025-12-31",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "available_at": "2026-10-23T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "liabilities",
+            "filed_on": "2026-10-22",
+            "filing_accession": "0001628280-26-066773",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001326801",
+            "period_end": "2025-12-31",
+            "period_start": null,
+            "raw_sha256": "b0d0d92870b68488cec086cffd83514f2cc6c80d3e8c4f91e192b17ce3e7c946",
+            "retrieved_at": "2026-11-02T03:29:32.426520+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "148778000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:54.552773+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:54.552792+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:54.552815+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:54.560203+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "META",
+            "issuer_id": "0001326801"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "currency": "USD",
+            "field": "net_income",
+            "issuer_id": "0001326801",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "available_at": "2026-01-30T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "net_income",
+            "filed_on": "2026-01-29",
+            "filing_accession": "0001628280-26-003942",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001326801",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "raw_sha256": "b0d0d92870b68488cec086cffd83514f2cc6c80d3e8c4f91e192b17ce3e7c946",
+            "retrieved_at": "2026-11-02T03:29:32.426520+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "60458000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:54.563933+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:54.563949+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:54.563971+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:54.566283+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "META",
+            "issuer_id": "0001326801"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "currency": "USD",
+            "field": "operating_cash_flow",
+            "issuer_id": "0001326801",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "available_at": "2026-01-30T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "operating_cash_flow",
+            "filed_on": "2026-01-29",
+            "filing_accession": "0001628280-26-003942",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001326801",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "raw_sha256": "b0d0d92870b68488cec086cffd83514f2cc6c80d3e8c4f91e192b17ce3e7c946",
+            "retrieved_at": "2026-11-02T03:29:32.426520+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "115800000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:54.569003+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:54.569013+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:54.569025+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:54.572684+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "META",
+            "issuer_id": "0001326801"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "currency": "USD",
+            "field": "capital_expenditure",
+            "issuer_id": "0001326801",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "available_at": "2026-01-30T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "capital_expenditure",
+            "filed_on": "2026-01-29",
+            "filing_accession": "0001628280-26-003942",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001326801",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "raw_sha256": "b0d0d92870b68488cec086cffd83514f2cc6c80d3e8c4f91e192b17ce3e7c946",
+            "retrieved_at": "2026-11-02T03:29:32.426520+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "69691000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:54.577762+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:54.577775+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:54.577790+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:54.581461+00:00",
+          "reused": false
+        }
+      ]
+    },
+    {
+      "symbol": "TSLA",
+      "issuer_id": "0001318605",
+      "scope_status": "pending_scope",
+      "scope_reason": "fund_legal_type_and_sector_model_not_accepted",
+      "readiness": "data_complete_scope_pending",
+      "fields": [
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "TSLA",
+            "issuer_id": "0001318605"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "currency": "USD",
+            "field": "revenue",
+            "issuer_id": "0001318605",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "available_at": "2026-01-30T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "revenue",
+            "filed_on": "2026-01-29",
+            "filing_accession": "0001628280-26-003952",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001318605",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "raw_sha256": "c951e0ae2402dd8cf8f39319928adccc4196b997941fe40b0d4d6b8060802db1",
+            "retrieved_at": "2026-11-02T03:29:38.439017+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "94827000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:54.591693+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:54.592718+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:54.649418+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:54.652244+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "TSLA",
+            "issuer_id": "0001318605"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Assets",
+            "currency": "USD",
+            "field": "assets",
+            "issuer_id": "0001318605",
+            "period_end": "2025-12-31",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Assets",
+            "available_at": "2026-11-02T03:39:58.034195+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "assets",
+            "filed_on": null,
+            "filing_accession": null,
+            "identity_evidence_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+            "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+            "identity_observed_at": "2026-11-02T03:39:26.022371+00:00",
+            "issuer_id": "0001318605",
+            "period_end": "2025-12-31",
+            "period_start": null,
+            "raw_sha256": "bb1051d505c4152125d52a7209b8f97d46b2bd97464e636dba66fdf507340895",
+            "retrieved_at": "2026-11-02T03:39:58.034195+00:00",
+            "source": "Yahoo",
+            "source_field": "annualTotalAssets",
+            "source_multiplier": null,
+            "source_url": "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/TSLA?symbol=TSLA&type=annualTotalAssets&period1=1704067200&period2=1767225600",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "1.37806E+11"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:54.657211+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:58.036893+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:58.037254+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "TSLA",
+            "issuer_id": "0001318605"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "currency": "USD",
+            "field": "liabilities",
+            "issuer_id": "0001318605",
+            "period_end": "2025-12-31",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "available_at": "2026-10-23T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "liabilities",
+            "filed_on": "2026-10-22",
+            "filing_accession": "0001628280-26-066775",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001318605",
+            "period_end": "2025-12-31",
+            "period_start": null,
+            "raw_sha256": "c951e0ae2402dd8cf8f39319928adccc4196b997941fe40b0d4d6b8060802db1",
+            "retrieved_at": "2026-11-02T03:29:38.439017+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "54941000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:58.041849+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:58.041866+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:58.041883+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:58.054019+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "TSLA",
+            "issuer_id": "0001318605"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "currency": "USD",
+            "field": "net_income",
+            "issuer_id": "0001318605",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "available_at": "2026-01-30T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "net_income",
+            "filed_on": "2026-01-29",
+            "filing_accession": "0001628280-26-003952",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001318605",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "raw_sha256": "c951e0ae2402dd8cf8f39319928adccc4196b997941fe40b0d4d6b8060802db1",
+            "retrieved_at": "2026-11-02T03:29:38.439017+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "3794000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:58.059244+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:58.059262+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:58.059279+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:58.062963+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "TSLA",
+            "issuer_id": "0001318605"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "currency": "USD",
+            "field": "operating_cash_flow",
+            "issuer_id": "0001318605",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "available_at": "2026-01-30T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "operating_cash_flow",
+            "filed_on": "2026-01-29",
+            "filing_accession": "0001628280-26-003952",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001318605",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "raw_sha256": "c951e0ae2402dd8cf8f39319928adccc4196b997941fe40b0d4d6b8060802db1",
+            "retrieved_at": "2026-11-02T03:29:38.439017+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "14747000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:58.068640+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:58.068657+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:58.068725+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:58.072449+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.13.0",
+          "company": {
+            "symbol": "TSLA",
+            "issuer_id": "0001318605"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "currency": "USD",
+            "field": "capital_expenditure",
+            "issuer_id": "0001318605",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "available_at": "2026-01-30T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "capital_expenditure",
+            "filed_on": "2026-01-29",
+            "filing_accession": "0001628280-26-003952",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0001318605",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "raw_sha256": "c951e0ae2402dd8cf8f39319928adccc4196b997941fe40b0d4d6b8060802db1",
+            "retrieved_at": "2026-11-02T03:29:38.439017+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "8527000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-02T03:39:58.081021+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-02T03:39:58.081039+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-02T03:39:58.081060+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-02T03:39:58.084808+00:00",
+          "reused": false
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "companies": 8,
+    "field_states": {
+      "pending_data": 5,
+      "collected": 43
+    },
+    "new_fields": 48,
+    "reused_fields": 0
+  },
+  "checkpoint_events": [],
+  "investment_approved": false,
+  "hundred_company_accepted": false,
+  "active_universe_accepted": false
+}

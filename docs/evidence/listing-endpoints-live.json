@@ -1,0 +1,29 @@
+{
+  "recorded_at": "2026-11-02T00:51:13.878132+00:00",
+  "attempts": [
+    {
+      "name": "nasdaqlisted",
+      "url": "https://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt",
+      "status": "api_error",
+      "http_status": 503
+    },
+    {
+      "name": "nasdaqlisted",
+      "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+      "status": "api_error",
+      "http_status": 406
+    },
+    {
+      "name": "otherlisted",
+      "url": "https://ftp.nasdaqtrader.com/SymbolDirectory/otherlisted.txt",
+      "status": "api_error",
+      "http_status": 503
+    },
+    {
+      "name": "otherlisted",
+      "url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+      "status": "api_error",
+      "http_status": 406
+    }
+  ]
+}

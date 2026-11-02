@@ -1,0 +1,92 @@
+{
+  "mode": "recorded original quarterly filing replay; no new live filing request",
+  "companies": [
+    {
+      "issuer_id": "0000320193",
+      "symbol": "AAPL",
+      "report_end": "2026-06-27",
+      "document_type": "10-Q",
+      "raw_sha256": "f401a1b076981ca791b9bebd8d20eae6a4edc6fc58d1ab7957bc2bbda7747025",
+      "registered_security": [
+        {
+          "context_id": "c-2",
+          "symbol": "AAPL",
+          "title": "Common Stock, $0.00001 par value per share",
+          "exchange": "The Nasdaq Stock Market LLC"
+        }
+      ],
+      "explicit_common_share_title": true,
+      "entity_shell_labels": [
+        "\u2610"
+      ],
+      "investment_company_labels": [],
+      "legal_type_approved": false,
+      "scope_approved": false,
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm",
+        "sha256": "f401a1b076981ca791b9bebd8d20eae6a4edc6fc58d1ab7957bc2bbda7747025",
+        "retrieved_at": "2026-11-01T18:55:06.944345+00:00",
+        "fixture": "tests/fixtures/filing-aapl.html.gz"
+      }
+    },
+    {
+      "issuer_id": "0000789019",
+      "symbol": "MSFT",
+      "report_end": "2026-09-30",
+      "document_type": "10-Q",
+      "raw_sha256": "f580ba9d8effe824f8f167d198a51c60c8c6b030fb72945fe286ee2141b70e72",
+      "registered_security": [
+        {
+          "context_id": "C_d978ff47-69e4-4cf8-86cc-6d2d42292a83",
+          "symbol": "MSFT",
+          "title": "Common stock, $0.00000625 par value per share",
+          "exchange": "Nasdaq"
+        }
+      ],
+      "explicit_common_share_title": true,
+      "entity_shell_labels": [
+        "\u2612"
+      ],
+      "investment_company_labels": [],
+      "legal_type_approved": false,
+      "scope_approved": false,
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/msft-20260930.htm",
+        "sha256": "f580ba9d8effe824f8f167d198a51c60c8c6b030fb72945fe286ee2141b70e72",
+        "retrieved_at": "2026-11-01T18:55:13.409020+00:00",
+        "fixture": "tests/fixtures/filing-msft.html.gz"
+      }
+    },
+    {
+      "issuer_id": "0001045810",
+      "symbol": "NVDA",
+      "report_end": "2026-07-26",
+      "document_type": "10-Q",
+      "raw_sha256": "e4b3889df3886edb243df887fcc1677263ec800ecbe369fa5f7c8597d1fe5602",
+      "registered_security": [
+        {
+          "context_id": "c-1",
+          "symbol": "NVDA",
+          "title": "Common Stock, $0.001 par value per share",
+          "exchange": "The Nasdaq Global Select Market"
+        }
+      ],
+      "explicit_common_share_title": true,
+      "entity_shell_labels": [
+        "\u2612"
+      ],
+      "investment_company_labels": [],
+      "legal_type_approved": false,
+      "scope_approved": false,
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+        "sha256": "e4b3889df3886edb243df887fcc1677263ec800ecbe369fa5f7c8597d1fe5602",
+        "retrieved_at": "2026-11-01T18:55:21.876710+00:00",
+        "fixture": "tests/fixtures/filing-nvda.html.gz"
+      }
+    }
+  ],
+  "note": "Cover dates are quarterly document dates, not the prior annual balance-sheet comparison date. Raw checkbox labels are not interpreted as booleans.",
+  "scope_approved": false,
+  "hundred_company_accepted": false
+}

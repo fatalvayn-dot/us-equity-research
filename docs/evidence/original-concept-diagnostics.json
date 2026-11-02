@@ -1,0 +1,2303 @@
+{
+  "companies": [
+    {
+      "issuer_id": "0001045810",
+      "period_start": "2025-01-27",
+      "period_end": "2026-01-25",
+      "raw_sha256": "d9135ae2801ec96e80398e2ddf0daa523b3a500ccf939ecf2ff150bdd13ab0dc",
+      "concepts": [
+        {
+          "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:NetIncomeLoss",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "120067000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "120067000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "120067000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "120067000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "120067000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "120067000000"
+            }
+          ],
+          "present_facts": 18,
+          "other_period_facts": 12,
+          "dimensional_facts": 1,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "102718000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "102718000000"
+            }
+          ],
+          "present_facts": 3,
+          "other_period_facts": 2,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:Revenues",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "215938000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "215938000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "215938000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "215938000000"
+            }
+          ],
+          "present_facts": 51,
+          "other_period_facts": 34,
+          "dimensional_facts": 14,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:ProfitLoss",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "6042000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "6042000000"
+            }
+          ],
+          "present_facts": 3,
+          "other_period_facts": 2,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        }
+      ],
+      "automatic_substitution": false,
+      "scope_approved": false,
+      "symbol": "NVDA",
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "sha256": "d9135ae2801ec96e80398e2ddf0daa523b3a500ccf939ecf2ff150bdd13ab0dc",
+        "retrieved_at": "2026-11-02T02:12:31.172984+00:00",
+        "fixture": "tests/fixtures/annual/0001045810-0001045810-26-000021.html.gz"
+      }
+    },
+    {
+      "issuer_id": "0000320193",
+      "period_start": "2024-09-29",
+      "period_end": "2025-09-27",
+      "raw_sha256": "056f733f13ff7407e64dc81fb96da3c3c55a6ba429bf094f57cb6bd472231f82",
+      "concepts": [
+        {
+          "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "416161000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "416161000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "416161000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "416161000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "416161000000"
+            }
+          ],
+          "present_facts": 57,
+          "other_period_facts": 38,
+          "dimensional_facts": 15,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:NetIncomeLoss",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "112010000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "112010000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "112010000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "112010000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "112010000000"
+            }
+          ],
+          "present_facts": 15,
+          "other_period_facts": 10,
+          "dimensional_facts": 1,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "111482000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "111482000000"
+            }
+          ],
+          "present_facts": 3,
+          "other_period_facts": 2,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "12715000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "12715000000"
+            }
+          ],
+          "present_facts": 3,
+          "other_period_facts": 2,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:Revenues",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:ProfitLoss",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        }
+      ],
+      "automatic_substitution": false,
+      "scope_approved": false,
+      "symbol": "AAPL",
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "sha256": "056f733f13ff7407e64dc81fb96da3c3c55a6ba429bf094f57cb6bd472231f82",
+        "retrieved_at": "2026-11-02T02:12:34.616416+00:00",
+        "fixture": "tests/fixtures/annual/0000320193-0000320193-25-000079.html.gz"
+      }
+    },
+    {
+      "issuer_id": "0000789019",
+      "period_start": "2025-07-01",
+      "period_end": "2026-06-30",
+      "raw_sha256": "a2e8af9a97a682ba3b408c9557ec6f0f3dbd4db6f600d310ae23ebe5b3c827a4",
+      "concepts": [
+        {
+          "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "331839000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+              "unit_id": "U_USD",
+              "value": "331839000000"
+            },
+            {
+              "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+              "unit_id": "U_USD",
+              "value": "331839000000"
+            },
+            {
+              "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+              "unit_id": "U_USD",
+              "value": "331839000000"
+            },
+            {
+              "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+              "unit_id": "U_USD",
+              "value": "331839000000"
+            }
+          ],
+          "present_facts": 67,
+          "other_period_facts": 44,
+          "dimensional_facts": 19,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:NetIncomeLoss",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "133749000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+              "unit_id": "U_USD",
+              "value": "133749000000"
+            },
+            {
+              "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+              "unit_id": "U_USD",
+              "value": "133749000000"
+            },
+            {
+              "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+              "unit_id": "U_USD",
+              "value": "133749000000"
+            },
+            {
+              "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+              "unit_id": "U_USD",
+              "value": "133749000000"
+            }
+          ],
+          "present_facts": 15,
+          "other_period_facts": 10,
+          "dimensional_facts": 1,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "182935000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+              "unit_id": "U_USD",
+              "value": "182935000000"
+            }
+          ],
+          "present_facts": 3,
+          "other_period_facts": 2,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "115948000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+              "unit_id": "U_USD",
+              "value": "115948000000"
+            }
+          ],
+          "present_facts": 3,
+          "other_period_facts": 2,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:Revenues",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:ProfitLoss",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        }
+      ],
+      "automatic_substitution": false,
+      "scope_approved": false,
+      "symbol": "MSFT",
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "sha256": "a2e8af9a97a682ba3b408c9557ec6f0f3dbd4db6f600d310ae23ebe5b3c827a4",
+        "retrieved_at": "2026-11-02T02:12:38.475331+00:00",
+        "fixture": "tests/fixtures/annual/0000789019-0001193125-26-323660.html.gz"
+      }
+    },
+    {
+      "issuer_id": "0001652044",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "raw_sha256": "bab3d2601c394c4b603fa4ae30165a65e123a37087a172c8e4146dba0c80ab82",
+      "concepts": [
+        {
+          "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "dimensional_only",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 45,
+          "other_period_facts": 30,
+          "dimensional_facts": 15,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:NetIncomeLoss",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "132170000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "132170000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "132170000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "132170000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "132170000000"
+            }
+          ],
+          "present_facts": 24,
+          "other_period_facts": 16,
+          "dimensional_facts": 4,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "164713000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "164713000000"
+            }
+          ],
+          "present_facts": 3,
+          "other_period_facts": 2,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "91447000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "91447000000"
+            }
+          ],
+          "present_facts": 3,
+          "other_period_facts": 2,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:Revenues",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "402836000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "402836000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "402836000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "402836000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "402836000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "402836000000"
+            }
+          ],
+          "present_facts": 18,
+          "other_period_facts": 12,
+          "dimensional_facts": 1,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:ProfitLoss",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        }
+      ],
+      "automatic_substitution": false,
+      "scope_approved": false,
+      "symbol": "GOOGL",
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm",
+        "sha256": "bab3d2601c394c4b603fa4ae30165a65e123a37087a172c8e4146dba0c80ab82",
+        "retrieved_at": "2026-11-02T03:26:34.535812+00:00",
+        "fixture": "tests/fixtures/annual-batch/bab3d2601c394c4b603fa4ae30165a65e123a37087a172c8e4146dba0c80ab82.html.gz"
+      }
+    },
+    {
+      "issuer_id": "0001018724",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "raw_sha256": "3702599045ec83f3faca3186c42b62247d1ec0e3bdf47c7f8acc7305b858f139",
+      "concepts": [
+        {
+          "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "716924000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "716924000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "716924000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "716924000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "716924000000"
+            }
+          ],
+          "present_facts": 63,
+          "other_period_facts": 42,
+          "dimensional_facts": 17,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:NetIncomeLoss",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "77670000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "77670000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "77670000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "77670000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "77670000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "77670000000"
+            }
+          ],
+          "present_facts": 19,
+          "other_period_facts": 12,
+          "dimensional_facts": 2,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "139514000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "139514000000"
+            }
+          ],
+          "present_facts": 3,
+          "other_period_facts": 2,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:Revenues",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:ProfitLoss",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "131819000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "131819000000"
+            }
+          ],
+          "present_facts": 3,
+          "other_period_facts": 2,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        }
+      ],
+      "automatic_substitution": false,
+      "scope_approved": false,
+      "symbol": "AMZN",
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm",
+        "sha256": "3702599045ec83f3faca3186c42b62247d1ec0e3bdf47c7f8acc7305b858f139",
+        "retrieved_at": "2026-11-02T03:26:37.898566+00:00",
+        "fixture": "tests/fixtures/annual-batch/3702599045ec83f3faca3186c42b62247d1ec0e3bdf47c7f8acc7305b858f139.html.gz"
+      }
+    },
+    {
+      "issuer_id": "0001730168",
+      "period_start": "2024-11-04",
+      "period_end": "2025-11-02",
+      "raw_sha256": "789c977a9e365d8f6eb3d6b3e12cce52047fc0660128732643e6558d3422bfdb",
+      "concepts": [
+        {
+          "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2024",
+          "status": "exact_original_value",
+          "value": "63887000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "63887000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "63887000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "63887000000"
+            }
+          ],
+          "present_facts": 68,
+          "other_period_facts": 44,
+          "dimensional_facts": 21,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:NetIncomeLoss",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2024",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2024",
+          "status": "exact_original_value",
+          "value": "27537000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "27537000000"
+            }
+          ],
+          "present_facts": 3,
+          "other_period_facts": 2,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2024",
+          "status": "exact_original_value",
+          "value": "623000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "623000000"
+            }
+          ],
+          "present_facts": 3,
+          "other_period_facts": 2,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:Revenues",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2024",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:ProfitLoss",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2024",
+          "status": "exact_original_value",
+          "value": "23126000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "23126000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "23126000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "23126000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "23126000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "23126000000"
+            }
+          ],
+          "present_facts": 18,
+          "other_period_facts": 12,
+          "dimensional_facts": 1,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2024",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        }
+      ],
+      "automatic_substitution": false,
+      "scope_approved": false,
+      "symbol": "AVGO",
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000121/avgo-20251102.htm",
+        "sha256": "789c977a9e365d8f6eb3d6b3e12cce52047fc0660128732643e6558d3422bfdb",
+        "retrieved_at": "2026-11-02T03:26:41.010589+00:00",
+        "fixture": "tests/fixtures/annual-batch/789c977a9e365d8f6eb3d6b3e12cce52047fc0660128732643e6558d3422bfdb.html.gz"
+      }
+    },
+    {
+      "issuer_id": "0001326801",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "raw_sha256": "5c4096ceb780d0fb52f3e3da5164ead16c58030223b453b0386ef2eb1bad8011",
+      "concepts": [
+        {
+          "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "200966000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "200966000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "200966000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "200966000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "200966000000"
+            }
+          ],
+          "present_facts": 45,
+          "other_period_facts": 30,
+          "dimensional_facts": 11,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:NetIncomeLoss",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "60458000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "60458000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "60458000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "60458000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "60458000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "60458000000"
+            }
+          ],
+          "present_facts": 19,
+          "other_period_facts": 12,
+          "dimensional_facts": 2,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "115800000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "115800000000"
+            }
+          ],
+          "present_facts": 3,
+          "other_period_facts": 2,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "69691000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "69691000000"
+            }
+          ],
+          "present_facts": 3,
+          "other_period_facts": 2,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:Revenues",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:ProfitLoss",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        }
+      ],
+      "automatic_substitution": false,
+      "scope_approved": false,
+      "symbol": "META",
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/meta-20251231.htm",
+        "sha256": "5c4096ceb780d0fb52f3e3da5164ead16c58030223b453b0386ef2eb1bad8011",
+        "retrieved_at": "2026-11-02T03:26:45.341532+00:00",
+        "fixture": "tests/fixtures/annual-batch/5c4096ceb780d0fb52f3e3da5164ead16c58030223b453b0386ef2eb1bad8011.html.gz"
+      }
+    },
+    {
+      "issuer_id": "0001318605",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "raw_sha256": "6613b0ffabe8e9b2668eef50f40540756bd4ef03e2f633d489ca83aa58b99729",
+      "concepts": [
+        {
+          "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "94827000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "94827000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "94827000000"
+            }
+          ],
+          "present_facts": 46,
+          "other_period_facts": 30,
+          "dimensional_facts": 14,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:NetIncomeLoss",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "3794000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "3794000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "3794000000"
+            }
+          ],
+          "present_facts": 6,
+          "other_period_facts": 4,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "14747000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "14747000000"
+            }
+          ],
+          "present_facts": 3,
+          "other_period_facts": 2,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "8527000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "8527000000"
+            }
+          ],
+          "present_facts": 3,
+          "other_period_facts": 2,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:Revenues",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "94827000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "94827000000"
+            }
+          ],
+          "present_facts": 18,
+          "other_period_facts": 12,
+          "dimensional_facts": 5,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:ProfitLoss",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "exact_original_value",
+          "value": "3855000000",
+          "currency": "USD",
+          "matches": [
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "3855000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "3855000000"
+            },
+            {
+              "context_id": "c-1",
+              "unit_id": "usd",
+              "value": "3855000000"
+            }
+          ],
+          "present_facts": 9,
+          "other_period_facts": 6,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        },
+        {
+          "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+          "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+          "status": "concept_not_disclosed",
+          "value": null,
+          "currency": "USD",
+          "matches": [],
+          "present_facts": 0,
+          "other_period_facts": 0,
+          "dimensional_facts": 0,
+          "unsupported_facts": 0
+        }
+      ],
+      "automatic_substitution": false,
+      "scope_approved": false,
+      "symbol": "TSLA",
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+        "sha256": "6613b0ffabe8e9b2668eef50f40540756bd4ef03e2f633d489ca83aa58b99729",
+        "retrieved_at": "2026-11-02T03:26:48.334467+00:00",
+        "fixture": "tests/fixtures/annual-batch/6613b0ffabe8e9b2668eef50f40540756bd4ef03e2f633d489ca83aa58b99729.html.gz"
+      }
+    }
+  ],
+  "duration_checks": [
+    {
+      "symbol": "NVDA",
+      "field": "revenue",
+      "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+      "status": "missing_collected_fact",
+      "collected_value": null,
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "concept_not_disclosed",
+        "value": null,
+        "currency": "USD",
+        "matches": [],
+        "present_facts": 0,
+        "other_period_facts": 0,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "NVDA",
+      "field": "net_income",
+      "accounting_definition": "us-gaap:NetIncomeLoss",
+      "status": "matched",
+      "collected_value": "120067000000",
+      "original": {
+        "concept": "us-gaap:NetIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "120067000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "120067000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "120067000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "120067000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "120067000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "120067000000"
+          }
+        ],
+        "present_facts": 18,
+        "other_period_facts": 12,
+        "dimensional_facts": 1,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "NVDA",
+      "field": "operating_cash_flow",
+      "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "status": "matched",
+      "collected_value": "102718000000",
+      "original": {
+        "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "102718000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "102718000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "NVDA",
+      "field": "capital_expenditure",
+      "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+      "status": "missing_collected_fact",
+      "collected_value": null,
+      "original": {
+        "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "concept_not_disclosed",
+        "value": null,
+        "currency": "USD",
+        "matches": [],
+        "present_facts": 0,
+        "other_period_facts": 0,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "AAPL",
+      "field": "revenue",
+      "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+      "status": "matched",
+      "collected_value": "416161000000",
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "416161000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "416161000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "416161000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "416161000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "416161000000"
+          }
+        ],
+        "present_facts": 57,
+        "other_period_facts": 38,
+        "dimensional_facts": 15,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "AAPL",
+      "field": "net_income",
+      "accounting_definition": "us-gaap:NetIncomeLoss",
+      "status": "matched",
+      "collected_value": "112010000000",
+      "original": {
+        "concept": "us-gaap:NetIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "112010000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "112010000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "112010000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "112010000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "112010000000"
+          }
+        ],
+        "present_facts": 15,
+        "other_period_facts": 10,
+        "dimensional_facts": 1,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "AAPL",
+      "field": "operating_cash_flow",
+      "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "status": "matched",
+      "collected_value": "111482000000",
+      "original": {
+        "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "111482000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "111482000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "AAPL",
+      "field": "capital_expenditure",
+      "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+      "status": "matched",
+      "collected_value": "12715000000",
+      "original": {
+        "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "12715000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "12715000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "MSFT",
+      "field": "revenue",
+      "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+      "status": "matched",
+      "collected_value": "331839000000",
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "331839000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+            "unit_id": "U_USD",
+            "value": "331839000000"
+          },
+          {
+            "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+            "unit_id": "U_USD",
+            "value": "331839000000"
+          },
+          {
+            "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+            "unit_id": "U_USD",
+            "value": "331839000000"
+          },
+          {
+            "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+            "unit_id": "U_USD",
+            "value": "331839000000"
+          }
+        ],
+        "present_facts": 67,
+        "other_period_facts": 44,
+        "dimensional_facts": 19,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "MSFT",
+      "field": "net_income",
+      "accounting_definition": "us-gaap:NetIncomeLoss",
+      "status": "matched",
+      "collected_value": "133749000000",
+      "original": {
+        "concept": "us-gaap:NetIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "133749000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+            "unit_id": "U_USD",
+            "value": "133749000000"
+          },
+          {
+            "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+            "unit_id": "U_USD",
+            "value": "133749000000"
+          },
+          {
+            "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+            "unit_id": "U_USD",
+            "value": "133749000000"
+          },
+          {
+            "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+            "unit_id": "U_USD",
+            "value": "133749000000"
+          }
+        ],
+        "present_facts": 15,
+        "other_period_facts": 10,
+        "dimensional_facts": 1,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "MSFT",
+      "field": "operating_cash_flow",
+      "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "status": "matched",
+      "collected_value": "182935000000",
+      "original": {
+        "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "182935000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+            "unit_id": "U_USD",
+            "value": "182935000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "MSFT",
+      "field": "capital_expenditure",
+      "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+      "status": "matched",
+      "collected_value": "115948000000",
+      "original": {
+        "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "115948000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+            "unit_id": "U_USD",
+            "value": "115948000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "GOOGL",
+      "field": "revenue",
+      "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+      "status": "missing_collected_fact",
+      "collected_value": null,
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "dimensional_only",
+        "value": null,
+        "currency": "USD",
+        "matches": [],
+        "present_facts": 45,
+        "other_period_facts": 30,
+        "dimensional_facts": 15,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "GOOGL",
+      "field": "net_income",
+      "accounting_definition": "us-gaap:NetIncomeLoss",
+      "status": "matched",
+      "collected_value": "132170000000",
+      "original": {
+        "concept": "us-gaap:NetIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "132170000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "132170000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "132170000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "132170000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "132170000000"
+          }
+        ],
+        "present_facts": 24,
+        "other_period_facts": 16,
+        "dimensional_facts": 4,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "GOOGL",
+      "field": "operating_cash_flow",
+      "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "status": "matched",
+      "collected_value": "164713000000",
+      "original": {
+        "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "164713000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "164713000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "GOOGL",
+      "field": "capital_expenditure",
+      "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+      "status": "matched",
+      "collected_value": "91447000000",
+      "original": {
+        "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "91447000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "91447000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "AMZN",
+      "field": "revenue",
+      "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+      "status": "matched",
+      "collected_value": "716924000000",
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "716924000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "716924000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "716924000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "716924000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "716924000000"
+          }
+        ],
+        "present_facts": 63,
+        "other_period_facts": 42,
+        "dimensional_facts": 17,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "AMZN",
+      "field": "net_income",
+      "accounting_definition": "us-gaap:NetIncomeLoss",
+      "status": "matched",
+      "collected_value": "77670000000",
+      "original": {
+        "concept": "us-gaap:NetIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "77670000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "77670000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "77670000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "77670000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "77670000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "77670000000"
+          }
+        ],
+        "present_facts": 19,
+        "other_period_facts": 12,
+        "dimensional_facts": 2,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "AMZN",
+      "field": "operating_cash_flow",
+      "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "status": "matched",
+      "collected_value": "139514000000",
+      "original": {
+        "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "139514000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "139514000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "AMZN",
+      "field": "capital_expenditure",
+      "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+      "status": "missing_collected_fact",
+      "collected_value": null,
+      "original": {
+        "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "concept_not_disclosed",
+        "value": null,
+        "currency": "USD",
+        "matches": [],
+        "present_facts": 0,
+        "other_period_facts": 0,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "AVGO",
+      "field": "revenue",
+      "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+      "status": "matched",
+      "collected_value": "63887000000",
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2024",
+        "status": "exact_original_value",
+        "value": "63887000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "63887000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "63887000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "63887000000"
+          }
+        ],
+        "present_facts": 68,
+        "other_period_facts": 44,
+        "dimensional_facts": 21,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "AVGO",
+      "field": "net_income",
+      "accounting_definition": "us-gaap:NetIncomeLoss",
+      "status": "missing_collected_fact",
+      "collected_value": null,
+      "original": {
+        "concept": "us-gaap:NetIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2024",
+        "status": "concept_not_disclosed",
+        "value": null,
+        "currency": "USD",
+        "matches": [],
+        "present_facts": 0,
+        "other_period_facts": 0,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "AVGO",
+      "field": "operating_cash_flow",
+      "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "status": "matched",
+      "collected_value": "27537000000",
+      "original": {
+        "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2024",
+        "status": "exact_original_value",
+        "value": "27537000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "27537000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "AVGO",
+      "field": "capital_expenditure",
+      "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+      "status": "matched",
+      "collected_value": "623000000",
+      "original": {
+        "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2024",
+        "status": "exact_original_value",
+        "value": "623000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "623000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "META",
+      "field": "revenue",
+      "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+      "status": "matched",
+      "collected_value": "200966000000",
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "200966000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "200966000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "200966000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "200966000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "200966000000"
+          }
+        ],
+        "present_facts": 45,
+        "other_period_facts": 30,
+        "dimensional_facts": 11,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "META",
+      "field": "net_income",
+      "accounting_definition": "us-gaap:NetIncomeLoss",
+      "status": "matched",
+      "collected_value": "60458000000",
+      "original": {
+        "concept": "us-gaap:NetIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "60458000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "60458000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "60458000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "60458000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "60458000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "60458000000"
+          }
+        ],
+        "present_facts": 19,
+        "other_period_facts": 12,
+        "dimensional_facts": 2,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "META",
+      "field": "operating_cash_flow",
+      "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "status": "matched",
+      "collected_value": "115800000000",
+      "original": {
+        "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "115800000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "115800000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "META",
+      "field": "capital_expenditure",
+      "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+      "status": "matched",
+      "collected_value": "69691000000",
+      "original": {
+        "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "69691000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "69691000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "TSLA",
+      "field": "revenue",
+      "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+      "status": "matched",
+      "collected_value": "94827000000",
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "94827000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "94827000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "94827000000"
+          }
+        ],
+        "present_facts": 46,
+        "other_period_facts": 30,
+        "dimensional_facts": 14,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "TSLA",
+      "field": "net_income",
+      "accounting_definition": "us-gaap:NetIncomeLoss",
+      "status": "matched",
+      "collected_value": "3794000000",
+      "original": {
+        "concept": "us-gaap:NetIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "3794000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "3794000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "3794000000"
+          }
+        ],
+        "present_facts": 6,
+        "other_period_facts": 4,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "TSLA",
+      "field": "operating_cash_flow",
+      "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+      "status": "matched",
+      "collected_value": "14747000000",
+      "original": {
+        "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "14747000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "14747000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    },
+    {
+      "symbol": "TSLA",
+      "field": "capital_expenditure",
+      "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+      "status": "matched",
+      "collected_value": "8527000000",
+      "original": {
+        "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "8527000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "8527000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      }
+    }
+  ],
+  "amzn_identity_diagnostic": {
+    "issuer_id": "0001018724",
+    "period_start": null,
+    "period_end": "2025-12-31",
+    "raw_sha256": "3702599045ec83f3faca3186c42b62247d1ec0e3bdf47c7f8acc7305b858f139",
+    "concepts": [
+      {
+        "concept": "us-gaap:Liabilities",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "concept_not_disclosed",
+        "value": null,
+        "currency": "USD",
+        "matches": [],
+        "present_facts": 0,
+        "other_period_facts": 0,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      {
+        "concept": "us-gaap:LiabilitiesAndStockholdersEquity",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "818042000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-9",
+            "unit_id": "usd",
+            "value": "818042000000"
+          }
+        ],
+        "present_facts": 2,
+        "other_period_facts": 1,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      {
+        "concept": "us-gaap:StockholdersEquity",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "411065000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-9",
+            "unit_id": "usd",
+            "value": "411065000000"
+          },
+          {
+            "context_id": "c-9",
+            "unit_id": "usd",
+            "value": "411065000000"
+          }
+        ],
+        "present_facts": 42,
+        "other_period_facts": 31,
+        "dimensional_facts": 9,
+        "unsupported_facts": 0
+      }
+    ],
+    "automatic_substitution": false,
+    "scope_approved": false,
+    "arithmetic_candidate": {
+      "formula": "LiabilitiesAndStockholdersEquity - StockholdersEquity",
+      "value": "406977000000",
+      "status": "candidate_only_requires_scope_and_mezzanine_review",
+      "accepted_as_liabilities": false
+    },
+    "source_evidence": {
+      "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm",
+      "sha256": "3702599045ec83f3faca3186c42b62247d1ec0e3bdf47c7f8acc7305b858f139",
+      "retrieved_at": "2026-11-02T03:26:37.898566+00:00",
+      "fixture": "tests/fixtures/annual-batch/3702599045ec83f3faca3186c42b62247d1ec0e3bdf47c7f8acc7305b858f139.html.gz"
+    }
+  },
+  "summary": {
+    "duration_checks": 32,
+    "matched": 27,
+    "missing_collected": 5,
+    "unresolved": 0,
+    "mismatched": 0
+  },
+  "new_network_requests": 0,
+  "automatic_substitution": false,
+  "hundred_company_accepted": false
+}

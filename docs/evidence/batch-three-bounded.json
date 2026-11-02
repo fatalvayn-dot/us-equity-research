@@ -1,0 +1,461 @@
+{
+  "schema_version": 1,
+  "policy_version": "0.9.0",
+  "generated_at": "2026-11-01T23:37:44.747468+00:00",
+  "companies": [
+    {
+      "symbol": "AAPL",
+      "issuer_id": "0000320193",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_listing_and_legal_common_share_evidence_pending",
+      "readiness": "pending_fields_and_scope",
+      "fields": [
+        {
+          "schema_version": 1,
+          "policy_version": "0.9.0",
+          "company": {
+            "symbol": "AAPL",
+            "issuer_id": "0000320193"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "currency": "USD",
+            "field": "revenue",
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": "2024-09-29",
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "available_at": "2025-11-01T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "revenue",
+            "filed_on": "2025-10-31",
+            "filing_accession": "0000320193-25-000079",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": "2024-09-29",
+            "raw_sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+            "retrieved_at": "2026-11-01T18:53:53.052462+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "416161000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-01T23:37:41.848234+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-01T23:37:41.849167+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-01T23:37:41.904243+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-01T23:37:41.906943+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.9.0",
+          "company": {
+            "symbol": "AAPL",
+            "issuer_id": "0000320193"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Assets",
+            "currency": "USD",
+            "field": "assets",
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Assets",
+            "available_at": "2026-08-01T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "assets",
+            "filed_on": "2026-07-31",
+            "filing_accession": "0000320193-26-000020",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": null,
+            "raw_sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+            "retrieved_at": "2026-11-01T18:53:53.052462+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "359241000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-01T23:37:41.910479+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "period_mismatch"
+            },
+            {
+              "attempted_at": "2026-11-01T23:37:44.670234+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-01T23:37:44.670251+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-01T23:37:44.679626+00:00",
+          "reused": false
+        },
+        {
+          "schema_version": 1,
+          "policy_version": "0.9.0",
+          "company": {
+            "symbol": "AAPL",
+            "issuer_id": "0000320193"
+          },
+          "query": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "currency": "USD",
+            "field": "liabilities",
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "fact": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "available_at": "2026-08-01T05:00:00+00:00",
+            "currency": "USD",
+            "data_observed_at": null,
+            "field": "liabilities",
+            "filed_on": "2026-07-31",
+            "filing_accession": "0000320193-26-000020",
+            "identity_evidence_sha256": null,
+            "identity_evidence_url": null,
+            "identity_observed_at": null,
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": null,
+            "raw_sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+            "retrieved_at": "2026-11-01T18:53:53.052462+00:00",
+            "source": "SEC",
+            "source_field": null,
+            "source_multiplier": null,
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "unit": "currency",
+            "unit_evidence_sha256": null,
+            "unit_evidence_url": null,
+            "unit_observed_at": null,
+            "value": "285508000000"
+          },
+          "attempts": [
+            {
+              "attempted_at": "2026-11-01T23:37:44.684015+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "Yahoo",
+              "status": "unsupported_field"
+            },
+            {
+              "attempted_at": "2026-11-01T23:37:44.684032+00:00",
+              "cached": false,
+              "detail": "",
+              "source": "SEC",
+              "status": "valid"
+            }
+          ],
+          "as_of": "2026-11-01T23:37:44.684048+00:00",
+          "state": "collected",
+          "completed_at": "2026-11-01T23:37:44.698371+00:00",
+          "reused": false
+        },
+        {
+          "query": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "currency": "USD",
+            "field": "net_income",
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": "2024-09-29",
+            "unit": "currency"
+          },
+          "state": "not_started",
+          "fact": null,
+          "attempts": [],
+          "reused": false
+        },
+        {
+          "query": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "currency": "USD",
+            "field": "operating_cash_flow",
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": "2024-09-29",
+            "unit": "currency"
+          },
+          "state": "not_started",
+          "fact": null,
+          "attempts": [],
+          "reused": false
+        },
+        {
+          "query": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "currency": "USD",
+            "field": "capital_expenditure",
+            "issuer_id": "0000320193",
+            "period_end": "2025-09-27",
+            "period_start": "2024-09-29",
+            "unit": "currency"
+          },
+          "state": "not_started",
+          "fact": null,
+          "attempts": [],
+          "reused": false
+        }
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "issuer_id": "0000789019",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_listing_and_legal_common_share_evidence_pending",
+      "readiness": "pending_fields_and_scope",
+      "fields": [
+        {
+          "query": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "currency": "USD",
+            "field": "revenue",
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": "2025-07-01",
+            "unit": "currency"
+          },
+          "state": "not_started",
+          "fact": null,
+          "attempts": [],
+          "reused": false
+        },
+        {
+          "query": {
+            "accounting_definition": "us-gaap:Assets",
+            "currency": "USD",
+            "field": "assets",
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "state": "not_started",
+          "fact": null,
+          "attempts": [],
+          "reused": false
+        },
+        {
+          "query": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "currency": "USD",
+            "field": "liabilities",
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "state": "not_started",
+          "fact": null,
+          "attempts": [],
+          "reused": false
+        },
+        {
+          "query": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "currency": "USD",
+            "field": "net_income",
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": "2025-07-01",
+            "unit": "currency"
+          },
+          "state": "not_started",
+          "fact": null,
+          "attempts": [],
+          "reused": false
+        },
+        {
+          "query": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "currency": "USD",
+            "field": "operating_cash_flow",
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": "2025-07-01",
+            "unit": "currency"
+          },
+          "state": "not_started",
+          "fact": null,
+          "attempts": [],
+          "reused": false
+        },
+        {
+          "query": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "currency": "USD",
+            "field": "capital_expenditure",
+            "issuer_id": "0000789019",
+            "period_end": "2026-06-30",
+            "period_start": "2025-07-01",
+            "unit": "currency"
+          },
+          "state": "not_started",
+          "fact": null,
+          "attempts": [],
+          "reused": false
+        }
+      ]
+    },
+    {
+      "symbol": "NVDA",
+      "issuer_id": "0001045810",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_listing_and_legal_common_share_evidence_pending",
+      "readiness": "pending_fields_and_scope",
+      "fields": [
+        {
+          "query": {
+            "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "currency": "USD",
+            "field": "revenue",
+            "issuer_id": "0001045810",
+            "period_end": "2026-01-25",
+            "period_start": "2025-01-27",
+            "unit": "currency"
+          },
+          "state": "not_started",
+          "fact": null,
+          "attempts": [],
+          "reused": false
+        },
+        {
+          "query": {
+            "accounting_definition": "us-gaap:Assets",
+            "currency": "USD",
+            "field": "assets",
+            "issuer_id": "0001045810",
+            "period_end": "2026-01-25",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "state": "not_started",
+          "fact": null,
+          "attempts": [],
+          "reused": false
+        },
+        {
+          "query": {
+            "accounting_definition": "us-gaap:Liabilities",
+            "currency": "USD",
+            "field": "liabilities",
+            "issuer_id": "0001045810",
+            "period_end": "2026-01-25",
+            "period_start": null,
+            "unit": "currency"
+          },
+          "state": "not_started",
+          "fact": null,
+          "attempts": [],
+          "reused": false
+        },
+        {
+          "query": {
+            "accounting_definition": "us-gaap:NetIncomeLoss",
+            "currency": "USD",
+            "field": "net_income",
+            "issuer_id": "0001045810",
+            "period_end": "2026-01-25",
+            "period_start": "2025-01-27",
+            "unit": "currency"
+          },
+          "state": "not_started",
+          "fact": null,
+          "attempts": [],
+          "reused": false
+        },
+        {
+          "query": {
+            "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "currency": "USD",
+            "field": "operating_cash_flow",
+            "issuer_id": "0001045810",
+            "period_end": "2026-01-25",
+            "period_start": "2025-01-27",
+            "unit": "currency"
+          },
+          "state": "not_started",
+          "fact": null,
+          "attempts": [],
+          "reused": false
+        },
+        {
+          "query": {
+            "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "currency": "USD",
+            "field": "capital_expenditure",
+            "issuer_id": "0001045810",
+            "period_end": "2026-01-25",
+            "period_start": "2025-01-27",
+            "unit": "currency"
+          },
+          "state": "not_started",
+          "fact": null,
+          "attempts": [],
+          "reused": false
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "companies": 3,
+    "field_states": {
+      "collected": 3,
+      "not_started": 15
+    },
+    "new_fields": 3,
+    "reused_fields": 0
+  },
+  "checkpoint_events": [],
+  "investment_approved": false,
+  "hundred_company_accepted": false,
+  "active_universe_accepted": false
+}

@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-11-01T22:33:10.345014+00:00",
+  "code_commit": "757df68e4997e842c51129f76db1d9f7dbf3442d",
+  "python": "3.12.14",
+  "command": "PYTHONPATH=src python3 -m unittest discover -s tests -q",
+  "tests_run": 173,
+  "failures": 0,
+  "errors": 0,
+  "nasdaq_companies": 3,
+  "instant_values_reconciled_to_original_filings": 6,
+  "live_ordered_cli": "docs/evidence/ordered-cli-live.json",
+  "remote_actions_run": false,
+  "all_four_sources_accepted": false,
+  "hundred_company_acceptance": false,
+  "full_universe_accepted": false
+}
