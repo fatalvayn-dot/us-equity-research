@@ -9,22 +9,27 @@ TAGS=frozenset({'documenttype','documentperiodenddate','entitycentralindexkey',
     'entityinvestmentcompanytype','documentfiscalperiodfocus','documentfiscalyearfocus'})
 
 class CoverParser(HTMLParser):
-    def __init__(self):
+    def __init__(self,extra_concepts=()):
         super().__init__(convert_charrefs=True)
+        self.extra_concepts=frozenset(c.lower() for c in extra_concepts);self.namespaces={}
         self.dei_namespaces=set();self.contexts={};self.context=None;self.capture=None;self.fact=None;self.fact_stack=[];self.facts=[];self.conflict=False
     def handle_starttag(self,tag,attrs):
         attrs=dict(attrs);local=tag.rsplit(':',1)[-1]
+        for key,value in attrs.items():
+            if key.startswith('xmlns:'):self.namespaces.setdefault(key[6:],set()).add(value)
         if 'xmlns:dei' in attrs:self.dei_namespaces.add(attrs['xmlns:dei'])
-        if local=='context':self.context={'id':attrs.get('id'),'dimensional':False}
+        if local=='context':self.context={'id':attrs.get('id'),'dimensional':False,'element_tag':tag}
         elif self.context is not None and local in ('identifier','startdate','enddate','instant'):
             self.capture=local;self.context[local]=''
+            self.context[local+'_element_tag']=tag
             if local=='identifier':self.context['scheme']=attrs.get('scheme')
         if self.context is not None and local in ('segment','scenario','explicitmember','typedmember'):self.context['dimensional']=True
         if local=='nonnumeric':
             fact=None
-            if attrs.get('name','').lower().startswith('dei:') and attrs['name'].lower()[4:] in TAGS:
+            name=attrs.get('name','').lower()
+            if (name.startswith('dei:') and name[4:] in TAGS) or name in self.extra_concepts:
                 if attrs.get('continuedat'):self.conflict=True  # unsupported continuation is never guessed
-                fact={'name':attrs['name'].lower()[4:],'context':attrs.get('contextref'),'text':'','nil':attrs.get('xsi:nil'),'format':attrs.get('format')}
+                fact={'name':name.split(':',1)[1],'prefix':name.split(':',1)[0],'element_tag':tag,'context':attrs.get('contextref'),'text':'','nil':attrs.get('xsi:nil'),'format':attrs.get('format')}
             self.fact_stack.append(fact)
             self.fact=next((f for f in reversed(self.fact_stack) if f is not None),None)
         if local=='exclude' and self.fact is not None:self.conflict=True
