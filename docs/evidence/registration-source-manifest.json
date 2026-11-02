@@ -1,0 +1,27 @@
+{
+  "observations": [
+    {
+      "label": "bdc",
+      "issuer_id": "0001902649",
+      "disclosure_date": "2026-08-21",
+      "document_type": "N-2/A",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1902649/000114036126034017/ef20080753_n2a.htm",
+      "raw_sha256": "17a7416296df1c071fadf9f00cd56081b48d89ae036b7b3705ba36b94dfc30a8",
+      "retrieved_at": "2026-11-02T10:54:43.972080+00:00",
+      "fixture": "tests/fixtures/registration/17a7416296df1c071fadf9f00cd56081b48d89ae036b7b3705ba36b94dfc30a8.html.gz"
+    },
+    {
+      "label": "fund",
+      "issuer_id": "0002031545",
+      "disclosure_date": "2026-10-01",
+      "document_type": "N-2",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/2031545/000110465926112751/tm2626786d1_posex.htm",
+      "raw_sha256": "eb84fcf4adb053c2f04127d2534cb9407d31a36b8a2022b23cc4fbbfb97f7f6c",
+      "retrieved_at": "2026-11-02T10:54:55.767550+00:00",
+      "fixture": "tests/fixtures/registration/eb84fcf4adb053c2f04127d2534cb9407d31a36b8a2022b23cc4fbbfb97f7f6c.html.gz"
+    }
+  ],
+  "issuer_document_downloads": 2,
+  "financial_downloads": 0,
+  "headers_stored": false
+}
