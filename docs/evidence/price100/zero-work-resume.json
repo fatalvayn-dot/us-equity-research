@@ -1,0 +1,15 @@
+{
+  "summary": {
+    "candidates": 100,
+    "collected_prices": 100,
+    "company_states": {
+      "collected": 100
+    },
+    "scored_companies": 0,
+    "new_price_get_invocations": 0
+  },
+  "new_identity_get_invocations": 0,
+  "all_selected_price_references_archived": true,
+  "original_prices_and_observation_times_unchanged": true,
+  "mode": "same-state cached resume, not new live acceptance"
+}

@@ -1,0 +1,12 @@
+{
+  "tests": 492,
+  "passed": 492,
+  "failed": 0,
+  "python": "3.12.14",
+  "seconds": 35.867,
+  "new_tests": 35,
+  "regressions": 457,
+  "command": "PYTHONPATH=src python3 -m unittest discover -s tests -q",
+  "ci_status": "pending",
+  "live_acceptance": "100 candidate price source contracts only; no common-share/model/MVP acceptance"
+}

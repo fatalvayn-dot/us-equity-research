@@ -21,7 +21,7 @@ from .pipeline import research_resolver
 
 def main():
     parser = argparse.ArgumentParser(description="US Equity Research foundation")
-    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report", "comparative-report", "mvp-run"])
+    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report", "comparative-report", "price-run", "mvp-run"])
     parser.add_argument("--user-agent", default=os.environ.get("SEC_USER_AGENT"))
     parser.add_argument("--symbol", action="append", default=[])
     parser.add_argument("--cik")
@@ -39,9 +39,25 @@ def main():
     parser.add_argument("--prior-input")
     parser.add_argument("--markdown")
     parser.add_argument("--candidates")
-    parser.add_argument("--state-dir",default="data/mvp")
+    parser.add_argument("--state-dir")
     parser.add_argument("--max-new-documents",type=int,default=100)
+    parser.add_argument("--max-new-prices",type=int,default=100)
     args = parser.parse_args()
+    if args.command == "price-run":
+        from pathlib import Path
+        from .prices import run_prices, PriceNotStarted
+        from .batch import RunBusy
+        if not args.candidates or not args.user_agent:
+            parser.error("price-run requires --candidates and identifying --user-agent")
+        try:
+            report = run_prices(json.loads(Path(args.candidates).read_text()), state_dir=args.state_dir or 'data/prices',
+                                user_agent=args.user_agent, max_new_prices=args.max_new_prices)
+            print(json.dumps(report['summary']))
+        except (ValueError, KeyError, TypeError, OSError, ProviderFailure, PriceNotStarted, RunBusy, sqlite3.Error) as exc:
+            print(json.dumps(dict(status='price_run_error', error_type=type(exc).__name__,
+                provider_status=exc.status.value if isinstance(exc,ProviderFailure) else None, mvp_accepted=False)))
+            raise SystemExit(2) from None
+        return
     if args.command == "mvp-run":
         from pathlib import Path
         from .mvp import run_mvp
@@ -50,7 +66,7 @@ def main():
             parser.error("mvp-run requires --candidates and identifying --user-agent")
         try:
             def progress(row):print(json.dumps(row),flush=True)
-            run_mvp(json.loads(Path(args.candidates).read_text()),state_dir=args.state_dir,
+            run_mvp(json.loads(Path(args.candidates).read_text()),state_dir=args.state_dir or 'data/mvp',
                 user_agent=args.user_agent,max_new_documents=args.max_new_documents,
                 max_new_fields=args.max_new_fields,progress=progress)
         except (ValueError,KeyError,TypeError,OSError,RunBusy,ProviderFailure,sqlite3.Error) as exc:
@@ -209,9 +225,10 @@ def main():
                           "active_common_share_universe_verified": False,
                           "financial_acceptance": False}, indent=2))
         return
-    print(json.dumps({"version": __version__, "stage": "identity_adapter", "live_providers": [],
+    print(json.dumps({"version": __version__, "stage": "mvp_inputs_incomplete", "live_providers": [],
                       "implemented_identity_adapters": ["SEC"],
                       "implemented_financial_adapters": ["Yahoo assets only", "SEC", "Nasdaq assets and liabilities", "Finnhub reported contracts; live unverified"],
+                      "implemented_market_data_adapters": ["Yahoo regular-session price; scope/model approval pending"],
                       "implemented_discovery_adapters": ["Nasdaq screener"],
                       "real_companies_validated": 0, "score_weights": dict(SCORE_WEIGHTS),
                       "production_accepted": False}, indent=2))
