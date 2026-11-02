@@ -1,0 +1,26 @@
+{
+  "tests": 513,
+  "passed": 513,
+  "failed": 0,
+  "python": "3.12.14",
+  "seconds": 53.691,
+  "new_tests": 21,
+  "baseline": 492,
+  "baseline_seconds": 30.073,
+  "command": "PYTHONPATH=src python3 -m unittest discover -s tests -q",
+  "ci_status": "passed",
+  "recorded_100_new_fields": 307,
+  "recorded_total_facts": 843,
+  "recorded_arithmetic_results": 576,
+  "fresh_financial_companies": 3,
+  "fresh_original_matches": 15,
+  "fresh_prices": 3,
+  "mvp_accepted": false,
+  "ci_run": 41497740509,
+  "ci_commit": "3975a0ff181f36f76efd4ae1a1426fab6b522275",
+  "ci_python_versions": [
+    "3.11",
+    "3.12",
+    "3.13"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "format": "gzip-jsonl-public-response-observations-v1",
+  "observations": 4,
+  "compressed_sha256": "234ed14a042936461305ddc86022af9766e2680d45881bd05b11f26642d63484",
+  "parts": [
+    {
+      "file": "sources.jsonl.gz.part0000",
+      "bytes": 243255,
+      "sha256": "234ed14a042936461305ddc86022af9766e2680d45881bd05b11f26642d63484"
+    }
+  ],
+  "headers_stored": false,
+  "credentials_stored": false
+}

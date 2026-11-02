@@ -117,10 +117,11 @@ def build_report(batch):
                 raise ValueError('mixed financial contexts')
             end, currency = next(iter(contexts))
             result.update(period_start=next(iter(starts), None), period_end=end, currency=currency)
-            if starts and scope != 'out_of_scope':
+            if scope != 'out_of_scope':
                 for name in CALCULATIONS:
+                    if not starts and any(not SPECS[f].instant for f in CALCULATIONS[name].fields):continue
                     result['calculations'].append(calculate(name, facts, issuer_id=company['issuer_id'],
-                        period_start=date.fromisoformat(result['period_start']), period_end=date.fromisoformat(end),
+                        period_start=date.fromisoformat(result['period_start']) if starts else None, period_end=date.fromisoformat(end),
                         currency=currency, as_of=cutoff))
             result['accepted_fact_count'] = len(facts)
             result['status'] = 'out_of_scope' if scope == 'out_of_scope' else 'review_required'

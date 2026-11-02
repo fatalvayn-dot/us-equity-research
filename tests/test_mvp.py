@@ -86,15 +86,15 @@ class MvpTests(unittest.TestCase):
 
     def test_no_document_start_only_queries_instants(self):
         plan,missing,deferred=financial_plan(metadata(),dict(companies=[]))
-        self.assertEqual(plan['companies'][0]['fields'],['assets','liabilities'])
-        self.assertIsNone(plan['companies'][0]['period_start']);self.assertEqual(len(deferred[CIK]),7)
+        self.assertEqual(plan['companies'][0]['fields'],['assets','liabilities','current_assets','current_liabilities','cash_equivalents'])
+        self.assertIsNone(plan['companies'][0]['period_start']);self.assertEqual(len(deferred[CIK]),9)
         self.assertEqual(missing,[])
 
     def test_exact_document_start_enables_duration_queries(self):
         row=metadata()[0];end=row['annual']['report_end']
         docs=dict(companies=[dict(issuer_id=CIK,period=dict(issuer_id=CIK,period_start='2024-09-29',period_end=end))])
         plan,_,deferred=financial_plan([row],docs)
-        self.assertEqual(len(plan['companies'][0]['fields']),9)
+        self.assertEqual(len(plan['companies'][0]['fields']),14)
         self.assertTrue({'revenue','revenue_total','net_income','profit_loss','capital_expenditure','productive_asset_cash_payments'}.issubset(plan['companies'][0]['fields']))
         self.assertEqual(deferred,{})
 
@@ -129,7 +129,7 @@ class MvpTests(unittest.TestCase):
     def test_zero_work_bound_never_infers_duration(self):
         with tempfile.TemporaryDirectory() as tmp, patch('equity_research.response_archive.ArchivedTransport.get',new=recorded_http):
             r=run_mvp(CANDIDATES,state_dir=tmp,user_agent='Synthetic fixture replay',max_new_documents=0,max_new_fields=0)
-            self.assertEqual(r['pipeline']['deferred_duration_fields'],7)
+            self.assertEqual(r['pipeline']['deferred_duration_fields'],9)
             self.assertEqual(r['summary']['accepted_facts'],0)
 
     def test_archive_coverage_requires_actual_matching_observation(self):

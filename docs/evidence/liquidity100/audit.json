@@ -1,0 +1,802 @@
+{
+  "recorded_summary": {
+    "companies": 100,
+    "company_states": {
+      "review_required": 98,
+      "period_unresolved": 2
+    },
+    "accepted_facts": 843,
+    "arithmetic_results": 576,
+    "scored_companies": 0
+  },
+  "additional_fields": {
+    "companies": 98,
+    "field_states": {
+      "collected": 307,
+      "pending_data": 163
+    },
+    "new_fields": 470,
+    "reused_fields": 0
+  },
+  "new_http_requests_replay": 0,
+  "additional_accepted_facts": 307,
+  "source_bundle": "tests/fixtures/mvp100-sources/manifest.json",
+  "fresh_sample": [
+    {
+      "symbol": "AAPL",
+      "issuer_id": "0000320193",
+      "annual_source": {
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "sha256": "056f733f13ff7407e64dc81fb96da3c3c55a6ba429bf094f57cb6bd472231f82",
+        "retrieved_at": "2026-11-02T12:28:27.200145+00:00"
+      },
+      "observations": [
+        {
+          "field": "current_assets",
+          "fact": {
+            "issuer_id": "0000320193",
+            "field": "current_assets",
+            "value": "147957000000",
+            "source": "SEC",
+            "period_start": null,
+            "period_end": "2025-09-27",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-02T17:53:40.911966+00:00",
+            "available_at": "2026-08-01T05:00:00+00:00",
+            "accounting_definition": "us-gaap:AssetsCurrent",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "filing_accession": "0000320193-26-000020",
+            "filed_on": "2026-07-31",
+            "raw_sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+            "source_field": null,
+            "identity_evidence_url": null,
+            "identity_evidence_sha256": null,
+            "identity_observed_at": null,
+            "unit_evidence_url": null,
+            "unit_evidence_sha256": null,
+            "unit_observed_at": null,
+            "data_observed_at": null,
+            "source_multiplier": null
+          },
+          "original": {
+            "concept": "us-gaap:AssetsCurrent",
+            "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+            "status": "exact_original_value",
+            "value": "147957000000",
+            "currency": "USD",
+            "matches": [
+              {
+                "context_id": "c-20",
+                "unit_id": "usd",
+                "value": "147957000000"
+              }
+            ],
+            "present_facts": 2,
+            "other_period_facts": 1,
+            "dimensional_facts": 0,
+            "unsupported_facts": 0
+          },
+          "matches": true
+        },
+        {
+          "field": "current_liabilities",
+          "fact": {
+            "issuer_id": "0000320193",
+            "field": "current_liabilities",
+            "value": "165631000000",
+            "source": "SEC",
+            "period_start": null,
+            "period_end": "2025-09-27",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-02T17:53:40.911966+00:00",
+            "available_at": "2026-08-01T05:00:00+00:00",
+            "accounting_definition": "us-gaap:LiabilitiesCurrent",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "filing_accession": "0000320193-26-000020",
+            "filed_on": "2026-07-31",
+            "raw_sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+            "source_field": null,
+            "identity_evidence_url": null,
+            "identity_evidence_sha256": null,
+            "identity_observed_at": null,
+            "unit_evidence_url": null,
+            "unit_evidence_sha256": null,
+            "unit_observed_at": null,
+            "data_observed_at": null,
+            "source_multiplier": null
+          },
+          "original": {
+            "concept": "us-gaap:LiabilitiesCurrent",
+            "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+            "status": "exact_original_value",
+            "value": "165631000000",
+            "currency": "USD",
+            "matches": [
+              {
+                "context_id": "c-20",
+                "unit_id": "usd",
+                "value": "165631000000"
+              }
+            ],
+            "present_facts": 2,
+            "other_period_facts": 1,
+            "dimensional_facts": 0,
+            "unsupported_facts": 0
+          },
+          "matches": true
+        },
+        {
+          "field": "cash_equivalents",
+          "fact": {
+            "issuer_id": "0000320193",
+            "field": "cash_equivalents",
+            "value": "35934000000",
+            "source": "SEC",
+            "period_start": null,
+            "period_end": "2025-09-27",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-02T17:53:40.911966+00:00",
+            "available_at": "2026-08-01T05:00:00+00:00",
+            "accounting_definition": "us-gaap:CashAndCashEquivalentsAtCarryingValue",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "filing_accession": "0000320193-26-000020",
+            "filed_on": "2026-07-31",
+            "raw_sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+            "source_field": null,
+            "identity_evidence_url": null,
+            "identity_evidence_sha256": null,
+            "identity_observed_at": null,
+            "unit_evidence_url": null,
+            "unit_evidence_sha256": null,
+            "unit_observed_at": null,
+            "data_observed_at": null,
+            "source_multiplier": null
+          },
+          "original": {
+            "concept": "us-gaap:CashAndCashEquivalentsAtCarryingValue",
+            "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+            "status": "exact_original_value",
+            "value": "35934000000",
+            "currency": "USD",
+            "matches": [
+              {
+                "context_id": "c-20",
+                "unit_id": "usd",
+                "value": "35934000000"
+              },
+              {
+                "context_id": "c-20",
+                "unit_id": "usd",
+                "value": "35934000000"
+              }
+            ],
+            "present_facts": 30,
+            "other_period_facts": 15,
+            "dimensional_facts": 13,
+            "unsupported_facts": 0
+          },
+          "matches": true
+        },
+        {
+          "field": "operating_income",
+          "fact": {
+            "issuer_id": "0000320193",
+            "field": "operating_income",
+            "value": "133050000000",
+            "source": "SEC",
+            "period_start": "2024-09-29",
+            "period_end": "2025-09-27",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-02T17:53:40.911966+00:00",
+            "available_at": "2025-11-01T05:00:00+00:00",
+            "accounting_definition": "us-gaap:OperatingIncomeLoss",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "filing_accession": "0000320193-25-000079",
+            "filed_on": "2025-10-31",
+            "raw_sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+            "source_field": null,
+            "identity_evidence_url": null,
+            "identity_evidence_sha256": null,
+            "identity_observed_at": null,
+            "unit_evidence_url": null,
+            "unit_evidence_sha256": null,
+            "unit_observed_at": null,
+            "data_observed_at": null,
+            "source_multiplier": null
+          },
+          "original": {
+            "concept": "us-gaap:OperatingIncomeLoss",
+            "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+            "status": "exact_original_value",
+            "value": "133050000000",
+            "currency": "USD",
+            "matches": [
+              {
+                "context_id": "c-1",
+                "unit_id": "usd",
+                "value": "133050000000"
+              },
+              {
+                "context_id": "c-1",
+                "unit_id": "usd",
+                "value": "133050000000"
+              }
+            ],
+            "present_facts": 24,
+            "other_period_facts": 16,
+            "dimensional_facts": 6,
+            "unsupported_facts": 0
+          },
+          "matches": true
+        },
+        {
+          "field": "gross_profit",
+          "fact": {
+            "issuer_id": "0000320193",
+            "field": "gross_profit",
+            "value": "195201000000",
+            "source": "SEC",
+            "period_start": "2024-09-29",
+            "period_end": "2025-09-27",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-02T17:53:40.911966+00:00",
+            "available_at": "2025-11-01T05:00:00+00:00",
+            "accounting_definition": "us-gaap:GrossProfit",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "filing_accession": "0000320193-25-000079",
+            "filed_on": "2025-10-31",
+            "raw_sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+            "source_field": null,
+            "identity_evidence_url": null,
+            "identity_evidence_sha256": null,
+            "identity_observed_at": null,
+            "unit_evidence_url": null,
+            "unit_evidence_sha256": null,
+            "unit_observed_at": null,
+            "data_observed_at": null,
+            "source_multiplier": null
+          },
+          "original": {
+            "concept": "us-gaap:GrossProfit",
+            "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+            "status": "exact_original_value",
+            "value": "195201000000",
+            "currency": "USD",
+            "matches": [
+              {
+                "context_id": "c-1",
+                "unit_id": "usd",
+                "value": "195201000000"
+              }
+            ],
+            "present_facts": 3,
+            "other_period_facts": 2,
+            "dimensional_facts": 0,
+            "unsupported_facts": 0
+          },
+          "matches": true
+        }
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "issuer_id": "0000789019",
+      "annual_source": {
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "sha256": "a2e8af9a97a682ba3b408c9557ec6f0f3dbd4db6f600d310ae23ebe5b3c827a4",
+        "retrieved_at": "2026-11-02T12:28:31.388350+00:00"
+      },
+      "observations": [
+        {
+          "field": "current_assets",
+          "fact": {
+            "issuer_id": "0000789019",
+            "field": "current_assets",
+            "value": "207710000000",
+            "source": "SEC",
+            "period_start": null,
+            "period_end": "2026-06-30",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-02T17:53:49.638146+00:00",
+            "available_at": "2026-10-29T05:00:00+00:00",
+            "accounting_definition": "us-gaap:AssetsCurrent",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filing_accession": "0001193125-26-436133",
+            "filed_on": "2026-10-28",
+            "raw_sha256": "8c1903c041f5c27e86ed15f37debb1f41882b7904bba129ef9edc76478b1e8ea",
+            "source_field": null,
+            "identity_evidence_url": null,
+            "identity_evidence_sha256": null,
+            "identity_observed_at": null,
+            "unit_evidence_url": null,
+            "unit_evidence_sha256": null,
+            "unit_observed_at": null,
+            "data_observed_at": null,
+            "source_multiplier": null
+          },
+          "original": {
+            "concept": "us-gaap:AssetsCurrent",
+            "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+            "status": "exact_original_value",
+            "value": "207710000000",
+            "currency": "USD",
+            "matches": [
+              {
+                "context_id": "C_ca004a37-7abb-4b0e-8638-a7c6b14ebb45",
+                "unit_id": "U_USD",
+                "value": "207710000000"
+              }
+            ],
+            "present_facts": 2,
+            "other_period_facts": 1,
+            "dimensional_facts": 0,
+            "unsupported_facts": 0
+          },
+          "matches": true
+        },
+        {
+          "field": "current_liabilities",
+          "fact": {
+            "issuer_id": "0000789019",
+            "field": "current_liabilities",
+            "value": "168825000000",
+            "source": "SEC",
+            "period_start": null,
+            "period_end": "2026-06-30",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-02T17:53:49.638146+00:00",
+            "available_at": "2026-10-29T05:00:00+00:00",
+            "accounting_definition": "us-gaap:LiabilitiesCurrent",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filing_accession": "0001193125-26-436133",
+            "filed_on": "2026-10-28",
+            "raw_sha256": "8c1903c041f5c27e86ed15f37debb1f41882b7904bba129ef9edc76478b1e8ea",
+            "source_field": null,
+            "identity_evidence_url": null,
+            "identity_evidence_sha256": null,
+            "identity_observed_at": null,
+            "unit_evidence_url": null,
+            "unit_evidence_sha256": null,
+            "unit_observed_at": null,
+            "data_observed_at": null,
+            "source_multiplier": null
+          },
+          "original": {
+            "concept": "us-gaap:LiabilitiesCurrent",
+            "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+            "status": "exact_original_value",
+            "value": "168825000000",
+            "currency": "USD",
+            "matches": [
+              {
+                "context_id": "C_ca004a37-7abb-4b0e-8638-a7c6b14ebb45",
+                "unit_id": "U_USD",
+                "value": "168825000000"
+              }
+            ],
+            "present_facts": 2,
+            "other_period_facts": 1,
+            "dimensional_facts": 0,
+            "unsupported_facts": 0
+          },
+          "matches": true
+        },
+        {
+          "field": "cash_equivalents",
+          "fact": {
+            "issuer_id": "0000789019",
+            "field": "cash_equivalents",
+            "value": "20935000000",
+            "source": "SEC",
+            "period_start": null,
+            "period_end": "2026-06-30",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-02T17:53:49.638146+00:00",
+            "available_at": "2026-10-29T05:00:00+00:00",
+            "accounting_definition": "us-gaap:CashAndCashEquivalentsAtCarryingValue",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filing_accession": "0001193125-26-436133",
+            "filed_on": "2026-10-28",
+            "raw_sha256": "8c1903c041f5c27e86ed15f37debb1f41882b7904bba129ef9edc76478b1e8ea",
+            "source_field": null,
+            "identity_evidence_url": null,
+            "identity_evidence_sha256": null,
+            "identity_observed_at": null,
+            "unit_evidence_url": null,
+            "unit_evidence_sha256": null,
+            "unit_observed_at": null,
+            "data_observed_at": null,
+            "source_multiplier": null
+          },
+          "original": {
+            "concept": "us-gaap:CashAndCashEquivalentsAtCarryingValue",
+            "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+            "status": "exact_original_value",
+            "value": "20935000000",
+            "currency": "USD",
+            "matches": [
+              {
+                "context_id": "C_ca004a37-7abb-4b0e-8638-a7c6b14ebb45",
+                "unit_id": "U_USD",
+                "value": "20935000000"
+              },
+              {
+                "context_id": "C_ca004a37-7abb-4b0e-8638-a7c6b14ebb45",
+                "unit_id": "U_USD",
+                "value": "20935000000"
+              }
+            ],
+            "present_facts": 36,
+            "other_period_facts": 18,
+            "dimensional_facts": 16,
+            "unsupported_facts": 0
+          },
+          "matches": true
+        },
+        {
+          "field": "operating_income",
+          "fact": {
+            "issuer_id": "0000789019",
+            "field": "operating_income",
+            "value": "155237000000",
+            "source": "SEC",
+            "period_start": "2025-07-01",
+            "period_end": "2026-06-30",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-02T17:53:49.638146+00:00",
+            "available_at": "2026-07-30T05:00:00+00:00",
+            "accounting_definition": "us-gaap:OperatingIncomeLoss",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filing_accession": "0001193125-26-323660",
+            "filed_on": "2026-07-29",
+            "raw_sha256": "8c1903c041f5c27e86ed15f37debb1f41882b7904bba129ef9edc76478b1e8ea",
+            "source_field": null,
+            "identity_evidence_url": null,
+            "identity_evidence_sha256": null,
+            "identity_observed_at": null,
+            "unit_evidence_url": null,
+            "unit_evidence_sha256": null,
+            "unit_observed_at": null,
+            "data_observed_at": null,
+            "source_multiplier": null
+          },
+          "original": {
+            "concept": "us-gaap:OperatingIncomeLoss",
+            "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+            "status": "exact_original_value",
+            "value": "155237000000",
+            "currency": "USD",
+            "matches": [
+              {
+                "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+                "unit_id": "U_USD",
+                "value": "155237000000"
+              },
+              {
+                "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+                "unit_id": "U_USD",
+                "value": "155237000000"
+              }
+            ],
+            "present_facts": 15,
+            "other_period_facts": 10,
+            "dimensional_facts": 3,
+            "unsupported_facts": 0
+          },
+          "matches": true
+        },
+        {
+          "field": "gross_profit",
+          "fact": {
+            "issuer_id": "0000789019",
+            "field": "gross_profit",
+            "value": "225465000000",
+            "source": "SEC",
+            "period_start": "2025-07-01",
+            "period_end": "2026-06-30",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-02T17:53:49.638146+00:00",
+            "available_at": "2026-07-30T05:00:00+00:00",
+            "accounting_definition": "us-gaap:GrossProfit",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filing_accession": "0001193125-26-323660",
+            "filed_on": "2026-07-29",
+            "raw_sha256": "8c1903c041f5c27e86ed15f37debb1f41882b7904bba129ef9edc76478b1e8ea",
+            "source_field": null,
+            "identity_evidence_url": null,
+            "identity_evidence_sha256": null,
+            "identity_observed_at": null,
+            "unit_evidence_url": null,
+            "unit_evidence_sha256": null,
+            "unit_observed_at": null,
+            "data_observed_at": null,
+            "source_multiplier": null
+          },
+          "original": {
+            "concept": "us-gaap:GrossProfit",
+            "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+            "status": "exact_original_value",
+            "value": "225465000000",
+            "currency": "USD",
+            "matches": [
+              {
+                "context_id": "C_29985a27-1d12-4b7e-9a06-156523f6e71e",
+                "unit_id": "U_USD",
+                "value": "225465000000"
+              }
+            ],
+            "present_facts": 3,
+            "other_period_facts": 2,
+            "dimensional_facts": 0,
+            "unsupported_facts": 0
+          },
+          "matches": true
+        }
+      ]
+    },
+    {
+      "symbol": "NVDA",
+      "issuer_id": "0001045810",
+      "annual_source": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "sha256": "d9135ae2801ec96e80398e2ddf0daa523b3a500ccf939ecf2ff150bdd13ab0dc",
+        "retrieved_at": "2026-11-02T12:28:23.400616+00:00"
+      },
+      "observations": [
+        {
+          "field": "current_assets",
+          "fact": {
+            "issuer_id": "0001045810",
+            "field": "current_assets",
+            "value": "125605000000",
+            "source": "SEC",
+            "period_start": null,
+            "period_end": "2026-01-25",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-02T17:54:00.634140+00:00",
+            "available_at": "2026-08-27T05:00:00+00:00",
+            "accounting_definition": "us-gaap:AssetsCurrent",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filing_accession": "0001045810-26-000075",
+            "filed_on": "2026-08-26",
+            "raw_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+            "source_field": null,
+            "identity_evidence_url": null,
+            "identity_evidence_sha256": null,
+            "identity_observed_at": null,
+            "unit_evidence_url": null,
+            "unit_evidence_sha256": null,
+            "unit_observed_at": null,
+            "data_observed_at": null,
+            "source_multiplier": null
+          },
+          "original": {
+            "concept": "us-gaap:AssetsCurrent",
+            "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+            "status": "exact_original_value",
+            "value": "125605000000",
+            "currency": "USD",
+            "matches": [
+              {
+                "context_id": "c-11",
+                "unit_id": "usd",
+                "value": "125605000000"
+              }
+            ],
+            "present_facts": 2,
+            "other_period_facts": 1,
+            "dimensional_facts": 0,
+            "unsupported_facts": 0
+          },
+          "matches": true
+        },
+        {
+          "field": "current_liabilities",
+          "fact": {
+            "issuer_id": "0001045810",
+            "field": "current_liabilities",
+            "value": "32163000000",
+            "source": "SEC",
+            "period_start": null,
+            "period_end": "2026-01-25",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-02T17:54:00.634140+00:00",
+            "available_at": "2026-08-27T05:00:00+00:00",
+            "accounting_definition": "us-gaap:LiabilitiesCurrent",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filing_accession": "0001045810-26-000075",
+            "filed_on": "2026-08-26",
+            "raw_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+            "source_field": null,
+            "identity_evidence_url": null,
+            "identity_evidence_sha256": null,
+            "identity_observed_at": null,
+            "unit_evidence_url": null,
+            "unit_evidence_sha256": null,
+            "unit_observed_at": null,
+            "data_observed_at": null,
+            "source_multiplier": null
+          },
+          "original": {
+            "concept": "us-gaap:LiabilitiesCurrent",
+            "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+            "status": "exact_original_value",
+            "value": "32163000000",
+            "currency": "USD",
+            "matches": [
+              {
+                "context_id": "c-11",
+                "unit_id": "usd",
+                "value": "32163000000"
+              }
+            ],
+            "present_facts": 2,
+            "other_period_facts": 1,
+            "dimensional_facts": 0,
+            "unsupported_facts": 0
+          },
+          "matches": true
+        },
+        {
+          "field": "cash_equivalents",
+          "fact": {
+            "issuer_id": "0001045810",
+            "field": "cash_equivalents",
+            "value": "10605000000",
+            "source": "SEC",
+            "period_start": null,
+            "period_end": "2026-01-25",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-02T17:54:00.634140+00:00",
+            "available_at": "2026-08-27T05:00:00+00:00",
+            "accounting_definition": "us-gaap:CashAndCashEquivalentsAtCarryingValue",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filing_accession": "0001045810-26-000075",
+            "filed_on": "2026-08-26",
+            "raw_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+            "source_field": null,
+            "identity_evidence_url": null,
+            "identity_evidence_sha256": null,
+            "identity_observed_at": null,
+            "unit_evidence_url": null,
+            "unit_evidence_sha256": null,
+            "unit_observed_at": null,
+            "data_observed_at": null,
+            "source_multiplier": null
+          },
+          "original": {
+            "concept": "us-gaap:CashAndCashEquivalentsAtCarryingValue",
+            "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+            "status": "exact_original_value",
+            "value": "10605000000",
+            "currency": "USD",
+            "matches": [
+              {
+                "context_id": "c-11",
+                "unit_id": "usd",
+                "value": "10605000000"
+              }
+            ],
+            "present_facts": 2,
+            "other_period_facts": 1,
+            "dimensional_facts": 0,
+            "unsupported_facts": 0
+          },
+          "matches": true
+        },
+        {
+          "field": "operating_income",
+          "fact": {
+            "issuer_id": "0001045810",
+            "field": "operating_income",
+            "value": "130387000000",
+            "source": "SEC",
+            "period_start": "2025-01-27",
+            "period_end": "2026-01-25",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-02T17:54:00.634140+00:00",
+            "available_at": "2026-02-26T05:00:00+00:00",
+            "accounting_definition": "us-gaap:OperatingIncomeLoss",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filing_accession": "0001045810-26-000021",
+            "filed_on": "2026-02-25",
+            "raw_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+            "source_field": null,
+            "identity_evidence_url": null,
+            "identity_evidence_sha256": null,
+            "identity_observed_at": null,
+            "unit_evidence_url": null,
+            "unit_evidence_sha256": null,
+            "unit_observed_at": null,
+            "data_observed_at": null,
+            "source_multiplier": null
+          },
+          "original": {
+            "concept": "us-gaap:OperatingIncomeLoss",
+            "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+            "status": "exact_original_value",
+            "value": "130387000000",
+            "currency": "USD",
+            "matches": [
+              {
+                "context_id": "c-1",
+                "unit_id": "usd",
+                "value": "130387000000"
+              }
+            ],
+            "present_facts": 15,
+            "other_period_facts": 10,
+            "dimensional_facts": 4,
+            "unsupported_facts": 0
+          },
+          "matches": true
+        },
+        {
+          "field": "gross_profit",
+          "fact": {
+            "issuer_id": "0001045810",
+            "field": "gross_profit",
+            "value": "153463000000",
+            "source": "SEC",
+            "period_start": "2025-01-27",
+            "period_end": "2026-01-25",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-02T17:54:00.634140+00:00",
+            "available_at": "2026-02-26T05:00:00+00:00",
+            "accounting_definition": "us-gaap:GrossProfit",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filing_accession": "0001045810-26-000021",
+            "filed_on": "2026-02-25",
+            "raw_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+            "source_field": null,
+            "identity_evidence_url": null,
+            "identity_evidence_sha256": null,
+            "identity_observed_at": null,
+            "unit_evidence_url": null,
+            "unit_evidence_sha256": null,
+            "unit_observed_at": null,
+            "data_observed_at": null,
+            "source_multiplier": null
+          },
+          "original": {
+            "concept": "us-gaap:GrossProfit",
+            "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+            "status": "exact_original_value",
+            "value": "153463000000",
+            "currency": "USD",
+            "matches": [
+              {
+                "context_id": "c-1",
+                "unit_id": "usd",
+                "value": "153463000000"
+              }
+            ],
+            "present_facts": 3,
+            "other_period_facts": 2,
+            "dimensional_facts": 0,
+            "unsupported_facts": 0
+          },
+          "matches": true
+        }
+      ]
+    }
+  ],
+  "fresh_source_observations": 6,
+  "fresh_financial_get_invocations": 3,
+  "fresh_source_bundle": "tests/fixtures/liquidity-live-sources/manifest.json"
+}

@@ -1,5 +1,104 @@
 # Development status
 
+## 2026-11-02 — Reference review and exact liquidity/operating inputs (latest)
+
+Branch: feat/liquidity-operating-analysis, based on main
+1338a40a830d8781acb22636dba8de96f33a49aa (PR #9 merge). Main fetched; inspected
+remote heads, open and recent merged PRs, README/AGENTS/PROJECT_BRIEF/status,
+provider/model/SQLite/report code and original evidence. No open/conflicting PR
+at start. Prior exact-head Actions 41484828688 successful. Baseline 492 tests
+passed again locally (30.073s). Legacy untouched; no new main project created.
+Connector branch-search argument binding failed; remote heads were read using
+git ls-remote instead. No data or repository state changed by failed reads.
+
+TRADE28 read-only audit: pinned Jakeschincariol/day-trader-skill commit
+3d0f4ef6986f4984b7c6bd46f7ff4f87744c3abd, MIT copyright 2026 Jake Schincariol,
+stdlib Python >=3.8; plugin manifests and external Alpaca MCP example reviewed.
+No reference installation, imports/execution, tests, broker or credential setup;
+no third-party code copied. Five requested modules reviewed. Detailed source-
+linked license/dependency/data/security/model decisions and independent criticism:
+docs/reviews/TRADE28_REVIEW.md. Preserve stronger existing provenance/identity;
+do not copy revenue/net-income alias merging, arbitrary unit fallback, inferred
+Q4, loose YoY dates, symbol punctuation conversion, quota-host rotation or
+missing-price/freshness defaults. Batch queries and input-bound risk gates are
+future design candidates. News, technical signals, simulation and portfolio work
+remain deferred. Monte Carlo resampling is not a future-success probability.
+PROJECT_BRIEF records the newly approved P0/P1 and non-compensating risk priority.
+
+Completed v0.25.0: five literal fields AssetsCurrent, LiabilitiesCurrent,
+CashAndCashEquivalentsAtCarryingValue, OperatingIncomeLoss, GrossProfit. Seven
+new traceable calculations: current ratio, cash-equivalents/current-liabilities,
+working capital, two operating and two gross margin variants. No accounting
+aliases, inferred debt/EBIT/cash aggregation or derived gross profit. Exact
+instant-vs-duration operands use the same issuer/end/currency/definition/as_of
+and raw-proof contracts. Instant-only reporting now calculates liquidity without
+inventing annual starts. Negative working capital and operating losses remain
+literal; negative balance inputs and nonpositive ratio bases are withheld.
+Model/scope/investment approvals remain false, including special/unknown sectors.
+A low current ratio or negative book working capital is not an insolvency finding.
+
+MVP plan now includes 14 literal fields. An explicit annual end with unresolved
+start requests five instant fields and defers nine duration fields; no guessed
+dates. Default source order remains Yahoo->SEC->Nasdaq->Finnhub, first valid
+stops. Unsupported local adapters do not create an HTTP request. Cached/source
+recordings are not relabelled as fresh; source observation times stay unchanged.
+Original 100-candidate record remains preserved. Expanded original-source replay:
+470 additional field jobs, 307 accepted and 163 pending (121 SEC missing,
+27 unsupported/15 invalid outcomes; lower-source availability is explicit).
+Combined 100-candidate report: 843 facts and 576 arithmetic results, including
+72 current ratios; 98 review-required and 2 period-unresolved companies. Original
+recorded sector profiles are preserved as review labels, not fresh approvals.
+No new HTTP request in this replay, and no new 100-company live acceptance.
+
+Separate fresh connections: AAPL/MSFT/NVDA SEC companyfacts fetched in three GET
+invocations; all 15 selected fields matched the exact original annual iXBRL
+issuer/period/USD concepts. Six original public observations (3 fresh financial
+responses +3 original annuals) stored in a bounded hash-checked source bundle.
+Separate current price sample: 3/3 Yahoo prices accepted with one fresh SEC
+identity GET and three Yahoo GET invocations; four raw observations archived.
+Old 100-price snapshot was revalidated as recorded evidence, not treated as
+current beyond its 15-minute cache freshness. All tests/CI replays are offline.
+
+Tests: 513/513 local tests passed on Python 3.12.14, 53.691s (492 baseline +16
+new unit/integration tests +5 recorded/primary-source tests). All 307 additional
+facts re-extract from exact original companyfacts bytes; all 15 fresh values
+reconcile to original iXBRL. Coverage includes missing/zero/negative amounts,
+no total-vs-current or cash/operating aliases, wrong issuer/currency/period,
+future proof, precision, instant-only report, first-valid stopping and unchanged
+legacy numeric results. Four outdated plan-size/deferred-field assertions failed
+across two early targeted runs (3, then 1); updated to 14 fields/five instant/
+nine duration expectations without relaxing financial validation. New calculation
+tests passed first run. No fresh provider/original-value mismatch. Working-tree
+capture policy_version fields retain their original capture label; release bump
+affects future checkpoint keys, not recorded numeric evidence. CLI and diff checks
+are required before publication; corrected full matrix CI is checked before merge.
+Evidence: docs/evidence/liquidity100/, current-price-sample/, liquidity-tests.json.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/10
+Code commit: https://github.com/fatalvayn-dot/us-equity-research/commit/3975a0ff181f36f76efd4ae1a1426fab6b522275
+Actions: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41497740509
+All 513 tests plus CLI status passed on Python 3.11/3.12/3.13; all job logs
+inspected (53.010/50.431/39.091 seconds). No failing matrix job. The published
+tree cc30dd1a30f8a1a9b59b291b237b55526aa6ad4b matches the local staged/tested
+implementation plus release metadata. Manual code review checked exact period/
+unit handling, no aliases or guessed starts, negative/zero balance rules,
+unsupported-provider stopping and unapproved-sector/no-score invariants.
+Documentation follow-up CI is checked before merge; exact-head CI and merge
+SHA are recorded in PR #10 discussion.
+
+Remaining: 100 verified active common-share coverage is not accepted (original
+83 cover matches); 439 combined attempted field outcomes remain pending, 90
+duration jobs deferred for ten missing starts, and 28 fields unattempted for two
+missing annuals. Alternative literal definitions are not all required by every
+model; these are field-job counts, not an economic completeness threshold.
+Zero sector-approved investment scores/ranks; source-bound valuation and generic
+sector eligibility remain missing. No investment-ready company count established,
+no fabricated overall completion percentage and MVP acceptance remains FALSE.
+Next concrete code task: unify financial suitability, valuation and risk outputs;
+add source-bound valuation inputs and an explicit versioned generic-sector model
+with mandatory critical-risk gates before weighted scores. Unknown/special or
+incomplete issuers stay unranked. Then complete the verified 100-share sample and
+run the reproducible report. P2/P3/P4 cannot delay that work.
+
 ## 2026-11-02 — Live source-bound Yahoo prices for 100 candidates (latest)
 
 Branch: feat/yahoo-market-price, based on main

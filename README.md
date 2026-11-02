@@ -647,3 +647,51 @@ A SEC identity-directory request is reported separately from quote selection.
 Recorded 100-candidate evidence and cache-only replay are in
 `docs/evidence/price100/`; source bytes are in `tests/fixtures/price100-sources/`.
 These inputs do not complete the generic-sector score model or MVP acceptance.
+
+### Liquidity and operating profitability
+
+The literal registry now also supports `current_assets` (AssetsCurrent),
+`current_liabilities` (LiabilitiesCurrent), `cash_equivalents`
+(CashAndCashEquivalentsAtCarryingValue), `operating_income` (OperatingIncomeLoss)
+and `gross_profit` (GrossProfit). `mvp-run` requests all 14 exact fields; when only
+an annual end is verified it requests five instant balances and defers all nine
+duration fields. Original records are not rewritten or calendar-aligned.
+
+Source-bound arithmetic adds current ratio, cash-equivalents/current-liabilities,
+working capital, and operating/gross margin variants using each distinct revenue
+concept. Total assets/liabilities never fill current balances. Cash is not
+silently combined with investments/restricted cash; operating income is not
+inferred EBIT/net income. Instant-only reports can calculate liquidity without
+inventing a fiscal-year start. Negative working capital is retained; negative
+balance inputs and nonpositive ratio denominators are withheld. These ratios do
+not independently prove distress, debt-paying capacity or sector suitability.
+
+```bash
+# Offline replay of the immutable 100-candidate recordings.
+PYTHONPATH=src python scripts/verify_liquidity_inputs.py \
+  --output data/liquidity-verification
+# Optional separate three-company fresh SEC/original-filing comparison.
+PYTHONPATH=src python scripts/verify_liquidity_inputs.py \
+  --output data/liquidity-verification --user-agent "$SEC_USER_AGENT"
+PYTHONPATH=src python -m equity_research research-report \
+  --input docs/evidence/liquidity100/batch.json.gz \
+  --output data/liquidity-report.json --markdown data/liquidity-report.md
+```
+
+Recorded replay adds 307 exact fields: 843 total input facts and 576 arithmetic
+results across 100 candidates, with 72 current ratios. The 470 additional field
+jobs contain 307 collected and 163 unresolved outcomes; none are zero-filled.
+This is **not** a fresh 100-company run. A separate fresh AAPL/MSFT/NVDA sample
+matched 15/15 literal fields against original SEC annual documents; a separate
+three-price sample checked current Yahoo/SEC identity access. Original 100-price
+records remain auditable snapshots, not current quotes after their freshness TTL.
+Evidence: `docs/evidence/liquidity100/`, `docs/evidence/current-price-sample/`, and
+`tests/fixtures/liquidity-live-sources/`. Every new recorded fact re-extracts from
+its exact original companyfacts bytes in regression tests. Ratios retain full
+operands/periods/currency/definitions/raw hashes and all scope/model approvals
+remain false. No complete financial research, valuation, score or MVP acceptance
+is implied by these arithmetic counts.
+
+The pinned [TRADE28 review](docs/reviews/TRADE28_REVIEW.md) covers license,
+dependencies, scanner/analyst/news/risk/simulation methods and security limits.
+The reference was not installed or executed; no third-party code was copied.

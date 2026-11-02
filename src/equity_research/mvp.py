@@ -11,6 +11,7 @@ from pathlib import Path
 from .batch import BatchRunner, BatchStore, load_plan
 from .cache import encode
 from .documents import DocumentRunner, FilingStore
+from .fields import SPECS
 from .pipeline import research_resolver
 from .providers import ProviderFailure, Status
 from .reporting import build_report, render_markdown
@@ -21,7 +22,8 @@ from .submissions import SecSubmissions
 from .transport import RateLimiter, Response
 
 FIELDS = ('revenue','assets','liabilities','net_income','operating_cash_flow','capital_expenditure',
-          'revenue_total','profit_loss','productive_asset_cash_payments')
+          'revenue_total','profit_loss','productive_asset_cash_payments',
+          'current_assets','current_liabilities','cash_equivalents','operating_income','gross_profit')
 
 
 def save_json(path, payload):
@@ -70,7 +72,7 @@ def financial_plan(metadata, documents):
         if period and (period['issuer_id']!=row['issuer_id'] or period['period_end']!=annual['report_end']):
             raise ValueError('document period identity mismatch')
         start=period['period_start'] if period else None
-        fields=list(FIELDS) if start else ['assets','liabilities']
+        fields=list(FIELDS) if start else [f for f in FIELDS if SPECS[f].instant]
         if not start:deferred[row['issuer_id']]=[f for f in FIELDS if f not in fields]
         plans.append(dict(**base,period_start=start,period_end=annual['report_end'],currency='USD',fields=fields))
     return dict(schema_version=1,companies=plans),unresolved,deferred
