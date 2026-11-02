@@ -39,10 +39,9 @@ common-share cover matches still do not establish the required current active
 100-share universe. Four check outcomes are screening-policy hypotheses, not
 calibrated risk probabilities. Details: docs/FINANCIAL_REVIEW.md.
 
-Tests so far: 528/528 full local regression passed on Python 3.12.14 (58.411s),
-then 16/16 targeted assessment/browser/CLI tests passed after adding one final
-artifact-reproduction test (529 unique tests now). Final full regression and
-remote matrix are checked before merge. Coverage includes critical-over-missing
+Tests: final 529/529 full local regression passed on Python 3.12.14 (58.418s),
+including 16 new assessment/browser/CLI tests. Earlier 528-test full regression
+also passed (58.411s). Remote matrix is checked before merge. Coverage includes critical-over-missing
 precedence, favorable-other-figure non-compensation, zero vs missing, exact
 identity/currency/concept/period/hash, old/future data, input immutability,
 invalid-company isolation, HTML escaping, CLI collision refusal and deterministic
@@ -70,6 +69,18 @@ run. No generic/special-sector score is approved by this change. The delivered
 HTML is a working evidence-inspection prototype, not the accepted ranked MVP.
 Commit/PR/exact CI links are recorded in the publication follow-up below and PR
 discussion. Do not report local tests as Actions or recorded inputs as live data.
+
+Publication: https://github.com/fatalvayn-dot/us-equity-research/pull/11
+Source commit: https://github.com/fatalvayn-dot/us-equity-research/commit/76bd7d78574cf3607fbfd0b376871c7bdbccb27d
+Source Actions: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41505752772
+Source CI passed: all 529 tests and CLI status on Python 3.11/3.12/3.13.
+All three job logs were inspected; test durations 33.846/62.743/63.620 seconds.
+Evidence: docs/evidence/financial-review-tests.json and financial-review-actions.json.
+Exact source tree 3d1ae7058b72f80676b94d0e28398adbaa736135 matched the local
+tested tree. Manual review checked source/period revalidation, critical-before-
+missing precedence, no risk clearance/model admission, escaped HTML content,
+output collision checks and retained numeric regression counts. Source CI
+and final documentation-head CI results are recorded before merge in PR #11.
 
 ## 2026-11-02 — Reference review and exact liquidity/operating inputs (latest)
 
