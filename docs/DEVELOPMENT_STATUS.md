@@ -73,7 +73,17 @@ capture policy_version fields retain their original capture label; release bump
 affects future checkpoint keys, not recorded numeric evidence. CLI and diff checks
 are required before publication; corrected full matrix CI is checked before merge.
 Evidence: docs/evidence/liquidity100/, current-price-sample/, liquidity-tests.json.
-Code/PR/CI links are added after publication and verified CI below.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/10
+Code commit: https://github.com/fatalvayn-dot/us-equity-research/commit/3975a0ff181f36f76efd4ae1a1426fab6b522275
+Actions: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41497740509
+All 513 tests plus CLI status passed on Python 3.11/3.12/3.13; all job logs
+inspected (53.010/50.431/39.091 seconds). No failing matrix job. The published
+tree cc30dd1a30f8a1a9b59b291b237b55526aa6ad4b matches the local staged/tested
+implementation plus release metadata. Manual code review checked exact period/
+unit handling, no aliases or guessed starts, negative/zero balance rules,
+unsupported-provider stopping and unapproved-sector/no-score invariants.
+Documentation follow-up CI is checked before merge; exact-head CI and merge
+SHA are recorded in PR #10 discussion.
 
 Remaining: 100 verified active common-share coverage is not accepted (original
 83 cover matches); 439 combined attempted field outcomes remain pending, 90

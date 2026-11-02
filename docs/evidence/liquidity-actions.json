@@ -1,0 +1,31 @@
+{
+  "run_id": 41497740509,
+  "commit": "3975a0ff181f36f76efd4ae1a1426fab6b522275",
+  "url": "https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41497740509",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "id": 125456993458,
+      "python": "3.11",
+      "tests": 513,
+      "seconds": 53.01,
+      "conclusion": "success"
+    },
+    {
+      "id": 125456992958,
+      "python": "3.12",
+      "tests": 513,
+      "seconds": 50.431,
+      "conclusion": "success"
+    },
+    {
+      "id": 125456993321,
+      "python": "3.13",
+      "tests": 513,
+      "seconds": 39.091,
+      "conclusion": "success"
+    }
+  ],
+  "job_logs_inspected": true,
+  "evidence_kind": "offline original-source regression, not new live run"
+}
