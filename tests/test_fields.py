@@ -20,7 +20,7 @@ class FieldTests(unittest.TestCase):
   self.assertEqual(TAGS['revenue'],('RevenueFromContractWithCustomerExcludingAssessedTax',False))
   self.assertEqual(TAGS['net_income'],('NetIncomeLoss',False))
   self.assertEqual(TAGS['capital_expenditure'],('PaymentsToAcquirePropertyPlantAndEquipment',False))
-  self.assertEqual(len(SPECS),9)
+  self.assertEqual(len(SPECS),14)
  def test_registry_and_specs_immutable(self):
   with self.assertRaises(TypeError):SPECS['x']=SPECS['assets']
   with self.assertRaises(FrozenInstanceError):SPECS['profit_loss'].tag='NetIncomeLoss'

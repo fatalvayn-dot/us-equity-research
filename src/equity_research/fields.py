@@ -23,6 +23,11 @@ SPECS=MappingProxyType({s.name:s for s in (
     FieldSpec('revenue_total','Revenues',False,'Literal Revenues disclosure; not an alias for contract revenue excluding assessed tax.',True),
     FieldSpec('profit_loss','ProfitLoss',False,'Literal ProfitLoss disclosure; attribution scope must be reviewed before common-share analysis.',True),
     FieldSpec('productive_asset_cash_payments','PaymentsToAcquireProductiveAssets',False,'Literal ProductiveAssets cash payments; not PP&E-only capex.',True),
+    FieldSpec('current_assets','AssetsCurrent',True,'Literal classified current assets; not total assets.'),
+    FieldSpec('current_liabilities','LiabilitiesCurrent',True,'Literal classified current liabilities; not total liabilities or financial debt.'),
+    FieldSpec('cash_equivalents','CashAndCashEquivalentsAtCarryingValue',True,'Literal cash and cash equivalents carrying value; no investments/restricted-cash aggregation.'),
+    FieldSpec('operating_income','OperatingIncomeLoss',False,'Literal operating income/loss; not net income or EBIT inferred by adding interest.'),
+    FieldSpec('gross_profit','GrossProfit',False,'Literal gross profit; no alternate cost/revenue concepts subtracted.'),
 )})
 TAGS=MappingProxyType({name:(spec.tag,spec.instant) for name,spec in SPECS.items()})
 
