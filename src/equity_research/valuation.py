@@ -43,12 +43,8 @@ def disclosed_shares(response, *, cik, as_of):
             end=date.fromisoformat(row['end']);filed=date.fromisoformat(row['filed'])
             value=row['val'];accession=row['accn']
             if ('start' in row or not re.fullmatch(r'[0-9]{10}-[0-9]{2}-[0-9]{6}',accession)
-                    or end>filed or filed>response.retrieved_at.date()
-                    or type(value) not in (int,Decimal)):
+                    or end>filed or filed>response.retrieved_at.date()):
                 raise ValueError('invalid share observation')
-            value=Decimal(value)
-            if not value.is_finite() or value<=0 or value!=value.to_integral_value() or value.adjusted()>20:
-                raise ValueError('positive bounded integral shares required')
             available=datetime.combine(filed+timedelta(days=1),time(5),timezone.utc)
             if available<=as_of:
                 candidates.append(dict(value=value,end=end,filed=filed,accession=accession,
@@ -56,13 +52,27 @@ def disclosed_shares(response, *, cik, as_of):
         if not candidates:return None
         latest=max((r['end'],r['filed']) for r in candidates)
         chosen=[r for r in candidates if (r['end'],r['filed'])==latest]
+        def valid_count(value):
+            return (type(value) in (int,Decimal) and Decimal(value).is_finite() and value>0
+                    and value==Decimal(value).to_integral_value() and Decimal(value).adjusted()<=20)
+        # Select chronology before numeric validation. An invalid latest row must
+        # never fall back to an older valid count. Unselected historic numeric
+        # defects are quarantined, not repaired or used as current operands.
+        if any(not valid_count(r['value']) for r in chosen):
+            raise ValueError('positive bounded integral latest shares required')
+        for r in chosen:r['value']=Decimal(r['value'])
+        historical_review=[dict(end=r['end'],filed=r['filed'],accession=r['accession'],
+            status='unselected_historical_numeric_value_invalid') for r in candidates
+            if (r['end'],r['filed'])!=latest and not valid_count(r['value'])]
         if len({(r['value'],r['accession'],r['form']) for r in chosen})!=1:
             raise ValueError('ambiguous latest share disclosure')
         row=chosen[0]
         if not timedelta(0)<=as_of.date()-row['end']<=SHARE_MAX_AGE:
             raise ValueError('stale disclosed share date')
-        return dict(**row,issuer_id=cik,concept=SHARE_CONCEPT,unit='shares',
+        result=dict(**row,issuer_id=cik,concept=SHARE_CONCEPT,unit='shares',
                     source_url=response.url,raw_sha256=response.sha256,retrieved_at=response.retrieved_at)
+        if historical_review:result['historical_numeric_review']=historical_review
+        return result
     except (KeyError,TypeError,ValueError,ArithmeticError):
         raise ProviderFailure(Status.INVALID_DATA) from None
 

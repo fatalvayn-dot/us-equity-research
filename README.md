@@ -794,3 +794,52 @@ ignored leased state, original response observations and reports under
 or comparative batches. New annual periods/conflicts therefore require updated
 financial inputs and correctly withhold affected scores. No subscription CSV,
 API key, authentication workaround, portfolio or trade is used.
+
+## Bounded candidate-driven valuation source collection
+
+`collect-valuation-sources` accepts 1–100 explicit, unique symbol/CIK candidates,
+without a hard-coded three-company limit. Candidate files contain
+`{"companies":[{"symbol":"MSFT","issuer_id":"0000789019"}]}`.
+The input file must be outside the output state directory.
+
+```bash
+PYTHONPATH=src python -m equity_research collect-valuation-sources \
+  --candidates data/valuation-candidates.json --state-dir data/valuation-collection \
+  --max-new-requests 51 \
+  --user-agent 'US Equity Research (https://github.com/fatalvayn-dot/us-equity-research)'
+```
+
+Each invocation has a hard 0–501 GET-invocation budget (internal HTTP retries are
+separately bounded at two attempts per GET, 10-second timeout/25-second budget).
+501 covers one directory plus five sources per 100 companies on a successful
+cold run. This is a maximum, not a request target. Re-run the same command to
+resume partially collected sources; `--max-new-requests 0` is cache-only, including
+identity. All public sources share a 0.6-second request interval. Checkpoint
+leases exclude overlapping runs and renew before source steps. HTTP failures
+are separately persisted with a five-minute cooldown; their status is not
+changed to missing. Original dates, URLs and body hashes are retained.
+
+The collector verifies exact US-exchange directory identities, current DEI share
+count against the original filing/class, USD Yahoo quotes and one-year daily
+history. Each leg has its own status; exhausted-budget and unqueried legs are
+explicitly pending. An unrelated successful leg never clears another leg's
+failure. Results: `<state-dir>/report.json`, operational SQLite checkpoints and
+`<state-dir>/source-bundle/`. The bundle can feed the existing `valuation-report`
+or `score-report` with a separately collected financial/comparative batch and
+explicit cutoff. No annual financial batch is refreshed by this command, and
+it does not alter first-valid Yahoo→SEC→Nasdaq→Finnhub financial field selection.
+
+Dated-share reconciliation is not complete capital-action, fund/legal-type or
+active-common-share clearance. This command supplies no scores, fair values,
+sector approval or MVP acceptance. Failure and budget limits do not turn
+unqueried sources into confirmed data absence. Existing fixed three-company
+verification helpers remain compatible for their recorded pilots.
+
+The disclosed-share parser chooses the latest available end/filing-date cohort
+before validating its numeric count. A malformed latest count still rejects the
+result; it cannot fall back to older shares. Invalid numeric values in unselected
+historical rows are explicitly retained as `historical_numeric_review`, with
+source accession/date/hash evidence, without correction or use as current data.
+Structural/identity/unit/chronology checks and original-filing reconciliation
+remain required. This addresses an observed Salesforce 2011 fraction (`133.9`
+in a shares unit) without changing the literal 2026 current disclosure.

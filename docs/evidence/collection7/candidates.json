@@ -1,0 +1,32 @@
+{
+  "companies": [
+    {
+      "symbol": "MSFT",
+      "issuer_id": "0000789019"
+    },
+    {
+      "symbol": "AMD",
+      "issuer_id": "0000002488"
+    },
+    {
+      "symbol": "ORCL",
+      "issuer_id": "0001341439"
+    },
+    {
+      "symbol": "AMAT",
+      "issuer_id": "0000006951"
+    },
+    {
+      "symbol": "TXN",
+      "issuer_id": "0000097476"
+    },
+    {
+      "symbol": "QCOM",
+      "issuer_id": "0000804328"
+    },
+    {
+      "symbol": "CRM",
+      "issuer_id": "0001108524"
+    }
+  ]
+}

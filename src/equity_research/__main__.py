@@ -21,7 +21,7 @@ from .pipeline import research_resolver
 
 def main():
     parser = argparse.ArgumentParser(description="US Equity Research foundation")
-    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report", "comparative-report", "valuation-report", "score-report", "price-run", "mvp-run"])
+    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report", "comparative-report", "valuation-report", "score-report", "price-run", "collect-valuation-sources", "mvp-run"])
     parser.add_argument("--user-agent", default=os.environ.get("SEC_USER_AGENT"))
     parser.add_argument("--symbol", action="append", default=[])
     parser.add_argument("--cik")
@@ -47,7 +47,25 @@ def main():
     parser.add_argument("--state-dir")
     parser.add_argument("--max-new-documents",type=int,default=100)
     parser.add_argument("--max-new-prices",type=int,default=100)
+    parser.add_argument("--max-new-requests",type=int,default=51)
     args = parser.parse_args()
+    if args.command == "collect-valuation-sources":
+        from pathlib import Path
+        from .valuation_collection import run_collection
+        from .batch import RunBusy
+        if not args.candidates or not args.user_agent or not args.state_dir:
+            parser.error("collect-valuation-sources requires --candidates, --state-dir and --user-agent")
+        try:
+            candidate_path=Path(args.candidates).resolve();state=Path(args.state_dir).resolve()
+            if candidate_path==state or state in candidate_path.parents:
+                parser.error("candidate input must be outside the output state directory")
+            report=run_collection(json.loads(candidate_path.read_text()), state_dir=state,
+                user_agent=args.user_agent,max_new_requests=args.max_new_requests)
+            print(json.dumps(report["summary"]))
+        except (ValueError,KeyError,TypeError,OSError,RunBusy,ProviderFailure,sqlite3.Error) as exc:
+            print(json.dumps(dict(status="source_collection_error",error_type=type(exc).__name__,mvp_accepted=False)))
+            raise SystemExit(2) from None
+        return
     if args.command == "price-run":
         from pathlib import Path
         from .prices import run_prices, PriceNotStarted

@@ -1,0 +1,29 @@
+{
+  "cutoff": "2026-11-02T23:28:34.914193+00:00",
+  "raw_bundle": "tests/fixtures/collection7-sources",
+  "observations": 35,
+  "mode": "actual_public_SEC_Yahoo_source_acquisition_not_financial_batch_or_MVP_acceptance",
+  "mvp_accepted": false,
+  "files": [
+    {
+      "file": "candidates.json",
+      "sha256": "20ecddd6929f73b17ed590603203703a6e6b8ef68c5e7d08de8b531c0b1616df"
+    },
+    {
+      "file": "initial-report.json.gz",
+      "sha256": "683b9e6d827863cf6f60fa95c5f102b5d7467f5dc260d5937c0a533361042207"
+    },
+    {
+      "file": "recovery-report.json.gz",
+      "sha256": "c4937d0db51b857f51c687f29a1ef191c367b9aff8ae3a23ea1d18a2ae9e5d08"
+    },
+    {
+      "file": "report.json.gz",
+      "sha256": "a35c333f7437ac282c0e8a448687056694db7b42ac7ec331d34c1041f53776e6"
+    },
+    {
+      "file": "resume-proof.json",
+      "sha256": "5bf020fcf9ade2595277dbc69b5ad966f3454dc44060c2a7f803ed2b5c5b4a46"
+    }
+  ]
+}

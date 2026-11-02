@@ -89,6 +89,19 @@ class ValuationTests(unittest.TestCase):
         self.assertEqual(s['unit'],'shares');self.assertEqual(s['raw_sha256'],cf().sha256)
         self.assertEqual(s['available_at'],datetime(2026,10,29,5,tzinfo=timezone.utc))
 
+    def test_unselected_historic_fraction_is_quarantined_without_repairing_or_using_it(self):
+        raw=json.loads(cf().body);rows=raw['facts']['dei']['EntityCommonStockSharesOutstanding']['units']['shares']
+        rows.append(dict(rows[0],end='2011-04-30',filed='2011-05-26',val=133.9,accn='0001193125-11-151778'))
+        result=disclosed_shares(response(companyfacts_url(CIK),raw),cik=CIK,as_of=NOW)
+        self.assertEqual(result['value'],Decimal(100))
+        self.assertEqual(result['historical_numeric_review'][0]['end'],date(2011,4,30))
+        self.assertEqual(result['historical_numeric_review'][0]['status'],'unselected_historical_numeric_value_invalid')
+
+    def test_invalid_latest_row_cannot_fall_back_to_valid_older_shares(self):
+        raw=json.loads(cf(val=133.9).body);rows=raw['facts']['dei']['EntityCommonStockSharesOutstanding']['units']['shares']
+        rows.append(dict(rows[0],end='2026-09-01',filed='2026-09-04',val=100))
+        with self.assertRaises(ProviderFailure):disclosed_shares(response(companyfacts_url(CIK),raw),cik=CIK,as_of=NOW)
+
     def test_issued_or_weighted_average_shares_are_not_aliases(self):
         raw=json.loads(cf().body);raw['facts']={'us-gaap':{'CommonStockSharesIssued':{'units':{'shares':[dict(val=100)]}}}}
         self.assertIsNone(disclosed_shares(response(companyfacts_url(CIK),raw),cik=CIK,as_of=NOW))

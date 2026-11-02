@@ -1,5 +1,65 @@
 # Development status
 
+## 2026-11-03 — Candidate-driven bounded source collection and Salesforce recovery
+
+Branch feat/bounded-valuation-collection from main 7e1d2be3fc68088b14c974ac307c90b3fdef8a7b
+(PR #13). Read PROJECT_BRIEF, status and AGENTS; remote main matched, no open
+PR at start; exact-head Actions 41539190808 passed 577 tests on three versions.
+Legacy untouched. Existing unrelated temporary source files preserved.
+
+Implemented v0.29.0 collect-valuation-sources CLI for 1–100 exact unique symbol/
+CIK candidates, with a hard 0–501 GET-invocation budget across all source legs,
+zero-budget cache-only mode including directory, per-URL cooldown checkpoints,
+leased/renewed state and original response archive/bundle. Shared 0.6-second
+request spacing; 10-second request timeout, 25-second budget and two maximum
+internal attempts. A GET invocation is not an individual retry. Missing, rate
+limit, access denial, timeout, invalid identity and unstarted-budget states are
+separate. Exact US-exchange identity is required before company-specific GETs.
+Independent share, price and history legs cannot approve one another. No annual
+financial refresh, financial-source priority change, capital-action/sector/
+active-common-share acceptance, score or investment approval is implied.
+
+Real bounded sample: MSFT, AMD, ORCL, AMAT, TXN, QCOM, CRM. Original selection
+requested ten symbols but only these seven existed in the retained candidate
+batch; the run and every artifact honestly use seven. Initial run made 32 GET
+invocations (www.sec.gov 6, data.sec.gov 13, Yahoo 13), retaining 32 bodies:
+7 exact identities/prices, 6 histories, 5 original-share reconciliations,
+ORCL symbol mismatch and CRM invalid share data. Initial warm repeat made zero
+GETs with unchanged share/price/history evidence. No all-100 acceptance claim.
+
+Investigation found CRM's current DEI shares were rejected because of a 2011
+unselected shares-unit row containing 133.9. Updated disclosed_shares to select
+the latest available date cohort before numeric validation, quarantine invalid
+unselected numeric rows with accession/date evidence and never correct/use them.
+The latest invalid/conflicting count still rejects; it cannot fall back to an
+older valid count. Structural, unit, chronology and exact primary-filing checks
+remain. A follow-up made 3 new GETs (CRM metadata, original 10-Q, history):
+6 dated-share reconciliations, 7 prices and 7 histories. Its cache-only repeat
+made zero GETs with all original evidence unchanged. Combined 35 public source
+observations retained, not a full financial-batch or score refresh. ORCL metadata
+lists ORCL and ORCL-PD, so existing single-class model correctly remains blocked.
+Source cutoffs and both before/after attempts: docs/evidence/collection7/;
+portable raw bundle: tests/fixtures/collection7-sources/. README gives rerun CLI.
+
+Tests: 15 new collector tests initially passed, then 16 including actual seven-
+company raw replay; two added numeric-cohort tests ensure historic quarantine
+and refusal to fall back from an invalid latest count. An initial stale-cache
+test failed because its synthetic owner exceeded its 15-minute lease; fixed the
+test to acquire a new lease for the next run, retaining strict runtime exclusion.
+27 focused valuation/recorded checks passed after the numeric-cohort change.
+Earlier full 592-test regression passed (72.804s, Python 3.12.14). Final full
+595/595 passed (71.463s, Python 3.12.14), including 18 new tests. Exact-head
+CI is checked before merge; these are offline regressions, not live CI acceptance.
+
+Remaining blocker/next code task: collect and reconcile the original current
+common-share covers for the remaining 17 sample candidates, or replace only
+unsupported candidates with explicit verified common stocks; bind accepted
+listing evidence to a 100-company plan. Then use bounded collector for missing
+valuation/history inputs and refresh required annual/comparative batches for a
+true end-to-end 100-company acceptance. Multi-class/ORCL-PD economics require a
+separate model; do not drop preferred shares into a common-share price ratio.
+Old two-score pilot remains dated; no extra company score is claimed here.
+
 ## 2026-11-03 — Publish scored pilot and protect HTML source evidence
 
 PR: https://github.com/fatalvayn-dot/us-equity-research/pull/13
