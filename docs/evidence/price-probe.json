@@ -1,0 +1,8 @@
+{
+  "url": "https://query1.finance.yahoo.com/v8/finance/chart/AAPL?interval=1d&range=5d",
+  "retrieved_at": "2026-11-02T16:23:00.508165+00:00",
+  "sha256": "ae9e1721e74b05095884c3984660c97ac3cae2f28a192d173cb37f95a4fd3bc3",
+  "mode": "initial endpoint availability probe only, not an identity-validated price input",
+  "get_invocations": 1,
+  "fixture": "tests/fixtures/price-probe-aapl.json.gz"
+}

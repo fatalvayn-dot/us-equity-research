@@ -595,3 +595,55 @@ review. These are arithmetic changes, not proof of organic growth, stable
 business perimeter, sector-model acceptance or numeric investment scores.
 The recorded evidence is in `docs/evidence/comparative100/`; the MVP remains
 unaccepted until all scope, price, scoring and real-acceptance gates pass.
+
+### Source-bound market prices
+
+```bash
+export SEC_USER_AGENT='Your research application and existing contact'
+PYTHONPATH=src python -m equity_research price-run \
+  --candidates docs/evidence/sample100-audit-queue.json \
+  --state-dir data/price100 --max-new-prices 100
+# Immediate cache-only reproduction; no identity or price HTTP request allowed.
+PYTHONPATH=src python -m equity_research price-run \
+  --candidates docs/evidence/sample100-audit-queue.json \
+  --state-dir data/price100 --max-new-prices 0
+PYTHONPATH=src python scripts/export_price_evidence.py \
+  --state-dir data/price100 --output docs/evidence/price100 \
+  --sources tests/fixtures/price100-sources
+```
+
+The CLI writes JSON/Markdown price-input reports. Its default state directory is
+`data/prices`, separate from `mvp-run`. A renewable lease prevents concurrent
+writers. Original successful response bodies persist incrementally; a 15-minute
+raw-response cache and one-day SEC-directory cache preserve original observation
+times. A zero-work run uses only available cache entries; absent/expired entries
+remain unattempted, never invented missing values. A missing identity cache makes
+zero-work execution fail explicitly instead of issuing an HTTP request.
+
+Only the literal Yahoo chart `meta.regularMarketPrice` is accepted: positive
+Decimal USD per share, exact uppercase class symbol without punctuation aliases,
+SEC symbol/CIK binding, matching explicit US exchange labels and EQUITY metadata.
+EQUITY and SEC-directory membership do not establish active common shares or
+sector/model eligibility. Nasdaq NMS/NGM/NCM, NYSE NYQ and the explicit ASE/NYSE
+American label pair are supported; unknown/conflicting exchanges stay unresolved.
+Every price retains market time, first-observed availability/retrieval time,
+field definition and raw Yahoo/SEC URLs/hashes. Financial report periods are
+never assigned to a market quote. There is no derived share count, market cap,
+NAV, adjusted history, after-hours price or executable-quote assertion.
+
+The default quote-age bound is four calendar days, allowing common market
+closures while still rejecting stale/future market timestamps. The response-age
+bound is separate. Yahoo's [data-provider information](https://help.yahoo.com/kb/SLN2310.html)
+was checked on 2026-11-02; reported prices may be delayed. The chart payload is an
+observed public-endpoint contract, not a guaranteed stable API. Bounded existing
+HTTP transport supplies pacing, timeout/size/retry limits and sanitized access,
+quota, network and malformed-data outcomes, without authentication workarounds.
+
+Price selection follows the same first-valid source priority. Successful Yahoo
+prices stop before fallback. On failure, SEC's unimplemented market-quote field
+is locally unsupported and Nasdaq/Finnhub quote adapters are explicitly
+unconfigured; those outcomes do not imply any HTTP request to those providers.
+A SEC identity-directory request is reported separately from quote selection.
+Recorded 100-candidate evidence and cache-only replay are in
+`docs/evidence/price100/`; source bytes are in `tests/fixtures/price100-sources/`.
+These inputs do not complete the generic-sector score model or MVP acceptance.

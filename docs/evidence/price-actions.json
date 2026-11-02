@@ -1,0 +1,44 @@
+{
+  "initial_run": {
+    "id": 41483836238,
+    "commit": "49b0d92ba5f37836ca73e48f73bacc9514bbbf0b",
+    "conclusion": "failure",
+    "reason": "Python 3.13 TypeError instead of ValueError in test of protected init=False field; guard rejected injection as intended",
+    "matrix": {
+      "3.11": "success",
+      "3.12": "cancelled",
+      "3.13": "failure"
+    }
+  },
+  "corrected_run": {
+    "id": 41484335857,
+    "commit": "735bf48ac273b328664331bf704426831a65f811",
+    "conclusion": "success",
+    "url": "https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41484335857"
+  },
+  "jobs": [
+    {
+      "id": 125410579741,
+      "python": "3.11",
+      "tests": 492,
+      "seconds": 34.963,
+      "conclusion": "success"
+    },
+    {
+      "id": 125410579366,
+      "python": "3.12",
+      "tests": 492,
+      "seconds": 38.318,
+      "conclusion": "success"
+    },
+    {
+      "id": 125410579733,
+      "python": "3.13",
+      "tests": 492,
+      "seconds": 32.761,
+      "conclusion": "success"
+    }
+  ],
+  "job_logs_inspected": true,
+  "ci_evidence_kind": "original-recording regression, not a new live run"
+}

@@ -1,5 +1,97 @@
 # Development status
 
+## 2026-11-02 — Live source-bound Yahoo prices for 100 candidates (latest)
+
+Branch: feat/yahoo-market-price, based on main
+9676b5c298299c418b4eea6941e34468dc3f119b (PR #8 merge). Fresh clone recovered
+current GitHub sources after workspace cleanup; main and PROJECT_BRIEF/status
+reviewed. No open PRs or conflicting work at start or before publication. Previous
+exact-head Actions 41474627084 successful. Legacy repository untouched.
+
+Completed v0.24.0: separate immutable MarketPrice contract, strict Yahoo chart
+regularMarketPrice adapter, bounded resumable price-run CLI and portable raw
+source export. Prices are USD per share, distinct from accounting periods, NAV,
+adjusted closes, after-hours prices or market cap. Exact uppercase class symbols
+(no punctuation alias), fresh raw SEC-directory symbol/CIK binding, explicit
+matching US exchange labels, EQUITY metadata and aware market/source times are
+required. Missing/invalid/old/future responses never become zero prices. Positive
+Decimal values preserve exact JSON precision. First observed availability equals
+original retrieval; it is not backdated to market time. Immutable approval flags
+cannot be constructor-injected. EQUITY/directory membership do not prove common
+share or sector-model eligibility; all companies remain unranked and in review.
+
+Pacing/timeouts/size limits/sanitized quota/access/network errors reuse the HTTP
+transport. Price response TTL is 15 minutes; SEC identity TTL one day; quote-age
+limit four calendar days, explicitly separate from response age and permitting
+common market closures. Original public responses are incrementally archived;
+restarts retain raw bytes and observation times. Renewable run lease prevents
+concurrent writers. Zero-work mode never fetches missing/expired data or identity.
+The default price state directory is separate from MVP financial reports. Yahoo
+valid prices stop fallback; absent/failed Yahoo outcomes expose SEC unsupported
+market-quote field plus unconfigured Nasdaq/Finnhub quote adapters with no HTTP
+request claimed for those entries. SEC identity fetch is counted separately.
+Missing/invalid successful response bodies retain their raw source evidence.
+
+REAL RUN on 2026-11-02: 100/100 existing candidates yielded contract-valid Yahoo
+regular-session prices. SEC exact CIK/class-symbol binding and USD/exchange/time
+contracts passed for every selected price; 36 NMS and 64 NYQ. Original price
+observations span 16:26:53.900693–16:32:52.493309 UTC. Collection made 100 Yahoo
+GET invocations and one SEC-directory GET invocation (internal transport retries
+are excluded from these counters). A separate initial one-GET AAPL availability
+probe preceded collection and is recorded separately; it is not an accepted
+identity-validated batch input. No authenticated/paid source or new access.
+
+All 100 price values and both price/identity source references are backed by
+101 exact public observations in the portable raw bundle. Every stored report
+hash and every parsed price was checked against the original source bytes.
+Immediate max-new-prices=0 rerun retained all 100 original prices, market times,
+retrieval times and raw hashes with ZERO price and ZERO identity GET invocations.
+That rerun is cached reproduction, not another fresh live run. Evidence:
+docs/evidence/price100/, tests/fixtures/price100-sources/, price-probe.json.
+README gives collection/cache-only/export commands. CLI outputs source-bound
+JSON and readable Markdown; operational SQLite files are not published.
+
+Tests: 492/492 local unittest tests passed on Python 3.12.14, 32.465 seconds
+(457 regressions +30 unit/CLI/integration tests +5 real-recorded regressions).
+Covers exact class/CIK/endpoint, ETF/foreign/unknown exchange rejection, Decimal
+precision, invalid/duplicate JSON, missing vs API/quota, explicit USD, separate
+market/response/identity age and future rejection, local fallback vs HTTP,
+first-valid stopping, cache restart/zero-work budgets, lease conflict, safe CLI
+errors/export, retained missing-response proof and reconstruction of all 100
+actual prices from both original source bodies. CLI status and diff check pass.
+Earlier 484-test regression run also passed; initial 492-test run took 35.867s.
+Initial PR CI 41483836238 exposed a Python 3.13 test-only exception mismatch:
+dataclasses.replace rejects init=False approval injection with TypeError rather
+than ValueError. The protection itself worked; the assertion now accepts both
+version-specific rejection types. The 3.11 job passed, 3.13 failed one test and
+the 3.12 job was cancelled. Review also clarified the future identity diagnostic
+as future_observation rather than stale_identity; both reject the observation.
+The full local 492-test regression rerun passed after the corrections. No terminal
+live-provider failure was reported. A status-edit helper stopped before writing
+because of a string/Path mix; corrected without changing source data or test results.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/9
+Initial source commit: https://github.com/fatalvayn-dot/us-equity-research/commit/49b0d92ba5f37836ca73e48f73bacc9514bbbf0b
+Compatibility/diagnostic fix: https://github.com/fatalvayn-dot/us-equity-research/commit/735bf48ac273b328664331bf704426831a65f811
+Corrected matrix run: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41484335857
+Corrected Actions 41484335857 passed all 492 tests plus CLI status on Python
+3.11/3.12/3.13; all three job logs inspected (34.963/38.318/32.761 seconds).
+Published corrected source tree dd393b98ab0aeafa85cb4fe10d0b0d32aa4309f9 exactly
+matched the tested local source tree. Documentation follow-up CI must pass before
+merge; final exact-head CI and merge SHA are recorded in PR #9 discussion.
+Evidence: price-tests.json. Recorded-response CI is not a fresh live acceptance.
+
+Remaining MVP blockers: no source-bound market-cap/share-count valuation bridge,
+no accepted generic operating-sector eligibility/scoring path, only 83 registered
+common-share cover matches in the original 100 financial candidates, unresolved
+annual/financial fields. These 100 prices are NOT 100 accepted common-share
+investment analyses. Zero scores/ranks and MVP acceptance remains FALSE.
+Next concrete code task: join the existing exact financial, comparative and price
+inputs into a versioned general operating-company eligibility/score contract;
+obtain exact sourced valuation inputs, withhold incomplete components and keep
+bank/insurance/REIT/BDC/unknown profiles in review. Test numerical thresholds,
+operand provenance and missing-value behavior; then run the 100-company report.
+Do not expand to 500+ or backtests before usable-MVP acceptance/user assessment.
+
 ## 2026-11-02 — Source-bound annual comparisons and growth CLI (latest)
 
 Branch: feat/comparable-annual-inputs, based on main

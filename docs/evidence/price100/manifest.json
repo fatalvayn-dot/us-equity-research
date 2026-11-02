@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "report_sha256": "df88f5da8e2cfb8d7f4dface570524f9a9a29b75edffa1edbf03da4ac750d4c9",
+  "stored_report_sha256": "7c59078bd94bfe9d305812140309b08d02ea4381db46d33aa87760008c578691",
+  "markdown_sha256": "fd59bb2608ef8d316f62d04945691c85d21e6af04174487a20baf88ab72d07d1",
+  "source_manifest": "tests/fixtures/price100-sources/manifest.json",
+  "source_observations": 101,
+  "summary": {
+    "candidates": 100,
+    "collected_prices": 100,
+    "company_states": {
+      "collected": 100
+    },
+    "scored_companies": 0,
+    "new_price_get_invocations": 100
+  },
+  "new_identity_get_invocations": 1,
+  "all_selected_price_references_archived": true,
+  "mvp_accepted": false,
+  "scoring_accepted": false
+}
