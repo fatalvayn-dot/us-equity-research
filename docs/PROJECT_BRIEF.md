@@ -26,8 +26,8 @@ scope, missing-data honesty and no paid/new-access/money rules remain binding.
 # Authoritative scope
 
 New repository: fatalvayn-dot/us-equity-research. Legacy:
-fatalvayn-dot/radar-agent, never delete; archive only through an authorized
-repository management operation. Develop independently.
+fatalvayn-dot/radar-agent, leave unchanged: no development, deletion or archive
+operation under the current MVP instruction. Develop independently.
 
 Goal: identify, analyze and rank attractive active NYSE, Nasdaq and NYSE American
 common shares with real auditable financial data. Exclude ETFs, funds, warrants,

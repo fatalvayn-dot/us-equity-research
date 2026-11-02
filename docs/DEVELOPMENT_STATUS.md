@@ -1,5 +1,69 @@
 # Development status
 
+## 2026-11-02 — Source-bound annual comparisons and growth CLI (latest)
+
+Branch: feat/comparable-annual-inputs, based on main
+77ca70c8d1927888806de607f1f7fba622af7375 (PR #7 merge). Fetched main;
+no open PRs or conflicting source work; previous exact-head Actions 41454028341
+successful. Reviewed PROJECT_BRIEF and DEVELOPMENT_STATUS. Legacy untouched.
+
+Completed v0.23.0: reparse original annual document contexts, discover explicit
+prior start/end dates from the same annual accession and exact accounting tag,
+then emit separate current/prior research-batch plans. Discovery selects periods,
+not numeric financial winners, and never counts a provider as tried. No fiscal
+start inferred from fy/fp/frames or subtracting a year. Conservative comparability
+requires consecutive 350–380 day full years with <=7-day length difference,
+including 52/53-week years. Stub years, ambiguous periods and conflicting values
+stay unresolved. Literal broader accounting concepts remain separate.
+
+New comparative-report CLI revalidates both original ordered source trails and
+exact issuer/currency/accounting contexts before calculating current/prior - 1.
+SEC operands must share accession, original snapshot hash/time and filing date.
+Both full operand facts and original collection attempts remain in JSON; Markdown
+shows each arithmetic/missing result. Nonpositive prior bases produce no value.
+No investment score/rank or general sector approval. Business-perimeter/accounting
+policy comparability and special/unknown sector models still require review.
+Gzip batch inputs and safe atomic report export are supported. Prior plans can
+also be used for fresh ordered research-batch collection.
+
+Recorded original-source replay: all 100 candidates considered; 80 companies
+have comparison plans, 5 lack a matching literal prior-period pair and 15 are
+deferred (12 without a verified annual context, 3 invalid original evidence).
+347 current +347 prior facts accepted by actual adapter/resolver contracts;
+Yahoo duration adapter returns local unsupported_field, SEC is valid, lower
+sources stop unqueried. 334 arithmetic growth results; 13 nonpositive bases
+remain unavailable. All original source observations preserved, replay cutoff is
+current session time, ZERO new HTTP requests. This is recorded-source replay,
+not a new live run, freshness acceptance or historical-vintage dataset. Original
+100-candidate live acceptance limits from PR #7 remain unchanged. Evidence:
+docs/evidence/comparative100/ (compressed full report/batches, exact query plans,
+audit, Markdown, file hash manifest); raw responses reuse immutable PR #7 bundle.
+Reproduce with README commands and scripts/verify_comparative_inputs.py.
+
+Tests: 457/457 local unittest tests passed, Python 3.12.14, 47.615s (426
+regressions +28 unit/CLI tests +3 real-recorded regressions). Coverage includes
+52/53-week calendars, dates not inferred, stub/gap rejection, exact annual
+accession, wrong identity/URL/future observation, ambiguous/conflicting values,
+foreign currency, source-order/scope injection, zero/negative base, literal
+semantic labels, precision/magnitude bounds, compressed CLI export/destination
+collision and all 334 real-recorded calculations/694 input source references.
+CLI status and git diff --check passed. Evidence: comparative-tests.json.
+Initial new-test run found a duplicate test-helper argument (18 tests passed,
+1 error); corrected the fixture construction; subsequent 28-test and full457
+runs passed. No failed live API request or new access requirement this session.
+GitHub code/PR/CI links are added after publication and CI verification below.
+
+Remaining blockers: no provenance-bound current market price/class-share inputs,
+no accepted generic-sector scoring/eligibility path, only 83 common-share cover
+matches in the original 100-candidate run, unresolved companies/financial fields.
+MVP NOT COMPLETE; target 2026-11-04 remains an objective, not guarantee.
+Next concrete code task: bounded Yahoo price adapter with exact class-symbol,
+SEC issuer binding, currency and market timestamp/raw evidence; recorded tests
+then live small-sample validation. Connect price/prior-period inputs to an
+explicit generic-sector scoring hypothesis while leaving special/unknown and
+insufficient issuers unranked. Complete 100 verified common shares before MVP
+acceptance; no 500+ expansion, backtest or legacy work.
+
 ## 2026-11-02 — Unified live 100-candidate pipeline and portable proof (latest)
 
 Branch: feat/mvp-live-pipeline, based on main a8eeba8362e520e5782b6c3075d23807757aa21e
