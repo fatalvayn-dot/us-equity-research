@@ -1,5 +1,54 @@
 # Development status
 
+## 2026-11-02 — Unified live MVP pipeline (in progress)
+
+Branch: feat/mvp-live-pipeline, based on main a8eeba8362e520e5782b6c3075d23807757aa21e
+(PR #6 merge). Main fetched and clean at start; no open PRs; prior Actions run
+41436814684 passed. No concurrent work observed. Legacy repository untouched.
+
+Completed v0.22.0 implementation: mvp-run connects fresh/cached SEC submissions,
+original annual-document period extraction, bounded resumable ordered financial
+collection, content-addressed raw-source archive and JSON/Markdown research report.
+Global run lease rejects concurrent writers; public requests renew the lease and
+share SEC pacing. Metadata/documents/facts retain original observation times on
+cache reuse. Exact symbol/CIK/annual end checks remain; missing annual reports
+produce explicit unattempted companies. An explicit annual end without verified
+start permits only Assets/Liabilities, deferring four duration fields. No fiscal
+calendar start is inferred. Existing Yahoo->SEC->Nasdaq->Finnhub first-valid order
+and typed failures remain intact. Source archive coverage verifies exact financial,
+identity and unit URL/hash/observation references. Private Finnhub responses are
+not archived; missing coverage stays visible. Public call counter excludes
+internal retries and private Finnhub transport and is labeled accordingly.
+
+Added portable public-response gzip JSONL evidence bundles split into bounded
+hash-checked parts, preserving exact bytes/URL/time. No operational SQLite cache,
+request headers or credentials are exported. Export refuses active collections;
+reader validates all parts/body hashes/counts before yielding reconstructed data.
+
+Tests: 420/420 local unittest tests passed (400 regressions +13 MVP tests +7
+bundle tests) on Python 3.12.14. Offline end-to-end fixture pipeline produces
+reports with exact archive coverage; immediate fixture rerun makes zero public
+GET calls. Tests cover work bounds, lease conflict/release, missing metadata/
+annual periods, instant-only fallback, period identity mismatch, zero-work bounds,
+archive absence, bundle round-trip/corruption/path escape/count/hash/determinism.
+No local test failures. Evidence: mvp-pipeline-tests.json. Fixture integration
+success is not live acceptance.
+
+Live 100-candidate run has started with the README command. Fresh SEC metadata
+completed for all 100. Annual phase completed: 98 downloads attempted, 93 sources
+available, 88 explicit annual periods, 83 registered common-share matches,
+5 invalid-data source outcomes and 2 no-annual-in-recent-window outcomes. Financial
+collection is still running; no final value/success count or 100-company financial
+acceptance is claimed in this checkpoint. Final live results, portable raw proof,
+resume evidence and remote CI will be recorded before merging.
+
+Remaining MVP gates: completed live financial run and evidence export, eligible
+generic-sector classification/scoring, required market-price/prior-period inputs,
+traceable nonmissing scores and final acceptance report. Current reports withhold
+all scores/approvals; banks/insurance/REIT/BDC/unknown remain review-required.
+Next: finish this bounded live run and verify its archived facts/resume, then add
+market/prior-period inputs and a validated generic-sector scoring contract.
+
 ## 2026-11-02 — MVP priority reset and user-facing research report (latest)
 
 Branch: feat/mvp-research-report, based on main ec0907754fff80027e7cdb0e2fb6dac0c09893e8

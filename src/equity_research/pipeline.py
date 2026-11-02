@@ -30,8 +30,9 @@ class DeferredProvider:
     def fetch(self,request):return self._get().fetch(request)
 
 
-def research_resolver(*,directory,symbol,user_agent,cache_dir="data/cache/companyfacts",clock=None,response_archive=None):
+def research_resolver(*,directory,symbol,user_agent,cache_dir="data/cache/companyfacts",clock=None,response_archive=None,transport_factory=None):
     def http(hosts):
+        if transport_factory is not None:return transport_factory(hosts)
         if response_archive is not None:
             from .response_archive import ArchivedTransport
             return ArchivedTransport(archive=response_archive,user_agent=user_agent,allowed_hosts=set(hosts))

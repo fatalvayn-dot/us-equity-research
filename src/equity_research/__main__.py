@@ -20,7 +20,7 @@ from .pipeline import research_resolver
 
 def main():
     parser = argparse.ArgumentParser(description="US Equity Research foundation")
-    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report"])
+    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report", "mvp-run"])
     parser.add_argument("--user-agent", default=os.environ.get("SEC_USER_AGENT"))
     parser.add_argument("--symbol", action="append", default=[])
     parser.add_argument("--cik")
@@ -36,7 +36,25 @@ def main():
     parser.add_argument("--max-new-fields",type=int)
     parser.add_argument("--input")
     parser.add_argument("--markdown")
+    parser.add_argument("--candidates")
+    parser.add_argument("--state-dir",default="data/mvp")
+    parser.add_argument("--max-new-documents",type=int,default=100)
     args = parser.parse_args()
+    if args.command == "mvp-run":
+        from pathlib import Path
+        from .mvp import run_mvp
+        from .batch import RunBusy
+        if not args.candidates or not args.user_agent:
+            parser.error("mvp-run requires --candidates and identifying --user-agent")
+        try:
+            def progress(row):print(json.dumps(row),flush=True)
+            run_mvp(json.loads(Path(args.candidates).read_text()),state_dir=args.state_dir,
+                user_agent=args.user_agent,max_new_documents=args.max_new_documents,
+                max_new_fields=args.max_new_fields,progress=progress)
+        except (ValueError,KeyError,TypeError,OSError,RunBusy,ProviderFailure) as exc:
+            print(json.dumps(dict(status="mvp_run_error",error_type=type(exc).__name__,mvp_accepted=False)))
+            raise SystemExit(2) from None
+        return
     if args.command == "research-report":
         from pathlib import Path
         import tempfile
