@@ -51,7 +51,7 @@ docs/evidence/price100/, tests/fixtures/price100-sources/, price-probe.json.
 README gives collection/cache-only/export commands. CLI outputs source-bound
 JSON and readable Markdown; operational SQLite files are not published.
 
-Tests: 492/492 local unittest tests passed on Python 3.12.14, 35.867 seconds
+Tests: 492/492 local unittest tests passed on Python 3.12.14, 32.465 seconds
 (457 regressions +30 unit/CLI/integration tests +5 real-recorded regressions).
 Covers exact class/CIK/endpoint, ETF/foreign/unknown exchange rejection, Decimal
 precision, invalid/duplicate JSON, missing vs API/quota, explicit USD, separate
@@ -59,8 +59,25 @@ market/response/identity age and future rejection, local fallback vs HTTP,
 first-valid stopping, cache restart/zero-work budgets, lease conflict, safe CLI
 errors/export, retained missing-response proof and reconstruction of all 100
 actual prices from both original source bodies. CLI status and diff check pass.
-Earlier 484-test regression run also passed. No new test failure or terminal
-live-provider failure was reported. GitHub PR/code/CI links are recorded after publication below.
+Earlier 484-test regression run also passed; initial 492-test run took 35.867s.
+Initial PR CI 41483836238 exposed a Python 3.13 test-only exception mismatch:
+dataclasses.replace rejects init=False approval injection with TypeError rather
+than ValueError. The protection itself worked; the assertion now accepts both
+version-specific rejection types. The 3.11 job passed, 3.13 failed one test and
+the 3.12 job was cancelled. Review also clarified the future identity diagnostic
+as future_observation rather than stale_identity; both reject the observation.
+The full local 492-test regression rerun passed after the corrections. No terminal
+live-provider failure was reported. A status-edit helper stopped before writing
+because of a string/Path mix; corrected without changing source data or test results.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/9
+Initial source commit: https://github.com/fatalvayn-dot/us-equity-research/commit/49b0d92ba5f37836ca73e48f73bacc9514bbbf0b
+Compatibility/diagnostic fix: https://github.com/fatalvayn-dot/us-equity-research/commit/735bf48ac273b328664331bf704426831a65f811
+Corrected matrix run: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41484335857
+Corrected Actions 41484335857 passed all 492 tests plus CLI status on Python
+3.11/3.12/3.13; all three job logs inspected (34.963/38.318/32.761 seconds).
+Published corrected source tree dd393b98ab0aeafa85cb4fe10d0b0d32aa4309f9 exactly
+matched the tested local source tree. Documentation follow-up CI must pass before
+merge; final exact-head CI and merge SHA are recorded in PR #9 discussion.
 Evidence: price-tests.json. Recorded-response CI is not a fresh live acceptance.
 
 Remaining MVP blockers: no source-bound market-cap/share-count valuation bridge,

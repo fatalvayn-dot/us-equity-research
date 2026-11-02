@@ -3,10 +3,20 @@
   "passed": 492,
   "failed": 0,
   "python": "3.12.14",
-  "seconds": 35.867,
+  "seconds": 32.465,
   "new_tests": 35,
   "regressions": 457,
   "command": "PYTHONPATH=src python3 -m unittest discover -s tests -q",
-  "ci_status": "pending",
-  "live_acceptance": "100 candidate price source contracts only; no common-share/model/MVP acceptance"
+  "ci_status": "passed",
+  "live_acceptance": "100 candidate price source contracts only; no common-share/model/MVP acceptance",
+  "initial_ci_run": 41483836238,
+  "initial_ci_status": "failure: Python 3.13 test expected ValueError, actual rejection TypeError",
+  "corrected_ci_run": 41484335857,
+  "corrected_source_commit": "735bf48ac273b328664331bf704426831a65f811",
+  "ci_run": 41484335857,
+  "ci_python_versions": [
+    "3.11",
+    "3.12",
+    "3.13"
+  ]
 }
