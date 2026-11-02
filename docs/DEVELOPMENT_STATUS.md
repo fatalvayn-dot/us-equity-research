@@ -49,7 +49,14 @@ flags, namespace-bound ballot/constant transforms, absent vs false, duplicates,
 wrong endpoint/CIK/form/date, future cutoff, dimensions, annual-vs-registration
 separation and original hash/time retention. Exploratory import command lacked
 PYTHONPATH and failed; corrected to PYTHONPATH=src. No regression/test failure.
-Remote PR/Actions evidence will be added after verification.
+GitHub Actions run 41433175246 passed 383 tests and CLI status on each Python
+3.11/3.12/3.13; logs inspected.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/5
+Code commit: https://github.com/fatalvayn-dot/us-equity-research/commit/a4e9cfda46e2c20bc3a9cbe12d052954ec43cc74
+Actions: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41433175246
+Source tree 8df7e63e4ba13ecc8e5f2c34b7c7d7ece4cb3681 exactly matched the
+locally tested tree. Documentation follow-up CI is checked before merge;
+final merge evidence is recorded in the PR discussion.
 
 Primary transform references checked 2026-11-02:
 https://www.sec.gov/files/edgar/filer-information/specifications/xbrl-guide-2026-08-14.pdf
