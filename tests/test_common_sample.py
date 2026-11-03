@@ -197,3 +197,29 @@ class RecordedCommonSampleTests(unittest.TestCase):
         self.assertEqual(report['summary']['selected'],3);self.assertTrue(report['target_sample_verified'])
         for actual,want in zip(report['companies'],selected):
             self.assertEqual(json.loads(json.dumps(actual,default=encode)),want)
+
+
+class RecordedCommonPriceTests(unittest.TestCase):
+    def test_new_plan_hundred_prices_replay_exact_source_identity_currency_and_times(self):
+        from dataclasses import asdict
+        from equity_research.cache import encode
+        from equity_research.evidence_bundle import read_bundle
+        from equity_research.prices import parse_price
+        from equity_research.sec import DIRECTORY_URL
+        root=Path(__file__).resolve().parents[1];folder=root/'docs/evidence/common-price100'
+        report=json.loads(gzip.decompress((folder/'report.json.gz').read_bytes()))
+        plan=json.loads((root/'docs/evidence/common100/candidates.json').read_text())
+        self.assertEqual(report['summary']['collected_prices'],100)
+        self.assertEqual([dict(symbol=r['symbol'],issuer_id=r['issuer_id']) for r in report['companies']],plan['companies'])
+        raw={(r.url,r.sha256,r.retrieved_at.isoformat()):r for r in read_bundle(root/'tests/fixtures/common-price100-sources')}
+        self.assertEqual(len(raw),101)
+        for row in report['companies']:
+            price=row['price'];identity=raw[(DIRECTORY_URL,price['identity_evidence_sha256'],price['identity_observed_at'])]
+            source=raw[(price['source_url'],price['raw_sha256'],price['retrieved_at'])]
+            result=parse_price(source,identity,cik=row['issuer_id'],symbol=row['symbol'],as_of=datetime.fromisoformat(report['generated_at']))
+            self.assertEqual(json.loads(json.dumps(asdict(result),default=encode)),price)
+            self.assertFalse(row['scope_approved']);self.assertIsNone(row['total_score'])
+        proof=json.loads((folder/'resume-proof.json').read_text())
+        self.assertEqual(proof['initial_price_GETs'],100);self.assertEqual(proof['initial_identity_GETs'],1)
+        self.assertEqual(proof['resume_price_GETs'],0);self.assertEqual(proof['resume_identity_GETs'],0)
+        self.assertTrue(proof['all_100_price_values_source_times_and_identity_evidence_unchanged'])

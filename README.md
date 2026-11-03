@@ -902,3 +902,25 @@ https://www.xbrl.org/Specification/inlineXBRL-transformationRegistry/REC-2015-02
 Only explicit supported subsets are implemented; dates are not inferred from
 calendar-year assumptions. Known exchange-name spellings are matched case-
 insensitively; symbols/CIKs/classes retain exact matching.
+
+### Prices for this exact common-share plan
+
+`docs/evidence/common-price100/` contains a separate real run for the new plan:
+100/100 USD regular-session prices, 100 quote GET invocations plus 1 fresh SEC
+identity GET, all raw references archived. Immediate warm resume used zero GETs,
+with identical values, source times and identity evidence. These are dated,
+potentially delayed market observations, not perpetual current/executable prices.
+Raw 101-observation bundle: `tests/fixtures/common-price100-sources/`.
+
+```bash
+PYTHONPATH=src python -m equity_research price-run \
+  --candidates docs/evidence/common100/candidates.json \
+  --state-dir data/common-prices --max-new-prices 100 \
+  --user-agent 'US Equity Research (https://github.com/fatalvayn-dot/us-equity-research)'
+```
+
+Use `--max-new-prices 0` for cache-only resume; expired/missing entries remain
+unstarted and are not fabricated. This price milestone and the exact byte-for-
+byte common-sample CLI replay (`docs/evidence/common100/cli-reproduction.json`)
+do not complete annual/comparative financial collection, valuation or scoring
+for the 17 newly selected companies. Full MVP acceptance remains pending.

@@ -2,6 +2,19 @@
 
 ## 2026-11-03 — Source-bound 100-common-share sample (latest)
 
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/15
+Source commit: https://github.com/fatalvayn-dot/us-equity-research/commit/10111dc5324ab0c3f8f86df85d884cc225c8da7e
+Published source tree de47302e07df4f104c70af62eb0eebcdb4bcddfa matches local a5399f4.
+Source CI: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41557895303
+All 613 tests and CLI status passed: 3.11/93.392s, 3.12/103.394s, 3.13/99.444s.
+Final addition retains the new-plan price100 artifacts plus one exact raw-price
+integration test (final suite 614). Targeted 2 tests passed in 3.849s; full final
+head CI is checked before merge. Source/local full 613 must not be called 614.
+Manual review: primary class cannot be joined across contexts/symbols/venues;
+known date/exchange variants do not guess periods/classes. Sample approval is
+separate from financial/model/legal approval, and all scores remain unavailable.
+Source artifacts preserve original times; listed as-of limitations stay explicit.
+
 Branch feat/source-bound-common-sample from main
 0e3c513a86eca99b7e510b893793dba17e476406 (PR #14). Read AGENTS, PROJECT_BRIEF,
 status, main/open PRs and Actions; no open/conflicting PR at start; exact-head
@@ -63,7 +76,21 @@ replacement covers (ADBE, INTU, TYL, unresolved TER) replay to exact report rows
 100 artifact identity/class/hash invariants and zero-GET proof checked. Existing
 financial/valuation/scoring regressions retained. Exact-head CI checked before
 merge; no live CI or full-MVP acceptance claim. Full common-sample CLI replay
-and new-plan 100-price run are tracked separately while in progress.
+then reproduced both report and candidate plan BYTE FOR BYTE, with zero network
+calls. Proof: docs/evidence/common100/cli-reproduction.json.
+
+A separate actual price-run now covers this exact new 100-company plan:
+100/100 valid USD regular-session observations, 100 Yahoo quote GET invocations
+plus one fresh SEC identity GET. All selected source/identity references were
+archived. Immediate zero-budget repeat retained 100/100 with zero new quote or
+identity GETs and identical values, source times and identity evidence. Sources:
+tests/fixtures/common-price100-sources/ (101 observations); dated reports,
+initial/resume proof and rerun command: docs/evidence/common-price100/, README.
+Initial generated_at 2026-11-03T01:09:40.306623+00:00; no perpetual current-price
+or executable-price claim. A new targeted integration test reconstructs all 100
+prices from their exact raw bodies/identity and checks source currency/times;
+full final-head CI is required. Earlier 613-test local full run predates this
+one added test; do not mislabel it as a local full 614-test run.
 
 Remaining/next concrete task: use docs/evidence/common100/candidates.json for
 financial metadata/document/14-field and comparable-period collection, then
@@ -71,7 +98,8 @@ valuation/history refresh and scored report. Old 843 facts/576 calculations and
 two dated pilot scores belong to the old candidate batch; they cannot establish
 coverage for the 17 new selected companies. Preserve special-sector/unverified
 model review and critical-financial gates. A new complete financial 100-company
-acceptance run, fresh price coverage and CI remain necessary before MVP delivery.
+acceptance run and CI remain necessary before MVP delivery. Fresh price
+coverage was verified above at its recorded cutoff, not accepted indefinitely.
 
 ## 2026-11-03 — Candidate-driven bounded source collection and Salesforce recovery
 

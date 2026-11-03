@@ -36,6 +36,10 @@
     {
       "file": "warm-collection.json",
       "sha256": "355f02dfdd52e9ef55244075eb9b53e8046233a2d5d85c6c20ff53e008a8ab16"
+    },
+    {
+      "file": "cli-reproduction.json",
+      "sha256": "d1101359ab39b7c8c49633050b8e6a4708059dbb2670273a740ec00e5ccd86d8"
     }
   ],
   "mvp_accepted": false
