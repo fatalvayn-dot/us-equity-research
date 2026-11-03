@@ -15,8 +15,7 @@ from .sec import DIRECTORY_URL
 from .submissions import parse_submissions,submissions_url
 from .valuation import build_valuation_report
 from .providers import ProviderFailure,Status
-from .filing_metadata import CoverParser
-from .legal_evidence import CONCEPTS,_disclosures,_boolean
+from .legal_evidence import registered_legal_contraindications as _legal_contraindications
 
 MODEL_VERSION='technology-research-v1'
 MODELS={'3571':'electronic_computers_v1','3674':'semiconductors_v1','7372':'prepackaged_software_v1'}
@@ -25,28 +24,6 @@ REQUIRED=('assets','liabilities','current_assets','current_liabilities','net_inc
 SHARE_UPLIFT=Decimal('.25')
 
 
-def _legal_contraindications(filing,cik):
-    """A known fund/BDC/shell disclosure overrides an apparently supported SIC.
-
-    Missing tags stay unknown. Positive model eligibility instead requires the
-    operating-issuer SIC, original common-share cover and current US quote.
-    This screen is not a legal opinion or permanent absence-of-fund certification.
-    """
-    p=CoverParser(extra_concepts=CONCEPTS.values());p.feed(filing.body.decode('utf-8'));p.close()
-    if p.conflict or p.context is not None or p.fact_stack:raise ValueError('invalid legal disclosure context')
-    contexts=[key for key,c in p.contexts.items() if not c['dimensional'] and c.get('scheme')=='http://www.sec.gov/CIK'
-              and c.get('identifier','').strip().zfill(10)==cik]
-    flags=_disclosures(p,contexts,allow_transforms=True)
-    blocked=any(r['status'] not in ('reported','unknown') or (r['status']=='reported' and r['value'] not in (False,None))
-                for key,r in flags.items() if key!='reit')
-    shell=[]
-    for f in p.facts:
-        if f['name']=='entityshellcompany' and f['context'] in contexts and f['nil'] not in ('true','1'):
-            shell.append(_boolean(' '.join(f['text'].split()),f['format'],p.namespaces))
-    if len(set(shell))>1:raise ValueError('conflicting shell status')
-    return dict(disclosures=flags,shell_status='reported' if shell else 'unknown',
-        shell_value=shell[0] if shell else None,blocked=blocked or any(shell),
-        source_url=filing.url,raw_sha256=filing.sha256,legal_type_approved=False)
 
 
 def _at_least(value,bands):

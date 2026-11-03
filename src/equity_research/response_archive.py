@@ -8,7 +8,7 @@ from .models import aware
 from .providers import ProviderFailure,Status
 from .transport import HttpTransport,Response
 
-PUBLIC_HOSTS=frozenset({'www.sec.gov','data.sec.gov','query1.finance.yahoo.com','api.nasdaq.com','www.nasdaq.com'})
+PUBLIC_HOSTS=frozenset({'www.sec.gov','data.sec.gov','query1.finance.yahoo.com','api.nasdaq.com','www.nasdaq.com','www.nasdaqtrader.com','ftp.nasdaqtrader.com'})
 
 
 def public_url(url):

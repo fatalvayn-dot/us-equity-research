@@ -21,7 +21,7 @@ from .pipeline import research_resolver
 
 def main():
     parser = argparse.ArgumentParser(description="US Equity Research foundation")
-    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report", "comparative-report", "valuation-report", "score-report", "price-run", "collect-valuation-sources", "mvp-run"])
+    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report", "comparative-report", "valuation-report", "score-report", "price-run", "collect-valuation-sources", "common-sample", "mvp-run"])
     parser.add_argument("--user-agent", default=os.environ.get("SEC_USER_AGENT"))
     parser.add_argument("--symbol", action="append", default=[])
     parser.add_argument("--cik")
@@ -48,7 +48,34 @@ def main():
     parser.add_argument("--max-new-documents",type=int,default=100)
     parser.add_argument("--max-new-prices",type=int,default=100)
     parser.add_argument("--max-new-requests",type=int,default=51)
+    parser.add_argument("--base-bundle")
+    parser.add_argument("--plan-output")
+    parser.add_argument("--sample-size",type=int,default=100)
     args = parser.parse_args()
+    if args.command == "common-sample":
+        from pathlib import Path
+        from datetime import datetime
+        from itertools import chain
+        from .common_sample import verify_common_sample
+        from .evidence_bundle import read_bundle
+        from .mvp import save_json
+        if not all((args.candidates,args.source_bundle,args.as_of,args.output,args.plan_output)):
+            parser.error("common-sample requires --candidates, --source-bundle, --as-of, --output and --plan-output")
+        paths=[Path(p).resolve() for p in (args.candidates,args.output,args.plan_output)]
+        if len(set(paths))!=len(paths):parser.error("candidate input and output paths must be distinct")
+        for bundle in (args.base_bundle,args.source_bundle):
+            if bundle and any(Path(bundle).resolve()==p or Path(bundle).resolve() in p.parents for p in paths[1:]):
+                parser.error("sample output must not overwrite source bundle contents")
+        try:
+            responses=chain(read_bundle(args.base_bundle) if args.base_bundle else (),read_bundle(args.source_bundle))
+            report=verify_common_sample(json.loads(paths[0].read_text()),responses,
+                as_of=datetime.fromisoformat(args.as_of),target=args.sample_size)
+            save_json(paths[1],report);save_json(paths[2],report['candidate_plan'])
+            print(json.dumps(report['summary']))
+        except (ValueError,KeyError,TypeError,OSError,ProviderFailure) as exc:
+            print(json.dumps(dict(status='common_sample_error',error_type=type(exc).__name__,mvp_accepted=False)))
+            raise SystemExit(2) from None
+        return
     if args.command == "collect-valuation-sources":
         from pathlib import Path
         from .valuation_collection import run_collection

@@ -843,3 +843,62 @@ source accession/date/hash evidence, without correction or use as current data.
 Structural/identity/unit/chronology checks and original-filing reconciliation
 remain required. This addresses an observed Salesforce 2011 fraction (`133.9`
 in a shares unit) without changing the literal 2026 current disclosure.
+
+## Source-bound 100-common-share research sample
+
+`docs/evidence/common100/candidates.json` contains the 100 selected identities.
+The audit examined 101 candidates: 83 existing corroborated covers and 18
+explicit replacement candidates. 100 passed the versioned listing/identity/
+registered-class checks; TER remained under review because the current parser
+rejects its original cover structure. `docs/evidence/common100/report.md` and
+`report.json.gz` retain the reasons and original source URL/hash/date evidence.
+The original 100-candidate financial/price reports are preserved; their 17
+unresolved names were not silently reclassified as inactive or non-common.
+The replacement set is a convenience development sample with technology bias,
+not a representative market sample or historical strategy result.
+
+Rebuild the exact sample from recorded primary bytes with no network calls:
+
+```bash
+PYTHONPATH=src python -m equity_research common-sample \
+  --candidates docs/evidence/common100/pool.json \
+  --base-bundle tests/fixtures/mvp100-sources \
+  --source-bundle tests/fixtures/common-extra-sources \
+  --as-of 2026-11-03T00:57:20.163470+00:00 \
+  --output data/common-sample-replay/report.json \
+  --plan-output data/common-sample-replay/candidates.json
+```
+
+The policy requires current directory membership/identity within four days,
+exact SEC metadata and original latest-annual class/symbol/period corroboration,
+a matching primary exchange, and rejection of known investment-company/shell
+contraindications. Missing fund tags remain unknown, never false. This narrow
+sample gate does not set `scope_approved`, legal-type, financial-model or
+investment approval and does not guarantee immediate tradability. Bank,
+insurance, REIT, BDC and other unsupported models cannot acquire a score through
+sample membership. All sample scores remain unavailable.
+
+The Nasdaq membership files are original 2026-11-02 recordings within the stated
+four-day policy. A fresh retrieval attempt failed; they are not presented as new
+live downloads. The extra bundle contains 37 newly obtained SEC directory/
+metadata/filing observations plus those two dated Nasdaq files. Initial SEC
+collection used 35 GET invocations; the TYL reserve added two; the final warm
+repeat used zero with unchanged evidence. Headers and operational SQLite are
+excluded. New official Nasdaq Trader archive origins are exact allowlisted
+public HTTPS hosts, with credential-bearing URLs still rejected.
+
+This does not accept the full MVP. Financial and comparative batches, fresh
+prices, sourced valuation/history inputs and the end-to-end acceptance run must
+now use this new candidate plan; old 100-company results do not establish its
+financial/price coverage. Model scoring and critical-risk gates remain separate.
+
+Observed date presentations now supported include four-digit month-first
+numeric dates and full/abbreviated English month names in title/upper case.
+Unknown transforms, invalid dates, two-digit numeric years and spoofed transform
+namespaces remain rejected by sample admission. Primary definition references:
+https://www.xbrl.org/Specification/inlineXBRL-transformationRegistry/REC-2020-02-12/inlineXBRL-transformationRegistry-REC-2020-02-12.html
+and
+https://www.xbrl.org/Specification/inlineXBRL-transformationRegistry/REC-2015-02-26%2Berrata-2019-04-17/inlineXBRL-transformationRegistry-REC-2015-02-26%2Bcorrected-errata-2019-04-17.html
+Only explicit supported subsets are implemented; dates are not inferred from
+calendar-year assumptions. Known exchange-name spellings are matched case-
+insensitively; symbols/CIKs/classes retain exact matching.

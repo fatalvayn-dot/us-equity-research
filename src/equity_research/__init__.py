@@ -1,3 +1,3 @@
 """Auditable US common-equity research; SEC identity and companyfacts adapters."""
 
-__version__ = "0.29.0"
+__version__ = "0.30.0"

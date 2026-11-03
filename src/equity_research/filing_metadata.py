@@ -53,15 +53,23 @@ class CoverParser(HTMLParser):
 
 
 def inline_date(text,format_label):
+    text=' '.join(text.split())
     if format_label in (None,''):return date.fromisoformat(text)
-    if format_label.split(':')[-1]!='date-monthname-day-year-en':raise ValueError('unsupported inline date transformation')
+    local=format_label.split(':')[-1]
+    if local=='date-month-day-year':
+        match=re.fullmatch(r'([0-9]{1,2})/([0-9]{1,2})/([0-9]{4})',text)
+        if not match:raise ValueError('unsupported numeric date text')
+        return date(int(match[3]),int(match[1]),int(match[2]))
+    if local not in ('date-monthname-day-year-en','datemonthdayyearen'):
+        raise ValueError('unsupported inline date transformation')
     months=('January','February','March','April','May','June','July','August','September','October','November','December')
     match=re.fullmatch(r'([A-Za-z]+) ([0-9]{1,2}), ([0-9]{4})',text)
-    if not match or match[1] not in months:raise ValueError('unsupported date text')
-    return date(int(match[3]),months.index(match[1])+1,int(match[2]))
+    labels={label:i for i,name in enumerate(months,1) for label in (name,name.upper(),name[:3],name[:3].upper())}
+    if not match or match[1] not in labels:raise ValueError('unsupported date text')
+    return date(int(match[3]),labels[match[1]],int(match[2]))
 
 
-def filing_security_metadata(body,*,cik,symbol,report_end,document_type):
+def filing_security_metadata(body,*,cik,symbol,report_end,document_type,expected_exchange=None):
     """Exact symbol and same-context title/exchange required, including class dimensions."""
     try:
         if not re.fullmatch(r'[0-9]{10}',cik) or int(cik)==0 or not symbol or not isinstance(report_end,date):raise ValueError('identity')
@@ -83,11 +91,18 @@ def filing_security_metadata(body,*,cik,symbol,report_end,document_type):
             all_values.setdefault(fact['name'],set()).add(text)
         if all_values.get('documenttype')!={document_type} or all_values.get('documentperiodenddate')!={report_end.isoformat()}:
             raise ValueError('document mismatch')
+        exchange_labels={
+            'NYSE':{'NYSE','New York Stock Exchange','The New York Stock Exchange'},
+            'Nasdaq':{'NASDAQ','Nasdaq','The Nasdaq Stock Market LLC','The Nasdaq Global Select Market','The Nasdaq Global Market','The Nasdaq Capital Market','Nasdaq Stock Market LLC','Nasdaq Stock Market, LLC','The Nasdaq Stock Market, LLC','The Nasdaq Stock Market','Nasdaq Global Select Market'},
+            'NYSE American':{'NYSE American','NYSE American LLC','NYSE MKT'}}
+        if expected_exchange is not None and expected_exchange not in exchange_labels:
+            raise ValueError('unsupported expected exchange')
         registered=[]
         for context,row in values.items():
             if row.get('tradingsymbol')!={symbol}:continue
             if len(row.get('security12btitle',set()))!=1 or len(row.get('securityexchangename',set()))!=1:continue
             title=next(iter(row['security12btitle']))
+            if expected_exchange is not None and next(iter(row['securityexchangename'])).casefold() not in {label.casefold() for label in exchange_labels[expected_exchange]}:continue
             if not re.search(r'\b(common|ordinary)\s+(stock|shares?)\b',title,re.I):continue
             if re.search(r'\b(preferred|depositary|depository|warrants?|units?|notes?|bonds?)\b',title,re.I):continue
             registered.append(dict(context_id=context,symbol=symbol,title=title,exchange=next(iter(row['securityexchangename']))))
