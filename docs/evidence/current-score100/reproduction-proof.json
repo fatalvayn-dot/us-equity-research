@@ -1,0 +1,21 @@
+{
+  "mode": "offline_fixed_cutoff_same_CLI_builder",
+  "new_http_requests": 0,
+  "as_of": "2026-11-03T05:36:21.308165+00:00",
+  "byte_identical": true,
+  "files": {
+    "report.json.gz": {
+      "original": "582c900081ad3dea57df6a066b782858fe98b85dc5af9ffa14081f4eb53e45a6",
+      "reproduced": "582c900081ad3dea57df6a066b782858fe98b85dc5af9ffa14081f4eb53e45a6"
+    },
+    "report.md": {
+      "original": "86c44d8ffd4b04745ef0450fb681eae06f8143da2c426b6ed8ade110a7508371",
+      "reproduced": "86c44d8ffd4b04745ef0450fb681eae06f8143da2c426b6ed8ade110a7508371"
+    },
+    "report.html": {
+      "original": "381369e7e1f459b8fd936d46e46dc57bfd72f87387f7d28be069b3badd553dee",
+      "reproduced": "381369e7e1f459b8fd936d46e46dc57bfd72f87387f7d28be069b3badd553dee"
+    }
+  },
+  "mvp_accepted": false
+}

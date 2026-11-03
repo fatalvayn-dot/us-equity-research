@@ -1,0 +1,53 @@
+{
+  "initial_summary": {
+    "candidates": 22,
+    "new_get_invocations": 103,
+    "get_invocations_by_host": {
+      "www.sec.gov": 19,
+      "data.sec.gov": 42,
+      "query1.finance.yahoo.com": 42
+    },
+    "identity_states": {
+      "exact_match": 22
+    },
+    "share_states": {
+      "verified_dated_share_class": 18,
+      "missing_disclosed_shares": 1,
+      "symbol_mismatch": 2,
+      "invalid_data": 1
+    },
+    "price_states": {
+      "valid": 22
+    },
+    "history_states": {
+      "valid": 20,
+      "not_started": 2
+    }
+  },
+  "resume_summary": {
+    "candidates": 22,
+    "new_get_invocations": 0,
+    "get_invocations_by_host": {},
+    "identity_states": {
+      "exact_match": 22
+    },
+    "share_states": {
+      "verified_dated_share_class": 18,
+      "missing_disclosed_shares": 1,
+      "symbol_mismatch": 2,
+      "invalid_data": 1
+    },
+    "price_states": {
+      "valid": 22
+    },
+    "history_states": {
+      "valid": 20,
+      "not_started": 2
+    }
+  },
+  "initial_as_of": "2026-11-03T05:36:21.308165+00:00",
+  "resume_as_of": "2026-11-03T05:36:52.059198+00:00",
+  "accepted_evidence_values_source_times_unchanged": true,
+  "new_100_financial_scan": false,
+  "mvp_accepted": false
+}

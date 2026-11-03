@@ -1,0 +1,92 @@
+{
+  "companies": [
+    {
+      "symbol": "AAPL",
+      "issuer_id": "0000320193"
+    },
+    {
+      "symbol": "MSFT",
+      "issuer_id": "0000789019"
+    },
+    {
+      "symbol": "MU",
+      "issuer_id": "0000723125"
+    },
+    {
+      "symbol": "AMD",
+      "issuer_id": "0000002488"
+    },
+    {
+      "symbol": "INTC",
+      "issuer_id": "0000050863"
+    },
+    {
+      "symbol": "PLTR",
+      "issuer_id": "0001321655"
+    },
+    {
+      "symbol": "ORCL",
+      "issuer_id": "0001341439"
+    },
+    {
+      "symbol": "AMAT",
+      "issuer_id": "0000006951"
+    },
+    {
+      "symbol": "TXN",
+      "issuer_id": "0000097476"
+    },
+    {
+      "symbol": "ADI",
+      "issuer_id": "0000006281"
+    },
+    {
+      "symbol": "MRVL",
+      "issuer_id": "0001835632"
+    },
+    {
+      "symbol": "CRM",
+      "issuer_id": "0001108524"
+    },
+    {
+      "symbol": "INTU",
+      "issuer_id": "0000896878"
+    },
+    {
+      "symbol": "NOW",
+      "issuer_id": "0001373715"
+    },
+    {
+      "symbol": "SNPS",
+      "issuer_id": "0000883241"
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672"
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397"
+    },
+    {
+      "symbol": "MCHP",
+      "issuer_id": "0000827054"
+    },
+    {
+      "symbol": "MPWR",
+      "issuer_id": "0001280452"
+    },
+    {
+      "symbol": "ON",
+      "issuer_id": "0001097864"
+    },
+    {
+      "symbol": "SWKS",
+      "issuer_id": "0000004127"
+    },
+    {
+      "symbol": "TYL",
+      "issuer_id": "0000860731"
+    }
+  ]
+}
