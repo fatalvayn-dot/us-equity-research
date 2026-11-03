@@ -6,7 +6,15 @@ Branch feat/common-annual-comparisons from main a7dc5accf719fdad405c70c1b783fc3c
 (PR #16). Inspected AGENTS, PROJECT_BRIEF, status, remote main/development refs,
 open PRs and Actions. Main matched, no open/conflicting PR, previous exact-head
 CI 41577426677 successful. Legacy repository untouched; unrelated temporary
-source-part files preserved and excluded. Commit/PR/CI links added after publication.
+source-part files preserved and excluded.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/17
+Source commit: https://github.com/fatalvayn-dot/us-equity-research/commit/c70fd5c89d6ba80da4851c08c88ec027cc296927
+Verified source tree a83e66ad3e57f8918d49a698782d5c5a23955b5d equals local c6a5dda;
+all 19 uploaded blobs independently matched their committed Git SHAs.
+Source CI: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41579347214
+All 646 tests and CLI status passed: Python 3.11/65.153s, 3.12/106.344s,
+3.13/66.190s. Code/data review recorded in PR comment 6595624934.
+Final documentation-head CI is checked before merge; no local/CI/live conflation.
 
 Added candidate-driven comparative_replay and a bounded-scope offline script
 accepting multiple original document cohorts and hash-validated public bundles.
@@ -33,7 +41,9 @@ share or investment approval. No scores/ranks from this work. Old pilots preserv
 
 Artifacts: docs/evidence/common-comparative100/ (current/prior batches/plans,
 report, explicit unresolved candidates, audit, original checks and reproduction
-proof). README provides exact rerun command. They feed existing comparison/score
+proof). Repeated fixed-cutoff CLI produced byte-identical numerical/audit outputs.
+All 202 original-value checks were separately rerun with byte-identical reconciliation
+JSON; every manifest input/output checksum passed. README provides exact rerun command. They feed existing comparison/score
 interfaces without replacing main financial observations or weakening model gates.
 
 Tests: 14 focused tests passed (2.205s); full local 646/646 passed (98.747s,
