@@ -2,11 +2,11 @@
   "date_local": "2026-11-03",
   "python": "3.12.14",
   "command": "PYTHONPATH=src python -m unittest discover -s tests -q",
-  "tests": 631,
-  "new_tests": 17,
+  "tests": 632,
+  "new_tests": 18,
   "errors": 0,
   "failures": 0,
-  "seconds": 94.134,
+  "seconds": 93.212,
   "mode": "offline_unit_regression_source_replay_and_CLI_not_live_CI",
   "fresh_financial_company_count": 17,
   "selected_financial_facts": 186,
@@ -31,5 +31,8 @@
   "mixed_arithmetic_results": 704,
   "full_new_100_live_run": false,
   "mvp_accepted": false,
-  "initial_test_failure": "serialized request dates were not decoded by replay test; fixed fixture, original selected values unaffected"
+  "initial_test_failure": "serialized request dates were not decoded by replay test; fixed fixture, original selected values unaffected",
+  "source_head_tests": 631,
+  "source_head_seconds": 94.134,
+  "cached_body_origin_and_size_guards": true
 }

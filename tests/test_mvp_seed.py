@@ -63,3 +63,18 @@ class MvpSeedTests(unittest.TestCase):
             part=bundle/'sources.jsonl.gz.part0000';part.write_bytes(part.read_bytes()+b'bad')
             with patch('equity_research.response_archive.ArchivedTransport.get',side_effect=AssertionError('unexpected GET')):
                 with self.assertRaises(ValueError):run_mvp(CANDIDATES,state_dir=root/'second',user_agent='Synthetic',seed_bundles=[bundle])
+
+
+    def test_cached_bodies_still_obey_transport_size_limits_without_network(self):
+        from equity_research.response_archive import ArchivedTransport
+        original=ArchivedTransport.__init__
+        def small(self,**kwargs):
+            original(self,**kwargs);self.max_bytes=10
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);_,bundle=self.seed(root)
+            with patch.object(ArchivedTransport,'__init__',small),patch.object(ArchivedTransport,'get',side_effect=AssertionError('unexpected GET')):
+                report=run_mvp(CANDIDATES,state_dir=root/'second',user_agent='Synthetic',seed_bundles=[bundle],max_new_fields=0)
+            self.assertEqual(report['pipeline']['metadata_states'],{'invalid_data':1})
+            self.assertEqual(report['pipeline']['public_transport_get_calls'],0)
+            self.assertEqual(report['summary']['accepted_facts'],0)
+            self.assertFalse(report['mvp_accepted'])

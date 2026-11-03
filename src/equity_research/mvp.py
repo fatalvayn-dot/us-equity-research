@@ -124,9 +124,11 @@ def run_mvp(payload, *, state_dir, user_agent, max_new_documents=100, max_new_fi
                 else:counts['seed_observations_outside_freshness']+=1
         class Recording(ArchivedTransport):
             def get(self,url):
+                self._validate_url(url)
                 pulse()
                 cached=cached_response(archive,url,clock(),timedelta(hours=6))
                 if cached is not None:
+                    if len(cached.body)>self.max_bytes:raise ProviderFailure(Status.INVALID_DATA)
                     counts['archived_transport_reuses']+=1
                     return cached
                 counts['public_transport_get_calls']+=1

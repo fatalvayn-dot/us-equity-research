@@ -2,6 +2,19 @@
 
 ## 2026-11-03 — New 17-company financial collection and mixed 100-cohort continuation
 
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/16
+Source commit: https://github.com/fatalvayn-dot/us-equity-research/commit/3ff708b1dffe97d338d7f239d2ebea617f1602ad
+Source tree de3be0af1f6ee68869da8d0b519c2383311a00ce matches local 6a4350c;
+each uploaded Git blob SHA independently matched before branch publication.
+Source CI: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41576906725
+631 tests and CLI status passed: Python 3.11/109.290s, 3.12/124.608s,
+3.13/111.637s. Manual review additionally required cached responses to pass
+transport origin/credential validation and original maximum response-byte bounds.
+These checks now apply before any cached body can be returned; oversized cached
+metadata remains invalid_data with zero GETs and zero accepted facts. One added
+regression raises final suite size to 632; final local 632/632 passed
+(93.212s, Python 3.12.14), and exact final-head CI is checked before merge. No copied secret, header or operational database in published evidence.
+
 Branch feat/common-financial-cohort from main
 1610fdeccb928d2dee15d9e77819c4810e73c59b (PR #15). Read main/open PRs/Actions,
 AGENTS, PROJECT_BRIEF and status; no open/conflicting PR at start, prior exact
@@ -63,7 +76,7 @@ metadata-finalization-audit.json. No partial metadata was accepted as full proof
 
 Tests: 27 focused unit/seed/cohort/MVP tests passed (5.448s), corrected 630/630
 full local regression passed (92.522s, Python 3.12.14). One additional recorded
-original-document test makes final suite 631; final 631/631 full local regression
+original-document test makes final suite 631; source-head 631/631 full local regression
 passed (94.134s, Python 3.12.14). Exact-head CI checked before merge. These are offline/recorded tests, not live CI.
 
 Next concrete task: derive and collect exact current/prior annual periods for

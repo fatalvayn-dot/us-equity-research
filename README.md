@@ -966,6 +966,7 @@ coverage for these companies.
 MVP collection can now seed public raw bundles and reuse bodies only within
 its six-hour freshness policy. Stale/future seed observations are skipped;
 seeding never updates retrieval dates or changes first-valid provider order.
+Cached responses still pass the transport origin/credential and byte-size guards.
 Writable state must be outside source bundles. A completed run writes a final
 complete metadata snapshot; exports reject incomplete metadata counts.
 
