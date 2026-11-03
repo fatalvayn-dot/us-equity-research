@@ -1,0 +1,32 @@
+{
+  "mode": "repeated_offline_CLI_same_explicit_cutoff",
+  "new_http_requests": 0,
+  "byte_identical": true,
+  "artifacts": {
+    "audit.json": {
+      "before": "b940460d1c30dd3fc70c05f3d1c7c5ee94015863585a8aaff9ddfbac80a3627a",
+      "after": "b940460d1c30dd3fc70c05f3d1c7c5ee94015863585a8aaff9ddfbac80a3627a"
+    },
+    "current-batch.json.gz": {
+      "before": "2c312b6c2f097e054c8d881db9f2b921f0bdfabd8a75283f480251f9e17ac67c",
+      "after": "2c312b6c2f097e054c8d881db9f2b921f0bdfabd8a75283f480251f9e17ac67c"
+    },
+    "prior-batch.json.gz": {
+      "before": "f7cf414608556638ba87b46fe34c6678121f877bccf0370cdf73d57c240721ea",
+      "after": "f7cf414608556638ba87b46fe34c6678121f877bccf0370cdf73d57c240721ea"
+    },
+    "current-plan.json": {
+      "before": "6ec46ec00b6bbb3268565b0be601ca5e2f1fcae29f8a12e9b24db1619d1d4ffb",
+      "after": "6ec46ec00b6bbb3268565b0be601ca5e2f1fcae29f8a12e9b24db1619d1d4ffb"
+    },
+    "prior-plan.json": {
+      "before": "9c1101b1b6dbabbbc20821acff700776677ca8008737c0d748c3599183ed83e2",
+      "after": "9c1101b1b6dbabbbc20821acff700776677ca8008737c0d748c3599183ed83e2"
+    },
+    "report.json.gz": {
+      "before": "b8809301c6ca9faa0c039cc69bb9609a4ab2e8409c07e7a9a936d633ce305bcd",
+      "after": "b8809301c6ca9faa0c039cc69bb9609a4ab2e8409c07e7a9a936d633ce305bcd"
+    }
+  },
+  "note": "Markdown explanation expanded between runs; numerical/audit outputs listed above are byte-identical. Original checks are a separate reconciliation artifact, not claimed as replay-produced."
+}

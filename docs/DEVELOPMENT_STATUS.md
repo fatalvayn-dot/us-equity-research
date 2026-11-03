@@ -1,5 +1,74 @@
 # Development status
 
+## 2026-11-03 — Exact common100 comparative inputs (v0.32.0)
+
+Branch feat/common-annual-comparisons from main a7dc5accf719fdad405c70c1b783fc3c3090c301
+(PR #16). Inspected AGENTS, PROJECT_BRIEF, status, remote main/development refs,
+open PRs and Actions. Main matched, no open/conflicting PR, previous exact-head
+CI 41577426677 successful. Legacy repository untouched; unrelated temporary
+source-part files preserved and excluded.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/17
+Source commit: https://github.com/fatalvayn-dot/us-equity-research/commit/c70fd5c89d6ba80da4851c08c88ec027cc296927
+Verified source tree a83e66ad3e57f8918d49a698782d5c5a23955b5d equals local c6a5dda;
+all 19 uploaded blobs independently matched their committed Git SHAs.
+Source CI: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41579347214
+All 646 tests and CLI status passed: Python 3.11/65.153s, 3.12/106.344s,
+3.13/66.190s. Code/data review recorded in PR comment 6595624934.
+Final documentation-head CI is checked before merge; no local/CI/live conflation.
+
+Added candidate-driven comparative_replay and a bounded-scope offline script
+accepting multiple original document cohorts and hash-validated public bundles.
+Uses explicit aware as-of, exact symbol/CIK joins, exact document URL/hash/time,
+latest available-at-cutoff companyfacts observations and existing strict annual
+planner. No fiscal calendar guesses, tag aliases, source date rewrites or network
+transport. Conflicting same-URL/timestamp bytes and overlapping document issuers
+reject. Future observations cannot supply current operands. Source providers
+retain Yahoo->SEC->Nasdaq->Finnhub first-valid behavior; later providers not
+queried after SEC success. No environment credential access. Recorded replay
+age is explicitly unrestricted inside this replay only; live six-hour policies
+remain unchanged. Source/query dates and all arithmetic operands remain visible.
+
+Exact new common100 plan: 100 identities retained on both sides, 96 ready annual
+pairs; 534 current + 534 prior accepted values. 514 literal growth calculations,
+20 nonpositive bases with unavailable growth ratio. GEV/SNDK/BLK fail original
+annual-period verification; RY lacks a literal supported US-GAAP comparable pair.
+All four stay visible, with no fabricated values/scores. New 17 issuers contribute
+101 accepted values per side; 202/202 paired values matched exact original annual
+iXBRL CIK/period/USD/concept contexts. All checks and original URLs/hashes/dates
+are retained. This reconciles recorded public bodies; zero new HTTP requests,
+not fresh live or historical-vintage acceptance. No new financial-model, common-
+share or investment approval. No scores/ranks from this work. Old pilots preserved.
+
+Artifacts: docs/evidence/common-comparative100/ (current/prior batches/plans,
+report, explicit unresolved candidates, audit, original checks and reproduction
+proof). Repeated fixed-cutoff CLI produced byte-identical numerical/audit outputs.
+All 202 original-value checks were separately rerun with byte-identical reconciliation
+JSON; every manifest input/output checksum passed. README provides exact rerun command. They feed existing comparison/score
+interfaces without replacing main financial observations or weakening model gates.
+
+Tests: 14 focused tests passed (2.205s); full local 646/646 passed (98.747s,
+Python 3.12.14). Covers wrong identity/currency, missing/conflicting raw references,
+future observations, exact date/hash selection, stale recorded replay labeling,
+empty/unresolved candidates, no network, ordered source stop, deterministic
+synthetic rerun and source/output isolation. Actual ADBE/INTU/TYL annual bodies
+reproduce 36 paired operands; full 100 artifact reproduces all 514 calculations.
+Local tests are not Actions or live acceptance. Exact-head CI checked before merge.
+
+Failures/corrections: initial replay incorrectly let live BatchRunner six-hour
+freshness mark 433 old retained pairs stale, leaving 101 per side. Explicit
+replay-only age policy corrected this; no live TTL relaxed or observation time
+changed. An inspection command tried to read the still-uncreated output folder;
+it was corrected after the collection finished. No source or user file removed.
+First collection/warm behavior here is offline only, never counted as new live work.
+
+Remaining blocker: latest sufficient financial operands, independently confirmed
+critical facts, refreshed share counts/quotes/history and full current scored
+100-company acceptance/CI are still required. Next concrete code task: refresh
+valuation sources for supported-model candidates in the exact common100 plan,
+join these current/prior batches, reconcile critical annual operands, produce
+explained research scores and an explicit end-to-end acceptance report. Keep
+special-sector/unknown and incomplete scores withheld. MVP remains unaccepted.
+
 ## 2026-11-03 — New 17-company financial collection and mixed 100-cohort continuation
 
 PR: https://github.com/fatalvayn-dot/us-equity-research/pull/16
