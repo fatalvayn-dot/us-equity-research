@@ -1,5 +1,106 @@
 # Development status
 
+## 2026-11-03 — Source-bound 100-common-share sample (latest)
+
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/15
+Source commit: https://github.com/fatalvayn-dot/us-equity-research/commit/10111dc5324ab0c3f8f86df85d884cc225c8da7e
+Published source tree de47302e07df4f104c70af62eb0eebcdb4bcddfa matches local a5399f4.
+Source CI: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41557895303
+All 613 tests and CLI status passed: 3.11/93.392s, 3.12/103.394s, 3.13/99.444s.
+Final addition retains the new-plan price100 artifacts plus one exact raw-price
+integration test (final suite 614). Targeted 2 tests passed in 3.849s; full final
+head CI is checked before merge. Source/local full 613 must not be called 614.
+Manual review: primary class cannot be joined across contexts/symbols/venues;
+known date/exchange variants do not guess periods/classes. Sample approval is
+separate from financial/model/legal approval, and all scores remain unavailable.
+Source artifacts preserve original times; listed as-of limitations stay explicit.
+
+Branch feat/source-bound-common-sample from main
+0e3c513a86eca99b7e510b893793dba17e476406 (PR #14). Read AGENTS, PROJECT_BRIEF,
+status, main/open PRs and Actions; no open/conflicting PR at start; exact-head
+Actions 41546619377 passed 595 tests on three Python versions. Legacy unchanged.
+Unrelated pre-existing temporary files preserved and excluded from staging.
+
+Implemented v0.30.0 registered-common-sample-v1 and common-sample CLI. Rebuild
+membership from original two Nasdaq directory bodies and exact SEC identity,
+then current-in-policy SEC submissions and original latest annual registered
+class/symbol/report-period/primary-exchange evidence. No caller approval flag
+can admit an entry. Explicit fund/shell contraindications and unsupported
+investment-company SIC routes remain under review; absent flags stay unknown.
+The narrow sample gate never sets scope/legal/model/investment approval or a
+score, nor guarantees immediate tradability or the full active universe.
+
+101 candidates examined: existing 83 corroborated covers plus 18 explicit
+replacement candidates. 100 source-bound common-class/listing matches selected;
+TER remains under review because its original cover triggers the existing
+unsupported/conflicting-structure guard. TYL was an explicit reserve, not a
+relaxation or symbol substitution. Pool, exact 100 identities, per-company raw
+URLs/hashes/dates and Markdown audit: docs/evidence/common100/. Original old
+100-candidate financial/price reports and unresolved names remain preserved.
+Development sample is technology-biased, not market-representative or a tested
+investment strategy. No scores/financial completeness added by sample admission.
+
+Live source work: 18 replacement SEC metadata + 18 original annual filings +
+1 fresh SEC directory = 37 public observations; two original Nasdaq membership
+files retained at 2026-11-02 observation times within the four-day policy.
+Initial 17-name collection used 35 GET invocations; TYL reserve added 2; final
+warm repeat used zero and retained identical evidence events. Raw extra bundle:
+tests/fixtures/common-extra-sources/ (39 total observations), alongside original
+tests/fixtures/mvp100-sources/. No copied credentials, headers or SQLite in Git.
+A preliminary fresh Nasdaq retrieval failed api_error; individual endpoint
+outcomes were not retained from that failed preliminary attempt. Do not count
+recorded membership as a fresh successful Nasdaq download or hide that limit.
+
+Date parsing now handles explicit four-digit month-first numeric and supported
+English full/short title/upper-case month presentations. Unknown transforms,
+invalid dates, two-digit numeric years and spoofed date-transform namespaces
+cannot admit sample rows. Definitions checked against XBRL registry 3/4 primary
+specifications linked in README. Primary exchange matching accepts documented
+case/spelling variants only; exact company/class symbol matching remains.
+Shared legal contraindication parsing factored without changing legacy scoring.
+Public raw archive allowlist adds only official Nasdaq Trader text origins;
+credential-bearing URLs remain rejected. CLI protects candidate and bundle paths.
+
+Failures/recovery: first stricter base pass admitted 70/83 because 13 real Nasdaq
+exchange labels used known case/name variants; explicit documented label matching
+resolved these, without accepting NYSE Arca or changing CIK/symbol matching.
+An operational source-index SQLite file failed integrity_check during rebuilding;
+it was preserved. Source reconstruction now reads/hash-validates original Git
+bundles directly, with no reliance on that corrupt operational cache. The
+100-selection result was produced from original bytes, not repaired cache data.
+
+Tests: 613/613 full local regressions passed (206.012s, Python 3.12.14), including
+18 new unit/CLI/actual-cover replay tests. Earlier full 611 passed (143.431s).
+These concurrent local timings are not performance benchmarks. Four actual
+replacement covers (ADBE, INTU, TYL, unresolved TER) replay to exact report rows;
+100 artifact identity/class/hash invariants and zero-GET proof checked. Existing
+financial/valuation/scoring regressions retained. Exact-head CI checked before
+merge; no live CI or full-MVP acceptance claim. Full common-sample CLI replay
+then reproduced both report and candidate plan BYTE FOR BYTE, with zero network
+calls. Proof: docs/evidence/common100/cli-reproduction.json.
+
+A separate actual price-run now covers this exact new 100-company plan:
+100/100 valid USD regular-session observations, 100 Yahoo quote GET invocations
+plus one fresh SEC identity GET. All selected source/identity references were
+archived. Immediate zero-budget repeat retained 100/100 with zero new quote or
+identity GETs and identical values, source times and identity evidence. Sources:
+tests/fixtures/common-price100-sources/ (101 observations); dated reports,
+initial/resume proof and rerun command: docs/evidence/common-price100/, README.
+Initial generated_at 2026-11-03T01:09:40.306623+00:00; no perpetual current-price
+or executable-price claim. A new targeted integration test reconstructs all 100
+prices from their exact raw bodies/identity and checks source currency/times;
+full final-head CI is required. Earlier 613-test local full run predates this
+one added test; do not mislabel it as a local full 614-test run.
+
+Remaining/next concrete task: use docs/evidence/common100/candidates.json for
+financial metadata/document/14-field and comparable-period collection, then
+valuation/history refresh and scored report. Old 843 facts/576 calculations and
+two dated pilot scores belong to the old candidate batch; they cannot establish
+coverage for the 17 new selected companies. Preserve special-sector/unverified
+model review and critical-financial gates. A new complete financial 100-company
+acceptance run and CI remain necessary before MVP delivery. Fresh price
+coverage was verified above at its recorded cutoff, not accepted indefinitely.
+
 ## 2026-11-03 — Candidate-driven bounded source collection and Salesforce recovery
 
 PR: https://github.com/fatalvayn-dot/us-equity-research/pull/14

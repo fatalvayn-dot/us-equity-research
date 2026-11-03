@@ -1,0 +1,12 @@
+{
+  "initial_generated_at": "2026-11-03T01:09:40.306623+00:00",
+  "resume_generated_at": "2026-11-03T01:10:13.175565+00:00",
+  "initial_price_GETs": 100,
+  "initial_identity_GETs": 1,
+  "resume_price_GETs": 0,
+  "resume_identity_GETs": 0,
+  "all_100_price_values_source_times_and_identity_evidence_unchanged": true,
+  "candidate_plan": "docs/evidence/common100/candidates.json",
+  "candidate_plan_sha256": "099c9c85df3534f948a99decf127cada9acacb0486381047e63a5cf276581a3d",
+  "full_MVP_accepted": false
+}

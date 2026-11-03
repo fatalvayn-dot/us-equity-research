@@ -1,0 +1,46 @@
+{
+  "mode": "registered_class_and_listing_sample_not_financial_acceptance",
+  "base_bundle": "tests/fixtures/mvp100-sources",
+  "base_manifest_sha256": "b9b9b477149adefe2354079500e34bb27d569a5393fa62c6b988b43efa15a3e4",
+  "extra_bundle": "tests/fixtures/common-extra-sources",
+  "extra_manifest_sha256": "c2bcddd0d03e297dbadab61d0040d4484b18022128183cc2dc47628e331d543f",
+  "files": [
+    {
+      "file": "candidates.json",
+      "sha256": "099c9c85df3534f948a99decf127cada9acacb0486381047e63a5cf276581a3d"
+    },
+    {
+      "file": "initial-collection.json",
+      "sha256": "0416e2d1f35144b658f633c216781f04792d2c6e453a4df971925d4510fd88eb"
+    },
+    {
+      "file": "pool.json",
+      "sha256": "c641fab19ea8de55293126b157edd48579f260577d070510bee34f0216311815"
+    },
+    {
+      "file": "report.json.gz",
+      "sha256": "8cfaf2b12eeea8ee6c458ce6b1288370742ab33381a3822b7e2b218e54f6e27b"
+    },
+    {
+      "file": "report.md",
+      "sha256": "dcbdd3d27a81bb5a02ed08baa6061ce304c0bd42ccdd15b45be7e3ac9f37cc61"
+    },
+    {
+      "file": "reserve-collection.json",
+      "sha256": "e74eed5fd03b970fc37faaf5b0f4565d43cb90f5e1cbc2ac3d5487489d97eea0"
+    },
+    {
+      "file": "resume-proof.json",
+      "sha256": "5a55f040b8fe03a3302b9324eafc0d6bda8b2ba124803c612a6ba71c9557bd78"
+    },
+    {
+      "file": "warm-collection.json",
+      "sha256": "355f02dfdd52e9ef55244075eb9b53e8046233a2d5d85c6c20ff53e008a8ab16"
+    },
+    {
+      "file": "cli-reproduction.json",
+      "sha256": "d1101359ab39b7c8c49633050b8e6a4708059dbb2670273a740ec00e5ccd86d8"
+    }
+  ],
+  "mvp_accepted": false
+}

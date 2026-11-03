@@ -1,0 +1,210 @@
+{
+  "candidates": [
+    {
+      "symbol": "ADBE",
+      "issuer_id": "0000796343"
+    },
+    {
+      "symbol": "INTU",
+      "issuer_id": "0000896878"
+    },
+    {
+      "symbol": "NOW",
+      "issuer_id": "0001373715"
+    },
+    {
+      "symbol": "SNPS",
+      "issuer_id": "0000883241"
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672"
+    },
+    {
+      "symbol": "FTNT",
+      "issuer_id": "0001262039"
+    },
+    {
+      "symbol": "WDAY",
+      "issuer_id": "0001327811"
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397"
+    },
+    {
+      "symbol": "ROP",
+      "issuer_id": "0000882835"
+    },
+    {
+      "symbol": "MCHP",
+      "issuer_id": "0000827054"
+    },
+    {
+      "symbol": "MPWR",
+      "issuer_id": "0001280452"
+    },
+    {
+      "symbol": "ON",
+      "issuer_id": "0001097864"
+    },
+    {
+      "symbol": "TER",
+      "issuer_id": "0000097210"
+    },
+    {
+      "symbol": "SWKS",
+      "issuer_id": "0000004127"
+    },
+    {
+      "symbol": "NTAP",
+      "issuer_id": "0001002047"
+    },
+    {
+      "symbol": "AKAM",
+      "issuer_id": "0001086222"
+    },
+    {
+      "symbol": "FFIV",
+      "issuer_id": "0001048695"
+    }
+  ],
+  "events": [
+    {
+      "symbol": "ADBE",
+      "issuer_id": "0000796343",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/796343/000079634326000003/adbe-20251128.htm",
+      "raw_sha256": "84774fc9be12377191d783b3777afdcb6192746acb6b2df536af166371958019"
+    },
+    {
+      "symbol": "INTU",
+      "issuer_id": "0000896878",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/896878/000089687826000037/intu-20260731.htm",
+      "raw_sha256": "924a5f31df8081bad8f1bbdf88bacd813baaa2e38592023af465c41b937c8a0d"
+    },
+    {
+      "symbol": "NOW",
+      "issuer_id": "0001373715",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1373715/000137371526000007/now-20251231.htm",
+      "raw_sha256": "57dd27a5f57afbed357e824da6fd5c794d9b7aa06e3b7f4d281e50dd3a8a89cb"
+    },
+    {
+      "symbol": "SNPS",
+      "issuer_id": "0000883241",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/883241/000088324125000028/snps-20251031.htm",
+      "raw_sha256": "7c7238d6a30b5e4474d52d438d2ebef5e6a12f295e0679ef67e800c03fed5c4d"
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/813672/000081367226000016/cdns-20251231.htm",
+      "raw_sha256": "80e2881357408a5df0f8054528cc5d6b66fd5ec493c5a8088e2dd9456dc9daf9"
+    },
+    {
+      "symbol": "FTNT",
+      "issuer_id": "0001262039",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1262039/000126203926000007/ftnt-20251231.htm",
+      "raw_sha256": "3105ef2328e21f6f46d1ff8f805901ec3fb295d80ecd952c4bbc82f322d97e4a"
+    },
+    {
+      "symbol": "WDAY",
+      "issuer_id": "0001327811",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1327811/000132781126000014/wday-20260131.htm",
+      "raw_sha256": "6da88670ba4d66b1a8a037b50b5c489237bf5894e481fb65d73262137428e4eb"
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/769397/000076939726000015/adsk-20260131.htm",
+      "raw_sha256": "a8d1e3f9b658bf2eed17740a0778b45b52c030230044eb2d726d28e9c252d7c4"
+    },
+    {
+      "symbol": "ROP",
+      "issuer_id": "0000882835",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/882835/000088283526000009/rop-20251231.htm",
+      "raw_sha256": "25d63f9e3f9f1b2e89b75f04df5827cefaa1ed2f203bbbd5b742771601c900a5"
+    },
+    {
+      "symbol": "MCHP",
+      "issuer_id": "0000827054",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/827054/000082705426000016/mchp-20260331.htm",
+      "raw_sha256": "7ae65e597e5abe743fd12a6cd48ccc69730daf8f2dd69cd542859b2e29d17084"
+    },
+    {
+      "symbol": "MPWR",
+      "issuer_id": "0001280452",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1280452/000143774926006113/mpwr20251231_10k.htm",
+      "raw_sha256": "9cd528dc5a069f25b34d6227b31f2481026475952688d0db11c3e3c1ba9a4cb5"
+    },
+    {
+      "symbol": "ON",
+      "issuer_id": "0001097864",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1097864/000109786426000006/on-20251231.htm",
+      "raw_sha256": "26122ffccd25a03c4a7f4ceca4cd88da566c743852305bba424f1f5db8bf9b39"
+    },
+    {
+      "symbol": "TER",
+      "issuer_id": "0000097210",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/97210/000119312526059002/ter-20251231.htm",
+      "raw_sha256": "18b7c1138a737e436185fb2d7741516e0f6961afccc6c4cb8e61ae31be86d434"
+    },
+    {
+      "symbol": "SWKS",
+      "issuer_id": "0000004127",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/4127/000000412725000085/swks-20251003.htm",
+      "raw_sha256": "8f06c556d7bb82b3a9918cc344172f07355de6b1a08fe779b12213167326f287"
+    },
+    {
+      "symbol": "NTAP",
+      "issuer_id": "0001002047",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1002047/000119312526259683/ntap-20260424.htm",
+      "raw_sha256": "278282b69321eab2e001bf1a79cf91ba73d1929528e6d301c2233be00dd7724d"
+    },
+    {
+      "symbol": "AKAM",
+      "issuer_id": "0001086222",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1086222/000108622226000022/akam-20251231.htm",
+      "raw_sha256": "d8b68312f41edc26b87c64305b6e840e2798e7df8e14142444c5d09c33745be1"
+    },
+    {
+      "symbol": "FFIV",
+      "issuer_id": "0001048695",
+      "status": "source_bodies_collected",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1048695/000104869525000157/ffiv-20250930.htm",
+      "raw_sha256": "d99a925e058ea0995f9a6bfa998bc12b20b7717d3166e28f9885cd744a584df9"
+    }
+  ],
+  "new_get_invocations": 35,
+  "listing_attempts": [
+    {
+      "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+      "status": "valid_recorded_membership",
+      "http_requested": false,
+      "retrieved_at": "2026-11-02T00:53:59.905999+00:00"
+    },
+    {
+      "url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+      "status": "valid_recorded_membership",
+      "http_requested": false,
+      "retrieved_at": "2026-11-02T00:54:11.831691+00:00"
+    }
+  ],
+  "as_of": "2026-11-03T00:50:44.100327+00:00",
+  "mvp_accepted": false
+}
