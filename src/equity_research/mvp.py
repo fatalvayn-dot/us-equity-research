@@ -98,11 +98,15 @@ def archive_coverage(batch, archive):
                 financial_facts=len(rows))
 
 
-def run_mvp(payload, *, state_dir, user_agent, max_new_documents=100, max_new_fields=None, progress=None):
+def run_mvp(payload, *, state_dir, user_agent, max_new_documents=100, max_new_fields=None, progress=None, seed_bundles=()):
     candidates=validate_candidates(payload)
     if type(max_new_documents) is not int or not 0<=max_new_documents<=100 or (max_new_fields is not None and (type(max_new_fields) is not int or max_new_fields<0)):
         raise ValueError('bounded document/field work required')
-    root=Path(state_dir);root.mkdir(parents=True,exist_ok=True)
+    root=Path(state_dir)
+    seed_bundles=tuple(Path(p).resolve() for p in seed_bundles)
+    if any(bundle==root.resolve() or bundle in root.resolve().parents for bundle in seed_bundles):
+        raise ValueError('working state must not overwrite an input source bundle')
+    root.mkdir(parents=True,exist_ok=True)
     lock=BatchStore(root/'run-lock.sqlite');owner=None;archive=None;client=None;documents=None;store=None
     clock=lambda:datetime.now(timezone.utc)
     ttl=timedelta(minutes=15);counts=Counter();limiters={}
@@ -110,9 +114,24 @@ def run_mvp(payload, *, state_dir, user_agent, max_new_documents=100, max_new_fi
         owner=lock.acquire(clock(),ttl)
         def pulse():lock.renew(owner,clock(),ttl)
         archive=ResponseArchive(root/'responses.sqlite')
+        from .evidence_bundle import read_bundle
+        from .prices import cached_response
+        for bundle in seed_bundles:
+            for response in read_bundle(bundle):
+                pulse()
+                if timedelta(0)<=clock()-response.retrieved_at<=timedelta(hours=6):
+                    archive.record(response);counts['seeded_public_observations']+=1
+                else:counts['seed_observations_outside_freshness']+=1
         class Recording(ArchivedTransport):
             def get(self,url):
-                pulse();counts['public_transport_get_calls']+=1
+                self._validate_url(url)
+                pulse()
+                cached=cached_response(archive,url,clock(),timedelta(hours=6))
+                if cached is not None:
+                    if len(cached.body)>self.max_bytes:raise ProviderFailure(Status.INVALID_DATA)
+                    counts['archived_transport_reuses']+=1
+                    return cached
+                counts['public_transport_get_calls']+=1
                 if progress and counts['public_transport_get_calls']%25==0:
                     progress(dict(phase='public_requests',calls=counts['public_transport_get_calls']))
                 return super().get(url)
@@ -168,7 +187,10 @@ def run_mvp(payload, *, state_dir, user_agent, max_new_documents=100, max_new_fi
         batch['companies'].extend(unresolved)
         batch['companies'].sort(key=lambda c:next(i for i,r in enumerate(candidates) if r['issuer_id']==c['issuer_id']))
         batch['summary'].update(companies=len(batch['companies']),financial_query_companies=len(plan['companies']),period_unresolved_companies=len(unresolved))
-        save_json(root/'batch.json',batch);pulse()
+        save_json(root/'batch.json',batch)
+        # Final complete metadata snapshot accompanies the completed batch;
+        # intermediate progress files must not be exported as final coverage.
+        save_json(root/'metadata.json',dict(companies=normalized));pulse()
         coverage=archive_coverage(batch,archive);save_json(root/'archive-coverage.json',coverage)
         report=build_report(batch)
         report['report_generation_network_requests']=report.pop('new_network_requests')
@@ -185,6 +207,9 @@ def run_mvp(payload, *, state_dir, user_agent, max_new_documents=100, max_new_fi
             companies_with_financial_facts=sum(c['accepted_fact_count']>0 for c in report['companies']),
             period_unresolved_companies=len(unresolved),deferred_duration_fields=sum(len(v) for v in deferred.values()),
             public_transport_get_calls=counts['public_transport_get_calls'],
+            seeded_public_observations=counts['seeded_public_observations'],
+            seed_observations_outside_freshness=counts['seed_observations_outside_freshness'],
+            archived_transport_reuses=counts['archived_transport_reuses'],
             call_measure='public transport GET invocations, excluding internal retries and private Finnhub transport',
             all_financial_references_archived=coverage['all_references_archived'],
             archived_financial_facts=coverage['financial_facts'])

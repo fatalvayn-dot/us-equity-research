@@ -21,7 +21,7 @@ from .pipeline import research_resolver
 
 def main():
     parser = argparse.ArgumentParser(description="US Equity Research foundation")
-    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report", "comparative-report", "valuation-report", "score-report", "price-run", "collect-valuation-sources", "common-sample", "mvp-run"])
+    parser.add_argument("command", choices=["status", "sec-directory", "sec-fact", "nasdaq-discovery", "finnhub-fact", "research-fact", "research-batch", "research-report", "comparative-report", "valuation-report", "score-report", "price-run", "collect-valuation-sources", "common-sample", "financial-cohort", "mvp-run"])
     parser.add_argument("--user-agent", default=os.environ.get("SEC_USER_AGENT"))
     parser.add_argument("--symbol", action="append", default=[])
     parser.add_argument("--cik")
@@ -51,7 +51,33 @@ def main():
     parser.add_argument("--base-bundle")
     parser.add_argument("--plan-output")
     parser.add_argument("--sample-size",type=int,default=100)
+    parser.add_argument("--cohort-input",action="append",default=[])
+    parser.add_argument("--seed-bundle",action="append",default=[])
+    parser.add_argument("--batch-output")
     args = parser.parse_args()
+    if args.command == 'financial-cohort':
+        import gzip
+        from pathlib import Path
+        from .financial_cohort import assemble_financial_cohort,render_cohort_markdown,render_cohort_html
+        from .mvp import save_json,save_text
+        from .reporting import render_markdown
+        if not all((args.candidates,args.cohort_input,args.output,args.batch_output)):
+            parser.error('financial-cohort requires --candidates, --cohort-input, --batch-output and --output')
+        inputs=[Path(p).resolve() for p in [args.candidates]+args.cohort_input]
+        outputs=[Path(p).resolve() for p in (args.batch_output,args.output,args.markdown,args.html) if p]
+        if len(set(inputs+outputs))!=len(inputs+outputs):parser.error('cohort input and output paths must be distinct')
+        try:
+            def read(path):
+                b=path.read_bytes();return json.loads(gzip.decompress(b) if str(path).endswith('.gz') else b)
+            batch,report=assemble_financial_cohort(read(inputs[0]),[read(p) for p in inputs[1:]])
+            save_json(args.batch_output,batch);save_json(args.output,report)
+            if args.markdown:save_text(args.markdown,render_cohort_markdown(report))
+            if args.html:save_text(args.html,render_cohort_html(report))
+            print(json.dumps(report['summary']))
+        except (ValueError,KeyError,TypeError,OSError) as exc:
+            print(json.dumps(dict(status='financial_cohort_error',error_type=type(exc).__name__,mvp_accepted=False)))
+            raise SystemExit(2) from None
+        return
     if args.command == "common-sample":
         from pathlib import Path
         from datetime import datetime
@@ -118,7 +144,7 @@ def main():
             def progress(row):print(json.dumps(row),flush=True)
             run_mvp(json.loads(Path(args.candidates).read_text()),state_dir=args.state_dir or 'data/mvp',
                 user_agent=args.user_agent,max_new_documents=args.max_new_documents,
-                max_new_fields=args.max_new_fields,progress=progress)
+                max_new_fields=args.max_new_fields,progress=progress,seed_bundles=args.seed_bundle)
         except (ValueError,KeyError,TypeError,OSError,RunBusy,ProviderFailure,sqlite3.Error) as exc:
             print(json.dumps(dict(status="mvp_run_error",error_type=type(exc).__name__,
                 sqlite_error=getattr(exc,'sqlite_errorname',None),mvp_accepted=False)))

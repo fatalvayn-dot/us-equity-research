@@ -1,0 +1,72 @@
+{
+  "companies": [
+    {
+      "symbol": "ADBE",
+      "issuer_id": "0000796343"
+    },
+    {
+      "symbol": "INTU",
+      "issuer_id": "0000896878"
+    },
+    {
+      "symbol": "NOW",
+      "issuer_id": "0001373715"
+    },
+    {
+      "symbol": "SNPS",
+      "issuer_id": "0000883241"
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672"
+    },
+    {
+      "symbol": "FTNT",
+      "issuer_id": "0001262039"
+    },
+    {
+      "symbol": "WDAY",
+      "issuer_id": "0001327811"
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397"
+    },
+    {
+      "symbol": "ROP",
+      "issuer_id": "0000882835"
+    },
+    {
+      "symbol": "MCHP",
+      "issuer_id": "0000827054"
+    },
+    {
+      "symbol": "MPWR",
+      "issuer_id": "0001280452"
+    },
+    {
+      "symbol": "ON",
+      "issuer_id": "0001097864"
+    },
+    {
+      "symbol": "SWKS",
+      "issuer_id": "0000004127"
+    },
+    {
+      "symbol": "NTAP",
+      "issuer_id": "0001002047"
+    },
+    {
+      "symbol": "AKAM",
+      "issuer_id": "0001086222"
+    },
+    {
+      "symbol": "FFIV",
+      "issuer_id": "0001048695"
+    },
+    {
+      "symbol": "TYL",
+      "issuer_id": "0000860731"
+    }
+  ]
+}

@@ -1,5 +1,91 @@
 # Development status
 
+## 2026-11-03 — New 17-company financial collection and mixed 100-cohort continuation
+
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/16
+Source commit: https://github.com/fatalvayn-dot/us-equity-research/commit/3ff708b1dffe97d338d7f239d2ebea617f1602ad
+Source tree de3be0af1f6ee68869da8d0b519c2383311a00ce matches local 6a4350c;
+each uploaded Git blob SHA independently matched before branch publication.
+Source CI: https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41576906725
+631 tests and CLI status passed: Python 3.11/109.290s, 3.12/124.608s,
+3.13/111.637s. Manual review additionally required cached responses to pass
+transport origin/credential validation and original maximum response-byte bounds.
+These checks now apply before any cached body can be returned; oversized cached
+metadata remains invalid_data with zero GETs and zero accepted facts. One added
+regression raises final suite size to 632; final local 632/632 passed
+(93.212s, Python 3.12.14), and exact final-head CI is checked before merge. No copied secret, header or operational database in published evidence.
+
+Branch feat/common-financial-cohort from main
+1610fdeccb928d2dee15d9e77819c4810e73c59b (PR #15). Read main/open PRs/Actions,
+AGENTS, PROJECT_BRIEF and status; no open/conflicting PR at start, prior exact
+Actions 41566957370 passed 614 tests on all three supported Python versions.
+Legacy untouched. Existing unrelated temporary source-part files preserved.
+
+v0.31.0: mvp-run accepts public raw seed bundles. A six-hour policy skips stale/
+future observations and reuses only original fresh-in-policy bodies, without
+rewriting source times. First-valid Yahoo->SEC->Nasdaq->Finnhub selection remains.
+Seed counts and archived transport reuses are separate from actual GET calls.
+Writable state cannot be placed inside a source bundle; checksum errors cannot
+initiate network calls. Completed runs explicitly finalize full metadata.
+
+New financial-cohort CLI selects exact symbol/CIK entries across supplied dated
+batches, refuses duplicate/ambiguous identities and wrong symbols, preserves
+all original field values/periods/currencies/attempts/source/query dates and
+keeps missing firms unresolved. Caller points/approvals cannot be adopted.
+Input hashes and cohort generation dates are retained. JSON/HTML/Markdown
+explicitly identify mixed dated inputs, not a new all-100 live scan. CLI input
+and batch/report destinations cannot overwrite each other. No score/rank or
+sector/model/investment approval is created by financial assembly.
+
+Actual new-list gap: 17 identities in the common100 plan absent from the old
+financial batch. Run attempted all 238 field jobs: 186 facts (SEC168, Yahoo14,
+Nasdaq4), 141 arithmetic results, 52 pending jobs. All 17 have verified annual
+starts/ends and selected facts; all financial/identity/unit references archived.
+Cold run made 42 public transport GET invocations (internal retries/private
+Finnhub excluded), reused 35 archived fresh-in-policy responses from 37 eligible
+seeds; 2 dated Nasdaq membership seeds skipped outside six-hour policy.
+No seed was presented as a fresh HTTP retrieval. Immediate zero-work resume used
+zero public GETs, kept 186 facts/141 calculations and identical accepted fact
+values, original source dates and evidence. First as_of 2026-11-03T03:50:01.038329+00:00.
+
+New delta archive: tests/fixtures/common-financial17-sources/ (42 observations,
+18 parts), with reused originals in common-extra-sources. No operational SQLite
+published. Reports and traceability: docs/evidence/common-financial17/. All 186
+selected values independently re-extract from the three providers' exact raw
+responses. Original SEC document checks on ADBE/INTU/TYL matched 26 selected
+values; one ADBE literal contract-revenue input absent in selection and original
+remained unavailable. No tag substitution or zero fill.
+
+100-candidate continuation selects 83 retained old issuers plus 17 new ones:
+988 facts, 704 arithmetic results, zero scores. Reproducible mixed batch/report,
+portable HTML and source hashes: docs/evidence/common-financial100/. The old
+83 observations are NOT refreshed by merging. This does not establish a new
+live-100 acceptance, latest comparative periods, current prices, valuation,
+supported special-sector models or a new ranked report. Old dated two-score
+pilot remains a separate artifact; no transferred/invented score.
+
+Failures/recovery: first raw re-extraction test passed serialized date strings
+to the strict FactRequest constructor; corrected the fixture to decode dates.
+A concurrently started 630-test run reported this same test error; corrected
+focused raw replay then passed (186/186, 6.619s). No observed financial mismatch.
+Completed metadata/report had 17 issuers while one progress JSON showed 11;
+rebuilt complete metadata from hash-verified submissions checkpoint bodies,
+with no new requests/date changes, and added explicit final metadata snapshot
+plus export count refusal. The original count and recovery are archived in
+metadata-finalization-audit.json. No partial metadata was accepted as full proof.
+
+Tests: 27 focused unit/seed/cohort/MVP tests passed (5.448s), corrected 630/630
+full local regression passed (92.522s, Python 3.12.14). One additional recorded
+original-document test makes final suite 631; source-head 631/631 full local regression
+passed (94.134s, Python 3.12.14). Exact-head CI checked before merge. These are offline/recorded tests, not live CI.
+
+Next concrete task: derive and collect exact current/prior annual periods for
+the 17 new issuers and align the retained comparisons to this exact 100-company
+plan. Refresh raw valuation/share/history inputs for eligible supported models,
+reconfirm critical annual operands, then produce explained scores and a real
+end-to-end acceptance report. Continue to withhold special-sector/unknown and
+incomplete scores. Do not call this mixed continuation a completed MVP.
+
 ## 2026-11-03 — Source-bound 100-common-share sample (latest)
 
 PR: https://github.com/fatalvayn-dot/us-equity-research/pull/15

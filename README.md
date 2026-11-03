@@ -924,3 +924,67 @@ unstarted and are not fabricated. This price milestone and the exact byte-for-
 byte common-sample CLI replay (`docs/evidence/common100/cli-reproduction.json`)
 do not complete annual/comparative financial collection, valuation or scoring
 for the 17 newly selected companies. Full MVP acceptance remains pending.
+
+## Financial continuation for the new common-share sample
+
+`financial-cohort` selects exact symbol/CIK identities from explicitly supplied
+batches. It rejects overlapping source identities and wrong symbols, retains
+original field queries/attempts/values/source dates without modification, and
+keeps missing companies unresolved. It does not call a provider or manufacture
+a current observation date. Company-level caller scores/approvals are discarded.
+
+```bash
+PYTHONPATH=src python -m equity_research financial-cohort \
+  --candidates docs/evidence/common100/candidates.json \
+  --cohort-input docs/evidence/liquidity100/batch.json.gz \
+  --cohort-input docs/evidence/common-financial17/batch.json.gz \
+  --batch-output data/common-financial100/batch.json \
+  --output data/common-financial100/report.json \
+  --markdown data/common-financial100/report.md \
+  --html data/common-financial100/report.html
+```
+
+The committed 100-company continuation has 988 accepted facts and 704 arithmetic
+results: 83 previously recorded issuers plus the 17 newly selected issuers. It
+is a mixed-date report, not a new live full-100 scan. JSON retains each input's
+canonical SHA-256 and generation time; HTML/Markdown display an explicit notice.
+No score, rank, sector-model approval or MVP acceptance is granted by assembly.
+Open `docs/evidence/common-financial100/report.html` for the portable report.
+
+The separate 17-company collection attempted all 238 field jobs and accepted
+186 facts (168 SEC, 14 Yahoo, 4 Nasdaq), producing 141 calculations; 52 jobs
+remained pending, never zero-filled. All original financial/identity/unit
+references are archived. All 186 values were re-extracted from exact raw bodies. A separate original-SEC
+document check for ADBE/INTU/TYL matched 26 selected values; one literal revenue
+input was unavailable in both selection and original tags, and remained missing.
+Collection used 42 public GET invocations and 35 fresh-in-policy archived body
+reuses; seeded observations retained original times. Immediate zero-work resume
+used zero public GETs and preserved all accepted fact values/source dates.
+This does not validate strategy performance or complete comparative/valuation
+coverage for these companies.
+
+MVP collection can now seed public raw bundles and reuse bodies only within
+its six-hour freshness policy. Stale/future seed observations are skipped;
+seeding never updates retrieval dates or changes first-valid provider order.
+Cached responses still pass the transport origin/credential and byte-size guards.
+Writable state must be outside source bundles. A completed run writes a final
+complete metadata snapshot; exports reject incomplete metadata counts.
+
+```bash
+PYTHONPATH=src python -m equity_research mvp-run \
+  --candidates docs/evidence/common-financial17/candidates.json \
+  --state-dir data/common-financial17-refresh --max-new-documents 17 \
+  --max-new-fields 238 \
+  --seed-bundle tests/fixtures/common-extra-sources \
+  --seed-bundle tests/fixtures/common-financial17-sources \
+  --user-agent 'US Equity Research (https://github.com/fatalvayn-dot/us-equity-research)'
+```
+
+The delta bundle stores only new source observations; older reused bodies remain
+in `common-extra-sources`. Operational SQLite files are not published. Source
+attempt counts exclude bounded internal retries and private Finnhub transport.
+Pending/unconfigured/unsupported providers are not presented as queried absences.
+The next work is exact current/prior annual comparisons and sourced valuation/
+history refresh for this precise 100-company plan, followed by explained scores
+and a complete acceptance run. Current mixed financial and dated price coverage
+do not by themselves complete that acceptance.

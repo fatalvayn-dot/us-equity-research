@@ -1,0 +1,7 @@
+{
+  "observed_intermediate_count": 11,
+  "final_count": 17,
+  "basis": "reconstructed complete metadata from exact hash-verified submissions checkpoint bodies",
+  "source_dates_unchanged": true,
+  "new_network_requests": 0
+}
