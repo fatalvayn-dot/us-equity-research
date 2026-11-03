@@ -988,3 +988,37 @@ The next work is exact current/prior annual comparisons and sourced valuation/
 history refresh for this precise 100-company plan, followed by explained scores
 and a complete acceptance run. Current mixed financial and dated price coverage
 do not by themselves complete that acceptance.
+
+### Exact current-plan annual comparisons (recorded replay)
+
+The new common100 plan now has paired annual-source coverage for 96 issuers:
+534 current and 534 prior values, 514 literal growth calculations, and 20
+nonpositive-base results with no growth ratio. Four candidates stay visible
+without calculated growth: GEV/SNDK/BLK fail the exact original annual-period
+check; RY has no accepted comparable literal US-GAAP duration pair. No issuer is
+removed to inflate coverage. The output includes all 100 exact candidate identities.
+
+This command is offline and reproducible from the original public bundles.
+It does not refresh source times, claim a historical vintage, grant sector or
+investment approval, or establish a new live-100 acceptance. Recorded age is
+explicitly unrestricted only inside this replay; live collection TTL is unchanged.
+The 17 new issuers' 202 paired values also matched original annual iXBRL values
+(`original-checks.json`); no accounting-tag substitution was used.
+
+```bash
+PYTHONPATH=src python scripts/replay_common_comparisons.py \
+  --candidates docs/evidence/common100/candidates.json \
+  --documents docs/evidence/mvp100/documents.json \
+  --documents docs/evidence/common-financial17/documents.json.gz \
+  --sources tests/fixtures/mvp100-sources \
+  --sources tests/fixtures/common-extra-sources \
+  --sources tests/fixtures/common-financial17-sources \
+  --as-of 2026-11-03T04:25:00+00:00 \
+  --output data/common-comparative100
+```
+
+Published outputs: `docs/evidence/common-comparative100/`. Current/prior batch
+files can feed `comparative-report` and, when all other required independently
+verified inputs are available, `score-report`. No score is created by replay.
+Unconfigured or unsupported later providers remain distinct from confirmed
+absence and are never counted as queried after SEC success.
