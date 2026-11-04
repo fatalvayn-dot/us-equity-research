@@ -7,7 +7,14 @@ Branch feat/current-score-cohort from main 8060ed36dbb6d9de7844e1c75402a8d45df96
 open PRs and Actions. No conflicting open PR, main matched, final PR #17 CI
 41579639000 passed 646 tests on three versions. Legacy repository untouched;
 pre-existing unrelated temporary source files preserved and excluded.
-Commit/PR/exact CI links added after publication.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/18
+Source commit: https://github.com/fatalvayn-dot/us-equity-research/commit/97c329d6812c527cfd8c09540428c484dbc92589
+Source tree 328f27c7af666d922f6e8f6380f15cb0243020f7 equals local a57142e;
+all 59 uploaded Git blobs independently matched before branch publication.
+Code/data review: PR comment 6596469421. Source CI:
+https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41585839972 —
+658 tests and CLI status passed on Python 3.11/131.653s, 3.12/112.885s and
+3.13/142.644s. Machine-readable evidence: docs/evidence/current-score-actions.json.
 
 v0.33.0 adds immutable score-input provenance: canonical digests, original batch
 generation dates, selected-source counts and observed-time ranges, plus missing/
@@ -37,7 +44,11 @@ NOW62, AMAT59.5, TYL55.5, AAPL53, SNPS53. These are dated model hypotheses,
 not investment approval or return promises. Five additional candidates (AMD,
 INTC, ADI, CDNS, ADSK) fail current SEC confirmation of literal Liabilities and
 stay unscored. No alias/equation/source replacement introduced to manufacture
-those scores. Other unqueried valuation sources remain missing/unstarted.
+those scores. Diagnostic replay found the literal Liabilities concept absent in
+all five current companyfacts snapshots; this is missing independent confirmation,
+not evidence that Nasdaq's selected values are wrong. Recorded annual documents
+also lack an accepted exact value (four concept_not_disclosed, INTC period_or_scope_mismatch).
+These source facts are preserved in the PR follow-up; no new request for diagnosis. Other unqueried valuation sources remain missing/unstarted.
 
 All 130 operands for the 13 scored companies (nine current financial fields plus
 prior contract revenue each) match original annual iXBRL exact CIK/period/USD/
@@ -56,8 +67,9 @@ provenance/export tests passed after final display update (0.207s), actual 100-r
 CLI reproduced JSON/Markdown/HTML byte for byte; final display builder rerun also
 reproduced exactly. Full local regression 658/658 passed (127.197s, Python 3.12.14), with final
 rejected-stage display changes additionally checked by the focused 10-test run.
-Exact final source CI remains required; concurrent local timings are not benchmarks.
-Exact-head CI required before merge. These are offline/recorded tests, not live CI.
+The source commit CI passed; a final exact-head CI remains required after the
+output-safety follow-up. Concurrent local timings are not benchmarks. These are
+offline/recorded tests and Actions, not a fresh live 100-company acceptance.
 
 Failures/corrections: first 653-test full run had 652 pass / one old report golden
 comparison failure because additive provenance was new. Updated the legacy test
@@ -66,6 +78,10 @@ unchanged; targeted replay passed. Subsequent 655-test full run passed (106.696s
 No observed old numeric score change. New 658-test regression includes two real-
 collection tests and one safe rejected-stage test. No provider access bypass or
 rate/quota override used; no fake missing-data zeros or unsupported-sector points.
+The final follow-up atomically replaces report.json.gz and refuses to follow an
+existing output symlink into retained raw evidence. Its focused two-test regression
+passed locally (0.360s); the complete follow-up regression passed 658/658
+(217.081s, Python 3.12.14). The exact follow-up head still requires full Actions.
 
 Remaining/next concrete task: resolve literal liabilities confirmation gaps and
 unsupported share disclosures using exact original current filings with a separately

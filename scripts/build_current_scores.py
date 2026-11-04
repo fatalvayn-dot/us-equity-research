@@ -3,6 +3,8 @@ import argparse
 import gzip
 import hashlib
 import json
+import os
+import tempfile
 from datetime import datetime
 from pathlib import Path
 
@@ -24,7 +26,15 @@ def build(*, financial, current, prior, sources, output, as_of):
     report=build_score_report(*(read(p) for p in inputs[:3]),read_bundle(inputs[3]),as_of=as_of)
     output.mkdir(parents=True,exist_ok=True)
     data=json.dumps(report,default=encode,sort_keys=True).encode()
-    (output/'report.json.gz').write_bytes(gzip.compress(data,mtime=0))
+    # Replace the directory entry atomically; never follow an existing output
+    # symlink into a raw source bundle, even when the output directory is separate.
+    temporary=None
+    try:
+        with tempfile.NamedTemporaryFile(dir=output,delete=False) as handle:
+            temporary=handle.name;handle.write(gzip.compress(data,mtime=0));handle.flush();os.fsync(handle.fileno())
+        os.replace(temporary,output/'report.json.gz')
+    finally:
+        if temporary and os.path.exists(temporary):os.unlink(temporary)
     save_text(output/'report.md',render_score_markdown(report))
     save_text(output/'report.html',render_score_html(report))
     save_json(output/'manifest.json',dict(as_of=as_of,summary=report['summary'],mvp_accepted=False,

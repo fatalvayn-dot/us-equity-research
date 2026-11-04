@@ -21,11 +21,15 @@ class CurrentScoreScriptTests(unittest.TestCase):
             batches=[financial(),*comparisons()]
             for name,batch in zip(('financial','current','prior'),batches):
                 (folder/(name+'.json.gz')).write_bytes(gzip.compress(json.dumps(batch,default=encode).encode(),mtime=0))
-            out=folder/'out'
+            out=folder/'out';out.mkdir()
+            original_manifest=(sources/'manifest.json').read_bytes()
+            (out/'report.json.gz').symlink_to(sources/'manifest.json')
             cmd=[sys.executable,str(ROOT/'scripts/build_current_scores.py'),'--sources',str(sources),'--output',str(out),'--as-of',ASOF.isoformat()]
             for name in ('financial','current','prior'):cmd+=['--'+name,str(folder/(name+'.json.gz'))]
             result=subprocess.run(cmd,env={**os.environ,'PYTHONPATH':str(ROOT/'src')},capture_output=True,text=True)
             self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+            self.assertEqual((sources/'manifest.json').read_bytes(),original_manifest)
+            self.assertFalse((out/'report.json.gz').is_symlink())
             report=json.loads(gzip.decompress((out/'report.json.gz').read_bytes()))
             self.assertEqual(report['summary']['scored_companies'],1)
             self.assertFalse(report['mvp_accepted']);self.assertEqual(report['new_network_requests'],0)
