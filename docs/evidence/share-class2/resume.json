@@ -1,0 +1,433 @@
+{
+  "schema_version": 1,
+  "report_kind": "valuation_source_collection_scope_pending",
+  "as_of": "2026-11-04T22:46:26.643134+00:00",
+  "companies": [
+    {
+      "symbol": "ORCL",
+      "issuer_id": "0001341439",
+      "attempts": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001341439.json",
+          "checked_at": "2026-11-04T22:46:25.786804+00:00",
+          "http_requested": false,
+          "cached": true,
+          "status": "body_available",
+          "raw_sha256": "fe93b258bc0ba8f3076ddebb5d8bb91c46deaa1f7b06d2ff2e3eaed85fee8a63",
+          "retrieved_at": "2026-11-04T22:44:09.199959+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0001341439.json",
+          "checked_at": "2026-11-04T22:46:25.862808+00:00",
+          "http_requested": false,
+          "cached": true,
+          "status": "body_available",
+          "raw_sha256": "25c8cfb76c857fd34a86ef8f8f0e2d5bdf3959e8d4a33290d1f6f433c47fe4af",
+          "retrieved_at": "2026-11-04T22:44:12.927063+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526389274/orcl-20260831.htm",
+          "checked_at": "2026-11-04T22:46:25.868577+00:00",
+          "http_requested": false,
+          "cached": true,
+          "status": "body_available",
+          "raw_sha256": "3028de826d9d904587a8ab585cd2a5c52c5428ecd85e665d942b9c76eb751d7b",
+          "retrieved_at": "2026-11-04T22:44:16.368119+00:00"
+        },
+        {
+          "stage": "price",
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/ORCL?interval=1d&range=5d",
+          "checked_at": "2026-11-04T22:46:26.159571+00:00",
+          "http_requested": false,
+          "cached": true,
+          "status": "body_available",
+          "raw_sha256": "748cd5318bcd4d22a9bdae9444ad67f4e01d740e4045a7caf07183e0378ecbe4",
+          "retrieved_at": "2026-11-04T22:44:20.428069+00:00"
+        },
+        {
+          "stage": "history",
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/ORCL?interval=1d&range=1y&events=div%2Csplits",
+          "checked_at": "2026-11-04T22:46:26.188041+00:00",
+          "http_requested": false,
+          "cached": true,
+          "status": "body_available",
+          "raw_sha256": "44d6f7800f87658c489f4898f4b6bc2a00c9070d162ef4ed6abce647042708ca",
+          "retrieved_at": "2026-11-04T22:44:23.930983+00:00"
+        }
+      ],
+      "identity_status": "exact_match",
+      "share_check": {
+        "status": "verified_dated_share_class",
+        "evidence": {
+          "value": "3023736000",
+          "disclosed_on": "2026-09-07",
+          "decimals": "INF",
+          "unit": "shares",
+          "concept": "dei:EntityCommonStockSharesOutstanding",
+          "companyfacts": {
+            "value": "3023736000",
+            "end": "2026-09-07",
+            "filed": "2026-09-11",
+            "accession": "0001193125-26-389274",
+            "form": "10-Q",
+            "available_at": "2026-09-12T05:00:00+00:00",
+            "issuer_id": "0001341439",
+            "concept": "dei:EntityCommonStockSharesOutstanding",
+            "unit": "shares",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001341439.json",
+            "raw_sha256": "fe93b258bc0ba8f3076ddebb5d8bb91c46deaa1f7b06d2ff2e3eaed85fee8a63",
+            "retrieved_at": "2026-11-04T22:44:09.199959+00:00"
+          },
+          "original_filing": {
+            "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526389274/orcl-20260831.htm",
+            "raw_sha256": "3028de826d9d904587a8ab585cd2a5c52c5428ecd85e665d942b9c76eb751d7b",
+            "retrieved_at": "2026-11-04T22:44:16.368119+00:00"
+          },
+          "metadata": {
+            "url": "https://data.sec.gov/submissions/CIK0001341439.json",
+            "raw_sha256": "25c8cfb76c857fd34a86ef8f8f0e2d5bdf3959e8d4a33290d1f6f433c47fe4af",
+            "retrieved_at": "2026-11-04T22:44:12.927063+00:00"
+          },
+          "registered_security": [
+            {
+              "context_id": "C_9dcd0e06-bdf8-444f-b24e-0ff30f28f7ba",
+              "symbol": "ORCL",
+              "title": "Common Stock, par value $0.01 per share",
+              "exchange": "New York Stock Exchange"
+            }
+          ],
+          "scope_approved": false,
+          "other_registered_securities": [
+            {
+              "symbol": "ORCL-PD",
+              "cover_symbol": "ORCL PRD",
+              "title": "Depositary Shares, each representing a 1/2,000th interest in a share of 6.50% Series D Mandatory Convertible Preferred Stock, par value $0.01 per",
+              "exchange": "New York Stock Exchange",
+              "symbol_corroboration": "single_unambiguous_non_common_cover_alias"
+            }
+          ],
+          "common_security_scope": "single_verified_common_symbol_with_explicit_non_common_tickers"
+        }
+      },
+      "price_check": {
+        "status": "valid",
+        "evidence": {
+          "issuer_id": "0001341439",
+          "symbol": "ORCL",
+          "value": "123.73",
+          "currency": "USD",
+          "exchange": "NYQ",
+          "source": "Yahoo",
+          "source_field": "chart.result[0].meta.regularMarketPrice",
+          "definition": "Yahoo latest regular-session market price; not adjusted close, NAV, market capitalization or a financial-statement value",
+          "unit": "currency_per_share",
+          "market_at": "2026-11-04T21:03:39+00:00",
+          "retrieved_at": "2026-11-04T22:44:20.428069+00:00",
+          "available_at": "2026-11-04T22:44:20.428069+00:00",
+          "source_url": "https://query1.finance.yahoo.com/v8/finance/chart/ORCL?interval=1d&range=5d",
+          "raw_sha256": "748cd5318bcd4d22a9bdae9444ad67f4e01d740e4045a7caf07183e0378ecbe4",
+          "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+          "identity_evidence_sha256": "224330f2c44f5d173395e427dbac3c6981acdb1f57e3658832d315c3e96f6522",
+          "identity_observed_at": "2026-11-04T22:44:05.147133+00:00",
+          "instrument_label": "EQUITY",
+          "scope_approved": false,
+          "sector_model_supported": false,
+          "investment_approved": false
+        }
+      },
+      "history_check": {
+        "status": "valid",
+        "evidence": {
+          "issuer_id": "0001341439",
+          "symbol": "ORCL",
+          "source_url": "https://query1.finance.yahoo.com/v8/finance/chart/ORCL?interval=1d&range=1y&events=div%2Csplits",
+          "raw_sha256": "44d6f7800f87658c489f4898f4b6bc2a00c9070d162ef4ed6abce647042708ca",
+          "retrieved_at": "2026-11-04T22:44:23.930983+00:00",
+          "currency": "USD",
+          "observations": 251,
+          "completed_sessions": 250,
+          "latest_daily_close": "123.7300033569336",
+          "latest_daily_observed_at": "2026-11-04T14:30:00+00:00",
+          "first_session": "2025-11-05T14:30:00+00:00",
+          "last_session": "2026-11-03T14:30:00+00:00",
+          "quote_day_excluded": "2026-11-04",
+          "annualized_sample_volatility": "0.59175295586795800872361411770060173416619153328915847570661237422154875126371155",
+          "median_63_session_close_times_volume": "3769854479.6600345087600",
+          "volatility_definition": "sample standard deviation of adjacent Yahoo adjusted-close simple returns x sqrt(252)",
+          "liquidity_definition": "median of Yahoo close x reported volume, last 63 completed sessions",
+          "split_window_status": "no_split_record_in_returned_window",
+          "split_events": [],
+          "capital_changes_fully_verified": false,
+          "limitations": [
+            "daily_quote_session_excluded_even_if_completed",
+            "not_forecast_volatility",
+            "absence_of_split_record_is_not_all_capital_changes_clearance"
+          ]
+        }
+      },
+      "scope_approved": false,
+      "sector_model_supported": false,
+      "investment_approved": false,
+      "total_score": null,
+      "rank": null
+    },
+    {
+      "symbol": "MCHP",
+      "issuer_id": "0000827054",
+      "attempts": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000827054.json",
+          "checked_at": "2026-11-04T22:46:26.242856+00:00",
+          "http_requested": false,
+          "cached": true,
+          "status": "body_available",
+          "raw_sha256": "e8f8817e99e806f3052c70002d235eaa3eeec2fa0eb661c137dcb7b8f337173a",
+          "retrieved_at": "2026-11-04T22:44:27.883380+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000827054.json",
+          "checked_at": "2026-11-04T22:46:26.316709+00:00",
+          "http_requested": false,
+          "cached": true,
+          "status": "body_available",
+          "raw_sha256": "eb536a21bfdfa7ab992c79f87eb5216da2d88ab0f0ec4f10dc29b6f3eca384eb",
+          "retrieved_at": "2026-11-04T22:44:31.262784+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/827054/000082705426000038/mchp-20260630.htm",
+          "checked_at": "2026-11-04T22:46:26.322702+00:00",
+          "http_requested": false,
+          "cached": true,
+          "status": "body_available",
+          "raw_sha256": "b1be69c88d6cd636e12e33bf3275fea1733da722844aa3daf11ccef36a638a2b",
+          "retrieved_at": "2026-11-04T22:44:34.623305+00:00"
+        },
+        {
+          "stage": "price",
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/MCHP?interval=1d&range=5d",
+          "checked_at": "2026-11-04T22:46:26.578682+00:00",
+          "http_requested": false,
+          "cached": true,
+          "status": "body_available",
+          "raw_sha256": "2eda4adc1a48e9e966e4ca7cdbcda547d03cbd53864ea5b603506ed38b45ec8f",
+          "retrieved_at": "2026-11-04T22:44:38.279929+00:00"
+        },
+        {
+          "stage": "history",
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/MCHP?interval=1d&range=1y&events=div%2Csplits",
+          "checked_at": "2026-11-04T22:46:26.611187+00:00",
+          "http_requested": false,
+          "cached": true,
+          "status": "body_available",
+          "raw_sha256": "fe6dbbb3d2e9f5216cbba12bc99de779bf33d2aa5103f9f12de0a6eb1457fa65",
+          "retrieved_at": "2026-11-04T22:44:41.798655+00:00"
+        }
+      ],
+      "identity_status": "exact_match",
+      "share_check": {
+        "status": "verified_dated_share_class",
+        "evidence": {
+          "value": "543008691",
+          "disclosed_on": "2026-07-28",
+          "decimals": "INF",
+          "unit": "shares",
+          "concept": "dei:EntityCommonStockSharesOutstanding",
+          "companyfacts": {
+            "value": "543008691",
+            "end": "2026-07-28",
+            "filed": "2026-08-06",
+            "accession": "0000827054-26-000038",
+            "form": "10-Q",
+            "available_at": "2026-08-07T05:00:00+00:00",
+            "issuer_id": "0000827054",
+            "concept": "dei:EntityCommonStockSharesOutstanding",
+            "unit": "shares",
+            "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000827054.json",
+            "raw_sha256": "e8f8817e99e806f3052c70002d235eaa3eeec2fa0eb661c137dcb7b8f337173a",
+            "retrieved_at": "2026-11-04T22:44:27.883380+00:00"
+          },
+          "original_filing": {
+            "url": "https://www.sec.gov/Archives/edgar/data/827054/000082705426000038/mchp-20260630.htm",
+            "raw_sha256": "b1be69c88d6cd636e12e33bf3275fea1733da722844aa3daf11ccef36a638a2b",
+            "retrieved_at": "2026-11-04T22:44:34.623305+00:00"
+          },
+          "metadata": {
+            "url": "https://data.sec.gov/submissions/CIK0000827054.json",
+            "raw_sha256": "eb536a21bfdfa7ab992c79f87eb5216da2d88ab0f0ec4f10dc29b6f3eca384eb",
+            "retrieved_at": "2026-11-04T22:44:31.262784+00:00"
+          },
+          "registered_security": [
+            {
+              "context_id": "c-2",
+              "symbol": "MCHP",
+              "title": "Common Stock, $0.001 par value per share",
+              "exchange": "NASDAQ Stock Market LLC"
+            }
+          ],
+          "scope_approved": false,
+          "other_registered_securities": [
+            {
+              "symbol": "MCHPP",
+              "title": "Depositary Shares, each representing a 1/20th interest in a share of 7.50% Series A Mandatory Convertible Preferred Stock $0.001 par value per share",
+              "exchange": "NASDAQ Stock Market LLC",
+              "symbol_corroboration": "exact_cover_symbol"
+            }
+          ],
+          "common_security_scope": "single_verified_common_symbol_with_explicit_non_common_tickers"
+        }
+      },
+      "price_check": {
+        "status": "valid",
+        "evidence": {
+          "issuer_id": "0000827054",
+          "symbol": "MCHP",
+          "value": "75.34",
+          "currency": "USD",
+          "exchange": "NMS",
+          "source": "Yahoo",
+          "source_field": "chart.result[0].meta.regularMarketPrice",
+          "definition": "Yahoo latest regular-session market price; not adjusted close, NAV, market capitalization or a financial-statement value",
+          "unit": "currency_per_share",
+          "market_at": "2026-11-04T21:00:01+00:00",
+          "retrieved_at": "2026-11-04T22:44:38.279929+00:00",
+          "available_at": "2026-11-04T22:44:38.279929+00:00",
+          "source_url": "https://query1.finance.yahoo.com/v8/finance/chart/MCHP?interval=1d&range=5d",
+          "raw_sha256": "2eda4adc1a48e9e966e4ca7cdbcda547d03cbd53864ea5b603506ed38b45ec8f",
+          "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+          "identity_evidence_sha256": "224330f2c44f5d173395e427dbac3c6981acdb1f57e3658832d315c3e96f6522",
+          "identity_observed_at": "2026-11-04T22:44:05.147133+00:00",
+          "instrument_label": "EQUITY",
+          "scope_approved": false,
+          "sector_model_supported": false,
+          "investment_approved": false
+        }
+      },
+      "history_check": {
+        "status": "valid",
+        "evidence": {
+          "issuer_id": "0000827054",
+          "symbol": "MCHP",
+          "source_url": "https://query1.finance.yahoo.com/v8/finance/chart/MCHP?interval=1d&range=1y&events=div%2Csplits",
+          "raw_sha256": "fe6dbbb3d2e9f5216cbba12bc99de779bf33d2aa5103f9f12de0a6eb1457fa65",
+          "retrieved_at": "2026-11-04T22:44:41.798655+00:00",
+          "currency": "USD",
+          "observations": 251,
+          "completed_sessions": 250,
+          "latest_daily_close": "75.33999633789062",
+          "latest_daily_observed_at": "2026-11-04T14:30:00+00:00",
+          "first_session": "2025-11-05T14:30:00+00:00",
+          "last_session": "2026-11-03T14:30:00+00:00",
+          "quote_day_excluded": "2026-11-04",
+          "annualized_sample_volatility": "0.50144309926336439636125976713172897332298706331232399475193479407641879843801524",
+          "median_63_session_close_times_volume": "650503953.24554445551100",
+          "volatility_definition": "sample standard deviation of adjacent Yahoo adjusted-close simple returns x sqrt(252)",
+          "liquidity_definition": "median of Yahoo close x reported volume, last 63 completed sessions",
+          "split_window_status": "no_split_record_in_returned_window",
+          "split_events": [],
+          "capital_changes_fully_verified": false,
+          "limitations": [
+            "daily_quote_session_excluded_even_if_completed",
+            "not_forecast_volatility",
+            "absence_of_split_record_is_not_all_capital_changes_clearance"
+          ]
+        }
+      },
+      "scope_approved": false,
+      "sector_model_supported": false,
+      "investment_approved": false,
+      "total_score": null,
+      "rank": null
+    }
+  ],
+  "identity_attempts": [
+    {
+      "stage": "identity",
+      "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+      "checked_at": "2026-11-04T22:46:25.731119+00:00",
+      "http_requested": false,
+      "cached": true,
+      "status": "body_available",
+      "raw_sha256": "224330f2c44f5d173395e427dbac3c6981acdb1f57e3658832d315c3e96f6522",
+      "retrieved_at": "2026-11-04T22:44:05.147133+00:00"
+    }
+  ],
+  "identity_validation": {
+    "status": "valid",
+    "raw_sha256": "224330f2c44f5d173395e427dbac3c6981acdb1f57e3658832d315c3e96f6522",
+    "retrieved_at": "2026-11-04T22:44:05.147133+00:00"
+  },
+  "summary": {
+    "candidates": 2,
+    "new_get_invocations": 0,
+    "get_invocations_by_host": {},
+    "identity_states": {
+      "exact_match": 2
+    },
+    "share_states": {
+      "verified_dated_share_class": 2
+    },
+    "price_states": {
+      "valid": 2
+    },
+    "history_states": {
+      "valid": 2
+    }
+  },
+  "max_new_requests": 0,
+  "mvp_accepted": false,
+  "hundred_active_common_shares_accepted": false,
+  "request_measure": "GET invocations excluding bounded internal retries",
+  "limitations": [
+    "No annual financial batch refresh or first-valid field replacement",
+    "Dated share reconciliation is not all capital actions, fund/legal or active common-share clearance",
+    "No scores, sector model, fair value or investment approval; unqueried legs stay not started"
+  ],
+  "candidate_plan": {
+    "companies": [
+      {
+        "symbol": "ORCL",
+        "issuer_id": "0001341439"
+      },
+      {
+        "symbol": "MCHP",
+        "issuer_id": "0000827054"
+      }
+    ]
+  },
+  "source_bundle": {
+    "schema_version": 1,
+    "format": "gzip-jsonl-public-response-observations-v1",
+    "observations": 11,
+    "compressed_sha256": "0e581a6cce000afd65b851fb859552629796a96ef3d5fdfa7b60cc9ab68ffd3b",
+    "parts": [
+      {
+        "file": "sources.jsonl.gz.part0000",
+        "bytes": 524288,
+        "sha256": "c0d56bee472d7778e7e11d761cd81cc076fb0dc19d09c90e02f5352bee0b0bb0"
+      },
+      {
+        "file": "sources.jsonl.gz.part0001",
+        "bytes": 524288,
+        "sha256": "f5d16749052ed783f1dbfd1f293272a92a302e6240893d05ddf9145b619312ef"
+      },
+      {
+        "file": "sources.jsonl.gz.part0002",
+        "bytes": 524288,
+        "sha256": "7fd9823cc4d6c1d46b00b709c9c1c20b0ca1db002a61bea1abcc660664b5d8c9"
+      },
+      {
+        "file": "sources.jsonl.gz.part0003",
+        "bytes": 402108,
+        "sha256": "be68081559d6f9e08d5744be560c703b6e17bb8368128ac73cd17f04736cedbb"
+      }
+    ],
+    "headers_stored": false,
+    "credentials_stored": false
+  }
+}

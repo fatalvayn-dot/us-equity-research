@@ -141,7 +141,7 @@ class ValuationSourceCollector:
                 else:
                     meta = self.get(submissions_url(cik), SNAPSHOT_TTL, result['attempts'], 'submissions')
                     snapshot = parse_submissions(meta, cik)
-                    if snapshot.tickers != (symbol,):
+                    if symbol not in snapshot.tickers:
                         raise ProviderFailure(Status.SYMBOL_MISMATCH)
                     recent = strict_json(meta.body)['filings']['recent']
                     indices = [i for i, value in enumerate(recent['accessionNumber']) if value == shares['accession']]

@@ -1,5 +1,59 @@
 # Development status
 
+## 5 Kasım 2026 — Ek tercihli sembolleri olan adi hisselerin kesin sınıf doğrulaması
+
+Dal: feat/share-class-corroboration; başlangıç main
+48ae648975d1ca362ff9d331a82625bfea4ebefd (PR #19). AGENTS, proje özeti,
+durum, uzak main, açık PR ve Actions incelendi. Açık/çakışan PR yoktu; PR #19
+Türkçe raporları tamamlamış ve 662 testli CI ile birleşmişti. Türkçeleştirme
+yeniden yapılmadı. Eski radar-agent deposuna dokunulmadı.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/20
+Kaynak commit: https://github.com/fatalvayn-dot/us-equity-research/commit/90d3426ac0b864be6767ecc135096ace153cef59
+Kaynak ağacı 18abf252413da6cb89d34e7926c91359347601c7, 666 testin geçtiği
+yerel 9d5fa46 ağacıyla birebir eşittir. Kaynak CI:
+https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41929668290 —
+Python 3.11/103.164s, 3.12/147.351s ve 3.13/142.878s üzerinde 666 test ve
+CLI durum kontrolü başarılı. Son belge commitinin CI sonucu ayrıca kontrol edilecek.
+
+v0.34.0, SEC submissions içinde adi hisse sembolünün yanında tercihli veya başka
+adi hisse dışı sembol bulunmasını otomatik sembol uyuşmazlığı saymaz. İstenen
+sembol özgün dönemsel bildirim kapağında açıkça adi hisse olmalı; diğer her sembol
+aynı kapakta tercihli/depositary/borç benzeri adi hisse dışı menkul olarak kesin
+eşleşmelidir. İkinci bir adi hisse, bilinmeyen başlık, eksik kapak eşlemesi veya
+birden çok olası eşleşme reddedilir. Sembol noktalaması dönüştürülmez. SEC
+submissions ile kapak farklı yazım kullanıyorsa yalnız tek eşleşmemiş adi hisse
+dışı çift kabul edilir ve iki özgün sembol ayrı ayrı kanıtta tutulur.
+
+Gerçek sınırlı doğrulama ORCL ve MCHP için 11 yeni kamu GET isteği yaptı:
+www.sec.gov 3, data.sec.gov 4, Yahoo 4. İki kesin CIK, iki fiyat ve iki yıllık
+fiyat geçmişi geçerliydi. İlk koşuda MCHP geçti; ORCL, submissions `ORCL-PD`
+ile kapak `ORCL PRD` yazımı farklı olduğu için geçmedi. Dar ve denetlenebilir
+kapak kuralından sonra aynı 11 ham yanıtla sıfır GET tekrarında iki adi hisse
+sınıfı da doğrulandı. MCHP ek `MCHPP` depositary/preferred sembolü kapakta birebir;
+ORCL iki özgün etiketi ve tek-eşleşme gerekçesini saklar. Ham kaynak aralığı
+2026-11-04T22:44:05.147133+00:00–22:44:41.798655+00:00; başlık/kimlik bilgisi
+yok, 11 gözlemli sıkıştırılmış kaynak SHA-256 değeri
+0e581a6cce000afd65b851fb859552629796a96ef3d5fdfa7b60cc9ab68ffd3b.
+Kanıt: docs/evidence/share-class2 ve tests/fixtures/share-class2-sources.
+
+Odaklı 72 birim/entegrasyon/kayıtlı-veri testi geçti (27.986s). Eski tarihli
+7 şirket kanıtı değiştirilmedi; yeni kural altında ORCL, özgün kapak yanıtı yoksa
+`pending_source_collection` kalır. Tek sembollü eski 13 puanın JSON çıktısı
+birebir korunur. İlk tam regresyonda 666 testten 665'i geçti; ortak örnek çıktısına
+iç doğrulama için eklenen `listed_security` alanı eski kayıtlı JSON sözleşmesini
+değiştirmişti. Alan yalnız yeni doğrulayıcı açıkça istediğinde üretilecek şekilde
+daraltıldı; finansal sayı veya sınıf sonucu değişmedi. Son tam yerel regresyon
+666/666 geçti (133.482s, Python 3.12.14); CLI ve `git diff --check` ayrıca
+başarılı. Kaynak commitin uzak CI'ı başarılı; bu durum kaydını içeren son commitin
+CI'ı birleşmeden önce ayrıca çalıştırılacak.
+Bu iki şirketlik doğrulama tam 100 şirket kabulü veya yatırım onayı değildir.
+
+Kalan engel: PLTR için doğrulanmış güncel adi hisse adedi yok; ON girdisi geçersiz.
+Beş desteklenen adayın literal Liabilities bağımsız teyidi eksik. Sonraki tek görev,
+özgün güncel bildirimlerde toplam yükümlülüğü oluşturan kalemleri kavramsal ve
+aritmetik olarak ayrı bir kanıt politikasıyla doğrulamak; güvenli değilse adayları
+puansız bırakmak. Ardından güncel, devam ettirilebilir 100 şirket kabulü çalıştırılacak.
+
 ## 5 Kasım 2026 — Türkçe radar ve raporlar
 
 Dal: feat/turkish-reports; başlangıç main 2136438acb64c2e49319006a239a78fb1c3ef53d
