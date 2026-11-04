@@ -7,6 +7,13 @@ Dal: feat/share-class-corroboration; başlangıç main
 durum, uzak main, açık PR ve Actions incelendi. Açık/çakışan PR yoktu; PR #19
 Türkçe raporları tamamlamış ve 662 testli CI ile birleşmişti. Türkçeleştirme
 yeniden yapılmadı. Eski radar-agent deposuna dokunulmadı.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/20
+Kaynak commit: https://github.com/fatalvayn-dot/us-equity-research/commit/90d3426ac0b864be6767ecc135096ace153cef59
+Kaynak ağacı 18abf252413da6cb89d34e7926c91359347601c7, 666 testin geçtiği
+yerel 9d5fa46 ağacıyla birebir eşittir. Kaynak CI:
+https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41929668290 —
+Python 3.11/103.164s, 3.12/147.351s ve 3.13/142.878s üzerinde 666 test ve
+CLI durum kontrolü başarılı. Son belge commitinin CI sonucu ayrıca kontrol edilecek.
 
 v0.34.0, SEC submissions içinde adi hisse sembolünün yanında tercihli veya başka
 adi hisse dışı sembol bulunmasını otomatik sembol uyuşmazlığı saymaz. İstenen
@@ -37,7 +44,8 @@ iç doğrulama için eklenen `listed_security` alanı eski kayıtlı JSON sözle
 değiştirmişti. Alan yalnız yeni doğrulayıcı açıkça istediğinde üretilecek şekilde
 daraltıldı; finansal sayı veya sınıf sonucu değişmedi. Son tam yerel regresyon
 666/666 geçti (133.482s, Python 3.12.14); CLI ve `git diff --check` ayrıca
-doğrulanacak. Uzak CI birleşmeden önce tam commit üzerinde çalıştırılacak.
+başarılı. Kaynak commitin uzak CI'ı başarılı; bu durum kaydını içeren son commitin
+CI'ı birleşmeden önce ayrıca çalıştırılacak.
 Bu iki şirketlik doğrulama tam 100 şirket kabulü veya yatırım onayı değildir.
 
 Kalan engel: PLTR için doğrulanmış güncel adi hisse adedi yok; ON girdisi geçersiz.
