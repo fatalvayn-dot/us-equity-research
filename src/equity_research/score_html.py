@@ -1,10 +1,11 @@
 """Portable pilot-ranking browser; escaped content, no remote scripts."""
+from .turkish import label, calculation_label
 from html import escape
 from decimal import Decimal
 
 
 def render_score_html(report):
-    def e(value):return escape(str(value),quote=True)
+    def e(value):return escape(label(value),quote=True)
     def number(value,digits=6):return format(Decimal(str(value)),f'.{digits}f')
     ranked=''.join('<tr>'+''.join('<td>'+e(c[k])+'</td>' for k in ('rank','symbol','score','model_id'))+'</tr>' for c in report['ranking'])
     cards=[]
@@ -14,7 +15,7 @@ def render_score_html(report):
         proof=[]
         for item in c.get('evidence',{}).get('financial_confirmations',[]):
             f=item['selected'];verified=item['confirmed']
-            proof.append('<tr>'+''.join('<td>'+v+'</td>' for v in (e(item['field']),e(f['value'])+' '+e(f['currency']),
+            proof.append('<tr>'+''.join('<td>'+v+'</td>' for v in (e(label(item['field'])),e(f['value'])+' '+e(f['currency']),
                 e(f['period_start'] or 'instant')+' / '+e(f['period_end']),
                 '<a href="'+e(f['source_url'])+'" target="_blank" rel="noopener noreferrer">kaynak</a><small>'+e(f['raw_sha256'])+'</small>',
                 '<a href="'+e(verified['source_url'])+'" target="_blank" rel="noopener noreferrer">SEC doğrulaması</a><small>'+e(verified['raw_sha256'])+'</small>'))+'</tr>')
@@ -43,7 +44,7 @@ Bu, gerçek hisse sayısı veya istatistiksel güven aralığı değildir. Böl�
         provenance='<p class="notice">Finansal ve karşılaştırma girdilerinin kaynak tarihleri korunmuştur. Raporun üretilmesi bütün 100 şirketin finansal verilerinin yeniden toplandığı anlamına gelmez.</p><ul>'+dates+'</ul>'
     return f'''<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
-<title>US Equity Research — puanlama prototipi</title><style>
+<title>ABD Hisse Araştırması — puanlama prototipi</title><style>
 body{{font:16px/1.5 system-ui,sans-serif;background:#f3f5f7;color:#1b2a39;margin:auto;max-width:1100px;padding:24px}}
 header,article{{background:white;padding:22px;border:1px solid #d8e0e7;border-radius:10px;margin-bottom:18px}}
 h1,h2{{margin:0 0 12px}}h2 small{{font-weight:400;font-size:14px}}small{{display:block;overflow-wrap:anywhere}}
@@ -51,7 +52,7 @@ h1,h2{{margin:0 0 12px}}h2 small{{font-weight:400;font-size:14px}}small{{display
 table{{border-collapse:collapse;width:100%;margin:12px 0}}td,th{{text-align:left;padding:9px;border-bottom:1px solid #dde3e9;vertical-align:top}}
 summary{{cursor:pointer;font-weight:600}}label{{display:inline-block;margin:10px 16px 10px 0}}input,select{{padding:7px;font:inherit;max-width:100%}}
 [hidden]{{display:none!important}}a{{color:#075b9e}}
-</style></head><body><header><h1>US Equity Research</h1><p>Araştırma puanlama prototipi · Kaynak kesimi: {e(report['as_of'])}</p>
+</style></head><body><header><h1>ABD Hisse Araştırması</h1><p>Araştırma puanlama prototipi · Kaynak verilerinin kesim zamanı: {e(report['as_of'])}</p>
 {provenance}<p>{summary['candidates']} aday · {summary['scored_companies']} araştırma puanı · {summary['unscored']} puansız · {summary['critical_review']} kritik inceleme</p>
 <p class="notice">100 aktif adi hisselik MVP henüz kabul edilmedi. Puanlar sınırlı sektör modelinin başlangıç hipotezidir;
 getiri başarısı, alım önerisi veya yatırım onayı değildir. Kayıtlı veriler canlı fiyat hizmeti olarak sunulmaz.</p>

@@ -1,3 +1,11 @@
+# 5 Kasım 2026 — Türkçe dil kararı ve devam önceliği
+
+Kullanıcının kararı: süreç proje yönetiminde belirlenen sırayla devam edecek;
+radar, kullanıcıya sunulan raporlar ve durum bildirimlerinin dili Türkçe olacak.
+Öncelik değişmedi: eksik finansal/hisse sınıfı doğrulamaları, ardından tam ve
+güncel 100 şirket kabulü. Dil değişikliği yeni veri toplama veya kabul anlamına gelmez.
+Kaynak kanıtları ve makine arayüzü tanımları çeviri nedeniyle değiştirilmeyecek.
+
 # 2026-11-02 — approved reference-review and research priorities
 
 Continue this repository and preserve all prior work. Read-only reference:

@@ -232,8 +232,8 @@ class PricesTests(unittest.TestCase):
         from equity_research.prices import render_price_markdown
         report=dict(companies=[dict(symbol='<X|Y>',issuer_id=CIK,price=None,state='not_started',attempts=[])])
         text=render_price_markdown(report)
-        self.assertIn('&lt;X&#124;Y&gt;',text);self.assertIn('not attempted',text)
-        self.assertIn('unavailable',text)
+        self.assertIn('&lt;X&#124;Y&gt;',text);self.assertIn('Henüz denenmedi',text)
+        self.assertIn('Mevcut değil',text)
 
     def test_cli_zero_work_without_identity_is_safe_typed_error(self):
         import os,subprocess,sys

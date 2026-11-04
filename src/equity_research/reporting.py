@@ -1,4 +1,5 @@
 """Deterministic research reports from resumable collection evidence, never filled scores."""
+from .turkish import label, calculation_label
 import html
 import re
 from collections import Counter
@@ -169,43 +170,43 @@ def build_report(batch):
 
 def render_markdown(report):
     def cell(value):
-        return html.escape(str(value)).replace('|', '&#124;').replace('\n', ' ')
-    lines = ['# US Equity Research', '', f"Evidence cutoff: {cell(report['as_of'])}", '',
-             'MVP acceptance: pending. Unavailable scores are not zero and companies remain unranked.', '',
-             '| Symbol | CIK | Period end | Accepted facts | Arithmetic results | Status | Score / 100 |',
+        return html.escape(label(value)).replace('|', '&#124;').replace('\n', ' ')
+    lines = ['# ABD Hisse Araştırması', '', f"Kaynak verilerinin kesim zamanı: {cell(report['as_of'])}", '',
+             'İlk sürümün (MVP) kabulü bekleniyor. Hesaplanamayan puanlar sıfır sayılmaz; şirketler sıralanmamıştır.', '',
+             '| Sembol | CIK | Dönem sonu | Kabul edilen veri | Hesaplanan sonuç | Durum | Puan / 100 |',
              '| --- | --- | --- | ---: | ---: | --- | --- |']
     for c in report['companies']:
         count = sum(r['value'] is not None for r in c['calculations'])
         lines.append('| '+' | '.join(cell(v) for v in (c['symbol'], c['issuer_id'], c.get('period_end','unknown'), c['accepted_fact_count'], count, c['status'], 'unavailable'))+' |')
     for c in report['companies']:
-        lines.extend(['', '## '+cell(c['symbol']), '', 'Scope: '+cell(c.get('scope_reason','invalid evidence')), ''])
+        lines.extend(['', '## '+cell(c['symbol']), '', 'Kapsam: '+cell(c.get('scope_reason','Geçersiz kaynak kanıtı')), ''])
         if c.get('sector_profile'):
-            lines.extend(['Sector review: '+cell(c['sector_profile']['profile'])+' ('+cell(c['sector_profile']['status'])+').', ''])
+            lines.extend(['Sektör incelemesi: '+cell(c['sector_profile']['profile'])+' ('+cell(c['sector_profile']['status'])+').', ''])
         if c.get('pending_reason'):
-            lines.extend(['', 'Unattempted financial collection: '+cell(c['pending_reason'])+'.', ''])
+            lines.extend(['', 'Henüz denenmeyen finansal veri toplama: '+cell(c['pending_reason'])+'.', ''])
         if c.get('deferred_fields'):
-            lines.extend(['', 'Unattempted duration fields (period unresolved): '+cell(', '.join(c['deferred_fields']))+'.', ''])
+            lines.extend(['', 'Henüz denenmeyen dönemsel alanlar (dönem çözümlenmedi): '+cell(', '.join(label(f) for f in c['deferred_fields']))+'.', ''])
         if c.get('financial_assessment'):
             assessment = c['financial_assessment']
-            lines.extend(['Financial review gate: '+cell(assessment['quantitative_gate'])+'.', '',
-                          '| Financial check | Result | Interpretation |', '| --- | --- | --- |'])
+            lines.extend(['Finansal inceleme sonucu: '+cell(assessment['quantitative_gate'])+'.', '',
+                          '| Finansal kontrol | Sonuç | Yorum |', '| --- | --- | --- |'])
             for check in assessment['checks']:
-                reason = check['explanation']
-                if check['missing_fields']: reason += ' Missing: '+', '.join(check['missing_fields'])+'.'
-                if check['rejections']: reason += ' Rejected: '+', '.join(r['field']+': '+r['reason'] for r in check['rejections'])+'.'
+                reason = label(check['explanation'])
+                if check['missing_fields']: reason += ' Eksik: '+', '.join(label(f) for f in check['missing_fields'])+'.'
+                if check['rejections']: reason += ' Reddedilen: '+', '.join(label(r['field'])+': '+label(r['reason']) for r in check['rejections'])+'.'
                 lines.append('| '+' | '.join(cell(v) for v in (check['check'], check['status'], reason))+' |')
-            lines.extend(['', 'Scoring withheld: '+cell('; '.join(c['score_blockers']))+'.', ''])
-        lines.extend(['| Field | Value and currency | Source | Period | Definition | Raw SHA-256 | Observed at | Attempts |',
+            lines.extend(['', 'Puanın hesaplanmama nedenleri: '+cell('; '.join(c['score_blockers']))+'.', ''])
+        lines.extend(['| Alan | Değer ve para birimi | Kaynak | Dönem | Muhasebe tanımı | Ham kaynak SHA-256 | Gözlem zamanı | Kaynak denemeleri |',
                       '| --- | --- | --- | --- | --- | --- | --- | --- |'])
         for f in c['fields']:
             fact = f['fact']; q = f['query']
-            attempts = '; '.join(a['source']+': '+a['status'] for a in f['attempts']) or 'not attempted'
+            attempts = '; '.join(a['source']+': '+label(a['status']) for a in f['attempts']) or 'not attempted'
             source = fact['source_url'] if fact else 'unavailable'
             lines.append('| '+' | '.join(cell(v) for v in (q['field'], str(fact['value'])+' '+fact['currency'] if fact else 'unavailable', source,
-                (q['period_start'] or 'instant')+' / '+q['period_end'], q['accounting_definition'], fact['raw_sha256'] if fact else '',
+                (q['period_start'] or 'Bilanço tarihi')+' / '+q['period_end'], q['accounting_definition'], fact['raw_sha256'] if fact else '',
                 fact['retrieved_at'] if fact else '', attempts))+' |')
-        lines.extend(['', '| Calculation | Value | Unit | Status |', '| --- | --- | --- | --- |'])
+        lines.extend(['', '| Hesaplama | Değer | Birim | Durum |', '| --- | --- | --- | --- |'])
         for r in c['calculations']:
-            lines.append('| '+' | '.join(cell(v) for v in (r['formula'], r['value'] if r['value'] is not None else 'unavailable', r['unit'], r['status']))+' |')
-        lines.extend(['', 'Score components: '+ '; '.join(cell(k)+': '+cell(v['status']) for k,v in c['score_components'].items())+'.', ''])
+            lines.append('| '+' | '.join(cell(v) for v in (calculation_label(r), r['value'] if r['value'] is not None else 'unavailable', r['unit'], r['status']))+' |')
+        lines.extend(['', 'Puan bileşenleri: '+ '; '.join(cell(k)+': '+cell(v['status']) for k,v in c['score_components'].items())+'.', ''])
     return '\n'.join(lines).rstrip()+'\n'

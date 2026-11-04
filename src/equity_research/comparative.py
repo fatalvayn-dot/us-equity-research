@@ -1,4 +1,5 @@
 """Explicit annual comparison plans and sourced growth; no fiscal-date guesses."""
+from .turkish import label, calculation_label
 from dataclasses import asdict
 from datetime import date, datetime, time, timedelta, timezone
 from decimal import Decimal, localcontext
@@ -192,13 +193,13 @@ def build_comparative_report(current_batch, prior_batch):
 def render_comparative_markdown(report):
     import html
     def cell(value):
-        return html.escape(str(value)).replace('|', '&#124;').replace('\n', ' ')
-    lines = ['# Annual comparison inputs', '', 'Sourced arithmetic only; sector/business comparability review and MVP acceptance remain pending.', '',
-             f"Evidence cutoff: {cell(report['as_of'])}", '',
-             '| Symbol | Field | Growth ratio | Status |', '| --- | --- | ---: | --- |']
+        return html.escape(label(value)).replace('|', '&#124;').replace('\n', ' ')
+    lines = ['# Yıllık karşılaştırma girdileri', '', 'Kaynaklara dayalı aritmetik hesaplamalardır. Sektör ve iş modeli karşılaştırılabilirliği incelemesi ile ilk sürümün kabulü bekleniyor.', '',
+             f"Kaynak verilerinin kesim zamanı: {cell(report['as_of'])}", '',
+             '| Sembol | Alan | Büyüme oranı | Durum |', '| --- | --- | ---: | --- |']
     for row in report['companies']:
         for calculation in row['calculations']:
             lines.append('| '+' | '.join(cell(v) for v in (row['symbol'], calculation['field'],
                 calculation['value'] if calculation['value'] is not None else 'unavailable', calculation['status']))+' |')
-    lines.extend(['', 'Formula: current / prior - 1. Full input values, periods, accounting definitions, currencies, source URLs, raw hashes and actual provider attempts are retained in the JSON report. No numeric investment scores or rankings.', ''])
+    lines.extend(['', 'Formül: cari dönem / önceki dönem − 1. Tüm girdi değerleri, dönemler, muhasebe tanımları, para birimleri, kaynak bağlantıları, ham kaynak özetleri ve yapılan kaynak denemeleri JSON raporunda korunmuştur. Yatırım puanı veya sıralama üretilmemiştir.', ''])
     return '\n'.join(lines).rstrip()+'\n'

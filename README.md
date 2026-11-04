@@ -1,3 +1,27 @@
+# ABD Hisse Araştırması
+
+Radar ekranı ve yeni raporlar Türkçedir. Kayıtlı prototipin Türkçe çıktıları:
+
+- [Radar: puanlar, gerekçeler ve kaynaklar](docs/evidence/turkish-reports/radar.html)
+- [Radar raporu (Markdown)](docs/evidence/turkish-reports/radar.md)
+- [100 şirketin finansal raporu](docs/evidence/turkish-reports/finansal-rapor.html)
+- [Fiyat raporu](docs/evidence/turkish-reports/fiyat-raporu.md)
+- [Yıllık karşılaştırma](docs/evidence/turkish-reports/yillik-karsilastirma.md)
+- [Üç şirketlik eski değerleme örneklemi](docs/evidence/turkish-reports/degerleme-orneklemi.md)
+
+HTML dosyaları indirilip tarayıcıda açılabilir; sembol ve durum filtreleri çalışır.
+Bu çıktılar 2–3 Kasım tarihli kaynak kayıtlarının Türkçe görünümüdür. Canlı fiyat
+hizmeti değildir; ilk sürümün 100 şirketle güncel kabulü henüz tamamlanmamıştır.
+JSON kanıtları, muhasebe etiketleri, kaynak bağlantıları ve tarihleri korunur.
+
+Türkçe görünümleri ağ isteği yapmadan yeniden üretmek için:
+
+```bash
+PYTHONPATH=src python scripts/export_turkish_reports.py
+```
+
+Aşağıdaki önceki teknik kayıtlar ve tarihli çıktılar geçmiş kanıt olarak korunmuştur.
+
 # US Equity Research
 
 Independent Python system for active NYSE, Nasdaq and NYSE American common

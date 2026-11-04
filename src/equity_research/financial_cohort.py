@@ -48,11 +48,11 @@ def assemble_financial_cohort(candidates,batches):
 
 def render_cohort_markdown(report):
     from .reporting import render_markdown
-    lines=['# Mixed dated financial cohorts','',
-        'Not a new live 100-company scan. Original per-fact source and query dates remain unchanged.','']
+    lines=['# Farklı tarihlerde toplanmış finansal veriler','',
+        'Bu rapor yeni bir canlı 100 şirket taraması değildir. Her verinin özgün kaynak ve sorgu tarihleri korunmuştur.','']
     for source in report['financial_cohort']['sources']:
-        lines.append(f"Input {source['source']}: {source['generated_at']} · SHA-256 {source['sha256']}")
-    lines.extend(['', 'Selected by input: '+json.dumps(report['financial_cohort']['selected_by_source']), ''])
+        lines.append(f"Girdi {source['source']}: {source['generated_at']} · SHA-256 {source['sha256']}")
+    lines.extend(['', 'Girdiye göre seçilen şirket sayısı: '+json.dumps(report['financial_cohort']['selected_by_source']), ''])
     return '\n'.join(lines)+render_markdown(report)
 
 

@@ -78,7 +78,7 @@ class RecordedValuationTests(unittest.TestCase):
             result=subprocess.run(cmd,env=env,capture_output=True,text=True)
             self.assertEqual(result.returncode,0,result.stdout+result.stderr)
             self.assertEqual(json.loads(out.read_text())['summary']['indicative_valuations'],3)
-            self.assertIn('not observed current market caps',md.read_text())
+            self.assertIn('gözlenen güncel piyasa değeri veya adil değer değildir',md.read_text())
             cmd[cmd.index('--output')+1]=str(ROOT/'tests/fixtures/valuation-sources/manifest.json')
             refused=subprocess.run(cmd,env=env,capture_output=True,text=True)
             self.assertEqual(refused.returncode,2)

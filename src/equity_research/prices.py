@@ -279,15 +279,16 @@ def run_prices(candidates, *, state_dir, user_agent, max_new_prices=100):
 
 def render_price_markdown(report):
     import html
+    from .turkish import label
     def cell(value):
-        return html.escape(str(value)).replace('|','&#124;').replace('\n',' ')
-    lines=['# Market-price inputs', '', 'Active common-share/sector approval and investment scores remain pending. Prices may be delayed.', '',
-           '| Symbol | CIK | Price / USD per share | Market time UTC | Source observation UTC | Status | Provider outcomes |',
+        return html.escape(label(value)).replace('|','&#124;').replace('\n',' ')
+    lines=['# Piyasa fiyatı girdileri', '', 'Aktif adi hisse kapsamı, sektör onayı ve yatırım puanları bekleniyor. Fiyatlar gecikmeli olabilir.', '',
+           '| Sembol | CIK | Fiyat (USD / hisse) | Piyasa zamanı (UTC) | Kaynak gözlemi (UTC) | Durum | Kaynak sonuçları |',
            '| --- | --- | ---: | --- | --- | --- | --- |']
     for row in report['companies']:
         p=row['price']
-        attempts='; '.join(a['source']+': '+a['status'] for a in row['attempts']) or 'not attempted'
+        attempts='; '.join(a['source']+': '+label(a['status']) for a in row['attempts']) or 'not attempted'
         lines.append('| '+' | '.join(cell(v) for v in (row['symbol'],row['issuer_id'],p['value'] if p else 'unavailable',
             p['market_at'] if p else '',p['retrieved_at'] if p else '',row['state'],attempts))+' |')
-    lines.extend(['', 'Full JSON retains exact price and identity URLs, raw SHA-256 values, original observation times, field definition, currency and provider outcomes. No market capitalization or share count is inferred.', ''])
+    lines.extend(['', 'JSON kaydı fiyat ve kimlik doğrulama bağlantılarını, ham SHA-256 özetlerini, özgün gözlem zamanlarını, alan tanımını, para birimini ve kaynak sonuçlarını korur. Piyasa değeri veya hisse sayısı türetilmez.', ''])
     return '\n'.join(lines).rstrip()+'\n'

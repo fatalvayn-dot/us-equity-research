@@ -121,13 +121,22 @@ class AssessmentTests(unittest.TestCase):
             self.assertFalse(c['financial_assessment']['overall_risk_cleared'])
             self.assertIsNone(c['total_score'])
             self.assertIn('source_bound_valuation_required',c['score_blockers'])
-        self.assertIn('Financial review gate:',render_markdown(report))
+        self.assertIn('Finansal inceleme sonucu:',render_markdown(report))
 
     def test_published_browser_and_assessments_reproduce_with_original_source_times(self):
         root=Path(__file__).resolve().parents[1];evidence=root/'docs/evidence/risk100'
         source=root/'docs/evidence/liquidity100/batch.json.gz'
         r=build_report(json.loads(gzip.decompress(source.read_bytes())))
-        self.assertEqual((evidence/'report.html').read_text(),render_html(r))
+        # Preserve the historical English artifact (hash-checked below), while
+        # checking the new Turkish renderer against its original source dates.
+        page = render_html(r)
+        self.assertIn('lang="tr"', page)
+        self.assertIn(r['as_of'], page)
+        self.assertEqual(page.count('<article '), 100)
+        for company in r['companies']:
+            for field in company['fields']:
+                if field['fact']:
+                    self.assertIn(field['fact']['raw_sha256'], page)
         audit=json.loads(gzip.decompress((evidence/'assessment.json.gz').read_bytes()))
         self.assertEqual(audit['source_sha256'],hashlib.sha256(source.read_bytes()).hexdigest())
         self.assertEqual(audit['as_of'],r['as_of'])
@@ -151,7 +160,7 @@ class AssessmentTests(unittest.TestCase):
         self.assertNotIn('<script>alert(1)</script>',page)
         self.assertIn('&lt;script&gt;alert(1)&lt;/script&gt;',page)
         self.assertEqual(page.count('<article '),8)
-        self.assertIn('Score: unavailable',page)
+        self.assertIn('Puan: hesaplanmadı',page)
         self.assertIn('aria-live="polite"',page)
 
     def test_cli_produces_html_and_refuses_overwriting_its_source(self):

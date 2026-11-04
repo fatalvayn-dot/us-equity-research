@@ -1,5 +1,56 @@
 # Development status
 
+## 5 Kasım 2026 — Türkçe radar ve raporlar
+
+Dal: feat/turkish-reports; başlangıç main 2136438acb64c2e49319006a239a78fb1c3ef53d
+(PR #18). AGENTS, proje özeti ve önceki durum okundu. Başlangıçta açık PR yoktu;
+main üzerindeki son Foundation tests çalışması 41824775204 başarılıydı.
+Kullanıcının Türkçe dil kararı AGENTS ve PROJECT_BRIEF içine kaydedildi.
+Eski radar-agent deposuna dokunulmadı.
+
+Radar ve finansal HTML ekranları ile araştırma, finansal, fiyat, yıllık karşılaştırma,
+değerleme ve karma tarihli finansal raporların Markdown çıktıları Türkçeleştirildi.
+Bileşen, model, durum, eksik veri ve kaynak hatası açıklamaları ortak sözlükten gelir.
+Bilinmeyen tanılar özgün koduyla görünür; başarıya dönüştürülmez. Filtre değerleri ve
+JSON sözleşmesi özgün kalır. Finansal değerlendirme, puan modeli, ilk geçerli kaynak
+sırası, dönem/para birimi kuralları ve kabul kapıları değiştirilmedi.
+
+Türkçe kayıtlı çıktılar: docs/evidence/turkish-reports/. Tekrar üretim:
+PYTHONPATH=src python scripts/export_turkish_reports.py
+Bu komut ağ isteği yapmaz; özgün tarihli JSON raporlarını yeniden görüntüler.
+Önceki İngilizce raporlar ve özetleri tarihli kanıt olarak korunmuştur. Yedi yeni
+HTML/Markdown çıktısının ve beş girdi dosyasının SHA-256 özeti manifestte yer alır.
+
+Kontrol: tam kaynak paketinden build_current_scores ile aynı kesim zamanında yeniden
+üretilen JSON, önceki current-score100 JSON kaydıyla birebir eşittir. 100 aday,
+13 puanlı, 87 puansız ve dört kritik inceleme değişmedi; kaynak tarihleri korunmuştur.
+Yeni canlı istek: 0. Bu çalışma güncel 100 şirket kabulü veya yatırım onayı değildir.
+
+Hata ve düzeltmeler: ilk 658 testlik koşuda dört sunum testi eski İngilizce metni
+ve eski HTML görünümünü beklediği için başarısız oldu; finansal sayılar değişmedi.
+Dil beklentileri güncellendi; eski HTML kanıtının manifest doğrulaması korundu.
+662 testlik sonraki koşuda 661 test geçti; fiyat raporunda kalan bir İngilizce
+metin beklentisi düzeltildi.
+İncelemede data-gate niteliğinin çevirisinin filtreyi bozabileceği görüldü; makine
+kodu korundu ve buna özel kontrol eklendi. Türkçe dışa aktarma ilk denemede yanlış
+.json yolu ve fiyat raporunun farklı tarih anahtarı nedeniyle durdu; özgün .json.gz
+ve generated_at sözleşmeleri kullanılarak düzeltildi. Kaynak dosyalar değişmedi.
+
+Doğrulama: dört yeni Türkçe görünüm/sözlük testi ve 30 fiyat testi başarılı.
+Son tam yerel regresyon: 662/662, 131.683 saniye, Python 3.12.14. CLI status
+ve git diff --check başarılı. Sekiz Türkçe çıktı/manifest dosyası yeniden
+üretimde birebir aynı; beş girdi ve yedi çıktı özeti doğrulandı. Uzak CI bu PR
+açıldıktan sonra, birleşmeden önce tam commit üzerinde kontrol edilecek.
+
+Devam düzeni: mevcut US Equity Research – Tek Merkez saatlik görevi
+başlangıç kontrolünde duraklatılmış bulundu. Kullanıcının devam talimatına göre
+Türkçe dil kuralı eklenecek ve bu PR tamamlandıktan sonra mevcut sıklıkla yeniden
+etkinleştirilecek. Eski radar ve sanal portföy görevleri açılmayacak.
+
+Sonraki görev değişmedi: yükümlülük ve hisse sınıfı doğrulama açıklarını özgün güncel
+bildirimlerle çöz; ardından tam, güncel ve devam ettirilebilir 100 şirket kabulünü
+çalıştır. Kapsam genişletme, geçmiş performans iddiası veya sanal portföy açma yok.
+
 ## 2026-11-03 — Current-market 22-candidate collection and 13-score common100 prototype
 
 Branch feat/current-score-cohort from main 8060ed36dbb6d9de7844e1c75402a8d45df9650b

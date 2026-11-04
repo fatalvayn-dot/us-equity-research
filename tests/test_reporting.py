@@ -99,7 +99,7 @@ class ReportingTests(unittest.TestCase):
 
     def test_markdown_contains_sources_hashes_definitions_ratios_and_missing_reasons(self):
         r=build_report(batch());text=render_markdown(r)
-        for token in ('https://','us-gaap:',collected(batch())['fact']['raw_sha256'],'Score / 100','unavailable','market_price','Operating cash flow'):
+        for token in ('https://','us-gaap:',collected(batch())['fact']['raw_sha256'],'Puan / 100','Mevcut değil','Piyasa fiyatı','Faaliyetlerden nakit akışı'):
             self.assertIn(token,text)
 
     def test_cli_exports_json_and_markdown_without_network(self):

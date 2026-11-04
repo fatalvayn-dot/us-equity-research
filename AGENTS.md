@@ -16,3 +16,9 @@ stage complete while its prerequisite acceptance gate is unverified.
 When repository creation is unavailable, preserve a Git bundle plus source
 archive as a persistent checkpoint, and report the precise repository action
 required. Avoid repeated identical notifications during scheduled attempts.
+
+# Proje dili
+
+Kullanıcıya görünen radar ekranları, raporlar, hata/eksik veri açıklamaları ve
+yeni durum bildirimleri Türkçe hazırlanır. JSON anahtarları, kaynak metinleri,
+muhasebe etiketleri, semboller, bağlantılar ve kanıt tarihleri özgün biçimde korunur.

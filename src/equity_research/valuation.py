@@ -1,4 +1,5 @@
 """Indicative capitalization from dated disclosed shares, never a live market-cap claim."""
+from .turkish import label, calculation_label
 import re
 from dataclasses import asdict
 from datetime import date, datetime, time, timedelta, timezone
@@ -283,10 +284,10 @@ def build_valuation_report(batch, responses, *, as_of):
 
 def render_valuation_markdown(report):
     import html
-    def cell(value):return html.escape(str(value)).replace('|','&#124;').replace('\n',' ')
-    lines=['# Disclosed-share valuation indications','',f"Evidence cutoff: {cell(report['as_of'])}",'',
-        'MVP acceptance pending. These are dated-share arithmetic indications, not observed current market caps or fair values. No scores or ranks.','',
-        '| Symbol | Status | Indicated capitalization USD | Disclosed share date |','| --- | --- | ---: | --- |']
+    def cell(value):return html.escape(label(value)).replace('|','&#124;').replace('\n',' ')
+    lines=['# Bildirilen hisse adedine dayalı değerleme göstergeleri','',f"Kaynak verilerinin kesim zamanı: {cell(report['as_of'])}",'',
+        'İlk sürümün kabulü bekleniyor. Tarihli hisse adedine dayalı aritmetik göstergelerdir; gözlenen güncel piyasa değeri veya adil değer değildir. Puan ve sıralama yoktur.','',
+        '| Sembol | Durum | Gösterge sermaye değeri (USD) | Hisse adedi bildirim tarihi |','| --- | --- | ---: | --- |']
     for c in report['companies']:
         v=c['valuation']
         lines.append('| '+' | '.join(cell(x) for x in (c['symbol'],c['status'],v['indicated_capitalization'] if v else 'unavailable',
@@ -295,16 +296,16 @@ def render_valuation_markdown(report):
         v=c['valuation']
         lines.extend(['','## '+cell(c['symbol']),''])
         if v is None:
-            lines.append('Unavailable: '+cell(c.get('provider_status') or '; '.join(c.get('missing_source_urls',[])))+'.');continue
+            lines.append('Mevcut değil: '+cell(c.get('provider_status') or '; '.join(c.get('missing_source_urls',[])))+'.');continue
         p=v['price'];s=v['disclosed_shares']
-        lines.extend([f"Price: {cell(p['value'])} USD, market time {cell(p['market_at'])}, observed {cell(p['retrieved_at'])}.",
-            f"Disclosed shares: {cell(s['value'])}, dated {cell(s['disclosed_on'])}, reported decimals {cell(s['decimals'])}.",
-            '', '| Metric | Ratio | Status |', '| --- | ---: | --- |'])
+        lines.extend([f"Fiyat: {cell(p['value'])} USD, piyasa zamanı {cell(p['market_at'])}, gözlem zamanı {cell(p['retrieved_at'])}.",
+            f"Bildirilen hisse adedi: {cell(s['value'])}, tarihi {cell(s['disclosed_on'])}, bildirilen ondalık hassasiyet {cell(s['decimals'])}.",
+            '', '| Ölçüt | Oran | Durum |', '| --- | ---: | --- |'])
         for metric in v['metrics']:
-            value=format(metric['value'],'.6f') if metric['value'] is not None else 'unavailable'
+            value=format(Decimal(str(metric['value'])),'.6f') if metric['value'] is not None else 'unavailable'
             lines.append('| '+' | '.join(cell(x) for x in (metric['metric'],value,metric['status']))+' |')
-        for name,source in [('price',p),('companyfacts',s['companyfacts']),('original filing',s['original_filing']),('metadata',s['metadata'])]:
+        for name,source in [('Fiyat',p),('SEC finansal verileri',s['companyfacts']),('Özgün bildirim',s['original_filing']),('Şirket bilgileri',s['metadata'])]:
             lines.extend(['',cell(name)+': '+cell(source.get('source_url') or source.get('url'))+' · SHA-256 '+cell(source['raw_sha256'])+'.'])
-        lines.extend(['','Scoring blocked: '+cell('; '.join(v['blockers']))+'.',
-            'Limits: '+cell('; '.join(v['limitations']))+'.'])
+        lines.extend(['','Puanın hesaplanmama nedenleri: '+cell('; '.join(v['blockers']))+'.',
+            'Sınırlamalar: '+cell('; '.join(v['limitations']))+'.'])
     return '\n'.join(lines)+'\n'
