@@ -19,7 +19,7 @@ from equity_research.response_archive import ResponseArchive
 from equity_research.sec import DIRECTORY_URL
 from equity_research.valuation_collection import ValuationSourceCollector, run_collection, candidate_rows
 from test_scoring import history, ASOF
-from test_valuation import CIK, NOW, cf, meta, filing, identity, price
+from test_valuation import CIK, NOW, cf, meta, filing, filing_with_other_security, identity, price
 
 ROOT=Path(__file__).resolve().parents[1]
 PLAN=dict(companies=[dict(symbol='AAPL',issuer_id=CIK)])
@@ -120,6 +120,14 @@ class CollectionTests(unittest.TestCase):
         company=self.collector().collect(PLAN)['companies'][0]
         self.assertEqual(company['share_check']['status'],'symbol_mismatch')
         self.assertNotIn(filing().url,self.transport.calls)
+    def test_extra_preferred_ticker_needs_and_accepts_exact_filing_cover_proof(self):
+        r=meta(tickers=['AAPL','AAPL-P']);self.transport.responses[r.url]=r
+        document=filing_with_other_security();self.transport.responses[document.url]=document
+        company=self.collector().collect(PLAN)['companies'][0]
+        self.assertEqual(company['share_check']['status'],'verified_dated_share_class')
+        proof=company['share_check']['evidence']
+        self.assertEqual(proof['other_registered_securities'][0]['symbol'],'AAPL-P')
+        self.assertFalse(company['scope_approved']);self.assertIsNone(company['total_score'])
     def test_stale_cached_market_inputs_require_refresh_and_budget_remains_hard(self):
         self.collector().collect(PLAN);self.now+=timedelta(minutes=16)
         self.lock.release(self.owner);self.owner=self.lock.acquire(self.now,timedelta(minutes=15))
@@ -166,11 +174,20 @@ class CollectionTests(unittest.TestCase):
         self.now=datetime.fromisoformat(expected['as_of'])
         self.lock.release(self.owner);self.owner=self.lock.acquire(self.now,timedelta(minutes=15))
         actual=self.collector(0).collect(expected['candidate_plan'])
-        self.assertEqual(actual['summary'],expected['summary'])
+        # The historical artifact remains unchanged. Under the stricter current
+        # policy, ORCL is pending its exact preferred-security cover proof instead
+        # of being rejected merely because submissions lists a second ticker.
+        self.assertEqual(actual['summary']['new_get_invocations'],0)
+        self.assertEqual(actual['summary']['share_states'],
+            {'verified_dated_share_class':6,'pending_source_collection':1})
         from equity_research.cache import encode
         for got,want in zip(actual['companies'],expected['companies']):
             self.assertEqual(got['symbol'],want['symbol'])
-            for leg in ('share_check','price_check','history_check'):
+            if got['symbol']=='ORCL':
+                self.assertEqual(want['share_check']['status'],'symbol_mismatch')
+                self.assertEqual(got['share_check']['status'],'pending_source_collection')
+            else:self.assertEqual(json.loads(json.dumps(got['share_check'],default=encode)),want['share_check'])
+            for leg in ('price_check','history_check'):
                 self.assertEqual(json.loads(json.dumps(got[leg],default=encode)),want[leg])
             self.assertFalse(got['scope_approved']);self.assertIsNone(got['total_score'])
         self.assertEqual(self.transport.calls,[])

@@ -109,7 +109,7 @@ def verify_share_class(shares, metadata, filing, *, symbol, as_of):
     """Reparse exact original filing and reject listed or disclosed class ambiguity."""
     cik=shares['issuer_id'];snapshot=parse_submissions(metadata,cik)
     if (not timedelta(0)<=as_of-metadata.retrieved_at<=SNAPSHOT_TTL
-            or snapshot.tickers!=(symbol,) or shares['retrieved_at']>as_of
+            or symbol not in snapshot.tickers or shares['retrieved_at']>as_of
             or not aware(filing.retrieved_at) or filing.retrieved_at>as_of
             or filing.retrieved_at.date()<shares['filed']):
         raise ProviderFailure(Status.INVALID_DATA)
@@ -125,12 +125,47 @@ def verify_share_class(shares, metadata, filing, *, symbol, as_of):
             raise ValueError('share filing mismatch')
         url=f'https://www.sec.gov/Archives/edgar/data/{int(cik)}/{shares["accession"].replace("-", "")}/{document}'
         if filing.url!=url:raise ValueError('wrong original document')
-        cover=filing_security_metadata(filing.body,cik=cik,symbol=symbol,report_end=report_end,document_type=shares['form'])
+        cover=filing_security_metadata(filing.body,cik=cik,symbol=symbol,report_end=report_end,
+            document_type=shares['form'],include_all_listed=True)
         # A single listed ticker alone cannot prove that all common shares have
         # the same economics. Class-labeled covers and dimensional DEI counts
         # require a separately accepted multi-class model.
         if any(re.search(r'\bclass\s+[A-Za-z0-9]+\b',r['title'],re.I) for r in cover['registered_security']):
             raise ValueError('class-specific capital structure requires review')
+        # SEC submissions can list a common symbol alongside preferred or debt
+        # tickers. Permit that only when this exact filing cover independently
+        # identifies every additional ticker as explicitly non-common and no
+        # second common/ordinary security is visible. Unknown or missing cover
+        # classifications remain a hard review gate.
+        listed=cover['listed_security'];other=[]
+        other_tickers=[ticker for ticker in snapshot.tickers if ticker!=symbol]
+        other_cover=[r for r in listed if r['symbol']!=symbol]
+        is_common=lambda title:re.search(r'\b(common|ordinary)\s+(stock|shares?)\b',title,re.I)
+        is_explicit_non_common=lambda title:re.search(
+            r'\b(preferred|depositary|depository|warrants?|units?|notes?|bonds?)\b',title,re.I)
+        if any(is_common(r['title']) or not is_explicit_non_common(r['title']) for r in other_cover):
+            raise ValueError('additional common or unknown security requires review')
+        used=set();unmatched=[]
+        for ticker in other_tickers:
+            matches=[(i,r) for i,r in enumerate(other_cover) if r['symbol']==ticker]
+            identities={(r['title'],r['exchange']) for _,r in matches}
+            if len(identities)==1:
+                title,exchange=next(iter(identities));used.update(i for i,_ in matches)
+                other.append(dict(symbol=ticker,title=title,exchange=exchange,
+                    symbol_corroboration='exact_cover_symbol'))
+            else:unmatched.append(ticker)
+        remaining=[r for i,r in enumerate(other_cover) if i not in used]
+        # Some SEC submissions use an exchange-style preferred ticker while the
+        # filing cover uses a spaced series designator (for example ORCL-PD vs
+        # ORCL PRD). Do not normalize punctuation or guess among alternatives:
+        # accept only one unmatched metadata ticker and one unmatched cover row,
+        # retain both exact labels, and use neither as a common-share operand.
+        if unmatched or remaining:
+            if len(unmatched)!=1 or len(remaining)!=1:
+                raise ValueError('additional ticker lacks unambiguous cover classification')
+            row=remaining[0]
+            other.append(dict(symbol=unmatched[0],cover_symbol=row['symbol'],title=row['title'],
+                exchange=row['exchange'],symbol_corroboration='single_unambiguous_non_common_cover_alias'))
         p=Inventory();p.feed(filing.body.decode('utf-8'));p.close()
         if (p.conflict or p.context is not None or p.unit is not None or p.stack
                 or not re.fullmatch(r'http://xbrl.sec.gov/dei/20[0-9]{2}',p.namespaces.get('dei',''))):
@@ -147,11 +182,17 @@ def verify_share_class(shares, metadata, filing, *, symbol, as_of):
             matches.append(_share_number(f,p))
         if len(set(matches))!=1 or matches[0][0]!=shares['value']:
             raise ValueError('original share disclosure does not reconcile')
-        return dict(value=shares['value'],disclosed_on=shares['end'],decimals=matches[0][1],
+        result=dict(value=shares['value'],disclosed_on=shares['end'],decimals=matches[0][1],
             unit='shares',concept=SHARE_CONCEPT,companyfacts=shares,
             original_filing=dict(url=filing.url,raw_sha256=filing.sha256,retrieved_at=filing.retrieved_at),
             metadata=dict(url=metadata.url,raw_sha256=metadata.sha256,retrieved_at=metadata.retrieved_at),
             registered_security=cover['registered_security'],scope_approved=False)
+        # Keep the established single-ticker report contract byte stable. The
+        # extra audit fields exist only when they are needed to prove why a
+        # multi-ticker issuer's common security can be isolated.
+        if other:result.update(other_registered_securities=other,
+            common_security_scope='single_verified_common_symbol_with_explicit_non_common_tickers')
+        return result
     except (KeyError,TypeError,ValueError,ArithmeticError,UnicodeError):
         raise ProviderFailure(Status.INVALID_DATA) from None
 

@@ -69,7 +69,8 @@ def inline_date(text,format_label):
     return date(int(match[3]),labels[match[1]],int(match[2]))
 
 
-def filing_security_metadata(body,*,cik,symbol,report_end,document_type,expected_exchange=None):
+def filing_security_metadata(body,*,cik,symbol,report_end,document_type,expected_exchange=None,
+                             include_all_listed=False):
     """Exact symbol and same-context title/exchange required, including class dimensions."""
     try:
         if not re.fullmatch(r'[0-9]{10}',cik) or int(cik)==0 or not symbol or not isinstance(report_end,date):raise ValueError('identity')
@@ -97,24 +98,31 @@ def filing_security_metadata(body,*,cik,symbol,report_end,document_type,expected
             'NYSE American':{'NYSE American','NYSE American LLC','NYSE MKT'}}
         if expected_exchange is not None and expected_exchange not in exchange_labels:
             raise ValueError('unsupported expected exchange')
-        registered=[]
+        listed=[];registered=[]
         for context,row in values.items():
-            if row.get('tradingsymbol')!={symbol}:continue
             if len(row.get('security12btitle',set()))!=1 or len(row.get('securityexchangename',set()))!=1:continue
+            if len(row.get('tradingsymbol',set()))!=1:continue
+            listed_symbol=next(iter(row['tradingsymbol']))
             title=next(iter(row['security12btitle']))
-            if expected_exchange is not None and next(iter(row['securityexchangename'])).casefold() not in {label.casefold() for label in exchange_labels[expected_exchange]}:continue
+            exchange=next(iter(row['securityexchangename']))
+            listed.append(dict(context_id=context,symbol=listed_symbol,title=title,exchange=exchange))
+            if listed_symbol!=symbol:continue
+            if expected_exchange is not None and exchange.casefold() not in {label.casefold() for label in exchange_labels[expected_exchange]}:continue
             if not re.search(r'\b(common|ordinary)\s+(stock|shares?)\b',title,re.I):continue
             if re.search(r'\b(preferred|depositary|depository|warrants?|units?|notes?|bonds?)\b',title,re.I):continue
-            registered.append(dict(context_id=context,symbol=symbol,title=title,exchange=next(iter(row['securityexchangename']))))
+            registered.append(dict(context_id=context,symbol=symbol,title=title,exchange=exchange))
         unique={(r['title'],r['exchange']) for r in registered}
         if len(unique)!=1:raise ValueError('missing or conflicting registered security')
         title,exchange=next(iter(unique))
         common=bool(re.search(r'\b(common|ordinary)\s+(stock|shares?)\b',title,re.I))
         forbidden=bool(re.search(r'\b(preferred|depositary|depository|warrants?|units?|notes?|bonds?)\b',title,re.I))
-        return dict(issuer_id=cik,symbol=symbol,report_end=report_end.isoformat(),document_type=document_type,
+        result=dict(issuer_id=cik,symbol=symbol,report_end=report_end.isoformat(),document_type=document_type,
             raw_sha256=hashlib.sha256(body).hexdigest(),registered_security=registered,
             explicit_common_share_title=common and not forbidden,
             entity_shell_labels=sorted(all_values.get('entityshellcompany',set())),
             investment_company_labels=sorted(all_values.get('entityinvestmentcompanytype',set())),
             legal_type_approved=False,scope_approved=False)
+        if include_all_listed:
+            result['listed_security']=sorted(listed,key=lambda r:(r['symbol'],r['title'],r['exchange'],r['context_id']))
+        return result
     except (UnicodeError,ValueError,KeyError,TypeError):raise ProviderFailure(Status.INVALID_DATA) from None

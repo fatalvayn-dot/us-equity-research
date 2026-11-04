@@ -54,6 +54,14 @@ def filing(title='Common Stock',value='100',unit='xbrli:shares',extra='',scale='
     return Response(FILE,body.encode(),NOW-timedelta(minutes=1))
 
 
+def filing_with_other_security(*, symbol='AAPL-P', title='Preferred Stock'):
+    other=f'''<xbrli:context id="other"><xbrli:entity><xbrli:identifier scheme="http://www.sec.gov/CIK">{CIK}</xbrli:identifier></xbrli:entity><xbrli:period><xbrli:endDate>2026-09-30</xbrli:endDate></xbrli:period></xbrli:context>
+<ix:nonNumeric name="dei:Security12bTitle" contextRef="other">{title}</ix:nonNumeric>
+<ix:nonNumeric name="dei:TradingSymbol" contextRef="other">{symbol}</ix:nonNumeric>
+<ix:nonNumeric name="dei:SecurityExchangeName" contextRef="other">Nasdaq</ix:nonNumeric>'''
+    return filing(extra=other)
+
+
 def identity():return response(DIRECTORY_URL,dict(fields=['cik','name','ticker','exchange'],data=[[320193,'Synthetic A','AAPL','Nasdaq']]))
 
 
@@ -140,6 +148,26 @@ class ValuationTests(unittest.TestCase):
         for kwargs in (dict(metadata=meta(['AAPL','AAPL-B'])),dict(filing=filing(title='Class A Common Stock')),
                        dict(filing=filing(title='Preferred Stock')),dict(filing=filing(title='Depositary Shares'))):
             with self.subTest(kwargs=kwargs),self.assertRaises(ProviderFailure):valuation(**kwargs)
+
+    def test_extra_ticker_requires_exact_non_common_cover_corroboration(self):
+        s=disclosed_shares(cf(),cik=CIK,as_of=NOW)
+        proof=verify_share_class(s,meta(['AAPL','AAPL-P']),filing_with_other_security(),symbol='AAPL',as_of=NOW)
+        self.assertEqual(proof['common_security_scope'],'single_verified_common_symbol_with_explicit_non_common_tickers')
+        self.assertEqual(proof['other_registered_securities'],[
+            dict(symbol='AAPL-P',title='Preferred Stock',exchange='Nasdaq',
+                 symbol_corroboration='exact_cover_symbol')])
+        for document in (filing(),filing_with_other_security(title='Class B Common Stock'),
+                         filing_with_other_security(title='Subscription Rights')):
+            with self.subTest(document=document),self.assertRaises(ProviderFailure):
+                verify_share_class(s,meta(['AAPL','AAPL-P']),document,symbol='AAPL',as_of=NOW)
+
+    def test_single_non_common_cover_alias_is_retained_without_symbol_normalization(self):
+        s=disclosed_shares(cf(),cik=CIK,as_of=NOW)
+        proof=verify_share_class(s,meta(['AAPL','AAPL-P']),
+            filing_with_other_security(symbol='AAPL PRP'),symbol='AAPL',as_of=NOW)
+        other=proof['other_registered_securities'][0]
+        self.assertEqual(other['symbol'],'AAPL-P');self.assertEqual(other['cover_symbol'],'AAPL PRP')
+        self.assertEqual(other['symbol_corroboration'],'single_unambiguous_non_common_cover_alias')
 
     def test_dimensional_share_count_never_becomes_issuer_aggregate(self):
         doc=filing();body=doc.body.replace(b'<xbrli:context id="shares">',b'<xbrli:context id="shares"><xbrli:scenario></xbrli:scenario>')
