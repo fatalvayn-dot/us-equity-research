@@ -67,6 +67,10 @@ class RecordedScoreTests(unittest.TestCase):
 
     def test_every_point_and_evidence_reference_reproduces_from_raw_bundles(self):
         expected=report();actual=build_score_report(*batches(),sources(),as_of=datetime.fromisoformat(expected['as_of']))
+        # Additive provenance must not alter any historical score/evidence field.
+        provenance=actual.pop('input_provenance')
+        self.assertFalse(provenance['report_generation_is_source_refresh'])
+        self.assertEqual(provenance['batches']['financial']['selected_facts'],843)
         self.assertEqual(json.loads(json.dumps(actual,default=encode)),expected)
         self.assertEqual(len(list(read_bundle(ROOT/'tests/fixtures/score-market-sources'))),7)
 

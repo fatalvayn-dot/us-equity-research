@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "us-equity-research"
-version = "0.32.0"
+version = "0.33.0"
 description = "Auditable research infrastructure for active US common equities"
 requires-python = ">=3.11"
 dependencies = []

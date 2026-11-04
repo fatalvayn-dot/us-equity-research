@@ -1,0 +1,70 @@
+{
+  "as_of": "2026-11-03T05:36:21.308165+00:00",
+  "summary": {
+    "candidates": 100,
+    "scored_companies": 13,
+    "critical_review": 4,
+    "unscored": 87
+  },
+  "mvp_accepted": false,
+  "mode": "current_market_sources_with_recorded_financial_inputs",
+  "new_http_requests": 0,
+  "source_bundle_manifest_sha256": "fd0ede88389b7648764f4b36317c05655a1464c462e25badb02ffb4ca22f3f55",
+  "input_provenance": {
+    "mode": "supplied_financial_batches_with_independent_source_confirmations",
+    "batches": {
+      "financial": {
+        "sha256": "462e0f7d9837034d82abae430768e5198d3101a001f1776559b7dedb8e03f6f1",
+        "generated_at": "2026-11-03T03:50:01.038329+00:00",
+        "candidates": 100,
+        "selected_facts": 988,
+        "selected_by_source": {
+          "SEC": 885,
+          "Yahoo": 76,
+          "Nasdaq": 27
+        },
+        "oldest_selected_observation": "2026-11-02T12:35:34.065053+00:00",
+        "newest_selected_observation": "2026-11-03T03:50:00.756836+00:00",
+        "missing_financial_identities": [],
+        "additional_identities": []
+      },
+      "current_comparison": {
+        "sha256": "3f3c0443b59bbd949f63875e01be5e4679a625872efe9bd99bb77f122bec58fd",
+        "generated_at": "2026-11-03T04:25:00+00:00",
+        "candidates": 100,
+        "selected_facts": 534,
+        "selected_by_source": {
+          "SEC": 534
+        },
+        "oldest_selected_observation": "2026-11-02T12:35:34.065053+00:00",
+        "newest_selected_observation": "2026-11-03T03:49:57.264043+00:00",
+        "missing_financial_identities": [],
+        "additional_identities": []
+      },
+      "prior_comparison": {
+        "sha256": "52b645dc5e1d72656e57089d6c48f53ddf16d31d4427ab978083ee2c762221a2",
+        "generated_at": "2026-11-03T04:25:00+00:00",
+        "candidates": 100,
+        "selected_facts": 534,
+        "selected_by_source": {
+          "SEC": 534
+        },
+        "oldest_selected_observation": "2026-11-02T12:35:34.065053+00:00",
+        "newest_selected_observation": "2026-11-03T03:49:57.264043+00:00",
+        "missing_financial_identities": [],
+        "additional_identities": []
+      }
+    },
+    "original_per_fact_times_preserved": true,
+    "report_generation_is_source_refresh": false,
+    "all_100_financials_freshly_collected": false,
+    "full_live_acceptance": false
+  },
+  "files": {
+    "report.html": "381369e7e1f459b8fd936d46e46dc57bfd72f87387f7d28be069b3badd553dee",
+    "report.md": "86c44d8ffd4b04745ef0450fb681eae06f8143da2c426b6ed8ade110a7508371",
+    "report.json.gz": "582c900081ad3dea57df6a066b782858fe98b85dc5af9ffa14081f4eb53e45a6",
+    "original-annual-checks.json": "a8444de363723d0066167e6a585b005aee040c3272fe8d265a4415abac535b8c",
+    "reproduction-proof.json": "98b8e4de1a6b6a95af461d3722daebc756db9544d41abdf9213fc0b5b258e34a"
+  }
+}

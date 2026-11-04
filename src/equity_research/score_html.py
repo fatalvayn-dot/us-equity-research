@@ -33,10 +33,14 @@ Bu, gerçek hisse sayısı veya istatistiksel güven aralığı değildir. Böl�
 <div class="scroll"><table><thead><tr><th>Alan</th><th>Değer</th><th>Dönem</th><th>İlk kaynak</th><th>Bağımsız kontrol</th></tr></thead><tbody>{''.join(proof)}</tbody></table></div>'''
         cards.append(f'''<article data-scored="{str(c['total_score'] is not None).lower()}">
 <h2>{e(c['symbol'])} <small>CIK {e(c['issuer_id'])}</small></h2><p class="score">{score}</p>
-<p>Durum: {e(c['status'])}. Engeller: {e('; '.join(c['blockers']) or 'sayısal araştırma modeli için yok')}.</p>
+<p>Durum: {e(c['status'])}. Engeller: {e('; '.join(c['blockers']+([c['failed_validation_stage']] if c.get('failed_validation_stage') else [])) or 'sayısal araştırma modeli için yok')}.</p>
 <details><summary>Bileşenler, gerekçe ve kaynaklar</summary><div class="scroll"><table><thead><tr><th>Bileşen</th><th>Puan</th><th>Ağırlık</th></tr></thead><tbody>{components}</tbody></table></div>{extra}
 <p>Nitel riskler, yönetim ve tüm sermaye değişiklikleri onaylanmış değildir. Yatırım onayı: verilmedi.</p></details></article>''')
     summary=report['summary']
+    provenance=''
+    if report.get('input_provenance'):
+        dates=''.join('<li>'+e(name)+': '+e(s['oldest_selected_observation'])+' / '+e(s['newest_selected_observation'])+'<small>SHA-256 '+e(s['sha256'])+'</small></li>' for name,s in report['input_provenance']['batches'].items())
+        provenance='<p class="notice">Finansal ve karşılaştırma girdilerinin kaynak tarihleri korunmuştur. Raporun üretilmesi bütün 100 şirketin finansal verilerinin yeniden toplandığı anlamına gelmez.</p><ul>'+dates+'</ul>'
     return f'''<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
 <title>US Equity Research — puanlama prototipi</title><style>
@@ -48,7 +52,7 @@ table{{border-collapse:collapse;width:100%;margin:12px 0}}td,th{{text-align:left
 summary{{cursor:pointer;font-weight:600}}label{{display:inline-block;margin:10px 16px 10px 0}}input,select{{padding:7px;font:inherit;max-width:100%}}
 [hidden]{{display:none!important}}a{{color:#075b9e}}
 </style></head><body><header><h1>US Equity Research</h1><p>Araştırma puanlama prototipi · Kaynak kesimi: {e(report['as_of'])}</p>
-<p>{summary['candidates']} aday · {summary['scored_companies']} araştırma puanı · {summary['unscored']} puansız · {summary['critical_review']} kritik inceleme</p>
+{provenance}<p>{summary['candidates']} aday · {summary['scored_companies']} araştırma puanı · {summary['unscored']} puansız · {summary['critical_review']} kritik inceleme</p>
 <p class="notice">100 aktif adi hisselik MVP henüz kabul edilmedi. Puanlar sınırlı sektör modelinin başlangıç hipotezidir;
 getiri başarısı, alım önerisi veya yatırım onayı değildir. Kayıtlı veriler canlı fiyat hizmeti olarak sunulmaz.</p>
 <h2>Puanlanabilen örnek şirketler</h2><div class="scroll"><table><thead><tr><th>Sıra</th><th>Sembol</th><th>Puan / 100</th><th>Model</th></tr></thead><tbody>{ranked}</tbody></table></div>

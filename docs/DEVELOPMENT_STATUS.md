@@ -1,5 +1,97 @@
 # Development status
 
+## 2026-11-03 — Current-market 22-candidate collection and 13-score common100 prototype
+
+Branch feat/current-score-cohort from main 8060ed36dbb6d9de7844e1c75402a8d45df9650b
+(PR #17). Read AGENTS, PROJECT_BRIEF, development status; checked remote main,
+open PRs and Actions. No conflicting open PR, main matched, final PR #17 CI
+41579639000 passed 646 tests on three versions. Legacy repository untouched;
+pre-existing unrelated temporary source files preserved and excluded.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/18
+Source commit: https://github.com/fatalvayn-dot/us-equity-research/commit/97c329d6812c527cfd8c09540428c484dbc92589
+Source tree 328f27c7af666d922f6e8f6380f15cb0243020f7 equals local a57142e;
+all 59 uploaded Git blobs independently matched before branch publication.
+Code/data review: PR comment 6596469421. Source CI:
+https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41585839972 —
+658 tests and CLI status passed on Python 3.11/131.653s, 3.12/112.885s and
+3.13/142.644s. Machine-readable evidence: docs/evidence/current-score-actions.json.
+
+v0.33.0 adds immutable score-input provenance: canonical digests, original batch
+generation dates, selected-source counts and observed-time ranges, plus missing/
+additional comparison identities. Future/naive batch dates or future selected
+observations cannot score. Caller freshness/approval flags are not adopted.
+HTML/Markdown visibly distinguish retained financials from refreshed market data;
+no report generation is presented as a full-100 financial refresh. A fixed,
+sanitized validation-stage code identifies the exact rejected financial operand.
+No numeric point bands, sector whitelist, source priority or model gates relaxed.
+A generic script builds portable gzip JSON/Markdown/HTML plus checksum manifest,
+with explicit cutoff and source/output isolation; no network during report build.
+
+Real bounded collection on the 22 input-ready common100 candidates: 103 public
+GET invocations (www.sec.gov19, data.sec.gov42, Yahoo42; internal retries excluded).
+22 exact SEC identities and valid prices, 20 histories, 18 original-share class
+reconciliations. PLTR lacks required disclosed shares; ORCL and MCHP fail exact
+ticker/class matching; ON has invalid share inputs. PLTR/ON histories remained
+unstarted, not falsely attempted. Warm cache-only repeat: zero GETs and identical
+accepted share/price/history values, original dates and evidence. Raw bundle:
+tests/fixtures/valuation22-sources (103 observations, 33 parts, 16,801,866 compressed
+bytes). No operational SQLite, credentials or request headers published.
+
+Score report cutoff 2026-11-03T05:36:21.308165+00:00: exact common100 rows,
+13 scored research hypotheses / 87 unscored / 4 critical mandatory reviews.
+13 scores: MU87, INTU78, MPWR78, SWKS68, MSFT66.5, CRM66, MRVL64.5, TXN63,
+NOW62, AMAT59.5, TYL55.5, AAPL53, SNPS53. These are dated model hypotheses,
+not investment approval or return promises. Five additional candidates (AMD,
+INTC, ADI, CDNS, ADSK) fail current SEC confirmation of literal Liabilities and
+stay unscored. No alias/equation/source replacement introduced to manufacture
+those scores. Diagnostic replay found the literal Liabilities concept absent in
+all five current companyfacts snapshots; this is missing independent confirmation,
+not evidence that Nasdaq's selected values are wrong. Recorded annual documents
+also lack an accepted exact value (four concept_not_disclosed, INTC period_or_scope_mismatch).
+These source facts are preserved in the PR follow-up; no new request for diagnosis. Other unqueried valuation sources remain missing/unstarted.
+
+All 130 operands for the 13 scored companies (nine current financial fields plus
+prior contract revenue each) match original annual iXBRL exact CIK/period/USD/
+concept contexts, using original source bodies. No new HTTP for reconciliation.
+Fresh SEC companyfacts independently confirms those values during score build.
+Original annual check details: current-score100/original-annual-checks.json.
+Retained financial batch remains 988 original observations; comparison remains
+534 per side / 514 growth results. This run refreshes 22 market/share inputs,
+not all 100 financial histories. Report JSON/HTML/Markdown, original checks and
+reproduction proof: docs/evidence/current-score100/. Collection/resume evidence:
+docs/evidence/valuation22/. Old pilot scores and all earlier evidence preserved.
+
+Validation: 24 focused scoring/provenance tests passed (0.265s), 10 focused
+provenance/export tests passed after final display update (0.207s), actual 100-row
+13-score raw replay plus cold/warm integration tests passed (15.999s). Fixed-cutoff
+CLI reproduced JSON/Markdown/HTML byte for byte; final display builder rerun also
+reproduced exactly. Full local regression 658/658 passed (127.197s, Python 3.12.14), with final
+rejected-stage display changes additionally checked by the focused 10-test run.
+The source commit CI passed; a final exact-head CI remains required after the
+output-safety follow-up. Concurrent local timings are not benchmarks. These are
+offline/recorded tests and Actions, not a fresh live 100-company acceptance.
+
+Failures/corrections: first 653-test full run had 652 pass / one old report golden
+comparison failure because additive provenance was new. Updated the legacy test
+to separately assert the new audit and still compare EVERY old score/evidence field
+unchanged; targeted replay passed. Subsequent 655-test full run passed (106.696s).
+No observed old numeric score change. New 658-test regression includes two real-
+collection tests and one safe rejected-stage test. No provider access bypass or
+rate/quota override used; no fake missing-data zeros or unsupported-sector points.
+The final follow-up atomically replaces report.json.gz and refuses to follow an
+existing output symlink into retained raw evidence. Its focused two-test regression
+passed locally (0.360s); the complete follow-up regression passed 658/658
+(217.081s, Python 3.12.14). The exact follow-up head still requires full Actions.
+
+Remaining/next concrete task: resolve literal liabilities confirmation gaps and
+unsupported share disclosures using exact original current filings with a separately
+validated adapter; preserve class ambiguity exclusions. Run a fresh, resumable
+end-to-end 100-company acceptance across scope/financial/current market inputs,
+with full missing/unattempted/error accounting and exact CI. Current prototype is
+usable as a dated research report but full MVP acceptance remains unverified.
+Do not expand scope or activate portfolios before acceptance and user usefulness
+assessment. No user action required.
+
 ## 2026-11-03 — Exact common100 comparative inputs (v0.32.0)
 
 Branch feat/common-annual-comparisons from main a7dc5accf719fdad405c70c1b783fc3c3090c301

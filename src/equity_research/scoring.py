@@ -10,6 +10,7 @@ from .fields import SPECS
 from .market_history import parse_history,history_url
 from .models import Fact,FactRequest,aware
 from .policy import SCORE_WEIGHTS
+from .score_inputs import score_input_provenance
 from .reporting import build_report
 from .sec import DIRECTORY_URL
 from .submissions import parse_submissions,submissions_url
@@ -51,6 +52,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
     financial=build_report(batch)
     comparison=build_comparative_report(current_comparison,prior_comparison)
     if datetime.fromisoformat(str(comparison['as_of']))>as_of:raise ValueError('future comparison')
+    provenance=score_input_provenance(batch,current_comparison,prior_comparison,as_of=as_of)
     comparative={c['issuer_id']:c for c in comparison['companies']}
     valuations=build_valuation_report(batch,responses,as_of=as_of)
     by_valuation={c['issuer_id']:c for c in valuations['companies']}
@@ -70,6 +72,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
         value=by_valuation[cik]['valuation']
         if value is None:
             row['blockers']=['valuation_source_evidence_required'];continue
+        validation_stage='metadata_and_sector'
         try:
             metadata=sources[submissions_url(cik)];snapshot=parse_submissions(metadata,cik)
             row['sector_evidence']=dict(sic=snapshot.sic_label,entity_type=snapshot.entity_type_label,
@@ -77,6 +80,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
             if snapshot.entity_type_label!='operating' or snapshot.sic_label not in MODELS:
                 row['blockers']=['specialized_or_unmodeled_sector'];continue
             row['model_id']=MODELS[snapshot.sic_label]
+            validation_stage='original_share_filing_legal_flags'
             legal=_legal_contraindications(sources[value['disclosed_shares']['original_filing']['url']],cik)
             row['legal_disclosure_review']=legal
             if legal['blocked']:
@@ -90,8 +94,10 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
                 row['blockers']=['latest_annual_period_not_confirmed'];continue
             if not 350<=(date.fromisoformat(company['period_end'])-date.fromisoformat(company['period_start'])).days+1<=380:
                 row['blockers']=['full_annual_period_required'];continue
+            validation_stage='companyfacts_identity'
             cf=sources[companyfacts_url(cik)];payload=SecCompanyFacts._parse(cf,cik)[1];checks=[]
             for field in REQUIRED:
+                validation_stage='financial_confirmation.'+field
                 f=facts[field];spec=SPECS[field]
                 request=FactRequest(cik,field,f.period_start,f.period_end,'USD','currency',spec.accounting_definition,as_of)
                 verified=SecCompanyFacts(None)._extract(request,spec.tag,cf,payload)
@@ -107,11 +113,13 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
             if any(getattr(current,k)!=getattr(facts['revenue'],k) for k in ('issuer_id','period_start','period_end','currency','accounting_definition','value')):
                 row['blockers']=['growth_current_period_or_definition_conflict'];continue
             request=FactRequest(cik,'revenue',prior.period_start,prior.period_end,'USD','currency',SPECS['revenue'].accounting_definition,as_of)
+            validation_stage='prior_revenue_confirmation'
             check_prior=SecCompanyFacts(None)._extract(request,SPECS['revenue'].tag,cf,payload)
             if check_prior is None or check_prior.value!=prior.value:raise ValueError('prior revenue confirmation mismatch')
             price=value['price'];shares=value['disclosed_shares']
             history=sources.get(history_url(symbol))
             if history is None:row['blockers']=['market_history_required'];continue
+            validation_stage='market_history'
             market=parse_history(history,sources[DIRECTORY_URL],cik=cik,symbol=symbol,
                 share_date=shares['disclosed_on'],price_market_at=price['market_at'],as_of=as_of)
             row['market_risk']=market
@@ -124,6 +132,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
             assets,liabilities,ca,cl,ni,oi,ocf,ppe,revenue=(facts[f].value for f in REQUIRED)
             if assets<=0 or cl<=0 or revenue<=0 or ppe<0:
                 row['blockers']=['unsupported_ratio_base_or_payment_sign'];continue
+            validation_stage='component_calculation'
             with localcontext() as ctx:
                 magnitude=max(max(len(f.value.as_tuple().digits),abs(f.value.adjusted())) for f in facts.values())
                 if magnitude>1000:raise ValueError('unsupported financial magnitude')
@@ -169,7 +178,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
                 rationale=['all six required components computed from verified inputs','critical financial review checked before totals',
                     'valuation uses explicit dated-share stress assumption','qualitative risk clearance and investment approval remain absent'])
         except (ProviderFailure,ValueError,KeyError,TypeError,ArithmeticError) as exc:
-            row.update(status='evidence_rejected',blockers=['source_period_definition_class_or_market_contract_failed'],
+            row.update(status='evidence_rejected',failed_validation_stage=validation_stage,blockers=['source_period_definition_class_or_market_contract_failed'],
                 provider_status=exc.status.value if isinstance(exc,ProviderFailure) else Status.INVALID_DATA.value,
                 total_score=None,model_scope_eligible=False,components={k:dict(weight=w,score=None) for k,w in SCORE_WEIGHTS.items()})
     ordered=sorted((c for c in companies if c['status']=='scored_research_hypothesis' and c['total_score'] is not None),key=lambda c:(-c['total_score'],c['symbol'],c['issuer_id']))
@@ -177,7 +186,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
     for i,c in enumerate(ordered,1):
         c['rank']=i;ranking.append(dict(rank=i,symbol=c['symbol'],issuer_id=c['issuer_id'],score=c['total_score'],model_id=c['model_id']))
     return dict(schema_version=1,model_version=MODEL_VERSION,as_of=as_of,score_weights=dict(SCORE_WEIGHTS),
-        companies=companies,ranking=ranking,summary=dict(candidates=len(companies),scored_companies=len(ranking),
+        companies=companies,ranking=ranking,input_provenance=provenance,summary=dict(candidates=len(companies),scored_companies=len(ranking),
             critical_review=sum(c['status']=='critical_review_required' for c in companies),unscored=len(companies)-len(ranking)),
         mvp_accepted=False,hundred_active_common_shares_accepted=False,new_network_requests=0,
         limitations=['limited_SIC_model_coverage','no_strategy_performance_validation','not_investment_or_trade_approval'])
@@ -189,9 +198,13 @@ def render_score_markdown(report):
     lines=['# US Equity research scores','',f"Model: {cell(report['model_version'])}; evidence cutoff: {cell(report['as_of'])}",'',
         'Scores are research hypotheses, not investment approval or validated return predictions. MVP acceptance pending.','',
         '| Rank | Symbol | Score / 100 | Model |','| ---: | --- | ---: | --- |']
+    if report.get('input_provenance'):
+        lines[4:4]=['Supplied financial and comparison batches retain their original source dates. Generating this report does not refresh all 100 financial inputs.', '']
+        for name, source in report['input_provenance']['batches'].items():
+            lines[4:4]=[cell(name)+': generated '+cell(source['generated_at'])+'; selected observations '+cell(source['oldest_selected_observation'])+' to '+cell(source['newest_selected_observation'])+'; SHA-256 '+cell(source['sha256'])+'.', '']
     for c in report['ranking']:lines.append('| '+' | '.join(cell(c[k]) for k in ('rank','symbol','score','model_id'))+' |')
     lines.extend(['','| Candidate | Status | Blockers |','| --- | --- | --- |'])
-    for c in report['companies']:lines.append('| '+' | '.join(cell(v) for v in (c['symbol'],c['status'],'; '.join(c['blockers']) or 'none for numeric research model'))+' |')
+    for c in report['companies']:lines.append('| '+' | '.join(cell(v) for v in (c['symbol'],c['status'],'; '.join(c['blockers']+([c['failed_validation_stage']] if c.get('failed_validation_stage') else [])) or 'none for numeric research model'))+' |')
     for c in report['companies']:
         if c['total_score'] is None:continue
         lines.extend(['','## '+cell(c['symbol']),'','| Component | Points | Weight |','| --- | ---: | ---: |'])
