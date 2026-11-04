@@ -69,7 +69,7 @@ class FinancialCohortTests(unittest.TestCase):
         from equity_research.financial_cohort import render_cohort_markdown,render_cohort_html
         _,report=assemble_financial_cohort(PLAN,[source(),source('0000789019','MSFT',hours=1)])
         md=render_cohort_markdown(report);html=render_cohort_html(report)
-        self.assertIn('Not a new live 100-company scan',md)
+        self.assertIn('yeni bir canlı 100 şirket taraması değildir',md)
         self.assertIn('yeni bir canlı 100 şirket taraması değildir',html)
         report['financial_cohort']['sources'][0]['generated_at']='<script>alert(1)</script>'
         self.assertNotIn('<script>alert(1)</script>',render_cohort_html(report))

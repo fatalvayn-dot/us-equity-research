@@ -1,0 +1,17 @@
+{
+  "language": "tr",
+  "tests": 662,
+  "passed": 662,
+  "seconds": 131.683,
+  "python": "3.12.14",
+  "mode": "local_offline_regression",
+  "new_live_requests": 0,
+  "score_report_exact_json_equal": true,
+  "summary": {
+    "candidates": 100,
+    "scored": 13,
+    "unscored": 87,
+    "critical_review": 4
+  },
+  "mvp_accepted": false
+}

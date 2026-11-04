@@ -173,8 +173,8 @@ class ComparativeTests(unittest.TestCase):
         r=build_comparative_report(batch(fact()),batch(fact(PS,PE,'0')))
         r['companies'][0]['symbol']='<X|Y>'
         text=render_comparative_markdown(r)
-        self.assertIn('&lt;X&#124;Y&gt;',text);self.assertIn('unavailable',text)
-        self.assertIn('raw hashes',text)
+        self.assertIn('&lt;X&#124;Y&gt;',text);self.assertIn('Mevcut değil',text)
+        self.assertIn('ham kaynak özetleri',text)
 
     def test_cli_reads_compressed_batches_and_exports_report(self):
         import gzip, os, subprocess, sys, tempfile

@@ -1,0 +1,38 @@
+{
+  "inputs": {
+    "common-comparative100/report.json.gz": {
+      "as_of": "2026-11-03T04:25:00+00:00",
+      "sha256": "b8809301c6ca9faa0c039cc69bb9609a4ab2e8409c07e7a9a936d633ce305bcd"
+    },
+    "common-financial100/report.json.gz": {
+      "as_of": "2026-11-03T03:50:01.038329+00:00",
+      "sha256": "b092330cff41f8f8f4c6584b6ff0e0c11bfc7f8402be8ce102c1836d0ec2fbc5"
+    },
+    "common-price100/report.json.gz": {
+      "as_of": "2026-11-03T01:10:13.175565+00:00",
+      "sha256": "e50a57387de1cce2067425b864f5914718174e7ff54eb215013434e74804e949"
+    },
+    "current-score100/report.json.gz": {
+      "as_of": "2026-11-03T05:36:21.308165+00:00",
+      "sha256": "582c900081ad3dea57df6a066b782858fe98b85dc5af9ffa14081f4eb53e45a6"
+    },
+    "valuation-sample/report.json.gz": {
+      "as_of": "2026-11-02T20:00:15.589376+00:00",
+      "sha256": "dd5ee52c3de8e38408a1c6a093b1aaf19e8261d0ca2dad69baffaa0a7609c688"
+    }
+  },
+  "language": "tr",
+  "mode": "recorded_report_presentation_only",
+  "mvp_accepted": false,
+  "new_network_requests": 0,
+  "outputs": {
+    "degerleme-orneklemi.md": "7b76ea1fc4bbdb2edcd3ecbb76694f89d72c4fc4c211c5edaafb8d8f395fdb09",
+    "finansal-rapor.html": "deddd6fc436b72c3ac4ac61af15309c3e6cc5e3fdf24e5f376578006ecbe1b21",
+    "finansal-rapor.md": "d4ecda0c70a41be1b662ffc68731907d948edaf56e2b5215d325713fe543dffe",
+    "fiyat-raporu.md": "cacdcc69aa209b3bee22391b8a6de38cb2d9600d32817f6aacf9979c72ac6801",
+    "radar.html": "dfdda442c325870b4da5611070b886af8d944078aa0bc0cfa3e562ce0305c6ed",
+    "radar.md": "9c67e7fc35357a803435fd39697dc2193e8bb2c5f142cc916bb21b5c26aa94a6",
+    "yillik-karsilastirma.md": "301982a5f7d3f5ddfc84dd5346c706ed3a7ae47af0fc38e423ccdb57fe6f0b63"
+  },
+  "source_dates_refreshed": false
+}

@@ -1,4 +1,5 @@
 """Explainable, limited-sector research hypotheses, not investment approval."""
+from .turkish import label, calculation_label
 from dataclasses import asdict
 from datetime import date,datetime
 from decimal import Decimal,localcontext
@@ -194,27 +195,27 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
 
 def render_score_markdown(report):
     import html
-    def cell(value):return html.escape(str(value)).replace('|','&#124;').replace('\n',' ')
-    lines=['# US Equity research scores','',f"Model: {cell(report['model_version'])}; evidence cutoff: {cell(report['as_of'])}",'',
-        'Scores are research hypotheses, not investment approval or validated return predictions. MVP acceptance pending.','',
-        '| Rank | Symbol | Score / 100 | Model |','| ---: | --- | ---: | --- |']
+    def cell(value):return html.escape(label(value)).replace('|','&#124;').replace('\n',' ')
+    lines=['# ABD Hisse Araştırması — araştırma puanları','',f"Model: {cell(report['model_version'])}; kaynak verilerinin kesim zamanı: {cell(report['as_of'])}",'',
+        'Puanlar araştırma varsayımlarıdır; yatırım onayı veya doğrulanmış getiri tahmini değildir. İlk sürümün (MVP) kabulü bekleniyor.','',
+        '| Sıra | Sembol | Puan / 100 | Model |','| ---: | --- | ---: | --- |']
     if report.get('input_provenance'):
-        lines[4:4]=['Supplied financial and comparison batches retain their original source dates. Generating this report does not refresh all 100 financial inputs.', '']
+        lines[4:4]=['Finansal ve karşılaştırma girdilerinin özgün kaynak tarihleri korunmuştur. Bu raporun üretilmesi 100 şirketin tüm finansal girdilerinin güncellendiği anlamına gelmez.', '']
         for name, source in report['input_provenance']['batches'].items():
-            lines[4:4]=[cell(name)+': generated '+cell(source['generated_at'])+'; selected observations '+cell(source['oldest_selected_observation'])+' to '+cell(source['newest_selected_observation'])+'; SHA-256 '+cell(source['sha256'])+'.', '']
+            lines[4:4]=[cell(name)+': üretim zamanı '+cell(source['generated_at'])+'; seçili gözlemler '+cell(source['oldest_selected_observation'])+' ile '+cell(source['newest_selected_observation'])+'; SHA-256 '+cell(source['sha256'])+'.', '']
     for c in report['ranking']:lines.append('| '+' | '.join(cell(c[k]) for k in ('rank','symbol','score','model_id'))+' |')
-    lines.extend(['','| Candidate | Status | Blockers |','| --- | --- | --- |'])
+    lines.extend(['','| Aday | Durum | Puanın hesaplanmama nedenleri |','| --- | --- | --- |'])
     for c in report['companies']:lines.append('| '+' | '.join(cell(v) for v in (c['symbol'],c['status'],'; '.join(c['blockers']+([c['failed_validation_stage']] if c.get('failed_validation_stage') else [])) or 'none for numeric research model'))+' |')
     for c in report['companies']:
         if c['total_score'] is None:continue
-        lines.extend(['','## '+cell(c['symbol']),'','| Component | Points | Weight |','| --- | ---: | ---: |'])
+        lines.extend(['','## '+cell(c['symbol']),'','| Bileşen | Puan | Ağırlık |','| --- | ---: | ---: |'])
         for name,r in c['components'].items():lines.append('| '+' | '.join(cell(v) for v in (name,r['score'],r['weight']))+' |')
-        lines.extend(['','Valuation uses a disclosed-share scenario: 25% extra shares plus one reported precision quantum. This is a stress assumption, not an observed share count or confidence interval.',
-            'Financial suitability, valuation points and observed market risk are separate. Qualitative/governance/capital-change clearance and investment approval remain absent.',''])
-        for field,value in c['metrics'].items():lines.append(cell(field)+': '+cell(format(value,'.6f'))+'.')
+        lines.extend(['','Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.',
+            'Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.',''])
+        for field,value in c['metrics'].items():lines.append(cell(field)+': '+cell(format(Decimal(str(value)),'.6f'))+'.')
         market=c['market_risk'];valuation=c['valuation']['indication']
         lines.extend(['',cell(market['source_url'])+' · SHA-256 '+cell(market['raw_sha256'])+'.',
             cell(c['sector_evidence']['source_url'])+' · SHA-256 '+cell(c['sector_evidence']['raw_sha256'])+'.',
             cell(valuation['disclosed_shares']['original_filing']['url'])+' · SHA-256 '+cell(valuation['disclosed_shares']['original_filing']['raw_sha256'])+'.',
-            'Full per-component inputs, confirmations and first-valid trails are retained in JSON.'])
+            'Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.'])
     return '\n'.join(lines)+'\n'

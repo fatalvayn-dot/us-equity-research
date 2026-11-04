@@ -63,7 +63,7 @@ class ScoreInputTests(unittest.TestCase):
 
     def test_human_reports_show_source_dates_without_html_or_markdown_injection(self):
         report=score();md=render_score_markdown(report);html=render_score_html(report)
-        self.assertIn('does not refresh all 100',md)
+        self.assertIn('tüm finansal girdilerinin güncellendiği anlamına gelmez',md)
         self.assertIn('yeniden toplandığı anlamına gelmez',html)
         report['input_provenance']['batches']['financial']['oldest_selected_observation']='<script>alert(1)</script>|x'
         self.assertNotIn('<script>alert(1)</script>',render_score_html(report))
