@@ -42,7 +42,10 @@ class LiveAcceptanceWorkflowTests(unittest.TestCase):
         self.assertIn("steps.preflight.outcome == 'failure'", self.body)
         self.assertIn('scripts/diagnose_sec_network.py', self.body)
         self.assertIn('sec-network-diagnostic', self.body)
-        self.assertNotIn('secrets.',self.body)
+        # The SEC user agent identifies the caller. Never expose it to PR jobs.
+        self.assertIn("secrets.SEC_USER_AGENT",self.body)
+        self.assertIn("github.event_name == 'workflow_dispatch'",self.body)
+        self.assertIn("SEC_USER_AGENT GitHub Actions secret",self.body)
         self.assertNotIn('FINNHUB_API_KEY',self.body)
 
     def test_state_can_resume_by_exact_run_and_evidence_is_exported(self):
