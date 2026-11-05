@@ -55,7 +55,7 @@ class SecDiagnosticTests(unittest.TestCase):
         report = module.diagnose_host("data.sec.gov", resolver=resolved,
                                       connect=blocked)
         self.assertEqual(report["dns"], "ok")
-        self.assertEqual(report["tcp"], "not_attempted")
+        self.assertEqual(report["tcp"], "failed")
         self.assertEqual(report["error_type"], "TimeoutError")
 
     def test_tls_success_does_not_claim_http_or_financial_validation(self):
