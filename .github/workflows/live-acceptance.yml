@@ -44,6 +44,16 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: SEC iletişim kimliğini doğrula
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: |
+          if [ -z "$SEC_USER_AGENT" ]; then
+            echo "::error::SEC_USER_AGENT GitHub Actions secret tanımlanmalı. Gerçek kurum/proje adı ve iletişim e-postası içermeli."
+            exit 2
+          fi
+
       - name: Önceki durum dosyalarını indir
         if: github.event_name == 'workflow_dispatch' && inputs.resume_run_id != ''
         uses: actions/download-artifact@v4
@@ -58,10 +68,11 @@ jobs:
         continue-on-error: true
         env:
           PYTHONPATH: src
-        run: >-
-          python scripts/check_live_sources.py
-          --user-agent 'US Equity Research (https://github.com/fatalvayn-dot/us-equity-research)'
-          --output data/live-preflight.json
+          SEC_USER_AGENT: ${{ github.event_name == 'workflow_dispatch' && secrets.SEC_USER_AGENT || '' }}
+        run: |
+          python scripts/check_live_sources.py \
+            --user-agent "${SEC_USER_AGENT:-US Equity Research (https://github.com/fatalvayn-dot/us-equity-research)}" \
+            --output data/live-preflight.json
 
       - name: Erişim kanıtını sakla
         if: always()
@@ -115,13 +126,14 @@ jobs:
           PYTHONPATH: src
           MAX_NEW_DOCUMENTS: ${{ inputs.max_new_documents || '5' }}
           MAX_NEW_FIELDS: ${{ inputs.max_new_fields || '30' }}
-        run: >-
-          python -m equity_research mvp-run
-          --candidates docs/evidence/common100/candidates.json
-          --state-dir data/live-acceptance
-          --user-agent 'US Equity Research (https://github.com/fatalvayn-dot/us-equity-research)'
-          --max-new-documents "$MAX_NEW_DOCUMENTS"
-          --max-new-fields "$MAX_NEW_FIELDS"
+          SEC_USER_AGENT: ${{ github.event_name == 'workflow_dispatch' && secrets.SEC_USER_AGENT || '' }}
+        run: |
+          python -m equity_research mvp-run \
+            --candidates docs/evidence/common100/candidates.json \
+            --state-dir data/live-acceptance \
+            --user-agent "${SEC_USER_AGENT:-US Equity Research (https://github.com/fatalvayn-dot/us-equity-research)}" \
+            --max-new-documents "$MAX_NEW_DOCUMENTS" \
+            --max-new-fields "$MAX_NEW_FIELDS"
 
       - name: Taşınabilir kaynak kanıtını üret
         if: steps.mvp.outcome == 'success'
