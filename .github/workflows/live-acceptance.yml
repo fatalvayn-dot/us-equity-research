@@ -72,6 +72,19 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+      - name: SEC DNS TCP TLS bağlantı tanısı
+        if: steps.preflight.outcome == 'failure'
+        run: python scripts/diagnose_sec_network.py --output data/sec-network-diagnostic.json
+
+      - name: SEC bağlantı tanısını sakla
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sec-network-diagnostic
+          path: data/sec-network-diagnostic.json
+          if-no-files-found: ignore
+          retention-days: 14
+
       - name: Zorunlu SEC kaynaklarını denetle
         id: source_gate
         continue-on-error: ${{ github.event_name == 'pull_request' }}
