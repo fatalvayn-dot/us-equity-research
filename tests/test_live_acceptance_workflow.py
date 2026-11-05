@@ -39,6 +39,9 @@ class LiveAcceptanceWorkflowTests(unittest.TestCase):
         self.assertNotIn("required={'sec_identity','sec_submissions','sec_companyfacts'}",self.body)
         self.assertNotIn("steps.preflight.outcome == 'success'",self.body)
         self.assertIn('live-source-preflight',self.body)
+        self.assertIn("steps.preflight.outcome == 'failure'", self.body)
+        self.assertIn('scripts/diagnose_sec_network.py', self.body)
+        self.assertIn('sec-network-diagnostic', self.body)
         self.assertNotIn('secrets.',self.body)
         self.assertNotIn('FINNHUB_API_KEY',self.body)
 
