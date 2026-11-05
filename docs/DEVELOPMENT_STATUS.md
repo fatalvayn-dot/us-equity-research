@@ -1,5 +1,30 @@
 # Development status
 
+## 5 Kasım 2026 — SEC erişiminde katmanlı bağlantı tanısı (incelemede)
+
+5 Kasım GitHub Actions kanıtlarında 6 kaynaktan 3'ü yanıt verdi; SEC
+kimlik, bildirim ve Companyfacts uçları kısa süreli preflight altında
+yanıt vermedi. Çalışma ortamındaki DNS hatası başka bir yürütücünün
+ağ hatasının DNS olduğunu ispatlamaz. Ayrıca kaynak kontrolünün SEC
+istek başına 5 saniyelik zaman aşımı, gerçek veri toplayıcısının
+10 saniyelik isteğinden kısaydı. Bu yüzden preflight yanlış negatif
+üretebilir.
+
+Bu değişiklik SEC preflight HTTP timeout değerini 12 saniye, toplam
+istek bütçesini 16 saniye yapar; deneme sayısını birde tutar. Tanı
+başarısız olduğunda yalnız sabit data.sec.gov, www.sec.gov ve
+github.com alanlarında DNS çözümleme, TCP/443 ve doğrulanan TLS
+katmanlarını ayrı kaydeder; kimlik bilgisi ve finansal veri indirmez.
+Tanı 14 günlük ayrı Actions artifact olarak saklanır. DNS adresleri
+kanıta eklenmez. GitHub Actions testleri ve canlı ağ sonucu henüz
+doğrulanmadı. Bu kod SEC ağ erişimini kendiliğinden açmaz; başarısızlığın
+katmanını teşhis eder ve geciken geçerli yanıtların yanlışlıkla
+engellenmesini azaltır.
+
+Son bilinen geçerli metadata 24/100, güncel finansal doğrulama 0/100.
+İşlemi başarıyla yeniden başlatmak için SEC bağlantısı olan yürütücü,
+önceki kontrol noktası ve yeni canlı koşu kanıtı gerekir.
+
 ## 5 Kasım 2026 — Otomasyon ve kesintili kaynak teşhisi (PR incelemesinde)
 
 Yönetim denetimi: Tek merkez görev saatlik zamanlı olmasına rağmen son koşu
