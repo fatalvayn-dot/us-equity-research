@@ -45,6 +45,7 @@ def main():
     parser.add_argument("--as-of")
     parser.add_argument("--candidates")
     parser.add_argument("--state-dir")
+    parser.add_argument("--max-new-metadata",type=int)
     parser.add_argument("--max-new-documents",type=int,default=100)
     parser.add_argument("--max-new-prices",type=int,default=100)
     parser.add_argument("--max-new-requests",type=int,default=51)
@@ -143,7 +144,8 @@ def main():
         try:
             def progress(row):print(json.dumps(row),flush=True)
             run_mvp(json.loads(Path(args.candidates).read_text()),state_dir=args.state_dir or 'data/mvp',
-                user_agent=args.user_agent,max_new_documents=args.max_new_documents,
+                user_agent=args.user_agent,max_new_metadata=args.max_new_metadata,
+                max_new_documents=args.max_new_documents,
                 max_new_fields=args.max_new_fields,progress=progress,seed_bundles=args.seed_bundle)
         except (ValueError,KeyError,TypeError,OSError,RunBusy,ProviderFailure,sqlite3.Error) as exc:
             print(json.dumps(dict(status="mvp_run_error",error_type=type(exc).__name__,

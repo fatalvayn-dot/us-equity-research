@@ -1,5 +1,48 @@
 # Development status
 
+## 5 Kasım 2026 — 49/100 devam checkpointi ve metadata istek bütçesi
+
+Başlangıç main'i `c0f095b734cb21a6113055162dd9b3f8ff59967c` idi; açık PR
+yoktu. PR #27'nin kaynak commit'i
+`722acff19a5a01ef5279527b243cc04e7355b1a8`, birleşim commit'i başlangıç
+main'idir. Aynı committe Foundation tests koşusu `42029487224`, canlı kabul
+iş akışı koşusu `42029487222` başarılıydı. Canlı koşunun başarılı olması
+finansal alan veya MVP kabulü anlamına gelmez.
+
+24/100 Library checkpointi SHA-256
+`6fb06cfddbf11a78313f571d388a8efb112692f54090b5a7cfbd65b6e9671882`
+ile doğrulanıp geri yüklendi. Etkin süreç yoktu ve eski kira süresi dolmuştu.
+Metadata aşamasının kendi iş bütçesi olmadığı, kesinti halinde 15 dakikalık
+kira bırakabildiği saptandı. Commit
+`44f1f58985572badcb56dbfa8932bb2051dd019b` ile `mvp-run` komutuna
+`--max-new-metadata` eklendi. Bütçe, önbellek isabetlerini değil gerçek kamu
+metadata isteklerini sayar; sınırda kısmi metadata ile ilerleme dosyasını
+yazar, belge/finansal alan/rapor aşamasına geçmez ve kirayı serbest bırakır.
+Sonraki çalışma aynı durum dizininden önbelleği kullanarak devam eder.
+
+Odaklı testler 19/19, tam yerel regresyon Python 3.12.14 üzerinde 675/675
+başarılıdır (`369.641s`). GitHub CI bu dalın nihai commit'i için henüz
+doğrulanmadı; CI olmadan birleştirme yapılmayacaktır.
+
+Geri yüklenen durumdan tam 25 yeni SEC metadata isteği yapıldı. Toplam 49/100
+aday işlendi: 47 kayıt `metadata_available_legal_type_pending`, UNH
+(`0000731766`) ve CRWD (`0001535527`) zaman aşımıdır. Bu dilimde 23 yeni
+geçerli metadata kaydı oluştu. SQLite sayımları: 47 submissions, 47 ham yanıt
+gözlemi, 0 finansal alan ve 0 etkin kira. Adi hisse onayı 0, skor 0 ve canlı
+MVP kabulü false değerindedir.
+
+İlk checkpoint yükleme girişimi kesik dosya üretti ve kabul edilmedi. Aynı
+Library dosyasının sürüm 3 içeriği temiz arşiv olarak yeniden yüklendi,
+yeniden indirildi ve SHA-256
+`d97d2128a22c71bf2b2b1a3458b3064411d3edd51c960eae70a7b552c3f3b9a3`
+ile doğrulandı. Arşivde 49 işlenmiş aday, 47 submissions, 47 ham yanıt,
+0 finansal alan ve 0 etkin kira vardır. Library kimliği
+`libfile_b865a66575348191bc9fdd1255e20c20` olarak korunmuştur.
+
+Sonraki tek görev: aynı doğrulanmış checkpointten en fazla 25 yeni metadata
+isteğiyle devam etmek; 100 aday tamamlanmadan belge ve finansal alan aşamasını
+tamamlanmış saymamak.
+
 ## 5 Kasım 2026 — Otomasyon ve kesintili kaynak teşhisi (PR incelemesinde)
 
 Yönetim denetimi: Tek merkez görev saatlik zamanlı olmasına rağmen son koşu

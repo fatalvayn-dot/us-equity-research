@@ -38,6 +38,18 @@ def recorded_http(transport,url):
     return response
 
 
+def metadata_http(transport,url):
+    cik=url.removeprefix('https://data.sec.gov/submissions/CIK').removesuffix('.json')
+    symbol={'0000320193':'AAPL','0000789019':'MSFT'}[cik]
+    recent={key:[] for key in ('accessionNumber','form','filingDate','reportDate',
+                               'primaryDocument','acceptanceDateTime')}
+    body=json.dumps(dict(cik=int(cik),name=symbol,tickers=[symbol],
+        entityType='operating',sic='0000',sicDescription='Test',fiscalYearEnd='1231',
+        filings=dict(recent=recent,files=[]))).encode()
+    response=Response(url,body,datetime.now(timezone.utc));transport.archive.record(response)
+    return response
+
+
 class MvpTests(unittest.TestCase):
     def test_cli_sqlite_failure_is_safe_and_not_acceptance(self):
         from equity_research.__main__ import main
@@ -80,9 +92,32 @@ class MvpTests(unittest.TestCase):
             with self.assertRaises(ValueError):validate_candidates(value)
 
     def test_all_work_bounds_checked_before_network(self):
-        for changes in (dict(max_new_documents=-1),dict(max_new_documents=101),dict(max_new_fields=-1)):
+        for changes in (dict(max_new_metadata=-1),dict(max_new_metadata=101),
+                        dict(max_new_documents=-1),dict(max_new_documents=101),dict(max_new_fields=-1)):
             with tempfile.TemporaryDirectory() as tmp, self.assertRaises(ValueError):
                 run_mvp(CANDIDATES,state_dir=tmp,user_agent='Synthetic',**changes)
+
+    def test_metadata_request_budget_pauses_cleanly_and_resumes_from_cache(self):
+        candidates=dict(companies=[dict(symbol='AAPL',issuer_id='0000320193'),
+                                   dict(symbol='MSFT',issuer_id='0000789019')])
+        with tempfile.TemporaryDirectory() as tmp, patch(
+                'equity_research.response_archive.ArchivedTransport.get',new=metadata_http):
+            first=run_mvp(candidates,state_dir=tmp,user_agent='Synthetic fixture',
+                          max_new_metadata=1,max_new_documents=0,max_new_fields=0)
+            self.assertEqual(first['status'],'metadata_collection_paused')
+            self.assertEqual(first['metadata_processed'],1)
+            self.assertEqual(first['new_metadata_requests'],1)
+            self.assertFalse(first['mvp_accepted'])
+            self.assertTrue((Path(tmp)/'metadata-progress.json').is_file())
+            self.assertFalse((Path(tmp)/'report.json').exists())
+            second=run_mvp(candidates,state_dir=tmp,user_agent='Synthetic fixture',
+                           max_new_metadata=1,max_new_documents=0,max_new_fields=0)
+            self.assertEqual(second['pipeline']['requested_candidates'],2)
+            self.assertEqual(second['pipeline']['public_transport_get_calls'],1)
+            self.assertFalse((Path(tmp)/'metadata-progress.json').exists())
+            lock=BatchStore(Path(tmp)/'run-lock.sqlite')
+            owner=lock.acquire(datetime.now(timezone.utc),timedelta(minutes=15))
+            lock.release(owner);lock.close()
 
     def test_no_document_start_only_queries_instants(self):
         plan,missing,deferred=financial_plan(metadata(),dict(companies=[]))
