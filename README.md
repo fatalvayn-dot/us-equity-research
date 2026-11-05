@@ -569,6 +569,27 @@ The export contains gzip JSONL observations split into hash-checked parts, not
 operational SQLite caches or headers. `read_bundle` reconstructs and validates
 original bytes/URLs/timestamps for recorded replay; replay is not a new live run.
 
+### GitHub Actions üzerinden devam ettirilebilir canlı kabul
+
+Yerel çalışma ortamı kamu veri kaynaklarına erişemiyorsa **Canlı 100 şirket
+kabulü** iş akışı elle başlatılabilir. İlk çalışmada `resume_run_id` boş bırakılır;
+yeni yıllık bildirim ve finansal alan bütçeleri seçilir. İş akışı önce SEC, Yahoo
+ve Nasdaq erişimini ölçer. SEC kimlik, bildirim veya Companyfacts kaynaklarından
+biri erişilebilir değilse uzun tarama başlamaz ve hata kanıtı saklanır. Yahoo veya
+Nasdaq erişim eksikliği raporda görünür fakat SEC tabanlı kısmi toplamayı durdurmaz.
+
+Veri toplamaya başlayan çalışmaların mevcut durum dosyaları
+`live-acceptance-state` adıyla 14 gün saklanır. Aynı depodan açılan ilgili
+PR’larda SEC erişimi varsa en fazla 5 yeni bildirim ve 30 yeni alan işlenir. Sonraki çalışmada önceki GitHub Actions run ID değeri
+`resume_run_id` alanına yazılır; aynı SQLite kontrol noktaları ve ham kamu yanıtları
+üzerinden devam edilir. Başarılı bölüm ayrıca `live-acceptance-evidence` içinde
+taşınabilir rapor ve başlıksız kaynak paketini üretir. İş akışı yazma yetkisi,
+ücretli sağlayıcı veya API anahtarı kullanmaz.
+
+Bir Actions çalışmasının başarılı olması tek başına MVP kabulü değildir. Güncel
+100 kimlik, finansal kapsam, karşılaştırma, piyasa verisi, sektör uygunluğu,
+puanlama ve eksik/hata raporları birlikte doğrulanmadan tamamlandı denmez.
+
 
 Recorded 2026-11-02 candidate-run evidence is in `docs/evidence/mvp100/report.md`.
 It has 100 candidates, 98 with financial queries, 96 with accepted input facts,

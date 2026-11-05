@@ -1,5 +1,26 @@
 # Development status
 
+## 5 Kasım 2026 — GitHub Actions üzerinde devam ettirilebilir canlı toplama
+
+Başlangıç main: `d99cf7967db61fcdb1a2860285a4a512cf17e754` (PR #22).
+Açık PR yoktu. PR #22 kaynak commitinin Foundation tests koşusu
+`41975883291` başarılıydı.
+
+Mogadişu saatiyle 12:21'de altı kamu kaynağından ikisi yanıt verdi.
+SEC kimlik dizini ile Nasdaq’ın kendi liste dosyası erişilebilirdi. SEC
+bildirimleri, Companyfacts, Yahoo fiyatı ve Nasdaq’ın diğer borsalar listesi
+zaman aşımına uğradı. Kanıt: `docs/evidence/live-source-preflight-2026-11-05-1221.json`.
+Bu yoklama şirketlerin finansal verisini doğrulamadı.
+
+Yeni iş akışı erişim kanıtını ayrı saklar. Üç SEC adresi erişilebilir olduğunda
+aynı depodan açılan ilgili PR'da 100 adayın bildirim üstverisi ile en fazla 5 yeni
+yıllık belge ve 30 finansal alan denenir. Elle başlatılan çalışmada belge ve
+alan bütçesi seçilir. Önceki durum paketi verilirse mevcut kontrol noktaları
+kullanılır. Veri toplama ve kanıt aktarımı iş akışında ayrı adımlardır.
+
+Güncel 100 şirket kabulü bekliyor. Mali veri toplamasının ardından güncel
+liste/adi hisse teyidi, karşılaştırma, piyasa verisi ve puanlama da doğrulanmalı.
+
 ## 5 Kasım 2026 — Canlı kabul öncesi kaynak erişimi
 
 Başlangıç main: `3226b2b3cf8b391ef09469070193123b31321292` (PR #21).

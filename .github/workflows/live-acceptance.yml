@@ -1,0 +1,139 @@
+name: Canlı 100 şirket kabulü
+
+on:
+  workflow_dispatch:
+    inputs:
+      resume_run_id:
+        description: Önceki canlı kabul çalışmasının run ID değeri; ilk çalışmada boş bırak
+        required: false
+        type: string
+      max_new_documents:
+        description: Bu çalışmada indirilecek en fazla yeni yıllık bildirim
+        required: true
+        default: '25'
+        type: choice
+        options: ['25', '50', '100']
+      max_new_fields:
+        description: Bu çalışmada işlenecek en fazla yeni finansal alan
+        required: true
+        default: '250'
+        type: choice
+        options: ['250', '500', '900']
+  pull_request:
+    paths:
+      - .github/workflows/live-acceptance.yml
+      - scripts/check_live_sources.py
+      - scripts/export_mvp_evidence.py
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: live-acceptance
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Önceki durum dosyalarını indir
+        if: github.event_name == 'workflow_dispatch' && inputs.resume_run_id != ''
+        uses: actions/download-artifact@v4
+        with:
+          name: live-acceptance-state
+          path: data/live-acceptance
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.resume_run_id }}
+
+      - name: Kamu veri kaynaklarına erişimi ölç
+        id: preflight
+        continue-on-error: true
+        env:
+          PYTHONPATH: src
+        run: >-
+          python scripts/check_live_sources.py
+          --user-agent 'US Equity Research (https://github.com/fatalvayn-dot/us-equity-research)'
+          --output data/live-preflight.json
+
+      - name: Erişim kanıtını sakla
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-source-preflight
+          path: data/live-preflight.json
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Zorunlu SEC kaynaklarını denetle
+        id: source_gate
+        continue-on-error: ${{ github.event_name == 'pull_request' }}
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          report=json.loads(Path('data/live-preflight.json').read_text())
+          states={row['source']:row['reachable'] for row in report['sources']}
+          required={'sec_identity','sec_submissions','sec_companyfacts'}
+          missing=sorted(name for name in required if not states.get(name,False))
+          print(json.dumps({'required':sorted(required),'missing':missing}))
+          raise SystemExit(bool(missing))
+          PY
+
+      - name: Devam ettirilebilir finansal veri toplamasını çalıştır
+        id: mvp
+        if: steps.source_gate.outcome == 'success'
+        continue-on-error: true
+        env:
+          PYTHONPATH: src
+          MAX_NEW_DOCUMENTS: ${{ inputs.max_new_documents || '5' }}
+          MAX_NEW_FIELDS: ${{ inputs.max_new_fields || '30' }}
+        run: >-
+          python -m equity_research mvp-run
+          --candidates docs/evidence/common100/candidates.json
+          --state-dir data/live-acceptance
+          --user-agent 'US Equity Research (https://github.com/fatalvayn-dot/us-equity-research)'
+          --max-new-documents "$MAX_NEW_DOCUMENTS"
+          --max-new-fields "$MAX_NEW_FIELDS"
+
+      - name: Taşınabilir kaynak kanıtını üret
+        if: steps.mvp.outcome == 'success'
+        env:
+          PYTHONPATH: src
+        run: >-
+          python scripts/export_mvp_evidence.py
+          --state-dir data/live-acceptance
+          --output data/live-evidence
+          --sources data/live-sources
+
+      - name: Devam durumunu sakla
+        if: always() && steps.mvp.outcome != 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-acceptance-state
+          path: data/live-acceptance
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Taşınabilir kabul kanıtını sakla
+        if: always() && steps.mvp.outcome != 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-acceptance-evidence
+          path: |
+            data/live-evidence
+            data/live-sources
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Veri toplama kesildiyse çalışmayı başarısız say
+        if: steps.mvp.outcome == 'failure'
+        run: exit 1
