@@ -1,5 +1,38 @@
 # Development status
 
+## 5 Kasım 2026 — Canlı kabul iş akışı birleşimi ve ilk devam kontrol noktası
+
+PR #24 main'e birleştirildi:
+https://github.com/fatalvayn-dot/us-equity-research/pull/24
+Kaynak commit `af45bde650f1b47ae622dc3ac5a98429bb236f11`, birleşim commit'i
+`7ec7bb09ad09c805f7b87ce0979e9b7e9bb323b5` değerindedir. Aynı işi yapan
+taslak PR #23 ve yinelenen PR #25 kapatıldı; eski `radar-agent` deposuna
+dokunulmadı.
+
+Foundation tests koşusu `42002017637`, Python 3.11, 3.12 ve 3.13 işlerinde
+başarılıdır. Kesin kaynak committeki canlı kabul koşusu `42002017777` de
+başarılı tamamlandı; GitHub yürütücüsü 3/6 kaynak grubundan yanıt aldı. Üç
+zorunlu SEC kaynağı birlikte erişilebilir olmadığı için finansal toplama
+başlatılmadı. Erişim kanıtı 14 gün saklanan `live-source-preflight` artifact'i
+`13403240759` içindedir. Bu koşu şirket finansallarını doğrulamadı.
+
+Yerel devam çalışması aynı 100 adayı ve yeni bir durum dizinini kullandı. 24
+şirket için güncel SEC submissions yanıtı ile yıllık bildirim üstverisi
+kaydedildi; tamamı `metadata_available_legal_type_pending` durumundadır.
+Finansal belge ve alan aşamasına geçilmeden işlem kesildi: 24/100 şirket
+üstverisi, 24 ham yanıt gözlemi, 0 finansal alan ve 0 puan. Tamamlanmış
+`report.json` bulunmadığından taşınabilir kanıt dışa aktarımı açık hata ile
+reddedildi; bu kısmi durum canlı kabul sayılmadı.
+
+Yerel birleşik ağaçta iş akışı sözleşme testleri 4/4 ve tam regresyon 674/674
+başarılıdır (Python 3.12.14). İlk tam regresyon çağrısı `PYTHONPATH` olmadan
+51 içe aktarma hatası verdi; doğru ortamla tekrarlandı ve geçti.
+
+Sonraki tek görev: etkin süreç bulunmadığı ve kayıtlı kira süresi dolduğu
+doğrulandıktan sonra `data/live-acceptance-20261105` durum dizininden aynı
+komutla devam ederek 100 şirket üstverisini tamamlamak; ardından yıllık belge
+ve finansal alan aşamasının sonuçlarını ayrı sayımlarla kaydetmektir.
+
 ## 5 Kasım 2026 — GitHub Actions üzerinde devam ettirilebilir canlı toplama
 
 Başlangıç main: `d99cf7967db61fcdb1a2860285a4a512cf17e754` (PR #22).
