@@ -1,5 +1,36 @@
 # Development status
 
+## 5 Kasım 2026 — GitHub Actions üzerinde devam ettirilebilir canlı toplama
+
+Başlangıç main: `d99cf7967db61fcdb1a2860285a4a512cf17e754` (PR #22).
+Başlangıç denetiminde açık PR yoktu. Aynı oturum sırasında açılan taslak PR #23
+ile yerel geliştirme çakıştığı için iki çalışma tek dalda birleştirildi. PR #23'ün
+yalnız erişim yoklaması yapan ve `SEC_USER_AGENT` secret'ı gerektiren iş akışı,
+secret istemeyen devam ettirilebilir kabul akışıyla değiştirildi. PR #22 kaynak
+commitinin Foundation tests koşusu `41975883291` başarılıydı.
+
+Mogadişu saatiyle 12:21'de altı kamu kaynağından ikisi yanıt verdi.
+SEC kimlik dizini ile Nasdaq’ın kendi liste dosyası erişilebilirdi. SEC
+bildirimleri, Companyfacts, Yahoo fiyatı ve Nasdaq’ın diğer borsalar listesi
+zaman aşımına uğradı. Kanıt: `docs/evidence/live-source-preflight-2026-11-05-1221.json`.
+Bu yoklama şirketlerin finansal verisini doğrulamadı.
+
+Yeni iş akışı erişim kanıtını ayrı saklar. Üç SEC adresi erişilebilir olduğunda
+aynı depodan açılan ilgili PR'da 100 adayın bildirim üstverisi ile en fazla 5 yeni
+yıllık belge ve 30 finansal alan denenir. Elle başlatılan çalışmada belge ve
+alan bütçesi seçilir. Önceki durum paketi verilirse mevcut kontrol noktaları
+kullanılır. Veri toplama ve kanıt aktarımı iş akışında ayrı adımlardır.
+
+Güncel 100 şirket kabulü bekliyor. Mali veri toplamasının ardından güncel
+liste/adi hisse teyidi, karşılaştırma, piyasa verisi ve puanlama da doğrulanmalı.
+
+Birleşik ağaçta canlı kabul iş akışı sözleşme testleri 4/4, tam regresyon
+674/674 başarılıdır (Python 3.12.14, 179,240 saniye). Tam regresyonun ilk
+çağrısı `PYTHONPATH` verilmediğinden 51 test modülünü içe aktaramadı; doğru
+ortamla tekrarlanan koşu geçti. Sonraki tek görev, PR #23'ün kesin baş SHA'sında
+Foundation tests ile canlı kabul iş akışını çalıştırmak; erişim uygunsa oluşan
+durum artifact'inden aynı 100 aday üzerinde devam etmektir.
+
 ## 5 Kasım 2026 — Canlı kabul öncesi kaynak erişimi
 
 Başlangıç main: `3226b2b3cf8b391ef09469070193123b31321292` (PR #21).

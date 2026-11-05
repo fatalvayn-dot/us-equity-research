@@ -1,26 +1,25 @@
-# Canlı veri erişim engeli: GitHub üzerinde bağımsız doğrulama
+# GitHub üzerinde devam ettirilebilir canlı kabul
 
 ## Sorun
 
-5 Kasım 2026 tarihinde mevcut çalışma ortamından SEC, Yahoo ve Nasdaq Trader
-adreslerine yapılan sekiz HTTP isteği zaman aşımına uğradı. Bu sonuç, kaynakların
-genel olarak kapalı olduğunu **kanıtlamaz**. Aynı kaynaklar GitHub barındırmalı
-Ubuntu yürütücüsünden ayrıca denenmelidir.
+5 Kasım 2026 tarihindeki son yoklamada SEC kimlik dizini ile Nasdaq'ın kendi
+liste dosyası yanıt verdi. SEC bildirimleri, Companyfacts, Yahoo fiyatı ve
+Nasdaq'ın diğer borsalar listesi zaman aşımına uğradı. Bu sonuç kaynakların genel
+olarak kapalı olduğunu veya şirket verisinin eksik olduğunu kanıtlamaz.
 
 ## Uygulama
 
-1. Depoda mevcut değilse `SEC_USER_AGENT` adlı GitHub Actions secret değerini,
-   gerçek proje kimliği ve iletişim bilgisi taşıyan SEC uyumlu User-Agent olarak
-   tanımlayın. Gerçek değeri kaynak koduna veya raporlara yazmayın.
-2. GitHub Actions > **Live public-source connectivity diagnostic** >
-   **Run workflow** ile işlemi başlatın.
-3. **public-source-preflight** adlı artifact içindeki
-   `data/live-preflight.json` raporunu açın.
-4. `reachable_sources` ve her kaynağın `attempts[].status` /
-   `attempts[].reason` alanlarını değerlendirin.
-5. SEC kimlik, bildirim ve finansal kaynaklarına erişim başarılıysa,
-   README'deki `mvp-run` akışını yalnız kaynak erişimi olan ortamda çalıştırın.
-   Uygun zamanlı kaynaklar ve gerçek kabul ayrıca doğrulanmalıdır.
+1. GitHub Actions > **Canlı 100 şirket kabulü** > **Run workflow** bölümünü açın.
+2. İlk çalışmada `resume_run_id` alanını boş bırakın; belge ve finansal alan
+   bütçelerini seçin.
+3. İş bitince `live-source-preflight`, `live-acceptance-state` ve
+   `live-acceptance-evidence` artifact'lerini inceleyin.
+4. Kesilen veya bütçesi dolan çalışmada önceki koşunun kimliğini
+   `resume_run_id` alanına yazın. İş akışı yalnız o koşunun durum paketini
+   indirerek devam eder.
+5. Üç zorunlu SEC kaynağı erişilebilir değilse finansal toplama başlamaz;
+   erişim raporu yine saklanır. Yahoo veya Nasdaq erişim sorunu SEC üzerinden
+   yapılabilen kısmi toplamayı engellemez.
 
 ## Yorumlama
 
@@ -29,8 +28,10 @@ Ubuntu yürütücüsünden ayrıca denenmelidir.
   atlatma uygulanmaz.
 - `response_received`: yalnızca HTTP yanıtı alındı. Şirket, muhasebe
   eşleşmesi, kaynak güncelliği veya 100 şirket kabulü kanıtı değildir.
-- Rapor hiç oluşmadıysa ilk önce `SEC_USER_AGENT` yapılandırma hatasını
-  inceleyin.
+- `live-acceptance-state`: kesintiden devam etmek için çalışma verisidir.
+- `live-acceptance-evidence`: kaynak kanıtının taşınabilir dışa aktarımıdır.
 
-İş akışı yalnızca kullanıcı tarafından tetiklenir, ücretli servise erişmez,
-yeni yetki veya gerçek alım-satım işlemi istemez. Rapor azami yedi gün saklanır.
+İş akışı zamanlanmış değildir; ücretli servise erişmez, secret veya yeni yetki
+istemez ve gerçek alım-satım işlemi yapmaz. Artifact'ler 14 gün saklanır. Bir
+koşunun başarılı olması tek başına 100 şirket kabulü değildir; çıktıdaki şirket,
+dönem, para birimi, kanıt ve puan kapsamı ayrıca doğrulanmalıdır.

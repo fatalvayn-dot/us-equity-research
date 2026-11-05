@@ -1,0 +1,97 @@
+{
+  "kind": "transport_preflight",
+  "started_at": "2026-11-05T09:21:14.949105+00:00",
+  "finished_at": "2026-11-05T09:21:35.059455+00:00",
+  "sources": [
+    {
+      "source": "sec_identity",
+      "reachable": true,
+      "attempts": [
+        {
+          "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+          "status": "response_received",
+          "retrieved_at": "2026-11-05T09:21:20.162293+00:00",
+          "sha256": "224330f2c44f5d173395e427dbac3c6981acdb1f57e3658832d315c3e96f6522",
+          "bytes": 522049
+        }
+      ]
+    },
+    {
+      "source": "sec_submissions",
+      "reachable": false,
+      "attempts": [
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000320193.json",
+          "status": "timeout",
+          "http_status": null,
+          "reason": "timeout"
+        }
+      ]
+    },
+    {
+      "source": "sec_companyfacts",
+      "reachable": false,
+      "attempts": [
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+          "status": "timeout",
+          "http_status": null,
+          "reason": "timeout"
+        }
+      ]
+    },
+    {
+      "source": "yahoo_price",
+      "reachable": false,
+      "attempts": [
+        {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/AAPL?interval=1d&range=5d",
+          "status": "timeout",
+          "http_status": null,
+          "reason": "timeout"
+        }
+      ]
+    },
+    {
+      "source": "nasdaq_listed",
+      "reachable": true,
+      "attempts": [
+        {
+          "url": "https://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt",
+          "status": "timeout",
+          "http_status": null,
+          "reason": "timeout"
+        },
+        {
+          "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "status": "response_received",
+          "retrieved_at": "2026-11-05T09:21:29.497630+00:00",
+          "sha256": "81bfaf8d15b09a9fe7b3ab4f46d588b3a4477b38c45d1c22eb60d5f2efbf2ad1",
+          "bytes": 348271
+        }
+      ]
+    },
+    {
+      "source": "nasdaq_other_listed",
+      "reachable": false,
+      "attempts": [
+        {
+          "url": "https://ftp.nasdaqtrader.com/SymbolDirectory/otherlisted.txt",
+          "status": "timeout",
+          "http_status": null,
+          "reason": "timeout"
+        },
+        {
+          "url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "status": "timeout",
+          "http_status": null,
+          "reason": "timeout"
+        }
+      ]
+    }
+  ],
+  "reachable_sources": 2,
+  "sources_checked": 6,
+  "companies_validated": 0,
+  "mvp_accepted": false
+}
