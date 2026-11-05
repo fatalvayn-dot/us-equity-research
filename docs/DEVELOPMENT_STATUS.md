@@ -7,6 +7,12 @@ Dal: `feat/liabilities-equation-proof`; başlangıç main
 açık PR yoktu; Actions `41930220540` Python 3.11/3.12/3.13 üzerinde 666 testle
 başarılıydı. AGENTS, proje özeti ve önceki durum okundu. Türkçe rapor sistemi
 yeniden yazılmadı; eski radar-agent deposuna dokunulmadı.
+PR: https://github.com/fatalvayn-dot/us-equity-research/pull/21
+Kaynak commit: https://github.com/fatalvayn-dot/us-equity-research/commit/8956660acb39e3188721aa58ef144f89bc36f12b
+Kaynak ağacı `45900b14bed3d867538a5795c631b6931c7d5b8d`, 670 testin geçtiği
+yerel ağacın birebir aynısıdır. Kaynak CI:
+https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41962692911 —
+Python 3.11, 3.12 ve 3.13 üzerinde 670 test ile CLI durum kontrolü başarılı.
 
 v0.35.0, SEC Companyfacts içinde literal `us-gaap:Liabilities` bulunmayan beş
 desteklenen şirket için özgün yıllık iXBRL bildiriminden dar bir bilanço denklemi
@@ -41,8 +47,8 @@ tekrar üretim çıktısında datetime serileştirmesi ayrı ayrı görüldü ve
 İlk 41 odaklı testte eski 87 puansız kart beklentisinin tek satırı kaldı; 18/82
 sözleşmesine güncellendi. Son odaklı koşu 41/41 (38,365 saniye), tam yerel
 regresyon 670/670 geçti (295,268 saniye, Python 3.12.14). CLI durum kontrolü ve
-`git diff --check` başarılı. PR, commit ve Actions bağlantıları uzak doğrulamadan
-sonra buraya eklenecek.
+`git diff --check` başarılı. Kaynak commitin üç sürümlü uzak CI'ı başarılıdır;
+bu durum kaydını içeren son commit de birleşmeden önce ayrıca doğrulanacaktır.
 
 Kalan engel: PLTR için doğrulanmış güncel adi hisse adedi yok; ON girdisi geçersiz.
 Bu iki durum puansız kalmalı. Sonraki tek görev, yeni bir durum klasörü ve çalışmanın
