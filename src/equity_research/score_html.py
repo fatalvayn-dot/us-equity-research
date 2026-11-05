@@ -14,11 +14,13 @@ def render_score_html(report):
         components=''.join('<tr><td>'+e(k)+'</td><td>'+('hesaplanmadı' if v['score'] is None else e(v['score']))+'</td><td>'+e(v['weight'])+'</td></tr>' for k,v in c['components'].items())
         proof=[]
         for item in c.get('evidence',{}).get('financial_confirmations',[]):
-            f=item['selected'];verified=item['confirmed']
+            f=item['selected'];verified=item.get('confirmed') or item['confirmation']
+            verification_label=('SEC denklem doğrulaması' if item.get('confirmation_method')=='original_filing_balance_equation'
+                                else 'SEC doğrulaması')
             proof.append('<tr>'+''.join('<td>'+v+'</td>' for v in (e(label(item['field'])),e(f['value'])+' '+e(f['currency']),
                 e(f['period_start'] or 'instant')+' / '+e(f['period_end']),
                 '<a href="'+e(f['source_url'])+'" target="_blank" rel="noopener noreferrer">kaynak</a><small>'+e(f['raw_sha256'])+'</small>',
-                '<a href="'+e(verified['source_url'])+'" target="_blank" rel="noopener noreferrer">SEC doğrulaması</a><small>'+e(verified['raw_sha256'])+'</small>'))+'</tr>')
+                '<a href="'+e(verified['source_url'])+'" target="_blank" rel="noopener noreferrer">'+verification_label+'</a><small>'+e(verified['raw_sha256'])+'</small>'))+'</tr>')
         extra=''
         if c['total_score'] is not None:
             metrics=''.join('<li>'+e(k)+': '+e(number(v))+'</li>' for k,v in c['metrics'].items())

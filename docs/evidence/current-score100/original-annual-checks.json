@@ -1,9 +1,9 @@
 {
   "mode": "recorded_original_annual_reconciliation",
   "new_http_requests": 0,
-  "scored_companies": 13,
+  "scored_companies": 18,
   "summary": {
-    "matched": 130
+    "matched": 180
   },
   "checks": [
     {
@@ -1087,6 +1087,744 @@
       "original_retrieved_at": "2026-11-02T12:29:00.324215+00:00"
     },
     {
+      "symbol": "AMD",
+      "issuer_id": "0000002488",
+      "field": "assets",
+      "period_start": null,
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "76926000000",
+      "original": {
+        "concept": "us-gaap:Assets",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "76926000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-6",
+            "unit_id": "usd",
+            "value": "76926000000"
+          }
+        ],
+        "present_facts": 2,
+        "other_period_facts": 1,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "original_sha256": "b9f1f0da5e92c001bda7b3048372b6e635dca961437fee0eef134de1a711098f",
+      "original_retrieved_at": "2026-11-02T12:29:08.292302+00:00"
+    },
+    {
+      "symbol": "AMD",
+      "issuer_id": "0000002488",
+      "field": "current_assets",
+      "period_start": null,
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "26947000000",
+      "original": {
+        "concept": "us-gaap:AssetsCurrent",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "26947000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-6",
+            "unit_id": "usd",
+            "value": "26947000000"
+          }
+        ],
+        "present_facts": 2,
+        "other_period_facts": 1,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "original_sha256": "b9f1f0da5e92c001bda7b3048372b6e635dca961437fee0eef134de1a711098f",
+      "original_retrieved_at": "2026-11-02T12:29:08.292302+00:00"
+    },
+    {
+      "symbol": "AMD",
+      "issuer_id": "0000002488",
+      "field": "current_liabilities",
+      "period_start": null,
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "9455000000",
+      "original": {
+        "concept": "us-gaap:LiabilitiesCurrent",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "9455000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-6",
+            "unit_id": "usd",
+            "value": "9455000000"
+          }
+        ],
+        "present_facts": 2,
+        "other_period_facts": 1,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "original_sha256": "b9f1f0da5e92c001bda7b3048372b6e635dca961437fee0eef134de1a711098f",
+      "original_retrieved_at": "2026-11-02T12:29:08.292302+00:00"
+    },
+    {
+      "symbol": "AMD",
+      "issuer_id": "0000002488",
+      "field": "net_income",
+      "period_start": "2024-12-29",
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "4335000000",
+      "original": {
+        "concept": "us-gaap:NetIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "4335000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "4335000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "4335000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "4335000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "4335000000"
+          }
+        ],
+        "present_facts": 15,
+        "other_period_facts": 10,
+        "dimensional_facts": 1,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "original_sha256": "b9f1f0da5e92c001bda7b3048372b6e635dca961437fee0eef134de1a711098f",
+      "original_retrieved_at": "2026-11-02T12:29:08.292302+00:00"
+    },
+    {
+      "symbol": "AMD",
+      "issuer_id": "0000002488",
+      "field": "operating_income",
+      "period_start": "2024-12-29",
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "3694000000",
+      "original": {
+        "concept": "us-gaap:OperatingIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "3694000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "3694000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "3694000000"
+          }
+        ],
+        "present_facts": 21,
+        "other_period_facts": 14,
+        "dimensional_facts": 5,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "original_sha256": "b9f1f0da5e92c001bda7b3048372b6e635dca961437fee0eef134de1a711098f",
+      "original_retrieved_at": "2026-11-02T12:29:08.292302+00:00"
+    },
+    {
+      "symbol": "AMD",
+      "issuer_id": "0000002488",
+      "field": "operating_cash_flow",
+      "period_start": "2024-12-29",
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "7709000000",
+      "original": {
+        "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "7709000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "7709000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "original_sha256": "b9f1f0da5e92c001bda7b3048372b6e635dca961437fee0eef134de1a711098f",
+      "original_retrieved_at": "2026-11-02T12:29:08.292302+00:00"
+    },
+    {
+      "symbol": "AMD",
+      "issuer_id": "0000002488",
+      "field": "capital_expenditure",
+      "period_start": "2024-12-29",
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "974000000",
+      "original": {
+        "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "974000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "974000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "original_sha256": "b9f1f0da5e92c001bda7b3048372b6e635dca961437fee0eef134de1a711098f",
+      "original_retrieved_at": "2026-11-02T12:29:08.292302+00:00"
+    },
+    {
+      "symbol": "AMD",
+      "issuer_id": "0000002488",
+      "field": "revenue",
+      "period_start": "2024-12-29",
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "34639000000",
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "34639000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "34639000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "34639000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "34639000000"
+          }
+        ],
+        "present_facts": 39,
+        "other_period_facts": 26,
+        "dimensional_facts": 10,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "original_sha256": "b9f1f0da5e92c001bda7b3048372b6e635dca961437fee0eef134de1a711098f",
+      "original_retrieved_at": "2026-11-02T12:29:08.292302+00:00"
+    },
+    {
+      "symbol": "AMD",
+      "issuer_id": "0000002488",
+      "field": "revenue",
+      "period_start": "2023-12-31",
+      "period_end": "2024-12-28",
+      "currency": "USD",
+      "selected_value": "25785000000",
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "25785000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-4",
+            "unit_id": "usd",
+            "value": "25785000000"
+          },
+          {
+            "context_id": "c-4",
+            "unit_id": "usd",
+            "value": "25785000000"
+          },
+          {
+            "context_id": "c-4",
+            "unit_id": "usd",
+            "value": "25785000000"
+          }
+        ],
+        "present_facts": 39,
+        "other_period_facts": 26,
+        "dimensional_facts": 10,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "original_sha256": "b9f1f0da5e92c001bda7b3048372b6e635dca961437fee0eef134de1a711098f",
+      "original_retrieved_at": "2026-11-02T12:29:08.292302+00:00"
+    },
+    {
+      "symbol": "AMD",
+      "issuer_id": "0000002488",
+      "field": "liabilities",
+      "period_start": null,
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "13927000000",
+      "original": {
+        "value": "13927000000",
+        "currency": "USD",
+        "period_end": "2025-12-27",
+        "formula": "LiabilitiesAndStockholdersEquity - total_equity",
+        "operands": [
+          {
+            "concept": "us-gaap:LiabilitiesAndStockholdersEquity",
+            "value": "76926000000"
+          },
+          {
+            "concept": "us-gaap:StockholdersEquity",
+            "value": "62999000000"
+          }
+        ],
+        "literal_liabilities_status": "concept_not_disclosed",
+        "excluded_scope_checks": [
+          {
+            "concept": "us-gaap:TemporaryEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:RedeemableNoncontrollingInterestEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:NoncontrollingInterestInConsolidatedEntity",
+            "status": "concept_not_disclosed",
+            "value": null
+          }
+        ],
+        "raw_sha256": "b9f1f0da5e92c001bda7b3048372b6e635dca961437fee0eef134de1a711098f",
+        "automatic_substitution": false,
+        "scope_approved": false
+      },
+      "confirmation_method": "original_filing_balance_equation",
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "original_sha256": "b9f1f0da5e92c001bda7b3048372b6e635dca961437fee0eef134de1a711098f",
+      "original_retrieved_at": "2026-11-02T12:29:08.292302+00:00"
+    },
+    {
+      "symbol": "INTC",
+      "issuer_id": "0000050863",
+      "field": "assets",
+      "period_start": null,
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "211429000000",
+      "original": {
+        "concept": "us-gaap:Assets",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "211429000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-8",
+            "unit_id": "usd",
+            "value": "211429000000"
+          }
+        ],
+        "present_facts": 2,
+        "other_period_facts": 1,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "original_sha256": "ba132c88123cc8be4e1da4773b45e3eb1672c88030b62cf2761430fab254b56e",
+      "original_retrieved_at": "2026-11-02T12:29:30.564362+00:00"
+    },
+    {
+      "symbol": "INTC",
+      "issuer_id": "0000050863",
+      "field": "current_assets",
+      "period_start": null,
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "63688000000",
+      "original": {
+        "concept": "us-gaap:AssetsCurrent",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "63688000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-8",
+            "unit_id": "usd",
+            "value": "63688000000"
+          }
+        ],
+        "present_facts": 2,
+        "other_period_facts": 1,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "original_sha256": "ba132c88123cc8be4e1da4773b45e3eb1672c88030b62cf2761430fab254b56e",
+      "original_retrieved_at": "2026-11-02T12:29:30.564362+00:00"
+    },
+    {
+      "symbol": "INTC",
+      "issuer_id": "0000050863",
+      "field": "current_liabilities",
+      "period_start": null,
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "31575000000",
+      "original": {
+        "concept": "us-gaap:LiabilitiesCurrent",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "31575000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-8",
+            "unit_id": "usd",
+            "value": "31575000000"
+          }
+        ],
+        "present_facts": 2,
+        "other_period_facts": 1,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "original_sha256": "ba132c88123cc8be4e1da4773b45e3eb1672c88030b62cf2761430fab254b56e",
+      "original_retrieved_at": "2026-11-02T12:29:30.564362+00:00"
+    },
+    {
+      "symbol": "INTC",
+      "issuer_id": "0000050863",
+      "field": "net_income",
+      "period_start": "2024-12-29",
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "-267000000",
+      "original": {
+        "concept": "us-gaap:NetIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "-267000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "-267000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "-267000000"
+          }
+        ],
+        "present_facts": 6,
+        "other_period_facts": 4,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "original_sha256": "ba132c88123cc8be4e1da4773b45e3eb1672c88030b62cf2761430fab254b56e",
+      "original_retrieved_at": "2026-11-02T12:29:30.564362+00:00"
+    },
+    {
+      "symbol": "INTC",
+      "issuer_id": "0000050863",
+      "field": "operating_income",
+      "period_start": "2024-12-29",
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "-2214000000",
+      "original": {
+        "concept": "us-gaap:OperatingIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "-2214000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "-2214000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "-2214000000"
+          }
+        ],
+        "present_facts": 27,
+        "other_period_facts": 18,
+        "dimensional_facts": 7,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "original_sha256": "ba132c88123cc8be4e1da4773b45e3eb1672c88030b62cf2761430fab254b56e",
+      "original_retrieved_at": "2026-11-02T12:29:30.564362+00:00"
+    },
+    {
+      "symbol": "INTC",
+      "issuer_id": "0000050863",
+      "field": "operating_cash_flow",
+      "period_start": "2024-12-29",
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "9697000000",
+      "original": {
+        "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "9697000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "9697000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "original_sha256": "ba132c88123cc8be4e1da4773b45e3eb1672c88030b62cf2761430fab254b56e",
+      "original_retrieved_at": "2026-11-02T12:29:30.564362+00:00"
+    },
+    {
+      "symbol": "INTC",
+      "issuer_id": "0000050863",
+      "field": "capital_expenditure",
+      "period_start": "2024-12-29",
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "14646000000",
+      "original": {
+        "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "14646000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "14646000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "original_sha256": "ba132c88123cc8be4e1da4773b45e3eb1672c88030b62cf2761430fab254b56e",
+      "original_retrieved_at": "2026-11-02T12:29:30.564362+00:00"
+    },
+    {
+      "symbol": "INTC",
+      "issuer_id": "0000050863",
+      "field": "revenue",
+      "period_start": "2024-12-29",
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "52853000000",
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "52853000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "52853000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "52853000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "52853000000"
+          }
+        ],
+        "present_facts": 45,
+        "other_period_facts": 30,
+        "dimensional_facts": 12,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "original_sha256": "ba132c88123cc8be4e1da4773b45e3eb1672c88030b62cf2761430fab254b56e",
+      "original_retrieved_at": "2026-11-02T12:29:30.564362+00:00"
+    },
+    {
+      "symbol": "INTC",
+      "issuer_id": "0000050863",
+      "field": "revenue",
+      "period_start": "2023-12-31",
+      "period_end": "2024-12-28",
+      "currency": "USD",
+      "selected_value": "53101000000",
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "53101000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-6",
+            "unit_id": "usd",
+            "value": "53101000000"
+          },
+          {
+            "context_id": "c-6",
+            "unit_id": "usd",
+            "value": "53101000000"
+          },
+          {
+            "context_id": "c-6",
+            "unit_id": "usd",
+            "value": "53101000000"
+          }
+        ],
+        "present_facts": 45,
+        "other_period_facts": 30,
+        "dimensional_facts": 12,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "original_sha256": "ba132c88123cc8be4e1da4773b45e3eb1672c88030b62cf2761430fab254b56e",
+      "original_retrieved_at": "2026-11-02T12:29:30.564362+00:00"
+    },
+    {
+      "symbol": "INTC",
+      "issuer_id": "0000050863",
+      "field": "liabilities",
+      "period_start": null,
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "selected_value": "85069000000",
+      "original": {
+        "value": "85069000000",
+        "currency": "USD",
+        "period_end": "2025-12-27",
+        "formula": "LiabilitiesAndStockholdersEquity - total_equity",
+        "operands": [
+          {
+            "concept": "us-gaap:LiabilitiesAndStockholdersEquity",
+            "value": "211429000000"
+          },
+          {
+            "concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+            "value": "126360000000"
+          },
+          {
+            "concept": "us-gaap:StockholdersEquity",
+            "value": "114281000000"
+          },
+          {
+            "concept": "us-gaap:MinorityInterest",
+            "value": "12079000000"
+          }
+        ],
+        "literal_liabilities_status": "period_or_scope_mismatch",
+        "excluded_scope_checks": [
+          {
+            "concept": "us-gaap:TemporaryEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:RedeemableNoncontrollingInterestEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:NoncontrollingInterestInConsolidatedEntity",
+            "status": "concept_not_disclosed",
+            "value": null
+          }
+        ],
+        "raw_sha256": "ba132c88123cc8be4e1da4773b45e3eb1672c88030b62cf2761430fab254b56e",
+        "automatic_substitution": false,
+        "scope_approved": false
+      },
+      "confirmation_method": "original_filing_balance_equation",
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "original_sha256": "ba132c88123cc8be4e1da4773b45e3eb1672c88030b62cf2761430fab254b56e",
+      "original_retrieved_at": "2026-11-02T12:29:30.564362+00:00"
+    },
+    {
       "symbol": "AMAT",
       "issuer_id": "0000006951",
       "field": "assets",
@@ -1790,6 +2528,381 @@
       "original_url": "https://www.sec.gov/Archives/edgar/data/97476/000009747626000059/txn-20251231.htm",
       "original_sha256": "dd41fe97ea2579b0b3b60db1f6a9dd27c5cc8d4c8f5819c147e19e2c51270722",
       "original_retrieved_at": "2026-11-02T12:31:06.128342+00:00"
+    },
+    {
+      "symbol": "ADI",
+      "issuer_id": "0000006281",
+      "field": "assets",
+      "period_start": null,
+      "period_end": "2025-11-01",
+      "currency": "USD",
+      "selected_value": "47992712000",
+      "original": {
+        "concept": "us-gaap:Assets",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "47992712000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-3",
+            "unit_id": "usd",
+            "value": "47992712000"
+          }
+        ],
+        "present_facts": 2,
+        "other_period_facts": 1,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/6281/000000628125000153/adi-20251101.htm",
+      "original_sha256": "9850888d8913f971ee6e13595770035edd85e56456d152029412406aa861fe2f",
+      "original_retrieved_at": "2026-11-02T12:32:31.520516+00:00"
+    },
+    {
+      "symbol": "ADI",
+      "issuer_id": "0000006281",
+      "field": "current_assets",
+      "period_start": null,
+      "period_end": "2025-11-01",
+      "currency": "USD",
+      "selected_value": "7108061000",
+      "original": {
+        "concept": "us-gaap:AssetsCurrent",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "7108061000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-3",
+            "unit_id": "usd",
+            "value": "7108061000"
+          }
+        ],
+        "present_facts": 2,
+        "other_period_facts": 1,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/6281/000000628125000153/adi-20251101.htm",
+      "original_sha256": "9850888d8913f971ee6e13595770035edd85e56456d152029412406aa861fe2f",
+      "original_retrieved_at": "2026-11-02T12:32:31.520516+00:00"
+    },
+    {
+      "symbol": "ADI",
+      "issuer_id": "0000006281",
+      "field": "current_liabilities",
+      "period_start": null,
+      "period_end": "2025-11-01",
+      "currency": "USD",
+      "selected_value": "3245801000",
+      "original": {
+        "concept": "us-gaap:LiabilitiesCurrent",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "3245801000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-3",
+            "unit_id": "usd",
+            "value": "3245801000"
+          }
+        ],
+        "present_facts": 2,
+        "other_period_facts": 1,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/6281/000000628125000153/adi-20251101.htm",
+      "original_sha256": "9850888d8913f971ee6e13595770035edd85e56456d152029412406aa861fe2f",
+      "original_retrieved_at": "2026-11-02T12:32:31.520516+00:00"
+    },
+    {
+      "symbol": "ADI",
+      "issuer_id": "0000006281",
+      "field": "net_income",
+      "period_start": "2024-11-03",
+      "period_end": "2025-11-01",
+      "currency": "USD",
+      "selected_value": "2267342000",
+      "original": {
+        "concept": "us-gaap:NetIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "2267342000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "2267342000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "2267342000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "2267342000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "2267342000"
+          }
+        ],
+        "present_facts": 24,
+        "other_period_facts": 15,
+        "dimensional_facts": 5,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/6281/000000628125000153/adi-20251101.htm",
+      "original_sha256": "9850888d8913f971ee6e13595770035edd85e56456d152029412406aa861fe2f",
+      "original_retrieved_at": "2026-11-02T12:32:31.520516+00:00"
+    },
+    {
+      "symbol": "ADI",
+      "issuer_id": "0000006281",
+      "field": "operating_income",
+      "period_start": "2024-11-03",
+      "period_end": "2025-11-01",
+      "currency": "USD",
+      "selected_value": "2932496000",
+      "original": {
+        "concept": "us-gaap:OperatingIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "2932496000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "2932496000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/6281/000000628125000153/adi-20251101.htm",
+      "original_sha256": "9850888d8913f971ee6e13595770035edd85e56456d152029412406aa861fe2f",
+      "original_retrieved_at": "2026-11-02T12:32:31.520516+00:00"
+    },
+    {
+      "symbol": "ADI",
+      "issuer_id": "0000006281",
+      "field": "operating_cash_flow",
+      "period_start": "2024-11-03",
+      "period_end": "2025-11-01",
+      "currency": "USD",
+      "selected_value": "4812202000",
+      "original": {
+        "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "4812202000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "4812202000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/6281/000000628125000153/adi-20251101.htm",
+      "original_sha256": "9850888d8913f971ee6e13595770035edd85e56456d152029412406aa861fe2f",
+      "original_retrieved_at": "2026-11-02T12:32:31.520516+00:00"
+    },
+    {
+      "symbol": "ADI",
+      "issuer_id": "0000006281",
+      "field": "capital_expenditure",
+      "period_start": "2024-11-03",
+      "period_end": "2025-11-01",
+      "currency": "USD",
+      "selected_value": "533552000",
+      "original": {
+        "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "533552000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "533552000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/6281/000000628125000153/adi-20251101.htm",
+      "original_sha256": "9850888d8913f971ee6e13595770035edd85e56456d152029412406aa861fe2f",
+      "original_retrieved_at": "2026-11-02T12:32:31.520516+00:00"
+    },
+    {
+      "symbol": "ADI",
+      "issuer_id": "0000006281",
+      "field": "revenue",
+      "period_start": "2024-11-03",
+      "period_end": "2025-11-01",
+      "currency": "USD",
+      "selected_value": "11019707000",
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "11019707000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "11019707000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "11019707000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "11019707000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "11019707000"
+          }
+        ],
+        "present_facts": 59,
+        "other_period_facts": 39,
+        "dimensional_facts": 16,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/6281/000000628125000153/adi-20251101.htm",
+      "original_sha256": "9850888d8913f971ee6e13595770035edd85e56456d152029412406aa861fe2f",
+      "original_retrieved_at": "2026-11-02T12:32:31.520516+00:00"
+    },
+    {
+      "symbol": "ADI",
+      "issuer_id": "0000006281",
+      "field": "revenue",
+      "period_start": "2023-10-29",
+      "period_end": "2024-11-02",
+      "currency": "USD",
+      "selected_value": "9427157000",
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "9427157000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-4",
+            "unit_id": "usd",
+            "value": "9427157000"
+          },
+          {
+            "context_id": "c-4",
+            "unit_id": "usd",
+            "value": "9427157000"
+          },
+          {
+            "context_id": "c-4",
+            "unit_id": "usd",
+            "value": "9427157000"
+          },
+          {
+            "context_id": "c-4",
+            "unit_id": "usd",
+            "value": "9427157000"
+          }
+        ],
+        "present_facts": 59,
+        "other_period_facts": 39,
+        "dimensional_facts": 16,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/6281/000000628125000153/adi-20251101.htm",
+      "original_sha256": "9850888d8913f971ee6e13595770035edd85e56456d152029412406aa861fe2f",
+      "original_retrieved_at": "2026-11-02T12:32:31.520516+00:00"
+    },
+    {
+      "symbol": "ADI",
+      "issuer_id": "0000006281",
+      "field": "liabilities",
+      "period_start": null,
+      "period_end": "2025-11-01",
+      "currency": "USD",
+      "selected_value": "14176957000",
+      "original": {
+        "value": "14176957000",
+        "currency": "USD",
+        "period_end": "2025-11-01",
+        "formula": "LiabilitiesAndStockholdersEquity - total_equity",
+        "operands": [
+          {
+            "concept": "us-gaap:LiabilitiesAndStockholdersEquity",
+            "value": "47992712000"
+          },
+          {
+            "concept": "us-gaap:StockholdersEquity",
+            "value": "33815755000"
+          }
+        ],
+        "literal_liabilities_status": "concept_not_disclosed",
+        "excluded_scope_checks": [
+          {
+            "concept": "us-gaap:TemporaryEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:RedeemableNoncontrollingInterestEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:NoncontrollingInterestInConsolidatedEntity",
+            "status": "concept_not_disclosed",
+            "value": null
+          }
+        ],
+        "raw_sha256": "9850888d8913f971ee6e13595770035edd85e56456d152029412406aa861fe2f",
+        "automatic_substitution": false,
+        "scope_approved": false
+      },
+      "confirmation_method": "original_filing_balance_equation",
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/6281/000000628125000153/adi-20251101.htm",
+      "original_sha256": "9850888d8913f971ee6e13595770035edd85e56456d152029412406aa861fe2f",
+      "original_retrieved_at": "2026-11-02T12:32:31.520516+00:00"
     },
     {
       "symbol": "MRVL",
@@ -3500,6 +4613,756 @@
       "original_url": "https://www.sec.gov/Archives/edgar/data/883241/000088324125000028/snps-20251031.htm",
       "original_sha256": "7c7238d6a30b5e4474d52d438d2ebef5e6a12f295e0679ef67e800c03fed5c4d",
       "original_retrieved_at": "2026-11-03T00:49:26.105969+00:00"
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672",
+      "field": "assets",
+      "period_start": null,
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "selected_value": "1.0153148E+10",
+      "original": {
+        "concept": "us-gaap:Assets",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "10153148000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-7",
+            "unit_id": "usd",
+            "value": "10153148000"
+          }
+        ],
+        "present_facts": 2,
+        "other_period_facts": 1,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/813672/000081367226000016/cdns-20251231.htm",
+      "original_sha256": "80e2881357408a5df0f8054528cc5d6b66fd5ec493c5a8088e2dd9456dc9daf9",
+      "original_retrieved_at": "2026-11-03T00:49:33.023404+00:00"
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672",
+      "field": "current_assets",
+      "period_start": null,
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "selected_value": "4669673000",
+      "original": {
+        "concept": "us-gaap:AssetsCurrent",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "4669673000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-7",
+            "unit_id": "usd",
+            "value": "4669673000"
+          }
+        ],
+        "present_facts": 2,
+        "other_period_facts": 1,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/813672/000081367226000016/cdns-20251231.htm",
+      "original_sha256": "80e2881357408a5df0f8054528cc5d6b66fd5ec493c5a8088e2dd9456dc9daf9",
+      "original_retrieved_at": "2026-11-03T00:49:33.023404+00:00"
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672",
+      "field": "current_liabilities",
+      "period_start": null,
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "selected_value": "1635291000",
+      "original": {
+        "concept": "us-gaap:LiabilitiesCurrent",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "1635291000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-7",
+            "unit_id": "usd",
+            "value": "1635291000"
+          }
+        ],
+        "present_facts": 2,
+        "other_period_facts": 1,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/813672/000081367226000016/cdns-20251231.htm",
+      "original_sha256": "80e2881357408a5df0f8054528cc5d6b66fd5ec493c5a8088e2dd9456dc9daf9",
+      "original_retrieved_at": "2026-11-03T00:49:33.023404+00:00"
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672",
+      "field": "net_income",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "selected_value": "1108888000",
+      "original": {
+        "concept": "us-gaap:NetIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "1108888000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "1108888000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "1108888000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "1108888000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "1108888000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "1108888000"
+          }
+        ],
+        "present_facts": 21,
+        "other_period_facts": 14,
+        "dimensional_facts": 2,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/813672/000081367226000016/cdns-20251231.htm",
+      "original_sha256": "80e2881357408a5df0f8054528cc5d6b66fd5ec493c5a8088e2dd9456dc9daf9",
+      "original_retrieved_at": "2026-11-03T00:49:33.023404+00:00"
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672",
+      "field": "operating_income",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "selected_value": "1492042000",
+      "original": {
+        "concept": "us-gaap:OperatingIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "1492042000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "1492042000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/813672/000081367226000016/cdns-20251231.htm",
+      "original_sha256": "80e2881357408a5df0f8054528cc5d6b66fd5ec493c5a8088e2dd9456dc9daf9",
+      "original_retrieved_at": "2026-11-03T00:49:33.023404+00:00"
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672",
+      "field": "operating_cash_flow",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "selected_value": "1728781000",
+      "original": {
+        "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "1728781000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "1728781000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/813672/000081367226000016/cdns-20251231.htm",
+      "original_sha256": "80e2881357408a5df0f8054528cc5d6b66fd5ec493c5a8088e2dd9456dc9daf9",
+      "original_retrieved_at": "2026-11-03T00:49:33.023404+00:00"
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672",
+      "field": "capital_expenditure",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "selected_value": "141871000",
+      "original": {
+        "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "141871000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "141871000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/813672/000081367226000016/cdns-20251231.htm",
+      "original_sha256": "80e2881357408a5df0f8054528cc5d6b66fd5ec493c5a8088e2dd9456dc9daf9",
+      "original_retrieved_at": "2026-11-03T00:49:33.023404+00:00"
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672",
+      "field": "revenue",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "selected_value": "5296759000",
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "5296759000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "5296759000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "5296759000"
+          }
+        ],
+        "present_facts": 39,
+        "other_period_facts": 26,
+        "dimensional_facts": 11,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/813672/000081367226000016/cdns-20251231.htm",
+      "original_sha256": "80e2881357408a5df0f8054528cc5d6b66fd5ec493c5a8088e2dd9456dc9daf9",
+      "original_retrieved_at": "2026-11-03T00:49:33.023404+00:00"
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672",
+      "field": "revenue",
+      "period_start": "2024-01-01",
+      "period_end": "2024-12-31",
+      "currency": "USD",
+      "selected_value": "4641264000",
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "4641264000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-15",
+            "unit_id": "usd",
+            "value": "4641264000"
+          },
+          {
+            "context_id": "c-15",
+            "unit_id": "usd",
+            "value": "4641264000"
+          }
+        ],
+        "present_facts": 39,
+        "other_period_facts": 26,
+        "dimensional_facts": 11,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/813672/000081367226000016/cdns-20251231.htm",
+      "original_sha256": "80e2881357408a5df0f8054528cc5d6b66fd5ec493c5a8088e2dd9456dc9daf9",
+      "original_retrieved_at": "2026-11-03T00:49:33.023404+00:00"
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672",
+      "field": "liabilities",
+      "period_start": null,
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "selected_value": "4678967000",
+      "original": {
+        "value": "4678967000",
+        "currency": "USD",
+        "period_end": "2025-12-31",
+        "formula": "LiabilitiesAndStockholdersEquity - total_equity",
+        "operands": [
+          {
+            "concept": "us-gaap:LiabilitiesAndStockholdersEquity",
+            "value": "10153148000"
+          },
+          {
+            "concept": "us-gaap:StockholdersEquity",
+            "value": "5474181000"
+          }
+        ],
+        "literal_liabilities_status": "concept_not_disclosed",
+        "excluded_scope_checks": [
+          {
+            "concept": "us-gaap:TemporaryEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:RedeemableNoncontrollingInterestEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:NoncontrollingInterestInConsolidatedEntity",
+            "status": "concept_not_disclosed",
+            "value": null
+          }
+        ],
+        "raw_sha256": "80e2881357408a5df0f8054528cc5d6b66fd5ec493c5a8088e2dd9456dc9daf9",
+        "automatic_substitution": false,
+        "scope_approved": false
+      },
+      "confirmation_method": "original_filing_balance_equation",
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/813672/000081367226000016/cdns-20251231.htm",
+      "original_sha256": "80e2881357408a5df0f8054528cc5d6b66fd5ec493c5a8088e2dd9456dc9daf9",
+      "original_retrieved_at": "2026-11-03T00:49:33.023404+00:00"
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397",
+      "field": "assets",
+      "period_start": null,
+      "period_end": "2026-01-31",
+      "currency": "USD",
+      "selected_value": "1.2467E+10",
+      "original": {
+        "concept": "us-gaap:Assets",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "12467000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-18",
+            "unit_id": "usd",
+            "value": "12467000000"
+          }
+        ],
+        "present_facts": 2,
+        "other_period_facts": 1,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/769397/000076939726000015/adsk-20260131.htm",
+      "original_sha256": "a8d1e3f9b658bf2eed17740a0778b45b52c030230044eb2d726d28e9c252d7c4",
+      "original_retrieved_at": "2026-11-03T00:49:50.251064+00:00"
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397",
+      "field": "current_assets",
+      "period_start": null,
+      "period_end": "2026-01-31",
+      "currency": "USD",
+      "selected_value": "4942000000",
+      "original": {
+        "concept": "us-gaap:AssetsCurrent",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "4942000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-18",
+            "unit_id": "usd",
+            "value": "4942000000"
+          }
+        ],
+        "present_facts": 2,
+        "other_period_facts": 1,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/769397/000076939726000015/adsk-20260131.htm",
+      "original_sha256": "a8d1e3f9b658bf2eed17740a0778b45b52c030230044eb2d726d28e9c252d7c4",
+      "original_retrieved_at": "2026-11-03T00:49:50.251064+00:00"
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397",
+      "field": "current_liabilities",
+      "period_start": null,
+      "period_end": "2026-01-31",
+      "currency": "USD",
+      "selected_value": "5808000000",
+      "original": {
+        "concept": "us-gaap:LiabilitiesCurrent",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "5808000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-18",
+            "unit_id": "usd",
+            "value": "5808000000"
+          }
+        ],
+        "present_facts": 2,
+        "other_period_facts": 1,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/769397/000076939726000015/adsk-20260131.htm",
+      "original_sha256": "a8d1e3f9b658bf2eed17740a0778b45b52c030230044eb2d726d28e9c252d7c4",
+      "original_retrieved_at": "2026-11-03T00:49:50.251064+00:00"
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397",
+      "field": "net_income",
+      "period_start": "2025-02-01",
+      "period_end": "2026-01-31",
+      "currency": "USD",
+      "selected_value": "1124000000",
+      "original": {
+        "concept": "us-gaap:NetIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "1124000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "1124000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "1124000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "1124000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "1124000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "1124000000"
+          }
+        ],
+        "present_facts": 21,
+        "other_period_facts": 14,
+        "dimensional_facts": 2,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/769397/000076939726000015/adsk-20260131.htm",
+      "original_sha256": "a8d1e3f9b658bf2eed17740a0778b45b52c030230044eb2d726d28e9c252d7c4",
+      "original_retrieved_at": "2026-11-03T00:49:50.251064+00:00"
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397",
+      "field": "operating_income",
+      "period_start": "2025-02-01",
+      "period_end": "2026-01-31",
+      "currency": "USD",
+      "selected_value": "1578000000",
+      "original": {
+        "concept": "us-gaap:OperatingIncomeLoss",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "1578000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "1578000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/769397/000076939726000015/adsk-20260131.htm",
+      "original_sha256": "a8d1e3f9b658bf2eed17740a0778b45b52c030230044eb2d726d28e9c252d7c4",
+      "original_retrieved_at": "2026-11-03T00:49:50.251064+00:00"
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397",
+      "field": "operating_cash_flow",
+      "period_start": "2025-02-01",
+      "period_end": "2026-01-31",
+      "currency": "USD",
+      "selected_value": "2452000000",
+      "original": {
+        "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "2452000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "2452000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/769397/000076939726000015/adsk-20260131.htm",
+      "original_sha256": "a8d1e3f9b658bf2eed17740a0778b45b52c030230044eb2d726d28e9c252d7c4",
+      "original_retrieved_at": "2026-11-03T00:49:50.251064+00:00"
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397",
+      "field": "capital_expenditure",
+      "period_start": "2025-02-01",
+      "period_end": "2026-01-31",
+      "currency": "USD",
+      "selected_value": "43000000",
+      "original": {
+        "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "43000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "43000000"
+          }
+        ],
+        "present_facts": 3,
+        "other_period_facts": 2,
+        "dimensional_facts": 0,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/769397/000076939726000015/adsk-20260131.htm",
+      "original_sha256": "a8d1e3f9b658bf2eed17740a0778b45b52c030230044eb2d726d28e9c252d7c4",
+      "original_retrieved_at": "2026-11-03T00:49:50.251064+00:00"
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397",
+      "field": "revenue",
+      "period_start": "2025-02-01",
+      "period_end": "2026-01-31",
+      "currency": "USD",
+      "selected_value": "7206000000",
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "7206000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "7206000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "7206000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "7206000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "7206000000"
+          },
+          {
+            "context_id": "c-1",
+            "unit_id": "usd",
+            "value": "7206000000"
+          }
+        ],
+        "present_facts": 75,
+        "other_period_facts": 50,
+        "dimensional_facts": 20,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/769397/000076939726000015/adsk-20260131.htm",
+      "original_sha256": "a8d1e3f9b658bf2eed17740a0778b45b52c030230044eb2d726d28e9c252d7c4",
+      "original_retrieved_at": "2026-11-03T00:49:50.251064+00:00"
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397",
+      "field": "revenue",
+      "period_start": "2024-02-01",
+      "period_end": "2025-01-31",
+      "currency": "USD",
+      "selected_value": "6131000000",
+      "original": {
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "taxonomy_namespace": "http://fasb.org/us-gaap/2025",
+        "status": "exact_original_value",
+        "value": "6131000000",
+        "currency": "USD",
+        "matches": [
+          {
+            "context_id": "c-16",
+            "unit_id": "usd",
+            "value": "6131000000"
+          },
+          {
+            "context_id": "c-16",
+            "unit_id": "usd",
+            "value": "6131000000"
+          },
+          {
+            "context_id": "c-16",
+            "unit_id": "usd",
+            "value": "6131000000"
+          },
+          {
+            "context_id": "c-16",
+            "unit_id": "usd",
+            "value": "6131000000"
+          },
+          {
+            "context_id": "c-16",
+            "unit_id": "usd",
+            "value": "6131000000"
+          }
+        ],
+        "present_facts": 75,
+        "other_period_facts": 50,
+        "dimensional_facts": 20,
+        "unsupported_facts": 0
+      },
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/769397/000076939726000015/adsk-20260131.htm",
+      "original_sha256": "a8d1e3f9b658bf2eed17740a0778b45b52c030230044eb2d726d28e9c252d7c4",
+      "original_retrieved_at": "2026-11-03T00:49:50.251064+00:00"
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397",
+      "field": "liabilities",
+      "period_start": null,
+      "period_end": "2026-01-31",
+      "currency": "USD",
+      "selected_value": "9422000000",
+      "original": {
+        "value": "9422000000",
+        "currency": "USD",
+        "period_end": "2026-01-31",
+        "formula": "LiabilitiesAndStockholdersEquity - total_equity",
+        "operands": [
+          {
+            "concept": "us-gaap:LiabilitiesAndStockholdersEquity",
+            "value": "12467000000"
+          },
+          {
+            "concept": "us-gaap:StockholdersEquity",
+            "value": "3045000000"
+          }
+        ],
+        "literal_liabilities_status": "concept_not_disclosed",
+        "excluded_scope_checks": [
+          {
+            "concept": "us-gaap:TemporaryEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:RedeemableNoncontrollingInterestEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:NoncontrollingInterestInConsolidatedEntity",
+            "status": "concept_not_disclosed",
+            "value": null
+          }
+        ],
+        "raw_sha256": "a8d1e3f9b658bf2eed17740a0778b45b52c030230044eb2d726d28e9c252d7c4",
+        "automatic_substitution": false,
+        "scope_approved": false
+      },
+      "confirmation_method": "original_filing_balance_equation",
+      "status": "matched",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/769397/000076939726000015/adsk-20260131.htm",
+      "original_sha256": "a8d1e3f9b658bf2eed17740a0778b45b52c030230044eb2d726d28e9c252d7c4",
+      "original_retrieved_at": "2026-11-03T00:49:50.251064+00:00"
     },
     {
       "symbol": "MPWR",

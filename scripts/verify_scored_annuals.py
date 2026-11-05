@@ -8,6 +8,7 @@ from pathlib import Path
 
 from equity_research.concept_diagnostics import inspect_concepts
 from equity_research.evidence_bundle import read_bundle
+from equity_research.filingcheck import filing_derived_liabilities
 from equity_research.mvp import save_json
 
 
@@ -29,7 +30,9 @@ def run():
     checks=[]
     for cik,c in requested.items():
         source=bodies[cik]
-        selected=[x['selected'] for x in c['evidence']['financial_confirmations']]+[c['evidence']['growth']['inputs'][1]]
+        confirmations=c['evidence']['financial_confirmations']
+        derived=[x for x in confirmations if x.get('confirmation_method')=='original_filing_balance_equation']
+        selected=[x['selected'] for x in confirmations if x not in derived]+[c['evidence']['growth']['inputs'][1]]
         groups={}
         for fact in selected:groups.setdefault((fact['period_start'],fact['period_end']),[]).append(fact)
         for (start,end),facts in groups.items():
@@ -40,6 +43,14 @@ def run():
                 checks.append(dict(symbol=c['symbol'],issuer_id=cik,field=fact['field'],period_start=start,period_end=end,
                     currency='USD',selected_value=fact['value'],original=raw,status='matched' if matched else 'unresolved_or_mismatch',
                     original_url=source.url,original_sha256=source.sha256,original_retrieved_at=source.retrieved_at.isoformat()))
+        for item in derived:
+            fact=item['selected'];proof=filing_derived_liabilities(source.body,cik=cik,period_end=date.fromisoformat(fact['period_end']))
+            matched=Decimal(proof['value'])==Decimal(fact['value']) and proof=={k:v for k,v in item['confirmation'].items()
+                if k not in ('source_url','retrieved_at')}
+            checks.append(dict(symbol=c['symbol'],issuer_id=cik,field='liabilities',period_start=None,
+                period_end=fact['period_end'],currency='USD',selected_value=fact['value'],original=proof,
+                confirmation_method='original_filing_balance_equation',status='matched' if matched else 'unresolved_or_mismatch',
+                original_url=source.url,original_sha256=source.sha256,original_retrieved_at=source.retrieved_at.isoformat()))
     result=dict(mode='recorded_original_annual_reconciliation',new_http_requests=0,scored_companies=len(requested),
         summary=dict(Counter(r['status'] for r in checks)),checks=checks,mvp_accepted=False)
     save_json(dest/'original-annual-checks.json',result)

@@ -67,8 +67,8 @@ class TurkishReportTests(unittest.TestCase):
             self.assertIn(token, visible)
         for token in ('scored_research_hypothesis', 'valuation_source_evidence_required', 'liabilities_to_assets', 'semiconductors_v1'):
             self.assertNotIn(token, visible)
-        self.assertEqual(page.count('data-scored="true"'), 13)
-        self.assertEqual(page.count('data-scored="false"'), 87)
+        self.assertEqual(page.count('data-scored="true"'), 18)
+        self.assertEqual(page.count('data-scored="false"'), 82)
         for c in report['companies']:
             if c['total_score'] is not None:
                 self.assertIn(str(c['total_score'])+' / 100', page)

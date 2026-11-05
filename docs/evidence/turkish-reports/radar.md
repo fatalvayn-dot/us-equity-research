@@ -17,16 +17,21 @@ Puanlar araştırma varsayımlarıdır; yatırım onayı veya doğrulanmış get
 | 1 | MU | 87 | Yarı iletkenler (v1) |
 | 2 | INTU | 78.0 | Hazır yazılım (v1) |
 | 3 | MPWR | 78 | Yarı iletkenler (v1) |
-| 4 | SWKS | 68 | Yarı iletkenler (v1) |
-| 5 | MSFT | 66.5 | Hazır yazılım (v1) |
-| 6 | CRM | 66.0 | Hazır yazılım (v1) |
-| 7 | MRVL | 64.5 | Yarı iletkenler (v1) |
-| 8 | TXN | 63 | Yarı iletkenler (v1) |
-| 9 | NOW | 62 | Hazır yazılım (v1) |
-| 10 | AMAT | 59.5 | Yarı iletkenler (v1) |
-| 11 | TYL | 55.5 | Hazır yazılım (v1) |
-| 12 | AAPL | 53.0 | Bilgisayar üretimi (v1) |
-| 13 | SNPS | 53.0 | Hazır yazılım (v1) |
+| 4 | ADI | 74 | Yarı iletkenler (v1) |
+| 5 | SWKS | 68 | Yarı iletkenler (v1) |
+| 6 | AMD | 67 | Yarı iletkenler (v1) |
+| 7 | MSFT | 66.5 | Hazır yazılım (v1) |
+| 8 | CRM | 66.0 | Hazır yazılım (v1) |
+| 9 | CDNS | 65.5 | Hazır yazılım (v1) |
+| 10 | MRVL | 64.5 | Yarı iletkenler (v1) |
+| 11 | TXN | 63 | Yarı iletkenler (v1) |
+| 12 | NOW | 62 | Hazır yazılım (v1) |
+| 13 | AMAT | 59.5 | Yarı iletkenler (v1) |
+| 14 | ADSK | 57.0 | Hazır yazılım (v1) |
+| 15 | TYL | 55.5 | Hazır yazılım (v1) |
+| 16 | AAPL | 53.0 | Bilgisayar üretimi (v1) |
+| 17 | SNPS | 53.0 | Hazır yazılım (v1) |
+| 18 | INTC | 20.5 | Yarı iletkenler (v1) |
 
 | Aday | Durum | Puanın hesaplanmama nedenleri |
 | --- | --- | --- |
@@ -41,12 +46,12 @@ Puanlar araştırma varsayımlarıdır; yatırım onayı veya doğrulanmış get
 | LLY | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
 | MU | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
 | WMT | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
-| AMD | Kaynak kanıtı reddedildi | Kaynak, dönem, tanım, hisse sınıfı veya piyasa verisi doğrulaması başarısız; Finansal doğrulama: Toplam yükümlülükler (financial_confirmation.liabilities) |
+| AMD | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
 | JPM | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
 | JNJ | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
 | MA | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
 | ABBV | Kritik inceleme gerekiyor | Kritik finansal inceleme gerekiyor |
-| INTC | Kaynak kanıtı reddedildi | Kaynak, dönem, tanım, hisse sınıfı veya piyasa verisi doğrulaması başarısız; Finansal doğrulama: Toplam yükümlülükler (financial_confirmation.liabilities) |
+| INTC | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
 | PLTR | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
 | CVX | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
 | COST | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
@@ -79,7 +84,7 @@ Puanlar araştırma varsayımlarıdır; yatırım onayı veya doğrulanmış get
 | LIN | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
 | KLAC | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
 | AXP | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
-| ADI | Kaynak kanıtı reddedildi | Kaynak, dönem, tanım, hisse sınıfı veya piyasa verisi doğrulaması başarısız; Finansal doğrulama: Toplam yükümlülükler (financial_confirmation.liabilities) |
+| ADI | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
 | GILD | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
 | APH | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
 | QCOM | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
@@ -117,10 +122,10 @@ Puanlar araştırma varsayımlarıdır; yatırım onayı veya doğrulanmış get
 | INTU | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
 | NOW | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
 | SNPS | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
-| CDNS | Kaynak kanıtı reddedildi | Kaynak, dönem, tanım, hisse sınıfı veya piyasa verisi doğrulaması başarısız; Finansal doğrulama: Toplam yükümlülükler (financial_confirmation.liabilities) |
+| CDNS | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
 | FTNT | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
 | WDAY | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
-| ADSK | Kaynak kanıtı reddedildi | Kaynak, dönem, tanım, hisse sınıfı veya piyasa verisi doğrulaması başarısız; Finansal doğrulama: Toplam yükümlülükler (financial_confirmation.liabilities) |
+| ADSK | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
 | ROP | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
 | MCHP | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
 | MPWR | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
@@ -206,6 +211,56 @@ https://data.sec.gov/submissions/CIK0000723125.json · SHA-256 b50ed951ec0bd75b9
 https://www.sec.gov/Archives/edgar/data/723125/000072312526000023/mu-20260903.htm · SHA-256 2ac5a21f7f1180b08e7220e1690aa58a70aa5a7a8eac946e620b2ca54283eb5d.
 Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
 
+## AMD
+
+| Bileşen | Puan | Ağırlık |
+| --- | ---: | ---: |
+| Nakit akışı | 10 | 15 |
+| Finansal sağlamlık | 20 | 20 |
+| Büyüme | 20 | 20 |
+| Kârlılık | 10 | 15 |
+| Risk | 7 | 10 |
+| Değerleme | 0 | 20 |
+
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
+
+Müşteri sözleşmesi hasılatı büyümesi: 0.343378.
+Cari oran: 2.850026.
+Toplam yükümlülükler / toplam varlıklar: 0.181044.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.194434.
+Faaliyet kâr marjı: 0.106643.
+
+https://query1.finance.yahoo.com/v8/finance/chart/AMD?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 3461caa05312f80a413d819fe22d9f0ee1579ce473d5db3d86612585688267c8.
+https://data.sec.gov/submissions/CIK0000002488.json · SHA-256 a17f4dbd4097965a9f05b1bb5a1eb38c0c1016d4038597e304a9dbddbd8991e0.
+https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm · SHA-256 319dfec05742eaaf5204f2555efc633c235ec25988c79db802f47007ad54dd61.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
+
+## INTC
+
+| Bileşen | Puan | Ağırlık |
+| --- | ---: | ---: |
+| Nakit akışı | 0 | 15 |
+| Finansal sağlamlık | 17.5 | 20 |
+| Büyüme | 0 | 20 |
+| Kârlılık | 0 | 15 |
+| Risk | 3 | 10 |
+| Değerleme | 0 | 20 |
+
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
+
+Müşteri sözleşmesi hasılatı büyümesi: -0.004670.
+Cari oran: 2.017039.
+Toplam yükümlülükler / toplam varlıklar: 0.402353.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: -0.093637.
+Faaliyet kâr marjı: -0.041890.
+
+https://query1.finance.yahoo.com/v8/finance/chart/INTC?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 ef035cb350e39011c46933003e006add6f6eef1659f461af57c1705a96974871.
+https://data.sec.gov/submissions/CIK0000050863.json · SHA-256 38dbc9c92b529ae8e8d08edf6600aebd50e8b81bc28e93fef56a419308710890.
+https://www.sec.gov/Archives/edgar/data/50863/000005086326000191/intc-20260926.htm · SHA-256 94500733295bd2eebb77a3f653164ef0479a2c9a18281734ad63c1b65b4bd510.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
+
 ## AMAT
 
 | Bileşen | Puan | Ağırlık |
@@ -254,6 +309,31 @@ Faaliyet kâr marjı: 0.340629.
 https://query1.finance.yahoo.com/v8/finance/chart/TXN?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 69714bc2e43065ef4251ee2fd8b9d20a49bf6d5d634edb8b76f4dc15b10b81bc.
 https://data.sec.gov/submissions/CIK0000097476.json · SHA-256 782b6aab79aaca81892ed43865bb9c3044a6fac7851230dd2f3c5fdcbbab6372.
 https://www.sec.gov/Archives/edgar/data/97476/000009747626000169/txn-20260930.htm · SHA-256 4953264008d5ab48db66f69a11f2034d5c5b14012a3854512e4ebabcf25018ad.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
+
+## ADI
+
+| Bileşen | Puan | Ağırlık |
+| --- | ---: | ---: |
+| Nakit akışı | 15 | 15 |
+| Finansal sağlamlık | 20 | 20 |
+| Büyüme | 15 | 20 |
+| Kârlılık | 15 | 15 |
+| Risk | 9 | 10 |
+| Değerleme | 0 | 20 |
+
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
+
+Müşteri sözleşmesi hasılatı büyümesi: 0.168932.
+Cari oran: 2.189925.
+Toplam yükümlülükler / toplam varlıklar: 0.295398.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.388273.
+Faaliyet kâr marjı: 0.266114.
+
+https://query1.finance.yahoo.com/v8/finance/chart/ADI?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 76b416d7f1acc5e69e1bbe8cecd42fcecaf78314bf0059f2a856b647b660207d.
+https://data.sec.gov/submissions/CIK0000006281.json · SHA-256 7f751d5b123650af20bd7041b3181ae3c699e8e699bda09b107f437bb01a89f2.
+https://www.sec.gov/Archives/edgar/data/6281/000000628126000073/adi-20260801.htm · SHA-256 b7c3c7f580867390aa51245cec726549a2fd62bc0e3fdcd62f6bf76da9ffb7d6.
 Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
 
 ## MRVL
@@ -379,6 +459,56 @@ Faaliyet kâr marjı: 0.129700.
 https://query1.finance.yahoo.com/v8/finance/chart/SNPS?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 0a8b85d6cbfb7a6b8995c97dba1d6c0dad4b0ca41217e6af93819f4ad6ef5464.
 https://data.sec.gov/submissions/CIK0000883241.json · SHA-256 6cfcc582e47f88240b56145e94028eff4221afcdf0aed6ade1027cbec8fb7ab5.
 https://www.sec.gov/Archives/edgar/data/883241/000088324126000025/snps-20260731.htm · SHA-256 0914c7ca583eb482af210178f96b4f7b622c0a8e8839e5c9fe283790ebe16510.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
+
+## CDNS
+
+| Bileşen | Puan | Ağırlık |
+| --- | ---: | ---: |
+| Nakit akışı | 15 | 15 |
+| Finansal sağlamlık | 17.5 | 20 |
+| Büyüme | 15 | 20 |
+| Kârlılık | 10 | 15 |
+| Risk | 8 | 10 |
+| Değerleme | 0 | 20 |
+
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
+
+Müşteri sözleşmesi hasılatı büyümesi: 0.141232.
+Cari oran: 2.855561.
+Toplam yükümlülükler / toplam varlıklar: 0.460839.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.299600.
+Faaliyet kâr marjı: 0.281690.
+
+https://query1.finance.yahoo.com/v8/finance/chart/CDNS?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 0f710b0efd38e16b8f3a642a4ff04f05599aeee96ccbc91e07ce641eab5be107.
+https://data.sec.gov/submissions/CIK0000813672.json · SHA-256 40de3d31d3706eb607bfe698d70d4bf888f0b14765dca997dc44b220c937961f.
+https://www.sec.gov/Archives/edgar/data/813672/000081367226000121/cdns-20260930.htm · SHA-256 734d68ed7dc580dabbdff9e5eaf9836b5d54c74fcaab17c8b291dab1faeafb40.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
+
+## ADSK
+
+| Bileşen | Puan | Ağırlık |
+| --- | ---: | ---: |
+| Nakit akışı | 15 | 15 |
+| Finansal sağlamlık | 5.0 | 20 |
+| Büyüme | 15 | 20 |
+| Kârlılık | 10 | 15 |
+| Risk | 7 | 10 |
+| Değerleme | 5 | 20 |
+
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
+
+Müşteri sözleşmesi hasılatı büyümesi: 0.175338.
+Cari oran: 0.850895.
+Toplam yükümlülükler / toplam varlıklar: 0.755755.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.334305.
+Faaliyet kâr marjı: 0.218984.
+
+https://query1.finance.yahoo.com/v8/finance/chart/ADSK?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 25ad1e4ad0f3475458d816e1136e2dd0225f5d36943279d13ecf6e131e5f9649.
+https://data.sec.gov/submissions/CIK0000769397.json · SHA-256 6be434af989da69a6c129231b9f768f4c18ef0c9e93c27b71c98237b253fc596.
+https://www.sec.gov/Archives/edgar/data/769397/000076939726000061/adsk-20260731.htm · SHA-256 ec8f98a351942a3d2a0d0d3eea6805ff703c92e3bda68e7f372be8515e28fad4.
 Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
 
 ## MPWR
