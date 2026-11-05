@@ -590,6 +590,13 @@ Bir Actions çalışmasının başarılı olması tek başına MVP kabulü deği
 100 kimlik, finansal kapsam, karşılaştırma, piyasa verisi, sektör uygunluğu,
 puanlama ve eksik/hata raporları birlikte doğrulanmadan tamamlandı denmez.
 
+Saatlik veya kısa süreli bir çalışma, SEC submissions aşamasını güvenli bir
+istek bütçesiyle durdurabilir. Örneğin `--max-new-metadata 25`, mevcut taze
+SQLite kayıtlarını yeniden sorgulamadan en fazla 25 yeni şirket üstverisi isteği
+yapar. Bütçe dolduğunda `metadata-progress.json` yazılır, kilit serbest bırakılır
+ve belge/finansal alan aşamasına geçilmez. Aynı komut ve durum diziniyle sonraki
+çalışma kaldığı yerden devam eder. Bu ara çıktı canlı MVP kabulü değildir.
+
 
 Recorded 2026-11-02 candidate-run evidence is in `docs/evidence/mvp100/report.md`.
 It has 100 candidates, 98 with financial queries, 96 with accepted input facts,

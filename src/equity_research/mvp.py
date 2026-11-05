@@ -98,10 +98,14 @@ def archive_coverage(batch, archive):
                 financial_facts=len(rows))
 
 
-def run_mvp(payload, *, state_dir, user_agent, max_new_documents=100, max_new_fields=None, progress=None, seed_bundles=()):
+def run_mvp(payload, *, state_dir, user_agent, max_new_metadata=None, max_new_documents=100,
+            max_new_fields=None, progress=None, seed_bundles=()):
     candidates=validate_candidates(payload)
-    if type(max_new_documents) is not int or not 0<=max_new_documents<=100 or (max_new_fields is not None and (type(max_new_fields) is not int or max_new_fields<0)):
-        raise ValueError('bounded document/field work required')
+    if ((max_new_metadata is not None and
+         (type(max_new_metadata) is not int or not 0<=max_new_metadata<=100)) or
+        type(max_new_documents) is not int or not 0<=max_new_documents<=100 or
+        (max_new_fields is not None and (type(max_new_fields) is not int or max_new_fields<0))):
+        raise ValueError('bounded metadata/document/field work required')
     root=Path(state_dir)
     seed_bundles=tuple(Path(p).resolve() for p in seed_bundles)
     if any(bundle==root.resolve() or bundle in root.resolve().parents for bundle in seed_bundles):
@@ -142,7 +146,10 @@ def run_mvp(payload, *, state_dir, user_agent, max_new_documents=100, max_new_fi
         client=SecSubmissions(http(['data.sec.gov']),cache_path=root/'submissions.sqlite')
         metadata=[]
         for row in candidates:
+            if max_new_metadata is not None and counts['metadata_network_requests']>=max_new_metadata:
+                break
             pulse();out=dict(row)
+            before=counts['public_transport_get_calls']
             try:
                 snapshot=client.fetch(row['issuer_id'])
                 if snapshot.cached:
@@ -154,8 +161,19 @@ def run_mvp(payload, *, state_dir, user_agent, max_new_documents=100, max_new_fi
                 out.update(status=snapshot.readiness(row['symbol']),snapshot=asdict(snapshot),annual=asdict(annual) if annual else None)
             except ProviderFailure as exc:
                 out.update(status=exc.status.value,http_status=exc.http_status)
+            counts['metadata_network_requests']+=counts['public_transport_get_calls']-before
             metadata.append(out);save_json(root/'metadata.json',dict(companies=metadata))
             if progress:progress(dict(phase='metadata',completed=len(metadata),total=len(candidates)))
+        if len(metadata)<len(candidates):
+            partial=dict(schema_version=1,status='metadata_collection_paused',
+                requested_candidates=len(candidates),metadata_processed=len(metadata),
+                metadata_states=dict(Counter(r['status'] for r in metadata)),
+                new_metadata_requests=counts['metadata_network_requests'],
+                public_transport_get_calls=counts['public_transport_get_calls'],mvp_accepted=False)
+            save_json(root/'metadata-progress.json',partial)
+            if progress:progress(dict(phase='metadata_paused',summary=partial))
+            return partial
+        (root/'metadata-progress.json').unlink(missing_ok=True)
         # Only metadata with an exact symbol match can drive financial-period collection.
         normalized=json.loads(json.dumps(metadata,default=encode))
         doc_rows=[r for r in normalized if r['status']=='metadata_available_legal_type_pending']
