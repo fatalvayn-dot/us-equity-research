@@ -1,5 +1,21 @@
 # Development status
 
+## 5 Kasım 2026 — SEC HTTP 403 erişim engeli doğrulaması
+
+Github Actions 42043751407 koşusunda DNS, TCP ve TLS bağlantıları
+data.sec.gov ve www.sec.gov için başarılıydı. SEC kimlik, submissions ve
+Companyfacts çağrıları HTTP 403 access_denied döndürdü. Bu nedenle
+GitHub yürütücüsünün sorunu DNS değil, SEC tarafındaki HTTP erişim
+reddidir. SEC kimliği ve IP kaynağı gibi erişim şartları incelenmeli;
+403'ü aşma amaçlı proxy veya hız artırımı yapılmamalıdır.
+
+Bu geliştirme SEC preflight timeout değerini 5'ten 12 saniyeye,
+istek bütçesini 8'den 16 saniyeye çıkarır, tek deneme sınırını korur.
+Ayrı DNS/TCP/TLS tanısını 14 gün saklar. Manuel canlı koşuda gerçek
+iletişim kimliği içeren SEC_USER_AGENT GitHub Actions secret'ı şarttır;
+PR'da secret kullanılmaz. Secret'ın var olduğu veya geçerli kimlikle
+403'ün düzeldiği henüz doğrulanmadı. Finansal kabul hâlâ beklemede.
+
 ## 5 Kasım 2026 — 49/100 devam checkpointi ve metadata istek bütçesi
 
 Başlangıç main'i `c0f095b734cb21a6113055162dd9b3f8ff59967c` idi; açık PR
