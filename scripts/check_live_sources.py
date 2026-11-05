@@ -39,8 +39,10 @@ def check(user_agent):
                 user_agent=user_agent,
                 allowed_hosts={host},
                 limiter=sec_limiter if host.endswith(".sec.gov") else None,
-                timeout=5,
-                budget=8,
+                # SEC endpoints sometimes need longer to establish a
+                # connection; keep a strict per-source total deadline.
+                timeout=12 if host.endswith(".sec.gov") else 5,
+                budget=16 if host.endswith(".sec.gov") else 8,
                 max_attempts=1,
                 accept="text/plain" if name.startswith("nasdaq_") else "application/json",
             )
