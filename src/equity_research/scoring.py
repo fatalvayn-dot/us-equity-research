@@ -8,6 +8,7 @@ from .cache import encode
 from .companyfacts import SecCompanyFacts,companyfacts_url
 from .comparative import build_comparative_report
 from .fields import SPECS
+from .filingcheck import filing_derived_liabilities
 from .market_history import parse_history,history_url
 from .models import Fact,FactRequest,aware
 from .policy import SCORE_WEIGHTS
@@ -102,8 +103,18 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
                 f=facts[field];spec=SPECS[field]
                 request=FactRequest(cik,field,f.period_start,f.period_end,'USD','currency',spec.accounting_definition,as_of)
                 verified=SecCompanyFacts(None)._extract(request,spec.tag,cf,payload)
-                if verified is None or verified.value!=f.value:raise ValueError('current SEC confirmation mismatch')
-                checks.append(dict(field=field,selected=asdict(f),confirmed=asdict(verified)))
+                if verified is None and field=='liabilities':
+                    original=sources.get(annual.source_url)
+                    if original is None:raise ValueError('original annual liabilities proof required')
+                    proof=filing_derived_liabilities(original.body,cik=cik,period_end=annual.report_end)
+                    if Decimal(proof['value'])!=f.value:raise ValueError('derived liabilities confirmation mismatch')
+                    checks.append(dict(field=field,selected=asdict(f),
+                        confirmation_method='original_filing_balance_equation',
+                        confirmation={**proof,'source_url':original.url,
+                            'retrieved_at':original.retrieved_at,'raw_sha256':original.sha256}))
+                else:
+                    if verified is None or verified.value!=f.value:raise ValueError('current SEC confirmation mismatch')
+                    checks.append(dict(field=field,selected=asdict(f),confirmed=asdict(verified)))
             peer=comparative.get(cik)
             if peer is None or peer['symbol']!=symbol or peer['status']!='review_required':
                 row['blockers']=['comparable_revenue_required'];continue

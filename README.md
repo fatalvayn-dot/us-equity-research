@@ -1050,7 +1050,7 @@ absence and are never counted as queried after SEC success.
 ### Current-market research prototype on the common100 plan
 
 `docs/evidence/current-score100/report.html` is a portable 100-candidate report:
-13 research scores, 87 unscored entries with reasons, including four mandatory
+18 research scores, 82 unscored entries with reasons, including four mandatory
 critical financial reviews. Scores use the existing limited-sector hypothesis,
 not validated return predictions or investment approval. Financial batches retain
 988 original dated observations; current/prior comparisons retain their source
@@ -1059,11 +1059,16 @@ dates. Report generation does not refresh those 100 financial histories.
 A bounded live collection for 22 input-ready candidates made 103 public GET
 invocations: 22 prices, 20 histories, 18 original-share reconciliations. A cache-
 only repeat made zero GETs with unchanged values and evidence dates. PLTR lacked
-the required disclosed-share concept; ORCL and MCHP failed exact ticker/class
-matching; ON's share inputs failed validation. Five further companies failed
-current SEC confirmation of the literal Liabilities operand and received no score.
-All 130 financial/prior-revenue operands for the 13 scored companies matched
-original annual iXBRL values. Detailed checks are separate from source freshness.
+the required disclosed-share concept and ON's share inputs failed validation.
+ORCL and MCHP were subsequently resolved through exact original-filing share-class
+evidence. For AMD, INTC, ADI, CDNS and ADSK, the selected Nasdaq Total Liabilities
+value was independently reconciled to the original annual SEC filing as total
+assets and liabilities/equity less total equity. INTC additionally reconciles
+common equity plus noncontrolling interest. The policy rejects temporary,
+redeemable or otherwise unresolved equity scope and never replaces the selected
+source automatically. All 180 financial/prior-revenue operands for the 18 scored
+companies matched original annual iXBRL values. Detailed checks are separate from
+source freshness.
 
 The frozen report cutoff is recorded in its manifest. Quotes/history are accepted
 only at that dated cutoff; this file is not an indefinitely current market feed.
@@ -1080,9 +1085,13 @@ PYTHONPATH=src python scripts/build_current_scores.py \
   --current docs/evidence/common-comparative100/current-batch.json.gz \
   --prior docs/evidence/common-comparative100/prior-batch.json.gz \
   --sources tests/fixtures/valuation22-sources \
+  --financial-sources tests/fixtures/liability-equation5-sources \
   --as-of 2026-11-03T05:36:21.308165+00:00 \
   --output data/reproduced-common100-scores
 ```
+
+This reproduction uses recorded source responses, makes zero new HTTP requests,
+and is not a fresh 100-company acceptance run.
 
 To collect fresh market/share evidence, use the existing bounded collector with
 `docs/evidence/valuation22/candidates.json`, a new or resumed `--state-dir`, and

@@ -3,7 +3,21 @@ from datetime import date
 from decimal import Decimal, InvalidOperation
 from html.parser import HTMLParser
 
+from .concept_diagnostics import inspect_concepts
 from .providers import ProviderFailure, Status
+
+
+LIABILITY_EQUATION_CONCEPTS = (
+    "us-gaap:Liabilities",
+    "us-gaap:Assets",
+    "us-gaap:LiabilitiesAndStockholdersEquity",
+    "us-gaap:StockholdersEquity",
+    "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+    "us-gaap:MinorityInterest",
+    "us-gaap:TemporaryEquityCarryingAmount",
+    "us-gaap:RedeemableNoncontrollingInterestEquityCarryingAmount",
+    "us-gaap:NoncontrollingInterestInConsolidatedEntity",
+)
 
 
 class AssetsParser(HTMLParser):
@@ -104,3 +118,62 @@ def filing_instant(body: bytes, *, cik: str, period_end: date, concept: str) -> 
 
 def filing_assets(body: bytes, *, cik: str, period_end: date) -> Decimal:
     return filing_instant(body,cik=cik,period_end=period_end,concept="Assets")
+
+
+def filing_derived_liabilities(body: bytes, *, cik: str, period_end: date) -> dict:
+    """Prove liabilities from one exact original-filing balance equation.
+
+    This is an independent confirmation of an already selected liabilities
+    value, not a provider alias or a replacement SEC fact. It rejects missing
+    total-equity scope, unexplained noncontrolling interest and mezzanine equity.
+    """
+    try:
+        scan=inspect_concepts(body,cik=cik,concepts=LIABILITY_EQUATION_CONCEPTS,
+            period_start=None,period_end=period_end)
+        facts={row['concept']:row for row in scan['concepts']}
+        def exact(name):
+            row=facts[name]
+            return Decimal(row['value']) if row['status']=='exact_original_value' else None
+        liabilities=facts['us-gaap:Liabilities']
+        if liabilities['status'] not in ('concept_not_disclosed','period_or_scope_mismatch'):
+            raise ValueError('literal liabilities is not a clean fallback case')
+        assets=exact('us-gaap:Assets');combined=exact('us-gaap:LiabilitiesAndStockholdersEquity')
+        common_equity=exact('us-gaap:StockholdersEquity')
+        total_equity=exact('us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest')
+        minority=exact('us-gaap:MinorityInterest')
+        if assets is None or combined is None or common_equity is None or assets!=combined or assets<0:
+            raise ValueError('balance equation totals do not reconcile')
+        excluded=[]
+        for name in ('us-gaap:TemporaryEquityCarryingAmount',
+                     'us-gaap:RedeemableNoncontrollingInterestEquityCarryingAmount',
+                     'us-gaap:NoncontrollingInterestInConsolidatedEntity'):
+            row=facts[name];value=exact(name)
+            if row['status'] not in ('concept_not_disclosed','period_or_scope_mismatch','exact_original_value'):
+                raise ValueError('unresolved excluded equity scope')
+            if value not in (None,Decimal(0)):
+                raise ValueError('mezzanine or separate noncontrolling interest requires review')
+            excluded.append(dict(concept=name,status=row['status'],value=row['value']))
+        if total_equity is None:
+            if minority not in (None,Decimal(0)):
+                raise ValueError('minority interest is outside selected equity scope')
+            equity=common_equity;equity_concept='us-gaap:StockholdersEquity'
+        else:
+            if minority is None:
+                if total_equity!=common_equity:raise ValueError('total equity cannot be decomposed')
+            elif common_equity+minority!=total_equity:
+                raise ValueError('stockholder and minority equity do not reconcile')
+            equity=total_equity
+            equity_concept='us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest'
+        value=combined-equity
+        if value<0:raise ValueError('negative derived liabilities')
+        operands=[dict(concept='us-gaap:LiabilitiesAndStockholdersEquity',value=str(combined)),
+                  dict(concept=equity_concept,value=str(equity))]
+        if equity_concept.endswith('NoncontrollingInterest'):
+            operands.extend((dict(concept='us-gaap:StockholdersEquity',value=str(common_equity)),
+                             dict(concept='us-gaap:MinorityInterest',value=str(minority))))
+        return dict(value=str(value),currency='USD',period_end=period_end.isoformat(),
+            formula='LiabilitiesAndStockholdersEquity - total_equity',operands=operands,
+            literal_liabilities_status=liabilities['status'],excluded_scope_checks=excluded,
+            raw_sha256=scan['raw_sha256'],automatic_substitution=False,scope_approved=False)
+    except (ValueError,TypeError,KeyError,InvalidOperation):
+        raise ProviderFailure(Status.INVALID_DATA) from None

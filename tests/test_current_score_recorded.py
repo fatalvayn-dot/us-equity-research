@@ -2,6 +2,7 @@
 import gzip,json,unittest
 from datetime import datetime
 from decimal import Decimal
+from itertools import chain
 from pathlib import Path
 
 from equity_research.cache import encode
@@ -17,15 +18,19 @@ def read(path):
 
 
 class CurrentScoreRecordedTests(unittest.TestCase):
-    def test_all_13_scores_confirmations_reproduce_from_exact_public_bodies(self):
+    def test_all_18_scores_confirmations_reproduce_from_exact_public_bodies(self):
         expected=read('docs/evidence/current-score100/report.json.gz')
         actual=build_score_report(read('docs/evidence/common-financial100/batch.json.gz'),
             read('docs/evidence/common-comparative100/current-batch.json.gz'),
             read('docs/evidence/common-comparative100/prior-batch.json.gz'),
-            read_bundle(ROOT/'tests/fixtures/valuation22-sources'),as_of=datetime.fromisoformat(expected['as_of']))
+            chain(read_bundle(ROOT/'tests/fixtures/valuation22-sources'),
+                  read_bundle(ROOT/'tests/fixtures/liability-equation5-sources')),
+            as_of=datetime.fromisoformat(expected['as_of']))
         self.assertEqual(json.loads(json.dumps(actual,default=encode)),expected)
-        self.assertEqual(actual['summary'],dict(candidates=100,scored_companies=13,critical_review=4,unscored=87))
+        self.assertEqual(actual['summary'],dict(candidates=100,scored_companies=18,critical_review=4,unscored=82))
         self.assertEqual([(r['symbol'],str(r['score'])) for r in actual['ranking']][:3],[('MU','87'),('INTU','78.0'),('MPWR','78')])
+        self.assertEqual({r['symbol']:str(r['score']) for r in actual['ranking'] if r['symbol'] in {'AMD','INTC','ADI','CDNS','ADSK'}},
+            {'ADI':'74','AMD':'67','CDNS':'65.5','ADSK':'57.0','INTC':'20.5'})
         for c in actual['companies']:
             self.assertFalse(c['investment_approved'])
             if c['total_score'] is not None:
@@ -35,10 +40,13 @@ class CurrentScoreRecordedTests(unittest.TestCase):
         self.assertFalse(actual['input_provenance']['report_generation_is_source_refresh'])
         self.assertEqual(actual['input_provenance']['batches']['financial']['selected_facts'],988)
         originals=read('docs/evidence/current-score100/original-annual-checks.json')
-        self.assertEqual(originals['summary'],{'matched':130});self.assertEqual(originals['scored_companies'],13)
+        self.assertEqual(originals['summary'],{'matched':180});self.assertEqual(originals['scored_companies'],18)
         for check in originals['checks']:
             self.assertEqual(Decimal(check['selected_value']),Decimal(check['original']['value']))
-            self.assertEqual(check['original']['status'],'exact_original_value')
+            if check.get('confirmation_method')=='original_filing_balance_equation':
+                self.assertEqual(check['original']['formula'],'LiabilitiesAndStockholdersEquity - total_equity')
+                self.assertFalse(check['original']['automatic_substitution'])
+            else:self.assertEqual(check['original']['status'],'exact_original_value')
 
     def test_actual_collection_resume_keeps_evidence_and_zero_get_counts(self):
         cold=read('docs/evidence/valuation22/collection.json.gz')

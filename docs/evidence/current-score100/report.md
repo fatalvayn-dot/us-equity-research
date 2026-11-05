@@ -1,457 +1,587 @@
-# US Equity research scores
+# ABD Hisse Araştırması — araştırma puanları
 
-Model: technology-research-v1; evidence cutoff: 2026-11-03 05:36:21.308165+00:00
+Model: Teknoloji araştırması (v1); kaynak verilerinin kesim zamanı: 2026-11-03 05:36:21.308165+00:00
 
-prior_comparison: generated 2026-11-03T04:25:00+00:00; selected observations 2026-11-02T12:35:34.065053+00:00 to 2026-11-03T03:49:57.264043+00:00; SHA-256 52b645dc5e1d72656e57089d6c48f53ddf16d31d4427ab978083ee2c762221a2.
+Önceki dönem karşılaştırma girdileri: üretim zamanı 2026-11-03T04:25:00+00:00; seçili gözlemler 2026-11-02T12:35:34.065053+00:00 ile 2026-11-03T03:49:57.264043+00:00; SHA-256 52b645dc5e1d72656e57089d6c48f53ddf16d31d4427ab978083ee2c762221a2.
 
-current_comparison: generated 2026-11-03T04:25:00+00:00; selected observations 2026-11-02T12:35:34.065053+00:00 to 2026-11-03T03:49:57.264043+00:00; SHA-256 3f3c0443b59bbd949f63875e01be5e4679a625872efe9bd99bb77f122bec58fd.
+Cari dönem karşılaştırma girdileri: üretim zamanı 2026-11-03T04:25:00+00:00; seçili gözlemler 2026-11-02T12:35:34.065053+00:00 ile 2026-11-03T03:49:57.264043+00:00; SHA-256 3f3c0443b59bbd949f63875e01be5e4679a625872efe9bd99bb77f122bec58fd.
 
-financial: generated 2026-11-03T03:50:01.038329+00:00; selected observations 2026-11-02T12:35:34.065053+00:00 to 2026-11-03T03:50:00.756836+00:00; SHA-256 462e0f7d9837034d82abae430768e5198d3101a001f1776559b7dedb8e03f6f1.
+Finansal girdiler: üretim zamanı 2026-11-03T03:50:01.038329+00:00; seçili gözlemler 2026-11-02T12:35:34.065053+00:00 ile 2026-11-03T03:50:00.756836+00:00; SHA-256 462e0f7d9837034d82abae430768e5198d3101a001f1776559b7dedb8e03f6f1.
 
-Supplied financial and comparison batches retain their original source dates. Generating this report does not refresh all 100 financial inputs.
+Finansal ve karşılaştırma girdilerinin özgün kaynak tarihleri korunmuştur. Bu raporun üretilmesi 100 şirketin tüm finansal girdilerinin güncellendiği anlamına gelmez.
 
-Scores are research hypotheses, not investment approval or validated return predictions. MVP acceptance pending.
+Puanlar araştırma varsayımlarıdır; yatırım onayı veya doğrulanmış getiri tahmini değildir. İlk sürümün (MVP) kabulü bekleniyor.
 
-| Rank | Symbol | Score / 100 | Model |
+| Sıra | Sembol | Puan / 100 | Model |
 | ---: | --- | ---: | --- |
-| 1 | MU | 87 | semiconductors_v1 |
-| 2 | INTU | 78.0 | prepackaged_software_v1 |
-| 3 | MPWR | 78 | semiconductors_v1 |
-| 4 | SWKS | 68 | semiconductors_v1 |
-| 5 | MSFT | 66.5 | prepackaged_software_v1 |
-| 6 | CRM | 66.0 | prepackaged_software_v1 |
-| 7 | MRVL | 64.5 | semiconductors_v1 |
-| 8 | TXN | 63 | semiconductors_v1 |
-| 9 | NOW | 62 | prepackaged_software_v1 |
-| 10 | AMAT | 59.5 | semiconductors_v1 |
-| 11 | TYL | 55.5 | prepackaged_software_v1 |
-| 12 | AAPL | 53.0 | electronic_computers_v1 |
-| 13 | SNPS | 53.0 | prepackaged_software_v1 |
+| 1 | MU | 87 | Yarı iletkenler (v1) |
+| 2 | INTU | 78.0 | Hazır yazılım (v1) |
+| 3 | MPWR | 78 | Yarı iletkenler (v1) |
+| 4 | ADI | 74 | Yarı iletkenler (v1) |
+| 5 | SWKS | 68 | Yarı iletkenler (v1) |
+| 6 | AMD | 67 | Yarı iletkenler (v1) |
+| 7 | MSFT | 66.5 | Hazır yazılım (v1) |
+| 8 | CRM | 66.0 | Hazır yazılım (v1) |
+| 9 | CDNS | 65.5 | Hazır yazılım (v1) |
+| 10 | MRVL | 64.5 | Yarı iletkenler (v1) |
+| 11 | TXN | 63 | Yarı iletkenler (v1) |
+| 12 | NOW | 62 | Hazır yazılım (v1) |
+| 13 | AMAT | 59.5 | Yarı iletkenler (v1) |
+| 14 | ADSK | 57.0 | Hazır yazılım (v1) |
+| 15 | TYL | 55.5 | Hazır yazılım (v1) |
+| 16 | AAPL | 53.0 | Bilgisayar üretimi (v1) |
+| 17 | SNPS | 53.0 | Hazır yazılım (v1) |
+| 18 | INTC | 20.5 | Yarı iletkenler (v1) |
 
-| Candidate | Status | Blockers |
+| Aday | Durum | Puanın hesaplanmama nedenleri |
 | --- | --- | --- |
-| NVDA | review_required | valuation_source_evidence_required |
-| AAPL | scored_research_hypothesis | none for numeric research model |
-| MSFT | scored_research_hypothesis | none for numeric research model |
-| GOOGL | review_required | valuation_source_evidence_required |
-| AMZN | review_required | valuation_source_evidence_required |
-| AVGO | review_required | valuation_source_evidence_required |
-| META | review_required | valuation_source_evidence_required |
-| TSLA | review_required | valuation_source_evidence_required |
-| LLY | review_required | valuation_source_evidence_required |
-| MU | scored_research_hypothesis | none for numeric research model |
-| WMT | review_required | valuation_source_evidence_required |
-| AMD | evidence_rejected | source_period_definition_class_or_market_contract_failed; financial_confirmation.liabilities |
-| JPM | review_required | valuation_source_evidence_required |
-| JNJ | review_required | valuation_source_evidence_required |
-| MA | review_required | valuation_source_evidence_required |
-| ABBV | critical_review_required | critical_financial_review |
-| INTC | evidence_rejected | source_period_definition_class_or_market_contract_failed; financial_confirmation.liabilities |
-| PLTR | review_required | valuation_source_evidence_required |
-| CVX | review_required | valuation_source_evidence_required |
-| COST | review_required | valuation_source_evidence_required |
-| CSCO | review_required | valuation_source_evidence_required |
-| ORCL | review_required | valuation_source_evidence_required |
-| KO | review_required | valuation_source_evidence_required |
-| PG | review_required | valuation_source_evidence_required |
-| UNH | review_required | valuation_source_evidence_required |
-| MRK | review_required | valuation_source_evidence_required |
-| BAC | review_required | valuation_source_evidence_required |
-| AMAT | scored_research_hypothesis | none for numeric research model |
-| HD | review_required | valuation_source_evidence_required |
-| PM | critical_review_required | critical_financial_review |
-| GE | review_required | valuation_source_evidence_required |
-| LRCX | review_required | valuation_source_evidence_required |
-| PANW | review_required | valuation_source_evidence_required |
-| DELL | critical_review_required | critical_financial_review |
-| MS | review_required | valuation_source_evidence_required |
-| CAT | review_required | valuation_source_evidence_required |
-| TXN | scored_research_hypothesis | none for numeric research model |
-| RY | review_required | valuation_source_evidence_required |
-| GS | review_required | valuation_source_evidence_required |
-| RTX | review_required | valuation_source_evidence_required |
-| CRWD | review_required | valuation_source_evidence_required |
-| TMO | review_required | valuation_source_evidence_required |
-| NFLX | review_required | valuation_source_evidence_required |
-| AMGN | review_required | valuation_source_evidence_required |
-| GEV | review_required | valuation_source_evidence_required |
-| ANET | review_required | valuation_source_evidence_required |
-| LIN | review_required | valuation_source_evidence_required |
-| KLAC | review_required | valuation_source_evidence_required |
-| AXP | review_required | valuation_source_evidence_required |
-| ADI | evidence_rejected | source_period_definition_class_or_market_contract_failed; financial_confirmation.liabilities |
-| GILD | review_required | valuation_source_evidence_required |
-| APH | review_required | valuation_source_evidence_required |
-| QCOM | review_required | valuation_source_evidence_required |
-| SNDK | review_required | valuation_source_evidence_required |
-| MRVL | scored_research_hypothesis | none for numeric research model |
-| CRM | scored_research_hypothesis | none for numeric research model |
-| PEP | review_required | valuation_source_evidence_required |
-| BLK | review_required | valuation_source_evidence_required |
-| MCD | critical_review_required | critical_financial_review |
-| ABT | review_required | valuation_source_evidence_required |
-| COP | review_required | valuation_source_evidence_required |
-| UNP | review_required | valuation_source_evidence_required |
-| DE | review_required | valuation_source_evidence_required |
-| NEE | review_required | valuation_source_evidence_required |
-| WELL | review_required | valuation_source_evidence_required |
-| PFE | review_required | valuation_source_evidence_required |
-| DHR | review_required | valuation_source_evidence_required |
-| ACN | review_required | valuation_source_evidence_required |
-| SCCO | review_required | valuation_source_evidence_required |
-| STX | review_required | valuation_source_evidence_required |
-| TMUS | review_required | valuation_source_evidence_required |
-| ISRG | review_required | valuation_source_evidence_required |
-| TJX | review_required | valuation_source_evidence_required |
-| SCHW | review_required | valuation_source_evidence_required |
-| ETN | review_required | valuation_source_evidence_required |
-| LMT | review_required | valuation_source_evidence_required |
-| WDC | review_required | valuation_source_evidence_required |
-| CB | review_required | valuation_source_evidence_required |
-| VRTX | review_required | valuation_source_evidence_required |
-| BA | review_required | valuation_source_evidence_required |
-| UBER | review_required | valuation_source_evidence_required |
-| PGR | review_required | valuation_source_evidence_required |
-| SPGI | review_required | valuation_source_evidence_required |
-| ADBE | review_required | valuation_source_evidence_required |
-| INTU | scored_research_hypothesis | none for numeric research model |
-| NOW | scored_research_hypothesis | none for numeric research model |
-| SNPS | scored_research_hypothesis | none for numeric research model |
-| CDNS | evidence_rejected | source_period_definition_class_or_market_contract_failed; financial_confirmation.liabilities |
-| FTNT | review_required | valuation_source_evidence_required |
-| WDAY | review_required | valuation_source_evidence_required |
-| ADSK | evidence_rejected | source_period_definition_class_or_market_contract_failed; financial_confirmation.liabilities |
-| ROP | review_required | valuation_source_evidence_required |
-| MCHP | review_required | valuation_source_evidence_required |
-| MPWR | scored_research_hypothesis | none for numeric research model |
-| ON | review_required | valuation_source_evidence_required |
-| SWKS | scored_research_hypothesis | none for numeric research model |
-| NTAP | review_required | valuation_source_evidence_required |
-| AKAM | review_required | valuation_source_evidence_required |
-| FFIV | review_required | valuation_source_evidence_required |
-| TYL | scored_research_hypothesis | none for numeric research model |
+| NVDA | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| AAPL | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| MSFT | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| GOOGL | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| AMZN | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| AVGO | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| META | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| TSLA | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| LLY | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| MU | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| WMT | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| AMD | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| JPM | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| JNJ | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| MA | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| ABBV | Kritik inceleme gerekiyor | Kritik finansal inceleme gerekiyor |
+| INTC | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| PLTR | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| CVX | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| COST | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| CSCO | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| ORCL | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| KO | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| PG | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| UNH | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| MRK | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| BAC | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| AMAT | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| HD | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| PM | Kritik inceleme gerekiyor | Kritik finansal inceleme gerekiyor |
+| GE | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| LRCX | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| PANW | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| DELL | Kritik inceleme gerekiyor | Kritik finansal inceleme gerekiyor |
+| MS | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| CAT | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| TXN | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| RY | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| GS | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| RTX | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| CRWD | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| TMO | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| NFLX | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| AMGN | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| GEV | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| ANET | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| LIN | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| KLAC | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| AXP | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| ADI | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| GILD | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| APH | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| QCOM | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| SNDK | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| MRVL | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| CRM | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| PEP | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| BLK | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| MCD | Kritik inceleme gerekiyor | Kritik finansal inceleme gerekiyor |
+| ABT | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| COP | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| UNP | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| DE | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| NEE | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| WELL | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| PFE | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| DHR | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| ACN | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| SCCO | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| STX | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| TMUS | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| ISRG | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| TJX | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| SCHW | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| ETN | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| LMT | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| WDC | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| CB | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| VRTX | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| BA | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| UBER | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| PGR | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| SPGI | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| ADBE | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| INTU | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| NOW | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| SNPS | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| CDNS | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| FTNT | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| WDAY | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| ADSK | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| ROP | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| MCHP | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| MPWR | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| ON | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| SWKS | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
+| NTAP | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| AKAM | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| FFIV | İnceleme gerekiyor | Değerleme girdilerinin kaynak kanıtları gerekiyor |
+| TYL | Araştırma modeli puanı hesaplandı | Sayısal araştırma modeli için engel yok |
 
 ## AAPL
 
-| Component | Points | Weight |
+| Bileşen | Puan | Ağırlık |
 | --- | ---: | ---: |
-| financial_strength | 5.0 | 20 |
-| valuation | 0 | 20 |
-| growth | 10 | 20 |
-| profitability | 15 | 15 |
-| cash_flow | 15 | 15 |
-| risk | 8 | 10 |
+| Finansal sağlamlık | 5.0 | 20 |
+| Değerleme | 0 | 20 |
+| Büyüme | 10 | 20 |
+| Kârlılık | 15 | 15 |
+| Nakit akışı | 15 | 15 |
+| Risk | 8 | 10 |
 
-Valuation uses a disclosed-share scenario: 25% extra shares plus one reported precision quantum. This is a stress assumption, not an observed share count or confidence interval.
-Financial suitability, valuation points and observed market risk are separate. Qualitative/governance/capital-change clearance and investment approval remain absent.
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
 
-liabilities_to_assets: 0.794753.
-current_ratio: 0.893293.
-operating_margin: 0.319708.
-ocf_less_ppe_margin: 0.237329.
-contract_revenue_growth: 0.064255.
+Toplam yükümlülükler / toplam varlıklar: 0.794753.
+Cari oran: 0.893293.
+Faaliyet kâr marjı: 0.319708.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.237329.
+Müşteri sözleşmesi hasılatı büyümesi: 0.064255.
 
 https://query1.finance.yahoo.com/v8/finance/chart/AAPL?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 4ea2deabb1d88a3d5d0383d1449eb4313585f039fe966014129a1a74f3866488.
 https://data.sec.gov/submissions/CIK0000320193.json · SHA-256 3ecd3634e81a5f55741ca9c812b66a8d5f9c4a9ba5fb454addf6c516e3f51370.
 https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm · SHA-256 3db22e88b50a484e26a2b36880944700b9e6a0edc25f9b55f96838b41db6da12.
-Full per-component inputs, confirmations and first-valid trails are retained in JSON.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
 
 ## MSFT
 
-| Component | Points | Weight |
+| Bileşen | Puan | Ağırlık |
 | --- | ---: | ---: |
-| financial_strength | 12.5 | 20 |
-| valuation | 0 | 20 |
-| growth | 15 | 20 |
-| profitability | 15 | 15 |
-| cash_flow | 15 | 15 |
-| risk | 9 | 10 |
+| Finansal sağlamlık | 12.5 | 20 |
+| Değerleme | 0 | 20 |
+| Büyüme | 15 | 20 |
+| Kârlılık | 15 | 15 |
+| Nakit akışı | 15 | 15 |
+| Risk | 9 | 10 |
 
-Valuation uses a disclosed-share scenario: 25% extra shares plus one reported precision quantum. This is a stress assumption, not an observed share count or confidence interval.
-Financial suitability, valuation points and observed market risk are separate. Qualitative/governance/capital-change clearance and investment approval remain absent.
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
 
-liabilities_to_assets: 0.416665.
-current_ratio: 1.230327.
-operating_margin: 0.467808.
-ocf_less_ppe_margin: 0.201866.
-contract_revenue_growth: 0.177887.
+Toplam yükümlülükler / toplam varlıklar: 0.416665.
+Cari oran: 1.230327.
+Faaliyet kâr marjı: 0.467808.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.201866.
+Müşteri sözleşmesi hasılatı büyümesi: 0.177887.
 
 https://query1.finance.yahoo.com/v8/finance/chart/MSFT?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 fec23b1f48660b0f964f1177c2fa0fac915b7fc731a2ff5cc11c17e7ea9f33d5.
 https://data.sec.gov/submissions/CIK0000789019.json · SHA-256 5c93fe7c62627741a3bd1ff48b9ce38e68be07f03c0b452624316f68ba69b068.
 https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/msft-20260930.htm · SHA-256 c1458161f228ff4ec779d36825f7dae7f84d59d67c1133ba6279f5b71cb6b8c3.
-Full per-component inputs, confirmations and first-valid trails are retained in JSON.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
 
 ## MU
 
-| Component | Points | Weight |
+| Bileşen | Puan | Ağırlık |
 | --- | ---: | ---: |
-| financial_strength | 20 | 20 |
-| valuation | 10 | 20 |
-| growth | 20 | 20 |
-| profitability | 15 | 15 |
-| cash_flow | 15 | 15 |
-| risk | 7 | 10 |
+| Finansal sağlamlık | 20 | 20 |
+| Değerleme | 10 | 20 |
+| Büyüme | 20 | 20 |
+| Kârlılık | 15 | 15 |
+| Nakit akışı | 15 | 15 |
+| Risk | 7 | 10 |
 
-Valuation uses a disclosed-share scenario: 25% extra shares plus one reported precision quantum. This is a stress assumption, not an observed share count or confidence interval.
-Financial suitability, valuation points and observed market risk are separate. Qualitative/governance/capital-change clearance and investment approval remain absent.
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
 
-liabilities_to_assets: 0.293586.
-current_ratio: 3.313805.
-operating_margin: 0.745863.
-ocf_less_ppe_margin: 0.442705.
-contract_revenue_growth: 2.563273.
+Toplam yükümlülükler / toplam varlıklar: 0.293586.
+Cari oran: 3.313805.
+Faaliyet kâr marjı: 0.745863.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.442705.
+Müşteri sözleşmesi hasılatı büyümesi: 2.563273.
 
 https://query1.finance.yahoo.com/v8/finance/chart/MU?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 9f9761689cada5d06fe3e6e03f4619ed4073c87597e0dabad3493acdc16f585f.
 https://data.sec.gov/submissions/CIK0000723125.json · SHA-256 b50ed951ec0bd75b90b6fc2305573200c3d52da9c568f05593b8b0cdeaf87f5c.
 https://www.sec.gov/Archives/edgar/data/723125/000072312526000023/mu-20260903.htm · SHA-256 2ac5a21f7f1180b08e7220e1690aa58a70aa5a7a8eac946e620b2ca54283eb5d.
-Full per-component inputs, confirmations and first-valid trails are retained in JSON.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
+
+## AMD
+
+| Bileşen | Puan | Ağırlık |
+| --- | ---: | ---: |
+| Finansal sağlamlık | 20 | 20 |
+| Değerleme | 0 | 20 |
+| Büyüme | 20 | 20 |
+| Kârlılık | 10 | 15 |
+| Nakit akışı | 10 | 15 |
+| Risk | 7 | 10 |
+
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
+
+Toplam yükümlülükler / toplam varlıklar: 0.181044.
+Cari oran: 2.850026.
+Faaliyet kâr marjı: 0.106643.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.194434.
+Müşteri sözleşmesi hasılatı büyümesi: 0.343378.
+
+https://query1.finance.yahoo.com/v8/finance/chart/AMD?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 3461caa05312f80a413d819fe22d9f0ee1579ce473d5db3d86612585688267c8.
+https://data.sec.gov/submissions/CIK0000002488.json · SHA-256 a17f4dbd4097965a9f05b1bb5a1eb38c0c1016d4038597e304a9dbddbd8991e0.
+https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm · SHA-256 319dfec05742eaaf5204f2555efc633c235ec25988c79db802f47007ad54dd61.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
+
+## INTC
+
+| Bileşen | Puan | Ağırlık |
+| --- | ---: | ---: |
+| Finansal sağlamlık | 17.5 | 20 |
+| Değerleme | 0 | 20 |
+| Büyüme | 0 | 20 |
+| Kârlılık | 0 | 15 |
+| Nakit akışı | 0 | 15 |
+| Risk | 3 | 10 |
+
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
+
+Toplam yükümlülükler / toplam varlıklar: 0.402353.
+Cari oran: 2.017039.
+Faaliyet kâr marjı: -0.041890.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: -0.093637.
+Müşteri sözleşmesi hasılatı büyümesi: -0.004670.
+
+https://query1.finance.yahoo.com/v8/finance/chart/INTC?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 ef035cb350e39011c46933003e006add6f6eef1659f461af57c1705a96974871.
+https://data.sec.gov/submissions/CIK0000050863.json · SHA-256 38dbc9c92b529ae8e8d08edf6600aebd50e8b81bc28e93fef56a419308710890.
+https://www.sec.gov/Archives/edgar/data/50863/000005086326000191/intc-20260926.htm · SHA-256 94500733295bd2eebb77a3f653164ef0479a2c9a18281734ad63c1b65b4bd510.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
 
 ## AMAT
 
-| Component | Points | Weight |
+| Bileşen | Puan | Ağırlık |
 | --- | ---: | ---: |
-| financial_strength | 17.5 | 20 |
-| valuation | 0 | 20 |
-| growth | 5 | 20 |
-| profitability | 15 | 15 |
-| cash_flow | 15 | 15 |
-| risk | 7 | 10 |
+| Finansal sağlamlık | 17.5 | 20 |
+| Değerleme | 0 | 20 |
+| Büyüme | 5 | 20 |
+| Kârlılık | 15 | 15 |
+| Nakit akışı | 15 | 15 |
+| Risk | 7 | 10 |
 
-Valuation uses a disclosed-share scenario: 25% extra shares plus one reported precision quantum. This is a stress assumption, not an observed share count or confidence interval.
-Financial suitability, valuation points and observed market risk are separate. Qualitative/governance/capital-change clearance and investment approval remain absent.
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
 
-liabilities_to_assets: 0.437588.
-current_ratio: 2.610451.
-operating_margin: 0.292195.
-ocf_less_ppe_margin: 0.200860.
-contract_revenue_growth: 0.043862.
+Toplam yükümlülükler / toplam varlıklar: 0.437588.
+Cari oran: 2.610451.
+Faaliyet kâr marjı: 0.292195.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.200860.
+Müşteri sözleşmesi hasılatı büyümesi: 0.043862.
 
 https://query1.finance.yahoo.com/v8/finance/chart/AMAT?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 bede286dcdcd0d5d33b3af41ea895085659b07119f2983afdf984ee1d7cde935.
 https://data.sec.gov/submissions/CIK0000006951.json · SHA-256 2b4ed5f0fba50cf3e76c4c2934869ea702f4bc97785226d15f2c0c50e7fa13cb.
 https://www.sec.gov/Archives/edgar/data/6951/000162828026058235/amat-20260726.htm · SHA-256 20a98ecbde0c4ae3f37b27a1ad68c6b24a3da707cefcf7d55644bff175803d12.
-Full per-component inputs, confirmations and first-valid trails are retained in JSON.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
 
 ## TXN
 
-| Component | Points | Weight |
+| Bileşen | Puan | Ağırlık |
 | --- | ---: | ---: |
-| financial_strength | 15 | 20 |
-| valuation | 0 | 20 |
-| growth | 15 | 20 |
-| profitability | 15 | 15 |
-| cash_flow | 10 | 15 |
-| risk | 8 | 10 |
+| Finansal sağlamlık | 15 | 20 |
+| Değerleme | 0 | 20 |
+| Büyüme | 15 | 20 |
+| Kârlılık | 15 | 15 |
+| Nakit akışı | 10 | 15 |
+| Risk | 8 | 10 |
 
-Valuation uses a disclosed-share scenario: 25% extra shares plus one reported precision quantum. This is a stress assumption, not an observed share count or confidence interval.
-Financial suitability, valuation points and observed market risk are separate. Qualitative/governance/capital-change clearance and investment approval remain absent.
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
 
-liabilities_to_assets: 0.529478.
-current_ratio: 4.352643.
-operating_margin: 0.340629.
-ocf_less_ppe_margin: 0.147212.
-contract_revenue_growth: 0.130490.
+Toplam yükümlülükler / toplam varlıklar: 0.529478.
+Cari oran: 4.352643.
+Faaliyet kâr marjı: 0.340629.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.147212.
+Müşteri sözleşmesi hasılatı büyümesi: 0.130490.
 
 https://query1.finance.yahoo.com/v8/finance/chart/TXN?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 69714bc2e43065ef4251ee2fd8b9d20a49bf6d5d634edb8b76f4dc15b10b81bc.
 https://data.sec.gov/submissions/CIK0000097476.json · SHA-256 782b6aab79aaca81892ed43865bb9c3044a6fac7851230dd2f3c5fdcbbab6372.
 https://www.sec.gov/Archives/edgar/data/97476/000009747626000169/txn-20260930.htm · SHA-256 4953264008d5ab48db66f69a11f2034d5c5b14012a3854512e4ebabcf25018ad.
-Full per-component inputs, confirmations and first-valid trails are retained in JSON.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
+
+## ADI
+
+| Bileşen | Puan | Ağırlık |
+| --- | ---: | ---: |
+| Finansal sağlamlık | 20 | 20 |
+| Değerleme | 0 | 20 |
+| Büyüme | 15 | 20 |
+| Kârlılık | 15 | 15 |
+| Nakit akışı | 15 | 15 |
+| Risk | 9 | 10 |
+
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
+
+Toplam yükümlülükler / toplam varlıklar: 0.295398.
+Cari oran: 2.189925.
+Faaliyet kâr marjı: 0.266114.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.388273.
+Müşteri sözleşmesi hasılatı büyümesi: 0.168932.
+
+https://query1.finance.yahoo.com/v8/finance/chart/ADI?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 76b416d7f1acc5e69e1bbe8cecd42fcecaf78314bf0059f2a856b647b660207d.
+https://data.sec.gov/submissions/CIK0000006281.json · SHA-256 7f751d5b123650af20bd7041b3181ae3c699e8e699bda09b107f437bb01a89f2.
+https://www.sec.gov/Archives/edgar/data/6281/000000628126000073/adi-20260801.htm · SHA-256 b7c3c7f580867390aa51245cec726549a2fd62bc0e3fdcd62f6bf76da9ffb7d6.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
 
 ## MRVL
 
-| Component | Points | Weight |
+| Bileşen | Puan | Ağırlık |
 | --- | ---: | ---: |
-| financial_strength | 17.5 | 20 |
-| valuation | 0 | 20 |
-| growth | 20 | 20 |
-| profitability | 10 | 15 |
-| cash_flow | 10 | 15 |
-| risk | 7 | 10 |
+| Finansal sağlamlık | 17.5 | 20 |
+| Değerleme | 0 | 20 |
+| Büyüme | 20 | 20 |
+| Kârlılık | 10 | 15 |
+| Nakit akışı | 10 | 15 |
+| Risk | 7 | 10 |
 
-Valuation uses a disclosed-share scenario: 25% extra shares plus one reported precision quantum. This is a stress assumption, not an observed share count or confidence interval.
-Financial suitability, valuation points and observed market risk are separate. Qualitative/governance/capital-change clearance and investment approval remain absent.
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
 
-liabilities_to_assets: 0.357944.
-current_ratio: 2.006086.
-operating_margin: 0.161436.
-ocf_less_ppe_margin: 0.170405.
-contract_revenue_growth: 0.420873.
+Toplam yükümlülükler / toplam varlıklar: 0.357944.
+Cari oran: 2.006086.
+Faaliyet kâr marjı: 0.161436.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.170405.
+Müşteri sözleşmesi hasılatı büyümesi: 0.420873.
 
 https://query1.finance.yahoo.com/v8/finance/chart/MRVL?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 0126668a178874994484cb17d096fed56c8620417fe71d8ab3bbb28b57f2469a.
 https://data.sec.gov/submissions/CIK0001835632.json · SHA-256 376c0056e8e92a9abdda85b6c1fa9b4b0e5905b3784b95b2a1ac851a9037ec5b.
 https://www.sec.gov/Archives/edgar/data/1835632/000183563226000025/mrvl-20260801.htm · SHA-256 54b2c6f57683cd55cb10cfa38d84af78a46a1a9412d1d0485aa4abf0f5ec10eb.
-Full per-component inputs, confirmations and first-valid trails are retained in JSON.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
 
 ## CRM
 
-| Component | Points | Weight |
+| Bileşen | Puan | Ağırlık |
 | --- | ---: | ---: |
-| financial_strength | 10.0 | 20 |
-| valuation | 15 | 20 |
-| growth | 10 | 20 |
-| profitability | 10 | 15 |
-| cash_flow | 15 | 15 |
-| risk | 6 | 10 |
+| Finansal sağlamlık | 10.0 | 20 |
+| Değerleme | 15 | 20 |
+| Büyüme | 10 | 20 |
+| Kârlılık | 10 | 15 |
+| Nakit akışı | 15 | 15 |
+| Risk | 6 | 10 |
 
-Valuation uses a disclosed-share scenario: 25% extra shares plus one reported precision quantum. This is a stress assumption, not an observed share count or confidence interval.
-Financial suitability, valuation points and observed market risk are separate. Qualitative/governance/capital-change clearance and investment approval remain absent.
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
 
-liabilities_to_assets: 0.473381.
-current_ratio: 0.760332.
-operating_margin: 0.200626.
-ocf_less_ppe_margin: 0.346827.
-contract_revenue_growth: 0.095791.
+Toplam yükümlülükler / toplam varlıklar: 0.473381.
+Cari oran: 0.760332.
+Faaliyet kâr marjı: 0.200626.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.346827.
+Müşteri sözleşmesi hasılatı büyümesi: 0.095791.
 
 https://query1.finance.yahoo.com/v8/finance/chart/CRM?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 6a84468de1cf0cd26b6893d687e1d5b617f18dc5482d13eef11c049e45085a73.
 https://data.sec.gov/submissions/CIK0001108524.json · SHA-256 78dc82cf63adf473d10e0024f827e0a54ac8609e0b50583876033db51ac26d55.
 https://www.sec.gov/Archives/edgar/data/1108524/000110852426000190/crm-20260731.htm · SHA-256 4fbc44b893c3e7f8dd6227fa7bff3531f96ce7f22a00a5552abbb10085354a41.
-Full per-component inputs, confirmations and first-valid trails are retained in JSON.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
 
 ## INTU
 
-| Component | Points | Weight |
+| Bileşen | Puan | Ağırlık |
 | --- | ---: | ---: |
-| financial_strength | 15.0 | 20 |
-| valuation | 15 | 20 |
-| growth | 15 | 20 |
-| profitability | 10 | 15 |
-| cash_flow | 15 | 15 |
-| risk | 8 | 10 |
+| Finansal sağlamlık | 15.0 | 20 |
+| Değerleme | 15 | 20 |
+| Büyüme | 15 | 20 |
+| Kârlılık | 10 | 15 |
+| Nakit akışı | 15 | 15 |
+| Risk | 8 | 10 |
 
-Valuation uses a disclosed-share scenario: 25% extra shares plus one reported precision quantum. This is a stress assumption, not an observed share count or confidence interval.
-Financial suitability, valuation points and observed market risk are separate. Qualitative/governance/capital-change clearance and investment approval remain absent.
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
 
-liabilities_to_assets: 0.483717.
-current_ratio: 1.506543.
-operating_margin: 0.274338.
-ocf_less_ppe_margin: 0.403907.
-contract_revenue_growth: 0.138973.
+Toplam yükümlülükler / toplam varlıklar: 0.483717.
+Cari oran: 1.506543.
+Faaliyet kâr marjı: 0.274338.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.403907.
+Müşteri sözleşmesi hasılatı büyümesi: 0.138973.
 
 https://query1.finance.yahoo.com/v8/finance/chart/INTU?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 defd5e17d37b7ed467e80673265b0d395d035936797e9d4cb6be5672cf46d083.
 https://data.sec.gov/submissions/CIK0000896878.json · SHA-256 4dc004281ac8b4977d90f7a3e7ac32adf0248936f66b0f6a32388531e60863ee.
 https://www.sec.gov/Archives/edgar/data/896878/000089687826000037/intu-20260731.htm · SHA-256 924a5f31df8081bad8f1bbdf88bacd813baaa2e38592023af465c41b937c8a0d.
-Full per-component inputs, confirmations and first-valid trails are retained in JSON.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
 
 ## NOW
 
-| Component | Points | Weight |
+| Bileşen | Puan | Ağırlık |
 | --- | ---: | ---: |
-| financial_strength | 10 | 20 |
-| valuation | 5 | 20 |
-| growth | 20 | 20 |
-| profitability | 5 | 15 |
-| cash_flow | 15 | 15 |
-| risk | 7 | 10 |
+| Finansal sağlamlık | 10 | 20 |
+| Değerleme | 5 | 20 |
+| Büyüme | 20 | 20 |
+| Kârlılık | 5 | 15 |
+| Nakit akışı | 15 | 15 |
+| Risk | 7 | 10 |
 
-Valuation uses a disclosed-share scenario: 25% extra shares plus one reported precision quantum. This is a stress assumption, not an observed share count or confidence interval.
-Financial suitability, valuation points and observed market risk are separate. Qualitative/governance/capital-change clearance and investment approval remain absent.
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
 
-liabilities_to_assets: 0.502112.
-current_ratio: 1.002681.
-operating_margin: 0.137370.
-ocf_less_ppe_margin: 0.344630.
-contract_revenue_growth: 0.208849.
+Toplam yükümlülükler / toplam varlıklar: 0.502112.
+Cari oran: 1.002681.
+Faaliyet kâr marjı: 0.137370.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.344630.
+Müşteri sözleşmesi hasılatı büyümesi: 0.208849.
 
 https://query1.finance.yahoo.com/v8/finance/chart/NOW?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 aa2ef1e4b8a11c0a16f16b09f1fde43d1f782bfa05a2233b36881e3fe59dbbfa.
 https://data.sec.gov/submissions/CIK0001373715.json · SHA-256 894302ab3aae5ca233dfe85d2c4a624f0e1654f660e28c7b310cfc5b98ed0cd4.
 https://www.sec.gov/Archives/edgar/data/1373715/000137371526000096/now-20260930.htm · SHA-256 2cd474eca45c5e93bc226d21d00341c5cdc4c57561c170d1d275f6f85605580a.
-Full per-component inputs, confirmations and first-valid trails are retained in JSON.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
 
 ## SNPS
 
-| Component | Points | Weight |
+| Bileşen | Puan | Ağırlık |
 | --- | ---: | ---: |
-| financial_strength | 15.0 | 20 |
-| valuation | 0 | 20 |
-| growth | 15 | 20 |
-| profitability | 5 | 15 |
-| cash_flow | 10 | 15 |
-| risk | 8 | 10 |
+| Finansal sağlamlık | 15.0 | 20 |
+| Değerleme | 0 | 20 |
+| Büyüme | 15 | 20 |
+| Kârlılık | 5 | 15 |
+| Nakit akışı | 10 | 15 |
+| Risk | 8 | 10 |
 
-Valuation uses a disclosed-share scenario: 25% extra shares plus one reported precision quantum. This is a stress assumption, not an observed share count or confidence interval.
-Financial suitability, valuation points and observed market risk are separate. Qualitative/governance/capital-change clearance and investment approval remain absent.
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
 
-liabilities_to_assets: 0.412601.
-current_ratio: 1.615074.
-operating_margin: 0.129700.
-ocf_less_ppe_margin: 0.191256.
-contract_revenue_growth: 0.151245.
+Toplam yükümlülükler / toplam varlıklar: 0.412601.
+Cari oran: 1.615074.
+Faaliyet kâr marjı: 0.129700.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.191256.
+Müşteri sözleşmesi hasılatı büyümesi: 0.151245.
 
 https://query1.finance.yahoo.com/v8/finance/chart/SNPS?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 0a8b85d6cbfb7a6b8995c97dba1d6c0dad4b0ca41217e6af93819f4ad6ef5464.
 https://data.sec.gov/submissions/CIK0000883241.json · SHA-256 6cfcc582e47f88240b56145e94028eff4221afcdf0aed6ade1027cbec8fb7ab5.
 https://www.sec.gov/Archives/edgar/data/883241/000088324126000025/snps-20260731.htm · SHA-256 0914c7ca583eb482af210178f96b4f7b622c0a8e8839e5c9fe283790ebe16510.
-Full per-component inputs, confirmations and first-valid trails are retained in JSON.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
+
+## CDNS
+
+| Bileşen | Puan | Ağırlık |
+| --- | ---: | ---: |
+| Finansal sağlamlık | 17.5 | 20 |
+| Değerleme | 0 | 20 |
+| Büyüme | 15 | 20 |
+| Kârlılık | 10 | 15 |
+| Nakit akışı | 15 | 15 |
+| Risk | 8 | 10 |
+
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
+
+Toplam yükümlülükler / toplam varlıklar: 0.460839.
+Cari oran: 2.855561.
+Faaliyet kâr marjı: 0.281690.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.299600.
+Müşteri sözleşmesi hasılatı büyümesi: 0.141232.
+
+https://query1.finance.yahoo.com/v8/finance/chart/CDNS?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 0f710b0efd38e16b8f3a642a4ff04f05599aeee96ccbc91e07ce641eab5be107.
+https://data.sec.gov/submissions/CIK0000813672.json · SHA-256 40de3d31d3706eb607bfe698d70d4bf888f0b14765dca997dc44b220c937961f.
+https://www.sec.gov/Archives/edgar/data/813672/000081367226000121/cdns-20260930.htm · SHA-256 734d68ed7dc580dabbdff9e5eaf9836b5d54c74fcaab17c8b291dab1faeafb40.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
+
+## ADSK
+
+| Bileşen | Puan | Ağırlık |
+| --- | ---: | ---: |
+| Finansal sağlamlık | 5.0 | 20 |
+| Değerleme | 5 | 20 |
+| Büyüme | 15 | 20 |
+| Kârlılık | 10 | 15 |
+| Nakit akışı | 15 | 15 |
+| Risk | 7 | 10 |
+
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
+
+Toplam yükümlülükler / toplam varlıklar: 0.755755.
+Cari oran: 0.850895.
+Faaliyet kâr marjı: 0.218984.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.334305.
+Müşteri sözleşmesi hasılatı büyümesi: 0.175338.
+
+https://query1.finance.yahoo.com/v8/finance/chart/ADSK?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 25ad1e4ad0f3475458d816e1136e2dd0225f5d36943279d13ecf6e131e5f9649.
+https://data.sec.gov/submissions/CIK0000769397.json · SHA-256 6be434af989da69a6c129231b9f768f4c18ef0c9e93c27b71c98237b253fc596.
+https://www.sec.gov/Archives/edgar/data/769397/000076939726000061/adsk-20260731.htm · SHA-256 ec8f98a351942a3d2a0d0d3eea6805ff703c92e3bda68e7f372be8515e28fad4.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
 
 ## MPWR
 
-| Component | Points | Weight |
+| Bileşen | Puan | Ağırlık |
 | --- | ---: | ---: |
-| financial_strength | 20 | 20 |
-| valuation | 0 | 20 |
-| growth | 20 | 20 |
-| profitability | 15 | 15 |
-| cash_flow | 15 | 15 |
-| risk | 8 | 10 |
+| Finansal sağlamlık | 20 | 20 |
+| Değerleme | 0 | 20 |
+| Büyüme | 20 | 20 |
+| Kârlılık | 15 | 15 |
+| Nakit akışı | 15 | 15 |
+| Risk | 8 | 10 |
 
-Valuation uses a disclosed-share scenario: 25% extra shares plus one reported precision quantum. This is a stress assumption, not an observed share count or confidence interval.
-Financial suitability, valuation points and observed market risk are separate. Qualitative/governance/capital-change clearance and investment approval remain absent.
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
 
-liabilities_to_assets: 0.158004.
-current_ratio: 5.912314.
-operating_margin: 0.261117.
-ocf_less_ppe_margin: 0.238738.
-contract_revenue_growth: 0.264310.
+Toplam yükümlülükler / toplam varlıklar: 0.158004.
+Cari oran: 5.912314.
+Faaliyet kâr marjı: 0.261117.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.238738.
+Müşteri sözleşmesi hasılatı büyümesi: 0.264310.
 
 https://query1.finance.yahoo.com/v8/finance/chart/MPWR?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 c1ae6e7f96b5043547ae93f98890b33632eda2cb1bd2816a225d849e495b8921.
 https://data.sec.gov/submissions/CIK0001280452.json · SHA-256 a3a2c83ce7339fb6f8c5392945112d725ed69fa1126252866bd2c5af18563eaf.
 https://www.sec.gov/Archives/edgar/data/1280452/000162828026053275/mpwr-20260630.htm · SHA-256 bb8531fd8845f09722b2b74d300385bbd1c8bd10a068b97b2bd8124fd3289836.
-Full per-component inputs, confirmations and first-valid trails are retained in JSON.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
 
 ## SWKS
 
-| Component | Points | Weight |
+| Bileşen | Puan | Ağırlık |
 | --- | ---: | ---: |
-| financial_strength | 20 | 20 |
-| valuation | 15 | 20 |
-| growth | 0 | 20 |
-| profitability | 10 | 15 |
-| cash_flow | 15 | 15 |
-| risk | 8 | 10 |
+| Finansal sağlamlık | 20 | 20 |
+| Değerleme | 15 | 20 |
+| Büyüme | 0 | 20 |
+| Kârlılık | 10 | 15 |
+| Nakit akışı | 15 | 15 |
+| Risk | 8 | 10 |
 
-Valuation uses a disclosed-share scenario: 25% extra shares plus one reported precision quantum. This is a stress assumption, not an observed share count or confidence interval.
-Financial suitability, valuation points and observed market risk are separate. Qualitative/governance/capital-change clearance and investment approval remain absent.
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
 
-liabilities_to_assets: 0.272818.
-current_ratio: 2.325423.
-operating_margin: 0.122342.
-ocf_less_ppe_margin: 0.270572.
-contract_revenue_growth: -0.021805.
+Toplam yükümlülükler / toplam varlıklar: 0.272818.
+Cari oran: 2.325423.
+Faaliyet kâr marjı: 0.122342.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.270572.
+Müşteri sözleşmesi hasılatı büyümesi: -0.021805.
 
 https://query1.finance.yahoo.com/v8/finance/chart/SWKS?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 722d23f65ea54921e561da2cb5f5ac54efb8daf158ecd62a310e9c6019913aa4.
 https://data.sec.gov/submissions/CIK0000004127.json · SHA-256 ca38337154c64ed6659bf83db0ee655e3e75c4ee7e106cfd0bbd57735cd480c3.
 https://www.sec.gov/Archives/edgar/data/4127/000000412726000049/swks-20260703.htm · SHA-256 c531419dc1303ee7a28dc8ce2466366254e3dd5fdfef5d2a90968a09225a6518.
-Full per-component inputs, confirmations and first-valid trails are retained in JSON.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.
 
 ## TYL
 
-| Component | Points | Weight |
+| Bileşen | Puan | Ağırlık |
 | --- | ---: | ---: |
-| financial_strength | 12.5 | 20 |
-| valuation | 5 | 20 |
-| growth | 10 | 20 |
-| profitability | 5 | 15 |
-| cash_flow | 15 | 15 |
-| risk | 8 | 10 |
+| Finansal sağlamlık | 12.5 | 20 |
+| Değerleme | 5 | 20 |
+| Büyüme | 10 | 20 |
+| Kârlılık | 5 | 15 |
+| Nakit akışı | 15 | 15 |
+| Risk | 8 | 10 |
 
-Valuation uses a disclosed-share scenario: 25% extra shares plus one reported precision quantum. This is a stress assumption, not an observed share count or confidence interval.
-Financial suitability, valuation points and observed market risk are separate. Qualitative/governance/capital-change clearance and investment approval remain absent.
+Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.
+Finansal uygunluk, değerleme puanı ve gözlenen piyasa riski ayrı değerlendirilir. Nitel risk, yönetim ve sermaye değişiklikleri onaylanmamıştır; yatırım onayı verilmemiştir.
 
-liabilities_to_assets: 0.343350.
-current_ratio: 1.050382.
-operating_margin: 0.153355.
-ocf_less_ppe_margin: 0.273343.
-contract_revenue_growth: 0.090999.
+Toplam yükümlülükler / toplam varlıklar: 0.343350.
+Cari oran: 1.050382.
+Faaliyet kâr marjı: 0.153355.
+Maddi duran varlık ödemeleri sonrası faaliyet nakdi / hasılat: 0.273343.
+Müşteri sözleşmesi hasılatı büyümesi: 0.090999.
 
 https://query1.finance.yahoo.com/v8/finance/chart/TYL?interval=1d&amp;range=1y&amp;events=div%2Csplits · SHA-256 46933bcf297ed6602c3ea89a3af84cf1345d72944fabec09016814b76286ad80.
 https://data.sec.gov/submissions/CIK0000860731.json · SHA-256 c18eca3dbd8ec959c0a8aa3923d0139b0c03f7a109f8e39b4c0dd649ac1da648.
 https://www.sec.gov/Archives/edgar/data/860731/000086073126000058/tyl-20260930.htm · SHA-256 83705f535dfafec1e074fe7dc690c5307688bedddf7d3ad6adae613ffdb82cac.
-Full per-component inputs, confirmations and first-valid trails are retained in JSON.
+Tüm bileşen girdileri, doğrulamalar ve ilk geçerli kaynağa kadar yapılan denemeler JSON kaydında korunmuştur.

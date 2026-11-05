@@ -1,5 +1,54 @@
 # Development status
 
+## 5 Kasım 2026 — Özgün SEC bilanço denklemiyle yükümlülük doğrulaması
+
+Dal: `feat/liabilities-equation-proof`; başlangıç main
+`37e41efe5d5e5af1a16f9d0dd3b3c8c8d2adc7cc` (PR #20 birleşimi). Başlangıçta
+açık PR yoktu; Actions `41930220540` Python 3.11/3.12/3.13 üzerinde 666 testle
+başarılıydı. AGENTS, proje özeti ve önceki durum okundu. Türkçe rapor sistemi
+yeniden yazılmadı; eski radar-agent deposuna dokunulmadı.
+
+v0.35.0, SEC Companyfacts içinde literal `us-gaap:Liabilities` bulunmayan beş
+desteklenen şirket için özgün yıllık iXBRL bildiriminden dar bir bilanço denklemi
+kanıtı üretir. CIK, dönem, USD, boyutsuz olgu, toplam bilanço eşitliği ve özkaynak
+kapsamı tam eşleşmelidir. Geçici veya itfa edilebilir özkaynak, açıklanamayan
+kontrol gücü olmayan pay, ayrı kapsam ya da negatif sonuç kanıtı reddeder. Bu yol
+yalnız literal olgu temiz biçimde yoksa çalışır; ilk geçerli kaynak seçimini
+değiştirmez ve otomatik muhasebe ikamesi sayılmaz.
+
+Kayıtlı özgün bildirim mutabakatı: AMD 13.927.000.000 USD, ADI 14.176.957.000
+USD, CDNS 4.678.967.000 USD, ADSK 9.422.000.000 USD ve INTC 85.069.000.000 USD.
+INTC toplam özkaynağı ayrıca 114.281.000.000 USD adi özkaynak ile
+12.079.000.000 USD kontrol gücü olmayan payın toplamı olarak doğrulandı. Beş
+seçilmiş Nasdaq değeri SEC denklemiyle tam eşleşti; reddedilen şirket yoktu.
+Kanıt: `docs/evidence/liability-equation5` ve
+`tests/fixtures/liability-equation5-sources` (manifest SHA-256
+`4f776e90ae382c4e6f3075f0541fb149f7fdf344303c38438d20b5602dd7812e`).
+
+Tarihli 3 Kasım prototipi aynı kesim anında 18 puanlı, 82 puansız ve dört zorunlu
+incelemeli sonuç verecek şekilde yeniden üretildi. Beş yeni puan ADI 74, AMD 67,
+CDNS 65,5, ADSK 57 ve INTC 20,5'tir. Puanların tamamındaki 180 yıllık finansal
+işlenen özgün bildirimle eşleşti. JSON, Markdown ve HTML geçici klasörde bayt bayt
+aynı üretildi; JSON SHA-256 değeri
+`abd2b819069ccf55544eefa820acb8221634e2dcd64e67f90110ce02225d6983`.
+Bu çalışma sıfır yeni HTTP isteği yaptı; 2–3 Kasım kayıtlarını kullanır ve güncel
+100 şirket kabulü değildir.
+
+İlk odaklı test çağrısı test modülü yolunu içermediği için içe aktarma aşamasında
+durdu; `PYTHONPATH=src:tests` ile düzeltildi. Sonraki rapor denemesinde yinelenen
+`raw_sha256` anahtarı, HTML sunumunda doğrudan doğrulamaya özgü alan beklentisi ve
+tekrar üretim çıktısında datetime serileştirmesi ayrı ayrı görüldü ve giderildi.
+İlk 41 odaklı testte eski 87 puansız kart beklentisinin tek satırı kaldı; 18/82
+sözleşmesine güncellendi. Son odaklı koşu 41/41 (38,365 saniye), tam yerel
+regresyon 670/670 geçti (295,268 saniye, Python 3.12.14). CLI durum kontrolü ve
+`git diff --check` başarılı. PR, commit ve Actions bağlantıları uzak doğrulamadan
+sonra buraya eklenecek.
+
+Kalan engel: PLTR için doğrulanmış güncel adi hisse adedi yok; ON girdisi geçersiz.
+Bu iki durum puansız kalmalı. Sonraki tek görev, yeni bir durum klasörü ve çalışmanın
+yapıldığı zamana ait kaynaklarla devam ettirilebilir 100 şirket uçtan uca kabulünü
+çalıştırmak; başarı, eksik ve hata sayılarını eski kayıtlarla karıştırmadan kaydetmek.
+
 ## 5 Kasım 2026 — Ek tercihli sembolleri olan adi hisselerin kesin sınıf doğrulaması
 
 Dal: feat/share-class-corroboration; başlangıç main
