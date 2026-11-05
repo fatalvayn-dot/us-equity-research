@@ -2,6 +2,24 @@
 
 ## 5 Kasım 2026 — SEC erişiminde katmanlı bağlantı tanısı (incelemede)
 
+Geliştirme sırasında yeni GitHub Actions kanıtı 42043751407:
+data.sec.gov ve www.sec.gov DNS, TCP/443 ve TLS bağlantısı başarılıydı,
+ancak SEC kimlik, submissions ve Companyfacts HTTP isteğinin her biri
+`403 access_denied` döndürdü. Yanıt kodları
+`live-source-preflight` artifact 13422962015 içinde doğrulandı.
+Bu ortamda kök engel DNS değildir; SEC HTTP erişimi reddetmektedir.
+Yahoo fiyatı ve Nasdaq listeleri yanıt verdi.
+
+Mevcut User-Agent yalnız GitHub depo bağlantısı içeriyordu; açık
+iletişim adresi taşımıyordu. SEC istek tanımlamasını iyileştirmek için
+manuel canlı koşuda `SEC_USER_AGENT` adlı GitHub Actions secret artık
+zorunludur. Değer gerçek kimlik ve erişilebilir iletişim e-postası
+içermelidir. Secret, PR koşularına verilmez. Bu değişiklik IP temelli
+veya başka bir 403 reddini aşmaz; erişim kısıtını dolanma yapılmaz.
+Secret yoksa iş açık bir yapılandırma hatasıyla durur. User-Agent
+ayarlanmadan 403'ün giderildiği iddia edilemez.
+
+
 5 Kasım GitHub Actions kanıtlarında 6 kaynaktan 3'ü yanıt verdi; SEC
 kimlik, bildirim ve Companyfacts uçları kısa süreli preflight altında
 yanıt vermedi. Çalışma ortamındaki DNS hatası başka bir yürütücünün
