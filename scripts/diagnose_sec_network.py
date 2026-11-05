@@ -35,6 +35,10 @@ def diagnose_host(host, *, resolver=socket.getaddrinfo,
                 result["tls"] = "ok"
                 result["tls_version"] = secure.version()
     except (OSError, ssl.SSLError, ValueError) as exc:
+        if result["tcp"] == "ok":
+            result["tls"] = "failed"
+        else:
+            result["tcp"] = "failed"
         result["error_type"] = type(exc).__name__
     return result
 
