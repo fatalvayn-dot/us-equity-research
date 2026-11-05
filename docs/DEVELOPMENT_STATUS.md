@@ -1,5 +1,35 @@
 # Development status
 
+## 5 Kasım 2026 — Canlı kabul öncesi kaynak erişimi
+
+Başlangıç main: `3226b2b3cf8b391ef09469070193123b31321292` (PR #21).
+Açık PR yoktu. Ana dal CI çalışması 41963433843 başarılıydı.
+`feat/live-source-preflight` dalında canlı kabul için gerekli kamu adreslerini
+mevcut HTTP istemcisiyle yoklayan `scripts/check_live_sources.py` eklendi.
+Yanıt alınırsa zaman, uzunluk ve SHA-256 kaydedilir. Bu araç içerik doğrulaması
+yapmaz. Hatalarda istemcinin sınıflandırmasını ve varsa HTTP kodunu kaydeder.
+Bir adres yanıt vermezse süreç 1 çıkış kodu döndürür ve raporu saklar.
+
+Mogadişu saatiyle 08:42'de SEC kimlik, SEC bildirim, SEC Companyfacts, Yahoo
+fiyat ve iki Nasdaq Trader liste kaynağı yoklandı. İki liste için ikinci resmi
+adres de denendi. Sekiz deneme zaman aşımına uğradı. Bu oturumda erişilen
+kaynak 0/6, canlı verisi doğrulanan şirket 0/100 ve kabul durumu beklemede.
+Kanıt: `docs/evidence/live-source-preflight-2026-11-05.json`.
+SEC HTTP istemcisi, Nasdaq, fiyat ve MVP kapsamındaki 83 yerel test geçti.
+
+Erişimi olan çalışma ortamında aşağıdaki komutla yeniden ölç:
+
+```sh
+PYTHONPATH=src python scripts/check_live_sources.py \
+  --user-agent "$SEC_USER_AGENT" --output data/live-preflight.json
+```
+
+Ardından `docs/evidence/common100/candidates.json` ile README'deki canlı
+`mvp-run` komutunu yeni durum dizininde çalıştır. Kesinti olursa aynı durum
+dizininden devam et. Güncel liste, karşılaştırma ve değerleme kanıtlarını ayrı
+aşamalarda tamamla. PR #21'in 18 puanlı, 82 puansız raporu tarihli prototip
+olarak kalır.
+
 ## 5 Kasım 2026 — Özgün SEC bilanço denklemiyle yükümlülük doğrulaması
 
 Dal: `feat/liabilities-equation-proof`; başlangıç main
