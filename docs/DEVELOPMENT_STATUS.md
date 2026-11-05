@@ -21,8 +21,12 @@ yazar, belge/finansal alan/rapor aşamasına geçmez ve kirayı serbest bırakı
 Sonraki çalışma aynı durum dizininden önbelleği kullanarak devam eder.
 
 Odaklı testler 19/19, tam yerel regresyon Python 3.12.14 üzerinde 675/675
-başarılıdır (`369.641s`). GitHub CI bu dalın nihai commit'i için henüz
-doğrulanmadı; CI olmadan birleştirme yapılmayacaktır.
+başarılıdır (`369.641s`). PR #28
+https://github.com/fatalvayn-dot/us-equity-research/pull/28 adresinde açıldı.
+Nihai kaynak commit `2ebf20efd7eeceab5f84375e3e1546023eb38b4a` için Foundation
+tests koşusu `42043509492`, Python 3.11, 3.12 ve 3.13 işlerinde başarılıdır.
+PR, `1eb40117854b9c710c842ff0ad03d7c7bc6262c0` commit'iyle main'e
+birleştirildi.
 
 Geri yüklenen durumdan tam 25 yeni SEC metadata isteği yapıldı. Toplam 49/100
 aday işlendi: 47 kayıt `metadata_available_legal_type_pending`, UNH
