@@ -32,7 +32,11 @@ class LiveAcceptanceWorkflowTests(unittest.TestCase):
         self.assertLess(preflight, gate)
         self.assertLess(gate, collection)
         self.assertIn("steps.source_gate.outcome == 'success'",self.body)
-        self.assertIn("required={'sec_identity','sec_submissions','sec_companyfacts'}",self.body)
+        # SEC submissions suffice to try metadata. Other failed providers
+        # remain explicitly unavailable in the underlying report.
+        self.assertIn("required={'sec_submissions'}",self.body)
+        self.assertIn("'unavailable_during_preflight':unavailable",self.body)
+        self.assertNotIn("required={'sec_identity','sec_submissions','sec_companyfacts'}",self.body)
         self.assertNotIn("steps.preflight.outcome == 'success'",self.body)
         self.assertIn('live-source-preflight',self.body)
         self.assertNotIn('secrets.',self.body)
