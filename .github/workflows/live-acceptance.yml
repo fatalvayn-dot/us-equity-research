@@ -82,9 +82,15 @@ jobs:
 
           report=json.loads(Path('data/live-preflight.json').read_text())
           states={row['source']:row['reachable'] for row in report['sources']}
-          required={'sec_identity','sec_submissions','sec_companyfacts'}
+          # Metadata collection needs SEC submissions. Other providers are
+          # checked independently by the bounded MVP collector; missing data
+          # must remain missing and cannot count as live financial acceptance.
+          required={'sec_submissions'}
           missing=sorted(name for name in required if not states.get(name,False))
-          print(json.dumps({'required':sorted(required),'missing':missing}))
+          unavailable=sorted(name for name,reachable in states.items() if not reachable)
+          print(json.dumps({'required_to_start':sorted(required),
+                            'unavailable_during_preflight':unavailable,
+                            'missing_required':missing}))
           raise SystemExit(bool(missing))
           PY
 

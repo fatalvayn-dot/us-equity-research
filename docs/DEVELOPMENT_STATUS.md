@@ -1,5 +1,34 @@
 # Development status
 
+## 5 Kasım 2026 — Otomasyon ve kesintili kaynak teşhisi (PR incelemesinde)
+
+Yönetim denetimi: Tek merkez görev saatlik zamanlı olmasına rağmen son koşu
+`failed` kaydedilmiş ve görev kapalıydı. Kesin çalışma hatası bu kayıttan
+çıkarılamıyor; saatlik otomasyonun sürekli bir sunucu işlemi olmadığı teyit
+edildi. Görev yeniden açıldı ve çalışma talimatı her oturumda tek sınırlı
+değişiklik, kalıcı checkpoint, kilit denetimi ve kanıt raporu üzerine
+daraltıldı. Bu değişiklik otomasyonun sonraki koşusunun başarılı olduğunu
+tek başına kanıtlamaz.
+
+Veri erişim engeli: GitHub Actions 42002017777 koşusunda yalnız 3/6
+kaynak erişilebildi; kaynak tanısı SEC uçlarını ayrı gösteriyor. Mevcut
+`live-acceptance.yml`, SEC kimlik dizini, submissions ve companyfacts
+üçünün eşzamanlı erişimini tüm veri toplamanın ön şartı yapıyordu.
+Oysa ilk metadata aşaması submissions yanıtıyla kısmen ilerleyebilir.
+Yeni dar kapı yalnız `sec_submissions` erişimini önkoşul yapıyor;
+diğer kaynakların yokluğunu tanıda koruyor. Finansal doğrulama,
+adi hisse sınıfı ve toplam MVP kabulü için hiçbir kapı kaldırılmadı.
+SEC submissions da erişilemezse işlem yine güvenli biçimde başlatılmaz.
+
+Bu dalda değişenler: canlı kabul Actions kapısı ve ilgili sözleşme testi.
+Yerel regresyon ve GitHub CI sonucu henüz doğrulanmadı; PR birleşimi
+başarılı CI sonrasına bırakılacak. 24/100 son kalıcı metadata sayımıdır;
+yeni doğrulanmış finansal alan ve skor hâlâ sıfırdır.
+
+Sonraki görev: PR testlerinin sonucunu incelemek; ardından erişilebilir
+SEC submissions ortamında kayıtlı 24/100 checkpointinden devam etmek,
+üstveri, finansal alan ve skor sayılarını ayrı kaydetmek.
+
 ## 5 Kasım 2026 — Canlı kabul iş akışı birleşimi ve ilk devam kontrol noktası
 
 PR #24 main'e birleştirildi:
