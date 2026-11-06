@@ -72,7 +72,13 @@ def verify(root, run_id, baseline):
     return saved, inspect_databases(root)
 
 
-def select(runs, artifacts, current_run, requested=''):
+def collection_never_started(jobs):
+    steps = [s for job in jobs for s in job.get('steps', [])
+             if s['name'] == 'Devam ettirilebilir finansal veri toplamasını çalıştır']
+    return bool(steps) and all(s.get('conclusion') == 'skipped' for s in steps)
+
+
+def select(runs, artifacts, current_run, requested='', safe_to_skip=None):
     for run in sorted(runs, key=lambda r: r['id'], reverse=True):
         if run['id'] == current_run or run['id'] < ROOT_RUN:
             continue
@@ -85,6 +91,8 @@ def select(runs, artifacts, current_run, requested=''):
             raise ValueError('Son çalışmanın kurtarma paketi incelenmeli; eski duruma dönülmedi')
         states = [a for a in items if a['name'] == 'live-acceptance-state']
         if not states:
+            if run['id'] != ROOT_RUN and not (safe_to_skip and safe_to_skip(run['id'])):
+                raise ValueError('Durum arşivi yok; veri toplama başlamadığı doğrulanmadan eski duruma dönülmedi')
             continue
         if len(states) != 1 or states[0]['expired']:
             raise ValueError('Son durum arşivi kullanılamıyor; eski duruma dönülmedi')
@@ -100,6 +108,12 @@ def api(path):
                                'Accept': 'application/vnd.github+json'})
     with urlopen(request, timeout=30) as response:
         return json.load(response)
+
+
+def safe_run_skip(run_id):
+    result = api(f'actions/runs/{run_id}/jobs?filter=all&per_page=100')
+    return (result['total_count'] == len(result['jobs'])
+            and collection_never_started(result['jobs']))
 
 
 def main():
@@ -121,7 +135,8 @@ def main():
         else:
             raise ValueError('Çalışma araması sınırı aşıldı')
         run_id = select(runs, lambda rid: api(f'actions/runs/{rid}/artifacts?per_page=100')['artifacts'],
-                        int(os.environ['GITHUB_RUN_ID']), args.requested)
+                        int(os.environ['GITHUB_RUN_ID']), args.requested,
+                        safe_to_skip=safe_run_skip)
         with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
             f.write(f'run_id={run_id}\n')
         print(json.dumps({'resume_run_id': run_id}))

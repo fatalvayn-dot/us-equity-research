@@ -1,5 +1,39 @@
 # Development status
 
+## 6 Kasım 2026 — PR #33 birleşimi, Work yönetimi ve yükleme kaybı koruması
+
+PR #33 kaynak commit `d33bd7c7eb9427e4cfb4114a697a1b349f89ed68`,
+main birleşimi `ed682cf0edd8417c4c095e7cd8d45ae0119f710c`.
+Foundation tests `42240026401` Python 3.11/3.12/3.13 üzerinde 694 testle başarılı;
+main CI `42240562113` de başarılı. Yerelde ilk tam regresyon 693 test/123.488s,
+sonradan eklenen mühürleme tur testiyle odaklı 19 test başarılıydı. Yerel
+kaynak ağacı GitHub ağacı `508f920a208c92abb5738c0fe58567e772670af7` ile eşleşti.
+
+#6'nın ayrı kopyasında ağ katmanı çağrısı yasaklanarak gerçek yeniden başlatma
+denendi: 100 metadata, 25 yeniden kullanılan belge, 182 değer ve 144 aritmetik
+sonuç korundu; 0 HTTP, 0 yeni skor. Asıl durum dosyalarının SHA değerleri
+sonrasında tekrar kontrol edildi; değişmedi. Kanıt: live-run6-resume-test.json.
+
+PR canlı denemesi `42240026263` başarılı görünse de SEC önkoşulu sağlanmadığı
+için koleksiyon atlandı; canlı ilerleme değildir. Ana dal gerçek devam koşusu
+#8 `42240561663`, #6'yı indirdi ve dosya/SQLite/kira kontrolünü geçti; bu kayıt
+yazılırken toplayıcı sürüyor. Bitiş sonucu henüz kabul edilmedi.
+
+Ek hata düzeltmesi: son main koşusunda state artifact bulunmaması artık tek
+başına eski duruma dönüş izni vermez. Bütün job denemelerinde koleksiyon
+adımının skipped olduğu kanıtlanmalı; eksik job sayfası veya başlamış koleksiyon
+varsa durulur. Böylece başarılı veri toplama sonrasındaki artifact yükleme
+kaybı görünmez olmaz. Önkoşul erişim hatası nedeniyle hiç başlamayan koleksiyon
+ise daha sonraki çalışmada aynı sağlam durumdan yeniden denenebilir.
+Odaklı 22 test başarılı; yeni tam regresyon/PR CI kontrolü sürüyor.
+
+Work proje yönetimi bu konuşmada saatlik etkin görev olarak kuruldu;
+6 Kasım 19:15 Europe/Istanbul başlangıcı ayarlandı. İlk gelecekteki çalışması
+henüz gözlenmedi. Eski başarısız görev kapalı tutuldu. Yönetim görevi çalışan
+toplayıcıyı çoğaltmaz; en son artifact ve PR/CI durumundan sonraki somut MVP
+görevini yürütür. GitHub veri toplayıcısının altı dilim sınırında teknik inceleme
+yapar. Bu kayıt 24/7 kesintisiz model çalışması iddiası değildir.
+
 ## 6 Kasım 2026 — Run #6 bütünlük denetimi ve güvenli devam
 
 Başlangıç main `fb0aa2d2830ec94dc46f0d35b1d4c3dabb8ed54d` (PR #32),
