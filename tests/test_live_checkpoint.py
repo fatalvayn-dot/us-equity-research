@@ -13,6 +13,32 @@ spec.loader.exec_module(m)
 
 
 class CheckpointTests(unittest.TestCase):
+    def test_rerun_is_rejected_before_api_or_state_changes(self):
+        from unittest.mock import patch
+        for attempt in ('2', '3', '0', '-1', 'invalid'):
+            with self.subTest(attempt=attempt), patch.dict(
+                    'os.environ', {'GITHUB_RUN_ATTEMPT': attempt}), patch.object(
+                    m, 'api') as api, patch('sys.argv', ['live_checkpoint.py', 'select']):
+                before = m.inventory(self.root)
+                with self.assertRaises(ValueError):
+                    m.main()
+                api.assert_not_called()
+                self.assertEqual(m.inventory(self.root), before)
+
+    def test_first_attempt_and_local_use_are_allowed(self):
+        from unittest.mock import patch
+        with patch.dict('os.environ', {}, clear=True):
+            m.require_first_attempt()
+        with patch.dict('os.environ', {'GITHUB_RUN_ATTEMPT': '1'}):
+            m.require_first_attempt()
+
+    def test_new_run_resumes_preceding_run_not_its_parent(self):
+        previous = m.ROOT_RUN + 1
+        runs = [self.run_row(m.ROOT_RUN), self.run_row(previous),
+                self.run_row(previous + 1)]
+        artifacts = lambda _: [dict(name='live-acceptance-state', expired=False)]
+        self.assertEqual(m.select(runs, artifacts, previous + 1), previous)
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)

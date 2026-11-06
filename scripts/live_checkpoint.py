@@ -117,6 +117,17 @@ def safe_run_skip(run_id):
             and (not result['jobs'] or collection_never_started(result['jobs'])))
 
 
+def require_first_attempt():
+    # GitHub reruns reuse the run ID. select() excludes that ID, so a retry
+    # could restore its older parent instead of the first attempt's new data.
+    # Require a fresh workflow run; leave all existing artifacts untouched.
+    if int(os.environ.get('GITHUB_RUN_ATTEMPT', '1')) != 1:
+        raise ValueError(
+            'Aynı canlı çalışma yeniden denenemez; önceki denemenin verisi '
+            'korundu. Yeni workflow_dispatch çalışması başlatın; son güvenli '
+            'durum otomatik seçilecektir.')
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('action', choices=['select', 'verify', 'seal'])
@@ -127,6 +138,7 @@ def main():
     args = p.parse_args()
     root = Path(args.state_dir)
     if args.action == 'select':
+        require_first_attempt()
         runs = []
         for page in range(1, 11):
             rows = api(f'actions/workflows/live-acceptance.yml/runs?branch=main&per_page=100&page={page}')['workflow_runs']
