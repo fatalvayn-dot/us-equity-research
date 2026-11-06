@@ -130,3 +130,8 @@ class CheckpointTests(unittest.TestCase):
             self.assertFalse(m.safe_run_skip(m.ROOT_RUN+1))
         with patch.object(m, 'api', return_value=dict(total_count=1, jobs=[job])):
             self.assertTrue(m.safe_run_skip(m.ROOT_RUN+1))
+
+    def test_cancelled_queue_without_any_job_can_be_skipped(self):
+        from unittest.mock import patch
+        with patch.object(m, 'api', return_value=dict(total_count=0, jobs=[])):
+            self.assertTrue(m.safe_run_skip(m.ROOT_RUN+1))

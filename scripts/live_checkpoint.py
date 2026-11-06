@@ -112,8 +112,9 @@ def api(path):
 
 def safe_run_skip(run_id):
     result = api(f'actions/runs/{run_id}/jobs?filter=all&per_page=100')
+    # A concurrency-cancelled queued run can have no jobs at all.
     return (result['total_count'] == len(result['jobs'])
-            and collection_never_started(result['jobs']))
+            and (not result['jobs'] or collection_never_started(result['jobs'])))
 
 
 def main():
