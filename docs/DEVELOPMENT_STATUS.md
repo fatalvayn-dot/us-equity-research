@@ -1,5 +1,41 @@
 # Development status
 
+## 6 Kasım 2026 — Aynı run ID ile yeniden denemede eski duruma dönüş koruması
+
+Başlangıç main `a3c00f104725f92f2c11dde5b8dac6ae27c64975` (PR #35);
+açık PR yok, main Foundation tests `42243577780` başarılı.
+Kod incelemesinde select() fonksiyonunun mevcut run ID'yi atladığı görüldü.
+GitHub aynı çalışmayı yeniden denediğinde ID değişmediğinden, ilk denemenin
+state paketi yerine daha eski parent seçilebilirdi. Bu bir kod yolu riskidir;
+üretimde veri kaybı yaşandığına dair kanıt bulunmadı.
+
+`GITHUB_RUN_ATTEMPT` 1 değilse seçim artık API çağrısından ve durum indirmeden
+önce durur. Devam için yeni workflow_dispatch çalışması gerekir; son sağlam
+state otomatik seçilir. Mevcut arşivler silinmez veya üzerine yazılmaz.
+Eski commit'lerin yeniden çalıştırılması bu yeni korumayı içermez; eski
+çalışmalarda Re-run kullanılmamalı. Aynı concurrency ve altı dilim sınırı korunur.
+
+Odaklı 22 test başarılı: tekrar denemelerin API'ye ulaşmaması ve dosyaları
+koruması, ilk denemenin geçmesi, yeni run'ın en yeni durumu seçmesi ve SQLite
+mühürleme/geri yükleme turu. Yerel tam regresyon: 701 test, 143.718 saniye,
+başarılı. PR CI sonucu birleşimden önce ayrıca doğrulanacak.
+
+Güncel canlı kanıt: run `42258906464` (#11), job `128033367454` başarılı.
+Logda parent `42248854054`, kök `42223465006`, sequence 4; 100 yeniden kullanılan
+yıllık belge, 89 şirkette 861 kabul edilmiş değer, 625 aritmetik sonuç,
+0 ertelenmiş dönemsel alan, 0 skor, 45 kamu GET. 100 aday review_required;
+kapak/liste kaydı aktif adi hisse kabulü değildir. Bu oturumda yeni veri
+indirilmedi ve #11 paketlerinin bağımsız ZIP/SQLite denetimi yapılmış sayılmadı.
+
+Work yönetim görevinin 16:15Z için planlanan denemesi 17:10:41Z'de başlayıp
+17:11:17Z'de failed olmuş; sonuç/hata ayrıntısı yok. Hemen çalıştırma isteği
+arka plan görevi açmak yerine bu konuşmada yürütme talimatı döndürdü.
+Bu, bağımsız zamanlayıcının düzeldiğinin kanıtı değildir; kök neden belirsiz.
+
+Sonraki görev: #11 veya daha yeni durum paketini bağımsız doğrula; güncel
+aktif adi hisse ve dönemler arası karşılaştırma kanıtlarını raporlama hattına
+bağla. 0 skor ve MVP kabulünün eksikliği açık tutuluyor.
+
 ## 6 Kasım 2026 — Run #8 tamamlandı: 50 belge, 48 şirkette 471 değer
 
 Son başarılı kod PR #34, kaynak `820e5db45536dedccf701147178857e992e30432`,
