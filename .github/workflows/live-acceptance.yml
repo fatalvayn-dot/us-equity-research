@@ -1,10 +1,17 @@
 name: Canlı 100 şirket kabulü
 
 on:
+  schedule:
+    - cron: '17 * * * *'
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/live-acceptance.yml
+      - scripts/live_checkpoint.py
   workflow_dispatch:
     inputs:
       resume_run_id:
-        description: Önceki canlı kabul çalışmasının run ID değeri; ilk çalışmada boş bırak
+        description: Son devam çalışmasının sayısal run ID değeri; boşsa son durum otomatik seçilir
         required: false
         type: string
       max_new_documents:
@@ -35,7 +42,7 @@ concurrency:
 
 jobs:
   collect:
-    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    if: (github.event_name != 'pull_request' && github.ref == 'refs/heads/main') || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
@@ -45,7 +52,7 @@ jobs:
           python-version: '3.12'
 
       - name: SEC iletişim kimliğini doğrula
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name != 'pull_request'
         env:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
         run: |
@@ -54,28 +61,44 @@ jobs:
             exit 2
           fi
 
+      - name: Son güvenli devam çalışmasını seç
+        id: checkpoint
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REQUESTED_RUN: ${{ inputs.resume_run_id }}
+        run: python scripts/live_checkpoint.py select --requested "$REQUESTED_RUN"
+
       - name: Önceki durum dosyalarını indir
-        if: github.event_name == 'workflow_dispatch' && inputs.resume_run_id != ''
+        if: github.event_name != 'pull_request'
         uses: actions/download-artifact@v4
         with:
           name: live-acceptance-state
           path: data/live-acceptance
           github-token: ${{ github.token }}
-          run-id: ${{ inputs.resume_run_id }}
+          run-id: ${{ steps.checkpoint.outputs.run_id }}
+
+      - name: Dosya özetlerini SQLite kayıtlarını ve kiraları doğrula
+        id: verified
+        if: github.event_name != 'pull_request'
+        env:
+          RESUME_RUN: ${{ steps.checkpoint.outputs.run_id }}
+        run: python scripts/live_checkpoint.py verify --run-id "$RESUME_RUN"
 
       - name: Kamu veri kaynaklarına erişimi ölç
         id: preflight
+        if: github.event_name == 'pull_request' || steps.verified.outputs.collect == 'true'
         continue-on-error: true
         env:
           PYTHONPATH: src
-          SEC_USER_AGENT: ${{ github.event_name == 'workflow_dispatch' && secrets.SEC_USER_AGENT || '' }}
+          SEC_USER_AGENT: ${{ github.event_name != 'pull_request' && secrets.SEC_USER_AGENT || '' }}
         run: |
           python scripts/check_live_sources.py \
             --user-agent "${SEC_USER_AGENT:-US Equity Research (https://github.com/fatalvayn-dot/us-equity-research)}" \
             --output data/live-preflight.json
 
       - name: Erişim kanıtını sakla
-        if: always()
+        if: always() && steps.preflight.outcome != 'skipped'
         uses: actions/upload-artifact@v4
         with:
           name: live-source-preflight
@@ -98,6 +121,7 @@ jobs:
 
       - name: Zorunlu SEC kaynaklarını denetle
         id: source_gate
+        if: github.event_name == 'pull_request' || steps.verified.outputs.collect == 'true'
         continue-on-error: ${{ github.event_name == 'pull_request' }}
         run: |
           python - <<'PY'
@@ -124,9 +148,9 @@ jobs:
         continue-on-error: true
         env:
           PYTHONPATH: src
-          MAX_NEW_DOCUMENTS: ${{ inputs.max_new_documents || '5' }}
-          MAX_NEW_FIELDS: ${{ inputs.max_new_fields || '30' }}
-          SEC_USER_AGENT: ${{ github.event_name == 'workflow_dispatch' && secrets.SEC_USER_AGENT || '' }}
+          MAX_NEW_DOCUMENTS: ${{ inputs.max_new_documents || (github.event_name == 'pull_request' && '5' || '25') }}
+          MAX_NEW_FIELDS: ${{ inputs.max_new_fields || (github.event_name == 'pull_request' && '30' || '500') }}
+          SEC_USER_AGENT: ${{ github.event_name != 'pull_request' && secrets.SEC_USER_AGENT || '' }}
         run: |
           python -m equity_research mvp-run \
             --candidates docs/evidence/common100/candidates.json \
@@ -145,14 +169,28 @@ jobs:
           --output data/live-evidence
           --sources data/live-sources
 
+      - name: Devam durumunun bütünlüğünü mühürle
+        id: sealed
+        if: always() && github.event_name != 'pull_request' && steps.verified.outcome == 'success' && steps.mvp.outcome != 'skipped'
+        run: python scripts/live_checkpoint.py seal --run-id "$GITHUB_RUN_ID"
+
       - name: Devam durumunu sakla
-        if: always() && steps.mvp.outcome != 'skipped'
+        if: always() && steps.sealed.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: live-acceptance-state
           path: data/live-acceptance
           if-no-files-found: warn
-          retention-days: 14
+          retention-days: 90
+
+      - name: Mühürlenemeyen durumu kurtarma için koru
+        if: always() && github.event_name != 'pull_request' && steps.verified.outcome == 'success' && steps.mvp.outcome != 'skipped' && steps.sealed.outcome != 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-acceptance-recovery
+          path: data/live-acceptance
+          if-no-files-found: error
+          retention-days: 90
 
       - name: Taşınabilir kabul kanıtını sakla
         if: always() && steps.mvp.outcome != 'skipped'
@@ -163,7 +201,7 @@ jobs:
             data/live-evidence
             data/live-sources
           if-no-files-found: warn
-          retention-days: 14
+          retention-days: 90
 
       - name: Veri toplama kesildiyse çalışmayı başarısız say
         if: steps.mvp.outcome == 'failure'
