@@ -133,6 +133,23 @@ class BatchRunner:
             raise ValueError("invalid pending trail")
         return now-completed<self.retry_delay
 
+    def _work_budget(self,companies,now,limit):
+        """Unattempted queries first, then oldest attempts; preserve report order."""
+        if limit is None:return None
+        candidates=[]
+        for company in companies:
+            if company.scope_status=="out_of_scope":continue
+            for query in company.queries:
+                key=self.key(company,query);result=self.store.read(key)
+                if result is not None:
+                    try:
+                        if self._validate(result,company,query,now):continue
+                    except (ValueError,KeyError,TypeError,ArithmeticError):
+                        result=None
+                completed=datetime.fromisoformat(result['completed_at']).timestamp() if result else 0
+                candidates.append((result is not None,completed,len(candidates),key))
+        return {row[3] for row in sorted(candidates)[:limit]}
+
     def run(self,companies,*,max_new_fields=None):
         companies=tuple(companies);now=self.clock()
         if not aware(now) or (max_new_fields is not None and (type(max_new_fields) is not int or max_new_fields<0)):
@@ -144,6 +161,7 @@ class BatchRunner:
         owner=self.store.acquire(now,self.lease_ttl)
         output=[];new=0;reused=0;events_start=len(self.store.events)
         try:
+            budget=self._work_budget(companies,now,max_new_fields)
             for company in companies:
                 fields=[];resolver=None
                 for query in company.queries:
@@ -159,7 +177,7 @@ class BatchRunner:
                             self.store.events.append({"key":key,"event":"invalid_checkpoint_semantics"});result=None
                     if result is not None:
                         reused+=1;fields.append({**result,"reused":True});continue
-                    if max_new_fields is not None and new>=max_new_fields:
+                    if budget is not None and (key not in budget or new>=max_new_fields):
                         fields.append({"query":normalized(asdict(query)),"state":"not_started","fact":None,"attempts":[],"reused":False});continue
                     result={"schema_version":1,"policy_version":self.policy_version,
                             "company":{"symbol":company.symbol,"issuer_id":company.issuer_id},

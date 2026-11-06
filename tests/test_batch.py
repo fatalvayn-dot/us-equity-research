@@ -90,6 +90,40 @@ class BatchTests(unittest.TestCase):
         self.clock.now+=timedelta(minutes=5)
         third=self.runner.run([company()]);self.assertEqual(third['summary']['field_states'],{'collected':2})
 
+    def test_bounded_retries_cannot_starve_unattempted_companies(self):
+        tasks=(company(),company('0000789019','MSFT'))
+        self.factory.missing=True
+        for _ in range(4):
+            result=self.runner.run(tasks,max_new_fields=1)
+            self.assertEqual(result['summary']['new_fields'],1)
+            self.assertEqual([c['symbol'] for c in result['companies']],['AAPL','MSFT'])
+            self.clock.now+=timedelta(minutes=6)
+        self.assertEqual(self.factory.calls,[('AAPL','assets'),('AAPL','liabilities'),
+                                             ('MSFT','assets'),('MSFT','liabilities')])
+        self.runner.run(tasks,max_new_fields=1)
+        self.assertEqual(self.factory.calls[-1],('AAPL','assets'))
+        self.clock.now+=timedelta(minutes=6)
+        self.runner.run(tasks,max_new_fields=1)
+        self.assertEqual(self.factory.calls[-1],('AAPL','liabilities'))
+
+    def test_bounded_expired_facts_do_not_starve_never_attempted_fields(self):
+        self.runner.run([company()],max_new_fields=1)
+        self.clock.now+=timedelta(hours=7)
+        result=self.runner.run([company()],max_new_fields=1)
+        self.assertEqual(self.factory.calls,[('AAPL','assets'),('AAPL','liabilities')])
+        self.assertEqual([f['state'] for f in result['companies'][0]['fields']],
+                         ['not_started','collected'])
+
+    def test_bounded_work_preserves_cooldown_and_skips_excluded_scope(self):
+        self.factory.missing=True
+        self.runner.run([company()])
+        self.factory.calls.clear()
+        result=self.runner.run([company(),company('0000789019','MSFT',
+                               scope_status='out_of_scope',scope_reason='verified ETF')],max_new_fields=1)
+        self.assertEqual(self.factory.calls,[])
+        self.assertEqual(result['summary']['reused_fields'],2)
+        self.assertEqual(result['summary']['new_fields'],0)
+
     def test_expiry_uses_original_evidence_not_checkpoint_time(self):
         self.factory.observed=NOW-timedelta(hours=5)
         self.runner.run([company()]);self.clock.now+=timedelta(hours=2);self.factory.observed=None

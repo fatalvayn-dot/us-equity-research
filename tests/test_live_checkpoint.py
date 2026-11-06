@@ -13,6 +13,22 @@ spec.loader.exec_module(m)
 
 
 class CheckpointTests(unittest.TestCase):
+    def test_review_allows_one_more_slice_then_closes_collection_gate(self):
+        from unittest.mock import patch
+        baseline=self.root/'baseline.json';baseline.write_text('{}')
+        output=self.root/'outputs'
+        state=self.root/'state'
+        for sequence,expected in ((6,'true'),(7,'false'),(8,'false')):
+            with self.subTest(sequence=sequence), patch.object(
+                    m,'verify',return_value=({'sequence':sequence},{})), patch.dict(
+                    'os.environ',{'GITHUB_OUTPUT':str(output)}), patch(
+                    'sys.argv',['live_checkpoint.py','verify','--state-dir',str(state),
+                                '--run-id',str(m.ROOT_RUN+1),'--baseline',str(baseline)]):
+                output.write_text('')
+                m.main()
+                self.assertEqual(output.read_text(),f'collect={expected}\n')
+                self.assertEqual(json.loads((self.root/'resume-receipt.json').read_text())['sequence'],sequence)
+
     def test_rerun_is_rejected_before_api_or_state_changes(self):
         from unittest.mock import patch
         for attempt in ('2', '3', '0', '-1', 'invalid'):
