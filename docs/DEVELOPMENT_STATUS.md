@@ -1,5 +1,54 @@
 # Development status
 
+## 6 Kasım 2026 — Run #6 bütünlük denetimi ve güvenli devam
+
+Başlangıç main `fb0aa2d2830ec94dc46f0d35b1d4c3dabb8ed54d` (PR #32),
+açık PR yok; Foundation tests `42045557265` başarılı. Canlı kabul #6 gerçek
+run ID `42223465006`, başarılı. Önceki durum indirme adımı atlanmış;
+49 şirketlik eski checkpoint bu çalışmanın başlangıcı değildir.
+
+İki ZIP indirildi, CRC ve GitHub SHA-256 ile birebir doğrulandı:
+- state artifact `13504628203`: `fb6acb6c3df1f51a5b2c28f258a6889e06637349073581277ac4150443551243`
+- evidence artifact `13505520146`: `1bc4d9b9be755e919ee4e2e2d742f7328a027d46252fffc5c2dad9f827ca5dfe`
+
+Beş SQLite integrity_check sonucu ok; etkin kira 0. 100 submissions,
+25 yıllık belge, 250 alan denemesi, 162 ham yanıt/gözlem. Kaynak paketinin
+bütün parça/yanıt özetleri ve rapor manifestleri doğrulandı. Rapor: 18 şirkette
+182 kabul edilmiş finansal değer, 144 aritmetik sonuç, 675 ertelenmiş dönemsel
+alan, 0 skor. 168 GET sayacı dahili yeniden denemeleri içermez. Aktif adi
+hisse ve güncel MVP kabulü henüz yok. 25 kapak kaydı tek başına aktif adi
+hisse kabulü değildir.
+
+Asıl arşivler ayrıca kalıcı kurtarma kopyası olarak saklandı:
+state `libfile_f12ec3dbec688191a48e562ea82cc5dc`,
+evidence `libfile_ea7720adb2548191b7c3a4688c2f8dd9`.
+Kod deposuna operasyonel veritabanı veya sağlayıcı önbelleği eklenmedi;
+`docs/evidence/live-run6-checkpoint.json` yalnız dosya özetleri içerir.
+
+Yeni devam aracı en son main üretim durumunu seçer; eski açık run ID,
+bozuk/eksik dosya, yanlış kök, etkin kira ve incelenmemiş kurtarma paketiyle
+başlamaz. PR durumları seçilmez. Her çıktı run/parent/root kimliği ve dosya
+özetleriyle mühürlenir. Kesinti kiraları silinmeden korunur; sonraki çalışmada
+süreleri dolmadan işlem yapılmaz. Mühürlenemeyen kayıt ayrı kurtarma artifact'ine
+alınır ve otomatik eski duruma dönüş engellenir. Tek Actions concurrency grubu
+korunur. Saat başından 17 dakika sonra en çok 25 belge/500 alanlık devam;
+altı dilimden sonra veri çağrılarına ara verilerek teknik inceleme gerekir.
+Yeni state/evidence artifact saklama süresi 90 gündür. Bu süre kalıcı depolama
+garantisi değildir. Ana dala workflow değişikliği birleşince ilk dilim tetiklenir.
+
+Eski proje müdürü görevi `6ae7781d799c8191a98d1442d0d6ec58` kapalı;
+son çalışma `a66d6be3-ae30-8322-a7a7-999dbfc4d48c` failed olarak kayıtlıdır.
+Aynı çalışmanın sonuç metni PR #32 birleşimini bildiriyor; iç hata/exception
+verisi yok, kesin kapanma nedeni bilinmiyor. Bu görev veri toplayıcısı olarak
+yeniden açılmadı; eski 49 şirket talimatı güncel devam kaynağı sayılmamalı.
+
+Doğrulama: odaklı testler ve #6 gerçek durum denetimi başarılı. Tam regresyon
+ve yeni PR CI sonucu aşağıdaki teslim kaydında güncellenecek. MVP tamamlanmadı.
+Sonraki görev: birleşimden tetiklenen devam diliminde parent_run_id değerinin
+42223465006 olduğunu, önceki kaynak kayıtlarının korunduğunu ve yeni belge/
+finansal alan sayılarını doğrulamak; ardından adi hisse/karşılaştırma/değerleme
+kabul zincirini tamamlamak. Backtest ve işlem otomasyonu açılmadı.
+
 ## 5 Kasım 2026 — SEC HTTP 403 erişim engeli doğrulaması
 
 Github Actions 42043751407 koşusunda DNS, TCP ve TLS bağlantıları

@@ -13,7 +13,7 @@ class LiveAcceptanceWorkflowTests(unittest.TestCase):
 
     def test_manual_collection_is_bounded_and_targets_exact_common100(self):
         self.assertIn('workflow_dispatch:',self.body)
-        self.assertNotIn('schedule:',self.body)
+        self.assertIn("cron: '17 * * * *'",self.body)
         self.assertIn('--candidates docs/evidence/common100/candidates.json',self.body)
         self.assertIn("options: ['25', '50', '100']",self.body)
         self.assertIn("options: ['250', '500', '900']",self.body)
@@ -22,8 +22,8 @@ class LiveAcceptanceWorkflowTests(unittest.TestCase):
 
     def test_pr_trial_uses_small_budgets_and_runs_only_in_the_same_repository(self):
         self.assertIn("github.event.pull_request.head.repo.full_name == github.repository", self.body)
-        self.assertIn("inputs.max_new_documents || '5'", self.body)
-        self.assertIn("inputs.max_new_fields || '30'", self.body)
+        self.assertIn("github.event_name == 'pull_request' && '5' || '25'", self.body)
+        self.assertIn("github.event_name == 'pull_request' && '30' || '500'", self.body)
 
     def test_preflight_gates_collection_without_secrets_or_paid_provider(self):
         preflight = self.body.index('id: preflight')
@@ -44,13 +44,13 @@ class LiveAcceptanceWorkflowTests(unittest.TestCase):
         self.assertIn('sec-network-diagnostic', self.body)
         # The SEC user agent identifies the caller. Never expose it to PR jobs.
         self.assertIn("secrets.SEC_USER_AGENT",self.body)
-        self.assertIn("github.event_name == 'workflow_dispatch'",self.body)
+        self.assertIn("github.event_name != 'pull_request'",self.body)
         self.assertIn("SEC_USER_AGENT GitHub Actions secret",self.body)
         self.assertNotIn('FINNHUB_API_KEY',self.body)
 
     def test_state_can_resume_by_exact_run_and_evidence_is_exported(self):
         for token in ('resume_run_id','actions/download-artifact@v4',
-                      'run-id: ${{ inputs.resume_run_id }}','live-acceptance-state',
+                      'run-id: ${{ steps.checkpoint.outputs.run_id }}','live-acceptance-state',
                       'scripts/export_mvp_evidence.py','live-acceptance-evidence'):
             self.assertIn(token,self.body)
         self.assertIn('actions: read',self.body)
