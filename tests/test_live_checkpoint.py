@@ -108,3 +108,30 @@ class CheckpointTests(unittest.TestCase):
         self.assertEqual(saved['parent_run_id'], m.ROOT_RUN)
         self.assertEqual(saved['sequence'], 1)
         self.assertEqual(len(counts), 5)
+
+    def test_lost_upload_does_not_silently_resume_older_state(self):
+        runs = [self.run_row(m.ROOT_RUN + 1), self.run_row(m.ROOT_RUN)]
+        artifacts = lambda rid: [] if rid > m.ROOT_RUN else [dict(name='live-acceptance-state', expired=False)]
+        with self.assertRaises(ValueError):m.select(runs, artifacts, 99999999999)
+        with self.assertRaises(ValueError):m.select(runs, artifacts, 99999999999, safe_to_skip=lambda _: False)
+        self.assertEqual(m.select(runs, artifacts, 99999999999, safe_to_skip=lambda _: True), m.ROOT_RUN)
+
+    def test_preflight_failure_can_skip_only_proven_unstarted_collection(self):
+        name = 'Devam ettirilebilir finansal veri toplamasını çalıştır'
+        self.assertTrue(m.collection_never_started([dict(steps=[dict(name=name, conclusion='skipped')])]))
+        self.assertFalse(m.collection_never_started([]))
+        self.assertFalse(m.collection_never_started([dict(steps=[dict(name=name, conclusion='success')])]))
+        self.assertFalse(m.collection_never_started([dict(steps=[dict(name=name, conclusion='skipped'), dict(name=name, conclusion='failure')])]))
+
+    def test_incomplete_attempt_history_is_not_safe_to_skip(self):
+        from unittest.mock import patch
+        job = dict(steps=[dict(name='Devam ettirilebilir finansal veri toplamasını çalıştır', conclusion='skipped')])
+        with patch.object(m, 'api', return_value=dict(total_count=2, jobs=[job])):
+            self.assertFalse(m.safe_run_skip(m.ROOT_RUN+1))
+        with patch.object(m, 'api', return_value=dict(total_count=1, jobs=[job])):
+            self.assertTrue(m.safe_run_skip(m.ROOT_RUN+1))
+
+    def test_cancelled_queue_without_any_job_can_be_skipped(self):
+        from unittest.mock import patch
+        with patch.object(m, 'api', return_value=dict(total_count=0, jobs=[])):
+            self.assertTrue(m.safe_run_skip(m.ROOT_RUN+1))

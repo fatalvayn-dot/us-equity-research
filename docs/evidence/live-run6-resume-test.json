@@ -1,0 +1,37 @@
+{
+  "original_run_id": 42223465006,
+  "network_calls": 0,
+  "summary": {
+    "companies": 100,
+    "company_states": {
+      "review_required": 100
+    },
+    "accepted_facts": 182,
+    "arithmetic_results": 144,
+    "scored_companies": 0
+  },
+  "pipeline": {
+    "requested_candidates": 100,
+    "metadata_states": {
+      "metadata_available_legal_type_pending": 100
+    },
+    "annual_document_summary": {
+      "companies": 100,
+      "new_documents": 0,
+      "reused_documents": 25,
+      "periods": 25,
+      "registered_shares": 25
+    },
+    "financial_query_companies": 100,
+    "companies_with_financial_facts": 18,
+    "period_unresolved_companies": 0,
+    "deferred_duration_fields": 675,
+    "public_transport_get_calls": 0,
+    "seeded_public_observations": 0,
+    "seed_observations_outside_freshness": 0,
+    "archived_transport_reuses": 0,
+    "call_measure": "public transport GET invocations, excluding internal retries and private Finnhub transport",
+    "all_financial_references_archived": true,
+    "archived_financial_facts": 182
+  }
+}
