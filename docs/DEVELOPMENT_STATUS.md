@@ -1,5 +1,45 @@
 # Development status
 
+## 6 Kasım 2026 — Run #8 tamamlandı: 50 belge, 48 şirkette 471 değer
+
+Son başarılı kod PR #34, kaynak `820e5db45536dedccf701147178857e992e30432`,
+main birleşimi `b858c4d18099c1820e5c8f137d5c9a84fc3adbfd`.
+CI `42241675487`: Python 3.11/3.12/3.13 üzerinde 698 test başarılı.
+İkinci yerel tam regresyon 696 test/122.782s; son iki sınır testi dahil
+23 odaklı test başarılı. Daha önceki PR #33 de main CI ile doğrulandı.
+
+Canlı kabul #8, run ID `42240561663`, 6 Kasım 18:19 (UTC+3) başarılı.
+Kök ve parent `42223465006`, sequence 1. Eski 49 şirket paketi kullanılmadı.
+100 metadata yeniden kullanıldı. 25 eski + 25 yeni yıllık belge = 50 belge.
+48 şirkette 471 kabul edilmiş finansal değer, 346 aritmetik sonuç,
+450 ertelenmiş dönemsel alan; 0 skor ve 0 tam MVP kabulü. 50 kapak kaydı
+aktif adi hisse kabulü değildir. Bu dilimde 101 kamu GET çağrısı var.
+
+ZIP CRC/GitHub SHA, manifestteki bütün dosya özetleri, beş SQLite integrity_check,
+alan payload özetleri, ham kaynak gövdeleri, rapor manifestleri ve 249 kaynak
+gözleminin taşınabilir paketi doğrulandı. #6'nın 162 kaynak gözlemi ve 182 kabul
+edilmiş fact nesnesi #8'in birebir altkümesidir: önceki değer/kanıt kaybı yok.
+Etkin kira yok. Ayrıntılı sayaç ve özetler: `docs/evidence/live-run8-audit.json`.
+
+State artifact `13515721153`, evidence `13516376164`; 4 Şubat 2027'ye kadar
+saklanıyor. Ayrıca kalıcı kopyalar:
+state `libfile_7d675bb9b70881919a91ba9ba0c6221b`,
+evidence `libfile_2f1fcb464bdc8191933f1463db3a2479`.
+Bunlar artık #6'dan daha yeni kurtarma durumudur; sonraki başarılı koşu varsa
+onun doğrulanmış artifact'i önceliklidir. Bu paketleri eski durumla ezme.
+
+PR #34 birleşimi sonraki #9 koşusunu (`42242552149`) tetikledi; bu kayıtta
+henüz tamamlanmış sayılmıyor. GitHub toplayıcı ve Work proje yönetimi zamanlaması
+etkin. Eski başarısız sohbet görevi kapalı. Gelecek Work görevinin başarısı
+henüz gözlenmedi. Saatlik Actions, tek concurrency grubu ve altı devam dilimi
+sınırıyla çalışıyor; sınırda yönetim görevi teknik inceleme yapmalıdır.
+
+Sonraki uygulanabilir görev: en yeni run sonucunu/artifact bütünlüğünü doğrula;
+kalan 50 yıllık belge ile finansal alanları tamamla. Ardından mevcut canlı
+adi hisse/liste doğrulaması, güncel/yıllık karşılaştırma ve değerleme/kaynak
+mutabakatını aynı 100 adayla birleştir. Eksik/uygunsuz sektör kanıtı nedeniyle
+skor kapısını gevşetme; MVP kabulü, backtest ve portföy işleri beklemede.
+
 ## 6 Kasım 2026 — PR #33 birleşimi, Work yönetimi ve yükleme kaybı koruması
 
 PR #33 kaynak commit `d33bd7c7eb9427e4cfb4114a697a1b349f89ed68`,
