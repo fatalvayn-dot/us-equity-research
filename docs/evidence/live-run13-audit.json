@@ -1,0 +1,94 @@
+{
+  "run_id": 42277691544,
+  "root_run_id": 42223465006,
+  "parent_run_id": 42266608774,
+  "sequence": 6,
+  "files_verified": 107,
+  "sqlite_counts": {
+    "run-lock.sqlite": {
+      "batch_fields_v1": 0,
+      "batch_lease_v1": 0
+    },
+    "responses.sqlite": {
+      "response_bodies_v1": 410,
+      "response_observations_v1": 559
+    },
+    "submissions.sqlite": {
+      "submissions_v1": 100
+    },
+    "financial.sqlite": {
+      "batch_fields_v1": 1361,
+      "batch_lease_v1": 0
+    },
+    "documents.sqlite": {
+      "batch_fields_v1": 100,
+      "batch_lease_v1": 0,
+      "filing_documents_v1": 100
+    }
+  },
+  "source_observations": 559,
+  "preserved_run8_observations": 249,
+  "summary": {
+    "companies": 100,
+    "company_states": {
+      "review_required": 100
+    },
+    "accepted_facts": 933,
+    "arithmetic_results": 684,
+    "scored_companies": 0
+  },
+  "pipeline": {
+    "requested_candidates": 100,
+    "metadata_states": {
+      "metadata_available_legal_type_pending": 100
+    },
+    "annual_document_summary": {
+      "companies": 100,
+      "new_documents": 25,
+      "reused_documents": 75,
+      "periods": 100,
+      "registered_shares": 100
+    },
+    "financial_query_companies": 100,
+    "companies_with_financial_facts": 96,
+    "period_unresolved_companies": 0,
+    "deferred_duration_fields": 0,
+    "public_transport_get_calls": 186,
+    "seeded_public_observations": 0,
+    "seed_observations_outside_freshness": 0,
+    "archived_transport_reuses": 42,
+    "call_measure": "public transport GET invocations, excluding internal retries and private Finnhub transport",
+    "all_financial_references_archived": true,
+    "archived_financial_facts": 933
+  },
+  "acceptance_gaps": [
+    "100_company_live_financial_run",
+    "verified_common_share_scope",
+    "validated_sector_scoring",
+    "market_price_and_prior_period_inputs"
+  ],
+  "artifact_sha256": {
+    "state": "a8de82bbc01f2758de3cb700d998af60ebea788585d986346b95f68ec575851b",
+    "evidence": "a0a087e335081ba85821f6f27ba02b8a0a7f6bdb1a6b0b1bb57aa968508d086b"
+  },
+  "backups": {
+    "state": "libfile_22e30b4f755c8191912b1ccdece6d27e",
+    "evidence": "libfile_3975c42e908881918d7edbbc6d48450e"
+  },
+  "field_states": {
+    "collected": 933,
+    "pending_data": 316,
+    "not_started": 151
+  },
+  "never_attempted_exact_queries": {
+    "AKAM": 11,
+    "FFIV": 14,
+    "TYL": 14
+  },
+  "bounded_selection_integration": {
+    "selected_unattempted": 39,
+    "network_calls": 0,
+    "original_state_modified": false
+  },
+  "reviewed_sequence_limit": 7
+}

@@ -1,5 +1,47 @@
 # Development status
 
+## 7 Kasım 2026 — Run #13 denetimi ve sınırlı bütçede ilerleme düzeltmesi
+
+PR #36 kaynak `eed5f6e988970de4bbf1b4f6d55b6bac2ad13bad`, main birleşimi
+`64f848dea3af6bd8f8cc13f9f8f5fce299b31a93`. Foundation tests `42264624183`
+Python 3.11/3.12/3.13 başarılı; yerelde 701 test/143.718s. Gerçek #8 durumuyla
+CLI tekrar denemesi reddedildi, 61 dosyanın tamamı değişmeden kaldı.
+
+Son veri üreten #13 run `42277691544`, parent `42266608774`, root `42223465006`,
+sequence 6. Ardından `42308380290` gibi başarılı görünen koşular altı dilim
+sınırında veri toplamayı atladı; bunlar yeni ilerleme değildir.
+#13 iki ZIP CRC/SHA doğrulaması, manifestte 107 dosya, beş SQLite integrity_check,
+payload/ham kaynak özetleri, 559 kaynak gözlemi ve rapor manifestleri geçti.
+#8'in 249 kaynak gözlemi korunmuş. Etkin kira 0. Arşivler ayrıca kalıcı yedeklendi;
+kimlikler ve ayrıntılar `docs/evidence/live-run13-audit.json` içinde.
+
+100 yıllık belge, 96 şirkette 933 kabul edilmiş değer, 684 aritmetik sonuç,
+0 skor. 316 alan pending_data, 151 alan not_started; son kategorinin 39'u
+veritabanında hiç denenmemiş: AKAM 11, FFIV 14, TYL 14. Diğerleri daha önceki
+kaydın yeniden kullanılma koşulunu sağlayamadığı için ertelenmiş. RY ve SNDK
+14'er pending_data alanıyla henüz kabul edilmiş değere sahip değil. Kapak
+kayıtları aktif adi hisse kabulü yerine geçmez; bütün adaylar review_required.
+
+Sabit şirket/alan sırası nedeniyle süresi dolmuş başarısız kayıtlar tekrar
+bütçe tüketirken listenin sonundaki yeni alanlar bekliyordu. Sınırlı BatchRunner
+bütçesi artık hiç denenmemiş/geçersiz kayıtları önce, sonra en eski tamamlanan
+denemeleri seçer. Rapor sırası, kaynak önceliği, bekleme süresi, kanıt tazeliği,
+kira ve yatırım kabul kuralları korunur. Gerçek #13 veritabanının ayrı kopyasında
+39 alanlık bütçe tam olarak bu 39 denenmemiş alanı seçti; 0 ağ çağrısı.
+Yerel tam regresyon 705 test/109.925s başarılı. 23 BatchRunner ve 23 kontrol
+noktası testi başarılı. Sentetik testler yeniden denemeler, eski başarılı kayıtlar ve kapsam dışı
+şirketlerin yeni alanları engellemediğini doğruluyor; canlı kabul sayılmaz.
+
+Denetim sonrası yalnız bir ek devam dilimine izin verildi: limit 7. Sequence 6
+bir kez ilerleyebilir; 7 ve üzeri yine teknik inceleme ister. PR CI geçmeden
+bu değişiklik ana dala alınmayacak. Yeni canlı sayılar sonuçtan sonra doğrulanacak.
+Work zamanlayıcısı için başarılı bağımsız geliştirme koşusu hâlâ gözlenmedi.
+
+Sonraki görev: sequence 7 sonucunu doğrula; 39 alanın gerçekten denendiğini,
+eski kaynakların korunduğunu incele. Sonra aktif adi hisse kapsamı, güncel fiyat,
+önceki dönem, sektör ve nitel risk kanıtlarını rapora bağla. MVP kabulü yok;
+backtest, gölge portföy ve gerçek alım-satım açılmadı.
+
 ## 6 Kasım 2026 — Aynı run ID ile yeniden denemede eski duruma dönüş koruması
 
 Başlangıç main `a3c00f104725f92f2c11dde5b8dac6ae27c64975` (PR #35);

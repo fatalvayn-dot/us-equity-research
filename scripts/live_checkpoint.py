@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 from urllib.request import Request, urlopen
 
 ROOT_RUN = 42223465006
+# Run 42277691544 (sequence 6) was audited before authorizing one more slice.
+# See docs/evidence/live-run13-audit.json. Review again after sequence 7.
+MAX_REVIEWED_SEQUENCE = 7
 REPO = 'fatalvayn-dot/us-equity-research'
 MANIFEST = 'checkpoint-manifest.json'
 REQUIRED = {'submissions.sqlite', 'documents.sqlite', 'financial.sqlite',
@@ -159,10 +162,9 @@ def main():
         receipt = dict(parent_run_id=args.run_id, root_run_id=ROOT_RUN, sequence=saved['sequence'])
         (root.parent / 'resume-receipt.json').write_text(json.dumps(receipt))
         with open(os.environ.get('GITHUB_OUTPUT', os.devnull), 'a') as f:
-            # Six bounded continuation slices, then require technical review.
-            f.write(f"collect={'true' if saved['sequence'] < 6 else 'false'}\n")
-        if saved['sequence'] >= 6:
-            print('Altı devam dilimi tamamlandı; yeni veri çağrısından önce teknik inceleme gerekiyor.')
+            f.write(f"collect={'true' if saved['sequence'] < MAX_REVIEWED_SEQUENCE else 'false'}\n")
+        if saved['sequence'] >= MAX_REVIEWED_SEQUENCE:
+            print('İncelenen devam bütçesi tamamlandı; yeni veri çağrısından önce teknik inceleme gerekiyor.')
         print(json.dumps({'verified_run_id': args.run_id, 'tables': counts}))
     else:
         receipt = json.loads((root.parent / 'resume-receipt.json').read_text())
