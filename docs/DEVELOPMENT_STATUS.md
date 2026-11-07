@@ -26,8 +26,9 @@ log indirme yapılamadı. GitHub bağlı araçlarıyla metadata erişimi başar�
 
 Son bağımsız denetimli sayaçlar #13'e aittir: 100 yıllık belge, 96 şirkette
 933 değer, 684 aritmetik sonuç, 0 skor. MVP kabulü yok.
-Odaklı kontrol noktası testleri: 23/23 başarılı. Tam regresyon sürüyor;
-PR CI sonucu birleşim öncesi doğrulanacak.
+Odaklı kontrol noktası testleri: 23/23 başarılı. Yerel tam regresyon:
+705 test, 154.325 saniye, başarılı. CLI status kontrolü başarılı;
+MVP eksik durumunu koruyor. PR #38 CI sonucu birleşim öncesi doğrulanacak.
 
 Sonraki iş: `42309920856` paketlerini doğrula; 39 daha önce denenmemiş alanı
 ve önceki kaynakların korunmasını denetle; ardından aktif adi hisse kabulü.
