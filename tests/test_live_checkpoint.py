@@ -17,16 +17,23 @@ class CheckpointTests(unittest.TestCase):
         from unittest.mock import patch
         baseline=self.root/'baseline.json';baseline.write_text('{}')
         output=self.root/'outputs'
+        summary=self.root/'summary.md'
         state=self.root/'state'
         for sequence,expected in ((6,'true'),(7,'false'),(8,'false')):
             with self.subTest(sequence=sequence), patch.object(
                     m,'verify',return_value=({'sequence':sequence},{})), patch.dict(
-                    'os.environ',{'GITHUB_OUTPUT':str(output)}), patch(
+                    'os.environ',{'GITHUB_OUTPUT':str(output), 'GITHUB_STEP_SUMMARY':str(summary)}), patch(
                     'sys.argv',['live_checkpoint.py','verify','--state-dir',str(state),
                                 '--run-id',str(m.ROOT_RUN+1),'--baseline',str(baseline)]):
                 output.write_text('')
+                summary.write_text('Önceki özet\n')
                 m.main()
                 self.assertEqual(output.read_text(),f'collect={expected}\n')
+                self.assertTrue(summary.read_text().startswith('Önceki özet\n'))
+                self.assertEqual('yeni finansal veri toplamaz' in summary.read_text(), expected == 'false')
+                if expected == 'false':
+                    self.assertIn(str(m.ROOT_RUN+1), summary.read_text())
+                    self.assertIn(f'devam sırası: {sequence}', summary.read_text())
                 self.assertEqual(json.loads((self.root/'resume-receipt.json').read_text())['sequence'],sequence)
 
     def test_rerun_is_rejected_before_api_or_state_changes(self):

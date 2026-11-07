@@ -165,6 +165,17 @@ def main():
             f.write(f"collect={'true' if saved['sequence'] < MAX_REVIEWED_SEQUENCE else 'false'}\n")
         if saved['sequence'] >= MAX_REVIEWED_SEQUENCE:
             print('İncelenen devam bütçesi tamamlandı; yeni veri çağrısından önce teknik inceleme gerekiyor.')
+            summary = os.environ.get('GITHUB_STEP_SUMMARY')
+            if summary:
+                with open(summary, 'a') as f:
+                    f.write('\n## Veri toplama teknik inceleme bekliyor\n\n'
+                            'Bu koşu yeni finansal veri toplamaz. Başarılı bütünlük '
+                            'kontrolü, yeni veri ilerlemesi veya MVP kabulü değildir.\n\n'
+                            f"Doğrulanan durum run ID: {args.run_id}; "
+                            f"devam sırası: {saved['sequence']}; "
+                            f"incelenmiş sınır: {MAX_REVIEWED_SEQUENCE}.\n\n"
+                            'Son durum ve kaynak kanıtlarını inceleyin; bütçeyi '
+                            'körlemesine artırmayın.\n')
         print(json.dumps({'verified_run_id': args.run_id, 'tables': counts}))
     else:
         receipt = json.loads((root.parent / 'resume-receipt.json').read_text())
