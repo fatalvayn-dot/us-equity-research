@@ -9,9 +9,10 @@ from datetime import datetime, timezone
 from urllib.request import Request, urlopen
 
 ROOT_RUN = 42223465006
-# Run 42277691544 (sequence 6) was audited before authorizing one more slice.
-# See docs/evidence/live-run13-audit.json. Review again after sequence 7.
-MAX_REVIEWED_SEQUENCE = 7
+# Run 42309920856 (sequence 7) was audited; PR #39 restored all 100
+# periods in offline replay. See docs/evidence/live-sequence7-audit.json.
+# Authorize one slice for the remaining 26 queries, then review again.
+MAX_REVIEWED_SEQUENCE = 8
 REPO = 'fatalvayn-dot/us-equity-research'
 MANIFEST = 'checkpoint-manifest.json'
 REQUIRED = {'submissions.sqlite', 'documents.sqlite', 'financial.sqlite',

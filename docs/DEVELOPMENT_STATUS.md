@@ -1,5 +1,38 @@
 # Development status
 
+## 7 Kasım 2026 — Sequence 7 bağımsız denetimi tamamlandı
+
+Başlangıç main 834c4c9 (PR #39), açık PR yok. Son saatlik koşular başarılı
+ancak sınır nedeniyle veri toplama atlanıyor. Yeni artifact indirme erişimiyle
+run 42309920856'nın iki ZIP'i alındı; GitHub SHA-256 ve CRC eşleşti.
+109 durum dosyası, beş SQLite bütünlüğü, alan payload özetleri, ham yanıtlar,
+712 gözlemli kaynak paketi ve rapor manifestleri doğrulandı.
+
+#13'teki 559 kaynak gözleminin, 100 belge gövdesinin ve 1361 alan anahtarının
+tamamı korunmuş. Alan anahtarlarının korunması, her güncel değerin eskiyle
+aynı olduğu anlamına gelmez. 13 yeni alan kaydı var. Önceden hiç denenmeyen
+39 sorgunun 13'ü denenmiş (12 collected, 1 pending_data); 26'sı hâlâ eksik:
+AKAM 8, FFIV 9, TYL 9. Rapor dönem kaybı bu alanların plan dışı kalmasına yol açmış.
+
+Bağımsız doğrulanmış rapor: 100 üstveri, 98 şirkette 695 değer, 481 hesaplama,
+50 kullanılan yıllık belge, 450 ertelenen dönemsel alan, 0 skor.
+Veritabanında 100 belgenin tamamı mevcut. PR #39 koduyla bu veritabanının
+ayrı kopyasında sıfır ağ/sıfır indirme bütçeli gerçek belge tekrar kontrolü:
+100 belge yeniden kullanıldı, 100 dönem doğrulandı, ertelenen dönemsel alan 0.
+Asıl 109 dosyanın özetleri değişmedi. Bu ağsız entegrasyon denemesidir;
+yeni güncel fiyat/finansal kabul veya aktif adi hisse kabulü değildir.
+
+Denetim kanıtı: docs/evidence/live-sequence7-audit.json. Kurtarma kopyaları:
+state libfile_f385ef9b2ea08191b1de30b45fcffe21,
+evidence libfile_6fada512135481919a47ead0de4387d0.
+Bu denetime dayanarak yalnız bir ek dilim (sequence 8) açılır; 8 ve üstünde
+tekrar inceleme gerekir. Concurrency, kilitler, kaynak sırası ve kabul koşulları
+korunur. Test/CI başarılı olmadan ana dala alınmayacak.
+
+Sonraki iş: yeni dilimde 100 dönem kapsamının korunduğunu ve 26 sorgunun
+çalıştığını doğrula; ardından aktif adi hisse doğrulaması ve değerleme hattı.
+MVP henüz tamamlanmadı; 10–12 Kasım hedefi erişim/yürütme koşullarına bağlı.
+
 ## 7 Kasım 2026 — Yıllık belge devamlılığı ve MVP yol haritası
 
 Başlangıç main 944e37e (PR #38); açık PR yok, ana dal CI başarılı.
