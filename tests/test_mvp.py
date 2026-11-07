@@ -84,6 +84,22 @@ class MvpTests(unittest.TestCase):
             self.assertEqual(second['pipeline']['public_transport_get_calls'],0)
             self.assertEqual(first['summary']['accepted_facts'],second['summary']['accepted_facts'])
 
+    def test_old_exact_document_keeps_period_with_zero_download_budget(self):
+        with tempfile.TemporaryDirectory() as tmp, patch('equity_research.response_archive.ArchivedTransport.get',new=recorded_http):
+            run_mvp(CANDIDATES,state_dir=tmp,user_agent='Synthetic offline fixture replay')
+            old=(datetime.now(timezone.utc)-timedelta(days=30)).isoformat()
+            with sqlite3.connect(Path(tmp)/'documents.sqlite') as db:
+                db.execute('UPDATE filing_documents_v1 SET retrieved_at=?',(old,))
+            with patch('equity_research.response_archive.ArchivedTransport.get',side_effect=AssertionError('unexpected network')):
+                result=run_mvp(CANDIDATES,state_dir=tmp,user_agent='Synthetic offline fixture replay',max_new_documents=0,max_new_fields=0)
+            docs=json.loads((Path(tmp)/'documents.json').read_text())
+            self.assertEqual(docs['summary']['reused_documents'],1)
+            self.assertIn('period',docs['companies'][0])
+            self.assertEqual(docs['companies'][0]['source_evidence']['retrieved_at'],old)
+            self.assertFalse(docs['scope_approved'])
+            self.assertEqual(result['summary']['scored_companies'],0)
+            self.assertEqual(result['pipeline']['public_transport_get_calls'],0)
+
     def test_duplicate_candidates_rejected_before_network(self):
         with self.assertRaises(ValueError):validate_candidates(dict(companies=CANDIDATES['companies']*2))
 
