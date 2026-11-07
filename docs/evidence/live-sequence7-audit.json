@@ -1,0 +1,333 @@
+{
+  "run_id": 42309920856,
+  "root_run_id": 42223465006,
+  "parent_run_id": 42277691544,
+  "sequence": 7,
+  "files_verified": 109,
+  "sqlite_counts": {
+    "responses.sqlite": {
+      "response_bodies_v1": 420,
+      "response_observations_v1": 712
+    },
+    "run-lock.sqlite": {
+      "batch_fields_v1": 0,
+      "batch_lease_v1": 0
+    },
+    "submissions.sqlite": {
+      "submissions_v1": 100
+    },
+    "documents.sqlite": {
+      "batch_fields_v1": 100,
+      "batch_lease_v1": 0,
+      "filing_documents_v1": 100
+    },
+    "financial.sqlite": {
+      "batch_fields_v1": 1374,
+      "batch_lease_v1": 0
+    }
+  },
+  "source_observations": 712,
+  "preserved_run13_observations": 559,
+  "source_bundle_matches_database": true,
+  "reports_match_state": true,
+  "preserved_document_bodies": 100,
+  "preserved_field_keys": 1361,
+  "new_field_keys": 13,
+  "summary": {
+    "companies": 100,
+    "company_states": {
+      "review_required": 100
+    },
+    "accepted_facts": 695,
+    "arithmetic_results": 481,
+    "scored_companies": 0
+  },
+  "pipeline": {
+    "requested_candidates": 100,
+    "metadata_states": {
+      "metadata_available_legal_type_pending": 100
+    },
+    "annual_document_summary": {
+      "companies": 100,
+      "new_documents": 25,
+      "reused_documents": 25,
+      "periods": 50,
+      "registered_shares": 50
+    },
+    "financial_query_companies": 100,
+    "companies_with_financial_facts": 98,
+    "period_unresolved_companies": 0,
+    "deferred_duration_fields": 450,
+    "public_transport_get_calls": 164,
+    "seeded_public_observations": 0,
+    "seed_observations_outside_freshness": 0,
+    "archived_transport_reuses": 1,
+    "call_measure": "public transport GET invocations, excluding internal retries and private Finnhub transport",
+    "all_financial_references_archived": true,
+    "archived_financial_facts": 695
+  },
+  "previously_unattempted": {
+    "total": 39,
+    "attempted": 13,
+    "still_missing": 26,
+    "queries": [
+      {
+        "symbol": "AKAM",
+        "field": "net_income",
+        "key": "53b53076c8c42e81d27b57ec94ad6ed02f50d9afce17550e89bdc196e256ec3b",
+        "attempted": false
+      },
+      {
+        "symbol": "AKAM",
+        "field": "operating_cash_flow",
+        "key": "f339b77aab696760b7c1e9b0c58c4541c447ae843ebbc70266383654cc872c0f",
+        "attempted": false
+      },
+      {
+        "symbol": "AKAM",
+        "field": "capital_expenditure",
+        "key": "105585b294ff71d0402ec2af0ce3e361251b5d3ad976c403c51917af7e9a29d5",
+        "attempted": false
+      },
+      {
+        "symbol": "AKAM",
+        "field": "revenue_total",
+        "key": "d3272e2eafdad13de64509fe2631205db42c1b1dbf0997414e4fb4e665c47b56",
+        "attempted": false
+      },
+      {
+        "symbol": "AKAM",
+        "field": "profit_loss",
+        "key": "77a7328765b20b9505c8ce32c89c972c33d50610a51361fefb96b76a1070f390",
+        "attempted": false
+      },
+      {
+        "symbol": "AKAM",
+        "field": "productive_asset_cash_payments",
+        "key": "c10c26ad395469743ee4f20146090ed3d047c79d0c82d8fd9bc8ae94039abf8d",
+        "attempted": false
+      },
+      {
+        "symbol": "AKAM",
+        "field": "current_assets",
+        "key": "5772aedd8a0d3406d95f4c47cde69f6c2ce612e9dd5b3943dfc6444ca232c6b5",
+        "attempted": true
+      },
+      {
+        "symbol": "AKAM",
+        "field": "current_liabilities",
+        "key": "cc73d6d0b1b0e0db3257e5d1b83c559ee3bd4f832fb066da97b0410cd3355bfd",
+        "attempted": true
+      },
+      {
+        "symbol": "AKAM",
+        "field": "cash_equivalents",
+        "key": "a2cebe225b16b5bc9fe21a208c20b3b6062e065b9e2f44469a2340001afca59d",
+        "attempted": true
+      },
+      {
+        "symbol": "AKAM",
+        "field": "operating_income",
+        "key": "b09c73a9fcd0215192966fc84ab045c61eb7dd10c32ae1880b574cae57855061",
+        "attempted": false
+      },
+      {
+        "symbol": "AKAM",
+        "field": "gross_profit",
+        "key": "e8fffe4a19a6b823643bbb885a226aeca9a0470e0cc7d6bd455ccde0efd4a89c",
+        "attempted": false
+      },
+      {
+        "symbol": "FFIV",
+        "field": "revenue",
+        "key": "73482763306a8d60a9a58a9c14c2dd5d5c92a19469041605ef72ee2bc371ff60",
+        "attempted": false
+      },
+      {
+        "symbol": "FFIV",
+        "field": "assets",
+        "key": "fb7fa2d0f0de91632e49fc571b8908adf7e845a73231b12ebc39fefe7161c57c",
+        "attempted": true
+      },
+      {
+        "symbol": "FFIV",
+        "field": "liabilities",
+        "key": "11d7b8d698af88516e793f9bf732fdfe40a293dda972fdb9e9f14ed8925e69c3",
+        "attempted": true
+      },
+      {
+        "symbol": "FFIV",
+        "field": "net_income",
+        "key": "3cddff2f1e3cb78a4d577cd0bf278739d34a57504388fd75dbaeae260413307a",
+        "attempted": false
+      },
+      {
+        "symbol": "FFIV",
+        "field": "operating_cash_flow",
+        "key": "ec1d5d457d239a0fe45686a9eb922c5eae59da12a83295ea991aa461001f2167",
+        "attempted": false
+      },
+      {
+        "symbol": "FFIV",
+        "field": "capital_expenditure",
+        "key": "08241af51ae4f42e2aff6db898023353bb1ecfe3e9bafe01c30f8acea5c27464",
+        "attempted": false
+      },
+      {
+        "symbol": "FFIV",
+        "field": "revenue_total",
+        "key": "518c07dfbed59da9ea70ae70bf036bc8c1d9150e0134aea39ea7dfe4257b4ed4",
+        "attempted": false
+      },
+      {
+        "symbol": "FFIV",
+        "field": "profit_loss",
+        "key": "4674148e85ccab8728f0b28a38688c7249df2ae3691023c64762191102b87295",
+        "attempted": false
+      },
+      {
+        "symbol": "FFIV",
+        "field": "productive_asset_cash_payments",
+        "key": "4f6e1ec84710231d3a0fe90756bbba1a3780fcaaec85f09f535f6e5c92d401a6",
+        "attempted": false
+      },
+      {
+        "symbol": "FFIV",
+        "field": "current_assets",
+        "key": "bf1a3ef765b1e6b063e5c08ff10e10a2a002766a85b30c00ce876d59aae63be6",
+        "attempted": true
+      },
+      {
+        "symbol": "FFIV",
+        "field": "current_liabilities",
+        "key": "ab10e7b1625089f1e1f7d3e06776c7f9fe98dbecb08238f68aa7b88086a2bcd0",
+        "attempted": true
+      },
+      {
+        "symbol": "FFIV",
+        "field": "cash_equivalents",
+        "key": "9bbd28dd28f1ff94550999d0d61e2491bd0a0344c9bab201fdc9c02ad41210d5",
+        "attempted": true
+      },
+      {
+        "symbol": "FFIV",
+        "field": "operating_income",
+        "key": "d9a18d376351e81413c924f265de70f8a24a18e4b4f86b3aed06d24cffd8182b",
+        "attempted": false
+      },
+      {
+        "symbol": "FFIV",
+        "field": "gross_profit",
+        "key": "2a22b1fd4bb027631b3271ee354ce988fc45fa3cc7fd4ba991a117aa76936035",
+        "attempted": false
+      },
+      {
+        "symbol": "TYL",
+        "field": "revenue",
+        "key": "252b3723f3b8b7bf7b804d5434b4ef8c99bcb2ce9d938b994b4f319426fbbd8c",
+        "attempted": false
+      },
+      {
+        "symbol": "TYL",
+        "field": "assets",
+        "key": "1f61ecce8556991c4a713041fd3301ec1c0adb2cd0dec39e1a0e54e09cdc28e7",
+        "attempted": true
+      },
+      {
+        "symbol": "TYL",
+        "field": "liabilities",
+        "key": "9ae70c70d4e1c193c6b37692327017408fd133def0aab6283685cd05a058a195",
+        "attempted": true
+      },
+      {
+        "symbol": "TYL",
+        "field": "net_income",
+        "key": "af9f7a0e3b03a79c69a4045dd3682e379546f8b4f6b47a2f865ccdc3ff69a8fb",
+        "attempted": false
+      },
+      {
+        "symbol": "TYL",
+        "field": "operating_cash_flow",
+        "key": "2a568b8fe1cdef7a62ad9270bb51b2cd7b8384148d3ef3ce6bc162f5537016d7",
+        "attempted": false
+      },
+      {
+        "symbol": "TYL",
+        "field": "capital_expenditure",
+        "key": "6eb3b6e3361a20c015a4c1ffcfa0655f12be0170bcd3923333e7cf0c3ab512d7",
+        "attempted": false
+      },
+      {
+        "symbol": "TYL",
+        "field": "revenue_total",
+        "key": "9d42f7a604fef529772916ee7f65afdec05153e71712cf6369176b8dd786eecd",
+        "attempted": false
+      },
+      {
+        "symbol": "TYL",
+        "field": "profit_loss",
+        "key": "01cd3370d13e9d56b3331fd07901244c40d4707dc40e341b8793fc145011d17d",
+        "attempted": false
+      },
+      {
+        "symbol": "TYL",
+        "field": "productive_asset_cash_payments",
+        "key": "94d4220623888df25d4ca150606fae5a41101e281b1aad9997741227a1e105c7",
+        "attempted": false
+      },
+      {
+        "symbol": "TYL",
+        "field": "current_assets",
+        "key": "eb51cd78a4fa4aaf650fe2520d8f676a379ea7f8cf2d1093596fa9c5f8186ff1",
+        "attempted": true
+      },
+      {
+        "symbol": "TYL",
+        "field": "current_liabilities",
+        "key": "aafd64a402ea8769ac2cd99546f1d033881d4a1a92bdd1f4e84b98b0df6ffe99",
+        "attempted": true
+      },
+      {
+        "symbol": "TYL",
+        "field": "cash_equivalents",
+        "key": "3cc5ef9cc0adf7d7a5bc7b2b795129771800252a6926625457e0e15c18259fc5",
+        "attempted": true
+      },
+      {
+        "symbol": "TYL",
+        "field": "operating_income",
+        "key": "ac220c0b19a0927f4bb98961c18cc2645e60e94e01ca8213243d9f049f4205d7",
+        "attempted": false
+      },
+      {
+        "symbol": "TYL",
+        "field": "gross_profit",
+        "key": "0cbddd7b20f75696337855275be2cb4dd495bd882e3dbaa39a35d54ea4cf6b23",
+        "attempted": false
+      }
+    ]
+  },
+  "offline_document_replay": {
+    "summary": {
+      "companies": 100,
+      "new_documents": 0,
+      "reused_documents": 100,
+      "periods": 100,
+      "registered_shares": 100
+    },
+    "deferred_duration_fields": 0,
+    "network_calls": 0,
+    "original_state_unchanged": true,
+    "live_acceptance": false
+  },
+  "artifact_sha256": {
+    "state": "f319c6e6b69db2c57796656a05a108616d710136e3f75b58c8ebb834d0713a30",
+    "evidence": "f8d702bbc7a1242474a96a25354d7c66e6e7a8aa0f118cda315092010f0282a2"
+  },
+  "mvp_accepted": false,
+  "backups": {
+    "state": "libfile_f385ef9b2ea08191b1de30b45fcffe21",
+    "evidence": "libfile_6fada512135481919a47ead0de4387d0"
+  },
+  "reviewed_sequence_limit": 8
+}
