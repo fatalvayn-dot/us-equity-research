@@ -183,7 +183,10 @@ def run_mvp(payload, *, state_dir, user_agent, max_new_metadata=None, max_new_do
                 if response is not None:archive.record(response)
                 return response
         documents=ArchivedFilings(root/'documents.sqlite')
-        docs=DocumentRunner(documents,http(['www.sec.gov'],accept='text/html')).run(doc_rows,max_new_documents=max_new_documents)
+        # Fresh submissions selected this exact accession/document/period. Reuse
+        # its verified historical bytes without claiming a new observation.
+        # Market data, submissions and financial fact TTLs remain unchanged.
+        docs=DocumentRunner(documents,http(['www.sec.gov'],accept='text/html'),ttl=None).run(doc_rows,max_new_documents=max_new_documents)
         save_json(root/'documents.json',docs);pulse()
         if progress:progress(dict(phase='documents',summary=docs['summary']))
         plan,unresolved,deferred=financial_plan(normalized,docs);save_json(root/'plan.json',plan)

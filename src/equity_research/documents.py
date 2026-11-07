@@ -36,7 +36,8 @@ class FilingStore(BatchStore):
         try:
             response=Response(row[0],row[1],datetime.fromisoformat(row[3]))
             if response.url!=annual['source_url'] or response.sha256!=row[2] or not aware(response.retrieved_at):raise ValueError('invalid source checkpoint')
-            if timedelta(0)<=now-response.retrieved_at<ttl:return response
+            age=now-response.retrieved_at
+            if age>=timedelta(0) and (ttl is None or age<ttl):return response
         except (ValueError,TypeError):self.events.append(dict(key=key,event='invalid_document_checkpoint'))
         return None
 
@@ -56,7 +57,7 @@ class FilingStore(BatchStore):
 
 class DocumentRunner:
     def __init__(self,store,transport,*,clock=None,ttl=timedelta(hours=6),lease_ttl=timedelta(minutes=15)):
-        if min(ttl,lease_ttl)<=timedelta(0):raise ValueError('positive checkpoint policy required')
+        if (ttl is not None and ttl<=timedelta(0)) or lease_ttl<=timedelta(0):raise ValueError('positive checkpoint policy required')
         self.store,self.transport=store,transport
         self.clock=clock or (lambda:datetime.now(timezone.utc));self.ttl=ttl;self.lease_ttl=lease_ttl
 

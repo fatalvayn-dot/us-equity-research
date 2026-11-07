@@ -50,6 +50,26 @@ class DocumentTests(unittest.TestCase):
   self.runner.run([row()],max_new_documents=1);self.now+=timedelta(hours=7)
   r=self.runner.run([row()],max_new_documents=0)
   self.assertEqual(r['companies'][0]['state'],'not_started');self.assertEqual(len(self.transport.calls),1)
+ def test_exact_archival_document_survives_ttl_without_new_observation(self):
+  self.runner.run([row()],max_new_documents=1);self.now+=timedelta(days=30)
+  runner=DocumentRunner(self.store,self.transport,clock=lambda:self.now,ttl=None)
+  result=runner.run([row()],max_new_documents=0)
+  self.assertEqual(result['summary']['reused_documents'],1)
+  self.assertEqual(result['companies'][0]['source_evidence']['retrieved_at'],NOW.isoformat())
+  self.assertIn('period',result['companies'][0]);self.assertFalse(result['scope_approved'])
+  self.assertEqual(len(self.transport.calls),1)
+ def test_archival_policy_rejects_changed_accession_corruption_and_future_bytes(self):
+  self.runner.run([row()],max_new_documents=1)
+  runner=DocumentRunner(self.store,self.transport,clock=lambda:self.now,ttl=None)
+  changed=row();changed['annual']['accession']='0000320193-26-000002'
+  changed['annual']['source_url']=changed['annual']['source_url'].replace('26000001','26000002')
+  self.assertEqual(runner.run([changed],max_new_documents=0)['companies'][0]['state'],'not_started')
+  self.now=NOW-timedelta(hours=1)
+  self.assertEqual(runner.run([row()],max_new_documents=0)['companies'][0]['state'],'not_started')
+  self.now=NOW+timedelta(days=30)
+  with self.store.db:self.store.db.execute("UPDATE filing_documents_v1 SET sha256='wrong'")
+  self.assertEqual(runner.run([row()],max_new_documents=0)['companies'][0]['state'],'not_started')
+  self.assertEqual(len(self.transport.calls),1)
  def test_failure_is_typed_and_persisted_without_invented_fact(self):
   self.transport.error=True;r=self.runner.run([row()],max_new_documents=1)
   self.assertEqual(r['companies'][0]['state'],'rate_limit');self.assertNotIn('period',r['companies'][0])

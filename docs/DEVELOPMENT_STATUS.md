@@ -1,5 +1,30 @@
 # Development status
 
+## 7 Kasım 2026 — Yıllık belge devamlılığı ve MVP yol haritası
+
+Başlangıç main 944e37e (PR #38); açık PR yok, ana dal CI başarılı.
+MVP hattı SEC üstverisinden seçilmiş aynı accession/belge/dönem için arşivdeki
+SHA doğrulanmış dosyayı altı saat geçtiği için düşürmeyecek. Özgün retrieved_at
+korunur; yeni gözlem veya aktif adi hisse kabulü sayılmaz. Değişen belge anahtarı,
+bozuk özet ve gelecekteki kayıt zamanı reddedilir. Fiyat, finansal değer ve
+SEC üstveri tazelik sınırları değişmedi; genel DocumentRunner TTL varsayılanı da
+korundu. Yalnız güncel metadata ile çalışan MVP hattı arşiv yeniden kullanımını açar.
+
+16 belge + 16 MVP testi başarılı. Otuz günlük belge ve sıfır indirme bütçesiyle
+kayıtlı örnek uçtan uca denemesinde dönem korunur, yeni GET yok, skor 0.
+Bu fixture kontrolüdür; yeni canlı kabul değildir. Tam regresyon ve PR CI
+birleşim öncesi denetlenecek. Dilim sınırı artırılmadı, yeni toplayıcı açılmadı.
+
+Son run 42309920856 paketleri bağımsız indirilip denetlenmedi. Önceki oturumun
+log özeti 98 şirkette 695 değer/50 belge bildiriyor; bağımsız arşiv sayacı değildir.
+Son bağımsız paket denetimi #13: 96 şirket/933 değer/100 belge/0 skor.
+Veri silinmesi veya tam düzelmiş canlı sonuç iddiası yok.
+
+İş sırası ve koşullu 10–12 Kasım hedefi: [MVP_ROADMAP_TR.md](MVP_ROADMAP_TR.md).
+Sonraki iş: son arşiv bütünlüğü ve 39 alanı doğrula; ardından aktif adi hisse,
+karşılaştırma dönemleri, fiyat/sektör/risk ve Türkçe rapor kabul zincirini tamamla.
+Work bağımsız yürütme hatası açık; ilk sürüm kabul edilmiş değil.
+
 ## 7 Kasım 2026 — İnceleme sınırında veri toplamamanın görünür kılınması
 
 Başlangıç main `2281e37019a7ac45b0c1d42b2e31100ae149dbea`, PR #37;
