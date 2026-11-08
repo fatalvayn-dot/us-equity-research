@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-11-08",
+  "status": "first_verified_full_research_scores_not_full_mvp",
+  "repository_commit": "3341231e4c7463fd379780699c6dc6e70edb5c68",
+  "financial_run_id": 42455760184,
+  "valuation_run_id": 42466713390,
+  "score_run_id": 42466864670,
+  "score_artifact_id": 13612260683,
+  "cutoff_utc": "2026-11-08T09:22:22.044620+00:00",
+  "summary": {
+    "candidates": 100,
+    "scored_companies": 3,
+    "unscored": 97,
+    "critical_review": 2
+  },
+  "ranking": [
+    {
+      "rank": 1,
+      "symbol": "MU",
+      "score": "92",
+      "model_id": "semiconductors_v1"
+    },
+    {
+      "rank": 2,
+      "symbol": "AAPL",
+      "score": "67.5",
+      "model_id": "electronic_computers_v1"
+    },
+    {
+      "rank": 3,
+      "symbol": "MSFT",
+      "score": "66.5",
+      "model_id": "prepackaged_software_v1"
+    }
+  ],
+  "unscored_blockers": {
+    "valuation_source_evidence_required": 84,
+    "specialized_or_unmodeled_sector": 6,
+    "complete_financial_review_required": 5,
+    "critical_financial_review": 2
+  },
+  "verifications": {
+    "artifact_zip_crc": "passed",
+    "report_sha256": "f3fe6ccc297b150163008c35a213d3f3da45a11d61377e9ce9ef8c06324539f5",
+    "report_markdown_sha256": "4a0eacb1db078cb9eadfda13acb1c70d50ab52f2e4cc70d11ddc3cbd424e1335",
+    "report_html_sha256": "5e1cccc9b00e3c6a3b9c865018b5ffd31d966690f01b3eeedd1a374bafddb42d",
+    "all_six_component_totals_matched": true,
+    "all_scored_have_nine_financial_confirmations": true,
+    "all_scored_have_prior_revenue_confirmation": true
+  },
+  "safety": {
+    "investment_approved": false,
+    "mvp_accepted": false,
+    "real_money_operations": false,
+    "legacy_repository_untouched": true
+  },
+  "limitations": [
+    "Sektör kapsamı yalnız üç SEC SIC modeli",
+    "Mevcut canlı arşivde 84 şirket için değerleme kanıtı eksik",
+    "Getiri tahmini ve yatırım onayı yapılmadı"
+  ]
+}
