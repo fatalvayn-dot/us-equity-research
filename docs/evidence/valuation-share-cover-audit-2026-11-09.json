@@ -1,0 +1,604 @@
+{
+  "mode": "archived_replay_zero_get",
+  "valuation_run_id": 42466713390,
+  "valuation_artifact_id": 13612550004,
+  "financial_run_id": 42455760184,
+  "artifact_sha256": "d56287914f22ab6ff3ad1a57649db56228acf0a73ecbf9833c7f564ee7e40445",
+  "as_of": "2026-11-08T09:21:24.270658+00:00",
+  "original_rejections": [
+    {
+      "symbol": "LLY",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "verify_share_class",
+          "additional ticker lacks unambiguous cover classification"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000059478.json",
+          "sha256": "72ec001637e16887021c76251eaf05056bdaaf9a4e68ef62316b9be99861dbdc",
+          "retrieved_at": "2026-11-08T06:14:06.099870+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000059478.json",
+          "sha256": "cb231e86259fd06aa77814ca1e46cce9bf0bfd9dc5702f4eacaada2f1b74d3e5",
+          "retrieved_at": "2026-11-08T06:10:53.006732+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000108/lly-20260930.htm",
+          "sha256": "09f385174462117631e8ea4d891b66120a8ec55987780ca0047731fae3ea33ec",
+          "retrieved_at": "2026-11-08T08:57:55.366929+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "WMT",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "verify_share_class",
+          "additional ticker lacks unambiguous cover classification"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+          "sha256": "49330f98609f70fcef4054edc90bc811398a58c4bf26dc0b218d607967a8dbe4",
+          "retrieved_at": "2026-11-08T06:14:37.567345+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000104169.json",
+          "sha256": "974a8f4fe73fc5e16ea8bf18ba149f747fe778ce05a749e46e3006e7bc73216b",
+          "retrieved_at": "2026-11-08T06:10:54.044630+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm",
+          "sha256": "cf320c1b47a306987e1b6aa5bdfc87031681aececbb24ccd44f535fb5f666af3",
+          "retrieved_at": "2026-11-08T08:57:58.951219+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "JPM",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "verify_share_class",
+          "additional common or unknown security requires review"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
+          "sha256": "8d3068d832a1b94f68b9d8398764a392a3786a6b7e61b9c686c44851998fc648",
+          "retrieved_at": "2026-11-08T06:15:39.281371+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000019617.json",
+          "sha256": "74949d55452a9ecfbbd06b5a99682ced852d80085b6a7aa2149fab91eaac7b6b",
+          "retrieved_at": "2026-11-08T06:10:55.132301+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026069523/jpm-20260930.htm",
+          "sha256": "855474af138a1eb696e1c05ac196483088064317c02a6eaf88197a56cbf6604c",
+          "retrieved_at": "2026-11-08T08:58:02.741180+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "JNJ",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "verify_share_class",
+          "additional ticker lacks unambiguous cover classification"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000200406.json",
+          "sha256": "9ce98e50414e9a6704eaf485e1868c2298c6ae36acc85a82c0a3737485303be7",
+          "retrieved_at": "2026-11-08T06:15:40.391144+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000200406.json",
+          "sha256": "826d25d6bf11a6a11f2a95444fd68456e913555e16a1cd416f714c2b8d32c935",
+          "retrieved_at": "2026-11-08T06:10:55.509517+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm",
+          "sha256": "6f477a1e9dfd0d6ef73226d94eacd130e74c5459d7d201b587c88e71a9746971",
+          "retrieved_at": "2026-11-08T08:58:04.927456+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "MA",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "disclosed_shares",
+          "stale disclosed share date"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json",
+          "sha256": "eec2f64179fe268380a6f9f4b5e3da53a9c1c5adb988aa31cc40c8372c0d8899",
+          "retrieved_at": "2026-11-08T06:15:41.187839+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "ABBV",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "verify_share_class",
+          "additional ticker lacks unambiguous cover classification"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001551152.json",
+          "sha256": "6ec0b9f0faeeb8ec745ed192956acb87604fe695b36755173727c0c789411ff6",
+          "retrieved_at": "2026-11-08T06:15:41.915621+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0001551152.json",
+          "sha256": "0f94c979a7a070e4fbce9dc9556efc91335d1d061483fe995c1b92debc8dfd6c",
+          "retrieved_at": "2026-11-08T06:10:56.531369+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000037/abbv-20260930.htm",
+          "sha256": "3863f811dbde1a55511d459dd17349e1433c05f4046e4a7189390fe7a8ecb859",
+          "retrieved_at": "2026-11-08T08:58:07.301405+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "KO",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "verify_share_class",
+          "additional ticker lacks unambiguous cover classification"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+          "sha256": "87a4173fcd3d662d18d19e0e885095aa5e3812b74c54d1ee55808ff1540a8081",
+          "retrieved_at": "2026-11-08T06:17:17.553357+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000021344.json",
+          "sha256": "3b114b5dd31bb97430a45b569b8b45ef43792205e0b8fa870d13a2e80a9a6580",
+          "retrieved_at": "2026-11-08T06:11:00.030253+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm",
+          "sha256": "097dedb0db22ab7f489212fba308eda667063057a1ee8f20614fb966d64ce4ac",
+          "retrieved_at": "2026-11-08T09:21:09.047684+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "PG",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "verify_share_class",
+          "additional ticker lacks unambiguous cover classification"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000080424.json",
+          "sha256": "c6ae61e012a2b4aadeaa49400847842dd637a4a4a03cbdf4dfff27dffd78f8d1",
+          "retrieved_at": "2026-11-08T06:17:48.486064+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000080424.json",
+          "sha256": "cbc835bcc9b48f8cfdea4081df60a10a3012a66b48e26c98dc5bba217ca07c73",
+          "retrieved_at": "2026-11-08T06:11:00.554969+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000256/pg-20260930.htm",
+          "sha256": "fe315354a8ff779a110f9c45b743af1fe290c56ce338e080f92173953076a55d",
+          "retrieved_at": "2026-11-08T09:21:10.768682+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "GS",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "disclosed_shares",
+          "invalid share observation"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000886982.json",
+          "sha256": "4b4d1f37923182ca0dd918cff58cd202dd9caa401672474d8801427c8c6aad63",
+          "retrieved_at": "2026-11-08T06:19:32.204612+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "GEV",
+      "outcome": "invalid_data",
+      "errors": [],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001996810.json",
+          "sha256": "1f824563aae3bc13d97f82cb379cf644d9bdc2c1e10fa12493f7dfb626cbdfce",
+          "retrieved_at": "2026-11-08T06:20:38.003475+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "SNDK",
+      "outcome": "invalid_data",
+      "errors": [],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0002023554.json",
+          "sha256": "33374cf440b069e7563af577070e9cc66a43923f3e9b9fcf0dab800308435768",
+          "retrieved_at": "2026-11-08T06:22:15.622945+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "BLK",
+      "outcome": "invalid_data",
+      "errors": [],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0002012383.json",
+          "sha256": "433252efcac82512f7ddea1f332d5ad9f8946a6cca98c85c2db11fc6c3caff94",
+          "retrieved_at": "2026-11-08T06:23:18.364674+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "NEE",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "disclosed_shares",
+          "stale disclosed share date"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000753308.json",
+          "sha256": "99e84510f602363147dc6c83321aa76859e185d0807019d1efc9e0da60491954",
+          "retrieved_at": "2026-11-08T06:24:53.726444+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "ACN",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "disclosed_shares",
+          "stale disclosed share date"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001467373.json",
+          "sha256": "83258e85f0e5ef6d55fe62cb43365d5bb764c3eb0786f05c13c57becd99d5fd8",
+          "retrieved_at": "2026-11-08T06:25:28.279166+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "SCCO",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "disclosed_shares",
+          "invalid share observation"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001001838.json",
+          "sha256": "597174f42141f6e4c47a6de9a6e4e840e8837c71369fedffda92d315f100c5d2",
+          "retrieved_at": "2026-11-08T06:25:59.523317+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "ADBE",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "disclosed_shares",
+          "invalid share observation"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000796343.json",
+          "sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "retrieved_at": "2026-11-08T06:28:15.433776+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "WDAY",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "disclosed_shares",
+          "stale disclosed share date"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001327811.json",
+          "sha256": "c953cbd3b65fdf9bab67f221d23190f77a9e8df6e1e14f38dce8c1d02380a71b",
+          "retrieved_at": "2026-11-08T06:28:50.676899+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "ON",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "disclosed_shares",
+          "invalid share observation"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001097864.json",
+          "sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "retrieved_at": "2026-11-08T06:29:56.073832+00:00"
+        }
+      ]
+    }
+  ],
+  "replayed_rejections": [
+    {
+      "symbol": "LLY",
+      "outcome": "verified_dated_share_class",
+      "errors": []
+    },
+    {
+      "symbol": "WMT",
+      "outcome": "verified_dated_share_class",
+      "errors": []
+    },
+    {
+      "symbol": "JPM",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "verify_share_class",
+          "additional common or unknown security requires review"
+        ]
+      ]
+    },
+    {
+      "symbol": "JNJ",
+      "outcome": "verified_dated_share_class",
+      "errors": []
+    },
+    {
+      "symbol": "MA",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "disclosed_shares",
+          "stale disclosed share date"
+        ]
+      ]
+    },
+    {
+      "symbol": "ABBV",
+      "outcome": "verified_dated_share_class",
+      "errors": []
+    },
+    {
+      "symbol": "KO",
+      "outcome": "verified_dated_share_class",
+      "errors": []
+    },
+    {
+      "symbol": "PG",
+      "outcome": "verified_dated_share_class",
+      "errors": []
+    },
+    {
+      "symbol": "GS",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "disclosed_shares",
+          "invalid share observation"
+        ]
+      ]
+    },
+    {
+      "symbol": "GEV",
+      "outcome": "invalid_data",
+      "errors": []
+    },
+    {
+      "symbol": "SNDK",
+      "outcome": "invalid_data",
+      "errors": []
+    },
+    {
+      "symbol": "BLK",
+      "outcome": "invalid_data",
+      "errors": []
+    },
+    {
+      "symbol": "NEE",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "disclosed_shares",
+          "stale disclosed share date"
+        ]
+      ]
+    },
+    {
+      "symbol": "ACN",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "disclosed_shares",
+          "stale disclosed share date"
+        ]
+      ]
+    },
+    {
+      "symbol": "SCCO",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "disclosed_shares",
+          "invalid share observation"
+        ]
+      ]
+    },
+    {
+      "symbol": "ADBE",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "disclosed_shares",
+          "invalid share observation"
+        ]
+      ]
+    },
+    {
+      "symbol": "WDAY",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "disclosed_shares",
+          "stale disclosed share date"
+        ]
+      ]
+    },
+    {
+      "symbol": "ON",
+      "outcome": "invalid_data",
+      "errors": [
+        [
+          "disclosed_shares",
+          "invalid share observation"
+        ]
+      ]
+    }
+  ],
+  "recovered": [
+    "ABBV",
+    "JNJ",
+    "KO",
+    "LLY",
+    "PG",
+    "WMT"
+  ],
+  "recovered_counts": {
+    "ABBV": {
+      "value": "1767616306",
+      "disclosed_on": "2026-10-26",
+      "cover_only_debt_count": 5
+    },
+    "JNJ": {
+      "value": "2407310266",
+      "disclosed_on": "2026-10-15",
+      "cover_only_debt_count": 10
+    },
+    "KO": {
+      "value": "4301902335",
+      "disclosed_on": "2026-10-26",
+      "cover_only_debt_count": 16
+    },
+    "LLY": {
+      "value": "940745031",
+      "disclosed_on": "2026-10-26",
+      "cover_only_debt_count": 8
+    },
+    "PG": {
+      "value": "2317783143",
+      "disclosed_on": "2026-09-30",
+      "cover_only_debt_count": 16
+    },
+    "WMT": {
+      "value": "7933746241",
+      "disclosed_on": "2026-08-26",
+      "cover_only_debt_count": 8
+    }
+  },
+  "unchanged_verified_share_classes": 14,
+  "replay_summary": {
+    "candidates": 100,
+    "new_get_invocations": 0,
+    "get_invocations_by_host": {},
+    "identity_states": {
+      "exact_match": 100
+    },
+    "share_states": {
+      "verified_dated_share_class": 20,
+      "missing_disclosed_shares": 5,
+      "invalid_data": 12,
+      "pending_source_collection": 63
+    },
+    "price_states": {
+      "valid": 25,
+      "pending_source_collection": 75
+    },
+    "history_states": {
+      "valid": 20,
+      "not_started": 80
+    }
+  },
+  "mvp_accepted": false
+}

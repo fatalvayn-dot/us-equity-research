@@ -169,6 +169,26 @@ class ValuationTests(unittest.TestCase):
         self.assertEqual(other['symbol'],'AAPL-P');self.assertEqual(other['cover_symbol'],'AAPL PRP')
         self.assertEqual(other['symbol_corroboration'],'single_unambiguous_non_common_cover_alias')
 
+    def test_cover_only_fixed_coupon_debt_is_excluded_from_common_share_count(self):
+        shares = disclosed_shares(cf(), cik=CIK, as_of=NOW)
+        document = filing_with_other_security(symbol='AAPL30', title='1.125% Senior Notes due 2030')
+        proof = verify_share_class(shares, meta(), document, symbol='AAPL', as_of=NOW)
+        self.assertEqual(proof['value'], shares['value'])
+        self.assertEqual(proof['original_filing']['raw_sha256'], document.sha256)
+        self.assertEqual(proof['other_registered_securities'], [
+            dict(symbol='AAPL30', title='1.125% Senior Notes due 2030', exchange='Nasdaq',
+                 symbol_corroboration='cover_only_fixed_coupon_debt')])
+
+    def test_cover_only_ambiguous_security_or_unmatched_metadata_still_rejected(self):
+        shares = disclosed_shares(cf(), cik=CIK, as_of=NOW)
+        for title in ('Preferred Stock', '1.125% Convertible Notes due 2030', 'Common Stock'):
+            with self.subTest(title=title), self.assertRaises(ProviderFailure):
+                verify_share_class(shares, meta(), filing_with_other_security(title=title),
+                                   symbol='AAPL', as_of=NOW)
+        document = filing_with_other_security(symbol='AAPL30', title='1.125% Notes due 2030')
+        with self.assertRaises(ProviderFailure):
+            verify_share_class(shares, meta(['AAPL', 'AAPL-B']), document, symbol='AAPL', as_of=NOW)
+
     def test_dimensional_share_count_never_becomes_issuer_aggregate(self):
         doc=filing();body=doc.body.replace(b'<xbrli:context id="shares">',b'<xbrli:context id="shares"><xbrli:scenario></xbrli:scenario>')
         with self.assertRaises(ProviderFailure):valuation(filing=replace(doc,body=body))

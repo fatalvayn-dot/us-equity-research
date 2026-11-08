@@ -1,5 +1,41 @@
 # Development status
 
+## 9 Kasım 2026 — SEC kapağındaki sabit kuponlu borçlar hisse adedinden ayrılıyor
+
+Başlangıç main `3441a98b7ce9c37b0576594a845ec09991add011` (PR #48).
+Main Foundation CI `42521481622` başarılı, açık PR yoktu. Son iki
+canlı kabul ve değerleme koşusu yeni artifact üretmedi. Son üretim
+finansal state/evidence `42455760184` (sequence 10, artifact
+`13608291162` ve `13607408956`), değerleme `42466713390`,
+skor `42466864670`.
+
+Değerleme artifact `13612550004` ZIP SHA-256, CRC ve SQLite bütünlüğü
+kontrol edildi. Reddedilen 18 adayın kullanılan kaynakları URL, SHA-256
+ve gözlem zamanı ile eşlendi. Altı adayın özgün kapağında, şirketin
+SEC submissions listesinde bulunmayan sabit kuponlu borç senetleri
+vardı. Bu başlıklar artık aynı kapaktaki sembol ve borsa bilgisiyle
+ayrı kanıt olarak saklanır. Belirsiz veya çelişkili kayıt ve eşleşmeyen
+metadata sembolü reddedilir. Borç sembolleri adi hisse adedine katılmaz.
+
+100 adaylık sıfır GET tekrarında özgün kesim tarihi kullanıldı.
+14 eski hisse kanıtı birebir korundu. ABBV, JNJ, KO, LLY, PG ve WMT
+için özgün SEC belgesindeki hisse adedi Company Facts ile eşleşti.
+100 kimlik, 20 tarihli hisse sınıfı/adedi, 25 geçerli fiyat ve 20
+geçerli piyasa geçmişi görüldü. 12 geçersiz kayıt hâlâ incelemede.
+Kanıt: `docs/evidence/valuation-share-cover-audit-2026-11-09.json`.
+
+25 odaklı test başarılı. İlk olumsuz test, mevcut tekli sembol takma
+adının sabit kuponlu borcu eşleşmeyen metadata sembolüyle
+ilişkilendirebildiğini gösterdi. Bu eşleme engellendi ve test geçti.
+Tam regresyon ve kesin PR head CI birleşim öncesi denetlenir.
+
+Son canlı finansal kapsam 100 metadata, 100 kayıtlı adi hisse örneklemi,
+98 finansal şirket, 961 kabul edilen değer, 704 hesaplama ve üç araştırma
+skoru. Yeni canlı kabul veya skor yok. Sequence 10 sınırı ve üretim state
+korundu. Sıradaki iş: dört adayın tarih sırası hatalı eski Company Facts
+satırlarını incele, yalnız kesin olarak eski satırlar için güvenli
+karantina testi geliştir. Güncel satır hatasında geriye dönüş yapılmaz.
+
 ## 8 Kasım 2026 — Piyasa geçmişi bütçesi doğrulanmış hisse sınıfına ayrılıyor
 
 Başlangıç main `d1d5b08c327ea5af89f627d245dde4e97319b7c8` (PR #47).
