@@ -74,6 +74,12 @@ jobs:
                 break
               fi
             done
+            if [ -z "$SOURCE_RUN" ]; then
+              # The last independently audited financial run is a bounded
+              # fallback only. Its raw source dates are never refreshed by reuse.
+              SOURCE_RUN=$(python -c "import json; print(json.load(open('docs/evidence/first-live-score-2026-11-08.json'))['financial_run_id'])")
+              echo "Son kanıtlı SEC run kimliğine geri dönüldü: $SOURCE_RUN" >> "$GITHUB_STEP_SUMMARY"
+            fi
           fi
           if ! [[ "$SOURCE_RUN" =~ ^[1-9][0-9]*$ ]]; then
             echo "::error::Kaynak run ID pozitif sayı olmalıdır"
