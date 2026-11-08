@@ -9,7 +9,9 @@ sonuç, 0 tam skor. Sonraki saatlik 42458573062 kanıt üretmeden atlandı.
 Aynı kesim tarihinde doğrulanmış fiyat, piyasa geçmişi, hisse sınıfı ve
 karşılaştırmalı önceki yıl batch'i puanlama modülüne henüz bağlanmadı.
 
-`valuation-live.yml` iş akışı, başarılı ana dal SEC koşusunun
+`valuation-live.yml` iş akışı, ana dala alındığı ilk push sırasında
+son geçerli SEC kanıt paketini seçerek ilk denemeyi de tetikler; ayrıca
+başarılı ana dal SEC koşusunun
 `live-acceptance-evidence` artifact dosyasını doğruladıktan sonra
 otomatik tetiklenecek şekilde düzenlendi. Kanıt üretmeyen dilimler atlanır;
 son başarılı değerleme çalışmasının ayrı durum paketi yüklenebilir; 51 GET
