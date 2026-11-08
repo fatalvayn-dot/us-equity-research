@@ -1,49 +1,53 @@
 # Canlı değerleme kaynağı toplama — ilk prototip
 
-Bu iş, ana 100 şirketlik SEC finansal veri toplamasından ayrıdır. Güncel
-hisse sayısı, özgün hisse sınıfı belgesi, piyasa fiyatı ve fiyat geçmişi
-kanıtlarını toplar. Hiçbir puanlama, sektör kabulü veya gerçek işlem yapmaz.
+Bu iş, ana 100 şirketlik finansal taramadan bağımsızdır. SEC şirket kimliği,
+özgün hisse sınıfı belgesi, fiyat ve piyasa geçmişi için kaynak kanıtı toplar.
+Skor, sektör kabulü, alım/satım emri veya MVP kabulü üretmez.
 
-## Çalıştırma
+## Otomatik çalışma
 
-1. Önce GitHub Actions **Canlı 100 şirket kabulü** çalışmasının
-   `live-acceptance-evidence` artifact dosyasının mevcut olduğunu doğrula.
-   Örnek doğrulanmış kaynak çalışma: `42455760184` (sequence 10,
-   8 Kasım 2026). Bu sayı yeni çalışma yapılınca güncellenmelidir.
-2. Actions altında **Canlı değerleme kaynakları** iş akışını `main`
-   dalında manuel çalıştır.
-3. `source_run_id` alanına kaynak iş akışının gerçek sayısal run ID'sini gir.
-   İlk denemede `max_new_requests=51` kullan. Erişim hatası varsa
-   aynı taramayı bilinçsizce büyütme.
-4. Sonraki değerleme taramasında `valuation_resume_run_id` alanına bir önceki
-   **değerleme** çalışmasının sayısal run ID'sini yaz. İlk çalışmada boş
-   bırak. Böylece mevcut kaynak ve negatif sonuç kayıtları silinmeden
-   tekrar kullanılabilir. Yeni kaynak `source_run_id` değeri finansal
-   taramanın; `valuation_resume_run_id` ise değerleme taramasının ID'sidir.
-5. Sonuçtaki `valuation-source-state` artifact dosyasını ve Türkçe
-   Actions özetini kontrol et. `report.json` içindeki `identity_states`,
-   `share_states`, `price_states`, `history_states` ayrı ayrı okunmalıdır.
+Ana daldaki `Canlı 100 şirket kabulü` iş akışı **başarıyla tamamlandığında**
+değerleme kaynakları iş akışı tetiklenir. İş akışı önce SEC koşusunun gerçekten
+`live-acceptance-evidence` artifact dosyası üretip üretmediğini GitHub API
+ile doğrular. Önceki kontrol dilimi sınırına ulaşıp veri toplamayı atlamışsa
+kanıt yoktur ve değerleme toplaması da atlanır.
 
-Kaynak dosyalar `data/valuation-import/live-sources` altına indirilir,
-SHA ve içerik bütünlüğü `read_bundle` ile denetlenir. Eski gözlemler
-güncelleştirilmiş gibi gösterilmez. Değerleme verileri
-`data/valuation-current` içinde tutulur; önceki finansal çalışma
-veritabanlarına yazılmaz.
+Yalnız aynı depodaki ana daldan gelen başarılı SEC koşuları otomatik
+işlenir; PR koşuları devralınmaz. İndirilen kaynak paketinin içerik ve SHA
+bütünlüğü mevcut `read_bundle` denetiminden geçer. Son başarılı değerleme
+koşusunun `valuation-source-state` artifact dosyası mevcutsa otomatik
+yüklenir; yoksa yeni bir durum diziniyle başlanır. Tek çalışma grubu,
+`cancel-in-progress: false` ve SQLite kilitleri çakışma riskini azaltır.
 
-## Kabul kapısı
+Otomatik çalışmanın yeni GET bütçesi **51**'dir. Veri yeniden tarih verilerek
+güncellenmez; mevcut 15 dakikalık fiyat ve 6 saatlik kaynak tazelik kuralları
+korunur. Başarılı iş akışı skorlu yatırım araştırması anlamına gelmez.
 
-Başarılı workflow = yalnız işlemin başarıyla tamamlanmasıdır.
-`mvp_accepted=false`, `investment_approved=false`, `total_score=null`
-korunur. Hisse sınıfı, güncel fiyat ve finansal girdiler ayrı denetlenmeden
-yatırım raporu veya öneri üretilmez. Bu paketten sonraki aşama,
-sektörü desteklenen ve yeterli dokuz temel finansal kalemi olan şirketlerde
-aynı kesim tarihinde karşılaştırma/değerleme/skor raporunu bağımsız
-testlerle doğrulamaktır.
+## Manuel tekrar
 
-## Test kanıtı
+İstenirse GitHub Actions > **Canlı değerleme kaynakları** > Run workflow:
 
-`tests/test_valuation_live_workflow.py` manuel tetik, ana dal,
-kaynak artifact, SEC kimliği, istek üst sınırı ve güvenli çıktı
-kontrollerini kapsar. PR CI ve gerçek Actions denemesi ayrı kanıtlardır;
-PR testleri başarıyla geçse bile ilk gerçek fiyat toplama henüz yapılmış
-sayılmaz.
+- Branch: `main`
+- `source_run_id`: gerçekten veri üretmiş finansal çalışmanın sayısal run ID'si
+- `valuation_resume_run_id`: boşsa uygun önceki değerleme işi otomatik bulunur
+- `max_new_requests`: varsayılan `51` (kontrollü alternatifler 0–501)
+
+Örnek kaynak koşusu: `42455760184` (8 Kasım 2026, sequence 10).
+Bu örnek geçmiş bir kayıttır; güncel fiyatın bugün doğrulandığını göstermez.
+
+Çıktı `valuation-source-state` artifact dosyasında tutulur.
+`report.json` içinde `identity_states`, `share_states`, `price_states`
+ve `history_states` ayrı kontrol edilir. Veri toplama tamamlanmasa bile
+nedenleri kayıtlarda korunur.
+
+## Nihai puanlamaya geçiş
+
+Bu kaynaklar ile mevcut 100 şirketlik finansal batch,
+sonraki yıl karşılaştırması ve piyasa riski **aynı kaynak kesim tarihinde**
+doğrulanıp birleştirilmelidir. `score-report` altı bileşenin tüm girdilerini
+zorunlu kılar; bilinmeyen alanlara puan verilmez. Sektör ve hisse sınıfı
+engelleri gevşetilmeden en az bir gerçek şirketin 100 puanlık hesaplama
+zincirini geçtiği canlı raporla gösterilmelidir.
+
+Test: `tests/test_valuation_live_workflow.py`. CI başarısı canlı kanıt
+toplandığı veya ilk puan üretildiği anlamına gelmez.
