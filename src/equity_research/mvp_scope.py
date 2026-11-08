@@ -26,7 +26,7 @@ def collect_common_evidence(candidates, metadata, archive, transport_factory, *,
         transport_factory(['www.sec.gov']).get(DIRECTORY_URL)
     except ProviderFailure as exc:
         attempts.append(dict(source='SEC', status=exc.status.value))
-    directories = NasdaqDirectories(transport_factory(['www.nasdaqtrader.com', 'ftp.nasdaqtrader.com']))
+    directories = NasdaqDirectories(transport_factory(['www.nasdaqtrader.com', 'ftp.nasdaqtrader.com'], accept='text/plain'))
     try:
         directories.fetch()
     except ProviderFailure:

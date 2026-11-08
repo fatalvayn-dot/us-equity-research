@@ -9,7 +9,7 @@ from urllib.parse import urlsplit
 
 from .batch import BatchStore
 from .companyfacts import companyfacts_url
-from .evidence_bundle import write_bundle
+from .evidence_bundle import write_bundle, read_bundle
 from .market_history import history_url, parse_history
 from .models import aware
 from .mvp import validate_candidates, save_json
@@ -23,6 +23,8 @@ from .valuation import disclosed_shares, verify_share_class, SNAPSHOT_TTL
 
 LEASE_TTL = timedelta(minutes=15)
 RETRY_DELAY = timedelta(minutes=5)
+MAX_SOURCE_BYTES = 16_000_000
+SEED_MAX_AGE = timedelta(hours=6)
 
 
 class CollectionPending(Exception):
@@ -90,6 +92,9 @@ class ValuationSourceCollector:
                     self.owner, self.clock(), LEASE_TTL)
                 raise CollectionPending() from None
             outcome['status'] = 'body_available'
+        if len(response.body) > MAX_SOURCE_BYTES:
+            outcome['status'] = Status.INVALID_DATA.value
+            raise ProviderFailure(Status.INVALID_DATA)
         outcome.update(raw_sha256=response.sha256, retrieved_at=response.retrieved_at.isoformat())
         return response
 
@@ -193,22 +198,45 @@ class ValuationSourceCollector:
                 'No scores, sector model, fair value or investment approval; unqueried legs stay not started'])
 
 
-def run_collection(payload, *, state_dir, user_agent, max_new_requests=51):
+def seed_sources(archive, bundles, *, clock, pulse):
+    counts = Counter()
+    for bundle in bundles:
+        for response in read_bundle(bundle):
+            pulse()
+            if len(response.body) > MAX_SOURCE_BYTES:
+                counts['oversized_observations'] += 1
+            elif not timedelta(0) <= clock() - response.retrieved_at <= SEED_MAX_AGE:
+                counts['outside_seed_freshness'] += 1
+            else:
+                archive.record(response)
+                counts['imported_observations'] += 1
+    return dict(counts)
+
+
+def run_collection(payload, *, state_dir, user_agent, max_new_requests=51, seed_bundles=(), clock=None):
     rows = candidate_rows(payload)
     request_limit(max_new_requests)
-    path = Path(state_dir); path.mkdir(parents=True, exist_ok=True)
+    path = Path(state_dir).resolve()
+    bundles = tuple(Path(p).resolve() for p in seed_bundles)
+    if any(p == path or p in path.parents or path in p.parents for p in bundles):
+        raise ValueError('Değerleme çalışma dizini kaynak paketlerinden ayrı olmalıdır')
+    clock = clock or (lambda: datetime.now(timezone.utc))
+    path.mkdir(parents=True, exist_ok=True)
     lock = BatchStore(path/'run-lock.sqlite'); archive = ResponseArchive(path/'sources.sqlite')
     owner = None
     try:
-        owner = lock.acquire(datetime.now(timezone.utc), LEASE_TTL)
+        owner = lock.acquire(clock(), LEASE_TTL)
+        seeded = seed_sources(archive, bundles, clock=clock,
+                              pulse=lambda: lock.renew(owner, clock(), LEASE_TTL))
         limiter = RateLimiter(.6)
         transports = {host: ArchivedTransport(archive=archive, user_agent=user_agent, allowed_hosts={host},
-            limiter=limiter, timeout=10, budget=25, max_attempts=2, max_bytes=16000000)
+            limiter=limiter, timeout=10, budget=25, max_attempts=2, max_bytes=MAX_SOURCE_BYTES)
             for host in ('www.sec.gov', 'data.sec.gov', 'query1.finance.yahoo.com')}
         collector = ValuationSourceCollector(archive, transports, max_new_requests=max_new_requests,
-                                             checkpoint=lock, owner=owner)
+                                             checkpoint=lock, owner=owner, clock=clock)
         report = collector.collect(dict(companies=rows))
         report['candidate_plan'] = dict(companies=rows)
+        report['seed_summary'] = seeded
         report['source_bundle'] = write_bundle(archive, path/'source-bundle')
         save_json(path/'report.json', report)
         return report

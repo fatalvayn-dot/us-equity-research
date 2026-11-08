@@ -1,5 +1,44 @@
 # Development status
 
+## 8 Kasım 2026 — Nasdaq metin erişimi düzeltmesi ve değerleme kaynaklarının kullanımı
+
+Başlangıç main 1beb58e, PR #41 birleştirildi. Kesin head 667f255 üzerinde
+714 test Python 3.11/3.12/3.13 ile başarılı; küçük canlı erişim işi geçti.
+Sequence 9 run 42453626663 tamamlandı. 110 dosya, beş SQLite, 1189 kaynak
+gözlemi, rapor manifestleri ve 1037 finansal kaynak referansı bağımsız doğrulandı.
+Önceki 888 gözlem, 100 özgün yıllık belge ve 1400 alan anahtarı korunmuş.
+1400 sorgunun tamamı işlendi: 961 değer, 439 pending_data, not_started 0.
+98 şirkette değer var, RY/SNDK'da yok; 704 hesaplama ve 0 skor. Kaynaklar:
+docs/evidence/live-sequence9-audit.json; state libfile_9780498ca4ec819198fa2eaab12f5f9e,
+evidence libfile_1babc9b8973c819183f8f41ddd68feb4.
+
+Adi hisse kabulü 0/100: Nasdaq FTP zaman aşımı ardından www metin dağıtımı
+HTTP 406 döndürmüş. Başarılı preflight text/plain kullanırken yeni MVP yolu
+application/json varsayılanını gönderiyordu. Nasdaq listelerine text/plain
+iletimi düzeltildi; test fabrikası başlığı denetliyor. 32 MVP testi başarılı.
+Bu düzeltmenin canlı kabulü henüz görülmedi. Bağımsız denetim sonrası yalnız
+sequence 10 açılır; finansal tazelik, kaynak önceliği ve kabul kapıları korunur.
+
+Değerleme toplayıcısına mevcut --seed-bundle CLI seçeneği bağlandı. Kamu kaynak
+paketi bütünlüğü denetlenip altı saat içindeki özgün gözlemler aktarılıyor.
+Eski/gelecek tarihli ve 16 MB üstü gövdeler ayrı sayılıyor. Fiyat/piyasa geçmişi
+15 dakika tazelik kapısını ayrıca geçmek zorunda; aktarım tarihi gözlem tarihi
+olamaz. İstek bütçesi 0 iken doğrulanmış girdiler kullanılabilir, eksikler ağ
+çağrısı yapılmadan beklemede kalır. Çakışan girdi/çıktı dizinleri reddedilir;
+bozuk pakette kira serbest bırakılır. Mevcut cache gövdesi de boyut sınırından geçer.
+
+52 değerleme testi ve 721 tam regresyon testi (107,574 saniye) başarılı.
+Gerçek ağ çağrısı olmadan tam kaynak, eski fiyat,
+eski/gelecek gözlem, bozuk paket, boyut sınırı ve CLI aktarımı sınandı. Tam
+regresyon geçti; Nasdaq düzeltmesi sonrası 32 MVP testi de geçti. Kesin PR
+head CI birleşimden önce denetlenecek. Bu değişiklik
+tek başına canlı değerleme, skor, aktif adi hisse veya MVP kabulü değildir.
+Kullanım: docs/VALUATION_SOURCE_REUSE_TR.md.
+
+Sonraki iş: sequence 10 adi hisse kabulünü incele; yeni kanıt paketini
+fiyat/piyasa geçmişi toplamasında kullan, karşılaştırmalı dönem ve değerleme/risk
+raporunu aynı tarihli finansal girdilere bağla. Skor önkoşulları gevşetilmez.
+
 ## 8 Kasım 2026 — Adi hisse kanıtı ana hatta bağlandı; sequence 8 denetlendi
 
 Başlangıç main f338310 (PR #40); açık PR yok. Run 42391678693'ün

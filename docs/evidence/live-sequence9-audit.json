@@ -1,0 +1,119 @@
+{
+  "run_id": 42453626663,
+  "root_run_id": 42223465006,
+  "parent_run_id": 42391678693,
+  "sequence": 9,
+  "files_verified": 110,
+  "sqlite_counts": {
+    "financial.sqlite": {
+      "batch_fields_v1": 1400,
+      "batch_lease_v1": 0
+    },
+    "documents.sqlite": {
+      "batch_fields_v1": 100,
+      "batch_lease_v1": 0,
+      "filing_documents_v1": 100
+    },
+    "submissions.sqlite": {
+      "submissions_v1": 100
+    },
+    "responses.sqlite": {
+      "response_bodies_v1": 462,
+      "response_observations_v1": 1189
+    },
+    "run-lock.sqlite": {
+      "batch_fields_v1": 0,
+      "batch_lease_v1": 0
+    }
+  },
+  "source_observations": 1189,
+  "preserved_parent_observations": 888,
+  "source_bundle_matches_database": true,
+  "reports_match_state": true,
+  "preserved_document_bodies": 100,
+  "preserved_field_keys": 1400,
+  "total_field_keys": 1400,
+  "summary": {
+    "companies": 100,
+    "company_states": {
+      "review_required": 100
+    },
+    "accepted_facts": 961,
+    "arithmetic_results": 704,
+    "scored_companies": 0
+  },
+  "pipeline": {
+    "requested_candidates": 100,
+    "metadata_states": {
+      "metadata_available_legal_type_pending": 100
+    },
+    "common_share_summary": {
+      "evaluated": 100,
+      "selected": 0,
+      "states": {
+        "review_required": 100
+      }
+    },
+    "hundred_common_share_sample_verified": false,
+    "annual_document_summary": {
+      "companies": 100,
+      "new_documents": 0,
+      "reused_documents": 100,
+      "periods": 100,
+      "registered_shares": 100
+    },
+    "financial_query_companies": 100,
+    "companies_with_financial_facts": 98,
+    "period_unresolved_companies": 0,
+    "deferred_duration_fields": 0,
+    "public_transport_get_calls": 334,
+    "seeded_public_observations": 0,
+    "seed_observations_outside_freshness": 0,
+    "archived_transport_reuses": 38,
+    "call_measure": "public transport GET invocations, excluding internal retries and private Finnhub transport",
+    "all_financial_references_archived": true,
+    "archived_financial_facts": 961
+  },
+  "batch_summary": {
+    "companies": 100,
+    "field_states": {
+      "pending_data": 439,
+      "collected": 961
+    },
+    "new_fields": 1400,
+    "reused_fields": 0,
+    "financial_query_companies": 100,
+    "period_unresolved_companies": 0
+  },
+  "companies_without_facts": [
+    "RY",
+    "SNDK"
+  ],
+  "common_share_collection_attempts": [
+    {
+      "name": "nasdaqlisted",
+      "url": "https://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt",
+      "status": "timeout",
+      "reason": "timeout",
+      "http_status": null
+    },
+    {
+      "name": "nasdaqlisted",
+      "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+      "status": "api_error",
+      "reason": "http",
+      "http_status": 406
+    }
+  ],
+  "independently_verified_financial_references": 1037,
+  "artifact_sha256": {
+    "state": "235d72ddf874cc799c08cf9f49cff3427531a1a9b22689ca7428dad47ca11e7f",
+    "evidence": "93acfe35aec35a7fef0c4964bc570335c426f731f6737714febb9e072bd1bc5b"
+  },
+  "mvp_accepted": false,
+  "reviewed_sequence_limit": 10,
+  "backups": {
+    "state": "libfile_9780498ca4ec819198fa2eaab12f5f9e",
+    "evidence": "libfile_1babc9b8973c819183f8f41ddd68feb4"
+  }
+}
