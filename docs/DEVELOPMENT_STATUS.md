@@ -1,5 +1,34 @@
 # Development status
 
+## 9 Kasım 2026 — Veri üretmeyen SEC koşusundan bağımsız günlük değerleme devamı (PR değerlendirmesinde)
+
+Başlangıç main `35b58194c972d7fb4bcdd812a1d6bcd81e88a8dd`,
+PR #51 kodu tam Python 3.11/3.12/3.13 CI üzerinden geçti,
+başka açık PR yok. Değerleme arşivinde 84 skorsuz şirketin
+22'sinde dokuz temel finansal kalem dolu; 75 fiyat isteği
+beklemede (tarihsel paket `42465060347`). Son canlı üç
+tam puanlı şirket MU, AAPL ve MSFT.
+
+Saatlik SEC koşusu son doğrulanmış paket sınırında veri
+üretmeden atlandığı için `workflow_run` tetiklenmesine rağmen
+değerleme devamı yeni artifact oluşturmuyor. Buna çare olarak
+`valuation-live.yml` günlük 09:17 UTC zamanlayıcısıyla son
+**kanıt üreten** SEC arşivini yeniden referans alacak. Arşiv
+kimliği ve SHA korunur; 6 saat üzeri tohum gövdeleri taze
+gibi kabul edilmez, gerçek kamu GET isteği gerekebilir.
+Yeni dağıtım `push` için 250, günlük çalışma için 100,
+manuel istek için seçilen 0–501 GET üst sınırı uygulanır.
+Önceki başarılı değerleme durumundan checksum/lease
+korumalı şirket rotasyonu sürdürülür. Zamanlayıcı yeni
+fiyat, skor veya MVP kabulü garantisi değildir; ücretli
+kaynak/gerçek alım satım yok.
+
+Testler `test_valuation_live_workflow.py` ve Foundation
+CI ile doğrulanmalı. PR başarıyla birleştiğinde ilk
+otomatik değerleme sonuçlarını ayrıca denetle; yalnız
+artifact raporundaki yeni kanıtı ilerleme say.
+
+
 ## 9 Kasım 2026 — 84 değerleme engeli için adil GET bütçesi ve devam imleci (PR testinde)
 
 Başlangıç main `c8807e1ff33bb4bee2f120cc6bb95a46c9564ae6`
