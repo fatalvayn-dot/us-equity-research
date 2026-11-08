@@ -73,7 +73,9 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
         if gate=='invalid_evidence':row['blockers']=['invalid_financial_evidence'];continue
         value=by_valuation[cik]['valuation']
         if value is None:
-            row['blockers']=['valuation_source_evidence_required'];continue
+            row['blockers']=['valuation_source_evidence_required']
+            row['valuation_diagnostics']={k:by_valuation[cik][k] for k in ('status','missing_source_urls','missing_evidence','provider_status','failed_validation_stage','failure_detail','source_observations') if k in by_valuation[cik]}
+            continue
         validation_stage='metadata_and_sector'
         try:
             metadata=sources[submissions_url(cik)];snapshot=parse_submissions(metadata,cik)
@@ -217,8 +219,12 @@ def render_score_markdown(report):
     for c in report['ranking']:lines.append('| '+' | '.join(cell(c[k]) for k in ('rank','symbol','score','model_id'))+' |')
     lines.extend(['','| Aday | Durum | Puanın hesaplanmama nedenleri |','| --- | --- | --- |'])
     for c in report['companies']:lines.append('| '+' | '.join(cell(v) for v in (c['symbol'],c['status'],'; '.join(c['blockers']+([c['failed_validation_stage']] if c.get('failed_validation_stage') else [])) or 'none for numeric research model'))+' |')
+    from .valuation_diagnostics import diagnostic_lines
     for c in report['companies']:
-        if c['total_score'] is None:continue
+        if c['total_score'] is None:
+            details=diagnostic_lines(c.get('valuation_diagnostics'))
+            if details:lines.extend(['','## '+cell(c['symbol']),'']+[cell(v) for v in details])
+            continue
         lines.extend(['','## '+cell(c['symbol']),'','| Bileşen | Puan | Ağırlık |','| --- | ---: | ---: |'])
         for name,r in c['components'].items():lines.append('| '+' | '.join(cell(v) for v in (name,r['score'],r['weight']))+' |')
         lines.extend(['','Değerlemede bildirilen hisse adedine %25 ve bir raporlama hassasiyet birimi eklenir. Bu bir stres varsayımıdır; gözlenen hisse sayısı veya güven aralığı değildir.',

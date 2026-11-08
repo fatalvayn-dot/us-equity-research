@@ -21,7 +21,8 @@ def render_score_html(report):
                 e(f['period_start'] or 'instant')+' / '+e(f['period_end']),
                 '<a href="'+e(f['source_url'])+'" target="_blank" rel="noopener noreferrer">kaynak</a><small>'+e(f['raw_sha256'])+'</small>',
                 '<a href="'+e(verified['source_url'])+'" target="_blank" rel="noopener noreferrer">'+verification_label+'</a><small>'+e(verified['raw_sha256'])+'</small>'))+'</tr>')
-        extra=''
+        from .valuation_diagnostics import diagnostic_lines
+        extra=''.join('<p>'+e(line)+'</p>' for line in diagnostic_lines(c.get('valuation_diagnostics')))
         if c['total_score'] is not None:
             metrics=''.join('<li>'+e(k)+': '+e(number(v))+'</li>' for k,v in c['metrics'].items())
             market=c['market_risk'];v=c['valuation'];p=v['indication']['price'];s=v['indication']['disclosed_shares']

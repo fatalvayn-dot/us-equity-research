@@ -26,7 +26,19 @@ class CurrentScoreRecordedTests(unittest.TestCase):
             chain(read_bundle(ROOT/'tests/fixtures/valuation22-sources'),
                   read_bundle(ROOT/'tests/fixtures/liability-equation5-sources')),
             as_of=datetime.fromisoformat(expected['as_of']))
-        self.assertEqual(json.loads(json.dumps(actual,default=encode)),expected)
+        # The archived report predates additive blocker diagnostics. Preserve its
+        # exact financial/score contract without rewriting historical evidence.
+        comparable=json.loads(json.dumps(actual,default=encode))
+        diagnostics=0
+        for company in comparable['companies']:
+            detail=company.pop('valuation_diagnostics',None)
+            if detail is not None:
+                diagnostics+=1
+                self.assertIsNone(company['total_score'])
+                self.assertEqual(company['blockers'],['valuation_source_evidence_required'])
+                self.assertTrue(detail.get('missing_source_urls') or detail.get('missing_evidence') or detail.get('failed_validation_stage'))
+        self.assertGreater(diagnostics,0)
+        self.assertEqual(comparable,expected)
         self.assertEqual(actual['summary'],dict(candidates=100,scored_companies=18,critical_review=4,unscored=82))
         self.assertEqual([(r['symbol'],str(r['score'])) for r in actual['ranking']][:3],[('MU','87'),('INTU','78.0'),('MPWR','78')])
         self.assertEqual({r['symbol']:str(r['score']) for r in actual['ranking'] if r['symbol'] in {'AMD','INTC','ADI','CDNS','ADSK'}},

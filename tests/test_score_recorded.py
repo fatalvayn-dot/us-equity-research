@@ -71,7 +71,17 @@ class RecordedScoreTests(unittest.TestCase):
         provenance=actual.pop('input_provenance')
         self.assertFalse(provenance['report_generation_is_source_refresh'])
         self.assertEqual(provenance['batches']['financial']['selected_facts'],843)
-        self.assertEqual(json.loads(json.dumps(actual,default=encode)),expected)
+        comparable=json.loads(json.dumps(actual,default=encode))
+        diagnostics=0
+        for company in comparable['companies']:
+            detail=company.pop('valuation_diagnostics',None)
+            if detail is not None:
+                diagnostics+=1
+                self.assertIsNone(company['total_score'])
+                self.assertEqual(company['blockers'],['valuation_source_evidence_required'])
+                self.assertTrue(detail.get('missing_source_urls') or detail.get('missing_evidence') or detail.get('failed_validation_stage'))
+        self.assertGreater(diagnostics,0)
+        self.assertEqual(comparable,expected)
         self.assertEqual(len(list(read_bundle(ROOT/'tests/fixtures/score-market-sources'))),7)
 
     def test_volatility_and_liquidity_match_independent_statistical_reference(self):

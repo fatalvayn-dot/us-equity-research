@@ -198,12 +198,15 @@ def verify_share_class(shares, metadata, filing, *, symbol, as_of):
 
 
 def indicative_valuation(*, price_response, identity, companyfacts, metadata, filing,
-                         financial_company, as_of):
+                         financial_company, as_of, diagnostics=None):
     """Price times *dated* disclosed shares. No corporate-action adjustment guessed.
 
     The resulting indication cannot feed scores until capital changes and the
     sector model are validated. Each source and each date remains visible.
     """
+    def stage(name):
+        if diagnostics is not None:diagnostics['validation_stage']=name
+    stage('financial_batch')
     # Recompute the financial report from its field trails. A caller-supplied
     # calculation or acceptance flag is never an operand or model approval.
     import json
@@ -215,13 +218,18 @@ def indicative_valuation(*, price_response, identity, companyfacts, metadata, fi
         fields=financial_company['fields'])]),default=encode))
     financial_company=build_report(normalized)['companies'][0]
     cik=financial_company['issuer_id'];symbol=financial_company['symbol']
+    stage('price')
     price=parse_price(price_response,identity,cik=cik,symbol=symbol,as_of=as_of)
     if price is None:raise ProviderFailure(Status.MISSING)
+    stage('disclosed_shares')
     shares=disclosed_shares(companyfacts,cik=cik,as_of=as_of)
     if shares is None:raise ProviderFailure(Status.MISSING)
+    stage('share_class')
     proof=verify_share_class(shares,metadata,filing,symbol=symbol,as_of=as_of)
+    stage('share_price_chronology')
     if price.market_at.date()<shares['end'] or shares['available_at']>price.retrieved_at:
         raise ProviderFailure(Status.INVALID_DATA)
+    stage('financial_period_currency')
     if (financial_company['status'] not in ('review_required',) or financial_company.get('currency')!='USD'
             or not financial_company.get('period_end')
             or as_of.date()-date.fromisoformat(financial_company['period_end'])>timedelta(days=550)):
@@ -230,6 +238,7 @@ def indicative_valuation(*, price_response, identity, companyfacts, metadata, fi
     # A later restatement/conflict must block the indication, not be averaged or
     # silently mixed with a different reporting period.
     from .fields import SPECS
+    stage('sec_financial_confirmation')
     payload=SecCompanyFacts._parse(companyfacts,cik)[1];confirmation=[]
     for row in financial_company['fields']:
         field=row['query']['field']
@@ -298,23 +307,33 @@ def build_valuation_report(batch, responses, *, as_of):
     for company in financial['companies']:
         cik=company['issuer_id'];symbol=company['symbol']
         row=dict(issuer_id=cik,symbol=symbol,status='pending_source_evidence',valuation=None,total_score=None)
+        diagnostics={'validation_stage':'source_inventory'}
         try:
             cf=latest.get(companyfacts_url(cik));meta=latest.get(submissions_url(cik))
             required=[price_url(symbol),DIRECTORY_URL,companyfacts_url(cik),submissions_url(cik)]
             row['missing_source_urls']=[url for url in required if url not in latest]
+            row['source_observations']=[dict(url=url,raw_sha256=latest[url].sha256,retrieved_at=latest[url].retrieved_at.isoformat()) for url in required if url in latest]
             if row['missing_source_urls']:companies.append(row);continue
+            diagnostics['validation_stage']='disclosed_shares'
             shares=disclosed_shares(cf,cik=cik,as_of=as_of)
-            if shares is None:raise ProviderFailure(Status.MISSING)
+            if shares is None:
+                row['missing_evidence']=['disclosed_shares'];companies.append(row);continue
+            diagnostics['validation_stage']='original_share_filing'
             candidates=[r for url,r in latest.items() if url.startswith(f'https://www.sec.gov/Archives/edgar/data/{int(cik)}/{shares["accession"].replace("-", "")}/')]
             if len(candidates)!=1:
-                row['missing_source_urls'].append('exact_original_share_filing');companies.append(row);continue
+                if not candidates:row['missing_source_urls'].append('exact_original_share_filing')
+                else:row.update(status='source_contract_rejected',provider_status='invalid_data',failure_detail='ambiguous_original_share_filing')
+                row['failed_validation_stage']=diagnostics['validation_stage'];companies.append(row);continue
+            row['source_observations'].append(dict(url=candidates[0].url,raw_sha256=candidates[0].sha256,retrieved_at=candidates[0].retrieved_at.isoformat()))
             row['valuation']=indicative_valuation(price_response=latest[price_url(symbol)],identity=latest[DIRECTORY_URL],
-                companyfacts=cf,metadata=meta,filing=candidates[0],financial_company=company,as_of=as_of)
+                companyfacts=cf,metadata=meta,filing=candidates[0],financial_company=company,as_of=as_of,diagnostics=diagnostics)
             row['status']='indicative_arithmetic_only'
         except ProviderFailure as exc:
-            row.update(status='source_contract_rejected',provider_status=exc.status.value)
+            row.update(status='source_contract_rejected',provider_status=exc.status.value,failed_validation_stage=diagnostics['validation_stage'])
+            from .prices import PriceFailure
+            if isinstance(exc,PriceFailure):row['failure_detail']=exc.issue.value
         except (ValueError,KeyError,TypeError):
-            row.update(status='source_contract_rejected',provider_status=Status.INVALID_DATA.value)
+            row.update(status='source_contract_rejected',provider_status=Status.INVALID_DATA.value,failed_validation_stage=diagnostics['validation_stage'])
         companies.append(row)
     return dict(schema_version=1,policy_version=POLICY_VERSION,as_of=as_of,companies=companies,
         summary=dict(candidates=len(companies),indicative_valuations=sum(c['valuation'] is not None for c in companies),

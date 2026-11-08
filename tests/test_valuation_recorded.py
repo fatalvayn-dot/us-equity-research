@@ -43,7 +43,12 @@ class RecordedValuationTests(unittest.TestCase):
         self.assertEqual(len(sources),13)
         expected=report()
         actual=build_valuation_report(batch(),sources,as_of=datetime.fromisoformat(expected['as_of']))
-        self.assertEqual(json.loads(json.dumps(actual,default=encode)),expected)
+        comparable=json.loads(json.dumps(actual,default=encode))
+        originals={(r.url,r.sha256):r.retrieved_at.isoformat() for r in sources}
+        for company in comparable['companies']:
+            for observation in company.pop('source_observations'):
+                self.assertEqual(observation['retrieved_at'],originals[(observation['url'],observation['raw_sha256'])])
+        self.assertEqual(comparable,expected)
         with localcontext() as ctx:
             ctx.prec=100
             for row in expected['companies']:
