@@ -1,0 +1,107 @@
+name: Canlı değerleme kaynakları
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: Denetlenmiş 100 şirket kabul çalışmasının sayısal GitHub run ID değeri
+        required: true
+        type: string
+      max_new_requests:
+        description: Yeni dış kaynak GET bütçesi (ilk deneme için 51)
+        required: true
+        default: '51'
+        type: choice
+        options: ['0', '51', '100', '250', '501']
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: valuation-source-collection
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: SEC iletişim kimliğini ve devam koşusunu doğrula
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+          SOURCE_RUN: ${{ inputs.source_run_id }}
+        run: |
+          if [ -z "$SEC_USER_AGENT" ]; then
+            echo "::error::SEC_USER_AGENT secret eksik"
+            exit 2
+          fi
+          if ! [[ "$SOURCE_RUN" =~ ^[1-9][0-9]*$ ]]; then
+            echo "::error::source_run_id pozitif sayısal GitHub Actions run ID olmalı"
+            exit 2
+          fi
+
+      - name: Önceki çalışmanın kamu kanıtlarını indir
+        uses: actions/download-artifact@v4
+        with:
+          name: live-acceptance-evidence
+          path: data/valuation-import
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.source_run_id }}
+
+      - name: Kanıt paketinin bulunduğunu doğrula
+        run: |
+          test -f data/valuation-import/live-sources/manifest.json || {
+            echo "::error::Kaynak paketi bulunamadı; önceki çalışmayı ve artifact içeriğini denetleyin"
+            exit 2
+          }
+
+      - name: Güncel fiyat ve hisse sınıfı kaynaklarını kontrollü topla
+        env:
+          PYTHONPATH: src
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+          MAX_NEW_REQUESTS: ${{ inputs.max_new_requests }}
+        run: |
+          python -m equity_research collect-valuation-sources \
+            --candidates docs/evidence/common100/candidates.json \
+            --state-dir data/valuation-current \
+            --seed-bundle data/valuation-import/live-sources \
+            --user-agent "$SEC_USER_AGENT" \
+            --max-new-requests "$MAX_NEW_REQUESTS"
+
+      - name: Toplama özetini göster
+        if: success()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report=json.loads(Path('data/valuation-current/report.json').read_text())
+          summary=report['summary']
+          print(json.dumps(summary,ensure_ascii=False,indent=2))
+          lines=['## Canlı değerleme kaynakları', '',
+                 'Bu iş fiyat ve hisse sınıfı kaynağı toplar; yatırım puanı veya MVP kabulü vermez.', '',
+                 f"- Kaynak run ID: ${{ inputs.source_run_id }}",
+                 f"- Yeni GET çağrısı: {summary['new_get_invocations']}",
+                 f"- Şirket: {summary['candidates']}",
+                 f"- Kimlik: {summary['identity_states']}",
+                 f"- Hisse kanıtı: {summary['share_states']}",
+                 f"- Fiyat: {summary['price_states']}",
+                 f"- Piyasa geçmişi: {summary['history_states']}"]
+          with Path(__import__('os').environ['GITHUB_STEP_SUMMARY']).open('a') as out:
+              out.write('\n'.join(lines)+'\n')
+          PY
+
+      - name: Değerleme kanıtını ve devam durumunu koru
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: valuation-source-state
+          path: data/valuation-current
+          if-no-files-found: error
+          retention-days: 90
