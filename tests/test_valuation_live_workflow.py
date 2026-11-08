@@ -17,7 +17,9 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("workflows: ['Canlı 100 şirket kabulü']", self.text)
         self.assertIn("types: [completed]", self.text)
         self.assertIn("workflow_dispatch:", self.text)
-        self.assertNotIn("  schedule:", self.text)
+        self.assertIn("  schedule:", self.text)
+        self.assertIn("cron: '17 9 * * *'", self.text)
+        self.assertIn('EVENT_NAME" = "schedule"', self.text)
         self.assertIn("github.ref == 'refs/heads/main'", self.text)
         self.assertIn("github.event.workflow_run.head_branch == 'main'", self.text)
         self.assertIn("github.event.workflow_run.conclusion == 'success'", self.text)
@@ -27,7 +29,7 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("live-acceptance-evidence", self.text)
         self.assertIn('ARTIFACT_COUNT', self.text)
         self.assertIn("collect=false", self.text)
-        self.assertIn("actions/workflows/live-acceptance.yml/runs?per_page=40", self.text)
+        self.assertIn("actions/workflows/live-acceptance.yml/runs?per_page=100", self.text)
         self.assertIn("collect=true", self.text)
         self.assertIn("steps.select.outputs.collect == 'true'", self.text)
         self.assertIn("data/valuation-import/live-sources/manifest.json", self.text)
@@ -40,7 +42,7 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("run-id: ${{ steps.select.outputs.resume_run }}", self.text)
         self.assertIn('select(.name == "valuation-source-state" and .expired == false)', self.text)
         self.assertIn("options: ['0', '51', '100', '250', '501']", self.text)
-        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '51' }}", self.text)
+        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'push' && '250' || '100') }}", self.text)
         self.assertIn("cancel-in-progress: false", self.text)
 
     def test_provenance_secrecy_and_no_score_bypass(self):
