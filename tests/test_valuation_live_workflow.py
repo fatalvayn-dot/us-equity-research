@@ -11,6 +11,8 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         cls.text = WORKFLOW.read_text(encoding="utf-8")
 
     def test_automatic_trigger_does_not_trust_pr_or_nonmain(self):
+        self.assertIn("push:", self.text)
+        self.assertIn("paths: [.github/workflows/valuation-live.yml]", self.text)
         self.assertIn("workflow_run:", self.text)
         self.assertIn("workflows: ['Canlı 100 şirket kabulü']", self.text)
         self.assertIn("types: [completed]", self.text)
@@ -25,6 +27,7 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("live-acceptance-evidence", self.text)
         self.assertIn('ARTIFACT_COUNT', self.text)
         self.assertIn("collect=false", self.text)
+        self.assertIn("actions/workflows/live-acceptance.yml/runs?per_page=40", self.text)
         self.assertIn("collect=true", self.text)
         self.assertIn("steps.select.outputs.collect == 'true'", self.text)
         self.assertIn("data/valuation-import/live-sources/manifest.json", self.text)
