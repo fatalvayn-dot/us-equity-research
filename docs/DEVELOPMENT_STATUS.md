@@ -1,5 +1,46 @@
 # Development status
 
+## 8 Kasım 2026 — Adi hisse kanıtı ana hatta bağlandı; sequence 8 denetlendi
+
+Başlangıç main f338310 (PR #40); açık PR yok. Run 42391678693'ün
+state/evidence ZIP SHA-256, CRC, 109 dosya ve beş SQLite bütünlüğü doğrulandı.
+888 kaynak gözlemi, taşınabilir kaynak paketi ve rapor manifestleri eşleşti.
+Önceki 712 gözlem, 100 özgün belge ve 1374 sorgu anahtarı korunmuş.
+Bekleyen 26 sorgu denenmiş; toplam 1400 alan kaydı var. Alan kaydı başarılı
+ve güncel finansal değer demek değildir. 392 değerin 407 kaynak referansı
+arşivde bağımsız eşleştirildi. Kanıt: docs/evidence/live-sequence8-audit.json.
+
+Canlı rapor: 100 dönem/100 yeniden kullanılan yıllık belge, ertelenen dönemsel
+alan 0; 54 şirkette 392 güncel değer, 305 hesaplama, skor 0. Finansal veri
+TTL ve çalışma bütçesi nedeniyle kapsam henüz 100 şirket için tamamlanmadı.
+Geçmiş değerler yeni tarih verilerek güncel sayılmadı.
+
+MVP artık SEC kimliği, iki Nasdaq liste kaynağı ve yıllık bildirim kapağını
+mevcut katı doğrulayıcıyla birleştirir. Sonuç common-share-evidence.json,
+şirket JSON kaydı ve Türkçe raporda gösterilir; taşınabilir dışa aktarıma
+alınır. Yıllık metadata yoksa ek ağ çağrısı yapılmaz. Kaynaklar yok, eski,
+çelişkili veya farklı hisse sınıfındaysa kabul verilmez. Kayıtlı adi hisse
+örneklemi kabulü finansal/sektör/yatırım kabulüne ve skora dönüşmez.
+Bu entegrasyonun testleri kayıtlı/sentetik kaynaklarla yürütüldü; henüz yeni
+canlı adi hisse kabulü iddiası yok. Yalnız sequence 9 denemesine izin verilir.
+
+İki kurtarma paketi kaydedildi:
+state libfile_78b6609183e881919851b93563b75907,
+evidence libfile_55ea167067b08191813590b40b921974.
+İlk odaklı testlerde metadata bütçesi ve küçük gövde sınırı senaryoları yeni
+liste çağrıları nedeniyle başarısızdı; metadata yoksa çağrıyı atlama düzeltildi.
+Taze kaynak paketinin gözlem sayısı 2'den 5'e çıktı; tazelik/tarih koruma
+beklentileri bu üç yeni kimlik/liste kaynağını kapsayacak şekilde güncellendi.
+31 MVP testi, 6 kapsam testi ve 23 checkpoint testi başarılı. Tam regresyon
+713 test / 108,686 saniye başarılı; ardından eklenen eksik liste senaryosu
+dahil 6 kapsam testi ve 23 checkpoint testi tekrar geçti. Kesin PR head CI
+birleşimden önce denetlenecek.
+
+Sonraki iş: sequence 9 gerçek liste/kapak kabulünü incele; finansal sorgu
+bütçesi ile tazelik penceresini 100 şirket kapsamını tamamlayacak şekilde çöz;
+sonra karşılaştırmalı dönem, fiyat/değerleme/risk ve açıklanabilir sıralama.
+MVP tamamlanmadı; yüzde veya teslim garantisi verilmedi.
+
 ## 7 Kasım 2026 — Sequence 7 bağımsız denetimi tamamlandı
 
 Başlangıç main 834c4c9 (PR #39), açık PR yok. Son saatlik koşular başarılı

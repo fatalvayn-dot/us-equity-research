@@ -21,7 +21,10 @@ finally:archive.close()
 verified=sum(1 for _ in read_bundle(args.sources))
 if verified!=manifest['observations']:raise ValueError('source bundle verification failed')
 files=[]
-for name in ('metadata.json','documents.json','plan.json','batch.json','report.json','report.md','archive-coverage.json'):
+names=('metadata.json','documents.json','plan.json','batch.json','report.json','report.md','archive-coverage.json')
+if (source/'common-share-evidence.json').is_file():
+    names+=('common-share-evidence.json',)
+for name in names:
     body=(source/name).read_bytes();stored=name
     payload=body
     if name.endswith('.json') and len(body)>524288:

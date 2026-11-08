@@ -180,6 +180,17 @@ def render_markdown(report):
         lines.append('| '+' | '.join(cell(v) for v in (c['symbol'], c['issuer_id'], c.get('period_end','unknown'), c['accepted_fact_count'], count, c['status'], 'unavailable'))+' |')
     for c in report['companies']:
         lines.extend(['', '## '+cell(c['symbol']), '', 'Kapsam: '+cell(c.get('scope_reason','Geçersiz kaynak kanıtı')), ''])
+        if c.get('common_share_evidence'):
+            membership = c['common_share_evidence']
+            verified = membership['status'] == 'verified_registered_common_sample'
+            lines.extend(['Adi hisse kanıtı: '+('Kayıtlı adi hisse örneklemi doğrulandı.' if verified else
+                          'Doğrulama bekleniyor; liste, kimlik veya belge kanıtı yetersiz.')+
+                          ' Finansal uygunluk ve puanlama kabulü ayrıdır.', ''])
+            for name in ('filing_source', 'metadata'):
+                evidence = membership.get(name)
+                if evidence:
+                    lines.append('Hisse doğrulama kaynağı: '+cell(evidence['url'])+
+                                 ' — SHA-256: '+cell(evidence['raw_sha256'])+'.')
         if c.get('sector_profile'):
             lines.extend(['Sektör incelemesi: '+cell(c['sector_profile']['profile'])+' ('+cell(c['sector_profile']['status'])+').', ''])
         if c.get('pending_reason'):

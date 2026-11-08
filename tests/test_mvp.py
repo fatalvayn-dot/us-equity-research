@@ -32,6 +32,12 @@ def recorded_http(transport,url):
         'https://www.sec.gov/files/company_tickers_exchange.json':ROOT/'tests/fixtures/sec-directory-recorded.json'}
     row=next(r for r in json.loads((ROOT/'docs/evidence/annual-document-batch.json').read_text())['companies'] if r['issuer_id']==CIK)
     mapping[row['source_evidence']['url']]=ROOT/row['source_evidence']['fixture']
+    if 'nasdaqtrader.com' in url:
+        from test_nasdaq import response
+        name='nasdaqlisted' if 'nasdaqlisted.txt' in url else 'otherlisted'
+        now=datetime.now(timezone.utc)
+        source=response(name,footer='File Creation Time: '+now.strftime('%m%d%Y%H:%M'))
+        result=Response(url,source.body,now);transport.archive.record(result);return result
     if url not in mapping:raise ProviderFailure(Status.API_ERROR)
     p=mapping[url];body=gzip.decompress(p.read_bytes()) if p.suffix=='.gz' else p.read_bytes()
     response=Response(url,body,datetime.now(timezone.utc));transport.archive.record(response)
@@ -67,6 +73,10 @@ class MvpTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp, patch('equity_research.response_archive.ArchivedTransport.get',new=recorded_http):
             report=run_mvp(CANDIDATES,state_dir=tmp,user_agent='Synthetic offline fixture replay')
             self.assertEqual(report['summary']['companies'],1)
+            self.assertIn('common_share_evidence',report['companies'][0])
+            self.assertIn('common_share_summary',report['pipeline'])
+            self.assertTrue((Path(tmp)/'common-share-evidence.json').exists())
+            self.assertIn('Adi hisse kanıtı:',(Path(tmp)/'report.md').read_text())
             self.assertGreater(report['summary']['accepted_facts'],0)
             self.assertTrue(report['pipeline']['all_financial_references_archived'])
             self.assertEqual(report['summary']['scored_companies'],0)
