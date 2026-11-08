@@ -32,8 +32,8 @@ class MvpSeedTests(unittest.TestCase):
             with patch('equity_research.response_archive.ArchivedTransport.get',side_effect=AssertionError('unexpected GET')):
                 report=run_mvp(CANDIDATES,state_dir=root/'second',user_agent='Synthetic seed fixture',seed_bundles=[bundle],max_new_fields=0)
             self.assertEqual(report['pipeline']['public_transport_get_calls'],0)
-            self.assertEqual(report['pipeline']['archived_transport_reuses'],2)
-            self.assertEqual(report['pipeline']['seeded_public_observations'],2)
+            self.assertEqual(report['pipeline']['archived_transport_reuses'],5)
+            self.assertEqual(report['pipeline']['seeded_public_observations'],5)
             a=json.loads((first/'metadata.json').read_text());b=json.loads((root/'second/metadata.json').read_text())
             self.assertEqual(a['companies'][0]['snapshot']['retrieved_at'],b['companies'][0]['snapshot']['retrieved_at'])
             self.assertFalse(report['mvp_accepted'])
@@ -45,8 +45,8 @@ class MvpSeedTests(unittest.TestCase):
                 with patch('equity_research.response_archive.ArchivedTransport.get',new=recorded_http):
                     report=run_mvp(CANDIDATES,state_dir=root/'second',user_agent='Synthetic seed fixture',seed_bundles=[bundle],max_new_fields=0)
                 self.assertEqual(report['pipeline']['seeded_public_observations'],0)
-                self.assertEqual(report['pipeline']['seed_observations_outside_freshness'],2)
-                self.assertEqual(report['pipeline']['public_transport_get_calls'],2)
+                self.assertEqual(report['pipeline']['seed_observations_outside_freshness'],5)
+                self.assertEqual(report['pipeline']['public_transport_get_calls'],5)
 
     def test_seed_folder_cannot_be_used_as_writable_state_or_receive_created_files(self):
         with tempfile.TemporaryDirectory() as td:

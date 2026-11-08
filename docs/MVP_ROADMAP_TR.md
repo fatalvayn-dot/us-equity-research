@@ -30,8 +30,10 @@ Backtest, gölge portföy, gerçek işlemler ve evren genişletme bu kabulün d�
 
 ## Açık bağımlılıklar
 
-Son arşivlere kimlik doğrulamalı indirme erişimi bu oturumda sağlanmadı;
-GitHub bağlı araçları metadata okuyabiliyor, ikili dosya indiremiyor.
+8 Kasım: arşiv indirme erişimi sağlandı; sequence 8 paketleri ve önceki
+kayıtların korunması bağımsız doğrulandı. Adi hisse kanıtı ana hatta bağlandı;
+yeni canlı kabul sonucu bekleniyor. Güncel finansal kapsam için varsayılan
+alan bütçesi 500’den 1400’e çıkarıldı; altı saatlik tazelik korunuyor.
 Work zamanlayıcısının bağımsız geliştirme başarısı doğrulanmadı. Bu nedenle
 gelecekteki kesintisiz çalışma varsayımıyla kesin tarih verilmez.
 Toplayıcının denetlenmiş dilim sınırı arşiv kontrolü tamamlanmadan yükseltilmez.

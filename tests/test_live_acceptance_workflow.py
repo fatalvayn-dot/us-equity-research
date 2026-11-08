@@ -16,14 +16,14 @@ class LiveAcceptanceWorkflowTests(unittest.TestCase):
         self.assertIn("cron: '17 * * * *'",self.body)
         self.assertIn('--candidates docs/evidence/common100/candidates.json',self.body)
         self.assertIn("options: ['25', '50', '100']",self.body)
-        self.assertIn("options: ['250', '500', '900']",self.body)
+        self.assertIn("options: ['250', '500', '900', '1400']",self.body)
         self.assertIn('timeout-minutes: 120',self.body)
         self.assertIn('cancel-in-progress: false',self.body)
 
     def test_pr_trial_uses_small_budgets_and_runs_only_in_the_same_repository(self):
         self.assertIn("github.event.pull_request.head.repo.full_name == github.repository", self.body)
         self.assertIn("github.event_name == 'pull_request' && '5' || '25'", self.body)
-        self.assertIn("github.event_name == 'pull_request' && '30' || '500'", self.body)
+        self.assertIn("github.event_name == 'pull_request' && '30' || '1400'", self.body)
 
     def test_preflight_gates_collection_without_secrets_or_paid_provider(self):
         preflight = self.body.index('id: preflight')

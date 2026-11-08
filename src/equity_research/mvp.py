@@ -14,6 +14,7 @@ from .documents import DocumentRunner, FilingStore
 from .fields import SPECS
 from .pipeline import research_resolver
 from .providers import ProviderFailure, Status
+from .mvp_scope import collect_common_evidence
 from .reporting import build_report, render_markdown
 from .response_archive import ResponseArchive, ArchivedTransport
 from .sec import SecDirectory
@@ -188,6 +189,8 @@ def run_mvp(payload, *, state_dir, user_agent, max_new_metadata=None, max_new_do
         # Market data, submissions and financial fact TTLs remain unchanged.
         docs=DocumentRunner(documents,http(['www.sec.gov'],accept='text/html'),ttl=None).run(doc_rows,max_new_documents=max_new_documents)
         save_json(root/'documents.json',docs);pulse()
+        common = collect_common_evidence(candidates, normalized, archive, http, clock=clock, pulse=pulse)
+        save_json(root/'common-share-evidence.json',common);pulse()
         if progress:progress(dict(phase='documents',summary=docs['summary']))
         plan,unresolved,deferred=financial_plan(normalized,docs);save_json(root/'plan.json',plan)
         directory=None
@@ -217,13 +220,17 @@ def run_mvp(payload, *, state_dir, user_agent, max_new_metadata=None, max_new_do
         report['report_generation_network_requests']=report.pop('new_network_requests')
         report['collection_mode']='live_source_collection' if counts['public_transport_get_calls'] else 'cached_or_unattempted_collection'
         metadata_by_cik={r['issuer_id']:r for r in normalized}
+        common_by_cik={r['issuer_id']:r for r in common['companies']}
         for company in report['companies']:
             meta=metadata_by_cik[company['issuer_id']]
+            company['common_share_evidence']=common_by_cik[company['issuer_id']]
             snapshot=meta.get('snapshot') if meta['status']=='metadata_available_legal_type_pending' else None
             source=(archive.get(snapshot['source_url'],snapshot['raw_sha256'],datetime.fromisoformat(snapshot['retrieved_at']))
                     if snapshot else None)
             company['sector_profile']=assess_profile(source,issuer_id=company['issuer_id'],as_of=datetime.fromisoformat(report['as_of']))
         report['pipeline']=dict(requested_candidates=len(candidates),metadata_states=dict(Counter(r['status'] for r in metadata)),
+            common_share_summary=common['summary'],
+            hundred_common_share_sample_verified=common['hundred_common_share_sample_verified'],
             annual_document_summary=docs['summary'],financial_query_companies=len(plan['companies']),
             companies_with_financial_facts=sum(c['accepted_fact_count']>0 for c in report['companies']),
             period_unresolved_companies=len(unresolved),deferred_duration_fields=sum(len(v) for v in deferred.values()),

@@ -23,9 +23,9 @@ on:
       max_new_fields:
         description: Bu çalışmada işlenecek en fazla yeni finansal alan
         required: true
-        default: '250'
+        default: '1400'
         type: choice
-        options: ['250', '500', '900']
+        options: ['250', '500', '900', '1400']
   pull_request:
     paths:
       - .github/workflows/live-acceptance.yml
@@ -149,7 +149,7 @@ jobs:
         env:
           PYTHONPATH: src
           MAX_NEW_DOCUMENTS: ${{ inputs.max_new_documents || (github.event_name == 'pull_request' && '5' || '25') }}
-          MAX_NEW_FIELDS: ${{ inputs.max_new_fields || (github.event_name == 'pull_request' && '30' || '500') }}
+          MAX_NEW_FIELDS: ${{ inputs.max_new_fields || (github.event_name == 'pull_request' && '30' || '1400') }}
           SEC_USER_AGENT: ${{ github.event_name != 'pull_request' && secrets.SEC_USER_AGENT || '' }}
         run: |
           python -m equity_research mvp-run \
