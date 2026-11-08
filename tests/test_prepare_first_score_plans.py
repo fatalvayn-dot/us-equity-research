@@ -17,6 +17,9 @@ class FirstScorePlansTests(unittest.TestCase):
         self.root = Path(self.temp.name)
         self.fact = companyfacts()
         self.batch = json.loads(json.dumps(financial(), default=encode))
+        for field in self.batch["companies"][0]["fields"]:
+            if field["query"]["field"] == "revenue":
+                field["fact"]["raw_sha256"] = self.fact.sha256
         self.meta = dict(companies=[dict(issuer_id=CIK, symbol="AAPL",
             status="metadata_available_legal_type_pending",
             snapshot=dict(entity_type_label="operating", sic_label="3571",
