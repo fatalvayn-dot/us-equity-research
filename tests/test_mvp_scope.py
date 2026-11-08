@@ -22,7 +22,11 @@ class ScopePipelineTests(unittest.TestCase):
                     if fail or url not in mapping: raise ProviderFailure(Status.API_ERROR)
                     archive.record(mapping[url]);return mapping[url]
             meta=[dict(status='metadata_available_legal_type_pending', annual=dict(source_url=evidence[-1].url))] if evidence else []
-            result=collect_common_evidence(PLAN['companies'], meta, archive, lambda hosts:Transport(),
+            def factory(hosts, **kwargs):
+                if 'www.nasdaqtrader.com' in hosts:
+                    self.assertEqual(kwargs.get('accept'),'text/plain')
+                return Transport()
+            result=collect_common_evidence(PLAN['companies'], meta, archive, factory,
                                           clock=lambda:ASOF, pulse=lambda:pulses.append(True))
             archive.close()
             return result,calls,pulses

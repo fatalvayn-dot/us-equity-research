@@ -114,7 +114,7 @@ def main():
             if candidate_path==state or state in candidate_path.parents:
                 parser.error("candidate input must be outside the output state directory")
             report=run_collection(json.loads(candidate_path.read_text()), state_dir=state,
-                user_agent=args.user_agent,max_new_requests=args.max_new_requests)
+                user_agent=args.user_agent,max_new_requests=args.max_new_requests,seed_bundles=args.seed_bundle)
             print(json.dumps(report["summary"]))
         except (ValueError,KeyError,TypeError,OSError,RunBusy,ProviderFailure,sqlite3.Error) as exc:
             print(json.dumps(dict(status="source_collection_error",error_type=type(exc).__name__,mvp_accepted=False)))

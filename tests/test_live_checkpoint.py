@@ -19,7 +19,7 @@ class CheckpointTests(unittest.TestCase):
         output=self.root/'outputs'
         summary=self.root/'summary.md'
         state=self.root/'state'
-        for sequence,expected in ((8,'true'),(9,'false'),(10,'false')):
+        for sequence,expected in ((9,'true'),(10,'false'),(11,'false')):
             with self.subTest(sequence=sequence), patch.object(
                     m,'verify',return_value=({'sequence':sequence},{})), patch.dict(
                     'os.environ',{'GITHUB_OUTPUT':str(output), 'GITHUB_STEP_SUMMARY':str(summary)}), patch(
