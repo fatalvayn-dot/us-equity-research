@@ -1,8 +1,7 @@
 """Only an unselected *older* SEC share chronology defect may be quarantined."""
 import json
 import unittest
-from dataclasses import replace
-from datetime import timedelta
+from datetime import date
 
 from equity_research.providers import ProviderFailure
 from equity_research.valuation import disclosed_shares
@@ -24,8 +23,8 @@ class HistoricalShareChronologyTests(unittest.TestCase):
         self.assertEqual(out['value'],100)
         self.assertEqual(out['end'].isoformat(),'2026-10-20')
         self.assertEqual(out['historical_numeric_review'],[
-            dict(end=__import__('datetime').date(2021,9,30),
-                 filed=__import__('datetime').date(2021,8,1),
+            dict(end=date(2021,9,30),
+                 filed=date(2021,8,1),
                  accession='0000320193-21-000001',
                  status='unselected_historical_date_order_invalid')])
         self.assertNotIn('chronology_valid',out)
@@ -57,12 +56,11 @@ class HistoricalShareChronologyTests(unittest.TestCase):
         with self.assertRaises(ProviderFailure):
             self.check([old,current])
 
-    def test_equal_end_with_more_recent_invalid_filing_blocks(self):
+    def test_equal_end_and_filing_conflicting_counts_still_rejected(self):
         current=json.loads(cf().body)['facts']['dei']['EntityCommonStockSharesOutstanding']['units']['shares'][0]
-        newer=dict(current,end='2026-10-20',filed='2026-10-29',
-                   accn='0000320193-26-000022',val=99)
+        conflict=dict(current,val=99)
         with self.assertRaises(ProviderFailure):
-            self.check([current,newer])
+            self.check([current,conflict])
 
 
 if __name__=='__main__':
