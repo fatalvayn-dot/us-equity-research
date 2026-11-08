@@ -1,5 +1,42 @@
 # Development status
 
+## 8 Kasım 2026 — Piyasa geçmişi bütçesi doğrulanmış hisse sınıfına ayrılıyor
+
+Başlangıç main `d1d5b08c327ea5af89f627d245dde4e97319b7c8` (PR #47).
+Main Foundation CI `42518515562` başarılı. Başlangıçta açık PR yoktu.
+En son canlı kabul `42517570832` ve onu izleyen değerleme/skor çalışmaları
+artifactsız tamamlandı. Son üretim finansal state/evidence `42455760184`
+(sequence 10, artifact `13608291162` ve `13607408956`), değerleme
+`42466713390` ve skor `42466864670` olarak belirlendi.
+
+Değerleme ve skor ZIP SHA-256/CRC, üç skor raporu SHA-256, değerleme
+SQLite bütünlüğü, 404 ham gövde SHA-256 ve 405 kaynak gözleminin
+taşınabilir paketle eşitliği doğrulandı. Skor manifesti aynı değerleme
+kaynak manifestine bağlı. 84 değerleme engelinin 73'ünde en az bir istek
+bütçe nedeniyle ertelenmiş. Hisse adedi eksik 4, geçersiz sınıf/adet kanıtı
+18, kaynak bekleyen 62 aday var. Arşivde sınıfı doğrulanmayan yedi aday
+için ayrı piyasa geçmişi GET isteği yapılmış.
+
+Toplayıcı artık geçerli fiyat bulsa bile piyasa geçmişini ancak tarihli
+hisse sınıfı doğrulandığında işler. Ertelemeyi `share_class_unverified`
+olarak yazar. Fiyat ve hisse sınıfı kontrolleri bağımsız kalır. Mevcut
+arşivde, özgün kesim tarihiyle sıfır GET tekrarında 100 kimlik, 14 tarihli
+hisse sınıfı ve 25 fiyat sonucu aynı kaldı. Geçerli geçmiş 21'den 14'e
+indi ve 405 gözlem korundu. Yedi eski GET, sonraki çalışma için ölçülmüş
+tasarruf değildir. Kanıt: `docs/evidence/valuation-history-budget-audit-2026-11-08.json`.
+
+18 odaklı test başarılı. İlk odaklı koşuda tarihî ORCL beklentisi eski
+politikaya göre geçerli geçmiş arıyordu. Arşivi değiştirmeden testin yeni
+erteleme durumunu ve ham gözlemin korunduğunu denetlemesi sağlandı.
+Tam regresyon ve kesin PR head CI birleşim öncesi denetlenir.
+
+Son kayıtlı kapsam 100 metadata, 100 kayıtlı adi hisse örneklemi,
+98 finansal şirket, 961 kabul edilen değer, 704 hesaplama ve üç araştırma
+skoru. MVP kabul edilmedi. Yeni canlı veri toplanmadı. Finansal state,
+sequence 10 sınırı, fiyat tazeliği ve kaynak önceliği korundu.
+Sıradaki iş: sınıf/adet denetiminde reddedilen 18 adayın kaynaklarını
+özgün bildirim ve sınıf bazında incele, düzeltilebilir kayıtları belirle.
+
 ## 8 Kasım 2026 — Değerleme engelleri kaynak ve kontrol aşamasıyla açıklanıyor
 
 Başlangıç main `99e57ff636d56102b00721b680c49119c7f775f8` (PR #46).

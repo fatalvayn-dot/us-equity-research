@@ -1,0 +1,90 @@
+{
+  "mode": "archived_artifacts_replay_no_new_collection",
+  "financial_run_id": 42455760184,
+  "valuation_run_id": 42466713390,
+  "score_run_id": 42466864670,
+  "valuation_artifact_id": 13612550004,
+  "score_artifact_id": 13612260683,
+  "artifact_sha256": {
+    "valuation": "d56287914f22ab6ff3ad1a57649db56228acf0a73ecbf9833c7f564ee7e40445",
+    "score": "790a6d113b6e990efbcc8d5a62146f159155989451a1dd39bb59489dc4041bcd"
+  },
+  "verified_source_observations": 405,
+  "sqlite_tables": {
+    "sources.sqlite": {
+      "response_bodies_v1": 404,
+      "response_observations_v1": 405
+    },
+    "run-lock.sqlite": {
+      "batch_fields_v1": 0,
+      "batch_lease_v1": 0
+    }
+  },
+  "archived_score_summary": {
+    "candidates": 100,
+    "critical_review": 2,
+    "scored_companies": 3,
+    "unscored": 97
+  },
+  "archived_valuation_as_of": "2026-11-08T09:21:24.270658+00:00",
+  "valuation_blocked": 84,
+  "request_budget_deferred": 73,
+  "blocked_share_states": {
+    "missing_disclosed_shares": 4,
+    "invalid_data": 18,
+    "pending_source_collection": 62
+  },
+  "blocked_price_states": {
+    "valid": 11,
+    "pending_source_collection": 73
+  },
+  "blocked_history_states": {
+    "not_started": 77,
+    "valid": 7
+  },
+  "archived_history_gets_without_verified_class": [
+    "LLY",
+    "WMT",
+    "JPM",
+    "JNJ",
+    "ABBV",
+    "KO",
+    "PG"
+  ],
+  "replay_history_deferred": [
+    "GOOGL",
+    "META",
+    "LLY",
+    "WMT",
+    "JPM",
+    "JNJ",
+    "MA",
+    "ABBV",
+    "PLTR",
+    "KO",
+    "PG"
+  ],
+  "replay_summary": {
+    "candidates": 100,
+    "new_get_invocations": 0,
+    "get_invocations_by_host": {},
+    "identity_states": {
+      "exact_match": 100
+    },
+    "share_states": {
+      "verified_dated_share_class": 14,
+      "missing_disclosed_shares": 5,
+      "invalid_data": 18,
+      "pending_source_collection": 63
+    },
+    "price_states": {
+      "valid": 25,
+      "pending_source_collection": 75
+    },
+    "history_states": {
+      "valid": 14,
+      "not_started": 86
+    }
+  },
+  "mvp_accepted": false
+}
