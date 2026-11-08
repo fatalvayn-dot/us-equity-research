@@ -6,6 +6,20 @@ Skor, sektör kabulü, alım/satım emri veya MVP kabulü üretmez.
 
 ## Otomatik çalışma
 
+SEC koşusu yeni kabul kanıtı üretmediğinde değerleme toplamasının
+durması önlensin diye ayrıca günlük 09:17 UTC zamanlayıcısı vardır.
+Zamanlayıcı, geçerli `live-acceptance-evidence` arşivi olan son
+başarılı ana dal SEC koşusunu seçer. Bu, eski SEC yanıtlarının yeni
+gözlem gibi kabul edildiği anlamına gelmez: özgün SHA ve tarih
+korunur; 6 saatlik tohum tazelik kapısı uygulanır ve gerekiyorsa
+gerçek kaynak GET isteği yapılır.
+
+Yalnız ana dala ilk yayın sırasında istek sınırı 250, günlük
+tekrarda 100 GET olur. Manuel çalıştırmanın seçili bütçe ve
+kaynak ID'si aynen korunur. Tüm koşuların maksimumu 501 GET'tir.
+Yeni kota ve ayrı iş akışı başarıyla tamamlanmış olsa bile bu,
+skor veya yatırım kabulü anlamına gelmez.
+
 İş akışı ilk kez ana dala alındığında, en son başarılı ve gerçek
 \`live-acceptance-evidence\` paketi bulunan SEC koşusunu arayıp ilk kaynak
 çalışmasını başlatır. Önceki veri paketleri orijinal tarihleriyle kullanılır;
