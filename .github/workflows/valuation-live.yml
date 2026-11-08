@@ -1,6 +1,9 @@
 name: Canlı değerleme kaynakları
 
 on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/valuation-live.yml]
   workflow_run:
     workflows: ['Canlı 100 şirket kabulü']
     types: [completed]
@@ -32,7 +35,7 @@ concurrency:
 jobs:
   collect:
     if: >-
-      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
+      (github.event_name != 'workflow_run' && github.ref == 'refs/heads/main')
       || (github.event_name == 'workflow_run'
           && github.event.workflow_run.head_branch == 'main'
           && github.event.workflow_run.conclusion == 'success'
@@ -57,6 +60,17 @@ jobs:
         run: |
           set -euo pipefail
           SOURCE_RUN="${SOURCE_RUN_INPUT:-$EVENT_SOURCE_RUN}"
+          if [ -z "$SOURCE_RUN" ] && [ "$EVENT_NAME" = "push" ]; then
+            for CANDIDATE in $(gh api "repos/$REPO/actions/workflows/live-acceptance.yml/runs?per_page=40" \
+              --jq '.workflow_runs[] | select(.status == "completed" and .conclusion == "success" and .head_branch == "main") | .id'); do
+              PRESENT=$(gh api "repos/$REPO/actions/runs/$CANDIDATE/artifacts?per_page=100" \
+                --jq '[.artifacts[] | select(.name == "live-acceptance-evidence" and .expired == false)] | length')
+              if [ "$PRESENT" -eq 1 ]; then
+                SOURCE_RUN="$CANDIDATE"
+                break
+              fi
+            done
+          fi
           if ! [[ "$SOURCE_RUN" =~ ^[1-9][0-9]*$ ]]; then
             echo "::error::Kaynak run ID pozitif sayı olmalıdır"
             exit 2
