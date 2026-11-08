@@ -77,6 +77,8 @@ jobs:
 
       - name: Toplama özetini göster
         if: success()
+        env:
+          SOURCE_RUN: ${{ inputs.source_run_id }}
         run: |
           python - <<'PY'
           import json
@@ -86,7 +88,7 @@ jobs:
           print(json.dumps(summary,ensure_ascii=False,indent=2))
           lines=['## Canlı değerleme kaynakları', '',
                  'Bu iş fiyat ve hisse sınıfı kaynağı toplar; yatırım puanı veya MVP kabulü vermez.', '',
-                 f"- Kaynak run ID: ${{ inputs.source_run_id }}",
+                 f"- Kaynak run ID: {__import__('os').environ['SOURCE_RUN']}",
                  f"- Yeni GET çağrısı: {summary['new_get_invocations']}",
                  f"- Şirket: {summary['candidates']}",
                  f"- Kimlik: {summary['identity_states']}",
