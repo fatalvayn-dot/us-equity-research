@@ -1,5 +1,36 @@
 # Development status
 
+## 9 Kasım 2026 — Eski SEC hisse tarihi anomalilerini sınırlı karantinaya alma (PR değerlendirmesinde)
+
+Başlangıç main `9a2a614d619a285b248c450204c6213b038e5eed`,
+açık PR yok, Foundation CI `42530908316` başarılı.
+Sonraki saatlik SEC/valuation/score `42532334024`, `42532384108`,
+`42532403913` işlerinin üçü de başarıyla kapanmasına karşın
+hiçbiri yeni artifact üretmedi; bu yeşil durum yeni veri veya skor
+anlamına gelmiyor. Son üretim skor koşusu `42466864670` üç
+şirket için gerçek 100 puanlık araştırma skoru verdi.
+
+`valuation-share-cover-audit-2026-11-09.json` dört şirkette
+(GS, SCCO, ADBE, ON) `disclosed_shares: invalid share observation`
+hatası kaydetti. SEC Companyfacts'teki tarih sırası ters olan
+**eski ve seçilmeyen** DEI hisse adedi gözlemleri karantinaya alınıp
+kaynağın özgün tarihi ve accession bilgisi korunacak şekilde
+`disclosed_shares` ayrıştırması daraltıldı. Güncel/en son tarihli
+gözlemde `end > filed`, negatif/kesirli sayı, belge kimliği
+uyuşmazlığı, gelecek filing veya çelişen son kayıt kabul edilmiyor.
+Aynı kaynağın yeniden tarihlenmesi ya da sayısal operandı değiştirme
+işlemi yok. `tests/test_historical_share_chronology.py` altı
+sınır senaryosu içerir; tüm sonuçlar CI ile doğrulanmadan
+birleştirme yapılmaz.
+
+Bu düzeltmenin dört gerçek şirkette kaçını kurtardığı **henüz
+canlı ham kaynak tekrarı ile doğrulanmadı**. Diğer değerleme ve
+finansal engeller mevcut; MVP hâlâ kabul edilmedi. Sonraki iş:
+tam regresyon, ayrı PR ve merge; ardından özgün tarihli
+kaynak tekrarında ilgili dört şirketin share/price/history
+statülerini denetleme. Puan veya yatırım onayı tahmin edilmeyecek.
+
+
 ## 9 Kasım 2026 — SEC kapağındaki sabit kuponlu borçlar hisse adedinden ayrılıyor
 
 Başlangıç main `3441a98b7ce9c37b0576594a845ec09991add011` (PR #48).
