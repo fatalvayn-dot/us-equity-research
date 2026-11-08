@@ -31,6 +31,8 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("collect=false", self.text)
         self.assertIn("actions/workflows/live-acceptance.yml/runs?per_page=100", self.text)
         self.assertIn("collect=true", self.text)
+        self.assertIn("docs/evidence/first-live-score-2026-11-08.json", self.text)
+        self.assertIn("['financial_run_id']", self.text)
         self.assertIn("steps.select.outputs.collect == 'true'", self.text)
         self.assertIn("data/valuation-import/live-sources/manifest.json", self.text)
         self.assertIn("--seed-bundle data/valuation-import/live-sources", self.text)
