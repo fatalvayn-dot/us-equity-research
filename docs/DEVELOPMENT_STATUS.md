@@ -1,5 +1,38 @@
 # Development status
 
+## 8 Kasım 2026 — İlk üç gerçek 100 puanlık araştırma skoru üretildi
+
+Ana dala birleşen PR #45 commit `3341231`, Python 3.11/3.12/3.13
+Foundation CI başarılı. Canlı SEC finansal kaynak run `42455760184`;
+yeni değerleme kaynak run `42466713390` başarılı, önceki finansal
+paketi aynı gerçek run kimliğiyle kullandı. İlk resmî skor run
+`42466864670` başarılı: 100 aday, üç altı bileşenli
+`scored_research_hypothesis`, 97 skorsuz, iki kritik finansal inceleme.
+
+Sıralama: MU **92/100** (SIC 3674), AAPL **67,5/100** (SIC 3571),
+MSFT **66,5/100** (SIC 7372). Hesaplar seçili kaynakların özgün
+tarihleri, dokuz SEC finansal teyidi, önceki yıl gelir dönemi, özgün
+hisse sayısı, fiyat ve piyasa geçmişiyle tam `build_score_report`
+motorundan üretildi. ZIP CRC ve üç raporun SHA-256 manifesti eşleşti;
+bileşenler ve toplamlar tekrar kontrol edildi. Ayrıntı:
+`docs/evidence/first-live-score-2026-11-08.json`. Kaynak Actions
+artifact `13612260683` (`first-live-score-evidence`).
+
+Skorsuz 97 adayın açıklanmış engelleri: 84 değerleme kaynak kanıtı
+eksik; altı desteklenmeyen sektör; beş finansal/model inceleme girdisi
+eksik; iki kritik finansal inceleme (PM, DELL). Bu sayılar
+`build_score_report` blocker sonuçlarıdır; gerçek şirket yatırım
+uygunluğu anlamına gelmez.
+
+**MVP kabul edilmedi; `mvp_accepted=false`, yatırım onayı yok.**
+Model araştırma hipotezidir, performans tahmini ve gerçek alım/satım
+yapılmadı. Sonraki iş: 84 değerleme engelini kaynak, yaş, hisse sınıfı
+ve fiyat geçmişi nedenlerine ayır; sıradaki desteklenen sektör ve
+dokuz girdisi tamam şirketleri öncele. SEC ve piyasa kanıtlarını
+yeniden tarih vererek taze kabul etme; üretilen skoru arşivle.
+Gölge portföy, backtest veya model genişletmeye geçme.
+
+
 ## 8 Kasım 2026 — Gerçek tam skor için karşılaştırmalı dönem ve kaynak zinciri (PR bekliyor)
 
 Sequence 10 finansal durum paketi 100 şirket, 961 kabul edilmiş değer,
