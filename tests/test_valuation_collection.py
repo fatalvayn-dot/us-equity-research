@@ -115,6 +115,18 @@ class CollectionTests(unittest.TestCase):
         company=self.collector().collect(PLAN)['companies'][0]
         self.assertEqual(company['share_check']['status'],'invalid_data');self.assertIsNone(company['total_score'])
         self.assertEqual(company['price_check']['status'],'valid')
+        self.assertEqual(company['history_check'], dict(status='not_started', deferred_reason='share_class_unverified'))
+        self.assertNotIn(history_url('AAPL'), self.transport.calls)
+
+    def test_history_is_deferred_when_original_filing_exhausts_request_budget(self):
+        self.archive.record(price())
+        report = self.collector(3).collect(PLAN)
+        company = report['companies'][0]
+        self.assertEqual(company['share_check']['status'], 'pending_source_collection')
+        self.assertEqual(company['price_check']['status'], 'valid')
+        self.assertEqual(company['history_check'], dict(status='not_started', deferred_reason='share_class_unverified'))
+        self.assertNotIn(history_url('AAPL'), self.transport.calls)
+
     def test_metadata_symbol_conflict_does_not_fetch_original_filing(self):
         r=meta(tickers=['MSFT']);self.transport.responses[r.url]=r
         company=self.collector().collect(PLAN)['companies'][0]
@@ -187,8 +199,13 @@ class CollectionTests(unittest.TestCase):
                 self.assertEqual(want['share_check']['status'],'symbol_mismatch')
                 self.assertEqual(got['share_check']['status'],'pending_source_collection')
             else:self.assertEqual(json.loads(json.dumps(got['share_check'],default=encode)),want['share_check'])
-            for leg in ('price_check','history_check'):
-                self.assertEqual(json.loads(json.dumps(got[leg],default=encode)),want[leg])
+            self.assertEqual(json.loads(json.dumps(got['price_check'],default=encode)),want['price_check'])
+            if got['symbol']=='ORCL':
+                self.assertEqual(want['history_check']['status'], 'valid')
+                self.assertEqual(got['history_check'], dict(status='not_started', deferred_reason='share_class_unverified'))
+                self.assertTrue(any(row['url'] == history_url('ORCL') for row in self.archive.observations()))
+            else:
+                self.assertEqual(json.loads(json.dumps(got['history_check'],default=encode)),want['history_check'])
             self.assertFalse(got['scope_approved']);self.assertIsNone(got['total_score'])
         self.assertEqual(self.transport.calls,[])
 

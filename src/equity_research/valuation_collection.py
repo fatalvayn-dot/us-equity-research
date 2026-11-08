@@ -172,7 +172,9 @@ class ValuationSourceCollector:
                 result['price_check'] = dict(status='pending_source_collection')
             except (ProviderFailure, ValueError, KeyError, TypeError) as exc:
                 self.reject(result, 'price_check', exc)
-            if price is not None and shares is not None:
+            if price is not None and result['share_check']['status'] != 'verified_dated_share_class':
+                result['history_check']['deferred_reason'] = 'share_class_unverified'
+            elif price is not None:
                 try:
                     history = self.get(history_url(symbol), PRICE_TTL, result['attempts'], 'history', not_before=price.market_at)
                     market = parse_history(history, identity, cik=cik, symbol=symbol, share_date=shares['end'],
