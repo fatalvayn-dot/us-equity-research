@@ -13,6 +13,10 @@ arşivde bağımsız eşleştirildi. Kanıt: docs/evidence/live-sequence8-audit.
 Canlı rapor: 100 dönem/100 yeniden kullanılan yıllık belge, ertelenen dönemsel
 alan 0; 54 şirkette 392 güncel değer, 305 hesaplama, skor 0. Finansal veri
 TTL ve çalışma bütçesi nedeniyle kapsam henüz 100 şirket için tamamlanmadı.
+Son dilim 500 yeni alan işledi, 900 alan not_started kaldı. Bu nedenle canlı
+varsayılan bütçe mevcut 100 × 14 alanı kapsayan 1400 oldu. PR denemesi 30 alan,
+120 dakika sınırı, altı saatlik tazelik ve kilitler değişmedi. Bu yeni bütçenin
+canlı sonucu henüz görülmedi; eksik kaynağın tamamlanacağı garanti edilmiyor.
 Geçmiş değerler yeni tarih verilerek güncel sayılmadı.
 
 MVP artık SEC kimliği, iki Nasdaq liste kaynağı ve yıllık bildirim kapağını
