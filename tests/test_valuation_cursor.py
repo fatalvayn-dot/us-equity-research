@@ -11,7 +11,7 @@ from equity_research.companyfacts import companyfacts_url
 from equity_research.response_archive import ResponseArchive
 from equity_research.valuation_collection import ValuationSourceCollector
 from test_scoring import ASOF
-from test_valuation import cf, identity
+from test_valuation import cf, identity, meta
 from test_valuation_collection import Transport
 
 
@@ -36,7 +36,8 @@ class FairValuationCursorTests(unittest.TestCase):
         first=cf()
         other=json.loads(first.body);other['cik']=789019
         second=replace(first,url=companyfacts_url(MSFT),body=json.dumps(other).encode())
-        self.transport=Transport({directory.url:directory,first.url:first,second.url:second})
+        third=meta()
+        self.transport=Transport({directory.url:directory,first.url:first,second.url:second,third.url:third})
     def tearDown(self):
         self.lock.release(self.owner);self.lock.close();self.archive.close();self.tmp.cleanup()
     def collector(self,budget):
