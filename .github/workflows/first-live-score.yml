@@ -1,0 +1,229 @@
+name: İlk gerçek 100 puan araştırma skoru
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/first-live-score.yml
+  workflow_run:
+    workflows: ['Canlı değerleme kaynakları']
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      valuation_run_id:
+        description: Kanıtlı değerleme kaynak çalışmasının sayısal run ID değeri
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: first-live-score
+  cancel-in-progress: false
+
+jobs:
+  score:
+    if: >-
+      (github.event_name != 'workflow_run' && github.ref == 'refs/heads/main')
+      || (github.event_name == 'workflow_run'
+          && github.event.workflow_run.head_branch == 'main'
+          && github.event.workflow_run.conclusion == 'success'
+          && github.event.workflow_run.head_repository.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Değerleme kaynak run ID değerini seç
+        id: select
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VALUATION_RUN_INPUT: ${{ inputs.valuation_run_id }}
+          TRIGGER_RUN: ${{ github.event.workflow_run.id }}
+          EVENT_NAME: ${{ github.event_name }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          RUN="${VALUATION_RUN_INPUT:-$TRIGGER_RUN}"
+          if [ -z "$RUN" ] && [ "$EVENT_NAME" = "push" ]; then
+            for CANDIDATE in $(gh api "repos/$REPO/actions/workflows/valuation-live.yml/runs?per_page=40" \
+                --jq '.workflow_runs[] | select(.status == "completed" and .conclusion == "success" and .head_branch == "main") | .id'); do
+              COUNT=$(gh api "repos/$REPO/actions/runs/$CANDIDATE/artifacts?per_page=100" \
+                --jq '[.artifacts[] | select(.name == "valuation-source-state" and .expired == false)] | length')
+              if [ "$COUNT" -eq 1 ]; then RUN="$CANDIDATE"; break; fi
+            done
+          fi
+          if ! [[ "$RUN" =~ ^[1-9][0-9]*$ ]]; then
+            echo "::error::Geçerli değerleme run ID yok"
+            exit 2
+          fi
+          COUNT=$(gh api "repos/$REPO/actions/runs/$RUN/artifacts?per_page=100" \
+            --jq '[.artifacts[] | select(.name == "valuation-source-state" and .expired == false)] | length')
+          if [ "$COUNT" -ne 1 ]; then
+            if [ "$EVENT_NAME" = "workflow_run" ]; then
+              echo "Kaynak çalışmada doğrulanmış değerleme paketi yok; skor denenmedi." >> "$GITHUB_STEP_SUMMARY"
+              echo "ready=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "::error::Değerleme kanıt paketi bulunamadı"
+            exit 2
+          fi
+          echo "ready=true" >> "$GITHUB_OUTPUT"
+          echo "valuation_run=$RUN" >> "$GITHUB_OUTPUT"
+
+      - name: Değerleme kaynak paketini indir
+        if: steps.select.outputs.ready == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: valuation-source-state
+          path: data/valuation
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.select.outputs.valuation_run }}
+
+      - name: İlgili finansal SEC kaynak run kimliğini çıkar
+        if: steps.select.outputs.ready == 'true'
+        id: financial
+        run: |
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          marker=Path('data/valuation/financial-source-run.json')
+          if not marker.is_file():
+              print('İlgili finansal kaynak run ID kanıtı bulunamadı. Skor denenmedi.')
+              with Path(os.environ['GITHUB_OUTPUT']).open('a') as out:out.write('ready=false\n')
+          else:
+              raw=json.loads(marker.read_text())
+              run=raw['run_id']
+              if type(run) is not int or run<=0:raise ValueError('invalid financial run identity')
+              with Path(os.environ['GITHUB_OUTPUT']).open('a') as out:
+                  out.write(f'ready=true\nsource_run={run}\n')
+          PY
+
+      - name: SEC finansal batch durumunu indir
+        if: steps.financial.outputs.ready == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: live-acceptance-state
+          path: data/financial
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.financial.outputs.source_run }}
+
+      - name: SEC ham kaynak kanıtlarını indir
+        if: steps.financial.outputs.ready == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: live-acceptance-evidence
+          path: data/financial-evidence
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.financial.outputs.source_run }}
+
+      - name: SEC kimliği ve açık yıllık karşılaştırma dönemlerini hazırla
+        if: steps.financial.outputs.ready == 'true'
+        id: plan
+        env:
+          PYTHONPATH: src
+        run: |
+          python scripts/prepare_first_score_plans.py \
+            --financial data/financial/batch.json \
+            --metadata data/financial/metadata.json \
+            --valuation data/valuation/report.json \
+            --companyfacts-dir data/financial/companyfacts \
+            --current-plan data/first-score-work/current-plan.json \
+            --prior-plan data/first-score-work/prior-plan.json \
+            --report data/first-score-work/selection.json \
+            --maximum 10
+
+      - name: Güncel yıl gelirini kaynak sırasıyla topla
+        if: steps.plan.outputs.ready == 'true'
+        id: current
+        continue-on-error: true
+        env:
+          PYTHONPATH: src
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: |
+          test -n "$SEC_USER_AGENT" || exit 2
+          python -m equity_research research-batch \
+            --plan data/first-score-work/current-plan.json \
+            --cache-dir data/financial/companyfacts \
+            --checkpoint data/first-score-work/current.sqlite \
+            --output data/first-score-work/current.json \
+            --user-agent "$SEC_USER_AGENT"
+
+      - name: Önceki yıl gelirini kaynak sırasıyla topla
+        if: steps.plan.outputs.ready == 'true'
+        id: prior
+        continue-on-error: true
+        env:
+          PYTHONPATH: src
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: |
+          test -n "$SEC_USER_AGENT" || exit 2
+          python -m equity_research research-batch \
+            --plan data/first-score-work/prior-plan.json \
+            --cache-dir data/financial/companyfacts \
+            --checkpoint data/first-score-work/prior.sqlite \
+            --output data/first-score-work/prior.json \
+            --user-agent "$SEC_USER_AGENT"
+
+      - name: Tam kaynaklı 100 puanlık araştırma skorunu çalıştır
+        if: steps.plan.outputs.ready == 'true'
+        id: score
+        continue-on-error: true
+        env:
+          PYTHONPATH: src
+        run: |
+          test -f data/first-score-work/current.json
+          test -f data/first-score-work/prior.json
+          test -f data/valuation/source-bundle/manifest.json
+          test -f data/financial-evidence/live-sources/manifest.json
+          AS_OF=$(python -c 'from datetime import datetime,timezone; print(datetime.now(timezone.utc).isoformat())')
+          python scripts/build_current_scores.py \
+            --financial data/financial/batch.json \
+            --current data/first-score-work/current.json \
+            --prior data/first-score-work/prior.json \
+            --sources data/valuation/source-bundle \
+            --financial-sources data/financial-evidence/live-sources \
+            --output data/first-score-work/output \
+            --as-of "$AS_OF"
+
+      - name: Skor durumunu Türkçe raporla
+        if: always() && steps.financial.outputs.ready == 'true'
+        run: |
+          python - <<'PY'
+          import gzip,json,os
+          from pathlib import Path
+          lines=['## İlk gerçek şirket skoru','']
+          selection=Path('data/first-score-work/selection.json')
+          if selection.is_file():
+              s=json.loads(selection.read_text())
+              lines.append(f"- Açık karşılaştırma planına alınan: {s['selected']} şirket")
+              lines.append(f"- Adaylar: {', '.join(s['selected_symbols'])}")
+          score=Path('data/first-score-work/output/report.json.gz')
+          if score.is_file():
+              report=json.loads(gzip.decompress(score.read_bytes()))
+              lines.append(f"- Altı bileşeni kanıtlanan skor: {report['summary']['scored_companies']} şirket")
+              lines.append(f"- Sıralama: {[(r['symbol'],str(r['score'])) for r in report['ranking']]}")
+              lines.append('- Puanlar yatırım onayı veya MVP kabulü değildir.')
+          else:
+              lines.append('- Resmî skor raporu üretilemedi; kanıt ve engeller arşivde saklandı.')
+          with Path(os.environ['GITHUB_STEP_SUMMARY']).open('a') as out:
+              out.write('\n'.join(lines)+'\n')
+          PY
+
+      - name: Skor, kaynak ve eksik veri kanıtlarını sakla
+        if: always() && steps.select.outputs.ready == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: first-live-score-evidence
+          path: data/first-score-work
+          if-no-files-found: warn
+          retention-days: 90
+
+      - name: Skor raporu üretilemediyse işi başarısız say
+        if: steps.plan.outputs.ready == 'true' && steps.score.outcome != 'success'
+        run: exit 1
