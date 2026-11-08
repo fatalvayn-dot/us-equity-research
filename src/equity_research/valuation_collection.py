@@ -1,5 +1,6 @@
 """Bounded source acquisition for explicit candidates; never scope or score approval."""
 import hashlib
+import json
 import re
 from collections import Counter
 from dataclasses import asdict
@@ -104,6 +105,20 @@ class ValuationSourceCollector:
 
     def collect(self, payload):
         rows = candidate_rows(payload)
+        # A fixed head-first budget can starve the back of a 100-company
+        # cohort forever when prices expire between scheduled runs.
+        # Store only an ordered-candidate-bound position, not cached approval.
+        fingerprint = hashlib.sha256(json.dumps(
+            [(r['symbol'], r['issuer_id']) for r in rows],
+            separators=(',', ':')).encode()).hexdigest()
+        cursor_key = 'valuation-candidate-cursor-v1'
+        prior = self.checkpoint.read(cursor_key) if self.limit else None
+        start = (prior['next_index'] if isinstance(prior, dict)
+                 and prior.get('fingerprint') == fingerprint
+                 and type(prior.get('next_index')) is int
+                 and 0 <= prior['next_index'] < len(rows) else 0)
+        scan = rows[start:] + rows[:start]
+        last_requested_index = None
         identity_attempts = []
         identity = None
         identity_validation = dict(status='not_started')
@@ -118,7 +133,7 @@ class ValuationSourceCollector:
             identity_validation = dict(status=exc.status.value if isinstance(exc, ProviderFailure) else 'invalid_data')
             identity = None
         companies = []
-        for row in rows:
+        for offset, row in enumerate(scan):
             result = dict(**row, attempts=[], identity_status='not_started',
                 share_check=dict(status='not_started'), price_check=dict(status='not_started'),
                 history_check=dict(status='not_started'), scope_approved=False,
@@ -184,6 +199,14 @@ class ValuationSourceCollector:
                     result['history_check'] = dict(status='pending_source_collection')
                 except (ProviderFailure, ValueError, KeyError, TypeError) as exc:
                     self.reject(result, 'history_check', exc)
+            if any(a.get('http_requested') for a in result['attempts']):
+                last_requested_index = (start + offset) % len(rows)
+        if self.limit and last_requested_index is not None:
+            self.checkpoint.write(cursor_key, dict(fingerprint=fingerprint,
+                next_index=(last_requested_index + 1) % len(rows)),
+                self.owner, self.clock(), LEASE_TTL)
+        order = {r['issuer_id']: i for i, r in enumerate(rows)}
+        companies.sort(key=lambda company: order[company['issuer_id']])
         return dict(schema_version=1, report_kind='valuation_source_collection_scope_pending',
             as_of=self.clock().isoformat(), companies=companies, identity_attempts=identity_attempts,
             identity_validation=identity_validation,
