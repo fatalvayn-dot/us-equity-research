@@ -15,7 +15,12 @@ kanıtlarını toplar. Hiçbir puanlama, sektör kabulü veya gerçek işlem yap
 3. `source_run_id` alanına kaynak iş akışının gerçek sayısal run ID'sini gir.
    İlk denemede `max_new_requests=51` kullan. Erişim hatası varsa
    aynı taramayı bilinçsizce büyütme.
-4. Sonuçtaki `valuation-source-state` artifact dosyasını ve Türkçe
+4. Sonraki değerleme taramasında `valuation_resume_run_id` alanına bir önceki
+   **değerleme** çalışmasının sayısal run ID'sini yaz. İlk çalışmada boş
+   bırak. Böylece mevcut kaynak ve negatif sonuç kayıtları silinmeden
+   tekrar kullanılabilir. Yeni kaynak `source_run_id` değeri finansal
+   taramanın; `valuation_resume_run_id` ise değerleme taramasının ID'sidir.
+5. Sonuçtaki `valuation-source-state` artifact dosyasını ve Türkçe
    Actions özetini kontrol et. `report.json` içindeki `identity_states`,
    `share_states`, `price_states`, `history_states` ayrı ayrı okunmalıdır.
 
