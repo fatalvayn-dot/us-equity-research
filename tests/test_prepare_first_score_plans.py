@@ -56,7 +56,11 @@ class FirstScorePlansTests(unittest.TestCase):
         rows=raw["facts"]["us-gaap"]["RevenueFromContractWithCustomerExcludingAssessedTax"]["units"]["USD"]
         raw["facts"]["us-gaap"]["RevenueFromContractWithCustomerExcludingAssessedTax"]["units"]["USD"]=[
             r for r in rows if r.get("end")!="2024-12-31"]
-        self.write_cache(json.dumps(raw).encode())
+        updated=json.dumps(raw).encode()
+        self.write_cache(updated)
+        for field in self.batch["companies"][0]["fields"]:
+            if field["query"]["field"] == "revenue":
+                field["fact"]["raw_sha256"] = hashlib.sha256(updated).hexdigest()
         _, prior, report=self.runplan()
         self.assertEqual(report["selected"],0)
         self.assertEqual(prior["companies"],[])
