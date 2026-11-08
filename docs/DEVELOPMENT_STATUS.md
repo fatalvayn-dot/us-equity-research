@@ -1,5 +1,33 @@
 # Development status
 
+## 8 Kasım 2026 — Nihai skor için otomatik kaynak devri (PR testinde)
+
+Başlangıç `main` 5ab3292; açık PR yok, 724 test Python 3.11/3.12/3.13
+başarılı. En son gerçek finansal dilim sequence 10 / run 42455760184:
+100/100 adi hisse örneklemi, 961 kabul edilmiş finansal değer, 704 aritmetik
+sonuç, 0 tam skor. Sonraki saatlik 42458573062 kanıt üretmeden atlandı.
+Aynı kesim tarihinde doğrulanmış fiyat, piyasa geçmişi, hisse sınıfı ve
+karşılaştırmalı önceki yıl batch'i puanlama modülüne henüz bağlanmadı.
+
+`valuation-live.yml` iş akışı, ana dala alındığı ilk push sırasında
+son geçerli SEC kanıt paketini seçerek ilk denemeyi de tetikler; ayrıca
+başarılı ana dal SEC koşusunun
+`live-acceptance-evidence` artifact dosyasını doğruladıktan sonra
+otomatik tetiklenecek şekilde düzenlendi. Kanıt üretmeyen dilimler atlanır;
+son başarılı değerleme çalışmasının ayrı durum paketi yüklenebilir; 51 GET
+varsayılanı, 501 üst sınırı, SEC iletişim kimliği, kaynak SHA doğrulaması ve
+tekil concurrency korunur. Sektör/skor kabulünde gevşetme, ticaret emri,
+yeni ücretli kaynak veya eski radar deposuna müdahale yok.
+Testler `test_valuation_live_workflow.py` ve Python CI ile doğrulanacak.
+Bu iş tek başına canlı değerleme veya 100 puanlık skor üretildi demek değildir.
+
+Sonraki adım: PR CI'ı doğrula, güvenli şekilde ana dala al; bir sonraki
+gerçek kaynak üreten SEC koşusunun otomatik değerleme artifact dosyasını
+denetle; karşılaştırmalı dönem ve kaynak paketlerini `score-report`
+girdilerine bağlayıp ilk gerçek skoru üret. Finansal alanlar eksikse
+tamamlama/tanım kanıtı olmadan sıfırla doldurma.
+
+
 ## 8 Kasım 2026 — İlk prototip için ayrı canlı değerleme kaynağı çalışma yolu (PR bekliyor)
 
 Sequence 10 (run 42455760184) günlük iş akışında 100/100 kayıtlı adi hisse
