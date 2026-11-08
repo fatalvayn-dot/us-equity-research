@@ -18,7 +18,13 @@ değerleme testi başarılı. İlk tam regresyon 740 testte üç eski rapor
 birebir karşılaştırmasını yeni tanı alanları nedeniyle reddetti. Testler,
 yalnız ek tanı alanlarını ayrıca denetleyip eski raporun tüm finansal/skor
 alanlarını birebir karşılaştıracak şekilde düzeltildi; tarihî arşivler
-korundu. Tam regresyon tekrarı ve kesin PR head CI sonucu henüz bekleniyor.
+korundu. Son tam regresyon 740/740 test, 118,920 saniye başarılı; CLI status
+kontrolü de geçti. Aradaki ikinci regresyon, test modülü düzeltmeden önce
+belleğe yüklendiği için bir eski karşılaştırma hatasını yineledi; son temiz
+çalıştırmada hata yok.
+PR #47 kod head `0147a7aef985cb9054ca55c043e5b5d85b9b446e` için
+Foundation CI `42517950341`, Python 3.11/3.12/3.13 başarılı. Bu belge
+kaydı sonrası nihai head CI ayrıca başarılı olmadan merge yapılmayacak.
 Bu testler kayıtlı/sentetik kaynaklarla yürütüldü, yeni canlı kabul değildir.
 
 Son veri üreten finansal run `42455760184` için state `13608291162` ve
