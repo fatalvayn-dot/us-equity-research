@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-08",
+  "classification": "verified_live_research_scores_not_mvp_acceptance",
+  "main_commit": "217dd6db3684d0d22ca90269c6bae01cf8f3cd1f",
+  "valuation_run_id": 42536567400,
+  "valuation_artifact_id": 13640160185,
+  "score_run_id": 42536926634,
+  "score_artifact_id": 13639024015,
+  "valuation_summary": {
+    "candidates": 100,
+    "new_get_invocations": 250,
+    "identity_exact": 100,
+    "verified_dated_share_class": 38,
+    "price_valid": 57,
+    "history_valid": 38
+  },
+  "score_summary": {
+    "candidates": 100,
+    "scored_companies": 7,
+    "unscored": 93,
+    "critical_review": 2
+  },
+  "ranked": [
+    [
+      "MU",
+      "92"
+    ],
+    [
+      "AAPL",
+      "67.5"
+    ],
+    [
+      "MSFT",
+      "66.5"
+    ],
+    [
+      "CRM",
+      "66"
+    ],
+    [
+      "MRVL",
+      "64.5"
+    ],
+    [
+      "TXN",
+      "63"
+    ],
+    [
+      "AMAT",
+      "59.5"
+    ]
+  ],
+  "unscored_blockers": {
+    "valuation_source_evidence_required": 61,
+    "specialized_or_unmodeled_sector": 24,
+    "complete_financial_review_required": 6,
+    "critical_financial_review": 2
+  },
+  "integrity": {
+    "score_zip_sha256": "f074881bc8eed094086edfe6257c983fee51a99d6961c8a0d63df9ecf1fdebbb",
+    "score_report_sha256": "b5323f10b5d68acedc45ae0d74509333c616b60a263681813d74e0f223dbf516",
+    "zip_crc_ok": true,
+    "report_manifest_shas_ok": true,
+    "all_seven_have_nine_sec_financial_confirmations": true
+  },
+  "safety": {
+    "mvp_accepted": false,
+    "investment_approved": false,
+    "real_money_orders": false
+  },
+  "notes": "Scores are hypotheses; the increase from 3 to 7 is validated in actual scored report; historical 84 blockers and current 61 are different run cutoffs."
+}
