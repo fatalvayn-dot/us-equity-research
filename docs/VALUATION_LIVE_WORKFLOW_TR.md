@@ -6,6 +6,11 @@ Skor, sektör kabulü, alım/satım emri veya MVP kabulü üretmez.
 
 ## Otomatik çalışma
 
+İş akışı ilk kez ana dala alındığında, en son başarılı ve gerçek
+\`live-acceptance-evidence\` paketi bulunan SEC koşusunu arayıp ilk kaynak
+çalışmasını başlatır. Önceki veri paketleri orijinal tarihleriyle kullanılır;
+eski fiyat otomatik güncel sayılmaz.
+
 Ana daldaki `Canlı 100 şirket kabulü` iş akışı **başarıyla tamamlandığında**
 değerleme kaynakları iş akışı tetiklenir. İş akışı önce SEC koşusunun gerçekten
 `live-acceptance-evidence` artifact dosyası üretip üretmediğini GitHub API
