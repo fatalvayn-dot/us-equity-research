@@ -56,3 +56,18 @@ zincirini geçtiği canlı raporla gösterilmelidir.
 
 Test: `tests/test_valuation_live_workflow.py`. CI başarısı canlı kanıt
 toplandığı veya ilk puan üretildiği anlamına gelmez.
+
+## 100 puanlık araştırma skoruna kaynak devri
+
+Değerleme durum paketi, kaynak alınan SEC çalışmasının sayısal ID bilgisini
+`financial-source-run.json` dosyasında taşır. Sonraki
+`İlk gerçek 100 puan araştırma skoru` iş akışı bu kimlikle tam olarak
+aynı finansal batch ve özgün kaynak arşivini indirir. Farklı koşuların
+finansal verileri sessizce karıştırılmaz.
+
+Skor akışı, sektör modeli desteklenen, dokuz temel girdisi mevcut ve
+fiyat/hisse sınıfı/geçmiş fiyatı kanıtlanmış adaylar için SEC'de açık
+önceki yıl dönemini arar. Önceki yılı takvim çıkarımıyla uydurmaz.
+Mevcut `research-batch` kaynak sırası ve `build_current_scores.py`
+modeli kullanılır. Sonuç `first-live-score-evidence` artifact dosyasında
+saklanır; puan oluşsa bile yatırım onayı ve MVP kabulü verilmez.

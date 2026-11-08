@@ -1,5 +1,37 @@
 # Development status
 
+## 8 Kasım 2026 — Gerçek tam skor için karşılaştırmalı dönem ve kaynak zinciri (PR bekliyor)
+
+Sequence 10 finansal durum paketi 100 şirket, 961 kabul edilmiş değer,
+704 hesaplama ve 0 resmî skor içeriyor. İlk canlı değerleme kaynak işi
+42465060347 başarıyla tamamlandı: 100 tam kimlik, 11 doğrulanmış tarihli
+hisse sınıfı, 20 geçerli fiyat ve 15 geçerli piyasa geçmişi; yeni GET 51.
+Bunların tamamı 100 puanlık yatırım araştırma skoru değildir.
+
+Canlı arşivlerde AAPL, MSFT ve MU için desteklenen SIC modelleri, dokuz
+temel finansal kalem, aynı yıllık bildirimden açık önceki yıl gelir dönemi,
+fiyat, hisse sınıfı ve piyasa geçmişi kanıtları bulunuyor.
+Resmî `build_score_report` henüz çalıştırılmadığından tamamlanmış
+skor/rank ilan edilmiyor. Sayısal ön hesap ile resmî kabul birbirinden
+ayrılıyor.
+
+Yeni `prepare_first_score_plans.py` yalnız SEC'nin aynı accession
+numaralı yıllık gelir gözlemlerinden ardışık dönemleri seçer; hash,
+şirket, tarih, tam finansal girdi, sektör ve piyasa kanıtını denetler.
+`first-live-score.yml` değerleme koşusunun tam finansal kaynak ID'sini
+kullanarak ilgili iki paketi indirir; `research-batch` ile güncel ve
+önceki yılı Yahoo→SEC→Nasdaq→Finnhub sırasıyla çözümler, ardından
+`scripts/build_current_scores.py` üzerinden gerçek altı bileşenli
+puanlama ve Türkçe rapor üretimini dener. Eksik kanıtta puan üretmez.
+Sonuçların kaynak ve hata kayıtları 90 gün korunur. Fon/banka/GYO
+modellerini zorla kabul etmez, alım-satım yapmaz.
+
+Sonraki iş: yeni testlerin Python 3.11/3.12/3.13 CI sonucunu denetle.
+Başarılıysa güvenli merge; ardından gerçek Actions skor denemesinin
+`first-live-score-evidence` paketindeki sonuç ve engelleri incele.
+MVP kabulü ve gerçek yatırım onayı henüz yok.
+
+
 ## 8 Kasım 2026 — Nihai skor için otomatik kaynak devri (PR testinde)
 
 Başlangıç `main` 5ab3292; açık PR yok, 724 test Python 3.11/3.12/3.13

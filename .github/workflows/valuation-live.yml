@@ -125,6 +125,19 @@ jobs:
           github-token: ${{ github.token }}
           run-id: ${{ steps.select.outputs.resume_run }}
 
+      - name: Değerleme paketinin finansal kaynak run ID bilgisini kaydet
+        if: steps.select.outputs.collect == 'true'
+        env:
+          SOURCE_RUN: ${{ steps.select.outputs.source_run }}
+        run: |
+          mkdir -p data/valuation-current
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          Path('data/valuation-current/financial-source-run.json').write_text(
+              json.dumps(dict(run_id=int(os.environ['SOURCE_RUN'])))+'\n')
+          PY
+
       - name: Doğrulanmış finansal kaynak paketini indir
         if: steps.select.outputs.collect == 'true'
         uses: actions/download-artifact@v4
