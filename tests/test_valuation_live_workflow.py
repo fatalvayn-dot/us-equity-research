@@ -21,6 +21,8 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("live-acceptance-evidence", self.text)
         self.assertIn("SEC_USER_AGENT", self.text)
         self.assertIn("run-id: ${{ inputs.source_run_id }}", self.text)
+        self.assertIn("run-id: ${{ inputs.valuation_resume_run_id }}", self.text)
+        self.assertIn("name: valuation-source-state", self.text)
         self.assertIn("data/valuation-import/live-sources/manifest.json", self.text)
         self.assertIn("--seed-bundle data/valuation-import/live-sources", self.text)
 
