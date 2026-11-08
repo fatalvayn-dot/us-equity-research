@@ -7,6 +7,10 @@ on:
         description: Denetlenmiş 100 şirket kabul çalışmasının sayısal GitHub run ID değeri
         required: true
         type: string
+      valuation_resume_run_id:
+        description: Önceki değerleme çalışmasının sayısal run ID değeri (ilk çalışmada boş)
+        required: false
+        type: string
       max_new_requests:
         description: Yeni dış kaynak GET bütçesi (ilk deneme için 51)
         required: true
@@ -37,6 +41,7 @@ jobs:
         env:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
           SOURCE_RUN: ${{ inputs.source_run_id }}
+          RESUME_RUN: ${{ inputs.valuation_resume_run_id }}
         run: |
           if [ -z "$SEC_USER_AGENT" ]; then
             echo "::error::SEC_USER_AGENT secret eksik"
@@ -46,6 +51,19 @@ jobs:
             echo "::error::source_run_id pozitif sayısal GitHub Actions run ID olmalı"
             exit 2
           fi
+          if [ -n "$RESUME_RUN" ] && ! [[ "$RESUME_RUN" =~ ^[1-9][0-9]*$ ]]; then
+            echo "::error::valuation_resume_run_id pozitif sayısal run ID olmalı"
+            exit 2
+          fi
+
+      - name: Önceki değerleme çalışma durumunu yükle
+        if: inputs.valuation_resume_run_id != ''
+        uses: actions/download-artifact@v4
+        with:
+          name: valuation-source-state
+          path: data/valuation-current
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.valuation_resume_run_id }}
 
       - name: Önceki çalışmanın kamu kanıtlarını indir
         uses: actions/download-artifact@v4
