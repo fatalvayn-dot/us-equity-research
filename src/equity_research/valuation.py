@@ -18,6 +18,10 @@ POLICY_VERSION = 'disclosed-share-indication-v1'
 SHARE_CONCEPT = 'dei:EntityCommonStockSharesOutstanding'
 SHARE_MAX_AGE = timedelta(days=120)
 SNAPSHOT_TTL = timedelta(hours=6)
+COVER_DEBT_TITLE = re.compile(
+    r'[0-9]+(?:\.[0-9]+)?% (?:EUR |GBP |USD )?(?:Senior )?Notes due '
+    r'(?:(?:January|February|March|April|May|June|July|August|September|October|November|December) )?'
+    r'20[0-9]{2}', re.I)
 
 
 def disclosed_shares(response, *, cik, as_of):
@@ -155,6 +159,21 @@ def verify_share_class(shares, metadata, filing, *, symbol, as_of):
                     symbol_corroboration='exact_cover_symbol'))
             else:unmatched.append(ticker)
         remaining=[r for i,r in enumerate(other_cover) if i not in used]
+        # The cover can list plain fixed-coupon debt absent from submissions.
+        # Preserve those exact symbols as debt evidence, without matching them
+        # to any missing metadata ticker or including them in the share count.
+        if remaining and not unmatched and all(
+                COVER_DEBT_TITLE.fullmatch(row['title']) for row in remaining):
+            debt_by_symbol = {}
+            for row in remaining:
+                identity = (row['title'], row['exchange'])
+                prior = debt_by_symbol.setdefault(row['symbol'], identity)
+                if prior != identity:
+                    raise ValueError('conflicting cover-only debt identity')
+            other.extend(dict(symbol=ticker, title=title, exchange=exchange,
+                symbol_corroboration='cover_only_fixed_coupon_debt')
+                for ticker, (title, exchange) in debt_by_symbol.items())
+            remaining = []
         # Some SEC submissions use an exchange-style preferred ticker while the
         # filing cover uses a spaced series designator (for example ORCL-PD vs
         # ORCL PRD). Do not normalize punctuation or guess among alternatives:
@@ -164,6 +183,8 @@ def verify_share_class(shares, metadata, filing, *, symbol, as_of):
             if len(unmatched)!=1 or len(remaining)!=1:
                 raise ValueError('additional ticker lacks unambiguous cover classification')
             row=remaining[0]
+            if COVER_DEBT_TITLE.fullmatch(row['title']):
+                raise ValueError('fixed-coupon debt cannot explain an unmatched metadata ticker')
             other.append(dict(symbol=unmatched[0],cover_symbol=row['symbol'],title=row['title'],
                 exchange=row['exchange'],symbol_corroboration='single_unambiguous_non_common_cover_alias'))
         p=Inventory();p.feed(filing.body.decode('utf-8'));p.close()
