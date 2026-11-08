@@ -1,5 +1,44 @@
 # Development status
 
+## 9 Kasım 2026 — 84 değerleme engeli için adil GET bütçesi ve devam imleci (PR testinde)
+
+Başlangıç main `c8807e1ff33bb4bee2f120cc6bb95a46c9564ae6`
+(PR #50), son sürüm Python 3.11, 3.12 ve 3.13
+Foundation CI `42535358371` başarılı. Eski SEC hisse tarih
+anomali düzeltmesi ana dalda. Mevcut canlı SEC akışında hâlâ veri
+üretmeyen yeşil koşular bulunuyor; güncel ve doğrulanmış skor üç şirkette.
+
+Kayıtlı `42465060347` fiyat paketi ve `42466864670` skor paketi
+eşleştirilerek 84 değerleme engeli şirket bazında ayrıldı:
+22 şirketin dokuz temel finansal girdisi mevcut, 75'inde fiyat
+aşaması beklemede, 64'ünde hisse kanıtı hâlâ kaynak bekliyor.
+Bu sayılar geçmiş paket kesimine aittir; yeni canlı puan üretildi
+anlamına gelmez. CSV çalışma listesi oturum çıktısıdır, yeni
+finansal verinin yerini tutmaz.
+
+`ValuationSourceCollector` daha önce her çalışmada aday sırasının
+başından yeniden tarıyordu. 15 dakikalık fiyat TTL ve sınırlı GET
+bütçesiyle daha sonraki şirketlere hiç ulaşılamama riski var.
+Yeni dar değişiklik, son gerçekten GET yapılan şirketin hemen
+sonrasını kilit/checksum kontrollü SQLite devam imlecine kaydeder.
+Sonraki çalışmada buradan başlar; ancak rapor şirket sırasını
+özgün aday listesindeki gibi gösterir. Aday listesi/order
+değişirse imleç eski kimliğe uygulanmaz. Sıfır istek bütçesinde
+imleç ve kaynaklar değişmez; bozuk imleç baştan güvenle başlar.
+Fiyat, hisse sınıfı, SEC özgün belge, kaynak tazeliği ve skor
+kabul koşulları gevşetilmedi.
+
+`tests/test_valuation_cursor.py` bütçe devri, sıra, sıfır istek
+ve bozuk checksum durumlarını sınar. Tam CI geçmeden merge
+yapılmayacak. Değişiklik PR ve test aşamasındayken yeni şirket
+fiyatı veya nihai skoru doğrulanmış sayılmaz.
+
+Sonraki iş: CI ve güvenli merge; eski state/kanıt dosyalarını
+koruyarak gerçek devam çalışması ve taramanın önceki 51 GET
+bütçesinin ötesine geçtiğinin kanıtı; sonra fiyat/özgün hisse
+belgesi/geçmişi beraber geçebilen şirketleri skorlama zincirine al.
+
+
 ## 9 Kasım 2026 — Eski SEC hisse tarihi anomalilerini sınırlı karantinaya alma (PR değerlendirmesinde)
 
 Başlangıç main `9a2a614d619a285b248c450204c6213b038e5eed`,
