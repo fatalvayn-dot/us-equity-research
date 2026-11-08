@@ -1,5 +1,52 @@
 # Development status
 
+## 8 Kasım 2026 — Değerleme engelleri kaynak ve kontrol aşamasıyla açıklanıyor
+
+Başlangıç main `99e57ff636d56102b00721b680c49119c7f775f8` (PR #46).
+Foundation CI `42467491984`, Python 3.11/3.12/3.13 başarılı; açık PR yoktu.
+Yereldeki yarım `fix/valuation-blocker-diagnostics` çalışması incelenip
+aynı dalda tamamlandı; paralel özellik veya yeni toplayıcı başlatılmadı.
+
+Eksik kaynak URL'si, eksik hisse adedi, belirsiz özgün bildirim, eski fiyat,
+hisse sınıfı uyuşmazlığı ve SEC finansal teyit reddi artık JSON üzerinden
+Türkçe Markdown/HTML şirket raporuna taşınıyor. Kaynak SHA ve özgün gözlem
+tarihi korunuyor. Reddedilen girdilere puan verilmiyor; hesaplama, kaynak
+önceliği, dönem/para birimi ve tazelik koşulları gevşetilmedi.
+
+Sekiz odaklı test başarılı; iki kayıtlı skor entegrasyonu ve beş kayıtlı
+değerleme testi başarılı. İlk tam regresyon 740 testte üç eski rapor
+birebir karşılaştırmasını yeni tanı alanları nedeniyle reddetti. Testler,
+yalnız ek tanı alanlarını ayrıca denetleyip eski raporun tüm finansal/skor
+alanlarını birebir karşılaştıracak şekilde düzeltildi; tarihî arşivler
+korundu. Son tam regresyon 740/740 test, 118,920 saniye başarılı; CLI status
+kontrolü de geçti. Aradaki ikinci regresyon, test modülü düzeltmeden önce
+belleğe yüklendiği için bir eski karşılaştırma hatasını yineledi; son temiz
+çalıştırmada hata yok.
+PR #47 kod head `0147a7aef985cb9054ca55c043e5b5d85b9b446e` için
+Foundation CI `42517950341`, Python 3.11/3.12/3.13 başarılı. Bu belge
+kaydı sonrası nihai head CI ayrıca başarılı olmadan merge yapılmayacak.
+Bu testler kayıtlı/sentetik kaynaklarla yürütüldü, yeni canlı kabul değildir.
+
+Son veri üreten finansal run `42455760184` için state `13608291162` ve
+evidence `13607408956` mevcut ve süresi dolmamış. Sonraki 13 main canlı
+kabul koşusu (`42458573062`–`42517570832`) ayrı ayrı kontrol edildi:
+toplama adımı skipped, artifact yok; recovery paketi de yok. Bunlar veri
+ilerlemesi sayılmadı. State indirilip değiştirilmedi; MAX_REVIEWED_SEQUENCE
+10 olarak korundu. GitHub CLI kimlik doğrulaması yok; bağlı GitHub API
+üzerinden inceleme/yayın yolu kullanıldı, yeni izin istenmedi.
+
+Son kaydedilmiş canlı sayılar değişmedi: 100 metadata/100 kayıtlı adi hisse
+örneklemi, 98 şirkette 961 finansal değer, 704 hesaplama; skor run
+`42466864670` üç araştırma skoru/97 skorsuz aday. Bu oturumda bu sayılar
+yeniden üretilmedi; güncel 100 şirket MVP kabulü yok. Tarihî 18 skor
+regresyon örneği güncel kabul sayılmadı.
+
+Sonraki uygulanabilir iş: kesin head CI'ı doğrulayıp güvenli merge yap;
+sonra 84 değerleme kaynak engelini son doğrulanmış canlı paket üzerinde
+bu tanılarla yeniden değerlendir ve kaynak tamamlama sırasını belirle.
+Yeni sequence veya istek bütçesi ancak sonuç/kaynak denetiminden sonra
+ayrı kararla açılabilir. Backtest, gölge portföy ve alım-satım kapalı.
+
 ## 8 Kasım 2026 — İlk üç gerçek 100 puanlık araştırma skoru üretildi
 
 Ana dala birleşen PR #45 commit `3341231`, Python 3.11/3.12/3.13

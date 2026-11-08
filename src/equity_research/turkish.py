@@ -4,6 +4,13 @@ Unknown codes remain visible verbatim so a new diagnostic cannot become a
 misleading generic success. Accounting tags, source URLs and dates stay literal.
 """
 LABELS = {
+    'stale_quote':'Piyasa fiyatının tarihi eski', 'stale_response':'Fiyat gözleminin tazelik süresi dolmuş',
+    'stale_identity':'Şirket kimliği gözleminin tazelik süresi dolmuş',
+    'future_observation':'Gelecek tarihli kaynak gözlemi',
+    'unsupported_instrument':'Desteklenmeyen araç türü',
+    'unsupported_or_conflicting_exchange':'Desteklenmeyen veya çelişkili borsa bilgisi',
+    'currency_mismatch':'Para birimi uyuşmazlığı',
+    'ambiguous_original_share_filing':'Aynı bildirim için birden fazla özgün dosya var',
     'financial_strength': 'Finansal sağlamlık', 'valuation': 'Değerleme',
     'growth': 'Büyüme', 'profitability': 'Kârlılık', 'cash_flow': 'Nakit akışı', 'risk': 'Risk',
     'assets': 'Toplam varlıklar', 'liabilities': 'Toplam yükümlülükler',
