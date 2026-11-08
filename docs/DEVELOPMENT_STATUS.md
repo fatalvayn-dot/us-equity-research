@@ -1,5 +1,30 @@
 # Development status
 
+## 8 Kasım 2026 — İlk prototip için ayrı canlı değerleme kaynağı çalışma yolu (PR bekliyor)
+
+Sequence 10 (run 42455760184) günlük iş akışında 100/100 kayıtlı adi hisse
+örneklemini doğruladı; 961 kabul edilmiş finansal değer, 704 aritmetik sonuç,
+0 skor üretti. Bu, aktif hisse evreni veya yatırım kabulü değildir.
+Saatlik 42458573062 işi inceleme sınırında toplama yapmadı ve yeni kanıt
+üretmedi. İş sırası veri toplama kotasını artırmak değil, fiyat/hisse sınıfı
+ve sektör/kıyaslama/değerleme kanıtlarını aynı kesim tarihinde bağlamak.
+
+Manuel `.github/workflows/valuation-live.yml`, önceden doğrulanmış
+`live-acceptance-evidence` paketini sayısal run ID ile indirir;
+SHA kontrollü içeriği `collect-valuation-sources --seed-bundle` ile
+kullanır. Bağımsız 501 GET üst sınırı, 51 varsayılanı, ana dal ve tekil
+çalışma kilidi vardır. Önceki finansal durum yazılmaz; sonuç ayrı artifact
+dosyasında saklanır. Puanlama ve gerçek alım satım yoktur.
+`tests/test_valuation_live_workflow.py` koruma sözleşmesini denetler;
+kullanım `docs/VALUATION_LIVE_WORKFLOW_TR.md` içindedir.
+Bu satırlar yeni canlı değerleme sonucu anlamına gelmez.
+PR testleri doğrulanmadan ana dala alınmaz.
+
+Sonraki iş: PR CI'ı doğrula, güvenli birleştirme; ardından
+sequence 10 paketini kullanarak ilk manuel canlı fiyat/hisse kaynağı
+çalışmasını başlatıp gerçek sonuçlarını denetle.
+
+
 ## 8 Kasım 2026 — Nasdaq metin erişimi düzeltmesi ve değerleme kaynaklarının kullanımı
 
 Başlangıç main 1beb58e, PR #41 birleştirildi. Kesin head 667f255 üzerinde
