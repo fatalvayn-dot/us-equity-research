@@ -1,6 +1,10 @@
 name: Canlı değerleme kaynakları
 
 on:
+  # SEC toplaması yeni artifact üretmediğinde bile, eski kanıtı yeni tarihli
+  # saymadan piyasa kaynaklarını kontrollü şekilde yenile.
+  schedule:
+    - cron: '17 9 * * *'
   push:
     branches: [main]
     paths: [.github/workflows/valuation-live.yml]
@@ -60,8 +64,8 @@ jobs:
         run: |
           set -euo pipefail
           SOURCE_RUN="${SOURCE_RUN_INPUT:-$EVENT_SOURCE_RUN}"
-          if [ -z "$SOURCE_RUN" ] && [ "$EVENT_NAME" = "push" ]; then
-            for CANDIDATE in $(gh api "repos/$REPO/actions/workflows/live-acceptance.yml/runs?per_page=40" \
+          if [ -z "$SOURCE_RUN" ] && { [ "$EVENT_NAME" = "push" ] || [ "$EVENT_NAME" = "schedule" ]; }; then
+            for CANDIDATE in $(gh api "repos/$REPO/actions/workflows/live-acceptance.yml/runs?per_page=100" \
               --jq '.workflow_runs[] | select(.status == "completed" and .conclusion == "success" and .head_branch == "main") | .id'); do
               PRESENT=$(gh api "repos/$REPO/actions/runs/$CANDIDATE/artifacts?per_page=100" \
                 --jq '[.artifacts[] | select(.name == "live-acceptance-evidence" and .expired == false)] | length')
@@ -70,6 +74,12 @@ jobs:
                 break
               fi
             done
+            if [ -z "$SOURCE_RUN" ]; then
+              # The last independently audited financial run is a bounded
+              # fallback only. Its raw source dates are never refreshed by reuse.
+              SOURCE_RUN=$(python -c "import json; print(json.load(open('docs/evidence/first-live-score-2026-11-08.json'))['financial_run_id'])")
+              echo "Son kanıtlı SEC run kimliğine geri dönüldü: $SOURCE_RUN" >> "$GITHUB_STEP_SUMMARY"
+            fi
           fi
           if ! [[ "$SOURCE_RUN" =~ ^[1-9][0-9]*$ ]]; then
             echo "::error::Kaynak run ID pozitif sayı olmalıdır"
@@ -160,7 +170,7 @@ jobs:
         env:
           PYTHONPATH: src
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
-          MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '51' }}
+          MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'push' && '250' || '100') }}
         run: |
           python -m equity_research collect-valuation-sources \
             --candidates docs/evidence/common100/candidates.json \
