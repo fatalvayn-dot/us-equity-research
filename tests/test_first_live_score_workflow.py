@@ -49,6 +49,8 @@ class FirstLiveScoreWorkflowTests(unittest.TestCase):
         self.assertIn("if: steps.score.outcome == 'success'",self.text)
         self.assertIn("scripts/audit_score_valuation_gaps.py",self.text)
         self.assertIn("--valuation-report data/valuation/report.json",self.text)
+        self.assertIn("--provenance data/first-score-work/run-provenance.json",self.text)
+        self.assertIn('--score-run "$GITHUB_RUN_ID" --valuation-run "$VALUATION_RUN"',self.text)
         self.assertIn("--output data/first-score-work/score-valuation-gaps.json",self.text)
         self.assertLess(self.text.index("scripts/build_current_scores.py"),
                         self.text.index("scripts/audit_score_valuation_gaps.py"))

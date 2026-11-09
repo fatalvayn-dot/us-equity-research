@@ -1,5 +1,33 @@
 # Development status
 
+## 9 Kasım 2026 — Skor engellerini üretim paketine bağlama
+
+Başlangıç main `a4917167600ed16d04621a2b5f1484a83d788a0f` (PR #78).
+Kesin PR CI `42657768372` ve main CI `42658385783` başarılı.
+SEC `42671106542` toplama adımını atladı. Değerleme `42671436322`
+başarısız sonuçlandı ve Actions API'de iş veya artifact görünmedi.
+Skor `42671602101` atlandı. Bu koşular yeni veri sayılmadı.
+
+Son finansal üretim `42455760184`, kök `42223465006`, sequence 10.
+100 metadata, 100 adi hisse adayı, 98 finansal şirket, 961 kabul
+edilen değer ve 704 hesaplama kayıtlı. Sequence 7 koşusu `42309920856`
+başarılı ve iki üretim paketi mevcut. Önceki bağımsız denetimde 39
+sorgunun 13'ü denenmiş, 26'sı eksik kalmıştı.
+
+Skor engelleri denetimi artık beklenen iki run kimliğini, skor
+manifestinin özetini, sıkıştırılmış skor raporunu ve değerleme raporunun
+özgün SHA-256 özetini doğrular. Yanlış run veya değiştirilmiş dosya
+denetim çıktısı üretemez. 12 hedefli test geçti.
+GitHub ZIP özetleri ve CRC doğrulanan `42654072673` (artifact
+`13691815112`) ile `42654693840` (artifact `13691940548`) üzerinde
+ağsız entegrasyon önceki engel raporunu yeniden üretti. 5 skor, 21
+değerleme engeli, 72 sektör modeli engeli ve 2 kritik finans incelemesi
+kayıtlı. Bir bayt eklenen değerleme raporu reddedildi.
+
+Sıradaki iş, değerleme koşusu iş üretmediğinde GitHub başlatma
+sonucunu incelemek ve yeni doğrulanmış pakette ADI fiyatı/CompanyFacts
+ile CRWD sınıf kanıtını kontrol etmek. MVP kabulü açık.
+
 ## 9 Kasım 2026 — Hisse tazeliği ve sınıf modeli engellerini ayırma
 
 Başlangıç `main` `f4512a4370d49dd5960dc0b4b254ced74fb81cb3` (PR #77).

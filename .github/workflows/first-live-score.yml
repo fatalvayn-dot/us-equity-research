@@ -186,10 +186,14 @@ jobs:
 
       - name: Skor engellerini özgün değerleme kaynaklarına bağla
         if: steps.score.outcome == 'success'
+        env:
+          VALUATION_RUN: ${{ steps.select.outputs.valuation_run }}
         run: |
           python scripts/audit_score_valuation_gaps.py \
             --score-report data/first-score-work/output/report.json.gz \
             --valuation-report data/valuation/report.json \
+            --provenance data/first-score-work/run-provenance.json \
+            --score-run "$GITHUB_RUN_ID" --valuation-run "$VALUATION_RUN" \
             --output data/first-score-work/score-valuation-gaps.json
 
       - name: Skor durumunu Türkçe raporla

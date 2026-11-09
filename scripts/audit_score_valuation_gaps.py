@@ -4,6 +4,7 @@ No missing value is filled. A score is never inferred from a previous cutoff.
 """
 import argparse
 import gzip
+import hashlib
 import json
 from collections import Counter
 from datetime import datetime
@@ -90,15 +91,41 @@ def diagnose(score, valuation):
                              "source_states_only","all_missing_values_remain_missing"])
 
 
+def audit_files(*, score_report, valuation_report, provenance, score_run, valuation_run):
+    receipt = json.loads(provenance.read_bytes())
+    if (type(receipt.get("schema_version")) is not int or receipt["schema_version"] != 1
+            or any(type(run) is not int or run <= 0 or type(receipt.get(key)) is not int
+                   or receipt[key] != run
+                   for key, run in (("score_run_id", score_run), ("valuation_run_id", valuation_run)))):
+        raise ValueError("Skor ve değerleme run kimlikleri kaynak kaydıyla uyuşmuyor")
+
+    hashes = receipt["sha256"]
+    manifest = score_report.with_name("manifest.json").read_bytes()
+    if hashlib.sha256(manifest).hexdigest() != hashes["score_manifest"]:
+        raise ValueError("Skor manifestinin SHA-256 özeti uyuşmuyor")
+    compressed_score = score_report.read_bytes()
+    if hashlib.sha256(compressed_score).hexdigest() != json.loads(manifest)["files"]["report.json.gz"]:
+        raise ValueError("Skor raporunun SHA-256 özeti uyuşmuyor")
+    market = valuation_report.read_bytes()
+    if hashlib.sha256(market).hexdigest() != hashes["valuation_report"]:
+        raise ValueError("Değerleme raporunun SHA-256 özeti uyuşmuyor")
+
+    result = diagnose(json.loads(gzip.decompress(compressed_score)), json.loads(market))
+    return dict(result, score_run_id=score_run, valuation_run_id=valuation_run)
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--score-report",type=Path,required=True)
     parser.add_argument("--valuation-report",type=Path,required=True)
+    parser.add_argument("--provenance",type=Path,required=True)
+    parser.add_argument("--score-run",type=int,required=True)
+    parser.add_argument("--valuation-run",type=int,required=True)
     parser.add_argument("--output",type=Path,required=True)
     args=parser.parse_args()
-    report=json.loads(gzip.decompress(args.score_report.read_bytes()))
-    valuation=json.loads(args.valuation_report.read_text())
-    result=diagnose(report,valuation)
+    result=audit_files(score_report=args.score_report, valuation_report=args.valuation_report,
+                       provenance=args.provenance, score_run=args.score_run,
+                       valuation_run=args.valuation_run)
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(result,ensure_ascii=False,sort_keys=True,
                                        indent=2)+"\n")
