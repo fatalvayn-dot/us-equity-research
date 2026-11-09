@@ -33,6 +33,13 @@ def audit(report, plan):
     if (report.get("summary", {}).get("candidates") != len(companies)
             or len(companies) != 100):
         raise ValueError("100 adaylı kaynak raporu bekleniyor")
+    symbols = {symbol for symbol, _ in by_key}
+    actual = report.get("priority_symbols")
+    if (not isinstance(actual, list)
+            or any(not isinstance(symbol, str) or symbol not in symbols for symbol in actual)
+            or len(actual) != len(set(actual))):
+        raise ValueError("raporun öncelikli tarama sembolleri geçersiz")
+    actual_priority = set(actual)
     selected = []
     seen = set()
     for candidate in wanted:
@@ -43,7 +50,7 @@ def audit(report, plan):
         selected.append(key)
     if len(selected) == 0:
         raise ValueError("boş öncelik listesi")
-    def row_for(key, *, prioritized):
+    def row_for(key):
         c = by_key[key]
         statuses = {}
         for leg in LEGS:
@@ -54,29 +61,35 @@ def audit(report, plan):
         attempts = c.get("attempts", [])
         if not isinstance(attempts, list):
             raise ValueError("kaynak istek geçmişi bozuk")
+        identity_status = c["identity_status"]
+        if not isinstance(identity_status, str) or not identity_status:
+            raise ValueError("kaynak kimliği durumu eksik")
         pending = []
+        if identity_status != "exact_match":
+            pending.append(dict(leg="identity_status", status=identity_status,
+                                deferred_reason=None))
         for leg in LEGS:
             if statuses[leg] != PASS[leg]:
                 pending.append(dict(leg=leg, status=statuses[leg],
                                     deferred_reason=c[leg].get("deferred_reason")))
         return dict(symbol=key[0], issuer_id=key[1],
-                    prioritized=prioritized, identity_status=c["identity_status"],
-                    market_evidence_complete=(c["identity_status"] == "exact_match"
-                                              and not pending),
+                    prioritized=key[0] in actual_priority, identity_status=identity_status,
+                    market_evidence_complete=not pending,
                     blockers=pending, source_gets=sum(a.get("http_requested") is True
                                                       for a in attempts if isinstance(a, dict)),
                     attempted_stages=list(dict.fromkeys(a.get("stage") for a in attempts
                                        if isinstance(a, dict) and isinstance(a.get("stage"), str))),
                     validation={leg:statuses[leg] for leg in LEGS})
-    priority=[row_for(k,prioritized=True) for k in selected]
-    remaining=[row_for(k,prioritized=False) for k in by_key if k not in seen]
+    priority=[row_for(k) for k in selected]
+    remaining=[row_for(k) for k in by_key if k not in seen]
     all_rows=priority+remaining
-    return dict(schema_version=1, report_kind="valuation_source_blocker_audit",
+    return dict(schema_version=2, report_kind="valuation_source_blocker_audit",
                 valuation_as_of=report.get("as_of"),
                 candidates=len(all_rows), priority_candidates=len(priority),
                 priority_complete=sum(r["market_evidence_complete"] for r in priority),
                 all_complete=sum(r["market_evidence_complete"] for r in all_rows),
-                priority_gets=sum(r["source_gets"] for r in priority),
+                priority_gets=sum(r["source_gets"] for r in all_rows if r["prioritized"]),
+                actual_priority_symbols=actual,
                 blocker_counts=dict(Counter(b["leg"] + ":" + b["status"] for r in all_rows
                                             for b in r["blockers"])),
                 priority=priority, other_companies=remaining,
