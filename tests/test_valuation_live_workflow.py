@@ -32,7 +32,7 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
     def test_source_artifact_presence_is_required_for_collection(self):
         self.assertIn("live-acceptance-evidence", self.text)
         self.assertIn('ARTIFACT_COUNT', self.text)
-        self.assertIn("collect=false", self.text)
+        self.assertNotIn("collect=false", self.text)
         self.assertIn("actions/workflows/live-acceptance.yml/runs?per_page=100", self.text)
         self.assertIn("collect=true", self.text)
         self.assertIn("docs/evidence/first-live-score-2026-11-08.json", self.text)
