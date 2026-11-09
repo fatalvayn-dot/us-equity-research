@@ -1,5 +1,47 @@
 # Development status
 
+## 9 Kasım 2026 — İş akışı güncellemesinde kontrollü canlı değerleme tetikleyicisi (PR testinde)
+
+Başlangıç main `5c4fdd40f06e67117517512bbb10debfd51025c3`,
+PR #74; `42635133922` Foundation CI Python 3.11/3.12/3.13
+başarılı; açık PR yok. Son güncel kaynaklı zincir
+`42455760184` SEC, `42598993077` değerleme,
+`42599479886` skor. Son rapor 7 puanlı, 19
+değerleme kaynağı engelli, 72 model dışı ve 2
+kritik finansal incelemeli şirket içeriyor.
+Sonraki koşularda yeni üretim artifact'i görülmedi;
+MVP kabul edilmedi.
+
+`.github/workflows/valuation-live.yml` yalnız
+**kendi dosyası main'e gönderildiğinde** bir kez
+`push` üzerinden kontrollü kaynak toplaması
+başlatacak biçimde değiştirildi. Normal kod,
+belge veya başka workflow güncellemeleri GET
+başlatmaz. Yeni `push` tetikinde finansal kaynak
+run ID otomatik seçilir: önce geçmişte doğrulanmış
+ve mevcut canlı artifact'i olan en yeni SEC koşusu,
+o yoksa önceden denetlenmiş SEC run kimliği.
+Eksik kaynak, süresi dolmuş artifact veya birden
+çok eşleşme onaylanmaz. `schedule` ve `push`
+250 GET sınırını; SEC `workflow_run` devri
+51 GET sınırını kullanır. Hepsi mevcut 0–501
+korumalı istek aralığındadır. Eski finansal
+alanlar yeni tarihli sayılmaz. Mevcut 14 şirket
+önceliği, adil rotasyon, orijinal hisse sınıfı,
+15 dakika fiyat TTL, SHA-256 kaynak bütünü
+ve yatırım/onay engelleri değişmez.
+
+Workflow ve kaynak seçim sözleşmesi için
+regresyonlar eklendi. PR CI ve main birleşim
+testleri temiz olmadan canlı çalışma başarılı
+sayılamaz. Yeni tetik sonrası gerçekten
+`valuation-source-state` ve bağlı
+`first-live-score-evidence` üretilirse,
+ilk kez 14 adayın aynı piyasa kesiminde
+kaç tanesinin puanlandığı ölçülecek.
+Altman Z prototip sonrasına bırakıldı.
+
+
 ## 9 Kasım 2026 — SEC boş kanıt koşularında değerleme devrini sürdürme (PR testinde)
 
 Başlangıç main `d16fd266c3f7c1da02c4ae35c34bf62307b287b9`,

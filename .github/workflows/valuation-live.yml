@@ -1,6 +1,12 @@
 name: Canlı değerleme kaynakları
 
 on:
+  # Only changes to this workflow on main can start an immediate bounded
+  # source run. Ordinary code/document pushes must not trigger API traffic.
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/valuation-live.yml
   # SEC toplaması yeni artifact üretmediğinde bile, eski kanıtı yeni tarihli
   # saymadan piyasa kaynaklarını kontrollü şekilde yenile.
   schedule:
@@ -61,7 +67,7 @@ jobs:
         run: |
           set -euo pipefail
           SOURCE_RUN="${SOURCE_RUN_INPUT:-$EVENT_SOURCE_RUN}"
-          if [ -z "$SOURCE_RUN" ] && [ "$EVENT_NAME" = "schedule" ]; then
+          if [ -z "$SOURCE_RUN" ] && { [ "$EVENT_NAME" = "schedule" ] || [ "$EVENT_NAME" = "push" ]; }; then
             for CANDIDATE in $(gh api "repos/$REPO/actions/workflows/live-acceptance.yml/runs?per_page=100" \
               --jq '.workflow_runs[] | select(.status == "completed" and .conclusion == "success" and .head_branch == "main") | .id'); do
               PRESENT=$(gh api "repos/$REPO/actions/runs/$CANDIDATE/artifacts?per_page=100" \
