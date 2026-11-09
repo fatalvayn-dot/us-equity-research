@@ -1,5 +1,44 @@
 # Development status
 
+## 9 Kasım 2026 — Aynı piyasa kesiminde 14 skor ve koşu zinciri doğrulaması
+
+Başlangıç `main` `82cdbc3d106a829881b4939009a9238c249738bd` (PR #75).
+PR CI `42637272166` ve ana dal CI `42637808220` başarılı.
+Son finansal üretim `42455760184` (sequence 10, kök `42223465006`).
+100 metadata, 100 adi hisse adayı, 98 finansal şirket, 961 kabul
+edilmiş değer ve 704 hesaplama. Finansal kesit yeniden tarihlenmedi.
+
+Değerleme koşusu `42637808449` (artifact `13683848263`) 250 GET,
+14 öncelikli adaya 49 GET yaptı. Öncelikli 14 adayın tamamında piyasa
+kanıtı hazır. 100 kimlik eşleşmesi, 57 tarihli hisse sınıfı, 58 fiyat,
+50 piyasa geçmişi ve 50 tam piyasa kanıtı var. Normal sıra TJX'ten
+BAC'a ilerledi. Skor `42638657110` (artifact `13683324745`),
+9 Kasım 14:51:36 UTC kesiminde 100 adayın 14'ünü puanladı.
+Kalan 86 adayda 72 sektör modeli, 9 tamamlanmamış finans incelemesi,
+2 kritik inceleme ve 3 değerleme engeli var. PLTR'de yayımlanmış
+hisse sayısı doğrulanamadı. CRWD ve ADI bu kesimde toplama bekliyor.
+MVP kabulü açık.
+
+Çevrimdışı skor denetimi artık yeni üretim paketindeki
+`run-provenance.json` kaydını, dışarıdan doğrulanmış skor/değerleme
+koşu kimlikleri, commit ve girdi dosyalarının SHA-256 özetleriyle
+birebir yeniden kurar. Eski kayıtsız paketler eski çağrıyla
+denetlenebilir, sonuçta kaynak zinciri doğrulandı diye işaretlenmez.
+Yeni koşu kimliği verilmişse eksik kayıt hata üretir. Altı odaklı test
+geçti. Aşağıdaki komut yalnız yerel, SHA-256 doğrulanmış paketleri okur.
+
+```sh
+PYTHONPATH=src python scripts/verify_production_score_replay.py \
+  --financial /path/to/financial-state --financial-run 42455760184 \
+  --financial-sources /path/to/financial-evidence/live-sources \
+  --valuation /path/to/valuation-state --valuation-run 42637808449 \
+  --score /path/to/score-evidence --score-run 42638657110 \
+  --commit 82cdbc3d106a829881b4939009a9238c249738bd
+```
+
+Sıradaki iş, PLTR hisse sınıfı kanıtını özgün SEC belgesinden
+çözümlemek ve CRWD/ADI'yi mevcut rotasyonda izlemek.
+
 ## 9 Kasım 2026 — İş akışı güncellemesinde kontrollü canlı değerleme tetikleyicisi (PR testinde)
 
 Başlangıç main `5c4fdd40f06e67117517512bbb10debfd51025c3`,

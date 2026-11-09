@@ -4,6 +4,7 @@ import unittest
 from pathlib import Path
 
 from scripts.live_checkpoint import digest
+from scripts.verify_production_score_replay import verify_score_provenance
 from scripts.write_score_run_provenance import write
 
 
@@ -51,3 +52,34 @@ class ScoreRunProvenanceTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "paket özetleri uyuşmuyor"):
             write(self.data, score_run=1, valuation_run=2, financial_run=3, commit="a" * 40)
         self.assertFalse(self.record.exists())
+
+
+    def verify(self, **expected):
+        return verify_score_provenance(financial=self.data / "financial",
+                                       valuation=self.data / "valuation",
+                                       financial_sources=[self.finance.parent],
+                                       score=self.record.parent, financial_run=3,
+                                       **expected)
+
+    def test_replay_rebuilds_and_verifies_receipt(self):
+        expected = dict(score_run=1, valuation_run=2, commit="a" * 40)
+        receipt = write(self.data, financial_run=3, **expected)
+        self.assertEqual(self.verify(**expected), receipt)
+
+    def test_replay_rejects_wrong_run_commit_or_input_bytes(self):
+        expected = dict(score_run=1, valuation_run=2, commit="a" * 40)
+        write(self.data, financial_run=3, **expected)
+        for field, bad in (("score_run", 10), ("valuation_run", 20), ("commit", "b" * 40)):
+            with self.subTest(field=field), self.assertRaisesRegex(ValueError, "provenance mismatch"):
+                self.verify(**(expected | {field: bad}))
+        self.file("valuation/report.json", {"changed": True})
+        with self.assertRaisesRegex(ValueError, "provenance mismatch"):
+            self.verify(**expected)
+
+    def test_replay_distinguishes_legacy_and_missing_required_receipt(self):
+        self.assertIsNone(self.verify())
+        with self.assertRaisesRegex(ValueError, "provenance missing"):
+            self.verify(score_run=1, valuation_run=2, commit="a" * 40)
+        write(self.data, financial_run=3, score_run=1, valuation_run=2, commit="a" * 40)
+        with self.assertRaisesRegex(ValueError, "exact score run"):
+            self.verify()

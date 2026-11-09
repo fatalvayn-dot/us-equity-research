@@ -11,7 +11,12 @@ from pathlib import Path
 from equity_research.cache import encode
 from equity_research.evidence_bundle import read_bundle
 from equity_research.scoring import build_score_report
-from live_checkpoint import verify
+if __package__:
+    from .live_checkpoint import verify
+    from .write_score_run_provenance import build_record
+else:
+    from live_checkpoint import verify
+    from write_score_run_provenance import build_record
 
 
 def read_json(path):
@@ -23,7 +28,32 @@ def digest(path):
         return hashlib.file_digest(source, 'sha256').hexdigest()
 
 
-def audit(*, financial, financial_run, valuation, financial_sources, score):
+def verify_score_provenance(*, financial, financial_run, valuation, financial_sources,
+                            score, score_run=None, valuation_run=None, commit=None):
+    receipt = score / 'run-provenance.json'
+    expected = (score_run, valuation_run, commit)
+    if not receipt.is_file():
+        if any(value is not None for value in expected):
+            raise ValueError('published score run provenance missing')
+        return None
+    if any(value is None for value in expected) or len(financial_sources) != 1:
+        raise ValueError('exact score run, valuation run, commit and one financial bundle required')
+    record = build_record(financial=financial, financial_run=financial_run,
+                          valuation=valuation, financial_sources=financial_sources[0],
+                          score=score, score_run=score_run, valuation_run=valuation_run,
+                          commit=commit)
+    if read_json(receipt) != record:
+        raise ValueError('published score run provenance mismatch')
+    return record
+
+
+def audit(*, financial, financial_run, valuation, financial_sources, score,
+          score_run=None, valuation_run=None, commit=None):
+    run_provenance = verify_score_provenance(
+        financial=financial, financial_run=financial_run, valuation=valuation,
+        financial_sources=financial_sources, score=score, score_run=score_run,
+        valuation_run=valuation_run, commit=commit,
+    )
     verify(financial, financial_run, {})
     linked = read_json(valuation / 'financial-source-run.json')['run_id']
     if type(linked) is not int or linked != financial_run:
@@ -71,7 +101,8 @@ def audit(*, financial, financial_run, valuation, financial_sources, score):
                     after=new[key]['blockers']) for key in old
                if old[key]['blockers'] != new[key]['blockers']]
     return dict(mode='offline_production_score_replay', financial_run_id=financial_run,
-                as_of=manifest['as_of'], new_http_requests=0, summary=replay['summary'],
+                run_provenance=run_provenance, as_of=manifest['as_of'],
+                new_http_requests=0, summary=replay['summary'],
                 ranking=replay['ranking'], scored_company_evidence_unchanged=True,
                 old_blockers=dict(Counter(reason for row in old.values() for reason in row['blockers'])),
                 replayed_blockers=dict(Counter(reason for row in new.values() for reason in row['blockers'])),
@@ -83,6 +114,9 @@ def main():
     for name in ('financial', 'valuation', 'score'):
         parser.add_argument('--' + name, type=Path, required=True)
     parser.add_argument('--financial-run', type=int, required=True)
+    parser.add_argument('--score-run', type=int)
+    parser.add_argument('--valuation-run', type=int)
+    parser.add_argument('--commit')
     parser.add_argument('--financial-sources', type=Path, action='append', default=[])
     print(json.dumps(audit(**vars(parser.parse_args())), indent=2))
 
