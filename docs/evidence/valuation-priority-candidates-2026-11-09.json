@@ -174,5 +174,6 @@
       ]
     }
   ],
-  "score_or_scope_approval": false
+  "score_or_scope_approval": false,
+  "valuation_report_sha256": "e99e095c6f15797960e903dc52a0f99cee29484041834528f6aa2554278f79c4"
 }
