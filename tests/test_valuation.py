@@ -179,9 +179,27 @@ class ValuationTests(unittest.TestCase):
             dict(symbol='AAPL30', title='1.125% Senior Notes due 2030', exchange='Nasdaq',
                  symbol_corroboration='cover_only_fixed_coupon_debt')])
 
+    def test_explicit_floating_and_fractional_cover_debt_keeps_exact_common_count(self):
+        shares = disclosed_shares(cf(), cik=CIK, as_of=NOW)
+        for title in ('7 1/2% Guaranteed Subordinated Notes due 2035',
+                      'Floating Rate Notes Due 2028',
+                      '3.433% Fixed-to-Floating Rate Notes due May 20, 2032'):
+            with self.subTest(title=title):
+                document = filing_with_other_security(symbol='AAPL/30', title=title)
+                proof = verify_share_class(shares, meta(), document, symbol='AAPL', as_of=NOW)
+                self.assertEqual(proof['value'], shares['value'])
+                self.assertEqual(proof['original_filing']['raw_sha256'], document.sha256)
+                self.assertEqual(proof['other_registered_securities'], [
+                    dict(symbol='AAPL/30', title=title, exchange='Nasdaq',
+                         symbol_corroboration='cover_only_explicit_debt')])
+                with self.assertRaises(ProviderFailure):
+                    verify_share_class(shares, meta(['AAPL', 'AAPL-B']), document,
+                                       symbol='AAPL', as_of=NOW)
+
     def test_cover_only_ambiguous_security_or_unmatched_metadata_still_rejected(self):
         shares = disclosed_shares(cf(), cik=CIK, as_of=NOW)
-        for title in ('Preferred Stock', '1.125% Convertible Notes due 2030', 'Common Stock'):
+        for title in ('Preferred Stock', '1.125% Convertible Notes due 2030', 'Common Stock',
+                      'Floating Rate Convertible Notes due 2030', 'Medium-Term Notes'):
             with self.subTest(title=title), self.assertRaises(ProviderFailure):
                 verify_share_class(shares, meta(), filing_with_other_security(title=title),
                                    symbol='AAPL', as_of=NOW)
