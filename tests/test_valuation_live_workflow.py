@@ -75,7 +75,7 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
     def test_priority_lineage_is_written_only_after_real_collection(self):
         self.assertIn('--lineage data/valuation-current/priority-lineage.json)', self.text)
         self.assertIn('select_reviewed_valuation_priority.py record', self.text)
-        self.assertIn('if [ -n "$priority" ]; then', self.text)
+        self.assertIn('if [ -n "$priority" ] && [ "$MAX_NEW_REQUESTS" -gt 0 ]; then', self.text)
         self.assertIn('--run-id "$GITHUB_RUN_ID"', self.text)
         self.assertIn('--report data/valuation-current/report.json', self.text)
         self.assertLess(self.text.index('collect-valuation-sources'),
