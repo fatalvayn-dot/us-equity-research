@@ -26,9 +26,25 @@ def body_for_classes():
 
 
 class DimensionedShareCoverAuditTests(unittest.TestCase):
-    def run_audit(self, body, sha=None):
+    def run_audit(self, body, sha=None, **options):
         return audit(body, cik=CIK, symbol="AAPL", report_end=date(2026, 9, 30),
-                     document_type="10-Q", sha256=sha or hashlib.sha256(body).hexdigest())
+                     document_type="10-Q", sha256=sha or hashlib.sha256(body).hexdigest(),
+                     **options)
+
+    def test_balance_sheet_reads_only_exact_instant_and_explicit_zero(self):
+        body = (body_for_classes().replace(b"2026-10-20", b"2026-09-30")
+                .replace(b"dei:EntityCommonStockSharesOutstanding", b"us-gaap:CommonStockSharesOutstanding")
+                .replace(b"<html ", b'<html xmlns:ixt="http://www.xbrl.org/inlineXBRL/transformation/2020-02-12" ')
+                .replace(b'>30</ix:nonFraction>', b' format="ixt:fixed-zero">no</ix:nonFraction>'))
+        result = self.run_audit(body, balance_sheet=True)
+        self.assertEqual(result["class_count_concept"], "us-gaap:CommonStockSharesOutstanding")
+        self.assertEqual([r["shares"] for r in result["class_counts"]], [100, 0])
+        self.assertFalse(result["valuation_eligible"])
+        for changed in (body.replace(b'2026-09-30</xbrli:instant>', b'2026-09-29</xbrli:instant>'),
+                        body.replace(b'format="ixt:fixed-zero">no', b'format="ixt:fixed-zero">'),
+                        body.replace(b'/transformation/2020-02-12', b'/transformation/2099-01-01')):
+            with self.subTest(changed=changed[-180:]), self.assertRaises(ValueError):
+                self.run_audit(changed, balance_sheet=True)
 
     def test_reports_exact_classes_without_valuation_total(self):
         result = self.run_audit(body_for_classes())
