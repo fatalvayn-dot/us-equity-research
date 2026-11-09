@@ -118,6 +118,15 @@ class CollectionTests(unittest.TestCase):
         self.assertEqual(company['history_check'], dict(status='not_started', deferred_reason='share_class_unverified'))
         self.assertNotIn(history_url('AAPL'), self.transport.calls)
 
+    def test_class_model_requirement_survives_collection_report(self):
+        r = filing(title='Class A Common Stock')
+        self.transport.responses[r.url] = r
+        row = self.collector().collect(PLAN)['companies'][0]
+        self.assertEqual(row['share_check'], dict(
+            status='invalid_data', failure_detail='class_specific_share_model_required'))
+        self.assertIsNone(row['total_score'])
+        self.assertNotIn(history_url('AAPL'), self.transport.calls)
+
     def test_history_is_deferred_when_original_filing_exhausts_request_budget(self):
         self.archive.record(price())
         report = self.collector(3).collect(PLAN)
@@ -147,6 +156,8 @@ class CollectionTests(unittest.TestCase):
         self.assertEqual(r['summary']['new_get_invocations'],0)
         self.assertEqual(r['companies'][0]['share_check']['status'],'verified_dated_share_class')
         self.assertEqual(r['companies'][0]['price_check']['status'],'pending_source_collection')
+        self.assertEqual(r['companies'][0]['history_check'],
+                         dict(status='not_started', deferred_reason='price_unavailable'))
     def test_invalid_duplicate_oversize_and_punctuation_plans_fail_before_http(self):
         for plan in ({'companies':[]},{'companies':PLAN['companies']*2},
                 {'companies':[dict(symbol='aapl',issuer_id=CIK)]},{'companies':PLAN['companies']*101}):

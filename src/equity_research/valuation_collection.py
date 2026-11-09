@@ -14,13 +14,13 @@ from .evidence_bundle import write_bundle, read_bundle
 from .market_history import history_url, parse_history
 from .models import aware
 from .mvp import validate_candidates, save_json
-from .prices import cached_response, parse_price, price_url, _identity, IDENTITY_TTL, PRICE_TTL
+from .prices import cached_response, parse_price, price_url, _identity, IDENTITY_TTL, PRICE_TTL, PriceFailure
 from .providers import ProviderFailure, Status
 from .response_archive import ResponseArchive, ArchivedTransport
 from .sec import DIRECTORY_URL, parse_directory
 from .submissions import parse_submissions, submissions_url
 from .transport import RateLimiter, strict_json
-from .valuation import disclosed_shares, verify_share_class, SNAPSHOT_TTL
+from .valuation import disclosed_shares, verify_share_class, SNAPSHOT_TTL, ShareFailure
 
 LEASE_TTL = timedelta(minutes=15)
 RETRY_DELAY = timedelta(minutes=5)
@@ -116,6 +116,8 @@ class ValuationSourceCollector:
     @staticmethod
     def reject(row, leg, exc):
         row[leg] = dict(status=exc.status.value if isinstance(exc, ProviderFailure) else 'invalid_data')
+        if isinstance(exc, (PriceFailure, ShareFailure)):
+            row[leg]['failure_detail'] = exc.issue.value
 
     def collect(self, payload, *, priority_plan=None):
         rows = candidate_rows(payload)
@@ -214,9 +216,11 @@ class ValuationSourceCollector:
                 result['price_check'] = dict(status='pending_source_collection')
             except (ProviderFailure, ValueError, KeyError, TypeError) as exc:
                 self.reject(result, 'price_check', exc)
-            if price is not None and result['share_check']['status'] != 'verified_dated_share_class':
+            if price is None:
+                result['history_check']['deferred_reason'] = 'price_unavailable'
+            elif result['share_check']['status'] != 'verified_dated_share_class':
                 result['history_check']['deferred_reason'] = 'share_class_unverified'
-            elif price is not None:
+            else:
                 try:
                     history = self.get(history_url(symbol), PRICE_TTL, result['attempts'], 'history', not_before=price.market_at)
                     market = parse_history(history, identity, cik=cik, symbol=symbol, share_date=shares['end'],

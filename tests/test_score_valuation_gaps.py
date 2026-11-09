@@ -98,6 +98,14 @@ class SourceGapTraceTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"tekrarlı"):
             diagnose(score,source)
 
+    def test_typed_source_failure_survives_gap_trace(self):
+        score, source = fixtures()
+        source["companies"][1]["price_check"]["failure_detail"] = "stale_quote"
+        result = diagnose(score, source)
+        self.assertEqual(result["companies"][1]["market_source_states"]["price_check"]
+                         ["failure_detail"], "stale_quote")
+        self.assertNotIn("failure_detail", result["companies"][0]["market_source_states"]["price_check"])
+
     def test_cutoff_and_full_cohort_enforced(self):
         score,source=fixtures()
         source["as_of"]="2026-11-10T00:00:00+00:00"
