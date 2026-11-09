@@ -1,5 +1,40 @@
 # Development status
 
+## 9 Kasım 2026 — Piyasa kanıtı bekleyen adaylarda SEC gelir dönemleri
+
+Başlangıç main `33e73bc7110b08ddf642c528020b8835517a822e` (PR #55),
+Foundation CI `42555851658` başarılı, açık PR yoktu.
+Son üretim finansal paketi `42455760184` (sequence 10),
+değerleme paketi `42536567400` ve skor paketi `42536926634`.
+Son saatlik işler yeni artifact üretmedi.
+
+Karşılaştırma planlayıcısı dokuz alanın varlığını ve aynı SEC
+bildirimindeki ardışık yıllık gelir dönemlerini piyasa kontrollerinden
+önce inceliyor. URL, kaynak SHA-256, CIK, bildirim kimliği, USD ve
+seçili gelir değeri eşleşiyor. Belirsiz, geçersiz veya sayısal
+olmayan gelir kanıtı plan oluşturmaz. Piyasa kanıtı eksikse iki
+dönem, accession ve kaynak SHA ayrı olarak raporlanır. Piyasa ve
+hisse kapıları tamamlanana kadar karşılaştırma planına girmez.
+
+Üretim arşivlerinin ZIP SHA-256 değerleri ve kullanılan finansal
+dosyaların manifest SHA-256 değerleri doğrulandı. Ağsız tekrar
+yedi önceki plan adayını korudu. BLK sonrası bekleyen sekiz
+adaydan INTU, NOW, SNPS, MPWR, ON, SWKS ve TYL'de arşivdeki
+yıllık gelir çifti doğrulandı. ADBE'de gelir alanı eksik.
+Ayrıca PLTR'nin gelir dönemleri doğrulandı, hisse kanıtı bekleniyor.
+Dokuz alanın varlığı bağımsız dokuz SEC değer teyidi değildir.
+Kanıt: `docs/evidence/comparison-readiness-2026-11-09.json`.
+
+Altı odaklı test ve üretim arşivi entegrasyon tekrarı başarılı.
+Tam regresyon ve PR'ın son commit CI sonucu birleşim öncesi
+denetlenir. Son canlı kapsam 100 metadata, 100 adi hisse
+adayı, 98 finansal şirket, 961 kabul edilmiş değer, 704
+hesaplama ve yedi araştırma skoru. 61 değerleme engeli son
+canlı skor raporuna ait. Yeni canlı skor ve MVP kabulü yok.
+Sequence 10 ve mevcut kaynak sırası korundu. Sıradaki iş,
+yeni üretim değerleme paketinde yedi bütçe adayının piyasa
+kapılarını ve puana girecek dokuz bağımsız SEC teyidini denetlemek.
+
 ## 9 Kasım 2026 — İstek bütçesi yarıda kesilen şirket bir kez yeniden öne alınıyor
 
 Başlangıç main `cf279e963817fd53ac3aeeafc8ea4b1e5a84b0ee` (PR #54),
