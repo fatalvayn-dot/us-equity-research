@@ -61,6 +61,8 @@ def diagnose(score, valuation):
                 raise ValueError("eksik değerleme kaynak bacağı")
             details[leg]=dict(status=value["status"],
                               deferred_reason=value.get("deferred_reason"))
+            if "failure_detail" in value:
+                details[leg]["failure_detail"] = value["failure_detail"]
         attempts=market.get("attempts",[])
         if not isinstance(attempts,list):
             raise ValueError("kaynak denemeleri listesi geçersiz")
