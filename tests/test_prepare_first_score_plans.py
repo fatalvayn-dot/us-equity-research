@@ -71,6 +71,35 @@ class FirstScorePlansTests(unittest.TestCase):
         self.write_cache(self.fact.body)
         self.valuation["companies"][0]["share_check"]["status"]="invalid_data"
         self.assertEqual(self.runplan()[2]["selected"],0)
+    def test_pending_market_reports_comparison_evidence_without_creating_plans(self):
+        self.valuation["companies"][0]["price_check"]["status"] = "pending_source_collection"
+        current, prior, report = self.runplan()
+        self.assertEqual(current["companies"], [])
+        self.assertEqual(prior["companies"], [])
+        self.assertEqual(report["comparison_evidence_market_pending"], [dict(
+            symbol="AAPL", issuer_id=CIK, current_period=["2025-01-01", "2025-12-31"],
+            prior_period=["2024-01-01", "2024-12-31"], accession="0000320193-26-000001",
+            raw_sha256=self.fact.sha256)])
+        self.write_cache(self.fact.body, sha="0" * 64)
+        _, _, report = self.runplan()
+        self.assertEqual(report["comparison_evidence_market_pending"], [])
+        self.assertEqual(report["excluded"][0]["reason"], "companyfacts_source_hash_or_url_mismatch")
+
+    def test_string_prior_value_is_not_sec_numeric_evidence(self):
+        raw = json.loads(self.fact.body)
+        rows = raw["facts"]["us-gaap"]["RevenueFromContractWithCustomerExcludingAssessedTax"]["units"]["USD"]
+        for row in rows:
+            if row.get("end") == "2024-12-31":
+                row["val"] = "Infinity"
+        updated = json.dumps(raw).encode()
+        self.write_cache(updated)
+        for field in self.batch["companies"][0]["fields"]:
+            if field["query"]["field"] == "revenue":
+                field["fact"]["raw_sha256"] = hashlib.sha256(updated).hexdigest()
+        _, _, report = self.runplan()
+        self.assertEqual(report["selected"], 0)
+        self.assertIn("explicit_comparable_revenue_missing_or_ambiguous", report["excluded_reasons"])
+
     def test_unsupported_sector_is_not_scored(self):
         self.meta["companies"][0]["snapshot"]["sic_label"]="6021"
         _,_,report=self.runplan()

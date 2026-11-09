@@ -19,6 +19,50 @@ from equity_research.scoring import MODELS, REQUIRED
 from equity_research.transport import strict_json
 
 
+def revenue_periods(revenue, annual, companyfacts_dir, cik):
+    """Return exact SEC periods or a reason the comparison cannot be planned."""
+    if (not annual or revenue["period_end"] != annual[0]["report_end"]
+            or revenue.get("filing_accession") != annual[0]["accession"]):
+        return None, "annual_period_or_accession_mismatch"
+
+    cache = Path(companyfacts_dir) / (cik + ".json")
+    if not cache.is_file():
+        return None, "original_sec_companyfacts_cache_missing"
+    envelope = json.loads(cache.read_text())
+    body = envelope.get("body", "").encode("utf-8")
+    if (envelope.get("url") != companyfacts_url(cik)
+            or hashlib.sha256(body).hexdigest() != envelope.get("sha256")
+            or envelope.get("sha256") != revenue.get("raw_sha256")):
+        return None, "companyfacts_source_hash_or_url_mismatch"
+    payload = strict_json(body)
+    if payload.get("cik") != int(cik):
+        return None, "sec_issuer_identity_mismatch"
+    rows = (payload.get("facts", {}).get("us-gaap", {})
+        .get("RevenueFromContractWithCustomerExcludingAssessedTax", {})
+        .get("units", {}).get("USD", []))
+    current_start = date.fromisoformat(revenue["period_start"])
+    current_end = date.fromisoformat(revenue["period_end"])
+    previous_end = current_start - timedelta(days=1)
+    filing_rows = [r for r in rows if r.get("accn") == revenue["filing_accession"]
+                   and r.get("filed") == revenue.get("filed_on")
+                   and r.get("form") in ("10-K", "10-K/A")]
+    current_rows = [r for r in filing_rows if r.get("start") == revenue["period_start"]
+                    and r.get("end") == revenue["period_end"]]
+    previous_rows = [r for r in filing_rows
+                     if r.get("end") == previous_end.isoformat() and r.get("start")
+                     and comparable_periods(current_start, current_end,
+                         date.fromisoformat(r["start"]), previous_end)]
+    ambiguous = "explicit_comparable_revenue_missing_or_ambiguous"
+    if len(current_rows) != 1 or len(previous_rows) != 1:
+        return None, ambiguous
+    current_value, prior_value = (current_rows[0]["val"], previous_rows[0]["val"])
+    if (type(current_value) not in (int, Decimal) or type(prior_value) not in (int, Decimal)
+            or not Decimal(prior_value).is_finite() or prior_value <= 0
+            or Decimal(current_value) != Decimal(revenue["value"])):
+        return None, ambiguous
+    return (current_rows[0], previous_rows[0]), None
+
+
 def plans(financial_batch, metadata, valuation, companyfacts_dir, *, maximum=10):
     if not isinstance(maximum, int) or not 1 <= maximum <= 100:
         raise ValueError("bounded candidate selection required")
@@ -28,7 +72,7 @@ def plans(financial_batch, metadata, valuation, companyfacts_dir, *, maximum=10)
     prices = {c["issuer_id"]: c for c in valuation["companies"]}
     if len(metas) != len(metadata["companies"]) or len(prices) != len(valuation["companies"]):
         raise ValueError("duplicate metadata or valuation identity")
-    current, prior, excluded = [], [], []
+    current, prior, excluded, market_pending = [], [], [], []
     for company in financial_batch["companies"]:
         cik, symbol = company["issuer_id"], company["symbol"]
         reason = None
@@ -41,75 +85,37 @@ def plans(financial_batch, metadata, valuation, companyfacts_dir, *, maximum=10)
                   and rowmeta.get("snapshot", {}).get("entity_type_label") == "operating"
                   and rowmeta["snapshot"].get("sic_label") in MODELS):
             reason = "unsupported_sector_or_entity_type"
-        elif (market.get("identity_status") != "exact_match"
-              or market.get("share_check", {}).get("status") != "verified_dated_share_class"
-              or market.get("price_check", {}).get("status") != "valid"
-              or market.get("history_check", {}).get("status") != "valid"):
-            reason = "market_or_original_share_evidence_incomplete"
         else:
             facts = {f["query"]["field"]: f["fact"] for f in company["fields"] if f.get("fact")}
             if any(f not in facts for f in REQUIRED):
                 reason = "nine_model_financial_facts_incomplete"
             elif facts["revenue"]["source"] != "SEC":
                 reason = "current_revenue_sec_confirmation_pending"
-            elif len(current) >= maximum:
-                reason = "candidate_budget_exceeded"
             else:
-                revenue = facts["revenue"]
                 annual = rowmeta["snapshot"].get("annual_filings", [])
-                if (not annual or revenue["period_end"] != annual[0]["report_end"]
-                        or revenue.get("filing_accession") != annual[0]["accession"]):
-                    reason = "annual_period_or_accession_mismatch"
-                else:
-                    cache = Path(companyfacts_dir) / (cik + ".json")
-                    if not cache.is_file():
-                        reason = "original_sec_companyfacts_cache_missing"
+                try:
+                    periods, reason = revenue_periods(facts["revenue"], annual, companyfacts_dir, cik)
+                except (OSError, ValueError, TypeError, KeyError, AttributeError, ArithmeticError):
+                    periods, reason = None, "invalid_comparable_revenue_evidence"
+                if periods is not None:
+                    latest, previous = periods
+                    if (market.get("identity_status") != "exact_match"
+                            or market.get("share_check", {}).get("status") != "verified_dated_share_class"
+                            or market.get("price_check", {}).get("status") != "valid"
+                            or market.get("history_check", {}).get("status") != "valid"):
+                        reason = "market_or_original_share_evidence_incomplete"
+                        market_pending.append(dict(symbol=symbol, issuer_id=cik,
+                            current_period=[latest["start"], latest["end"]],
+                            prior_period=[previous["start"], previous["end"]],
+                            accession=latest["accn"], raw_sha256=facts["revenue"]["raw_sha256"]))
+                    elif len(current) >= maximum:
+                        reason = "candidate_budget_exceeded"
                     else:
-                        envelope = json.loads(cache.read_text())
-                        body = envelope.get("body", "").encode("utf-8")
-                        if (envelope.get("url") != companyfacts_url(cik)
-                                or hashlib.sha256(body).hexdigest() != envelope.get("sha256")
-                                or envelope.get("sha256") != revenue.get("raw_sha256")):
-                            reason = "companyfacts_source_hash_or_url_mismatch"
-                        else:
-                            payload = strict_json(body)
-                            if payload.get("cik") != int(cik):
-                                reason = "sec_issuer_identity_mismatch"
-                            else:
-                                rows = (payload.get("facts", {}).get("us-gaap", {})
-                                    .get("RevenueFromContractWithCustomerExcludingAssessedTax", {})
-                                    .get("units", {}).get("USD", []))
-                                current_start = date.fromisoformat(revenue["period_start"])
-                                current_end = date.fromisoformat(revenue["period_end"])
-                                previous_end = current_start - timedelta(days=1)
-                                current_rows = [r for r in rows
-                                    if r.get("accn") == revenue["filing_accession"]
-                                    and r.get("start") == revenue["period_start"]
-                                    and r.get("end") == revenue["period_end"]
-                                    and r.get("filed") == revenue.get("filed_on")
-                                    and r.get("form") in ("10-K", "10-K/A")]
-                                previous_rows = [r for r in rows
-                                    if r.get("accn") == revenue["filing_accession"]
-                                    and r.get("end") == previous_end.isoformat()
-                                    and r.get("filed") == revenue.get("filed_on")
-                                    and r.get("form") in ("10-K", "10-K/A")
-                                    and r.get("start")
-                                    and comparable_periods(current_start, current_end,
-                                        date.fromisoformat(r["start"]), date.fromisoformat(r["end"]))]
-                                if (len(current_rows) != 1
-                                        or Decimal(current_rows[0]["val"]) != Decimal(revenue["value"])
-                                        or len(previous_rows) != 1
-                                        or Decimal(previous_rows[0]["val"]) <= 0):
-                                    reason = "explicit_comparable_revenue_missing_or_ambiguous"
-                                else:
-                                    previous = previous_rows[0]
-                                    basis = dict(symbol=symbol, issuer_id=cik, currency="USD",
-                                        fields=["revenue"], scope_status="pending_scope",
-                                        scope_reason="separate_security_sector_and_investment_review_pending")
-                                    current.append(dict(**basis,
-                                        period_start=revenue["period_start"], period_end=revenue["period_end"]))
-                                    prior.append(dict(**basis,
-                                        period_start=previous["start"], period_end=previous["end"]))
+                        basis = dict(symbol=symbol, issuer_id=cik, currency="USD",
+                            fields=["revenue"], scope_status="pending_scope",
+                            scope_reason="separate_security_sector_and_investment_review_pending")
+                        current.append(dict(**basis, period_start=latest["start"], period_end=latest["end"]))
+                        prior.append(dict(**basis, period_start=previous["start"], period_end=previous["end"]))
         if reason:
             excluded.append(dict(symbol=symbol, issuer_id=cik, reason=reason))
     return (
@@ -118,7 +124,7 @@ def plans(financial_batch, metadata, valuation, companyfacts_dir, *, maximum=10)
         dict(schema_version=1, selected=len(current), evaluated=len(financial_batch["companies"]),
             selected_symbols=[x["symbol"] for x in current],
             excluded_reasons=dict(Counter(x["reason"] for x in excluded)),
-            excluded=excluded, securities_approved=False, full_scores_generated=False,
+            excluded=excluded, comparison_evidence_market_pending=market_pending, securities_approved=False, full_scores_generated=False,
             mvp_accepted=False,
             notes="Only exact consecutive periods, not financial winner selection or scoring")
     )
