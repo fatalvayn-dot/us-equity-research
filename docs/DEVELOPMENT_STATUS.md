@@ -1,5 +1,36 @@
 # Development status
 
+## 9 Kasım 2026 — Öncelikli yedi adayın canlı değerleme ve skor denetimi
+
+Başlangıç `main` `08d2a4d9e068a4b1f12fb9154d7a5674ac91dffe`
+(PR #65), Foundation CI `42598593798` başarılı. SEC son üretim koşusu
+`42455760184`, sequence 10 ve kök `42223465006`. Kapsam 100 metadata,
+100 adi hisse adayı, 98 finansal şirket, 961 kabul edilmiş değer ve 704
+hesaplama. SEC `42599393338` yeni paket üretmedi.
+
+Yeni değerleme `42598993077` (artifact `13664443650`) 100 GET yaptı,
+35'i INTU, NOW, SNPS, MPWR, ON, SWKS ve TYL için. Yedisinde tarihli
+hisse sınıfı, fiyat ve geçmiş geçerli. 100 kimlik eşleşmesi, 15 hisse
+sınıfı, 22 fiyat, 14 geçmiş kaydı görüldü. ZIP SHA-256, SQLite, kaynak
+paketi ve önceki 655 gözlemin tamamı doğrulandı. Yeni toplam 755.
+Normal sıra BLK'dan başladı ve SQLite imleci TJX'e (indeks 72) geçti.
+
+Skor `42599479886` (artifact `13664797659`) 100 adayı değerlendirdi.
+Yedi skor INTU 78, MPWR 78, SWKS 68, NOW 62, TYL 55,5, SNPS 53 ve ON
+51,5. Önceki yedi skor ayrı tarihli kesitte kalır. 93 puansız adayda
+72 sektör modeli, 19 değerleme kanıtı ve 2 kritik finans incelemesi
+engeli var. Ayrıntı `docs/evidence/priority-production-42598993077.json`.
+MVP kabulü açık.
+
+Skor işinde artık başarılı skorla birlikte koşu kimlikleri, kod commit'i
+ve tam girdi/çıktı SHA-256 özetleri `run-provenance.json` içinde yazılır.
+Kaynak manifestleri ile finansal run kimliği eşleşmezse sonuç başarılı
+sayılmaz. Kod birleşimi ekstra bir skor toplaması başlatmasın diye eski
+`push` tetikleyicisi kaldırıldı. Değerleme sonrası ve manuel tetikleme
+korundu. Yeni kayıt üretim ZIP'lerinden çıkarılmış dosyalarla doğrulandı.
+Sıradaki iş kalan 19 değerleme engelini şirket ve kaynak bazında ayırmak,
+en eski eksik kanıtı normal sıra ve mevcut bütçeyle ele almak.
+
 ## 9 Kasım 2026 — Değerleme devamı için eskiye dönüş engeli
 
 Başlangıç `main` commit'i `afb946a4c3af9bcb111047ae5257e4de786762f7`
