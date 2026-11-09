@@ -51,6 +51,14 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '100' }}", self.text)
         self.assertIn("cancel-in-progress: false", self.text)
 
+    def test_resume_is_verified_before_writing_and_reupload(self):
+        self.assertIn("python -m scripts.verify_valuation_state data/valuation-current", self.text)
+        self.assertLess(self.text.index("id: verify_resume"),
+                        self.text.index("financial-source-run.json"))
+        self.assertLess(self.text.index("id: verify_resume"),
+                        self.text.index("python -m equity_research collect-valuation-sources"))
+        self.assertIn("steps.verify_resume.outcome == 'success'", self.text)
+
     def test_priority_is_bound_to_both_run_ids_and_report_digest(self):
         with tempfile.TemporaryDirectory() as folder:
             plan = Path(folder) / 'plan.json'
