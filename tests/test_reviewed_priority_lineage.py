@@ -30,7 +30,8 @@ class PriorityLineageTests(unittest.TestCase):
             schema_version=1,
             report_kind='valuation_source_collection_scope_pending',
             priority_symbols=list(names),
-            companies=[dict(symbol=s,issuer_id=c) for s,c in
+            companies=[dict(symbol=s,issuer_id=c,attempts=[
+                dict(stage='price',http_requested=s in names)]) for s,c in
                 [candidate,('INTU','0000896878')]])))
         return record_next(self.plan,11,33,self.report,self.lineage)
 
@@ -75,6 +76,30 @@ class PriorityLineageTests(unittest.TestCase):
             record_next(self.plan,12,33,self.report,self.lineage)
         with self.assertRaisesRegex(ValueError,'exact financial run'):
             record_next(self.plan,11,0,self.report,self.lineage)
+
+    def test_no_priority_get_does_not_propagate_stale_lineage(self):
+        self.produce()
+        self.assertTrue(self.lineage.exists())
+        self.report.write_text(json.dumps(dict(
+            schema_version=1,
+            report_kind='valuation_source_collection_scope_pending',
+            priority_symbols=['NOW'],
+            companies=[dict(symbol='NOW',issuer_id='0001373715',
+                            attempts=[dict(stage='price',http_requested=False)]),
+                       dict(symbol='INTU',issuer_id='0000896878',attempts=[])])))
+        self.assertIsNone(record_next(self.plan,11,34,self.report,self.lineage))
+        self.assertFalse(self.lineage.exists())
+
+    def test_unrelated_normal_get_cannot_count_as_priority_progress(self):
+        self.report.write_text(json.dumps(dict(
+            report_kind='valuation_source_collection_scope_pending',
+            priority_symbols=['NOW'],
+            companies=[dict(symbol='NOW',issuer_id='0001373715',
+                            attempts=[dict(http_requested=False)]),
+                       dict(symbol='INTU',issuer_id='0000896878',
+                            attempts=[dict(http_requested=True)])])))
+        self.assertIsNone(record_next(self.plan,11,34,self.report,self.lineage))
+        self.assertFalse(self.lineage.exists())
 
     def test_no_side_effect_when_lineage_unavailable(self):
         self.assertIsNone(select(self.plan,11,33,self.report,self.lineage))
