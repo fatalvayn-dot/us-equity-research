@@ -6,6 +6,9 @@ from scripts.live_checkpoint import api, require_first_attempt
 WORKFLOW = "valuation-live.yml"
 COLLECTION_STEP = "Güncel fiyat ve hisse sınıfı kanıtlarını kontrollü topla"
 AUDITED_RUN = 42536567400
+# GitHub reported an internal server error before any job existed for this
+# exact attempt. See the reviewed startup failure in DEVELOPMENT_STATUS.md.
+REVIEWED_STARTUP_FAILURE = (42671436322, "a4917167600ed16d04621a2b5f1484a83d788a0f", 1)
 
 
 def main_runs(fetch=api):
@@ -25,7 +28,10 @@ def collection_skipped(run, fetch):
     if len(jobs) != data["total_count"]:
         return False
     if not jobs:
-        return run["conclusion"] in {"cancelled", "skipped"}
+        return (run["conclusion"] in {"cancelled", "skipped"}
+                or (run["conclusion"] == "failure"
+                    and (run["id"], run.get("head_sha"), run.get("run_attempt"))
+                    == REVIEWED_STARTUP_FAILURE))
     steps = [step for job in jobs for step in job["steps"]
              if step["name"] == COLLECTION_STEP]
     return bool(steps) and all(step["conclusion"] == "skipped" for step in steps)
@@ -46,7 +52,7 @@ def select(runs, current_run, requested="", *, fetch=api):
         states = [item for item in data["artifacts"]
                   if item["name"] == "valuation-source-state"]
         if not states:
-            if run_id != AUDITED_RUN and collection_skipped(run, fetch):
+            if run_id != AUDITED_RUN and not data["artifacts"] and collection_skipped(run, fetch):
                 continue
             raise ValueError(f"Değerleme durum paketi eksik ({run_id}); eski duruma dönülmedi")
         if len(states) != 1 or states[0]["expired"] or run["conclusion"] != "success":

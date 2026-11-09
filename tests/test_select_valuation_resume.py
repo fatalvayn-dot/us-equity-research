@@ -3,7 +3,9 @@ import runpy
 import unittest
 from unittest.mock import patch
 
-from scripts.select_valuation_resume import AUDITED_RUN, COLLECTION_STEP, main_runs, select
+from scripts.select_valuation_resume import (
+    AUDITED_RUN, COLLECTION_STEP, REVIEWED_STARTUP_FAILURE, main_runs, select,
+)
 
 
 def run(offset, *, status="completed", conclusion="success"):
@@ -44,6 +46,31 @@ class ValuationResumeSelectionTests(unittest.TestCase):
     def test_missing_artifact_after_started_attempt_blocks_rollback(self):
         self.artifacts(2)
         self.jobs(2, "success", "skipped")
+        with self.assertRaisesRegex(ValueError, "durum paketi eksik"):
+            select([run(2), run(0)], AUDITED_RUN + 3, fetch=self.fetch)
+
+    def test_only_reviewed_exact_jobless_failure_can_be_skipped(self):
+        run_id, head_sha, attempt = REVIEWED_STARTUP_FAILURE
+        offset = run_id - AUDITED_RUN
+        failed = run(offset, conclusion="failure") | dict(head_sha=head_sha, run_attempt=attempt)
+        self.artifacts(offset)
+        self.jobs(offset)
+        self.artifacts(1, artifact())
+        self.assertEqual(select([failed, run(1)], run_id + 1, fetch=self.fetch), AUDITED_RUN + 1)
+        for changes in (dict(run_attempt=2), dict(head_sha="unknown")):
+            with self.subTest(changes=changes), self.assertRaisesRegex(ValueError, "durum paketi eksik"):
+                select([failed | changes, run(1)], run_id + 1, fetch=self.fetch)
+        self.artifacts(offset + 1)
+        self.jobs(offset + 1)
+        with self.assertRaisesRegex(ValueError, "durum paketi eksik"):
+            select([failed | dict(id=run_id + 1), run(1)], run_id + 2, fetch=self.fetch)
+        self.jobs(offset, "failure")
+        with self.assertRaisesRegex(ValueError, "durum paketi eksik"):
+            select([failed, run(1)], run_id + 1, fetch=self.fetch)
+
+    def test_recovery_artifact_blocks_even_when_collection_was_skipped(self):
+        self.artifacts(2, artifact(name="valuation-source-recovery"))
+        self.jobs(2, "skipped")
         with self.assertRaisesRegex(ValueError, "durum paketi eksik"):
             select([run(2), run(0)], AUDITED_RUN + 3, fetch=self.fetch)
 
