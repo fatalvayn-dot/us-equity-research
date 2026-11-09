@@ -1,5 +1,40 @@
 # Development status
 
+## 9 Kasım 2026 — Sektör modelini değerleme engelinden önce ayırma (PR testinde)
+
+Başlangıç main `5dd81a24f3d8a25da22d90a930b9f66a51042a9e`,
+PR #57 sonrası Python 3.11/3.12/3.13 Foundation CI
+`42564462782` başarılı; açık PR yok. Son üç saatlik
+SEC/değerleme/skor koşusu yeni artifact üretmedi.
+Son kanıtlı skor `42536926634`: 100 aday, 7 puanlı,
+93 puansız; 61 değerleme kaynak engeli son puanlama
+raporundaki sayıdır, bütününün teknoloji modeliyle
+puanlanabilir olduğu anlamına gelmez.
+
+Skor motoru önce piyasa değerleme kanıtına bakıp,
+sektör SIC kapsamına ancak sonrasında geçiyordu.
+Bu, modelin desteklemediği bankacılık, GYO ve diğer
+sektörlerin de `valuation_source_evidence_required`
+engeli altında görünmesine yol açabiliyordu. Artık
+orijinal SEC submissions gözlemi mevcut ve ayrıştırılabilir
+ise, `operating` ve desteklenen `3571/3674/7372`
+kapsamına girmeyen şirketler değerleme kuyruğundan
+önce `specialized_or_unmodeled_sector` olarak raporlanır.
+Metadata yok veya bozuksa sektör tahmin edilmez;
+önceki kanıt kontrolü devam eder. Puan, model kapsamı,
+sermaye işlemleri ve yatırım kabulü gevşetilmedi.
+
+Üç ek sentetik regresyon sınaması; eksik piyasa verisi
+olan desteklenen sektör, doğrulanmış model dışı SIC,
+metadata yokluğu ayrımını korur. Tam CI ve gerçek
+üretim arşivinde yeniden skor hesaplaması yapılmadan
+yeni engel toplamı veya yeni puan duyurulmaz.
+Sonraki iş: Python CI doğrula ve güvenli merge;
+sonraki tam skor artifact dosyasındaki sektör ve
+gerçek değerleme engellerinin dağılımını yeniden say.
+MVP henüz kabul edilmedi.
+
+
 ## 9 Kasım 2026 — Bekleyen adayların dokuz SEC finansal alanı teyit edildi
 
 Başlangıç main `8c8c01ecfc3a59816f01e1aa7994a66923a57650` (PR #56),
