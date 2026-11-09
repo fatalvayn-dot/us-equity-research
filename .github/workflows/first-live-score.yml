@@ -184,6 +184,14 @@ jobs:
           python -m scripts.write_score_run_provenance \
             --data data --valuation-run "$VALUATION_RUN" --financial-run "$FINANCIAL_RUN"
 
+      - name: Skor engellerini özgün değerleme kaynaklarına bağla
+        if: steps.score.outcome == 'success'
+        run: |
+          python scripts/audit_score_valuation_gaps.py \
+            --score-report data/first-score-work/output/report.json.gz \
+            --valuation-report data/valuation/report.json \
+            --output data/first-score-work/score-valuation-gaps.json
+
       - name: Skor durumunu Türkçe raporla
         if: always() && steps.financial.outputs.ready == 'true'
         env:
@@ -203,6 +211,14 @@ jobs:
               report=json.loads(gzip.decompress(score.read_bytes()))
               lines.append(f"- Altı bileşeni kanıtlanan skor: {report['summary']['scored_companies']} şirket")
               lines.append(f"- Sıralama: {[(r['symbol'],str(r['score'])) for r in report['ranking']]}")
+              gaps=Path('data/first-score-work/score-valuation-gaps.json')
+              if gaps.is_file():
+                  audit=json.loads(gaps.read_text())
+                  lines.append(f"- Değerleme kaynak kanıtı bekleyen: {audit['valuation_source_blockers']} şirket")
+                  for company in audit['companies']:
+                      missing=', '.join(f"{name}={leg['status']}" for name,leg in company['market_source_states'].items()
+                                        if leg['status'] not in ('valid','verified_dated_share_class')) or 'piyasa kaynak basamakları geçerli; diğer kabul engellerini incele'
+                      lines.append(f"- {company['symbol']}: {missing}")
               lines.append('- Puanlar yatırım onayı veya MVP kabulü değildir.')
           else:
               lines.append('- Resmî skor raporu üretilemedi; kanıt ve engeller arşivde saklandı.')

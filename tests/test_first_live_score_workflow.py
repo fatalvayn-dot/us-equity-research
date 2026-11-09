@@ -44,6 +44,17 @@ class FirstLiveScoreWorkflowTests(unittest.TestCase):
         self.assertEqual(cohort_size, 14)
         self.assertIn(f"--maximum {cohort_size}\n", self.text)
 
+    def test_source_gap_trace_runs_only_after_successful_official_score(self):
+        self.assertIn("name: Skor engellerini özgün değerleme kaynaklarına bağla",self.text)
+        self.assertIn("if: steps.score.outcome == 'success'",self.text)
+        self.assertIn("scripts/audit_score_valuation_gaps.py",self.text)
+        self.assertIn("--valuation-report data/valuation/report.json",self.text)
+        self.assertIn("--output data/first-score-work/score-valuation-gaps.json",self.text)
+        self.assertLess(self.text.index("scripts/build_current_scores.py"),
+                        self.text.index("scripts/audit_score_valuation_gaps.py"))
+        self.assertLess(self.text.index("scripts/audit_score_valuation_gaps.py"),
+                        self.text.index("audit=json.loads(gaps.read_text())"))
+
     def test_normal_resolver_and_official_scoring_are_used(self):
         self.assertIn("research-batch",self.text)
         self.assertIn("build_current_scores.py",self.text)

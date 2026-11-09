@@ -1,5 +1,47 @@
 # Development status
 
+## 9 Kasım 2026 — Skordaki değerleme engelini kaynak basamağına bağlama (PR testinde)
+
+Başlangıç ana dal `48204845030cbfc14d80ff71c283eb27b9354cc8`
+(PR #72), Foundation CI `42619795772` başarılı, açık PR
+yoktu. En güncel gerçek zincir SEC `42455760184`,
+değerleme `42598993077`, skor `42599479886`.
+Yeni 14 şirketlik bir üretim paketinin oluştuğu
+henüz gözlenmedi. Son gerçek skorda 7 güncel
+puanlı şirket, 19 `valuation_source_evidence_required`,
+72 model dışı şirket ve 2 kritik finansal inceleme
+kaydı bulunuyor. Sonraki otomatik koşuların başarılı
+bitmesi yeni veri üretildiği anlamına gelmiyor.
+
+`scripts/audit_score_valuation_gaps.py`, skor
+`report.json.gz` ve aynı çalışmanın değerleme
+`report.json` dosyalarını karşılaştırır. Her iki
+raporun 100 şirket kimliği birebir eşleşmeli,
+değerleme kesim tarihi skor kesiminden ileri
+olmamalıdır. Skorda `valuation_source_evidence_required`
+engeli olan her şirketin gerçek `share_check`,
+`price_check`, `history_check` durumlarını
+ve yapılan HTTP GET girişimlerini özgün
+dosyalardan alır. Eksik finans veya yanlış
+sektör bilgisi için piyasa puanı uydurmaz;
+engelli şirketlere puan vermez. Çıktı
+`score-valuation-gaps.json` olarak aynı
+`first-live-score-evidence` paketine eklenir
+ve Türkçe Actions özetinde gösterilir.
+
+Sentetik regresyonlar 100 kimlik bütünlüğünü,
+tarih sırasını, özgün eksik alanları, başarısız
+ağ girişimlerini ve skor üretilmemiş bir şirketin
+kabul edilmemesini denetler. Yeni raporun
+üretilmesi yatırım, MVP kabulü veya 14
+güncel skor anlamına gelmez. Sonraki iş:
+gerçek 250 GET kaynak paketinde bu dosyanın
+durumlarını ve yeni skor sayısını denetle;
+finansal eksiklerin sektör bazında ayrımını
+koruyarak nihai MVP testine ilerle.
+Altman Z prototip sonrasına bırakıldı.
+
+
 ## 9 Kasım 2026 — Planlanan ve uygulanan değerleme önceliği ayrıldı
 
 Başlangıç `main` `3414a3023133e00e3eb1292837ae9857bee26c92` (PR #71).
