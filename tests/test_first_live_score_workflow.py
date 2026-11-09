@@ -29,6 +29,14 @@ class FirstLiveScoreWorkflowTests(unittest.TestCase):
         self.assertIn("--companyfacts-dir data/financial/companyfacts",self.text)
         self.assertIn("--cache-dir data/financial/companyfacts",self.text)
 
+    def test_run_provenance_is_written_after_successful_score_without_push_trigger(self):
+        self.assertNotIn("  push:", self.text)
+        self.assertLess(self.text.index("python scripts/build_current_scores.py"),
+                        self.text.index("python -m scripts.write_score_run_provenance"))
+        self.assertIn('--valuation-run "$VALUATION_RUN" --financial-run "$FINANCIAL_RUN"', self.text)
+        self.assertIn("VALUATION_RUN: ${{ steps.select.outputs.valuation_run }}", self.text)
+        self.assertIn("FINANCIAL_RUN: ${{ steps.financial.outputs.source_run }}", self.text)
+
     def test_normal_resolver_and_official_scoring_are_used(self):
         self.assertIn("research-batch",self.text)
         self.assertIn("build_current_scores.py",self.text)

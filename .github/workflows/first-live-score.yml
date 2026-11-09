@@ -1,10 +1,6 @@
 name: İlk gerçek 100 puan araştırma skoru
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/first-live-score.yml
   workflow_run:
     workflows: ['Canlı değerleme kaynakları']
     types: [completed]
@@ -50,14 +46,6 @@ jobs:
         run: |
           set -euo pipefail
           RUN="${VALUATION_RUN_INPUT:-$TRIGGER_RUN}"
-          if [ -z "$RUN" ] && [ "$EVENT_NAME" = "push" ]; then
-            for CANDIDATE in $(gh api "repos/$REPO/actions/workflows/valuation-live.yml/runs?per_page=40" \
-                --jq '.workflow_runs[] | select(.status == "completed" and .conclusion == "success" and .head_branch == "main") | .id'); do
-              COUNT=$(gh api "repos/$REPO/actions/runs/$CANDIDATE/artifacts?per_page=100" \
-                --jq '[.artifacts[] | select(.name == "valuation-source-state" and .expired == false)] | length')
-              if [ "$COUNT" -eq 1 ]; then RUN="$CANDIDATE"; break; fi
-            done
-          fi
           if ! [[ "$RUN" =~ ^[1-9][0-9]*$ ]]; then
             echo "::error::Geçerli değerleme run ID yok"
             exit 2
@@ -176,7 +164,10 @@ jobs:
         continue-on-error: true
         env:
           PYTHONPATH: src
+          VALUATION_RUN: ${{ steps.select.outputs.valuation_run }}
+          FINANCIAL_RUN: ${{ steps.financial.outputs.source_run }}
         run: |
+          set -euo pipefail
           test -f data/first-score-work/current.json
           test -f data/first-score-work/prior.json
           test -f data/valuation/source-bundle/manifest.json
@@ -190,9 +181,13 @@ jobs:
             --financial-sources data/financial-evidence/live-sources \
             --output data/first-score-work/output \
             --as-of "$AS_OF"
+          python -m scripts.write_score_run_provenance \
+            --data data --valuation-run "$VALUATION_RUN" --financial-run "$FINANCIAL_RUN"
 
       - name: Skor durumunu Türkçe raporla
         if: always() && steps.financial.outputs.ready == 'true'
+        env:
+          SCORE_OUTCOME: ${{ steps.score.outcome }}
         run: |
           python - <<'PY'
           import gzip,json,os
@@ -204,7 +199,7 @@ jobs:
               lines.append(f"- Açık karşılaştırma planına alınan: {s['selected']} şirket")
               lines.append(f"- Adaylar: {', '.join(s['selected_symbols'])}")
           score=Path('data/first-score-work/output/report.json.gz')
-          if score.is_file():
+          if os.environ['SCORE_OUTCOME'] == 'success' and score.is_file():
               report=json.loads(gzip.decompress(score.read_bytes()))
               lines.append(f"- Altı bileşeni kanıtlanan skor: {report['summary']['scored_companies']} şirket")
               lines.append(f"- Sıralama: {[(r['symbol'],str(r['score'])) for r in report['ranking']]}")

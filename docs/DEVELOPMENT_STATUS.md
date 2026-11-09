@@ -1,5 +1,33 @@
 # Development status
 
+## 9 Kasım 2026 — Üretim değerleme devamı ve skor kaynak zinciri
+
+Başlangıç `main` `93969549ed7c3691e1ff37f0152c75f6a16ee32f` (PR #66),
+kesin PR CI `42606727196` başarılı. SEC üretim koşusu `42455760184`
+sequence 10 ve kök `42223465006`. Kapsam 100 metadata, 100 adi hisse
+adayı, 98 finansal şirket, 961 kabul edilmiş değer ve 704 hesaplama.
+SEC `42599393338` yeni paket üretmedi.
+
+Değerleme `42598993077` (artifact `13664443650`) 100 GET yaptı,
+35'i INTU, NOW, SNPS, MPWR, ON, SWKS ve TYL için. Yedisinde tarihli
+hisse sınıfı, fiyat ve geçmiş kanıtı ham SQLite kaydına kadar eşleşti.
+ZIP ve kaynak paketinin SHA-256 kontrolleri geçti. Önceki 655 gözlem
+korundu, toplam 755. Normal sıra BLK'dan başladı ve SQLite imleci
+TJX'e (indeks 72) geçti. Skor `42599479886` 100 adayın yedisini
+puanladı. Kalan 19 değerleme engeli, 72 sektör modeli engeli ve
+2 kritik finans incelemesi var. Tarihli skor kıyası PR #66'da,
+ham kaynak referansları `docs/evidence/priority-production-42598993077.json`
+dosyasında. MVP kabulü açık.
+
+Başarılı skor işine koşu kimliklerini, kod commit'ini ve tam dosya
+SHA-256 özetlerini içeren `run-provenance.json` eklendi. Kaynak
+manifestleri veya finansal run kimliği eşleşmezse skor işi hata verir.
+Kod birleşiminde ek skor işi başlamaması için eski push tetikleyicisi
+kaldırıldı. Değerleme sonrası ve manuel tetikleme korundu.
+Yeni kayıt doğrulanmış üretim ZIP'lerinden alınan girdilerle üretildi.
+Sıradaki iş 19 değerleme engelini şirket ve kaynak bazında ayırmak
+ve kalan kanıtı normal sıra ile mevcut bütçede toplamak.
+
 ## 9 Kasım 2026 — İki tarihte 14 farklı şirketin gerçek skor kanıtı (PR değerlendirmesinde)
 
 Başlangıç ana dal `08d2a4d9e068a4b1f12fb9154d7a5674ac91dffe`
