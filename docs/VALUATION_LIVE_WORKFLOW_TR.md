@@ -38,7 +38,7 @@ koşusunun `valuation-source-state` artifact dosyası mevcutsa otomatik
 yüklenir; yoksa yeni bir durum diziniyle başlanır. Tek çalışma grubu,
 `cancel-in-progress: false` ve SQLite kilitleri çakışma riskini azaltır.
 
-Otomatik çalışmanın yeni GET bütçesi **51**'dir. Veri yeniden tarih verilerek
+Otomatik çalışmanın yeni GET bütçesi **250**'dir. Veri yeniden tarih verilerek
 güncellenmez; mevcut 15 dakikalık fiyat ve 6 saatlik kaynak tazelik kuralları
 korunur. Başarılı iş akışı skorlu yatırım araştırması anlamına gelmez.
 
@@ -64,7 +64,7 @@ yedi şirket puanı üretildiği anlamına gelmez.
 - Branch: `main`
 - `source_run_id`: gerçekten veri üretmiş finansal çalışmanın sayısal run ID'si
 - `valuation_resume_run_id`: boşsa uygun önceki değerleme işi otomatik bulunur
-- `max_new_requests`: varsayılan `51` (kontrollü alternatifler 0–501)
+- `max_new_requests`: varsayılan `51` (manuel kontrollü alternatifler 0–501); günlük otomatik sınır `250`
 
 Örnek kaynak koşusu: `42455760184` (8 Kasım 2026, sequence 10).
 Bu örnek geçmiş bir kayıttır; güncel fiyatın bugün doğrulandığını göstermez.
@@ -100,3 +100,17 @@ fiyat/hisse sınıfı/geçmiş fiyatı kanıtlanmış adaylar için SEC'de açı
 Mevcut `research-batch` kaynak sırası ve `build_current_scores.py`
 modeli kullanılır. Sonuç `first-live-score-evidence` artifact dosyasında
 saklanır; puan oluşsa bile yatırım onayı ve MVP kabulü verilmez.
+
+## Aynı kesitte 14 daha önce puanlanmış şirketi yenileme
+
+İki bağımsız, gerçek ve manifest özeti doğrulanmış skor artifact'ında
+14 farklı şirket önceki tarihlerde puanlanmıştır. Bunlar birleşik güncel
+sıralama değildir. On dört sembolün SEC CIK eşleşmesi
+`docs/evidence/valuation-priority-candidates-2026-11-09.json` dosyasına
+eklendi. Günlük otomatik 250 GET bütçesi, 14 şirketin en fazla
+70 ayrı aday isteğini öncelikli işleyebilmeye yeterlidir; toplayıcının
+öncelik üst sınırı bütçenin yarısını aşmadığından normal rotasyonun
+en az 125 GET kapasitesi korunur. Gerçek tüketim sağlayıcı yanıtı,
+önbellek ve tazelik şartlarına bağlıdır. Başarılı bir koşunun 14
+şirketi yeniden puanlayacağı garanti edilmez; geçmiş fiyat yeni
+fiyat sayılmaz. İlk üretim paketi özellikle denetlenmelidir.
