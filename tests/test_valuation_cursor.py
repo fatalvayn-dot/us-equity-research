@@ -10,8 +10,10 @@ from equity_research.batch import BatchStore
 from equity_research.companyfacts import companyfacts_url
 from equity_research.response_archive import ResponseArchive
 from equity_research.valuation_collection import ValuationSourceCollector
-from test_scoring import ASOF
-from test_valuation import cf, identity, meta
+from equity_research.prices import price_url
+from equity_research.providers import ProviderFailure, Status
+from test_scoring import ASOF, history
+from test_valuation import cf, filing, identity, meta, price
 from test_valuation_collection import Transport
 
 
@@ -67,6 +69,26 @@ class FairValuationCursorTests(unittest.TestCase):
         self.assertEqual([c['symbol'] for c in three['companies']], ['AAPL', 'MSFT'])
         self.assertFalse(three['mvp_accepted'])
         self.assertTrue(all(c['total_score'] is None for c in three['companies']))
+
+    def test_priority_gets_are_bounded_and_normal_cursor_still_moves(self):
+        plan = dict(companies=list(reversed(PLAN['companies'])))
+        self.transport.responses.update({r.url: r for r in (filing(), price(), history())})
+        self.transport.responses[companyfacts_url(MSFT)] = ProviderFailure(Status.TIMEOUT)
+        self.transport.responses[price_url('MSFT')] = ProviderFailure(Status.TIMEOUT)
+        report = self.collector(10).collect(plan, priority_plan=dict(companies=[PLAN['companies'][0]]))
+        self.assertEqual(report['priority_symbols'], ['AAPL'])
+        self.assertEqual(self.transport.calls[1], companyfacts_url(PLAN['companies'][0]['issuer_id']))
+        self.assertEqual(self.transport.calls[6], companyfacts_url(MSFT))
+        self.assertEqual(report['summary']['new_get_invocations'], 8)
+        self.assertEqual([c['symbol'] for c in report['companies']], ['MSFT', 'AAPL'])
+        self.assertEqual(report['continuation']['next_symbol'], 'AAPL')
+        self.assertFalse(report['mvp_accepted'])
+
+    def test_priority_symbol_cannot_override_issuer_identity(self):
+        with self.assertRaises(ValueError):
+            self.collector(10).collect(PLAN, priority_plan=dict(companies=[
+                dict(symbol='AAPL', issuer_id=MSFT)]))
+        self.assertEqual(self.transport.calls, [])
 
     def test_zero_budget_never_advances_checkpoint(self):
         self.collector(2).collect(PLAN)

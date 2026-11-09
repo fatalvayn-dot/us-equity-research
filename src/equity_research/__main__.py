@@ -44,6 +44,7 @@ def main():
     parser.add_argument("--comparison-input")
     parser.add_argument("--as-of")
     parser.add_argument("--candidates")
+    parser.add_argument("--priority-candidates", help="optional valuation candidate subset")
     parser.add_argument("--state-dir")
     parser.add_argument("--max-new-metadata",type=int)
     parser.add_argument("--max-new-documents",type=int,default=100)
@@ -113,8 +114,13 @@ def main():
             candidate_path=Path(args.candidates).resolve();state=Path(args.state_dir).resolve()
             if candidate_path==state or state in candidate_path.parents:
                 parser.error("candidate input must be outside the output state directory")
+            priority_path = Path(args.priority_candidates).resolve() if args.priority_candidates else None
+            if priority_path is not None and (priority_path == state or state in priority_path.parents):
+                parser.error("priority input must be outside the output state directory")
+            priority_plan = json.loads(priority_path.read_text()) if priority_path is not None else None
             report=run_collection(json.loads(candidate_path.read_text()), state_dir=state,
-                user_agent=args.user_agent,max_new_requests=args.max_new_requests,seed_bundles=args.seed_bundle)
+                user_agent=args.user_agent,max_new_requests=args.max_new_requests,seed_bundles=args.seed_bundle,
+                priority_plan=priority_plan)
             print(json.dumps(report["summary"]))
         except (ValueError,KeyError,TypeError,OSError,RunBusy,ProviderFailure,sqlite3.Error) as exc:
             print(json.dumps(dict(status="source_collection_error",error_type=type(exc).__name__,mvp_accepted=False)))

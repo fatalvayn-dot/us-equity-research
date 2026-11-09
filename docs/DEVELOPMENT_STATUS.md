@@ -1,5 +1,38 @@
 # Development status
 
+## 9 Kasım 2026 — Yedi aday için sınırlı değerleme önceliği
+
+Başlangıç main `da03a564b34547e2d6e9f2a63a2871cd9c8f013d` (PR #59),
+Foundation CI `42571557031` başarılı, açık PR yoktu.
+Son üretim zinciri `42455760184` → `42536567400` → `42536926634`.
+Son saatlik koşular yeni artifact üretmedi.
+
+Değerleme ve skor ZIP SHA-256 değerleri ve skorun değerleme kaynak
+manifestine bağlantısı doğrulandı. 13 adaydan 11'inde hisse ve fiyat
+sorgusu bütçe bekliyor. PLTR'de açıklanan adet yok, CRWD'de
+hisse sınıfı kanıtı geçersiz. Hiçbirinin piyasa geçmişi başlamamış.
+INTU, NOW, SNPS, MPWR, ON, SWKS ve TYL, dokuz arşiv SEC alanı
+ve yıllık gelir çifti kanıtlı bütçe adayları olarak CIK ile eşlendi.
+Kanıt ve isteğe bağlı aday listesi:
+`docs/evidence/valuation-priority-candidates-2026-11-09.json`.
+
+`collect-valuation-sources --priority-candidates <plan.json>`
+aynı ana aday planındaki sembol/CIK çiftlerine öncelik verebilir.
+Öncelikli şirketlerin azami GET sayısı toplam bütçenin yarısını
+aşmaz. Ortak kimlik GET'i toplam limite dahildir. Normal sıra
+ve rapor sırası korunur. Öncelikli sorgular normal devam
+imlecini ilerletmez. İsteğe bağlı giriş kullanılmadığında
+mevcut sıra devam eder. GitHub Actions akışı değiştirilmedi.
+
+Altı odaklı test, üretim adaylarıyla sıfır GET CLI entegrasyonu
+ve kaynak bağlantısı denetimi başarılı. Tam regresyon ve kesin
+PR head CI birleşim öncesi denetlenir. Son canlı kapsam 100
+metadata, 100 adi hisse adayı, 98 finansal şirket, 961 kabul
+edilmiş değer, 704 hesaplama ve yedi skor. Sequence 10 korundu.
+MVP kabul edilmedi. Sonraki iş: yeni üretim paketi geldiğinde
+13 adayın durumunu yeniden karşılaştır, gerekiyorsa öncelik
+girişini o pakete bağlayarak mevcut tek toplayıcıda etkinleştir.
+
 ## 9 Kasım 2026 — Üretim skoru tekrarında 13 değerleme engeli kaldı
 
 Başlangıç main `f5b0f766d89555a50e5c81a58eb550deb3876693` (PR #58).

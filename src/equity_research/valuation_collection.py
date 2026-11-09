@@ -39,6 +39,20 @@ def candidate_rows(payload):
     return rows
 
 
+# Company Facts, submissions, original filing, quote and market history.
+MAX_GETS_PER_CANDIDATE = 5
+
+
+def priority_keys(plan, rows):
+    if plan is None:
+        return set()
+    requested = {(r['issuer_id'], r['symbol']) for r in candidate_rows(plan)}
+    candidates = {(r['issuer_id'], r['symbol']) for r in rows}
+    if not requested <= candidates:
+        raise ValueError('priority identity must match the main candidate plan')
+    return requested
+
+
 def request_limit(value):
     if type(value) is not int or not 0 <= value <= 501:
         raise ValueError('0..501 new GET invocations required for at most 100 candidates')
@@ -103,8 +117,9 @@ class ValuationSourceCollector:
     def reject(row, leg, exc):
         row[leg] = dict(status=exc.status.value if isinstance(exc, ProviderFailure) else 'invalid_data')
 
-    def collect(self, payload):
+    def collect(self, payload, *, priority_plan=None):
         rows = candidate_rows(payload)
+        requested_priority = priority_keys(priority_plan, rows)
         # A fixed head-first budget can starve the back of a 100-company
         # cohort forever when prices expire between scheduled runs.
         # Store only an ordered-candidate-bound position, not cached approval.
@@ -119,7 +134,16 @@ class ValuationSourceCollector:
                           and 0 <= prior['next_index'] < len(rows))
         start = prior['next_index'] if cursor_matches else 0
         retrying_partial = cursor_matches and prior.get('retrying_partial') is True
-        scan = rows[start:] + rows[:start]
+        rotation = list(enumerate(rows))
+        rotation = rotation[start:] + rotation[:start]
+        # Reserve at least half the company budget for normal rotation. Keep
+        # the priority prefix in rotation order and exclude it from cursor writes.
+        priority_limit = self.limit // (2 * MAX_GETS_PER_CANDIDATE)
+        priority = [i for i, row in rotation
+                    if (row['issuer_id'], row['symbol']) in requested_priority][:priority_limit]
+        priority_indices = set(priority)
+        scan = [(i, rows[i]) for i in priority] + [
+            (i, row) for i, row in rotation if i not in priority_indices]
         last_requested_index = None
         last_request_partial = False
         identity_attempts = []
@@ -136,7 +160,7 @@ class ValuationSourceCollector:
             identity_validation = dict(status=exc.status.value if isinstance(exc, ProviderFailure) else 'invalid_data')
             identity = None
         companies = []
-        for offset, row in enumerate(scan):
+        for index, row in scan:
             result = dict(**row, attempts=[], identity_status='not_started',
                 share_check=dict(status='not_started'), price_check=dict(status='not_started'),
                 history_check=dict(status='not_started'), scope_approved=False,
@@ -202,8 +226,8 @@ class ValuationSourceCollector:
                     result['history_check'] = dict(status='pending_source_collection')
                 except (ProviderFailure, ValueError, KeyError, TypeError) as exc:
                     self.reject(result, 'history_check', exc)
-            if any(a.get('http_requested') for a in result['attempts']):
-                last_requested_index = (start + offset) % len(rows)
+            if index not in priority_indices and any(a.get('http_requested') for a in result['attempts']):
+                last_requested_index = index
                 last_request_partial = any(
                     a.get('deferred_reason') == 'request_budget' for a in result['attempts'])
         next_index = None
@@ -221,6 +245,7 @@ class ValuationSourceCollector:
         return dict(schema_version=1, report_kind='valuation_source_collection_scope_pending',
             as_of=self.clock().isoformat(), companies=companies, identity_attempts=identity_attempts,
             identity_validation=identity_validation,
+            priority_symbols=[rows[i]['symbol'] for i in priority],
             continuation=dict(start_symbol=rows[start]['symbol'],
                 next_symbol=rows[next_index]['symbol'] if next_index is not None else None),
             summary=dict(candidates=len(companies), new_get_invocations=sum(self.calls.values()),
@@ -251,8 +276,9 @@ def seed_sources(archive, bundles, *, clock, pulse):
     return dict(counts)
 
 
-def run_collection(payload, *, state_dir, user_agent, max_new_requests=51, seed_bundles=(), clock=None):
+def run_collection(payload, *, state_dir, user_agent, max_new_requests=51, seed_bundles=(), clock=None, priority_plan=None):
     rows = candidate_rows(payload)
+    priority_keys(priority_plan, rows)
     request_limit(max_new_requests)
     path = Path(state_dir).resolve()
     bundles = tuple(Path(p).resolve() for p in seed_bundles)
@@ -272,7 +298,7 @@ def run_collection(payload, *, state_dir, user_agent, max_new_requests=51, seed_
             for host in ('www.sec.gov', 'data.sec.gov', 'query1.finance.yahoo.com')}
         collector = ValuationSourceCollector(archive, transports, max_new_requests=max_new_requests,
                                              checkpoint=lock, owner=owner, clock=clock)
-        report = collector.collect(dict(companies=rows))
+        report = collector.collect(dict(companies=rows), priority_plan=priority_plan)
         report['candidate_plan'] = dict(companies=rows)
         report['seed_summary'] = seeded
         report['source_bundle'] = write_bundle(archive, path/'source-bundle')
