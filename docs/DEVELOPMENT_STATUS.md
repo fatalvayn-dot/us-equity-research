@@ -1,5 +1,51 @@
 # Development status
 
+## 9 Kasım 2026 — Değerleme engelleri ve özgün SEC borç başlıkları
+
+Başlangıç main `8d47797252af357e046eade6b65367d18990988c` (PR #53),
+Foundation CI `42537481638` başarılı, açık PR yok. Son saatlik
+finansal, değerleme ve skor işleri `42545785776`, `42545841489`,
+`42545859200` yeni artifact üretmedi. Son üretim zinciri
+`42455760184` (sequence 10) → `42536567400` → `42536926634`.
+Değerleme ve skor ZIP SHA-256/CRC, rapor dosyaları SHA-256 ve
+değerleme SQLite bütünlüğü denetlendi. Skor manifestindeki
+kaynak özeti üretim değerleme manifestiyle eşleşti.
+
+Skor raporundaki 61 değerleme engeli CIK ve sembolle eşlendi.
+43 adayda hisse kaynağı ve fiyat istek bütçesini bekliyordu.
+Diğer 18 adayın fiyatı geçerliydi, 14 hisse kaydı geçersizdi,
+dördünde açıklanan hisse adedi eksikti. 61 adayın geçmişi
+başlamamıştı. Aynı kesimde skor planlayıcısı 32 adayı finansal
+inceleme, 19 adayı sektör veya şirket tipi nedeniyle ayırdı.
+Piyasa/hisse kanıtı aşamasına gelen 10 adayın sekizinde bütçe
+bekleniyor. PLTR'de açıklanan adet eksik, CRWD'de sınıf
+incelemesi gerekli. Bu 10 adayın tam finansal veya skor
+uygunluğu henüz doğrulanmadı.
+
+Özgün SEC bildirim kapağındaki üç açık borç başlığı biçimi
+desteklendi: kesirli kuponlu garantili tahvil, değişken faizli
+tahvil ve tarihlenmiş sabitten değişkene faizli tahvil. Tam
+başlık eşleşmesi gerekir. Belirsiz veya dönüştürülebilir başlık,
+adi hisse sınıfı ve eşleşmeyen metadata sembolü için eski
+inceleme koşulları korunur. Özgün tahvil sembolü ve borsa
+bilgisi saklanır, hisse adedinde kullanılmaz.
+
+Özgün kesim tarihinde sıfır GET arşiv tekrarında 38 mevcut
+tarihli hisse kanıtı birebir korundu. AXP, GE, PEP ve TMO
+için sayı SEC özgün kapakla eşleşti. Toplam 42 tarihli hisse
+kanıtı ve 57 geçerli fiyat görüldü. Dört yeni kanıtta piyasa
+geçmişi beklemede, mevcut 38 geçerli geçmiş sayısı korundu.
+Kanıt: `docs/evidence/valuation-debt-cover-replay-2026-11-09.json`.
+
+26 odaklı test başarılı. Tam regresyon ve kesin PR head CI
+birleşim öncesinde denetlenir. Son canlı finansal kapsam 100
+metadata ve 100 kayıtlı adi hisse adayı, 98 şirkette 961
+kabul edilmiş değer ve 704 hesaplama. Son canlı skor yedi
+şirkette. Sequence 10 ve üretim state korundu, yeni toplayıcı
+başlatılmadı. Sıradaki iş: devam imlecinin sekiz bütçe bekleyen
+adaya erişimini yeni üretim artifact'iyle denetle ve dokuz
+finansal girdi ile kıyas dönemini ayrı ayrı doğrula.
+
 ## 9 Kasım 2026 — Yedi gerçek 100 puanlık skor ve 61 değerleme engeli
 
 PR #50 eski SEC DEI tarih sırası anomalilerini güvenli karantinaya

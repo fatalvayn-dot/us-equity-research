@@ -1,0 +1,1323 @@
+{
+  "mode": "archived_replay_zero_get",
+  "financial_run_id": 42455760184,
+  "valuation_run_id": 42536567400,
+  "valuation_artifact_id": 13640160185,
+  "score_run_id": 42536926634,
+  "score_artifact_id": 13639024015,
+  "artifact_sha256": {
+    "valuation": "e456d79332173096836285497dc5a74a381ed6708735e36538e39a242656a478",
+    "score": "f074881bc8eed094086edfe6257c983fee51a99d6961c8a0d63df9ecf1fdebbb"
+  },
+  "as_of": "2026-11-08T23:47:44.772512+00:00",
+  "valuation_blocker_count": 61,
+  "blocker_share_states": {
+    "missing_disclosed_shares": 4,
+    "invalid_data": 14,
+    "pending_source_collection": 43
+  },
+  "blocker_price_states": {
+    "valid": 18,
+    "pending_source_collection": 43
+  },
+  "blocker_history_states": {
+    "not_started": 61
+  },
+  "blocker_planner_reasons": {
+    "unsupported_sector_or_entity_type": 19,
+    "financial_review_required": 32,
+    "market_or_original_share_evidence_incomplete": 10
+  },
+  "recovered": {
+    "AXP": {
+      "value": "670552018",
+      "disclosed_on": "2026-10-15",
+      "decimals": "INF",
+      "unit": "shares",
+      "concept": "dei:EntityCommonStockSharesOutstanding",
+      "companyfacts": {
+        "value": "670552018",
+        "end": "2026-10-15",
+        "filed": "2026-10-23",
+        "accession": "0000004962-26-000409",
+        "form": "10-Q",
+        "available_at": "2026-10-24T05:00:00+00:00",
+        "issuer_id": "0000004962",
+        "concept": "dei:EntityCommonStockSharesOutstanding",
+        "unit": "shares",
+        "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000004962.json",
+        "raw_sha256": "e0f88341930d943f34039276fcd1ff8650219870001b035dc6e107e7f74d87a9",
+        "retrieved_at": "2026-11-08T23:47:19.145089+00:00"
+      },
+      "original_filing": {
+        "url": "https://www.sec.gov/Archives/edgar/data/4962/000000496226000409/axp-20260930.htm",
+        "raw_sha256": "8c34bf44d6c7461b70f10a0f57b93fbb7fc7be15bcc2df0176070ad37248fa7d",
+        "retrieved_at": "2026-11-08T23:47:20.132667+00:00"
+      },
+      "metadata": {
+        "url": "https://data.sec.gov/submissions/CIK0000004962.json",
+        "raw_sha256": "acffa48f209dde90c0393a84169f845f2633be5c8f525bd308e21e149edcba7f",
+        "retrieved_at": "2026-11-08T23:47:19.308339+00:00"
+      },
+      "registered_security": [
+        {
+          "context_id": "c-2",
+          "symbol": "AXP",
+          "title": "Common shares (par value $0.20 per share)",
+          "exchange": "New York Stock Exchange"
+        }
+      ],
+      "scope_approved": false,
+      "other_registered_securities": [
+        {
+          "symbol": "AXP32",
+          "title": "3.433% Fixed-to-Floating Rate Notes due May 20, 2032",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_explicit_debt"
+        },
+        {
+          "symbol": "AXP34",
+          "title": "3.835% Fixed-to-Floating Rate Notes due June 16, 2034",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_explicit_debt"
+        }
+      ],
+      "common_security_scope": "single_verified_common_symbol_with_explicit_non_common_tickers"
+    },
+    "GE": {
+      "value": "1033351921",
+      "disclosed_on": "2026-09-30",
+      "decimals": "0",
+      "unit": "shares",
+      "concept": "dei:EntityCommonStockSharesOutstanding",
+      "companyfacts": {
+        "value": "1033351921",
+        "end": "2026-09-30",
+        "filed": "2026-10-20",
+        "accession": "0000040545-26-000064",
+        "form": "10-Q",
+        "available_at": "2026-10-21T05:00:00+00:00",
+        "issuer_id": "0000040545",
+        "concept": "dei:EntityCommonStockSharesOutstanding",
+        "unit": "shares",
+        "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000040545.json",
+        "raw_sha256": "95ed2ee4383e17c8c50ea84b475a90b8172dc9d1728a330787ec0b7fada60216",
+        "retrieved_at": "2026-11-08T23:46:30.263759+00:00"
+      },
+      "original_filing": {
+        "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054526000064/ge-20260930.htm",
+        "raw_sha256": "910a413149b1f59929348d5f27ef82a37a5b982315ef5b8f32a59cc4400ccfd9",
+        "retrieved_at": "2026-11-08T23:46:31.330372+00:00"
+      },
+      "metadata": {
+        "url": "https://data.sec.gov/submissions/CIK0000040545.json",
+        "raw_sha256": "975aed1f77e94f6c9477fb81d49e40bd9366d68dbc29ef8cece3191f2f2be852",
+        "retrieved_at": "2026-11-08T23:46:30.520668+00:00"
+      },
+      "registered_security": [
+        {
+          "context_id": "c-2",
+          "symbol": "GE",
+          "title": "Common stock, par value $0.01 per share",
+          "exchange": "New York Stock Exchange"
+        }
+      ],
+      "scope_approved": false,
+      "other_registered_securities": [
+        {
+          "symbol": "GE /35",
+          "title": "7 1/2% Guaranteed Subordinated Notes due 2035",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_explicit_debt"
+        },
+        {
+          "symbol": "GE 27E",
+          "title": "1.875% Notes due 2027",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "GE 29",
+          "title": "1.500% Notes due 2029",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "GE 37",
+          "title": "2.125% Notes due 2037",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        }
+      ],
+      "common_security_scope": "single_verified_common_symbol_with_explicit_non_common_tickers"
+    },
+    "PEP": {
+      "value": "1362741092",
+      "disclosed_on": "2026-10-01",
+      "decimals": "INF",
+      "unit": "shares",
+      "concept": "dei:EntityCommonStockSharesOutstanding",
+      "companyfacts": {
+        "value": "1362741092",
+        "end": "2026-10-01",
+        "filed": "2026-10-08",
+        "accession": "0000077476-26-000048",
+        "form": "10-Q",
+        "available_at": "2026-10-09T05:00:00+00:00",
+        "issuer_id": "0000077476",
+        "concept": "dei:EntityCommonStockSharesOutstanding",
+        "unit": "shares",
+        "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000077476.json",
+        "raw_sha256": "4a734cc934f3cf9f129fc15657589d4c6c82138f1bd889023c11170d97990d8d",
+        "retrieved_at": "2026-11-08T23:47:41.088131+00:00"
+      },
+      "original_filing": {
+        "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747626000048/pep-20260905.htm",
+        "raw_sha256": "af9db2615f8901493ab43010843194eb9725ecbddc78a62769e308206a793def",
+        "retrieved_at": "2026-11-08T23:47:42.021962+00:00"
+      },
+      "metadata": {
+        "url": "https://data.sec.gov/submissions/CIK0000077476.json",
+        "raw_sha256": "8a76bef3a85a8fd68951062bc5e578c4c947bd619dca7f1084548cb88116ab37",
+        "retrieved_at": "2026-11-08T23:47:41.256596+00:00"
+      },
+      "registered_security": [
+        {
+          "context_id": "c-2",
+          "symbol": "PEP",
+          "title": "Common Stock, par value 1-2/3 cents per share",
+          "exchange": "The Nasdaq Stock Market LLC"
+        }
+      ],
+      "scope_approved": false,
+      "other_registered_securities": [
+        {
+          "symbol": "PEP27",
+          "title": "0.750% Senior Notes Due 2027",
+          "exchange": "The Nasdaq Stock Market LLC",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "PEP28",
+          "title": "0.875% Senior Notes Due 2028",
+          "exchange": "The Nasdaq Stock Market LLC",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "PEP28A",
+          "title": "0.500% Senior Notes Due 2028",
+          "exchange": "The Nasdaq Stock Market LLC",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "PEP28B",
+          "title": "Floating Rate Notes Due 2028",
+          "exchange": "The Nasdaq Stock Market LLC",
+          "symbol_corroboration": "cover_only_explicit_debt"
+        },
+        {
+          "symbol": "PEP29",
+          "title": "3.200% Senior Notes Due 2029",
+          "exchange": "The Nasdaq Stock Market LLC",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "PEP31",
+          "title": "1.125% Senior Notes Due 2031",
+          "exchange": "The Nasdaq Stock Market LLC",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "PEP32",
+          "title": "0.400% Senior Notes Due 2032",
+          "exchange": "The Nasdaq Stock Market LLC",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "PEP33",
+          "title": "0.750% Senior Notes Due 2033",
+          "exchange": "The Nasdaq Stock Market LLC",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "PEP34",
+          "title": "3.550% Senior Notes Due 2034",
+          "exchange": "The Nasdaq Stock Market LLC",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "PEP34A",
+          "title": "3.300% Senior Notes Due 2034",
+          "exchange": "The Nasdaq Stock Market LLC",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "PEP37",
+          "title": "3.450% Senior Notes Due 2037",
+          "exchange": "The Nasdaq Stock Market LLC",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "PEP38",
+          "title": "3.700% Senior Notes Due 2038",
+          "exchange": "The Nasdaq Stock Market LLC",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "PEP39",
+          "title": "0.875% Senior Notes Due 2039",
+          "exchange": "The Nasdaq Stock Market LLC",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "PEP47",
+          "title": "4.150% Senior Notes Due 2047",
+          "exchange": "The Nasdaq Stock Market LLC",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "PEP50",
+          "title": "1.050% Senior Notes Due 2050",
+          "exchange": "The Nasdaq Stock Market LLC",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "PEP55",
+          "title": "4.050% Senior Notes Due 2055",
+          "exchange": "The Nasdaq Stock Market LLC",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        }
+      ],
+      "common_security_scope": "single_verified_common_symbol_with_explicit_non_common_tickers"
+    },
+    "TMO": {
+      "value": "370515868",
+      "disclosed_on": "2026-09-26",
+      "decimals": "INF",
+      "unit": "shares",
+      "concept": "dei:EntityCommonStockSharesOutstanding",
+      "companyfacts": {
+        "value": "370515868",
+        "end": "2026-09-26",
+        "filed": "2026-10-30",
+        "accession": "0000097745-26-000179",
+        "form": "10-Q",
+        "available_at": "2026-10-31T05:00:00+00:00",
+        "issuer_id": "0000097745",
+        "concept": "dei:EntityCommonStockSharesOutstanding",
+        "unit": "shares",
+        "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000097745.json",
+        "raw_sha256": "c1702c20855e7f135eaea324dd0f46468bcd51f5a4f6846cc3f62e36cc71cf69",
+        "retrieved_at": "2026-11-08T23:46:59.169723+00:00"
+      },
+      "original_filing": {
+        "url": "https://www.sec.gov/Archives/edgar/data/97745/000009774526000179/tmo-20260926.htm",
+        "raw_sha256": "795206cd74462af36f2c0b0850f7171dfbbbffd8e9c12197254f7433c18ea56e",
+        "retrieved_at": "2026-11-08T23:47:00.711296+00:00"
+      },
+      "metadata": {
+        "url": "https://data.sec.gov/submissions/CIK0000097745.json",
+        "raw_sha256": "86785ccd4a73835fd60dc52e6c468d72df34bc4fee8db0170b39983c9f388ea9",
+        "retrieved_at": "2026-11-08T23:46:59.750765+00:00"
+      },
+      "registered_security": [
+        {
+          "context_id": "c-2",
+          "symbol": "TMO",
+          "title": "Common Stock, $1.00 par value",
+          "exchange": "New York Stock Exchange"
+        }
+      ],
+      "scope_approved": false,
+      "other_registered_securities": [
+        {
+          "symbol": "TMO 27",
+          "title": "1.450% Notes due 2027",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "TMO 27B",
+          "title": "1.750% Notes due 2027",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "TMO 27D",
+          "title": "Floating Rate Notes due 2027",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_explicit_debt"
+        },
+        {
+          "symbol": "TMO 28",
+          "title": "1.375% Notes due 2028",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "TMO 28A",
+          "title": "0.500% Notes due 2028",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "TMO 29",
+          "title": "1.950% Notes due 2029",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "TMO 31",
+          "title": "0.875% Notes due 2031",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "TMO 32",
+          "title": "2.375% Notes due 2032",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "TMO 34",
+          "title": "3.650% Notes due 2034",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "TMO 35A",
+          "title": "3.628% Notes due 2035",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "TMO 37",
+          "title": "2.875% Notes due 2037",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "TMO 39",
+          "title": "1.500% Notes due 2039",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        },
+        {
+          "symbol": "TMO 49",
+          "title": "1.875% Notes due 2049",
+          "exchange": "New York Stock Exchange",
+          "symbol_corroboration": "cover_only_fixed_coupon_debt"
+        }
+      ],
+      "common_security_scope": "single_verified_common_symbol_with_explicit_non_common_tickers"
+    }
+  },
+  "unchanged_verified_share_proofs": 38,
+  "replay_summary": {
+    "candidates": 100,
+    "new_get_invocations": 0,
+    "get_invocations_by_host": {},
+    "identity_states": {
+      "exact_match": 100
+    },
+    "share_states": {
+      "verified_dated_share_class": 42,
+      "missing_disclosed_shares": 5,
+      "invalid_data": 10,
+      "pending_source_collection": 43
+    },
+    "price_states": {
+      "valid": 57,
+      "pending_source_collection": 43
+    },
+    "history_states": {
+      "valid": 38,
+      "not_started": 58,
+      "pending_source_collection": 4
+    }
+  },
+  "blockers": [
+    {
+      "symbol": "GOOGL",
+      "issuer_id": "0001652044",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "missing_disclosed_shares",
+      "price": "valid",
+      "history": "not_started"
+    },
+    {
+      "symbol": "META",
+      "issuer_id": "0001326801",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "missing_disclosed_shares",
+      "price": "valid",
+      "history": "not_started"
+    },
+    {
+      "symbol": "JPM",
+      "issuer_id": "0000019617",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "invalid_data",
+      "price": "valid",
+      "history": "not_started",
+      "replay": "invalid_data",
+      "failures": [
+        [
+          "verify_share_class",
+          "additional common or unknown security requires review"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
+          "sha256": "8d3068d832a1b94f68b9d8398764a392a3786a6b7e61b9c686c44851998fc648",
+          "retrieved_at": "2026-11-08T23:45:34.590121+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000019617.json",
+          "sha256": "74949d55452a9ecfbbd06b5a99682ced852d80085b6a7aa2149fab91eaac7b6b",
+          "retrieved_at": "2026-11-08T23:45:34.854365+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026069523/jpm-20260930.htm",
+          "sha256": "855474af138a1eb696e1c05ac196483088064317c02a6eaf88197a56cbf6604c",
+          "retrieved_at": "2026-11-08T23:45:35.819016+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "MA",
+      "issuer_id": "0001141391",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "invalid_data",
+      "price": "valid",
+      "history": "not_started",
+      "replay": "invalid_data",
+      "failures": [
+        [
+          "disclosed_shares",
+          "stale disclosed share date"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json",
+          "sha256": "eec2f64179fe268380a6f9f4b5e3da53a9c1c5adb988aa31cc40c8372c0d8899",
+          "retrieved_at": "2026-11-08T23:45:41.696684+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "PLTR",
+      "issuer_id": "0001321655",
+      "planner_reason": "market_or_original_share_evidence_incomplete",
+      "identity": "exact_match",
+      "share": "missing_disclosed_shares",
+      "price": "valid",
+      "history": "not_started"
+    },
+    {
+      "symbol": "BAC",
+      "issuer_id": "0000070858",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "invalid_data",
+      "price": "valid",
+      "history": "not_started",
+      "replay": "invalid_data",
+      "failures": [
+        [
+          "verify_share_class",
+          "additional ticker lacks unambiguous cover classification"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json",
+          "sha256": "4cd3063ef3750a15e422718f07dcafdb7559b6e15478f1fb3f9e2fa8e65385b5",
+          "retrieved_at": "2026-11-08T23:46:15.929852+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000070858.json",
+          "sha256": "de2fd8f458c15c2f6d35124e6abaf8db5e524f249bda49a01bb93fe9f5d91161",
+          "retrieved_at": "2026-11-08T23:46:16.514537+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm",
+          "sha256": "d26728101248db16a3a172f35c840e25e1fabc6c0b04ee3812c5fcaf26618f2b",
+          "retrieved_at": "2026-11-08T23:46:17.903637+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "GE",
+      "issuer_id": "0000040545",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "invalid_data",
+      "price": "valid",
+      "history": "not_started",
+      "replay": "invalid_data",
+      "failures": [
+        [
+          "verify_share_class",
+          "additional ticker lacks unambiguous cover classification"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000040545.json",
+          "sha256": "95ed2ee4383e17c8c50ea84b475a90b8172dc9d1728a330787ec0b7fada60216",
+          "retrieved_at": "2026-11-08T23:46:30.263759+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000040545.json",
+          "sha256": "975aed1f77e94f6c9477fb81d49e40bd9366d68dbc29ef8cece3191f2f2be852",
+          "retrieved_at": "2026-11-08T23:46:30.520668+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/40545/000004054526000064/ge-20260930.htm",
+          "sha256": "910a413149b1f59929348d5f27ef82a37a5b982315ef5b8f32a59cc4400ccfd9",
+          "retrieved_at": "2026-11-08T23:46:31.330372+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "MS",
+      "issuer_id": "0000895421",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "invalid_data",
+      "price": "valid",
+      "history": "not_started",
+      "replay": "invalid_data",
+      "failures": [
+        [
+          "verify_share_class",
+          "additional ticker lacks unambiguous cover classification"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000895421.json",
+          "sha256": "26383d6c47bdff8f8878ed93fce64042859176036a98d02a042a1fc1d64a687c",
+          "retrieved_at": "2026-11-08T23:46:40.357443+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000895421.json",
+          "sha256": "268a4a198b2de60acc6f56ef77cbf158ae12bdf88dfa3ca315f309e1f25f266b",
+          "retrieved_at": "2026-11-08T23:46:40.594515+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/895421/000089542126000293/ms-20260930.htm",
+          "sha256": "d619ef8f3a91aabb172e90f0aa9d4c816491481fed4a8a2e38b9bf82dd0b304c",
+          "retrieved_at": "2026-11-08T23:46:41.360623+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "CAT",
+      "issuer_id": "0000018230",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "invalid_data",
+      "price": "valid",
+      "history": "not_started",
+      "replay": "invalid_data",
+      "failures": [
+        [
+          "verify_share_class",
+          "additional common or unknown security requires review"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json",
+          "sha256": "0fe50d57bf90ee91f2997ca309353b4b86c2adc192ba9c469623ea7c2f52cfb7",
+          "retrieved_at": "2026-11-08T23:46:43.080526+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000018230.json",
+          "sha256": "bcb05695563629a55636b17f85a161ff88ee3a4e80f8cdf5e56e2630a5445ec2",
+          "retrieved_at": "2026-11-08T23:46:43.656643+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000057/cat-20260930.htm",
+          "sha256": "c61517f4893d2d9da6e4a44a0fc832149db41ab05b3ec735d593e16073dc8dc6",
+          "retrieved_at": "2026-11-08T23:46:44.541187+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "RY",
+      "issuer_id": "0001000275",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "missing_disclosed_shares",
+      "price": "valid",
+      "history": "not_started"
+    },
+    {
+      "symbol": "GS",
+      "issuer_id": "0000886982",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "invalid_data",
+      "price": "valid",
+      "history": "not_started",
+      "replay": "invalid_data",
+      "failures": [
+        [
+          "verify_share_class",
+          "additional ticker lacks unambiguous cover classification"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000886982.json",
+          "sha256": "4b4d1f37923182ca0dd918cff58cd202dd9caa401672474d8801427c8c6aad63",
+          "retrieved_at": "2026-11-08T23:46:49.997970+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000886982.json",
+          "sha256": "d40cc0a61b0d8ab2375d929bc71472549dcba0f9406c56b7ea0d3f412d029e8a",
+          "retrieved_at": "2026-11-08T23:46:50.574766+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/886982/000088698226000532/gs-20260930.htm",
+          "sha256": "d6c995d982ab91ecb992c7fe672a3aaa2579daed104bf75e3083610c67c13999",
+          "retrieved_at": "2026-11-08T23:46:51.730116+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "CRWD",
+      "issuer_id": "0001535527",
+      "planner_reason": "market_or_original_share_evidence_incomplete",
+      "identity": "exact_match",
+      "share": "invalid_data",
+      "price": "valid",
+      "history": "not_started",
+      "replay": "invalid_data",
+      "failures": [
+        [
+          "verify_share_class",
+          "class-specific capital structure requires review"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001535527.json",
+          "sha256": "a71a92f1f11bd3032271ca55be7a7770a96a846ec809f925829ef952fd5f3fa1",
+          "retrieved_at": "2026-11-08T23:46:56.743416+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0001535527.json",
+          "sha256": "2cb8b9be1ae45e839a57b8c813a9c9a634c933f3edc18be470dcd0f0754a5872",
+          "retrieved_at": "2026-11-08T23:46:57.317810+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/1535527/000153552726000031/crwd-20260731.htm",
+          "sha256": "c908f999d7de14644df4397fee34cb670a8946a7a5ebaba13acf1dda2c540300",
+          "retrieved_at": "2026-11-08T23:46:58.227819+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "TMO",
+      "issuer_id": "0000097745",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "invalid_data",
+      "price": "valid",
+      "history": "not_started",
+      "replay": "invalid_data",
+      "failures": [
+        [
+          "verify_share_class",
+          "additional ticker lacks unambiguous cover classification"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000097745.json",
+          "sha256": "c1702c20855e7f135eaea324dd0f46468bcd51f5a4f6846cc3f62e36cc71cf69",
+          "retrieved_at": "2026-11-08T23:46:59.169723+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000097745.json",
+          "sha256": "86785ccd4a73835fd60dc52e6c468d72df34bc4fee8db0170b39983c9f388ea9",
+          "retrieved_at": "2026-11-08T23:46:59.750765+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/97745/000009774526000179/tmo-20260926.htm",
+          "sha256": "795206cd74462af36f2c0b0850f7171dfbbbffd8e9c12197254f7433c18ea56e",
+          "retrieved_at": "2026-11-08T23:47:00.711296+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "GEV",
+      "issuer_id": "0001996810",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "invalid_data",
+      "price": "valid",
+      "history": "not_started",
+      "replay": "invalid_data",
+      "failures": [],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001996810.json",
+          "sha256": "1f824563aae3bc13d97f82cb379cf644d9bdc2c1e10fa12493f7dfb626cbdfce",
+          "retrieved_at": "2026-11-08T23:47:08.100315+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "AXP",
+      "issuer_id": "0000004962",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "invalid_data",
+      "price": "valid",
+      "history": "not_started",
+      "replay": "invalid_data",
+      "failures": [
+        [
+          "verify_share_class",
+          "additional ticker lacks unambiguous cover classification"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000004962.json",
+          "sha256": "e0f88341930d943f34039276fcd1ff8650219870001b035dc6e107e7f74d87a9",
+          "retrieved_at": "2026-11-08T23:47:19.145089+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000004962.json",
+          "sha256": "acffa48f209dde90c0393a84169f845f2633be5c8f525bd308e21e149edcba7f",
+          "retrieved_at": "2026-11-08T23:47:19.308339+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/4962/000000496226000409/axp-20260930.htm",
+          "sha256": "8c34bf44d6c7461b70f10a0f57b93fbb7fc7be15bcc2df0176070ad37248fa7d",
+          "retrieved_at": "2026-11-08T23:47:20.132667+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "APH",
+      "issuer_id": "0000820313",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "invalid_data",
+      "price": "valid",
+      "history": "not_started",
+      "replay": "invalid_data",
+      "failures": [
+        [
+          "verify_share_class",
+          "class-specific capital structure requires review"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000820313.json",
+          "sha256": "e2f254c81670b79471a615be4fd7b602663d737f96164bfdca03d226353aff3c",
+          "retrieved_at": "2026-11-08T23:47:27.901822+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000820313.json",
+          "sha256": "c5f86368821fcc5b6b0d3e40b008a214584ff059ff9b4aafc0ec96a7fbd85008",
+          "retrieved_at": "2026-11-08T23:47:28.083797+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/820313/000110465926120646/aph-20260930x10q.htm",
+          "sha256": "cb3cad084696c9220f12292a0c477ebe0a25fd9fd6a7dacc80ede7ee9a180f7b",
+          "retrieved_at": "2026-11-08T23:47:28.835571+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "SNDK",
+      "issuer_id": "0002023554",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "invalid_data",
+      "price": "valid",
+      "history": "not_started",
+      "replay": "invalid_data",
+      "failures": [],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0002023554.json",
+          "sha256": "33374cf440b069e7563af577070e9cc66a43923f3e9b9fcf0dab800308435768",
+          "retrieved_at": "2026-11-08T23:47:33.167220+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "PEP",
+      "issuer_id": "0000077476",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "invalid_data",
+      "price": "valid",
+      "history": "not_started",
+      "replay": "invalid_data",
+      "failures": [
+        [
+          "verify_share_class",
+          "additional ticker lacks unambiguous cover classification"
+        ]
+      ],
+      "sources": [
+        {
+          "stage": "companyfacts",
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000077476.json",
+          "sha256": "4a734cc934f3cf9f129fc15657589d4c6c82138f1bd889023c11170d97990d8d",
+          "retrieved_at": "2026-11-08T23:47:41.088131+00:00"
+        },
+        {
+          "stage": "submissions",
+          "url": "https://data.sec.gov/submissions/CIK0000077476.json",
+          "sha256": "8a76bef3a85a8fd68951062bc5e578c4c947bd619dca7f1084548cb88116ab37",
+          "retrieved_at": "2026-11-08T23:47:41.256596+00:00"
+        },
+        {
+          "stage": "original_share_filing",
+          "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747626000048/pep-20260905.htm",
+          "sha256": "af9db2615f8901493ab43010843194eb9725ecbddc78a62769e308206a793def",
+          "retrieved_at": "2026-11-08T23:47:42.021962+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "BLK",
+      "issuer_id": "0002012383",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "MCD",
+      "issuer_id": "0000063908",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "ABT",
+      "issuer_id": "0000001800",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "COP",
+      "issuer_id": "0001163165",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "UNP",
+      "issuer_id": "0000100885",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "DE",
+      "issuer_id": "0000315189",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "NEE",
+      "issuer_id": "0000753308",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "WELL",
+      "issuer_id": "0000766704",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "PFE",
+      "issuer_id": "0000078003",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "DHR",
+      "issuer_id": "0000313616",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "ACN",
+      "issuer_id": "0001467373",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "SCCO",
+      "issuer_id": "0001001838",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "STX",
+      "issuer_id": "0001137789",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "TMUS",
+      "issuer_id": "0001283699",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "ISRG",
+      "issuer_id": "0001035267",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "TJX",
+      "issuer_id": "0000109198",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "SCHW",
+      "issuer_id": "0000316709",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "ETN",
+      "issuer_id": "0001551182",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "LMT",
+      "issuer_id": "0000936468",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "WDC",
+      "issuer_id": "0000106040",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "CB",
+      "issuer_id": "0000896159",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "VRTX",
+      "issuer_id": "0000875320",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "BA",
+      "issuer_id": "0000012927",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "UBER",
+      "issuer_id": "0001543151",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "PGR",
+      "issuer_id": "0000080661",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "SPGI",
+      "issuer_id": "0000064040",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "ADBE",
+      "issuer_id": "0000796343",
+      "planner_reason": "market_or_original_share_evidence_incomplete",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "INTU",
+      "issuer_id": "0000896878",
+      "planner_reason": "market_or_original_share_evidence_incomplete",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "NOW",
+      "issuer_id": "0001373715",
+      "planner_reason": "market_or_original_share_evidence_incomplete",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "SNPS",
+      "issuer_id": "0000883241",
+      "planner_reason": "market_or_original_share_evidence_incomplete",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "FTNT",
+      "issuer_id": "0001262039",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "WDAY",
+      "issuer_id": "0001327811",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "ROP",
+      "issuer_id": "0000882835",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "MCHP",
+      "issuer_id": "0000827054",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "MPWR",
+      "issuer_id": "0001280452",
+      "planner_reason": "market_or_original_share_evidence_incomplete",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "ON",
+      "issuer_id": "0001097864",
+      "planner_reason": "market_or_original_share_evidence_incomplete",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "SWKS",
+      "issuer_id": "0000004127",
+      "planner_reason": "market_or_original_share_evidence_incomplete",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "NTAP",
+      "issuer_id": "0001002047",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "AKAM",
+      "issuer_id": "0001086222",
+      "planner_reason": "unsupported_sector_or_entity_type",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "FFIV",
+      "issuer_id": "0001048695",
+      "planner_reason": "financial_review_required",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    },
+    {
+      "symbol": "TYL",
+      "issuer_id": "0000860731",
+      "planner_reason": "market_or_original_share_evidence_incomplete",
+      "identity": "exact_match",
+      "share": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started"
+    }
+  ],
+  "mvp_accepted": false
+}

@@ -24,6 +24,24 @@ COVER_DEBT_TITLE = re.compile(
     r'20[0-9]{2}', re.I)
 
 
+# These are full title shapes observed on SEC covers. A generic "Notes" label
+# does not establish that an unmatched security is outside the common class.
+COVER_OTHER_DEBT_TITLE = re.compile(
+    r'(?:[0-9]+ [1-9][0-9]*/[1-9][0-9]*% Guaranteed Subordinated Notes due 20[0-9]{2}'
+    r'|Floating Rate Notes due 20[0-9]{2}'
+    r'|[0-9]+(?:\.[0-9]+)?% Fixed-to-Floating Rate Notes due '
+    r'(?:January|February|March|April|May|June|July|August|September|October|November|December) '
+    r'(?:[1-9]|[12][0-9]|3[01]), 20[0-9]{2})', re.I)
+
+
+def _cover_debt_corroboration(title):
+    if COVER_DEBT_TITLE.fullmatch(title):
+        return 'cover_only_fixed_coupon_debt'
+    if COVER_OTHER_DEBT_TITLE.fullmatch(title):
+        return 'cover_only_explicit_debt'
+    return None
+
+
 def disclosed_shares(response, *, cik, as_of):
     """Latest exact DEI shares observation; no weighted-average/issued-share aliases."""
     if not aware(as_of): raise ValueError('aware cutoff required')
@@ -171,11 +189,11 @@ def verify_share_class(shares, metadata, filing, *, symbol, as_of):
                     symbol_corroboration='exact_cover_symbol'))
             else:unmatched.append(ticker)
         remaining=[r for i,r in enumerate(other_cover) if i not in used]
-        # The cover can list plain fixed-coupon debt absent from submissions.
+        # The cover can list explicit debt absent from submissions.
         # Preserve those exact symbols as debt evidence, without matching them
         # to any missing metadata ticker or including them in the share count.
         if remaining and not unmatched and all(
-                COVER_DEBT_TITLE.fullmatch(row['title']) for row in remaining):
+                _cover_debt_corroboration(row['title']) for row in remaining):
             debt_by_symbol = {}
             for row in remaining:
                 identity = (row['title'], row['exchange'])
@@ -183,7 +201,7 @@ def verify_share_class(shares, metadata, filing, *, symbol, as_of):
                 if prior != identity:
                     raise ValueError('conflicting cover-only debt identity')
             other.extend(dict(symbol=ticker, title=title, exchange=exchange,
-                symbol_corroboration='cover_only_fixed_coupon_debt')
+                symbol_corroboration=_cover_debt_corroboration(title))
                 for ticker, (title, exchange) in debt_by_symbol.items())
             remaining = []
         # Some SEC submissions use an exchange-style preferred ticker while the
@@ -195,8 +213,8 @@ def verify_share_class(shares, metadata, filing, *, symbol, as_of):
             if len(unmatched)!=1 or len(remaining)!=1:
                 raise ValueError('additional ticker lacks unambiguous cover classification')
             row=remaining[0]
-            if COVER_DEBT_TITLE.fullmatch(row['title']):
-                raise ValueError('fixed-coupon debt cannot explain an unmatched metadata ticker')
+            if _cover_debt_corroboration(row['title']):
+                raise ValueError('explicit debt cannot explain an unmatched metadata ticker')
             other.append(dict(symbol=unmatched[0],cover_symbol=row['symbol'],title=row['title'],
                 exchange=row['exchange'],symbol_corroboration='single_unambiguous_non_common_cover_alias'))
         p=Inventory();p.feed(filing.body.decode('utf-8'));p.close()
