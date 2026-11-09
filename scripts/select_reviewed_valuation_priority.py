@@ -56,11 +56,19 @@ def record_next(plan, source_run, run_id, report, lineage):
             or not set(symbols).issubset({c.get('symbol') for c in candidates})
             or not expected.issubset({(c.get('symbol'), c.get('issuer_id')) for c in candidates})):
         raise ValueError('priority lineage requires a real exact-candidate report')
+    priority_gets = sum(
+        1 for candidate in candidates if candidate.get('symbol') in symbols
+        for attempt in candidate.get('attempts', []) if attempt.get('http_requested') is True)
+    if priority_gets == 0:
+        # A selected list is not evidence of source acquisition. Do not
+        # propagate a stale record against an overwritten report.json.
+        lineage.unlink(missing_ok=True)
+        return None
     entry = dict(schema_version=1, source_run_id=source_run, run_id=run_id,
                  root_run_id=reviewed['valuation_run_id'],
                  root_report_sha256=reviewed['valuation_report_sha256'],
                  plan_sha256=digest(plan), report_sha256=digest(report),
-                 observed_priority_symbols=symbols)
+                 observed_priority_symbols=symbols, priority_http_gets=priority_gets)
     lineage.write_text(json.dumps(entry, sort_keys=True, indent=2) + '\n')
     return entry
 
