@@ -1,5 +1,19 @@
 # ABD Hisse Araştırması
 
+## Çalışan prototipi aç
+
+[10 Kasım 2026 skor koşusundan](https://github.com/fatalvayn-dot/us-equity-research/actions/runs/42717115072)
+`first-live-score-evidence` ZIP paketini indirin. Depo dizininde tek komutla
+paketin özetini doğrulayıp Türkçe HTML raporunu çıkarın:
+
+```bash
+python scripts/open_prototype_report.py first-live-score-evidence.zip --sha256 a169abb4ff17bd176733a81fa628668f1d3f33acd0318e9636c64c3f7d1b771c
+```
+
+Oluşan `radar.html` dosyasını tarayıcıda açın. 100 adayın 5'i
+puanlandı, 95'inin engeli raporda yer alıyor. Bu, kaydedilmiş veri
+kesiminin çalışan prototipidir. Canlı tarama ve tam MVP kabulü ayrıdır.
+
 Radar ekranı ve yeni raporlar Türkçedir. Kayıtlı prototipin Türkçe çıktıları:
 
 - [Radar: puanlar, gerekçeler ve kaynaklar](docs/evidence/turkish-reports/radar.html)

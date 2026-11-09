@@ -1,12 +1,6 @@
 name: Canlı değerleme kaynakları
 
 on:
-  # Only changes to this workflow on main can start an immediate bounded
-  # source run. Ordinary code/document pushes must not trigger API traffic.
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/valuation-live.yml
   # SEC toplaması yeni artifact üretmediğinde bile, eski kanıtı yeni tarihli
   # saymadan piyasa kaynaklarını kontrollü şekilde yenile.
   schedule:
@@ -67,7 +61,7 @@ jobs:
         run: |
           set -euo pipefail
           SOURCE_RUN="${SOURCE_RUN_INPUT:-$EVENT_SOURCE_RUN}"
-          if [ -z "$SOURCE_RUN" ] && { [ "$EVENT_NAME" = "schedule" ] || [ "$EVENT_NAME" = "push" ]; }; then
+          if [ -z "$SOURCE_RUN" ] && [ "$EVENT_NAME" = "schedule" ]; then
             for CANDIDATE in $(gh api "repos/$REPO/actions/workflows/live-acceptance.yml/runs?per_page=100" \
               --jq '.workflow_runs[] | select(.status == "completed" and .conclusion == "success" and .head_branch == "main") | .id'); do
               PRESENT=$(gh api "repos/$REPO/actions/runs/$CANDIDATE/artifacts?per_page=100" \
@@ -200,14 +194,6 @@ jobs:
               --lineage data/valuation-current/priority-lineage.json
           fi
 
-      - name: Şirket bazlı kaynak engellerini sınıflandır
-        if: steps.select.outputs.collect == 'true' && success()
-        run: |
-          python scripts/audit_valuation_blockers.py \
-            --report data/valuation-current/report.json \
-            --priority-plan docs/evidence/valuation-priority-candidates-2026-11-09.json \
-            --output data/valuation-current/blocker-audit.json
-
       - name: Kaynak toplama özetini göster
         if: steps.select.outputs.collect == 'true' && success()
         env:
@@ -230,15 +216,6 @@ jobs:
                  f"- Hisse sınıfı: {s['share_states']}",
                  f"- Fiyat: {s['price_states']}",
                  f"- Piyasa geçmişi: {s['history_states']}"]
-          audit=json.loads(Path('data/valuation-current/blocker-audit.json').read_text())
-          lines.extend(['', '## Öncelikli 14 şirketin kaynak kontrolü',
-                        f"- Hazır piyasa kanıtı: {audit['priority_complete']}/{audit['priority_candidates']}",
-                        f"- Bu koşuda öne alınan aday: {len(audit['actual_priority_symbols'])}",
-                        f"- Öne alınan adaylara yapılan yeni GET: {audit['priority_gets']}",
-                        f"- Toplam piyasa kanıtı: {audit['all_complete']}/{audit['candidates']}"])
-          for company in audit['priority']:
-              reasons=', '.join(f"{b['leg']}={b['status']}" for b in company['blockers']) or 'üç piyasa bacağı doğrulanmış'
-              lines.append(f"- {company['symbol']}: {reasons}")
           print(json.dumps(s,ensure_ascii=False,indent=2))
           with Path(os.environ['GITHUB_STEP_SUMMARY']).open('a') as out:
               out.write('\n'.join(lines)+'\n')
@@ -251,6 +228,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: valuation-source-state
-          path: data/valuation-current
+          path: |
+            data/valuation-current
+            !data/valuation-current/blocker-audit.json
           if-no-files-found: error
           retention-days: 90

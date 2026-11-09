@@ -16,13 +16,6 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         cls.text = WORKFLOW.read_text(encoding="utf-8")
 
     def test_automatic_trigger_does_not_trust_pr_or_nonmain(self):
-        self.assertIn("  push:", self.text)
-        self.assertIn("branches: [main]", self.text)
-        self.assertIn("paths:", self.text)
-        self.assertIn("- .github/workflows/valuation-live.yml", self.text)
-        self.assertEqual(self.text.count("  push:"), 1)
-        self.assertIn('EVENT_NAME" = "push"', self.text)
-        self.assertIn('EVENT_NAME" = "schedule"', self.text)
         self.assertIn("workflow_run:", self.text)
         self.assertIn("workflows: ['Canlı 100 şirket kabulü']", self.text)
         self.assertIn("types: [completed]", self.text)
@@ -35,10 +28,9 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("github.event.workflow_run.conclusion == 'success'", self.text)
         self.assertIn("github.event.workflow_run.head_repository.full_name == github.repository", self.text)
 
-    def test_workflow_update_push_is_bounded_and_does_not_loop(self):
-        # Workflow-only push, not ordinary changes or PRs. No git writes.
-        self.assertIn("push:\n    branches: [main]\n    paths:\n      - .github/workflows/valuation-live.yml", self.text)
-        self.assertIn('if [ -z "$SOURCE_RUN" ] && { [ "$EVENT_NAME" = "schedule" ] || [ "$EVENT_NAME" = "push" ]; }; then', self.text)
+    def test_workflow_edit_does_not_launch_a_second_collector(self):
+        self.assertNotIn("  push:", self.text)
+        self.assertIn('if [ -z "$SOURCE_RUN" ] && [ "$EVENT_NAME" = "schedule" ]; then', self.text)
         self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'workflow_run' && '51' || '250') }}", self.text)
         self.assertIn("contents: read", self.text)
         self.assertIn("actions: read", self.text)
@@ -133,16 +125,10 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertEqual(reviewed['valuation_run_id'],42598993077)
         self.assertEqual(reviewed['valuation_artifact_id'],13664443650)
 
-    def test_company_blocker_audit_is_part_of_live_artifact(self):
-        self.assertIn("python scripts/audit_valuation_blockers.py", self.text)
-        self.assertIn("--output data/valuation-current/blocker-audit.json", self.text)
-        self.assertIn("data/valuation-current/blocker-audit.json", self.text)
-        self.assertIn("audit['priority_complete']", self.text)
-        self.assertIn("audit['priority_gets']", self.text)
-        self.assertLess(self.text.index("collect-valuation-sources"),
-                        self.text.index("audit_valuation_blockers.py"))
-        self.assertLess(self.text.index("audit_valuation_blockers.py"),
-                        self.text.index("blocker-audit.json').read_text()"))
+    def test_derived_blocker_audit_cannot_block_production_handoff(self):
+        self.assertNotIn("audit_valuation_blockers.py", self.text)
+        self.assertIn("!data/valuation-current/blocker-audit.json", self.text)
+        self.assertIn("steps.verify_resume.outcome == 'success'", self.text)
 
     def test_provenance_secrecy_and_no_score_bypass(self):
         self.assertIn("SEC_USER_AGENT", self.text)
