@@ -77,7 +77,7 @@ def audit(report, plan):
                 priority_complete=sum(r["market_evidence_complete"] for r in priority),
                 all_complete=sum(r["market_evidence_complete"] for r in all_rows),
                 priority_gets=sum(r["source_gets"] for r in priority),
-                blocker_counts=dict(Counter((b["leg"], b["status"]) for r in all_rows
+                blocker_counts=dict(Counter(b["leg"] + ":" + b["status"] for r in all_rows
                                             for b in r["blockers"])),
                 priority=priority, other_companies=remaining,
                 mvp_accepted=False,
