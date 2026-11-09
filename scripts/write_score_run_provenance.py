@@ -4,22 +4,24 @@ import json
 import os
 from pathlib import Path
 
-from scripts.live_checkpoint import digest
+if __package__:
+    from .live_checkpoint import digest
+else:
+    from live_checkpoint import digest
 
 
-def write(data: Path, *, score_run: int, valuation_run: int, financial_run: int,
-          commit: str) -> dict:
+def build_record(*, financial: Path, valuation: Path, financial_sources: Path,
+                 score: Path, score_run: int, valuation_run: int, financial_run: int,
+                 commit: str) -> dict:
     if any(type(run) is not int or run <= 0 for run in (score_run, valuation_run, financial_run)):
         raise ValueError("Skor ve kaynak run ID değerleri pozitif olmalıdır")
-    valuation = data / "valuation"
-    work = data / "first-score-work"
     marker = json.loads((valuation / "financial-source-run.json").read_text())
     if type(marker["run_id"]) is not int or marker["run_id"] != financial_run:
         raise ValueError("Değerleme ve finansal kaynak run ID değerleri uyuşmuyor")
 
     market_manifest = valuation / "source-bundle/manifest.json"
-    finance_manifest = data / "financial-evidence/live-sources/manifest.json"
-    output_manifest = work / "output/manifest.json"
+    finance_manifest = financial_sources / "manifest.json"
+    output_manifest = score / "output/manifest.json"
     report = json.loads(output_manifest.read_text())
     market_sha = digest(market_manifest)
     finance_sha = digest(finance_manifest)
@@ -28,7 +30,7 @@ def write(data: Path, *, score_run: int, valuation_run: int, financial_run: int,
             != [finance_sha]):
         raise ValueError("Skor ve kaynak paket özetleri uyuşmuyor")
 
-    record = {
+    return {
         "schema_version": 1,
         "score_run_id": score_run,
         "repository_commit": commit,
@@ -37,14 +39,23 @@ def write(data: Path, *, score_run: int, valuation_run: int, financial_run: int,
         "sha256": {
             "valuation_report": digest(valuation / "report.json"),
             "valuation_source_manifest": market_sha,
-            "financial_batch": digest(data / "financial/batch.json"),
+            "financial_batch": digest(financial / "batch.json"),
             "financial_source_manifest": finance_sha,
-            "current_comparison": digest(work / "current.json"),
-            "prior_comparison": digest(work / "prior.json"),
+            "current_comparison": digest(score / "current.json"),
+            "prior_comparison": digest(score / "prior.json"),
             "score_manifest": digest(output_manifest),
         },
     }
-    (work / "run-provenance.json").write_text(json.dumps(record, indent=2) + "\n")
+
+
+def write(data: Path, *, score_run: int, valuation_run: int, financial_run: int,
+          commit: str) -> dict:
+    score = data / "first-score-work"
+    record = build_record(financial=data / "financial", valuation=data / "valuation",
+                          financial_sources=data / "financial-evidence/live-sources",
+                          score=score, score_run=score_run, valuation_run=valuation_run,
+                          financial_run=financial_run, commit=commit)
+    (score / "run-provenance.json").write_text(json.dumps(record, indent=2) + "\n")
     return record
 
 
