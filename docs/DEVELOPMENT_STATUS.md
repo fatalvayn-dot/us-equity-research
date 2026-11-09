@@ -1,5 +1,35 @@
 # Development status
 
+## 10 Kasım 2026 — Çalışan prototipin teslimi ve değerleme akışının sadeleşmesi
+
+Başlangıç main `3f7ff6ed9316737a1dd9257bf5cdf6c42c461b67` (PR #83).
+Kesin PR CI `42712244989` ve main CI `42712768609` başarılı.
+Skor `42717115072` (artifact `13717629947`) ve değerleme
+`42716717481` bağlı. Skor ZIP özeti doğrulandı. 10 Kasım 02.03
+kesiminde INTU, MPWR, NOW, SNPS ve ON puanlandı. 21 değerleme,
+72 sektör modeli ve 2 kritik finans incelemesi engeli kaydedildi.
+SEC `42716600541` paket üretmedi. Son finansal üretim `42455760184`,
+kök `42223465006`, sequence 10. 100 metadata, 100 adi hisse adayı,
+98 finansal şirket, 961 kabul edilmiş değer ve 704 hesaplama.
+
+README'deki tek komut doğrulanmış üretim ZIP'inden Türkçe HTML
+çıkarır. Gerçek skor paketiyle ağsız denendi. Yanlış özet ve
+var olan çıktı dosyası reddedilir. Prototip teslimi tam MVP
+kabulünden ayrı tutuldu.
+
+Türetilmiş şirket engel özeti otomatik değerleme akışından ayrıldı.
+Gerektiğinde mevcut denetim komutuyla üretilebilir. Günlük, SEC
+sonrası ve manuel toplama yolları sürer. Akış dosyası değişikliği
+tek başına yeni bir toplayıcı başlatmaz. Kaynak ve durum
+bütünlüğü, kira, sequence ve istek bütçesi kontrolleri korunur.
+
+Finansal plandaki 14 alanın tümü mevcut rapor, hesap veya risk
+akışında kullanılır. Yahoo geçmiş isteğinin döndürdüğü ayrı
+temettü olayları okunmaz. Aynı isteğin düzeltilmiş kapanışı,
+fiyatı, hacmi ve bölünmeleri kullanılır. Temettü olayları ayrı
+bir ağ çağrısı yaratmaz. Sıradaki sadeleştirme, ağır arşiv
+testlerini hızlı PR kontrollerinden ayırmaktır.
+
 ## 10 Kasım 2026 — Değerleme kaynak engelinin nedenini koruma
 
 Başlangıç main `3c2405f903ca6398814dc0d6d9e1ed012ed6dc82` (PR #82).
