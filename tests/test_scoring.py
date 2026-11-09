@@ -120,6 +120,20 @@ class ScoringTests(unittest.TestCase):
         self.assertFalse(c['investment_approved']);self.assertFalse(r['mvp_accepted'])
         self.assertEqual(c['rank'],1);self.assertEqual(len(c['evidence']['financial_confirmations']),9)
 
+    def test_empty_comparison_pair_still_reports_company_without_score(self):
+        empty = dict(schema_version=1, generated_at=ASOF.isoformat(), companies=[])
+        report = score(current=empty, prior=empty)
+        company, = report['companies']
+        self.assertEqual(company['blockers'], ['comparable_revenue_required'])
+        self.assertIsNone(company['total_score'])
+        self.assertIsNone(company['rank'])
+
+    def test_one_empty_comparison_batch_still_fails_validation(self):
+        current, prior = comparisons()
+        prior['companies'] = []
+        with self.assertRaises(ValueError):
+            score(current=current, prior=prior)
+
     def test_software_uses_its_declared_margin_thresholds(self):
         c=score(metadata_response=metadata(sic='7372'))['companies'][0]
         self.assertEqual(c['components']['profitability']['score'],Decimal(10))

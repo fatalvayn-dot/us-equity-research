@@ -127,7 +127,7 @@ jobs:
             --maximum 14
 
       - name: Güncel yıl gelirini kaynak sırasıyla topla
-        if: steps.plan.outputs.ready == 'true'
+        if: steps.plan.outputs.has_candidates == 'true'
         id: current
         continue-on-error: true
         env:
@@ -143,7 +143,7 @@ jobs:
             --user-agent "$SEC_USER_AGENT"
 
       - name: Önceki yıl gelirini kaynak sırasıyla topla
-        if: steps.plan.outputs.ready == 'true'
+        if: steps.plan.outputs.has_candidates == 'true'
         id: prior
         continue-on-error: true
         env:
@@ -166,13 +166,25 @@ jobs:
           PYTHONPATH: src
           VALUATION_RUN: ${{ steps.select.outputs.valuation_run }}
           FINANCIAL_RUN: ${{ steps.financial.outputs.source_run }}
+          HAS_COMPARISON_CANDIDATES: ${{ steps.plan.outputs.has_candidates }}
         run: |
           set -euo pipefail
+          AS_OF=$(python -c 'from datetime import datetime,timezone; print(datetime.now(timezone.utc).isoformat())')
+          if [ "$HAS_COMPARISON_CANDIDATES" = false ]; then
+            python - "$AS_OF" <<'PYTHON'
+          import json
+          import sys
+          from pathlib import Path
+
+          empty_batch = json.dumps(dict(schema_version=1, generated_at=sys.argv[1], companies=[]))
+          for name in ("current", "prior"):
+              Path(f"data/first-score-work/{name}.json").write_text(empty_batch, encoding="utf-8")
+          PYTHON
+          fi
           test -f data/first-score-work/current.json
           test -f data/first-score-work/prior.json
           test -f data/valuation/source-bundle/manifest.json
           test -f data/financial-evidence/live-sources/manifest.json
-          AS_OF=$(python -c 'from datetime import datetime,timezone; print(datetime.now(timezone.utc).isoformat())')
           python scripts/build_current_scores.py \
             --financial data/financial/batch.json \
             --current data/first-score-work/current.json \
