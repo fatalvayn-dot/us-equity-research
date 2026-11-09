@@ -1,5 +1,43 @@
 # Development status
 
+## 9 Kasım 2026 — Öncelikli GET kanıtı olmadan devam kaydı oluşturma hatası (PR testinde)
+
+Başlangıç ana dal `13b50f0d4d44cf4d130670a168f3de7e4899f372` (PR #62),
+Python 3.11/3.12/3.13 birleşim sonrası Foundation CI `42576692100` başarılı,
+açık PR yok. Son saatlik SEC/değerleme/skor koşusu `42572730219`,
+`42572787846`, `42572812354` yeni artifact üretmedi.
+Son kanıtlı üretim zinciri `42455760184` →
+`42536567400` → `42536926634`, yedi skor.
+Yedi incelenmiş öncelik şirketi INTU, NOW, SNPS,
+MPWR, ON, SWKS, TYL; bu oturumda henüz yeni piyasa
+kanıtı veya toplam skor yok.
+
+PR #62, bir kaynak toplama komutu başarılı olduğunda
+öncelik planı seçiliyse yeni `priority-lineage.json`
+oluşturabiliyordu. Ancak komut yalnız kaynak önbelleğine
+bakmış veya tüm GET bütçesi normal rotasyona gitmiş
+olabilir; seçili öncelik tek başına gerçek yeni kaynak
+isteği kanıtı değildir. Yeni kayıt, öncelikli sembollerden
+en az birinin `attempts[].http_requested=true`
+olması halinde yapılır. Değerleme raporu değişmiş,
+öncelik adına yeni GET yapılmamışsa eski zincir
+silinir; gelecek run eski SHA ile bozuk eşleşmeye
+zorlanmaz. Bir GET yalnız normal taramaya aitse
+öncelik ilerlemesi sayılmaz. Kayıt şemasında
+`priority_http_gets` gerçek sayısı taşınır.
+
+İki ek test (sıfır öncelikli GET ve yalnız normal
+rotasyon GET) eklendi; tam regresyon ve PR CI
+sonucu doğrulanmadan ana dala alınmayacak.
+Bu değişiklik score, sektör modeli, SEC kaynak
+tazeliği veya GET üst sınırını değiştirmez.
+MVP henüz kabul edilmedi. Sonraki iş: ilk gerçek
+zamanlanmış öncelikli değerleme artifact'ında
+kaynak isteklerini, hisse sınıfı, fiyat ve piyasa
+geçmişini sembol bazında doğrula. Altman Z
+geliştirmesi prototip sonrasına ertelendi.
+
+
 ## 9 Kasım 2026 — Yedi öncelikli şirketin SHA-256 zinciriyle devamı (PR testinde)
 
 Başlangıç main `eaf140dc501f249b7f66ea124b818ff868c03386`
