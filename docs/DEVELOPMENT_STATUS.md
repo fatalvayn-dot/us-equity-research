@@ -1,5 +1,28 @@
 # Development status
 
+## 10 Kasım 2026 — Sequence sınırındaki aynı paketi tekrar indirmeme
+
+Başlangıç main `14ac90960d1d5bac680d9fb2c1742c6b0e728e2d` (PR #85).
+Kesin PR CI `42719699558` üç sürümde başarılı. Yerelde tam 829
+ve uyumluluk 794 testi geçti.
+
+Planlı SEC koşusu, en yeni durumu mevcut seçiciyle bulur. Yalnız
+önceden bağımsız denetlenmiş run `42455760184` ve artifact
+`13608291162` kayıtlı SHA-256 ve sequence 10 ile eşleşirse
+paketi tekrar indirmeden durur. Manuel çalışmada veya eşleşme
+değiştiğinde tam SQLite ve kaynak denetimi çalışır. Kurtarma
+paketi veya eksik artifact listesi seçimi durdurur. Schedule ve
+manuel girişler sürer, push ek üretim koşusu başlatmaz.
+
+38 hedefli test başarılı. Gerçek Actions paket metadata'sıyla
+ağsız seçici denemesi, planlı koşuda indirmeyi atladı ve aynı
+paketi manuel koşuda tam denetime bıraktı. Son finansal durum
+100 metadata, 100 adi hisse adayı, 98 finansal şirket, 961 değer
+ve 704 hesaplama. Son doğrulanmış prototip `42717115072` 5 skor,
+21 değerleme, 72 sektör modeli ve 2 kritik finans incelemesi
+engeli içeriyor. Sıradaki adım, olağan ana dal koşusunda seçici
+çıktısını ve bağlı değerleme paketini doğrulamak.
+
 ## 10 Kasım 2026 — Ağır arşiv testlerinin tekrarını azaltma
 
 Başlangıç main `667c1e806d7517a90377472f39cb4399dda62161` (PR #84).

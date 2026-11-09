@@ -13,6 +13,24 @@ spec.loader.exec_module(m)
 
 
 class CheckpointTests(unittest.TestCase):
+    def test_idle_state_requires_exact_reviewed_artifact_and_sequence(self):
+        from unittest.mock import patch
+
+        evidence = json.loads(m.REVIEWED_STATE.read_text())
+        run_id = evidence['financial_lineage']['run_id']
+        artifact = dict(name='live-acceptance-state', expired=False,
+                        id=evidence['financial_artifact_id'],
+                        digest='sha256:' + evidence['artifact_sha256']['financial'])
+        self.assertTrue(m.is_reviewed_idle_state(run_id, [artifact], evidence))
+        self.assertFalse(m.is_reviewed_idle_state(run_id + 1, [artifact], evidence))
+        for change in (dict(digest='sha256:changed'), dict(id=0), dict(expired=True)):
+            with self.subTest(change=change):
+                self.assertFalse(m.is_reviewed_idle_state(run_id, [artifact | change], evidence))
+        recovery = dict(name='live-acceptance-recovery')
+        self.assertFalse(m.is_reviewed_idle_state(run_id, [artifact, recovery], evidence))
+        with patch.object(m, 'MAX_REVIEWED_SEQUENCE', evidence['financial_lineage']['sequence'] + 1):
+            self.assertFalse(m.is_reviewed_idle_state(run_id, [artifact], evidence))
+
     def test_review_allows_one_more_slice_then_closes_collection_gate(self):
         from unittest.mock import patch
         baseline=self.root/'baseline.json';baseline.write_text('{}')
