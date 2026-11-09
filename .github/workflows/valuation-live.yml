@@ -84,12 +84,17 @@ jobs:
           fi
           ARTIFACT_COUNT=$(gh api "repos/$REPO/actions/runs/$SOURCE_RUN/artifacts?per_page=100" \
             --jq '[.artifacts[] | select(.name == "live-acceptance-evidence" and .expired == false)] | length')
+          # A completed SEC run may legitimately produce no new evidence
+          # while its bounded collection cursor is awaiting the next run.
+          # Fall back ONLY on an exact zero-artifact automatic handoff,
+          # never on ambiguous/multiple artifacts or an explicit manual run.
+          if [ "$ARTIFACT_COUNT" -eq 0 ] && [ "$EVENT_NAME" = "workflow_run" ]; then
+            SOURCE_RUN=$(python -c "import json; print(json.load(open('docs/evidence/first-live-score-2026-11-08.json'))['financial_run_id'])")
+            echo "SEC bu koşuda yeni kanıt üretmedi; eski finansal arşiv yalnız geçmiş tarihli kaynak kimliği olarak kullanıldı: $SOURCE_RUN" >> "$GITHUB_STEP_SUMMARY"
+            ARTIFACT_COUNT=$(gh api "repos/$REPO/actions/runs/$SOURCE_RUN/artifacts?per_page=100" \
+              --jq '[.artifacts[] | select(.name == "live-acceptance-evidence" and .expired == false)] | length')
+          fi
           if [ "$ARTIFACT_COUNT" -ne 1 ]; then
-            if [ "$EVENT_NAME" = "workflow_run" ]; then
-              echo "Veri üretmeyen/kanıtsız SEC koşusu: değerleme toplaması atlandı." >> "$GITHUB_STEP_SUMMARY"
-              echo "collect=false" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
             echo "::error::Seçilen run için tek ve geçerli live-acceptance-evidence artifact bulunamadı"
             exit 2
           fi
@@ -159,7 +164,7 @@ jobs:
         env:
           PYTHONPATH: src
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
-          MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '250' }}
+          MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'workflow_run' && '51' || '250') }}
           SOURCE_RUN: ${{ steps.select.outputs.source_run }}
           RESUME_RUN: ${{ steps.select.outputs.resume_run }}
         run: |
