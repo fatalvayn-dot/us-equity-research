@@ -1,35 +1,79 @@
 # Development status
 
-## 9 Kasım 2026 — Öncelikli yedi adayın canlı değerleme ve skor denetimi
+## 9 Kasım 2026 — Üretim değerleme devamı ve skor kaynak zinciri
 
-Başlangıç `main` `08d2a4d9e068a4b1f12fb9154d7a5674ac91dffe`
-(PR #65), Foundation CI `42598593798` başarılı. SEC son üretim koşusu
-`42455760184`, sequence 10 ve kök `42223465006`. Kapsam 100 metadata,
-100 adi hisse adayı, 98 finansal şirket, 961 kabul edilmiş değer ve 704
-hesaplama. SEC `42599393338` yeni paket üretmedi.
+Başlangıç `main` `93969549ed7c3691e1ff37f0152c75f6a16ee32f` (PR #66),
+kesin PR CI `42606727196` başarılı. SEC üretim koşusu `42455760184`
+sequence 10 ve kök `42223465006`. Kapsam 100 metadata, 100 adi hisse
+adayı, 98 finansal şirket, 961 kabul edilmiş değer ve 704 hesaplama.
+SEC `42599393338` yeni paket üretmedi.
 
-Yeni değerleme `42598993077` (artifact `13664443650`) 100 GET yaptı,
+Değerleme `42598993077` (artifact `13664443650`) 100 GET yaptı,
 35'i INTU, NOW, SNPS, MPWR, ON, SWKS ve TYL için. Yedisinde tarihli
-hisse sınıfı, fiyat ve geçmiş geçerli. 100 kimlik eşleşmesi, 15 hisse
-sınıfı, 22 fiyat, 14 geçmiş kaydı görüldü. ZIP SHA-256, SQLite, kaynak
-paketi ve önceki 655 gözlemin tamamı doğrulandı. Yeni toplam 755.
-Normal sıra BLK'dan başladı ve SQLite imleci TJX'e (indeks 72) geçti.
+hisse sınıfı, fiyat ve geçmiş kanıtı ham SQLite kaydına kadar eşleşti.
+ZIP ve kaynak paketinin SHA-256 kontrolleri geçti. Önceki 655 gözlem
+korundu, toplam 755. Normal sıra BLK'dan başladı ve SQLite imleci
+TJX'e (indeks 72) geçti. Skor `42599479886` 100 adayın yedisini
+puanladı. Kalan 19 değerleme engeli, 72 sektör modeli engeli ve
+2 kritik finans incelemesi var. Tarihli skor kıyası PR #66'da,
+ham kaynak referansları `docs/evidence/priority-production-42598993077.json`
+dosyasında. MVP kabulü açık.
 
-Skor `42599479886` (artifact `13664797659`) 100 adayı değerlendirdi.
-Yedi skor INTU 78, MPWR 78, SWKS 68, NOW 62, TYL 55,5, SNPS 53 ve ON
-51,5. Önceki yedi skor ayrı tarihli kesitte kalır. 93 puansız adayda
-72 sektör modeli, 19 değerleme kanıtı ve 2 kritik finans incelemesi
-engeli var. Ayrıntı `docs/evidence/priority-production-42598993077.json`.
-MVP kabulü açık.
+Başarılı skor işine koşu kimliklerini, kod commit'ini ve tam dosya
+SHA-256 özetlerini içeren `run-provenance.json` eklendi. Kaynak
+manifestleri veya finansal run kimliği eşleşmezse skor işi hata verir.
+Kod birleşiminde ek skor işi başlamaması için eski push tetikleyicisi
+kaldırıldı. Değerleme sonrası ve manuel tetikleme korundu.
+Yeni kayıt doğrulanmış üretim ZIP'lerinden alınan girdilerle üretildi.
+Sıradaki iş 19 değerleme engelini şirket ve kaynak bazında ayırmak
+ve kalan kanıtı normal sıra ile mevcut bütçede toplamak.
 
-Skor işinde artık başarılı skorla birlikte koşu kimlikleri, kod commit'i
-ve tam girdi/çıktı SHA-256 özetleri `run-provenance.json` içinde yazılır.
-Kaynak manifestleri ile finansal run kimliği eşleşmezse sonuç başarılı
-sayılmaz. Kod birleşimi ekstra bir skor toplaması başlatmasın diye eski
-`push` tetikleyicisi kaldırıldı. Değerleme sonrası ve manuel tetikleme
-korundu. Yeni kayıt üretim ZIP'lerinden çıkarılmış dosyalarla doğrulandı.
-Sıradaki iş kalan 19 değerleme engelini şirket ve kaynak bazında ayırmak,
-en eski eksik kanıtı normal sıra ve mevcut bütçeyle ele almak.
+## 9 Kasım 2026 — İki tarihte 14 farklı şirketin gerçek skor kanıtı (PR değerlendirmesinde)
+
+Başlangıç ana dal `08d2a4d9e068a4b1f12fb9154d7a5674ac91dffe`
+(PR #65), son Foundation CI `42598593798` başarılı,
+açık PR yok. Yeni değerleme `42598993077` 100 yeni GET
+(21 www.sec.gov, 43 data.sec.gov, 36 Yahoo) üretti:
+15 tarihlenmiş hisse sınıfı, 22 geçerli fiyat ve 14 piyasa
+geçmişi görüldü. Bu sayılar **bu run kesitinin** kapsamıdır,
+önceki koşunun toplam doğrulamalarını silmez veya
+bugüne taşımaz.
+
+İlk gerçek skor artifact'i `42536926634` (7 puan:
+MU, AAPL, MSFT, CRM, MRVL, TXN, AMAT) ile yeni
+`42599479886` artifact'i (7 puan: INTU 78, MPWR 78,
+SWKS 68, NOW 62, TYL 55.5, SNPS 53, ON 51.5)
+ZIP CRC ve üç rapor dosyasının SHA-256 manifest
+özetleriyle doğrulandı. Kesimler sırasıyla
+`2026-11-08T23:48:52Z` ve `2026-11-09T10:17:39Z`.
+Sıralamalar kesişmiyor: **iki tarihte farklı 14 şirket
+skorlandı; tek güncel raporda 7 skor var**.
+Önceki 7 şirket yeni kesitte `valuation_source_evidence_required`
+nedeniyle skorsuz; eski puanlar güncel değer
+gibi birleştirilemez. Yeni kesitte 72 model dışı sektör,
+19 değerleme engeli, iki kritik finansal inceleme var.
+Kanıt: `docs/evidence/double-snapshot-score-coverage-2026-11-09.json`.
+
+Bu ayrımı makinece denetlemek için
+`scripts/audit_dated_score_coverage.py` eklendi:
+iki GitHub Actions ZIP artifact'ını, SHA-256 rapor
+manifestlerini, tarihleri, model sürümünü,
+rank/puan/kimlik uyumunu ve dokuz finansal teyidi
+kontrol eder. Çıktı ayrı tarih kesimli kaynakları,
+yalnız önceki/yeni/iki kesitte görülen şirketleri
+gösterir; birleşik güncel portföy veya sahte
+14 puanlı sıralama üretmez. Sentetik testler
+kesim çakışması, eski skor, bozulmuş dosya özeti,
+sahte kabul ve model değişimi sınırlarını kapsar.
+
+Henüz MVP kabul edilmedi; doğrulanmamış fiyat
+güncellenmiş sayılmaz. Sonraki iş: iki kesimde
+skor alan şirketlerin fiyat ve hisse kanıtını
+**aynı yeni kesitte** toplayacak makul GET planını
+test etmek; 100 aday/kaynak koruma kurallarını
+ve mevcut tekil veri doğrulamalarını korumak.
+Altman Z prototip sonrasına ertelidir.
+
 
 ## 9 Kasım 2026 — Değerleme devamı için eskiye dönüş engeli
 
