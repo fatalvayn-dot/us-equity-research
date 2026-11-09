@@ -53,7 +53,7 @@ class FirstLiveScoreWorkflowTests(unittest.TestCase):
         self.assertLess(self.text.index("scripts/build_current_scores.py"),
                         self.text.index("scripts/audit_score_valuation_gaps.py"))
         self.assertLess(self.text.index("scripts/audit_score_valuation_gaps.py"),
-                        self.text.index("score-valuation-gaps.json').read_text()"))
+                        self.text.index("audit=json.loads(gaps.read_text())"))
 
     def test_normal_resolver_and_official_scoring_are_used(self):
         self.assertIn("research-batch",self.text)
