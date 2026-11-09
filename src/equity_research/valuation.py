@@ -128,21 +128,25 @@ def disclosed_shares(response, *, cik, as_of):
         raise ProviderFailure(Status.INVALID_DATA) from None
 
 
-def _share_number(fact, inventory):
+def _share_number(fact, inventory, *, allow_zero=False):
     a=fact['attrs'];unit=inventory.units.get(a.get('unitref'))
     if (not unit or unit['compound'] or [s.strip() for s in unit['measures']]!=['xbrli:shares']
             or inventory.namespaces.get('xbrli')!='http://www.xbrl.org/2003/instance'
             or a.get('xsi:nil','false').lower() in ('true','1') or fact['excluded']
             or a.get('continuedat') or a.get('sign') is not None):
         raise ValueError('exact shares unit and supported numeric presentation required')
+    text=fact['text'].strip()
     if a.get('format'):
         prefix,sep,local=a['format'].partition(':')
-        if (not sep or local.lower() not in ('num-dot-decimal','numdotdecimal')
+        fixed_zero = allow_zero and local == 'fixed-zero' and bool(text)
+        if (not sep or (not fixed_zero and local.lower() not in ('num-dot-decimal','numdotdecimal'))
                 or inventory.namespaces.get(prefix) not in (
                     'http://www.xbrl.org/inlineXBRL/transformation/2020-02-12',
                     'http://www.xbrl.org/inlineXBRL/transformation/2022-02-16')):
             raise ValueError('unsupported share transformation')
-    text=fact['text'].strip();scale=int(a.get('scale','0'))
+        if fixed_zero:
+            text = '0'
+    scale=int(a.get('scale','0'))
     if not re.fullmatch(r'(?:[0-9]+|[0-9]{1,3}(?:,[0-9]{3})+)(?:\.[0-9]+)?',text) or len(text)>100 or not -12<=scale<=12:
         raise ValueError('unsupported share number')
     decimals=a.get('decimals')
@@ -151,7 +155,8 @@ def _share_number(fact, inventory):
     if decimals!='INF' and not -12<=int(decimals)<=12:raise ValueError('unsupported reported precision')
     with localcontext() as ctx:
         ctx.prec=128;value=Decimal(text.replace(',',''))*(Decimal(10)**scale)
-    if value<=0 or value!=value.to_integral_value():raise ValueError('positive integral shares required')
+    if value < 0 or (value == 0 and not allow_zero) or value != value.to_integral_value():
+        raise ValueError('integral shares required with valid zero policy')
     return value,decimals
 
 

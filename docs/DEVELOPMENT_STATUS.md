@@ -1,5 +1,31 @@
 # Development status
 
+## 9 Kasım 2026 — CRWD bilanço hisse sınıflarını özgün belgeden denetleme
+
+Başlangıç main `1607232406ee13234b5ce19729d3680aa699e2f0` (PR #79).
+Kesin PR CI `42675256689` Python 3.11, 3.12 ve 3.13'te başarılı.
+Son finansal üretim `42455760184`, kök `42223465006`, sequence 10.
+100 metadata kaydı, 100 adi hisse adayı, 98 finansal şirket, 961
+kabul edilmiş değer ve 704 hesaplama. Son sağlam değerleme
+`42654072673` ile skor `42654693840` kesiminde 5 skor,
+21 değerleme, 72 sektör modeli ve 2 kritik finans incelemesi engeli var.
+
+Değerleme ZIP SHA-256 ve SQLite/kaynak paketi 1.107 gözlemde doğrulandı.
+CRWD'nin özgün 10-Q belgesi 31 Temmuz 2026 bilançosunda, bin hisse
+hassasiyetinde, Class A için 1.023.845.000 adet ve Class B için açıkça
+sıfır bildiriyor. Nasdaq'ta Class A kayıtlı. 20 Ağustos tarihli
+boyutsuz kapak sayımı farklı tarihlidir. Yeni çevrimdışı denetim modu
+bilanço kesimini, hisse birimini, sınıf eksenini ve açık sıfır dönüşümünü
+doğrular. Kaynak bağlantısı, belge özeti ve bağlam kimlikleri
+`docs/evidence/crwd-balance-sheet-share-classes-2026-11-09.json` içinde.
+30 hedefli test ve doğrulanmış üretim belgesiyle entegrasyon başarılı.
+CRWD için üretim değerleme ve skor kapıları kapalı. ADI'nin
+CompanyFacts ve fiyat denemeleri son sağlam pakette bütçe bekliyor.
+
+Sonraki iş, yeni doğrulanmış pakette ADI girdilerini denetlemek ve
+CRWD için Class B'nin statüsü, değerleme tarihindeki pay adedi ve
+Temmuz bölünmesinin fiyat/geçmiş uyumunu birlikte incelemek.
+
 ## 9 Kasım 2026 — Skor engellerini üretim paketine bağlama
 
 Başlangıç main `a4917167600ed16d04621a2b5f1484a83d788a0f` (PR #78).

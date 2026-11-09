@@ -34,7 +34,7 @@ class ClassInventory(Inventory):
         super().handle_endtag(tag)
 
 
-def audit(body, *, cik, symbol, report_end, document_type, sha256):
+def audit(body, *, cik, symbol, report_end, document_type, sha256, balance_sheet=False):
     if hashlib.sha256(body).hexdigest() != sha256:
         raise ValueError("SEC belge SHA-256 uyuşmuyor")
     cover = filing_security_metadata(body, cik=cik, symbol=symbol, report_end=report_end,
@@ -52,17 +52,22 @@ def audit(body, *, cik, symbol, report_end, document_type, sha256):
             or not re.fullmatch(r"http://fasb.org/us-gaap/20[0-9]{2}", parser.namespaces.get("us-gaap", ""))):
         raise ValueError("SEC hisse boyutu taksonomisi doğrulanamadı")
 
+    concept = "us-gaap:CommonStockSharesOutstanding" if balance_sheet else SHARE_CONCEPT
+    axis = "us-gaap:StatementClassOfStockAxis"
     counts = {}
     for fact in parser.facts:
-        if fact["attrs"].get("name", "").lower() != SHARE_CONCEPT.lower():
+        if fact["attrs"].get("name", "").lower() != concept.lower():
             continue
         context_id = fact["attrs"].get("contextref")
         context = parser.contexts.get(context_id, {})
         members = context.get("members", [])
+        if balance_sheet and (context.get("instant", "").strip() != report_end.isoformat()
+                              or not any(dimension == axis for dimension, _ in members)):
+            continue
         if (context.get("scheme") != "http://www.sec.gov/CIK"
                 or context.get("identifier", "").strip().zfill(10) != cik
                 or not context.get("instant") or context.get("startdate") or context.get("enddate")
-                or context.get("typed_member") or len(members) != 1 or members[0][0] != "us-gaap:StatementClassOfStockAxis"):
+                or context.get("typed_member") or len(members) != 1 or members[0][0] != axis):
             raise ValueError("Tek ve açık hisse sınıfı bağlamı gerekli")
         member = members[0][1].strip()
         prefix, separator, local = member.partition(":")
@@ -72,18 +77,21 @@ def audit(body, *, cik, symbol, report_end, document_type, sha256):
         key = (disclosed_on, parser.namespaces[prefix], local)
         if key in counts:
             raise ValueError("Tekrarlı hisse sınıfı bildirimi")
-        value, decimals = _share_number(fact, parser)
+        value, decimals = _share_number(fact, parser, allow_zero=balance_sheet)
         counts[key] = dict(context_id=context_id, member=member, member_namespace=key[1],
                            disclosed_on=disclosed_on, shares=int(value), decimals=decimals)
     if len(counts) < 2 or len({key[0] for key in counts}) != 1:
         raise ValueError("Aynı tarihe ait birden çok sınıf bildirimi gerekli")
     listed_member = f"CommonClass{listed_class.group(1)}Member".casefold()
     listed_counts = [value for key, value in counts.items() if key[2].casefold() == listed_member]
-    if len(listed_counts) != 1:
+    if len(listed_counts) != 1 or listed_counts[0]["shares"] <= 0:
         raise ValueError("Borsada kayıtlı hisse sınıfının sayımı tekil olmalıdır")
-    return dict(cover=cover, class_counts=list(counts.values()),
-                listed_class_member=listed_counts[0]["member"],
-                valuation_eligible=False, scope_approved=False, mvp_accepted=False)
+    result = dict(cover=cover, class_counts=list(counts.values()),
+                  listed_class_member=listed_counts[0]["member"],
+                  valuation_eligible=False, scope_approved=False, mvp_accepted=False)
+    if balance_sheet:
+        result["class_count_concept"] = concept
+    return result
 
 
 if __name__ == "__main__":
@@ -94,5 +102,7 @@ if __name__ == "__main__":
     parser.add_argument("--report-end", type=date.fromisoformat, required=True)
     parser.add_argument("--document-type", required=True)
     parser.add_argument("--sha256", required=True)
+    parser.add_argument("--balance-sheet", action="store_true",
+                        help="Sınıf adetlerini bilanço kapanışındaki US GAAP etiketlerinden oku")
     args = vars(parser.parse_args())
     print(json.dumps(audit(args.pop("filing").read_bytes(), **args), ensure_ascii=False, indent=2))
