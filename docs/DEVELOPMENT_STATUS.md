@@ -1,5 +1,51 @@
 # Development status
 
+## 9 Kasım 2026 — SEC boş kanıt koşularında değerleme devrini sürdürme (PR testinde)
+
+Başlangıç main `d16fd266c3f7c1da02c4ae35c34bf62307b287b9`,
+PR #73, üç Python Foundation CI `42627209025` başarılı.
+Açık PR yok. Son SEC `42627107617`, değerleme
+`42627214144`, skor `42627251097` başarılı göründü
+ancak **hiçbiri yeni üretim kanıtı oluşturmadı**.
+Son gerçek üretim `42455760184` (100 SEC şirket),
+`42598993077` (100 değerleme GET) ve `42599479886`
+(7 güncel skor). Özgün raporda 19 değerleme kaynak
+engeli, 72 sektör modeli dışı şirket, 2 kritik inceleme var.
+
+`valuation-live.yml` içindeki `workflow_run` devri,
+başarılı SEC çalışması yeni `live-acceptance-evidence`
+paketi üretmediyse tüm değerleme toplamayı atlıyordu.
+İncelenmiş SEC koşusu `42455760184` GitHub Actions
+artefact olarak kayıtlı olduğu hâlde, günlük bağımsız
+09:17 UTC taraması dışındaki SEC tetiklerinde
+piyasa kanıtı yenilenemiyordu.
+
+Artık yalnız **main dalında başarıyla bitmiş SEC
+çalışmasından** gelen otomatik `workflow_run` devrinde
+exact sıfır finansal kanıt paketi bulunursa, mevcut
+`docs/evidence/first-live-score-2026-11-08.json`
+içindeki bağımsız denetlenmiş finansal run ID kullanılır.
+İkinci kaynak artifact araması tam **bir** geçerli,
+süresi dolmamış paket bulmazsa fail-closed hata verir.
+Manuel olarak seçilen eksik veya çifte kaynak paketleri
+eskiye düşürülmez. Daha önceki SEC arşivi yeni
+finansal veri gibi tarih damgalanmaz. Önceki
+değerleme durumunun salt okunur doğrulaması,
+kök/plan SHA-256, 15 dk fiyat TTL ve aynı alan
+kontrolleri devam eder. Bağlı SEC otomatik
+devrinde yalnız 51 yeni GET sınırı; günlük
+schedule tetikinde mevcut 250 GET sınırı korunur,
+manuel izinli seçimler değişmez.
+
+Yeni workflow sözleşme regresyonları eklendi.
+Üretim GET veya canlı puan bu PR testinin
+sonucu olarak varsayılmaz. İlk yeni kanıtlı
+değerleme ZIP'indeki gerçek HTTP GET, 14 adayın
+hisse/fiyat/geçmiş bacakları ve takip eden
+skor kesimi tekrar doğrulanmalıdır. Altman Z
+kapsam dışındadır; MVP kabul edilmedi.
+
+
 ## 9 Kasım 2026 — Skordaki değerleme engelini kaynak basamağına bağlama (PR testinde)
 
 Başlangıç ana dal `48204845030cbfc14d80ff71c283eb27b9354cc8`
