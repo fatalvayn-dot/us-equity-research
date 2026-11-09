@@ -45,19 +45,28 @@ class FairValuationCursorTests(unittest.TestCase):
             ('www.sec.gov','data.sec.gov','query1.finance.yahoo.com')},
             max_new_requests=budget,checkpoint=self.lock,owner=self.owner,clock=lambda:ASOF)
 
-    def test_request_budget_rotates_without_permuting_reports(self):
-        one=self.collector(2).collect(PLAN)
-        self.assertEqual(one['summary']['new_get_invocations'],2)
-        self.assertEqual([c['symbol'] for c in one['companies']],['AAPL','MSFT'])
-        self.assertEqual(self.lock.read('valuation-candidate-cursor-v1')['next_index'],1)
-        requested_before=len(self.transport.calls)
-        two=self.collector(1).collect(PLAN)
-        self.assertEqual([c['symbol'] for c in two['companies']],['AAPL','MSFT'])
-        self.assertEqual(two['summary']['new_get_invocations'],1)
-        self.assertEqual(self.transport.calls[requested_before],companyfacts_url(MSFT))
-        self.assertEqual(self.lock.read('valuation-candidate-cursor-v1')['next_index'],0)
-        self.assertFalse(two['mvp_accepted'])
-        self.assertTrue(all(c['total_score'] is None for c in two['companies']))
+    def test_partial_boundary_retries_once_then_rotates_without_permuting_reports(self):
+        one = self.collector(2).collect(PLAN)
+        self.assertEqual(one['summary']['new_get_invocations'], 2)
+        self.assertEqual(one['continuation'], dict(start_symbol='AAPL', next_symbol='AAPL'))
+        cursor = self.lock.read('valuation-candidate-cursor-v1')
+        self.assertTrue(cursor['retrying_partial'])
+        self.assertEqual(cursor['next_index'], 0)
+        requested_before = len(self.transport.calls)
+
+        two = self.collector(1).collect(PLAN)
+        self.assertEqual(two['summary']['new_get_invocations'], 1)
+        self.assertEqual(self.transport.calls[requested_before], meta().url)
+        self.assertEqual(two['continuation'], dict(start_symbol='AAPL', next_symbol='MSFT'))
+        self.assertFalse(self.lock.read('valuation-candidate-cursor-v1')['retrying_partial'])
+        requested_before = len(self.transport.calls)
+
+        three = self.collector(1).collect(PLAN)
+        self.assertEqual(three['summary']['new_get_invocations'], 1)
+        self.assertEqual(self.transport.calls[requested_before], companyfacts_url(MSFT))
+        self.assertEqual([c['symbol'] for c in three['companies']], ['AAPL', 'MSFT'])
+        self.assertFalse(three['mvp_accepted'])
+        self.assertTrue(all(c['total_score'] is None for c in three['companies']))
 
     def test_zero_budget_never_advances_checkpoint(self):
         self.collector(2).collect(PLAN)

@@ -1,5 +1,43 @@
 # Development status
 
+## 9 Kasım 2026 — İstek bütçesi yarıda kesilen şirket bir kez yeniden öne alınıyor
+
+Başlangıç main `cf279e963817fd53ac3aeeafc8ea4b1e5a84b0ee` (PR #54),
+Foundation CI `42547792295` başarılı, açık PR yoktu.
+Son saatlik finansal, değerleme ve skor koşuları `42554343471`,
+`42554407399`, `42554433007` yeni artifact üretmedi.
+
+Finansal state `42455760184` ve değerleme state `42536567400`
+ZIP SHA-256 ve CRC denetlendi. Finansal manifestte kök
+`42223465006`, üst koşu `42453626663`, sequence 10 doğrulandı.
+`live_checkpoint.verify` 110 dosya, beş SQLite veritabanı,
+1191 kaynak gözlemi, 1400 finansal sorgu kaydı ve 100 yıllık
+belgeyi doğruladı. Değerleme imleci SQLite checksum ve aday
+sırası parmak iziyle eşleşti. 57 şirkette GET görülmüş,
+sonu PEP ve kayıtlı devamı BLK. Bekleyen sekiz aday,
+BLK'dan 26–42 konum sonra. ADBE'de gelir kaydı eksik,
+diğer yedisinde dokuz girdi var. Dönem ve bağımsız SEC
+değer teyidi ayrıca yapılacak.
+Kanıt: `docs/evidence/valuation-cursor-continuation-2026-11-09.json`.
+
+Bütçe bir şirketin sorgularını yarıda keserse o şirket,
+bir sonraki koşuda bir kez yeniden ilk sıraya alınır.
+Sonraki koşu da aynı şirkette kesilirse sıra ilerler.
+Önceki imleç biçimi okunabilir. Sıfır GET tekrarında
+imleç yazılmaz ve raporun aday sırası korunur.
+Rapor başlangıç ve kaydedilen devam sembolünü gösterir.
+Bu davranış dört odaklı testle doğrulandı. Tam regresyon
+ve PR'ın son commit CI sonucu birleşimden önce denetlenir.
+
+Son canlı kapsam 100 metadata, 100 kayıtlı adi hisse adayı,
+98 finansal şirket, 961 kabul edilmiş değer ve 704 hesaplama.
+`42536926634` yedi araştırma skoru ve 61 değerleme engeli
+gösteriyor. 100 aktif adi hisse MVP kabulü tamamlanmadı.
+Sequence 10 ve mevcut istek üst sınırı korundu.
+Sonraki iş: yeni üretim raporunda BLK sonrası sekiz
+adayın hangi aşamaya ulaştığını gözle ve finansal dönemi
+yeterli olanlarda karşılaştırma kanıtını doğrula.
+
 ## 9 Kasım 2026 — Değerleme engelleri ve özgün SEC borç başlıkları
 
 Başlangıç main `8d47797252af357e046eade6b65367d18990988c` (PR #53),
