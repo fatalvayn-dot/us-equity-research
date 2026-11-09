@@ -42,13 +42,26 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("--seed-bundle data/valuation-import/live-sources", self.text)
         self.assertIn("run-id: ${{ steps.select.outputs.source_run }}", self.text)
 
+    def test_noartifact_sec_handoff_uses_only_exact_audited_fallback(self):
+        # A missing artifact may be normal when the financial SEC cursor has
+        # no new evidence; never trust an ambiguous or explicit manual source.
+        self.assertIn('if [ "$ARTIFACT_COUNT" -eq 0 ] && [ "$EVENT_NAME" = "workflow_run" ]; then', self.text)
+        self.assertIn('ARTIFACT_COUNT=$(gh api "repos/$REPO/actions/runs/$SOURCE_RUN/artifacts?per_page=100"', self.text)
+        self.assertIn("['financial_run_id']", self.text)
+        self.assertIn('if [ "$ARTIFACT_COUNT" -ne 1 ]; then', self.text)
+        self.assertNotIn("değerleme toplaması atlandı", self.text)
+        self.assertNotIn('echo "collect=false"', self.text)
+        self.assertIn("'workflow_run' && '51' || '250'", self.text)
+        self.assertLess(self.text.index('if [ "$ARTIFACT_COUNT" -eq 0 ]'),
+                        self.text.index('RESUME_RUN=$(python -m scripts.select_valuation_resume)'))
+
     def test_recovers_prior_valuation_and_bounds_requests(self):
         self.assertIn("valuation-source-state", self.text)
         self.assertIn("steps.select.outputs.resume_run", self.text)
         self.assertIn("run-id: ${{ steps.select.outputs.resume_run }}", self.text)
         self.assertIn("RESUME_RUN=$(python -m scripts.select_valuation_resume)", self.text)
         self.assertIn("options: ['0', '51', '100', '250', '501']", self.text)
-        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '250' }}", self.text)
+        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'workflow_run' && '51' || '250') }}", self.text)
         self.assertIn("cancel-in-progress: false", self.text)
 
     def test_resume_is_verified_before_writing_and_reupload(self):
@@ -99,7 +112,7 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertEqual(len(set(keys)),14)
         # The collector caps priority at budget // (2 * 5 GETs/company).
         self.assertLessEqual(len(keys)*5,250//2)
-        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '250' }}",self.text)
+        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'workflow_run' && '51' || '250') }}",self.text)
         self.assertEqual(reviewed['financial_run_id'],42455760184)
         self.assertEqual(reviewed['valuation_run_id'],42598993077)
         self.assertEqual(reviewed['valuation_artifact_id'],13664443650)
