@@ -72,6 +72,15 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn('priority_args=(--priority-candidates "$priority")', self.text)
         self.assertEqual(self.text.count('python -m equity_research collect-valuation-sources'), 1)
 
+    def test_priority_lineage_is_written_only_after_real_collection(self):
+        self.assertIn('--lineage data/valuation-current/priority-lineage.json)', self.text)
+        self.assertIn('select_reviewed_valuation_priority.py record', self.text)
+        self.assertIn('if [ -n "$priority" ]; then', self.text)
+        self.assertIn('--run-id "$GITHUB_RUN_ID"', self.text)
+        self.assertIn('--report data/valuation-current/report.json', self.text)
+        self.assertLess(self.text.index('collect-valuation-sources'),
+                        self.text.index('select_reviewed_valuation_priority.py record'))
+
     def test_provenance_secrecy_and_no_score_bypass(self):
         self.assertIn("SEC_USER_AGENT", self.text)
         self.assertIn("permissions:", self.text)
