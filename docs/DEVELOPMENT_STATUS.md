@@ -21,8 +21,11 @@ paketinin tekrar yayımlanmasını engeller.
 
 ZIP SHA-256 değeri doğrulanan üretim artifact'i `13640160185` üzerinde
 salt okunur entegrasyon kontrolü 527 gövde, 655 eşleşen gözlem ve bir
-imleç kaydı doğruladı. Yedi doğrulayıcı birim testi ve sekiz workflow
-sözleşme testi geçti. Sonraki iş, veri üreten ilk yeni değerleme
+imleç kaydı doğruladı. Tüm dosya SHA-256 özetleri korundu. Tam yerel
+regresyon 779/779 geçti. İlk PR CI `42588830439` Python 3.11 ve 3.13'te
+geçti, Python 3.12 mevcut beş dakikalık sınırda testler bitmeden iptal
+edildi. Foundation test işi için sınır 10 dakikaya çıkarıldı. Bu süre
+değişikliği canlı veri işlerini etkilemez. Sonraki iş, veri üreten ilk yeni değerleme
 artifact'ında öncelikli şirketlerin GET, fiyat, sınıf, geçmiş ve imleç
 kanıtını incelemek. MVP kabulü bekliyor.
 
