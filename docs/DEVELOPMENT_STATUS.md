@@ -1,5 +1,52 @@
 # Development status
 
+## 9 Kasım 2026 — İki tarihte 14 farklı şirketin gerçek skor kanıtı (PR değerlendirmesinde)
+
+Başlangıç ana dal `08d2a4d9e068a4b1f12fb9154d7a5674ac91dffe`
+(PR #65), son Foundation CI `42598593798` başarılı,
+açık PR yok. Yeni değerleme `42598993077` 100 yeni GET
+(21 www.sec.gov, 43 data.sec.gov, 36 Yahoo) üretti:
+15 tarihlenmiş hisse sınıfı, 22 geçerli fiyat ve 14 piyasa
+geçmişi görüldü. Bu sayılar **bu run kesitinin** kapsamıdır,
+önceki koşunun toplam doğrulamalarını silmez veya
+bugüne taşımaz.
+
+İlk gerçek skor artifact'i `42536926634` (7 puan:
+MU, AAPL, MSFT, CRM, MRVL, TXN, AMAT) ile yeni
+`42599479886` artifact'i (7 puan: INTU 78, MPWR 78,
+SWKS 68, NOW 62, TYL 55.5, SNPS 53, ON 51.5)
+ZIP CRC ve üç rapor dosyasının SHA-256 manifest
+özetleriyle doğrulandı. Kesimler sırasıyla
+`2026-11-08T23:48:52Z` ve `2026-11-09T10:17:39Z`.
+Sıralamalar kesişmiyor: **iki tarihte farklı 14 şirket
+skorlandı; tek güncel raporda 7 skor var**.
+Önceki 7 şirket yeni kesitte `valuation_source_evidence_required`
+nedeniyle skorsuz; eski puanlar güncel değer
+gibi birleştirilemez. Yeni kesitte 72 model dışı sektör,
+19 değerleme engeli, iki kritik finansal inceleme var.
+Kanıt: `docs/evidence/double-snapshot-score-coverage-2026-11-09.json`.
+
+Bu ayrımı makinece denetlemek için
+`scripts/audit_dated_score_coverage.py` eklendi:
+iki GitHub Actions ZIP artifact'ını, SHA-256 rapor
+manifestlerini, tarihleri, model sürümünü,
+rank/puan/kimlik uyumunu ve dokuz finansal teyidi
+kontrol eder. Çıktı ayrı tarih kesimli kaynakları,
+yalnız önceki/yeni/iki kesitte görülen şirketleri
+gösterir; birleşik güncel portföy veya sahte
+14 puanlı sıralama üretmez. Sentetik testler
+kesim çakışması, eski skor, bozulmuş dosya özeti,
+sahte kabul ve model değişimi sınırlarını kapsar.
+
+Henüz MVP kabul edilmedi; doğrulanmamış fiyat
+güncellenmiş sayılmaz. Sonraki iş: iki kesimde
+skor alan şirketlerin fiyat ve hisse kanıtını
+**aynı yeni kesitte** toplayacak makul GET planını
+test etmek; 100 aday/kaynak koruma kurallarını
+ve mevcut tekil veri doğrulamalarını korumak.
+Altman Z prototip sonrasına ertelidir.
+
+
 ## 9 Kasım 2026 — Değerleme devamı için eskiye dönüş engeli
 
 Başlangıç `main` commit'i `afb946a4c3af9bcb111047ae5257e4de786762f7`
