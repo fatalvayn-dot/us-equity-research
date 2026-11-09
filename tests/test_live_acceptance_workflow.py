@@ -56,3 +56,10 @@ class LiveAcceptanceWorkflowTests(unittest.TestCase):
         self.assertIn('actions: read',self.body)
         self.assertIn('contents: read',self.body)
         self.assertIn('retention-days: 14',self.body)
+
+    def test_reviewed_idle_checkpoint_does_not_download_or_collect(self):
+        self.assertNotIn('  push:', self.body)
+        for step in ('Önceki durum dosyalarını indir', 'Dosya özetlerini SQLite kayıtlarını ve kiraları doğrula'):
+            body = self.body.split(f'name: {step}', 1)[1].split('- name:', 1)[0]
+            self.assertIn("steps.checkpoint.outputs.reviewed_idle != 'true'", body)
+        self.assertIn("steps.verified.outputs.collect == 'true'", self.body)

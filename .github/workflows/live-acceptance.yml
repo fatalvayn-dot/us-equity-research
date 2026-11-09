@@ -3,11 +3,6 @@ name: Canlı 100 şirket kabulü
 on:
   schedule:
     - cron: '17 * * * *'
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/live-acceptance.yml
-      - scripts/live_checkpoint.py
   workflow_dispatch:
     inputs:
       resume_run_id:
@@ -70,7 +65,7 @@ jobs:
         run: python scripts/live_checkpoint.py select --requested "$REQUESTED_RUN"
 
       - name: Önceki durum dosyalarını indir
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && steps.checkpoint.outputs.reviewed_idle != 'true'
         uses: actions/download-artifact@v4
         with:
           name: live-acceptance-state
@@ -80,7 +75,7 @@ jobs:
 
       - name: Dosya özetlerini SQLite kayıtlarını ve kiraları doğrula
         id: verified
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && steps.checkpoint.outputs.reviewed_idle != 'true'
         env:
           RESUME_RUN: ${{ steps.checkpoint.outputs.run_id }}
         run: python scripts/live_checkpoint.py verify --run-id "$RESUME_RUN"

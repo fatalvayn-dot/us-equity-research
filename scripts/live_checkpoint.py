@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import sqlite3
 from datetime import datetime, timezone
+from functools import cache
 from urllib.request import Request, urlopen
 
 ROOT_RUN = 42223465006
@@ -17,6 +18,7 @@ REPO = 'fatalvayn-dot/us-equity-research'
 MANIFEST = 'checkpoint-manifest.json'
 REQUIRED = {'submissions.sqlite', 'documents.sqlite', 'financial.sqlite',
             'responses.sqlite', 'run-lock.sqlite'}
+REVIEWED_STATE = Path(__file__).resolve().parents[1] / 'docs/evidence/valuation-cursor-continuation-2026-11-09.json'
 
 
 def digest(path):
@@ -121,6 +123,19 @@ def safe_run_skip(run_id):
             and (not result['jobs'] or collection_never_started(result['jobs'])))
 
 
+def is_reviewed_idle_state(run_id, items, evidence):
+    lineage = evidence['financial_lineage']
+    states = [item for item in items if item['name'] == 'live-acceptance-state']
+    return (lineage['root_run_id'] == ROOT_RUN
+            and lineage['run_id'] == run_id
+            and lineage['sequence'] == MAX_REVIEWED_SEQUENCE
+            and not any(item['name'] == 'live-acceptance-recovery' for item in items)
+            and len(states) == 1
+            and states[0].get('expired') is False
+            and states[0].get('id') == evidence['financial_artifact_id']
+            and states[0].get('digest') == 'sha256:' + evidence['artifact_sha256']['financial'])
+
+
 def require_first_attempt():
     # GitHub reruns reuse the run ID. select() excludes that ID, so a retry
     # could restore its older parent instead of the first attempt's new data.
@@ -151,11 +166,24 @@ def main():
                 break
         else:
             raise ValueError('Çalışma araması sınırı aşıldı')
-        run_id = select(runs, lambda rid: api(f'actions/runs/{rid}/artifacts?per_page=100')['artifacts'],
+        @cache
+        def artifacts(rid):
+            result = api(f'actions/runs/{rid}/artifacts?per_page=100')
+            if len(result['artifacts']) != result['total_count']:
+                raise ValueError('Durum paketleri listesi eksik')
+            return result['artifacts']
+
+        run_id = select(runs, artifacts,
                         int(os.environ['GITHUB_RUN_ID']), args.requested,
                         safe_to_skip=safe_run_skip)
+        idle = (os.environ.get('GITHUB_EVENT_NAME') == 'schedule'
+                and is_reviewed_idle_state(run_id, artifacts(run_id), json.loads(REVIEWED_STATE.read_text())))
         with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
             f.write(f'run_id={run_id}\n')
+            f.write(f"reviewed_idle={'true' if idle else 'false'}\n")
+        if idle and (summary := os.environ.get('GITHUB_STEP_SUMMARY')):
+            with open(summary, 'a') as f:
+                f.write(f'İncelenmiş sequence sınırında aynı paket ({run_id}). Yeni finansal veri toplanmadı.\n')
         print(json.dumps({'resume_run_id': run_id}))
     elif args.action == 'verify':
         saved, counts = verify(root, args.run_id, json.loads(Path(args.baseline).read_text()))
