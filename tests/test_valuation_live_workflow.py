@@ -16,7 +16,13 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         cls.text = WORKFLOW.read_text(encoding="utf-8")
 
     def test_automatic_trigger_does_not_trust_pr_or_nonmain(self):
-        self.assertNotIn("  push:", self.text)
+        self.assertIn("  push:", self.text)
+        self.assertIn("branches: [main]", self.text)
+        self.assertIn("paths:", self.text)
+        self.assertIn("- .github/workflows/valuation-live.yml", self.text)
+        self.assertEqual(self.text.count("  push:"), 1)
+        self.assertIn('EVENT_NAME" = "push"', self.text)
+        self.assertIn('EVENT_NAME" = "schedule"', self.text)
         self.assertIn("workflow_run:", self.text)
         self.assertIn("workflows: ['Canlı 100 şirket kabulü']", self.text)
         self.assertIn("types: [completed]", self.text)
@@ -28,6 +34,16 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("github.event.workflow_run.head_branch == 'main'", self.text)
         self.assertIn("github.event.workflow_run.conclusion == 'success'", self.text)
         self.assertIn("github.event.workflow_run.head_repository.full_name == github.repository", self.text)
+
+    def test_workflow_update_push_is_bounded_and_does_not_loop(self):
+        # Workflow-only push, not ordinary changes or PRs. No git writes.
+        self.assertIn("push:\n    branches: [main]\n    paths:\n      - .github/workflows/valuation-live.yml", self.text)
+        self.assertIn('if [ -z "$SOURCE_RUN" ] && { [ "$EVENT_NAME" = "schedule" ] || [ "$EVENT_NAME" = "push" ]; }; then', self.text)
+        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'workflow_run' && '51' || '250') }}", self.text)
+        self.assertIn("contents: read", self.text)
+        self.assertIn("actions: read", self.text)
+        self.assertNotIn("git push", self.text)
+        self.assertNotIn("mvp_accepted: true", self.text)
 
     def test_source_artifact_presence_is_required_for_collection(self):
         self.assertIn("live-acceptance-evidence", self.text)
