@@ -177,7 +177,8 @@ jobs:
           priority=$(python scripts/select_reviewed_valuation_priority.py \
             --plan docs/evidence/valuation-priority-candidates-2026-11-09.json \
             --source-run "$SOURCE_RUN" "${resume_args[@]}" \
-            --resume-report data/valuation-current/report.json)
+            --resume-report data/valuation-current/report.json \
+            --lineage data/valuation-current/priority-lineage.json)
           priority_args=()
           if [ -n "$priority" ]; then priority_args=(--priority-candidates "$priority"); fi
           python -m equity_research collect-valuation-sources \
@@ -186,6 +187,15 @@ jobs:
             --seed-bundle data/valuation-import/live-sources \
             --user-agent "$SEC_USER_AGENT" \
             --max-new-requests "$MAX_NEW_REQUESTS" "${priority_args[@]}"
+          # Persist continuation only after a successful exact-priority
+          # collection, never for a skipped, invalid or zero-priority run.
+          if [ -n "$priority" ]; then
+            python scripts/select_reviewed_valuation_priority.py record \
+              --plan "$priority" --source-run "$SOURCE_RUN" \
+              --run-id "$GITHUB_RUN_ID" \
+              --report data/valuation-current/report.json \
+              --lineage data/valuation-current/priority-lineage.json
+          fi
 
       - name: Kaynak toplama özetini göster
         if: steps.select.outputs.collect == 'true' && success()
