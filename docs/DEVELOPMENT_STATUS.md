@@ -1,5 +1,35 @@
 # Development status
 
+## 9 Kasım 2026 — Değerleme önceliği doğrulanmış devam paketine bağlandı
+
+Başlangıç main `349ef9eea5c8e535da6a3270a8a3f8835f90e421` (PR #60),
+Foundation CI `42572485963` başarılı, açık PR yoktu.
+`42572730219`, `42572787846` ve `42572812354` artifact üretmedi.
+Son üretim zinciri `42455760184` → `42536567400` → `42536926634`.
+
+Mevcut değerleme işi, yedi öncelikli adayı ancak finansal koşu
+`42455760184`, devam koşusu `42536567400` ve önceki
+`report.json` SHA-256 değeri birlikte eşleşirse kullanır.
+ZIP özeti doğrulanan üretim arşivindeki rapor özeti kanıt
+dosyasına eklendi. Farklı veya daha yeni koşuda normal sıra
+kullanılır. Beklenen çiftte rapor eksik veya bozuksa toplama
+başlamadan hata verir. Öncelik GET sınırı ve normal imleç
+korundu. Birleşimin yeni toplama başlatmaması için ilk yayına
+ait push tetikleyicisi kaldırıldı. Mevcut zamanlama, SEC
+devri, manuel giriş, concurrency ve 100 GET varsayılanı korundu.
+
+Altı odaklı test, shell sözdizimi ve 100 gerçek adayla sıfır
+GET CLI entegrasyonu geçti. Üretim arşiviyle doğru çift
+planı seçti, farklı devam koşusu seçmedi. Tam regresyon ve
+kesin PR head CI birleşim öncesi denetlenir.
+Son canlı kapsam 100 metadata, 100 adi hisse adayı, 98
+finansal şirket, 961 kabul edilmiş değer, 704 hesaplama,
+yedi skor. Son arşiv tekrarında 13 değerleme engeli var.
+Sequence 10 korundu. Yeni canlı sonuç veya MVP kabulü yok.
+Sonraki iş: mevcut toplayıcının yeni artifact'inde yedi
+aday için seçilen önceliği, fiyat/sınıf/geçmiş kanıtını
+ve normal devam imlecini denetle.
+
 ## 9 Kasım 2026 — Yedi aday için sınırlı değerleme önceliği
 
 Başlangıç main `da03a564b34547e2d6e9f2a63a2871cd9c8f013d` (PR #59),

@@ -5,9 +5,6 @@ on:
   # saymadan piyasa kaynaklarını kontrollü şekilde yenile.
   schedule:
     - cron: '17 9 * * *'
-  push:
-    branches: [main]
-    paths: [.github/workflows/valuation-live.yml]
   workflow_run:
     workflows: ['Canlı 100 şirket kabulü']
     types: [completed]
@@ -64,7 +61,7 @@ jobs:
         run: |
           set -euo pipefail
           SOURCE_RUN="${SOURCE_RUN_INPUT:-$EVENT_SOURCE_RUN}"
-          if [ -z "$SOURCE_RUN" ] && { [ "$EVENT_NAME" = "push" ] || [ "$EVENT_NAME" = "schedule" ]; }; then
+          if [ -z "$SOURCE_RUN" ] && [ "$EVENT_NAME" = "schedule" ]; then
             for CANDIDATE in $(gh api "repos/$REPO/actions/workflows/live-acceptance.yml/runs?per_page=100" \
               --jq '.workflow_runs[] | select(.status == "completed" and .conclusion == "success" and .head_branch == "main") | .id'); do
               PRESENT=$(gh api "repos/$REPO/actions/runs/$CANDIDATE/artifacts?per_page=100" \
@@ -170,14 +167,25 @@ jobs:
         env:
           PYTHONPATH: src
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
-          MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'push' && '250' || '100') }}
+          MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '100' }}
+          SOURCE_RUN: ${{ steps.select.outputs.source_run }}
+          RESUME_RUN: ${{ steps.select.outputs.resume_run }}
         run: |
+          set -euo pipefail
+          resume_args=()
+          if [ -n "$RESUME_RUN" ]; then resume_args=(--resume-run "$RESUME_RUN"); fi
+          priority=$(python scripts/select_reviewed_valuation_priority.py \
+            --plan docs/evidence/valuation-priority-candidates-2026-11-09.json \
+            --source-run "$SOURCE_RUN" "${resume_args[@]}" \
+            --resume-report data/valuation-current/report.json)
+          priority_args=()
+          if [ -n "$priority" ]; then priority_args=(--priority-candidates "$priority"); fi
           python -m equity_research collect-valuation-sources \
             --candidates docs/evidence/common100/candidates.json \
             --state-dir data/valuation-current \
             --seed-bundle data/valuation-import/live-sources \
             --user-agent "$SEC_USER_AGENT" \
-            --max-new-requests "$MAX_NEW_REQUESTS"
+            --max-new-requests "$MAX_NEW_REQUESTS" "${priority_args[@]}"
 
       - name: Kaynak toplama özetini göster
         if: steps.select.outputs.collect == 'true' && success()
@@ -190,12 +198,14 @@ jobs:
           from pathlib import Path
           report=json.loads(Path('data/valuation-current/report.json').read_text())
           s=report['summary']
+          priority=', '.join(report['priority_symbols']) or 'yok'
           lines=['## Canlı değerleme kaynakları', '',
                  'Kaynak toplama sonuçlarıdır; nihai yatırım skoru veya MVP kabulü değildir.', '',
                  f"- Finansal kaynak run: {os.environ['SOURCE_RUN']}",
                  f"- Önceki değerleme run: {os.environ['RESUME_RUN'] or 'ilk çalışma'}",
                  f"- Şirket: {s['candidates']}",
                  f"- Yeni GET: {s['new_get_invocations']}",
+                 f"- Öncelikli tarama: {priority}",
                  f"- Hisse sınıfı: {s['share_states']}",
                  f"- Fiyat: {s['price_states']}",
                  f"- Piyasa geçmişi: {s['history_states']}"]

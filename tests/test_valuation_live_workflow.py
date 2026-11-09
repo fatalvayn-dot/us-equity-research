@@ -1,6 +1,11 @@
 """Gerçek veri üretmiş SEC işlerinden kontrollü değerleme devri."""
+import hashlib
+import json
+import tempfile
 import unittest
 from pathlib import Path
+
+from scripts.select_reviewed_valuation_priority import select
 
 WORKFLOW = Path(__file__).resolve().parents[1] / ".github/workflows/valuation-live.yml"
 
@@ -11,8 +16,7 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         cls.text = WORKFLOW.read_text(encoding="utf-8")
 
     def test_automatic_trigger_does_not_trust_pr_or_nonmain(self):
-        self.assertIn("push:", self.text)
-        self.assertIn("paths: [.github/workflows/valuation-live.yml]", self.text)
+        self.assertNotIn("  push:", self.text)
         self.assertIn("workflow_run:", self.text)
         self.assertIn("workflows: ['Canlı 100 şirket kabulü']", self.text)
         self.assertIn("types: [completed]", self.text)
@@ -44,8 +48,29 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("run-id: ${{ steps.select.outputs.resume_run }}", self.text)
         self.assertIn('select(.name == "valuation-source-state" and .expired == false)', self.text)
         self.assertIn("options: ['0', '51', '100', '250', '501']", self.text)
-        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'push' && '250' || '100') }}", self.text)
+        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '100' }}", self.text)
         self.assertIn("cancel-in-progress: false", self.text)
+
+    def test_priority_is_bound_to_both_run_ids_and_report_digest(self):
+        with tempfile.TemporaryDirectory() as folder:
+            plan = Path(folder) / 'plan.json'
+            report = Path(folder) / 'report.json'
+            report.write_bytes(b'reviewed report')
+            plan.write_text(json.dumps(dict(financial_run_id=12, valuation_run_id=34,
+                valuation_report_sha256=hashlib.sha256(report.read_bytes()).hexdigest())))
+            self.assertEqual(select(plan, 12, 34, report), plan)
+            self.assertIsNone(select(plan, 13, 34, report))
+            self.assertIsNone(select(plan, 12, 35, report))
+            self.assertIsNone(select(plan, 12, None, report))
+            report.write_bytes(b'changed report')
+            with self.assertRaisesRegex(ValueError, 'digest mismatch'):
+                select(plan, 12, 34, report)
+
+    def test_existing_collector_receives_only_the_bound_priority_option(self):
+        self.assertIn('scripts/select_reviewed_valuation_priority.py', self.text)
+        self.assertIn('--source-run "$SOURCE_RUN" "${resume_args[@]}"', self.text)
+        self.assertIn('priority_args=(--priority-candidates "$priority")', self.text)
+        self.assertEqual(self.text.count('python -m equity_research collect-valuation-sources'), 1)
 
     def test_provenance_secrecy_and_no_score_bypass(self):
         self.assertIn("SEC_USER_AGENT", self.text)
