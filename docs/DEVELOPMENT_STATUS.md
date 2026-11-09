@@ -1,5 +1,42 @@
 # Development status
 
+## 9 Kasım 2026 — Yedi öncelikli şirketin SHA-256 zinciriyle devamı (PR testinde)
+
+Başlangıç main `eaf140dc501f249b7f66ea124b818ff868c03386`
+(PR #61), Foundation CI `42574770141` başarılı, açık PR
+yoktu. Son üç saatlik finansal/değerleme/skor işi yeni artifact
+üretmedi. Son gerçek skor `42536926634`: yedi şirket; MVP
+kabul edilmedi. PR #61, önceliği yalnız incelenmiş finansal
+`42455760184` ve değerleme `42536567400` koşularının
+rapor özeti eşleşince devreye sokuyordu. Bu tek seferlik
+koruma yeni değerleme run ID'sinde önceliğin kaybolmasına
+neden olacaktı.
+
+`scripts/select_reviewed_valuation_priority.py` artık doğrulanmış
+**ilk** raporun SHA-256 değerini sabit kök kabul eder. İlk
+öncelikli kaynak toplaması başarılıysa yeni
+`priority-lineage.json`, mevcut rapor SHA-256, çalışan
+run ID, finansal run ID, kök run ID ve özgün aday planı
+özetiyle oluşturulur. Sonraki bir workflow yalnız
+indirilen **o çalışma** artifact'ındaki devam kimliği,
+plan ve rapor özetleri birebir uyuşursa aynı yedi
+adayı tekrar öne alır. Eşleşmeyen veya eksik zincir
+normal rotasyona döner. Müdahale edilmiş rapor özeti
+hata üretir. Kayıt yalnız başarılı collector çağrısının
+ardından, öncelik gerçekten seçilmişse yazılır.
+
+Normal dönen şirket imleci, bütçe sınırı, ilk geçerli
+kaynak seçimi, 15 dakikalık fiyat TTL, özgün SEC belge
+ve hisse sınıfı şartları korunur. 5 özel lineage
+testi ve bir workflow sözleşme testi eklendi.
+CI ve gerçek yeni artifact doğrulanmadan yeni canlı
+skor iddia edilmez. Sıradaki iş: tam regresyon,
+güvenli merge, ilk günlük kanıtlı değerleme
+çalışmasında yedi öncelikli adayı ve devam zincirini
+incelemek. Altman Z entegrasyonu MVP sonrası
+listeye bırakıldı; şimdilik yapılmayacak.
+
+
 ## 9 Kasım 2026 — Değerleme önceliği doğrulanmış devam paketine bağlandı
 
 Başlangıç main `349ef9eea5c8e535da6a3270a8a3f8835f90e421` (PR #60),
