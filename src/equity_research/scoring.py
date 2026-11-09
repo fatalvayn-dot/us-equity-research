@@ -95,6 +95,27 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
         if gate=='critical_review_required':
             row.update(status='critical_review_required',blockers=['critical_financial_review']);continue
         if gate=='invalid_evidence':row['blockers']=['invalid_financial_evidence'];continue
+        # A model-unsupported issuer cannot become scoreable by collecting
+        # more prices. Check its observed SEC category first so that the
+        # missing-valuation queue contains only potentially modeled issuers.
+        # Unavailable/malformed metadata is not treated as evidence of an
+        # unsupported SIC: its existing valuation/source gate still applies.
+        metadata_for_scope=sources.get(submissions_url(cik))
+        if metadata_for_scope is not None:
+            try:
+                scope_snapshot=parse_submissions(metadata_for_scope,cik)
+            except (ProviderFailure, ValueError, KeyError, TypeError, ArithmeticError):
+                scope_snapshot=None
+            if (scope_snapshot is not None and
+                    (scope_snapshot.entity_type_label!='operating'
+                     or scope_snapshot.sic_label not in MODELS)):
+                row['sector_evidence']=dict(sic=scope_snapshot.sic_label,
+                    entity_type=scope_snapshot.entity_type_label,
+                    source_url=metadata_for_scope.url,
+                    raw_sha256=metadata_for_scope.sha256,
+                    retrieved_at=metadata_for_scope.retrieved_at)
+                row['blockers']=['specialized_or_unmodeled_sector']
+                continue
         value=by_valuation[cik]['valuation']
         if value is None:
             row['blockers']=['valuation_source_evidence_required']
