@@ -1,5 +1,40 @@
 # Development status
 
+## 9 Kasım 2026 — PLTR'nin üç hisse sınıfını özgün SEC kapağından denetleme
+
+Başlangıç `main` `9c2f51d1306aae95e5ac3ef487aeec3d1cec218f` (PR #76).
+PR CI `42641485814`, ana dal CI `42642016889` başarılı. Finansal
+üretim `42455760184`, kök `42223465006`, sequence 10. Son kapsam
+100 metadata kaydı, 100 adi hisse adayı, 98 finansal şirket,
+961 kabul edilmiş değer ve 704 hesaplama. SEC `42642332638`
+yeni finansal paket üretmedi.
+
+Son değerleme `42642486729` (artifact `13685334426`) 51 GET,
+100 kimlik eşleşmesi, 62 tarihli hisse sınıfı, 15 fiyat ve 10
+piyasa geçmişi üretti. Öncelikli grupta 5 aday seçildi.
+SQLite ve kaynak paketi 1.056 gözlemde eşleşti, önceki 1.005 gözlemin
+tamamı korundu. Normal imleç BAC'tan GS'ye geçti. Son skor
+`42643108173` (artifact `13685433643`), 9 Kasım 15:17:41 UTC kesiminde
+5 skor üretti. Skor ve değerleme ZIP'leri ile skor dosya manifesti,
+değerleme kaynak manifesti ve karşılaştırma dosyası özetleri eşleşti.
+Önceki 14 skor, 250 GET'lik ayrı kesime aittir. Son 95 puansız adayda
+72 sektör modeli, 21 değerleme ve 2 kritik finans incelemesi engeli var.
+
+PLTR'nin 3 Kasım'da yayımlanan özgün 10-Q kapağı, Nasdaq'ta kayıtlı
+Class A'yı ve 26 Ekim tarihli üç ayrı sayımı doğruluyor. Class A
+2.306.705.341, B 101.787.133 ve F 1.005.000 hisse. SEC CompanyFacts
+eksikliği bu boyutlu sayımların yerine sıfır veya şirket toplamı
+yazma gerekçesi değildir. Yeni çevrimdışı komut, SHA-256, SEC CIK,
+belge türü/dönemi, kayıtlı sınıf, hisse birimi ve tekil sınıf
+bağlamlarını kontrol eder. Kaynak bağlantısı ve özet
+`docs/evidence/pltr-dimensioned-share-cover-2026-11-09.json`
+dosyasına kaydedildi. PLTR değerlemesi ve skoru kapalı kalır.
+Üç regresyon testi ve özgün SEC HTML entegrasyonu başarılı.
+
+Sonraki iş, kaynak bütçesini körlemesine büyütmeden 51 GET kesitinde
+bekleyen CRWD/ADI ve diğer piyasa kanıtlarını mevcut rotasyonda
+izlemek, PLTR için sınıf ekonomilerini ayrı incelemek. MVP kabulü açık.
+
 ## 9 Kasım 2026 — Aynı piyasa kesiminde 14 skor ve koşu zinciri doğrulaması
 
 Başlangıç `main` `82cdbc3d106a829881b4939009a9238c249738bd` (PR #75).

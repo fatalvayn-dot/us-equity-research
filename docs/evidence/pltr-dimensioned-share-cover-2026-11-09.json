@@ -1,0 +1,57 @@
+{
+  "cover": {
+    "issuer_id": "0001321655",
+    "symbol": "PLTR",
+    "report_end": "2026-09-30",
+    "document_type": "10-Q",
+    "raw_sha256": "2047bc813fa64840468dacadc9c4a61f292c8f25a7e9563642e552c89cfc7e7a",
+    "registered_security": [
+      {
+        "context_id": "c-1",
+        "symbol": "PLTR",
+        "title": "Class A Common Stock, par value $0.001 per share",
+        "exchange": "The Nasdaq Stock Market LLC"
+      }
+    ],
+    "explicit_common_share_title": true,
+    "entity_shell_labels": [
+      "☒"
+    ],
+    "investment_company_labels": [],
+    "legal_type_approved": false,
+    "scope_approved": false
+  },
+  "class_counts": [
+    {
+      "context_id": "c-2",
+      "member": "us-gaap:CommonClassAMember",
+      "member_namespace": "http://fasb.org/us-gaap/2026",
+      "disclosed_on": "2026-10-26",
+      "shares": 2306705341,
+      "decimals": "INF"
+    },
+    {
+      "context_id": "c-3",
+      "member": "us-gaap:CommonClassBMember",
+      "member_namespace": "http://fasb.org/us-gaap/2026",
+      "disclosed_on": "2026-10-26",
+      "shares": 101787133,
+      "decimals": "INF"
+    },
+    {
+      "context_id": "c-4",
+      "member": "pltr:CommonClassFMember",
+      "member_namespace": "http://www.palantir.com/20260930",
+      "disclosed_on": "2026-10-26",
+      "shares": 1005000,
+      "decimals": "INF"
+    }
+  ],
+  "listed_class_member": "us-gaap:CommonClassAMember",
+  "valuation_eligible": false,
+  "scope_approved": false,
+  "mvp_accepted": false,
+  "sec_accession": "0001321655-26-000048",
+  "filed_on": "2026-11-03",
+  "source_url": "https://www.sec.gov/Archives/edgar/data/1321655/000132165526000048/pltr-20260930.htm"
+}
