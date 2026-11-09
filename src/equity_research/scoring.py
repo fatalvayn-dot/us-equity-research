@@ -37,6 +37,30 @@ def _at_most(value,bands):
     return next((Decimal(str(points)) for maximum,points in bands if value<=Decimal(str(maximum))),Decimal(0))
 
 
+def confirm_score_field(fact, companyfacts, payload, *, annual, original, as_of):
+    """Apply the score's exact SEC confirmation to one selected annual fact."""
+    spec = SPECS[fact.field]
+    request = FactRequest(fact.issuer_id, fact.field, fact.period_start, fact.period_end,
+                          'USD', 'currency', spec.accounting_definition, as_of)
+    verified = SecCompanyFacts(None)._extract(request, spec.tag, companyfacts, payload)
+    if verified is not None:
+        if verified.value != fact.value:
+            raise ValueError('current SEC confirmation mismatch')
+        return dict(field=fact.field, selected=asdict(fact), confirmed=asdict(verified))
+    if fact.field != 'liabilities':
+        raise ValueError('current SEC confirmation missing')
+    if (original is None or original.url != annual.source_url
+            or not aware(original.retrieved_at) or original.retrieved_at > as_of):
+        raise ValueError('original annual liabilities proof required')
+    proof = filing_derived_liabilities(original.body, cik=fact.issuer_id, period_end=annual.report_end)
+    if Decimal(proof['value']) != fact.value:
+        raise ValueError('derived liabilities confirmation mismatch')
+    return dict(field=fact.field, selected=asdict(fact),
+                confirmation_method='original_filing_balance_equation',
+                confirmation={**proof, 'source_url':original.url,
+                              'retrieved_at':original.retrieved_at, 'raw_sha256':original.sha256})
+
+
 def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_of):
     """Rebuild evidence and all components; incoming scores/approvals are ignored.
 
@@ -102,21 +126,8 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
             cf=sources[companyfacts_url(cik)];payload=SecCompanyFacts._parse(cf,cik)[1];checks=[]
             for field in REQUIRED:
                 validation_stage='financial_confirmation.'+field
-                f=facts[field];spec=SPECS[field]
-                request=FactRequest(cik,field,f.period_start,f.period_end,'USD','currency',spec.accounting_definition,as_of)
-                verified=SecCompanyFacts(None)._extract(request,spec.tag,cf,payload)
-                if verified is None and field=='liabilities':
-                    original=sources.get(annual.source_url)
-                    if original is None:raise ValueError('original annual liabilities proof required')
-                    proof=filing_derived_liabilities(original.body,cik=cik,period_end=annual.report_end)
-                    if Decimal(proof['value'])!=f.value:raise ValueError('derived liabilities confirmation mismatch')
-                    checks.append(dict(field=field,selected=asdict(f),
-                        confirmation_method='original_filing_balance_equation',
-                        confirmation={**proof,'source_url':original.url,
-                            'retrieved_at':original.retrieved_at,'raw_sha256':original.sha256}))
-                else:
-                    if verified is None or verified.value!=f.value:raise ValueError('current SEC confirmation mismatch')
-                    checks.append(dict(field=field,selected=asdict(f),confirmed=asdict(verified)))
+                checks.append(confirm_score_field(facts[field], cf, payload, annual=annual,
+                    original=sources.get(annual.source_url), as_of=as_of))
             peer=comparative.get(cik)
             if peer is None or peer['symbol']!=symbol or peer['status']!='review_required':
                 row['blockers']=['comparable_revenue_required'];continue
