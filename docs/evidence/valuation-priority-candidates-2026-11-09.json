@@ -1,0 +1,178 @@
+{
+  "companies": [
+    {
+      "symbol": "INTU",
+      "issuer_id": "0000896878"
+    },
+    {
+      "symbol": "NOW",
+      "issuer_id": "0001373715"
+    },
+    {
+      "symbol": "SNPS",
+      "issuer_id": "0000883241"
+    },
+    {
+      "symbol": "MPWR",
+      "issuer_id": "0001280452"
+    },
+    {
+      "symbol": "ON",
+      "issuer_id": "0001097864"
+    },
+    {
+      "symbol": "SWKS",
+      "issuer_id": "0000004127"
+    },
+    {
+      "symbol": "TYL",
+      "issuer_id": "0000860731"
+    }
+  ],
+  "financial_run_id": 42455760184,
+  "valuation_run_id": 42536567400,
+  "score_run_id": 42536926634,
+  "valuation_artifact_id": 13640160185,
+  "score_artifact_id": 13639024015,
+  "observed_as_of": "2026-11-08T23:47:44.772512+00:00",
+  "market_blockers": [
+    {
+      "symbol": "PLTR",
+      "issuer_id": "0001321655",
+      "shares": "missing_disclosed_shares",
+      "price": "valid",
+      "history": "not_started",
+      "budget_deferred": []
+    },
+    {
+      "symbol": "CRWD",
+      "issuer_id": "0001535527",
+      "shares": "invalid_data",
+      "price": "valid",
+      "history": "not_started",
+      "budget_deferred": []
+    },
+    {
+      "symbol": "ADBE",
+      "issuer_id": "0000796343",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "INTU",
+      "issuer_id": "0000896878",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "NOW",
+      "issuer_id": "0001373715",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "SNPS",
+      "issuer_id": "0000883241",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "MCHP",
+      "issuer_id": "0000827054",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "MPWR",
+      "issuer_id": "0001280452",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "ON",
+      "issuer_id": "0001097864",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "SWKS",
+      "issuer_id": "0000004127",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "TYL",
+      "issuer_id": "0000860731",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    }
+  ],
+  "score_or_scope_approval": false
+}
