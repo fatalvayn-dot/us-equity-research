@@ -189,6 +189,14 @@ jobs:
               --lineage data/valuation-current/priority-lineage.json
           fi
 
+      - name: Şirket bazlı kaynak engellerini sınıflandır
+        if: steps.select.outputs.collect == 'true' && success()
+        run: |
+          python scripts/audit_valuation_blockers.py \
+            --report data/valuation-current/report.json \
+            --priority-plan docs/evidence/valuation-priority-candidates-2026-11-09.json \
+            --output data/valuation-current/blocker-audit.json
+
       - name: Kaynak toplama özetini göster
         if: steps.select.outputs.collect == 'true' && success()
         env:
@@ -211,6 +219,14 @@ jobs:
                  f"- Hisse sınıfı: {s['share_states']}",
                  f"- Fiyat: {s['price_states']}",
                  f"- Piyasa geçmişi: {s['history_states']}"]
+          audit=json.loads(Path('data/valuation-current/blocker-audit.json').read_text())
+          lines.extend(['', '## Öncelikli 14 şirketin kaynak kontrolü',
+                        f"- Hazır piyasa kanıtı: {audit['priority_complete']}/{audit['priority_candidates']}",
+                        f"- Öncelikli yeni GET: {audit['priority_gets']}",
+                        f"- Toplam piyasa kanıtı: {audit['all_complete']}/{audit['candidates']}"])
+          for company in audit['priority']:
+              reasons=', '.join(f"{b['leg']}={b['status']}" for b in company['blockers']) or 'üç piyasa bacağı doğrulanmış'
+              lines.append(f"- {company['symbol']}: {reasons}")
           print(json.dumps(s,ensure_ascii=False,indent=2))
           with Path(os.environ['GITHUB_STEP_SUMMARY']).open('a') as out:
               out.write('\n'.join(lines)+'\n')

@@ -104,6 +104,17 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertEqual(reviewed['valuation_run_id'],42598993077)
         self.assertEqual(reviewed['valuation_artifact_id'],13664443650)
 
+    def test_company_blocker_audit_is_part_of_live_artifact(self):
+        self.assertIn("python scripts/audit_valuation_blockers.py", self.text)
+        self.assertIn("--output data/valuation-current/blocker-audit.json", self.text)
+        self.assertIn("data/valuation-current/blocker-audit.json", self.text)
+        self.assertIn("audit['priority_complete']", self.text)
+        self.assertIn("audit['priority_gets']", self.text)
+        self.assertLess(self.text.index("collect-valuation-sources"),
+                        self.text.index("audit_valuation_blockers.py"))
+        self.assertLess(self.text.index("audit_valuation_blockers.py"),
+                        self.text.index("blocker-audit.json').read_text()"))
+
     def test_provenance_secrecy_and_no_score_bypass(self):
         self.assertIn("SEC_USER_AGENT", self.text)
         self.assertIn("permissions:", self.text)

@@ -1,5 +1,50 @@
 # Development status
 
+## 9 Kasım 2026 — 14 öncelikli şirketin canlı kaynak engellerini şirket bazında raporlama (PR testinde)
+
+Başlangıç main `60f5415ce9928564fbfddb58638157a0d928f1b6`
+(PR #70), Foundation CI `42612666281` Python 3.11/3.12/3.13
+başarılı; açık PR yoktu. PR #70, 14 şirketlik
+öncelik planını son gerçek kaynak devamı
+`42598993077` raporunun SHA-256 özetiyle
+eşleştirdi; skor karşılaştırma kapasitesini 14'e
+çıkardı. Son doğrulanmış güncel skor paketi
+`42599479886` 7 şirketi puanladı; iki kesitte
+14 farklı şirket puanlanmış olsa da bugünkü tek
+raporda 14 güncel skor yok. 19 değerleme engeli,
+72 sektör uygunluk engeli, iki kritik finansal
+inceleme kaydı önceki üretim kesimindendir.
+
+Yeni `scripts/audit_valuation_blockers.py`,
+tamamlanmış 100 şirketlik değerleme raporundaki
+her şirketin `share_check`, `price_check`,
+`history_check`, `identity_status` değerlerini,
+kendi `attempts[].http_requested` gerçek
+kaynak isteklerini ve engel nedenlerini ayrı
+satırlarda tutar. İncelenmiş 14 benzersiz
+sembol/CIK çifti öncelikli gösterilir;
+diğer 86 şirketin durumları kaybolmaz. Bozuk
+kimlik, hatalı 100 aday sayısı veya eksik
+durum kontrolü sessizce kabul edilmez.
+Yeni `blocker-audit.json` değerleme
+`valuation-source-state` artifact'ında
+saklanır; GitHub Actions özetinde 14 şirket
+için Türkçe engel açıklamaları gösterilir.
+Tam piyasa kanıtı, yatırım puanı veya
+finansal kabul anlamına gelmez.
+
+Sentetik birim sınırları ve workflow sözleşme
+testleri eklendi. Henüz bu kodla bir canlı
+üretim artifact'ı oluşturulmadı. CI geçmeden
+merge yapılmayacak. Sonraki iş: gerçek
+250 GET değerleme taramasını yeni dosya
+üreterek tamamlayan ilk koşuda 14 şirketin
+piyasa kanıtı/engellerini ve takip eden tam
+skor raporunu doğrula; ardından MVP kabul
+kontrollerini çalıştır. Altman Z'ye
+dokunulmadı.
+
+
 ## 9 Kasım 2026 — On dört adayın üretim devri ve karşılaştırma kapasitesi
 
 Başlangıç `main` `58e76dcb4b897a4fd00365d9fd3bbf5fa028d17b` (PR #69).
