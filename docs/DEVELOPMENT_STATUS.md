@@ -1,5 +1,23 @@
 # Development status
 
+## 10 Kasım 2026 — Ağır arşiv testlerinin tekrarını azaltma
+
+Başlangıç main `667c1e806d7517a90377472f39cb4399dda62161` (PR #84).
+Kesin PR CI `42719052538` Python 3.11, 3.12 ve 3.13'te başarılı.
+Yerelde 829 test geçti. Doğrulanmış üretim skor ZIP'inden çıkarılan
+Türkçe HTML, manifest özetiyle eşleşti ve 100 aday ile 5 skor içeriyor.
+
+CI tam testi Python 3.12'de sürdürür. Python 3.11 ve 3.13'te
+arşiv tekrarına ayrılmış dokuz dosya hariç aynı keşif kapsamı
+çalışır. Bütün sürümlerde durum komutu çalışır. Testler silinmedi.
+
+Son prototip kesimi `42717115072`: 5 skor, 21 değerleme,
+72 sektör modeli ve 2 kritik finans incelemesi engeli. Son
+finansal üretim `42455760184`, sequence 10. 100 metadata,
+100 adi hisse adayı, 98 finansal şirket, 961 kabul edilen değer
+ve 704 hesaplama. Sıradaki sadeleştirme, doğrulanmış aynı paketin
+sequence sınırında yinelenen indirme ve taramasını azaltmaktır.
+
 ## 10 Kasım 2026 — Çalışan prototipin teslimi ve değerleme akışının sadeleşmesi
 
 Başlangıç main `3f7ff6ed9316737a1dd9257bf5cdf6c42c461b67` (PR #83).

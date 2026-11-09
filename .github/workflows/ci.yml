@@ -21,9 +21,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - run: python -m unittest discover -s tests -v
+      - name: Tam test paketi
+        if: matrix.python == '3.12'
+        run: python -m unittest discover -s tests -v
         env:
           PYTHONPATH: src
+      - name: Python uyumluluk testleri
+        if: matrix.python != '3.12'
+        run: |
+          mapfile -t modules < <(find tests -maxdepth 1 -name 'test_*.py' ! -name 'test_*_recorded.py' -printf '%f\n' | sort)
+          python -m unittest -v "${modules[@]%.py}"
+        env:
+          PYTHONPATH: src:tests
       - run: python -m equity_research status
         env:
           PYTHONPATH: src
