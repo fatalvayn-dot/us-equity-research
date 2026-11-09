@@ -1,5 +1,36 @@
 # Development status
 
+## 10 Kasım 2026 — Değerleme devamının üretim kanıtı ve kaynak sürekliliği
+
+Başlangıç main `a6c4fe51a008f49dafb9ff778ac3802b2a012757` (PR #81).
+Kesin PR CI `42686337861` ve main CI `42686951113` başarılı.
+PR #81 sonrasında değerleme `42690490711` ve `42699671898`
+gerçekten toplama yaptı. Her koşu 51 yeni GET kaydetti.
+Son koşunun doğrudan üst paketi `42690490711`, Actions iş kaydında
+doğrulandı. Paketler `13705949205` ve `13710533407` GitHub
+SHA-256 özetleriyle eşleşti. Son pakette üst koşunun 1.158
+SQLite gözlemi korundu, 51 gözlem eklendi.
+
+Salt okunur durum denetimine `--previous-state` eklendi.
+İki paketin SQLite ve kaynak manifestleri bağımsız doğrulanır.
+Bir gözlemin URL, SHA-256 veya alınma zamanı değiştirilirse
+toplam kayıt sayısı eşit olsa bile devam doğrulaması durur.
+8 durum ve 12 değerleme iş akışı testi geçti.
+
+ADI'nin 9 Kasım 20:13 UTC kesiminde sınıfı, fiyatı ve geçmişi
+doğrulandı. Son kesimde CompanyFacts gözlemi özgün tarihiyle korundu,
+fiyat yenilemesi ve geçmiş bütçe bekledi. CRWD'nin sınıf engeli sürüyor.
+Son skor `42700215861` (artifact `13711975323`), 9 Kasım 21:12 UTC
+kesiminde INTU, MPWR, NOW, SNPS ve ON'u puanladı. Engeller 21
+değerleme, 72 sektör modeli ve 2 kritik finans incelemesi. Skor
+manifesti ve bağlı değerleme raporu doğrulandı, engel çıktısı eşleşti.
+
+Son finansal üretim `42455760184`, kök `42223465006`, sequence 10.
+100 metadata, 100 adi hisse adayı, 98 finansal şirket, 961 kabul
+edilmiş değer ve 704 hesaplama. SEC `42699527807` toplama adımını
+atladı. Sıradaki iş, ADI için aynı skor kesiminde piyasa kanıtını
+tamamlamak ve CRWD'nin sınıf ile bölünme uyumunu incelemek.
+
 ## 9 Kasım 2026 — Değerleme devamını iş başlamadan kapanan koşudan kurtarma
 
 Başlangıç main `81706031005c4d69b56c1f4b0138bb8abbcbe221` (PR #80).
