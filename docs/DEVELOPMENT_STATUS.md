@@ -1,5 +1,44 @@
 # Development status
 
+## 9 Kasım 2026 — Bekleyen adayların dokuz SEC finansal alanı teyit edildi
+
+Başlangıç main `8c8c01ecfc3a59816f01e1aa7994a66923a57650` (PR #56),
+Foundation CI `42558331181` başarılı, açık PR yoktu.
+Son finansal, değerleme ve skor işleri `42560951048`, `42561017926`
+ve `42561048845` yeni artifact üretmedi. Üretim zinciri
+`42455760184` → `42536567400` → `42536926634` olarak kaldı.
+
+Skor motorunun SEC alan teyidi ayrı bir işlevde birleştirildi.
+`scripts/verify_pending_score_inputs.py` aynı teyidi piyasa
+kapılarına girmeden, salt okunur ve ağsız çalıştırır.
+Üretim state ZIP SHA-256, manifest dosya özetleri, SQLite
+bütünlüğü ve ham kaynak özetleri doğrulandı. Denetim arşivin
+özgün kesim tarihini kullanır. Değerler, dönem, USD ve muhasebe
+tanımı üzerinden eşleştirildi. Teyit, sıralama veya skor üretmez.
+
+INTU, NOW, SNPS, MPWR, ON, SWKS, TYL ve PLTR'de dokuzar
+alan eşleşti. ADBE'de sekiz alan eşleşti, sözleşme geliri eksik.
+ADBE SEC Company Facts arşivinde aynı döneme ait genel
+`us-gaap:Revenues` var, modelin sözleşme geliri tanımının
+yerine kullanılmadı. Kanıt:
+`docs/evidence/pending-score-sec-confirmations-2026-11-09.json`.
+İlk geçici denetim betiği ham JSON sayı türü nedeniyle durdu.
+Kaydedilmiş batch, üretimdeki `build_report` ile ayrıştırıldı.
+Kalıcı komut ile aynı 80/81 sonuç tekrarlandı:
+
+```sh
+PYTHONPATH=src python scripts/verify_pending_score_inputs.py --state-dir /path/to/verified-state --run-id 42455760184 INTU NOW SNPS MPWR ON SWKS TYL PLTR ADBE
+```
+
+16 odaklı skor testi başarılı. Tam regresyon ve kesin head CI
+birleşim öncesi denetlenir. Son canlı kapsam 100 metadata,
+100 adi hisse adayı, 98 finansal şirket, 961 kabul edilmiş değer,
+704 hesaplama ve yedi araştırma skoru. Piyasa ve hisse kanıtı
+bekleyen adaylar puanlanmadı. Sequence 10 sınırı korundu.
+Sonraki iş: en yeni üretim değerleme paketinde yedi adayın
+piyasa kapılarını ve SEC teyitlerini özgün zamanlarıyla yeniden
+denetle. MVP kabul edilmedi.
+
 ## 9 Kasım 2026 — Piyasa kanıtı bekleyen adaylarda SEC gelir dönemleri
 
 Başlangıç main `33e73bc7110b08ddf642c528020b8835517a822e` (PR #55),
