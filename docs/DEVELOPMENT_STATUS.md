@@ -1,5 +1,33 @@
 # Development status
 
+## 9 Kasım 2026 — Değerleme devamı için eskiye dönüş engeli
+
+Başlangıç `main` commit'i `afb946a4c3af9bcb111047ae5257e4de786762f7`
+(PR #64), birleşim sonrası Foundation CI `42589979086` başarılı.
+Son doğrulanan üretim zinciri `42455760184` (SEC sequence 10)
+→ `42536567400` → `42536926634`. Kapsam 100 metadata kaydı, 100
+adi hisse adayı, 98 finansal şirket, 961 kabul edilmiş değer, 704 hesaplama
+ve 7 araştırma skoru. Çevrimdışı tekrarda 13 değerleme engeli kaldı.
+SEC devam bütçesi incelenmiş sequence 10 sınırında.
+
+Değerleme devam araması artık yalnız ilk 30 başarılı koşuya bağlı değil.
+Daha yeni koşu ancak bütün denemelerde toplama adımının atlandığı
+doğrulanırsa geçilir. Çalışan toplayıcı, kayıp veya süresi dolmuş paket,
+başarısız koşunun paketi ve birden çok eşleşme açık hata üretir.
+İlk denetlenmiş taban `42536567400` bulunamazsa boş durum açılmaz.
+Elle girilen run ID yalnız en yeni güvenli seçimi doğrular.
+Aynı run ID ile Re-run işlemi veri yazan yol için reddedilir.
+Seçilen paket mevcut salt okunur bütünlük kontrolünden geçer.
+
+Yedi yeni seçim testi ve sekiz workflow sözleşme testi geçti.
+GitHub Actions API ile salt okunur entegrasyonda altı atlanmış koşunun
+toplama adımları ayrı ayrı kontrol edildi. Seçim `42536567400` ve
+artifact `13640160185` üzerinde kaldı. Yeni canlı veri gözlenmedi.
+Sonraki iş, gerçek yeni değerleme paketinde öncelikli şirketlerin kaynak
+isteklerini, fiyat, hisse sınıfı, geçmiş ve imleç kanıtını denetlemek.
+Eksik veya kurtarma gerektiren paket varsa durup o run ID üzerinden
+kanıtları incele. MVP kabulü bekliyor.
+
 ## 9 Kasım 2026 — Değerleme devam paketinin salt okunur bütünlük kontrolü
 
 Başlangıç `main` commit'i `d8a218ea338af14c6b014e6d4a8e9d3793821db3`

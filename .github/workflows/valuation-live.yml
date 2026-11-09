@@ -15,7 +15,7 @@ on:
         required: true
         type: string
       valuation_resume_run_id:
-        description: Önceki değerleme çalışmasının run ID değeri (boşsa otomatik bulunur)
+        description: Son değerleme çalışmasının run ID değeri (boşsa otomatik bulunur)
         required: false
         type: string
       max_new_requests:
@@ -93,22 +93,7 @@ jobs:
             echo "::error::Seçilen run için tek ve geçerli live-acceptance-evidence artifact bulunamadı"
             exit 2
           fi
-          RESUME_RUN="$RESUME_RUN_INPUT"
-          if [ -n "$RESUME_RUN" ] && ! [[ "$RESUME_RUN" =~ ^[1-9][0-9]*$ ]]; then
-            echo "::error::Devam run ID pozitif sayı olmalıdır"
-            exit 2
-          fi
-          if [ -z "$RESUME_RUN" ]; then
-            for PREV in $(gh api "repos/$REPO/actions/workflows/valuation-live.yml/runs?per_page=30" \
-              --jq '.workflow_runs[] | select(.status == "completed" and .conclusion == "success" and .head_branch == "main") | .id'); do
-              FOUND=$(gh api "repos/$REPO/actions/runs/$PREV/artifacts?per_page=100" \
-                --jq '[.artifacts[] | select(.name == "valuation-source-state" and .expired == false)] | length')
-              if [ "$FOUND" -eq 1 ]; then
-                RESUME_RUN="$PREV"
-                break
-              fi
-            done
-          fi
+          RESUME_RUN=$(python -m scripts.select_valuation_resume)
           echo "collect=true" >> "$GITHUB_OUTPUT"
           echo "source_run=$SOURCE_RUN" >> "$GITHUB_OUTPUT"
           echo "resume_run=$RESUME_RUN" >> "$GITHUB_OUTPUT"
@@ -124,7 +109,7 @@ jobs:
           fi
 
       - name: Önceki değerleme çalışma durumunu yükle
-        if: steps.select.outputs.collect == 'true' && steps.select.outputs.resume_run != ''
+        if: steps.select.outputs.collect == 'true'
         uses: actions/download-artifact@v4
         with:
           name: valuation-source-state
@@ -134,7 +119,7 @@ jobs:
 
       - name: İndirilen değerleme durumunu salt okunur doğrula
         id: verify_resume
-        if: steps.select.outputs.collect == 'true' && steps.select.outputs.resume_run != ''
+        if: steps.select.outputs.collect == 'true'
         env:
           PYTHONPATH: src
         run: python -m scripts.verify_valuation_state data/valuation-current
@@ -234,7 +219,7 @@ jobs:
       - name: Değerleme kanıtını ve devam durumunu koru
         if: >-
           always() && steps.select.outputs.collect == 'true'
-          && (steps.select.outputs.resume_run == '' || steps.verify_resume.outcome == 'success')
+          && steps.verify_resume.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: valuation-source-state

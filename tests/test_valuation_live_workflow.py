@@ -46,7 +46,7 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("valuation-source-state", self.text)
         self.assertIn("steps.select.outputs.resume_run", self.text)
         self.assertIn("run-id: ${{ steps.select.outputs.resume_run }}", self.text)
-        self.assertIn('select(.name == "valuation-source-state" and .expired == false)', self.text)
+        self.assertIn("RESUME_RUN=$(python -m scripts.select_valuation_resume)", self.text)
         self.assertIn("options: ['0', '51', '100', '250', '501']", self.text)
         self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '100' }}", self.text)
         self.assertIn("cancel-in-progress: false", self.text)
