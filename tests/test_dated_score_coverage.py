@@ -1,5 +1,4 @@
 """Synthetic archive tests; never represent these fixtures as real stocks."""
-import copy
 import gzip
 import hashlib
 import json
@@ -14,7 +13,7 @@ from scripts.audit_dated_score_coverage import SnapshotError, read_snapshot, com
 def archive(path, when, scores, *, tamper=None, mvp=False):
     companies=[]
     for idx,(symbol,score) in enumerate(scores.items(),1):
-        companies.append(dict(issuer_id=f'{idx:010d}',symbol=symbol,
+        companies.append(dict(issuer_id=f'{int(hashlib.sha256(symbol.encode()).hexdigest()[:12],16)%10**10:010d}',symbol=symbol,
             rank=idx,total_score=str(score),status='scored_research_hypothesis',
             evidence=dict(financial_confirmations=[{} for _ in range(9)])))
     ranking=[dict(issuer_id=row['issuer_id'],symbol=row['symbol'],
