@@ -4,12 +4,13 @@ import re
 from dataclasses import asdict
 from datetime import date, datetime, time, timedelta, timezone
 from decimal import Decimal, localcontext
+from enum import Enum
 
 from .companyfacts import SecCompanyFacts, companyfacts_url, FORMS
 from .concept_diagnostics import Inventory
 from .filing_metadata import filing_security_metadata
 from .models import Fact, FactRequest, aware
-from .prices import parse_price, price_url
+from .prices import PriceFailure, parse_price, price_url
 from .providers import ProviderFailure, Status
 from .sec import DIRECTORY_URL
 from .submissions import parse_submissions, submissions_url
@@ -42,12 +43,27 @@ def _cover_debt_corroboration(title):
     return None
 
 
+class ShareIssue(str, Enum):
+    STALE_COMPANYFACTS = 'stale_share_companyfacts'
+    STALE_DISCLOSURE = 'stale_share_disclosure'
+    CLASS_MODEL_REQUIRED = 'class_specific_share_model_required'
+
+
+class ShareFailure(ProviderFailure):
+    def __init__(self, issue: ShareIssue):
+        self.issue = issue
+        super().__init__(Status.INVALID_DATA)
+
+
 def disclosed_shares(response, *, cik, as_of):
     """Latest exact DEI shares observation; no weighted-average/issued-share aliases."""
     if not aware(as_of): raise ValueError('aware cutoff required')
     _, payload = SecCompanyFacts._parse(response, cik)
-    if not timedelta(0) <= as_of-response.retrieved_at <= SNAPSHOT_TTL:
+    age = as_of - response.retrieved_at
+    if age < timedelta(0):
         raise ProviderFailure(Status.INVALID_DATA)
+    if age > SNAPSHOT_TTL:
+        raise ShareFailure(ShareIssue.STALE_COMPANYFACTS)
     try:
         taxonomy=payload['facts'].get('dei', {})
         if not isinstance(taxonomy,dict):raise ValueError('DEI object required')
@@ -102,7 +118,7 @@ def disclosed_shares(response, *, cik, as_of):
             raise ValueError('ambiguous latest share disclosure')
         row=chosen[0]
         if not timedelta(0)<=as_of.date()-row['end']<=SHARE_MAX_AGE:
-            raise ValueError('stale disclosed share date')
+            raise ShareFailure(ShareIssue.STALE_DISCLOSURE)
         row.pop('chronology_valid')
         result=dict(**row,issuer_id=cik,concept=SHARE_CONCEPT,unit='shares',
                     source_url=response.url,raw_sha256=response.sha256,retrieved_at=response.retrieved_at)
@@ -165,7 +181,7 @@ def verify_share_class(shares, metadata, filing, *, symbol, as_of):
         # the same economics. Class-labeled covers and dimensional DEI counts
         # require a separately accepted multi-class model.
         if any(re.search(r'\bclass\s+[A-Za-z0-9]+\b',r['title'],re.I) for r in cover['registered_security']):
-            raise ValueError('class-specific capital structure requires review')
+            raise ShareFailure(ShareIssue.CLASS_MODEL_REQUIRED)
         # SEC submissions can list a common symbol alongside preferred or debt
         # tickers. Permit that only when this exact filing cover independently
         # identifies every additional ticker as explicitly non-common and no
@@ -227,7 +243,7 @@ def verify_share_class(shares, metadata, filing, *, symbol, as_of):
             c=p.contexts.get(f['attrs'].get('contextref'))
             if not c or c.get('scheme')!='http://www.sec.gov/CIK' or c.get('identifier','').strip().zfill(10)!=cik:
                 raise ValueError('share issuer context mismatch')
-            if c['dimensional']:raise ValueError('dimensional share class requires review')
+            if c['dimensional']:raise ShareFailure(ShareIssue.CLASS_MODEL_REQUIRED)
             if c.get('instant','').strip()!=shares['end'].isoformat() or c.get('startdate'):
                 raise ValueError('share instant mismatch')
             matches.append(_share_number(f,p))
@@ -381,8 +397,7 @@ def build_valuation_report(batch, responses, *, as_of):
             row['status']='indicative_arithmetic_only'
         except ProviderFailure as exc:
             row.update(status='source_contract_rejected',provider_status=exc.status.value,failed_validation_stage=diagnostics['validation_stage'])
-            from .prices import PriceFailure
-            if isinstance(exc,PriceFailure):row['failure_detail']=exc.issue.value
+            if isinstance(exc,(PriceFailure,ShareFailure)):row['failure_detail']=exc.issue.value
         except (ValueError,KeyError,TypeError):
             row.update(status='source_contract_rejected',provider_status=Status.INVALID_DATA.value,failed_validation_stage=diagnostics['validation_stage'])
         companies.append(row)

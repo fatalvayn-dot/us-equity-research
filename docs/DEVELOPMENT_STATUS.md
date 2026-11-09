@@ -1,5 +1,36 @@
 # Development status
 
+## 9 Kasım 2026 — Hisse tazeliği ve sınıf modeli engellerini ayırma
+
+Başlangıç `main` `f4512a4370d49dd5960dc0b4b254ced74fb81cb3` (PR #77).
+Kesin PR CI `42650956481`, ana dal CI `42651577472` başarılı.
+SEC `42653907196` yeni finansal paket üretmedi. Üretim finansal durumu
+`42455760184`, kök `42223465006`, sequence 10. Kapsam 100 metadata,
+100 adi hisse adayı, 98 finansal şirket, 961 kabul edilmiş değer ve
+704 hesaplama. Sequence bütçesi değişmedi.
+
+Son değerleme `42654072673` (artifact `13691815112`) 51 GET,
+100 kimlik eşleşmesi, 55 tarihli hisse sınıfı, 13 fiyat ve 9 fiyat
+geçmişi üretti. İmleç GS'den ANET'e ilerledi. Son skor
+`42654693840` (artifact `13691940548`), 9 Kasım 16:26:53 UTC
+kesiminde INTU, CRM, MRVL, NOW ve SNPS'yi puanladı.
+95 puansız adayda 72 sektör modeli, 21 değerleme ve 2 kritik finans
+incelemesi engeli var. Önceki 14 skor ayrı kesimde duruyor.
+
+Hisse değerleme denetimi artık SEC CompanyFacts tazelik süresini,
+bildirilen hisse adedinin yaşını ve sınıfa özgü model gereksinimini
+ayrı nedenler olarak JSON, Türkçe Markdown ve HTML raporlarına taşır.
+Bu nedenler önceki ret kapılarını gevşetmez ve eski fiyatı
+güncellemez. ADI'nin son skor kesimindeki arşiv CompanyFacts
+gözlemi 16 saatten eski. CRWD'nin fiyatı toplandı, ancak özgün
+hisse sınıfı kanıtı model kapısında durdu. Dokuz tanı regresyonu
+geçti. ZIP ve kaynak özetleri doğrulanan üretim arşivinden
+iki şirketin özgün gözlemleriyle ret nedenleri yeniden üretildi.
+SQLite ve kaynak paketi 1.107 gözlemde eşleşti, önceki 1.056
+gözlemin tamamı korundu. Sıradaki iş, ADI'nin taze CompanyFacts ve fiyatını mevcut
+sırada doğrulamak ve CRWD için sınıf modelinin koşullarını incelemek.
+MVP kabulü açık.
+
 ## 9 Kasım 2026 — PLTR'nin üç hisse sınıfını özgün SEC kapağından denetleme
 
 Başlangıç `main` `9c2f51d1306aae95e5ac3ef487aeec3d1cec218f` (PR #76).

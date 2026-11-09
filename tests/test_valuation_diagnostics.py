@@ -17,6 +17,18 @@ class DiagnosticTests(unittest.TestCase):
         self.assertEqual(r['failed_validation_stage'],'price');self.assertEqual(r['failure_detail'],'stale_response')
         r=self.report([cf(),meta(),filing(title='Preferred Stock'),identity(),price()])
         self.assertEqual(r['failed_validation_stage'],'share_class');self.assertIsNone(r['valuation'])
+    def test_stale_share_snapshot_and_class_model_are_distinct(self):
+        stale = replace(cf(), retrieved_at=NOW-timedelta(hours=7))
+        r = self.report([stale, meta(), filing(), identity(), price()])
+        self.assertEqual(r["failed_validation_stage"], "disclosed_shares")
+        self.assertEqual(r["failure_detail"], "stale_share_companyfacts")
+        self.assertIsNone(r["valuation"])
+
+        r = self.report([cf(), meta(), filing(title="Class A Common Stock"), identity(), price()])
+        self.assertEqual(r["failed_validation_stage"], "share_class")
+        self.assertEqual(r["failure_detail"], "class_specific_share_model_required")
+        self.assertIsNone(r["valuation"])
+
     def test_missing_disclosed_shares_is_not_invalid_data(self):
         source=cf();body=json.loads(source.body);body['facts']['dei']={}
         r=self.report([replace(source,body=json.dumps(body).encode()),meta(),filing(),identity(),price()])
