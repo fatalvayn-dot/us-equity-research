@@ -113,12 +113,15 @@ class ValuationSourceCollector:
             separators=(',', ':')).encode()).hexdigest()
         cursor_key = 'valuation-candidate-cursor-v1'
         prior = self.checkpoint.read(cursor_key) if self.limit else None
-        start = (prior['next_index'] if isinstance(prior, dict)
-                 and prior.get('fingerprint') == fingerprint
-                 and type(prior.get('next_index')) is int
-                 and 0 <= prior['next_index'] < len(rows) else 0)
+        cursor_matches = (isinstance(prior, dict)
+                          and prior.get('fingerprint') == fingerprint
+                          and type(prior.get('next_index')) is int
+                          and 0 <= prior['next_index'] < len(rows))
+        start = prior['next_index'] if cursor_matches else 0
+        retrying_partial = cursor_matches and prior.get('retrying_partial') is True
         scan = rows[start:] + rows[:start]
         last_requested_index = None
+        last_request_partial = False
         identity_attempts = []
         identity = None
         identity_validation = dict(status='not_started')
@@ -201,15 +204,25 @@ class ValuationSourceCollector:
                     self.reject(result, 'history_check', exc)
             if any(a.get('http_requested') for a in result['attempts']):
                 last_requested_index = (start + offset) % len(rows)
-        if self.limit and last_requested_index is not None:
+                last_request_partial = any(
+                    a.get('deferred_reason') == 'request_budget' for a in result['attempts'])
+        next_index = None
+        if last_requested_index is not None:
+            # Resume the boundary company once so its cached partial work can
+            # finish. Then rotate even if expired inputs consume the budget again.
+            retry_partial = last_request_partial and not (
+                retrying_partial and last_requested_index == start)
+            next_index = (last_requested_index + (0 if retry_partial else 1)) % len(rows)
             self.checkpoint.write(cursor_key, dict(fingerprint=fingerprint,
-                next_index=(last_requested_index + 1) % len(rows)),
+                next_index=next_index, retrying_partial=retry_partial),
                 self.owner, self.clock(), LEASE_TTL)
         order = {r['issuer_id']: i for i, r in enumerate(rows)}
         companies.sort(key=lambda company: order[company['issuer_id']])
         return dict(schema_version=1, report_kind='valuation_source_collection_scope_pending',
             as_of=self.clock().isoformat(), companies=companies, identity_attempts=identity_attempts,
             identity_validation=identity_validation,
+            continuation=dict(start_symbol=rows[start]['symbol'],
+                next_symbol=rows[next_index]['symbol'] if next_index is not None else None),
             summary=dict(candidates=len(companies), new_get_invocations=sum(self.calls.values()),
                 get_invocations_by_host=dict(self.calls),
                 identity_states=dict(Counter(c['identity_status'] for c in companies)),
