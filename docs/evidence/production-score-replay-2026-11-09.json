@@ -1,0 +1,567 @@
+{
+  "mode": "offline_production_score_replay",
+  "financial_run_id": 42455760184,
+  "as_of": "2026-11-08T23:48:52.968671+00:00",
+  "new_http_requests": 0,
+  "summary": {
+    "candidates": 100,
+    "scored_companies": 7,
+    "critical_review": 2,
+    "unscored": 93
+  },
+  "ranking": [
+    {
+      "rank": 1,
+      "symbol": "MU",
+      "issuer_id": "0000723125",
+      "score": "92",
+      "model_id": "semiconductors_v1"
+    },
+    {
+      "rank": 2,
+      "symbol": "AAPL",
+      "issuer_id": "0000320193",
+      "score": "67.5",
+      "model_id": "electronic_computers_v1"
+    },
+    {
+      "rank": 3,
+      "symbol": "MSFT",
+      "issuer_id": "0000789019",
+      "score": "66.5",
+      "model_id": "prepackaged_software_v1"
+    },
+    {
+      "rank": 4,
+      "symbol": "CRM",
+      "issuer_id": "0001108524",
+      "score": "66.0",
+      "model_id": "prepackaged_software_v1"
+    },
+    {
+      "rank": 5,
+      "symbol": "MRVL",
+      "issuer_id": "0001835632",
+      "score": "64.5",
+      "model_id": "semiconductors_v1"
+    },
+    {
+      "rank": 6,
+      "symbol": "TXN",
+      "issuer_id": "0000097476",
+      "score": "63",
+      "model_id": "semiconductors_v1"
+    },
+    {
+      "rank": 7,
+      "symbol": "AMAT",
+      "issuer_id": "0000006951",
+      "score": "59.5",
+      "model_id": "semiconductors_v1"
+    }
+  ],
+  "scored_company_evidence_unchanged": true,
+  "old_blockers": {
+    "complete_financial_review_required": 6,
+    "valuation_source_evidence_required": 61,
+    "specialized_or_unmodeled_sector": 24,
+    "critical_financial_review": 2
+  },
+  "replayed_blockers": {
+    "complete_financial_review_required": 6,
+    "specialized_or_unmodeled_sector": 72,
+    "valuation_source_evidence_required": 13,
+    "critical_financial_review": 2
+  },
+  "blocker_changes": [
+    {
+      "issuer_id": "0001652044",
+      "symbol": "GOOGL",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001326801",
+      "symbol": "META",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000019617",
+      "symbol": "JPM",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001141391",
+      "symbol": "MA",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000070858",
+      "symbol": "BAC",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000040545",
+      "symbol": "GE",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000895421",
+      "symbol": "MS",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000018230",
+      "symbol": "CAT",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001000275",
+      "symbol": "RY",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000886982",
+      "symbol": "GS",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000097745",
+      "symbol": "TMO",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001996810",
+      "symbol": "GEV",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000004962",
+      "symbol": "AXP",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000820313",
+      "symbol": "APH",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0002023554",
+      "symbol": "SNDK",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000077476",
+      "symbol": "PEP",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0002012383",
+      "symbol": "BLK",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000063908",
+      "symbol": "MCD",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000001800",
+      "symbol": "ABT",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001163165",
+      "symbol": "COP",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000100885",
+      "symbol": "UNP",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000315189",
+      "symbol": "DE",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000753308",
+      "symbol": "NEE",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000766704",
+      "symbol": "WELL",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000078003",
+      "symbol": "PFE",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000313616",
+      "symbol": "DHR",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001467373",
+      "symbol": "ACN",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001001838",
+      "symbol": "SCCO",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001137789",
+      "symbol": "STX",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001283699",
+      "symbol": "TMUS",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001035267",
+      "symbol": "ISRG",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000109198",
+      "symbol": "TJX",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000316709",
+      "symbol": "SCHW",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001551182",
+      "symbol": "ETN",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000936468",
+      "symbol": "LMT",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000106040",
+      "symbol": "WDC",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000896159",
+      "symbol": "CB",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000875320",
+      "symbol": "VRTX",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000012927",
+      "symbol": "BA",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001543151",
+      "symbol": "UBER",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000080661",
+      "symbol": "PGR",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000064040",
+      "symbol": "SPGI",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001262039",
+      "symbol": "FTNT",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001327811",
+      "symbol": "WDAY",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0000882835",
+      "symbol": "ROP",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001002047",
+      "symbol": "NTAP",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001086222",
+      "symbol": "AKAM",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    },
+    {
+      "issuer_id": "0001048695",
+      "symbol": "FFIV",
+      "before": [
+        "valuation_source_evidence_required"
+      ],
+      "after": [
+        "specialized_or_unmodeled_sector"
+      ]
+    }
+  ],
+  "mvp_accepted": false,
+  "valuation_run_id": 42536567400,
+  "score_run_id": 42536926634,
+  "artifact_ids": {
+    "financial": 13608291162,
+    "valuation": 13640160185,
+    "financial_evidence": 13607408956,
+    "score": 13639024015
+  }
+}

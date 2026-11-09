@@ -1,5 +1,39 @@
 # Development status
 
+## 9 Kasım 2026 — Üretim skoru tekrarında 13 değerleme engeli kaldı
+
+Başlangıç main `f5b0f766d89555a50e5c81a58eb550deb3876693` (PR #58).
+Foundation CI `42570048641` başarılı, açık PR yoktu. En yeni
+saatlik finansal/değerleme/skor işleri yeni artifact üretmedi.
+Üretim zinciri `42455760184` → `42536567400` → `42536926634`.
+
+`scripts/verify_production_score_replay.py`, arşivlenmiş
+finansal state'i ve değerleme koşusuyla bağlantısını, skor
+raporu dosya özetlerini, ham kaynak paketlerini ve finansal
+girdi özetlerini doğrular. Özgün kesim tarihinde ağı kullanmadan
+skoru tekrar hesaplar. Kimlik, sıralama veya puanlı şirketin
+kanıtı değişirse denetim hata verir.
+
+Dört üretim ZIP SHA-256 değeri Actions özetleriyle eşleşti.
+Sequence 10 state, manifest ve SQLite bütünlük denetimi geçti.
+Özgün skor kesiminde yedi puanlı şirketin tüm kayıtları ve
+sıralaması birebir korundu. 48 şirket değerleme engelinden
+model dışı sektöre ayrıldı. Aynı kesimde 13 değerleme engeli,
+72 model dışı, altı finansal inceleme ve iki kritik inceleme
+kaldı. Bu ayrım, yeni fiyat veya yeni skor değildir.
+Kanıt: `docs/evidence/production-score-replay-2026-11-09.json`.
+
+19 odaklı skor testi ve üretim entegrasyon tekrarı başarılı.
+Tam regresyon ve kesin PR head CI birleşimden önce denetlenir.
+Son canlı kapsam 100 metadata, 100 adi hisse adayı, 98 finansal
+şirket, 961 kabul edilmiş değer, 704 hesaplama ve yedi skor.
+100 aktif adi hisse MVP kabulü tamamlanmadı. Sequence 10 korundu.
+
+Sıradaki iş: yeni değerleme artifact'inde PLTR, CRWD, ADBE,
+INTU, NOW, SNPS, CDNS, ADSK, MCHP, MPWR, ON, SWKS ve TYL
+için hisse/fiyat/geçmiş kapılarını denetle. Eksik alan veya
+model dışı durum varsa skora geçmeden ayrı kaydet.
+
 ## 9 Kasım 2026 — Sektör modelini değerleme engelinden önce ayırma (PR testinde)
 
 Başlangıç main `5dd81a24f3d8a25da22d90a930b9f66a51042a9e`,
