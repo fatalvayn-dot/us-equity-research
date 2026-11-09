@@ -1,5 +1,31 @@
 # Development status
 
+## 9 Kasım 2026 — Değerleme devam paketinin salt okunur bütünlük kontrolü
+
+Başlangıç `main` commit'i `d8a218ea338af14c6b014e6d4a8e9d3793821db3`
+(PR #63), birleşim sonrası Foundation CI `42580356333` başarılı.
+SEC `42587467926`, değerleme `42587539552` ve skor `42587569361`
+koşuları artifact üretmedi. SEC sequence 10 incelenmiş sınırında.
+Son üretim zinciri `42455760184` → `42536567400` → `42536926634`.
+Son kapsam 100 metadata kaydı, 100 adi hisse adayı, 98 finansal şirket,
+961 kabul edilmiş değer, 704 hesaplama ve 7 araştırma skoru.
+Üretim arşivinin çevrimdışı tekrarında 13 değerleme engeli kaldı.
+
+Değerleme işinde indirilen devam paketi artık kaynak run işareti
+yazılmadan ve toplayıcı açılmadan doğrulanır. Gerekli SQLite dosyaları,
+tablo şemaları, etkin kira, SQLite bütünlüğü, kayıt ve ham kaynak
+SHA-256 özetleri ile rapor ve paket manifestinin eşliği kontrol edilir.
+Kaynak paketindeki gözlemler SQLite ile URL, SHA-256 ve zaman bazında
+birebir eşleşmelidir. Başarısız doğrulama yeni toplama ve bozuk devam
+paketinin tekrar yayımlanmasını engeller.
+
+ZIP SHA-256 değeri doğrulanan üretim artifact'i `13640160185` üzerinde
+salt okunur entegrasyon kontrolü 527 gövde, 655 eşleşen gözlem ve bir
+imleç kaydı doğruladı. Yedi doğrulayıcı birim testi ve sekiz workflow
+sözleşme testi geçti. Sonraki iş, veri üreten ilk yeni değerleme
+artifact'ında öncelikli şirketlerin GET, fiyat, sınıf, geçmiş ve imleç
+kanıtını incelemek. MVP kabulü bekliyor.
+
 ## 9 Kasım 2026 — Öncelikli GET kanıtı olmadan devam kaydı oluşturma hatası (PR testinde)
 
 Başlangıç ana dal `13b50f0d4d44cf4d130670a168f3de7e4899f372` (PR #62),

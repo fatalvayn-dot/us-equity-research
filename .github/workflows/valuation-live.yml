@@ -132,6 +132,13 @@ jobs:
           github-token: ${{ github.token }}
           run-id: ${{ steps.select.outputs.resume_run }}
 
+      - name: İndirilen değerleme durumunu salt okunur doğrula
+        id: verify_resume
+        if: steps.select.outputs.collect == 'true' && steps.select.outputs.resume_run != ''
+        env:
+          PYTHONPATH: src
+        run: python -m scripts.verify_valuation_state data/valuation-current
+
       - name: Değerleme paketinin finansal kaynak run ID bilgisini kaydet
         if: steps.select.outputs.collect == 'true'
         env:
@@ -225,7 +232,9 @@ jobs:
           PY
 
       - name: Değerleme kanıtını ve devam durumunu koru
-        if: always() && steps.select.outputs.collect == 'true'
+        if: >-
+          always() && steps.select.outputs.collect == 'true'
+          && (steps.select.outputs.resume_run == '' || steps.verify_resume.outcome == 'success')
         uses: actions/upload-artifact@v4
         with:
           name: valuation-source-state
