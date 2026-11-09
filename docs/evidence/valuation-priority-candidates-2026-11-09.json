@@ -58,11 +58,11 @@
     }
   ],
   "financial_run_id": 42455760184,
-  "valuation_run_id": 42536567400,
-  "score_run_id": 42536926634,
-  "valuation_artifact_id": 13640160185,
-  "score_artifact_id": 13639024015,
-  "observed_as_of": "2026-11-08T23:47:44.772512+00:00",
+  "valuation_run_id": 42598993077,
+  "score_run_id": 42599479886,
+  "valuation_artifact_id": 13664443650,
+  "score_artifact_id": 13664797659,
+  "observed_as_of": "2026-11-09T10:14:11.089044+00:00",
   "market_blockers": [
     {
       "symbol": "PLTR",
@@ -203,7 +203,7 @@
     }
   ],
   "score_or_scope_approval": false,
-  "valuation_report_sha256": "e99e095c6f15797960e903dc52a0f99cee29484041834528f6aa2554278f79c4",
+  "valuation_report_sha256": "aa5029b41c2d0d9b81ed6e31221d10576f652c5564403f75afc21c72db481d64",
   "expanded_evidence": {
     "first_score_run_id": 42536926634,
     "first_score_artifact_id": 13639024015,
@@ -211,5 +211,6 @@
     "second_score_artifact_id": 13664797659,
     "source": "docs/evidence/double-snapshot-score-coverage-2026-11-09.json",
     "purpose": "refresh 14 previously independently scored issuers in one bounded current market run; old scores never reused as current"
-  }
+  },
+  "market_blockers_run_id": 42536567400
 }

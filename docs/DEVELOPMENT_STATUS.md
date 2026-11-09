@@ -1,5 +1,35 @@
 # Development status
 
+## 9 Kasım 2026 — On dört adayın üretim devri ve karşılaştırma kapasitesi
+
+Başlangıç `main` `58e76dcb4b897a4fd00365d9fd3bbf5fa028d17b` (PR #69).
+PR CI `42608326853`, ana dal CI `42608733099` başarılı. PR #68
+birleşmeden kapandı. Son SEC üretimi `42455760184`, sequence 10,
+kök `42223465006`. 100 metadata kaydı, 100 adi hisse adayı, 98 finansal
+şirket, 961 kabul edilmiş değer, 704 hesaplama. Son değerleme ve skor
+`42598993077` → `42599479886`. Son güncel kesitte 7 skor ve 19 değerleme
+engeli var. Sonraki atlanan koşular yeni üretim paketi oluşturmadı.
+
+PR #69'daki 14 adaylık planın SHA-256 özeti son üretim paketinde yazılı
+eski 7 adaylık plan özetinden farklıydı. Bu nedenle seçici yeni planı
+uygulamıyordu. Planı son doğrulanmış `13664443650` ZIP'indeki
+`42598993077` raporunun SHA-256 özetine bağladık. Önceki engel
+gözlemleri özgün `42536567400` kimliğiyle saklandı. Salt okunur
+entegrasyon, eski seçimin boş döndüğünü ve yeni seçimin aynı üretim
+raporunda 14 adaylık planı etkinleştirdiğini doğruladı.
+
+Skor karşılaştırma sınırı 10'dan 14'e alındı. Değerleme raporundaki
+öncelikli adaylar, diğer adayların kendi sırası korunarak önce
+değerlendirilir. Kimlik, hisse sınıfı, fiyat, geçmiş, finans ve dönem
+kontrolleri aynı şekilde uygulanır. Sentetik regresyon 14 uygun adayın
+sığdığını, eksik piyasa kanıtı olan öncelikli adayın dışarıda kaldığını
+doğruladı. SHA-256 özeti eşleşen SEC ve değerleme ZIP'leriyle yerel
+planlama mevcut yedi adayı yeniden üretti.
+
+Yeni canlı sonuç yok. Sonraki adım ilk yeni 14 adaylık değerleme
+paketini ve ona bağlı skor paketini aynı kesimde denetlemek.
+MVP kabulü açık.
+
 ## 9 Kasım 2026 — On dört geçmişte puanlanmış şirket için tek kesimli piyasa yenileme planı (PR testinde)
 
 Başlangıç main `93969549ed7c3691e1ff37f0152c75f6a16ee32f`

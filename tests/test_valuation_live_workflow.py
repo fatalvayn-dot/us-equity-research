@@ -101,7 +101,8 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertLessEqual(len(keys)*5,250//2)
         self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '250' }}",self.text)
         self.assertEqual(reviewed['financial_run_id'],42455760184)
-        self.assertEqual(reviewed['valuation_run_id'],42536567400)
+        self.assertEqual(reviewed['valuation_run_id'],42598993077)
+        self.assertEqual(reviewed['valuation_artifact_id'],13664443650)
 
     def test_provenance_secrecy_and_no_score_bypass(self):
         self.assertIn("SEC_USER_AGENT", self.text)
