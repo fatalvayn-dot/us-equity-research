@@ -48,7 +48,7 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("run-id: ${{ steps.select.outputs.resume_run }}", self.text)
         self.assertIn("RESUME_RUN=$(python -m scripts.select_valuation_resume)", self.text)
         self.assertIn("options: ['0', '51', '100', '250', '501']", self.text)
-        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '100' }}", self.text)
+        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '250' }}", self.text)
         self.assertIn("cancel-in-progress: false", self.text)
 
     def test_resume_is_verified_before_writing_and_reupload(self):
@@ -88,6 +88,20 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn('--report data/valuation-current/report.json', self.text)
         self.assertLess(self.text.index('collect-valuation-sources'),
                         self.text.index('select_reviewed_valuation_priority.py record'))
+
+    def test_fourteen_historically_scored_identities_fit_fair_daily_budget(self):
+        import json
+        plan_path=Path(__file__).resolve().parents[1] / (
+            'docs/evidence/valuation-priority-candidates-2026-11-09.json')
+        reviewed=json.loads(plan_path.read_text())
+        keys=[(r['issuer_id'],r['symbol']) for r in reviewed['companies']]
+        self.assertEqual(len(keys),14)
+        self.assertEqual(len(set(keys)),14)
+        # The collector caps priority at budget // (2 * 5 GETs/company).
+        self.assertLessEqual(len(keys)*5,250//2)
+        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '250' }}",self.text)
+        self.assertEqual(reviewed['financial_run_id'],42455760184)
+        self.assertEqual(reviewed['valuation_run_id'],42536567400)
 
     def test_provenance_secrecy_and_no_score_bypass(self):
         self.assertIn("SEC_USER_AGENT", self.text)

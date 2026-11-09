@@ -1,5 +1,44 @@
 # Development status
 
+## 9 Kasım 2026 — On dört geçmişte puanlanmış şirket için tek kesimli piyasa yenileme planı (PR testinde)
+
+Başlangıç main `93969549ed7c3691e1ff37f0152c75f6a16ee32f`
+(PR #66); tarihli skorlar güvenli biçimde ayrı tutuldu.
+Tam Python 3.11/3.12/3.13 PR CI `42606727196` başarılı,
+birleşim sonrası testleri ayrıca kontrol edilecek.
+İlk gerçek 7 şirket `42536926634`, sonraki farklı 7 şirket
+`42599479886` tarafından bağımsız kanıtla puanlandı;
+son tarihli raporda hâlâ 7 güncel skor var.
+Eski puanların ikincisine kopyalanması kabul edilmedi.
+
+Her iki skorun gerçek SEC kimlikleri doğrulanmış
+14 aday (INTU, NOW, SNPS, MPWR, ON, SWKS, TYL,
+MU, AAPL, MSFT, CRM, MRVL, TXN, AMAT) incelenmiş
+öncelik planına alındı. Günlük değerleme GET sınırı
+100'den 250'ye çıkarıldı; bu proje içindeki mevcut,
+izin verilen 0–501 sınırının içindedir.
+Her aday azami 5 GET için ayrılan 14×5=70 istek,
+en az yarım bütçe olan 125 GET öncelik tavanını
+aşmaz; normal sıraya kapasite korunur.
+Bu, 14 şirketin aynı gün puanlanma garantisi değildir:
+SEC özgün hisse sınıfı, fiyat, piyasa geçmişi ve
+finansal dönem kaynakları güncel kesimde doğrulanır.
+Skor formülü değişmedi. İlk geçerli kaynak sırası,
+şirket kimliği, maliyet ve kabul kuralları korunur.
+
+`tests/test_valuation_live_workflow.py` 14 benzersiz
+sembol/CIK çiftini, korunmuş kök kaynak run kimliklerini
+ve 250 GET/yarım bütçe koşulunu denetler.
+Tam CI ve ilk gerçek günlük artifact sonucu olmadan
+14 güncel skorlu MVP veya değerleme kabulü iddia edilmez.
+Sonraki iş: yeni artifact'te 14 sembolün
+`share_check`, `price_check`, `history_check`
+durumlarını ve resmî skor raporunu aynı `as_of`
+kesiminde doğrula. Altman Z prototip sonrasına bırakıldı.
+
+
+
+
 ## 9 Kasım 2026 — Üretim değerleme devamı ve skor kaynak zinciri
 
 Başlangıç `main` `93969549ed7c3691e1ff37f0152c75f6a16ee32f` (PR #66),
