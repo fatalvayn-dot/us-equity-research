@@ -26,7 +26,7 @@ def fixture():
     rows[1]["history_check"]=dict(status="not_started")
     return dict(report_kind="valuation_source_collection_scope_pending",
                 as_of="2026-11-09T10:00:00+00:00",companies=rows,
-                summary=dict(candidates=100)),dict(companies=[
+                summary=dict(candidates=100),priority_symbols=["SYM0"]),dict(companies=[
                     dict(symbol=rows[i]["symbol"],issuer_id=rows[i]["issuer_id"])
                     for i in (0,1,2)])
 
@@ -78,6 +78,26 @@ class AuditBlockerTests(unittest.TestCase):
         result=audit(report,plan)
         self.assertEqual(result["priority_complete"],0)
         self.assertFalse(result["priority"][2]["market_evidence_complete"])
+        self.assertEqual(result["priority"][2]["blockers"][0]["leg"], "identity_status")
+
+    def test_planned_cohort_and_actual_priority_gets_are_distinct(self):
+        report, plan = fixture()
+        report["priority_symbols"] = ["SYM3"]
+        report["companies"][3]["attempts"] = [dict(stage="price", http_requested=True)]
+        result = audit(report, plan)
+        self.assertEqual(result["actual_priority_symbols"], ["SYM3"])
+        self.assertEqual(result["priority_gets"], 1)
+        self.assertFalse(result["priority"][0]["prioritized"])
+        self.assertTrue(result["other_companies"][0]["prioritized"])
+        report["priority_symbols"] = []
+        self.assertEqual(audit(report, plan)["priority_gets"], 0)
+
+    def test_unknown_or_duplicate_actual_priority_is_rejected(self):
+        report, plan = fixture()
+        for actual in (["unknown"], ["SYM0", "SYM0"], None):
+            with self.subTest(actual=actual), self.assertRaisesRegex(ValueError, "öncelikli tarama"):
+                report["priority_symbols"] = actual
+                audit(report, plan)
 
     def test_no_new_source_requests_not_implied_as_progress(self):
         report,plan=fixture()

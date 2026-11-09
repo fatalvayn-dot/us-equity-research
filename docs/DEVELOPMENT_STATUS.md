@@ -1,5 +1,32 @@
 # Development status
 
+## 9 Kasım 2026 — Planlanan ve uygulanan değerleme önceliği ayrıldı
+
+Başlangıç `main` `3414a3023133e00e3eb1292837ae9857bee26c92` (PR #71).
+PR CI `42615511078` ve ana dal CI `42615993750` başarılı.
+`42615437541`, `42615530804`, `42615563033` üretim paketi vermedi.
+Son finansal paket `42455760184`, kök `42223465006`, sequence 10.
+Kapsam 100 metadata, 100 adi hisse adayı, 98 finansal şirket,
+961 kabul edilmiş değer ve 704 hesaplama. Son gerçek değerleme ve
+skor `42598993077` → `42599479886`: 7 skor, 19 değerleme engeli,
+72 sektör modeli engeli, 2 kritik finans incelemesi.
+
+Denetim öncelik planındaki şirketlere normal sırada yapılan GET'leri
+öncelikli sayabiliyordu. Planın 14+86 şirketlik ayrımı korunarak,
+`prioritized` ve öncelikli GET sayısı çalışmanın kendi
+`priority_symbols` alanına bağlandı. Kimlik uyuşmazlığı ayrı engel
+olarak gösterilir. Bilinmeyen veya tekrarlı öncelik sembolleri
+denetimde reddedilir. Skor ve toplama bütçesi etkilenmez.
+
+7 denetim birim ve 10 workflow testi başarılı. SHA-256 doğrulanan
+artifact `13664443650` ile çevrimdışı entegrasyon, planlanan 14
+şirketten 7'sinin bu çalışmada öne alındığını ve öncelik zincirindeki
+35 GET ile tam eşleşmeyi gösterdi. Bu eski kesitte planlanan grupta
+7/14 ve bütün adaylarda 14/100 piyasa kanıtı hazır. Bu ölçüler
+finansal kabul ya da güncel skor anlamına gelmez. Sonraki iş, yeni
+14 adaylık üretim koşusunun denetim ve skor dosyalarını doğrulamak.
+MVP kabulü açık.
+
 ## 9 Kasım 2026 — 14 öncelikli şirketin canlı kaynak engellerini şirket bazında raporlama (PR testinde)
 
 Başlangıç main `60f5415ce9928564fbfddb58638157a0d928f1b6`
