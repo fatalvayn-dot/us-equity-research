@@ -131,6 +131,36 @@ class ScoringTests(unittest.TestCase):
             self.assertIsNone(c['total_score']);self.assertFalse(c['model_scope_eligible'])
             self.assertTrue(all(p['score'] is None for p in c['components'].values()))
 
+    def test_unsupported_sec_sector_precedes_missing_market_valuation(self):
+        # This issuer has an observed SEC SIC but no price, history or
+        # original share filing. It must not consume the modeled valuation
+        # repair queue when no supported sector model exists.
+        for sic in ('6021','6798','9999'):
+            with self.subTest(sic=sic):
+                report=build_score_report(financial(),*comparisons(),
+                    [companyfacts(),metadata(sic=sic),identity()],as_of=ASOF)
+                row=report['companies'][0]
+                self.assertEqual(row['blockers'],['specialized_or_unmodeled_sector'])
+                self.assertIsNone(row['total_score'])
+                self.assertFalse(row['model_scope_eligible'])
+                self.assertEqual(row['sector_evidence']['sic'],sic)
+                self.assertFalse(row['investment_approved'])
+
+    def test_supported_sec_sector_with_missing_market_stays_unscored(self):
+        report=build_score_report(financial(),*comparisons(),
+            [companyfacts(),metadata(sic='3571'),identity()],as_of=ASOF)
+        row=report['companies'][0]
+        self.assertEqual(row['blockers'],['valuation_source_evidence_required'])
+        self.assertIsNone(row['total_score'])
+        self.assertFalse(report['mvp_accepted'])
+
+    def test_no_metadata_never_implies_unsupported_sector(self):
+        report=build_score_report(financial(),*comparisons(),
+            [companyfacts(),identity()],as_of=ASOF)
+        row=report['companies'][0]
+        self.assertEqual(row['blockers'],['valuation_source_evidence_required'])
+        self.assertNotIn('sector_evidence',row)
+
     def test_critical_deficit_overrides_favorable_other_inputs_and_injected_points(self):
         b=financial(liabilities='1001');b['companies'][0].update(total_score=100,investment_approved=True)
         c=score(b=b)['companies'][0]
