@@ -189,7 +189,7 @@ jobs:
             --max-new-requests "$MAX_NEW_REQUESTS" "${priority_args[@]}"
           # Persist continuation only after a successful exact-priority
           # collection, never for a skipped, invalid or zero-priority run.
-          if [ -n "$priority" ]; then
+          if [ -n "$priority" ] && [ "$MAX_NEW_REQUESTS" -gt 0 ]; then
             python scripts/select_reviewed_valuation_priority.py record \
               --plan "$priority" --source-run "$SOURCE_RUN" \
               --run-id "$GITHUB_RUN_ID" \
