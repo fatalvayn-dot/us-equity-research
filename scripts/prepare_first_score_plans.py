@@ -73,7 +73,10 @@ def plans(financial_batch, metadata, valuation, companyfacts_dir, *, maximum=10)
     if len(metas) != len(metadata["companies"]) or len(prices) != len(valuation["companies"]):
         raise ValueError("duplicate metadata or valuation identity")
     current, prior, excluded, market_pending = [], [], [], []
-    for company in financial_batch["companies"]:
+    priority_symbols = set(valuation.get("priority_symbols", []))
+    candidates = sorted(financial_batch["companies"],
+                        key=lambda company: company["symbol"] not in priority_symbols)
+    for company in candidates:
         cik, symbol = company["issuer_id"], company["symbol"]
         reason = None
         rowmeta, market = metas.get(cik), prices.get(cik)

@@ -1,4 +1,5 @@
 """Live score workflow must use real source artifacts and original score engine."""
+import json
 import unittest
 from pathlib import Path
 
@@ -36,6 +37,12 @@ class FirstLiveScoreWorkflowTests(unittest.TestCase):
         self.assertIn('--valuation-run "$VALUATION_RUN" --financial-run "$FINANCIAL_RUN"', self.text)
         self.assertIn("VALUATION_RUN: ${{ steps.select.outputs.valuation_run }}", self.text)
         self.assertIn("FINANCIAL_RUN: ${{ steps.financial.outputs.source_run }}", self.text)
+
+    def test_comparison_cap_covers_reviewed_valuation_cohort(self):
+        reviewed = FILE.parents[2] / "docs/evidence/valuation-priority-candidates-2026-11-09.json"
+        cohort_size = len(json.loads(reviewed.read_text())["companies"])
+        self.assertEqual(cohort_size, 14)
+        self.assertIn(f"--maximum {cohort_size}\n", self.text)
 
     def test_normal_resolver_and_official_scoring_are_used(self):
         self.assertIn("research-batch",self.text)
