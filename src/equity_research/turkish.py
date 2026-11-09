@@ -6,6 +6,9 @@ misleading generic success. Accounting tags, source URLs and dates stay literal.
 LABELS = {
     'stale_quote':'Piyasa fiyatının tarihi eski', 'stale_response':'Fiyat gözleminin tazelik süresi dolmuş',
     'stale_identity':'Şirket kimliği gözleminin tazelik süresi dolmuş',
+    'stale_share_companyfacts': 'SEC CompanyFacts hisse gözleminin tazelik süresi dolmuş',
+    'stale_share_disclosure': 'Bildirilen hisse adedinin tarihi güncelliğini yitirmiş',
+    'class_specific_share_model_required': 'Hisse sınıflarını ayrı ele alan değerleme modeli gerekiyor',
     'future_observation':'Gelecek tarihli kaynak gözlemi',
     'unsupported_instrument':'Desteklenmeyen araç türü',
     'unsupported_or_conflicting_exchange':'Desteklenmeyen veya çelişkili borsa bilgisi',
