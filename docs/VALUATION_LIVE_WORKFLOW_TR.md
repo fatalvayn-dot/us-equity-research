@@ -42,6 +42,21 @@ Otomatik çalışmanın yeni GET bütçesi **51**'dir. Veri yeniden tarih verile
 güncellenmez; mevcut 15 dakikalık fiyat ve 6 saatlik kaynak tazelik kuralları
 korunur. Başarılı iş akışı skorlu yatırım araştırması anlamına gelmez.
 
+## Öncelikli şirketlerin takip eden koşularda doğrulanması
+
+Kayıtlı yedi öncelikli aday yalnız ilk incelenmiş değerleme
+raporu ve sabit finansal run ID ile başlatılır. İlk başarılı
+öncelikli kaynak toplaması, `priority-lineage.json` içine
+çalışma kimliğini, aynı raporun SHA-256 değerini, aday planının
+SHA-256 değerini ve başlangıç arşivinin kimlik/özetlerini
+kaydedebilir. Sonraki koşu yalnız indirilen önceki
+`valuation-source-state` paketinde bu zincir güncel
+raporla birebir örtüşüyorsa öncelik kullanır. Uyuşmazlık
+puan veya veri kabulünü gevşetmez; kaynak bütçesi normal
+rotasyonla işlenir ya da bozuk rapor durumunda çalışma
+durdurulur. Bu mekanizma yeni SEC verisi veya yeni
+yedi şirket puanı üretildiği anlamına gelmez.
+
 ## Manuel tekrar
 
 İstenirse GitHub Actions > **Canlı değerleme kaynakları** > Run workflow:
