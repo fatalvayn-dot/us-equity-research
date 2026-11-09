@@ -27,6 +27,34 @@
     {
       "symbol": "TYL",
       "issuer_id": "0000860731"
+    },
+    {
+      "symbol": "MU",
+      "issuer_id": "0000723125"
+    },
+    {
+      "symbol": "AAPL",
+      "issuer_id": "0000320193"
+    },
+    {
+      "symbol": "MSFT",
+      "issuer_id": "0000789019"
+    },
+    {
+      "symbol": "CRM",
+      "issuer_id": "0001108524"
+    },
+    {
+      "symbol": "MRVL",
+      "issuer_id": "0001835632"
+    },
+    {
+      "symbol": "TXN",
+      "issuer_id": "0000097476"
+    },
+    {
+      "symbol": "AMAT",
+      "issuer_id": "0000006951"
     }
   ],
   "financial_run_id": 42455760184,
@@ -175,5 +203,13 @@
     }
   ],
   "score_or_scope_approval": false,
-  "valuation_report_sha256": "e99e095c6f15797960e903dc52a0f99cee29484041834528f6aa2554278f79c4"
+  "valuation_report_sha256": "e99e095c6f15797960e903dc52a0f99cee29484041834528f6aa2554278f79c4",
+  "expanded_evidence": {
+    "first_score_run_id": 42536926634,
+    "first_score_artifact_id": 13639024015,
+    "second_score_run_id": 42599479886,
+    "second_score_artifact_id": 13664797659,
+    "source": "docs/evidence/double-snapshot-score-coverage-2026-11-09.json",
+    "purpose": "refresh 14 previously independently scored issuers in one bounded current market run; old scores never reused as current"
+  }
 }
