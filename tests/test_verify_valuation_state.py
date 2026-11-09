@@ -1,4 +1,5 @@
 import json
+import shutil
 import sqlite3
 import tempfile
 import unittest
@@ -56,6 +57,25 @@ class VerifyValuationStateTests(unittest.TestCase):
             db.execute("UPDATE response_bodies_v1 SET body = ?", (b"altered",))
         with self.assertRaisesRegex(ValueError, "Ham kaynak özeti"):
             verify(self.root)
+
+    def test_continuation_preserves_exact_observations(self):
+        previous = self.root / "previous"
+        shutil.copytree(self.root, previous)
+        with closing(ResponseArchive(self.source)) as archive:
+            archive.record(Response("https://www.sec.gov/next", b"new", self.now))
+            manifest = write_bundle(archive, self.bundle)
+        self.report.write_text(json.dumps({"source_bundle": manifest}))
+        self.assertEqual(verify(self.root, previous_state=previous), 2)
+
+        with closing(sqlite3.connect(self.source)) as db, db:
+            db.execute("UPDATE response_observations_v1 SET retrieved_at = ? WHERE url = ?",
+                       ((self.now + timedelta(minutes=1)).isoformat(), "https://www.sec.gov/example"))
+        with closing(ResponseArchive(self.source)) as archive:
+            manifest = write_bundle(archive, self.bundle)
+        self.report.write_text(json.dumps({"source_bundle": manifest}))
+        self.assertEqual(verify(self.root), 2)
+        with self.assertRaisesRegex(ValueError, "1 kaynak gözlemi kayıp"):
+            verify(self.root, previous_state=previous)
 
     def test_rejects_same_count_with_different_sqlite_observation(self):
         with closing(sqlite3.connect(self.source)) as db, db:
