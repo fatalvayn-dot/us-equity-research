@@ -54,50 +54,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           SOURCE_RUN_INPUT: ${{ inputs.source_run_id }}
-          EVENT_SOURCE_RUN: ${{ github.event.workflow_run.id }}
           RESUME_RUN_INPUT: ${{ inputs.valuation_resume_run_id }}
-          EVENT_NAME: ${{ github.event_name }}
-          REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
-          SOURCE_RUN="${SOURCE_RUN_INPUT:-$EVENT_SOURCE_RUN}"
-          if [ -z "$SOURCE_RUN" ] && [ "$EVENT_NAME" = "schedule" ]; then
-            for CANDIDATE in $(gh api "repos/$REPO/actions/workflows/live-acceptance.yml/runs?per_page=100" \
-              --jq '.workflow_runs[] | select(.status == "completed" and .conclusion == "success" and .head_branch == "main") | .id'); do
-              PRESENT=$(gh api "repos/$REPO/actions/runs/$CANDIDATE/artifacts?per_page=100" \
-                --jq '[.artifacts[] | select(.name == "live-acceptance-evidence" and .expired == false)] | length')
-              if [ "$PRESENT" -eq 1 ]; then
-                SOURCE_RUN="$CANDIDATE"
-                break
-              fi
-            done
-            if [ -z "$SOURCE_RUN" ]; then
-              # The last independently audited financial run is a bounded
-              # fallback only. Its raw source dates are never refreshed by reuse.
-              SOURCE_RUN=$(python -c "import json; print(json.load(open('docs/evidence/first-live-score-2026-11-08.json'))['financial_run_id'])")
-              echo "Son kanıtlı SEC run kimliğine geri dönüldü: $SOURCE_RUN" >> "$GITHUB_STEP_SUMMARY"
-            fi
-          fi
-          if ! [[ "$SOURCE_RUN" =~ ^[1-9][0-9]*$ ]]; then
-            echo "::error::Kaynak run ID pozitif sayı olmalıdır"
-            exit 2
-          fi
-          ARTIFACT_COUNT=$(gh api "repos/$REPO/actions/runs/$SOURCE_RUN/artifacts?per_page=100" \
-            --jq '[.artifacts[] | select(.name == "live-acceptance-evidence" and .expired == false)] | length')
-          # A completed SEC run may legitimately produce no new evidence
-          # while its bounded collection cursor is awaiting the next run.
-          # Fall back ONLY on an exact zero-artifact automatic handoff,
-          # never on ambiguous/multiple artifacts or an explicit manual run.
-          if [ "$ARTIFACT_COUNT" -eq 0 ] && [ "$EVENT_NAME" = "workflow_run" ]; then
-            SOURCE_RUN=$(python -c "import json; print(json.load(open('docs/evidence/first-live-score-2026-11-08.json'))['financial_run_id'])")
-            echo "SEC bu koşuda yeni kanıt üretmedi; eski finansal arşiv yalnız geçmiş tarihli kaynak kimliği olarak kullanıldı: $SOURCE_RUN" >> "$GITHUB_STEP_SUMMARY"
-            ARTIFACT_COUNT=$(gh api "repos/$REPO/actions/runs/$SOURCE_RUN/artifacts?per_page=100" \
-              --jq '[.artifacts[] | select(.name == "live-acceptance-evidence" and .expired == false)] | length')
-          fi
-          if [ "$ARTIFACT_COUNT" -ne 1 ]; then
-            echo "::error::Seçilen run için tek ve geçerli live-acceptance-evidence artifact bulunamadı"
-            exit 2
-          fi
+          SOURCE_RUN=$(python -m scripts.select_valuation_financial_source)
           RESUME_RUN=$(python -m scripts.select_valuation_resume)
           echo "collect=true" >> "$GITHUB_OUTPUT"
           echo "source_run=$SOURCE_RUN" >> "$GITHUB_OUTPUT"

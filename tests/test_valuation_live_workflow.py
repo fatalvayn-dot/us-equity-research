@@ -22,7 +22,6 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("workflow_dispatch:", self.text)
         self.assertIn("  schedule:", self.text)
         self.assertIn("cron: '17 9 * * *'", self.text)
-        self.assertIn('EVENT_NAME" = "schedule"', self.text)
         self.assertIn("github.ref == 'refs/heads/main'", self.text)
         self.assertIn("github.event.workflow_run.head_branch == 'main'", self.text)
         self.assertIn("github.event.workflow_run.conclusion == 'success'", self.text)
@@ -30,7 +29,6 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
 
     def test_workflow_edit_does_not_launch_a_second_collector(self):
         self.assertNotIn("  push:", self.text)
-        self.assertIn('if [ -z "$SOURCE_RUN" ] && [ "$EVENT_NAME" = "schedule" ]; then', self.text)
         self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'workflow_run' && '51' || '250') }}", self.text)
         self.assertIn("contents: read", self.text)
         self.assertIn("actions: read", self.text)
@@ -39,28 +37,18 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
 
     def test_source_artifact_presence_is_required_for_collection(self):
         self.assertIn("live-acceptance-evidence", self.text)
-        self.assertIn('ARTIFACT_COUNT', self.text)
-        self.assertNotIn("collect=false", self.text)
-        self.assertIn("actions/workflows/live-acceptance.yml/runs?per_page=100", self.text)
         self.assertIn("collect=true", self.text)
-        self.assertIn("docs/evidence/first-live-score-2026-11-08.json", self.text)
-        self.assertIn("['financial_run_id']", self.text)
         self.assertIn("steps.select.outputs.collect == 'true'", self.text)
         self.assertIn("data/valuation-import/live-sources/manifest.json", self.text)
         self.assertIn("--seed-bundle data/valuation-import/live-sources", self.text)
         self.assertIn("run-id: ${{ steps.select.outputs.source_run }}", self.text)
 
-    def test_noartifact_sec_handoff_uses_only_exact_audited_fallback(self):
-        # A missing artifact may be normal when the financial SEC cursor has
-        # no new evidence; never trust an ambiguous or explicit manual source.
-        self.assertIn('if [ "$ARTIFACT_COUNT" -eq 0 ] && [ "$EVENT_NAME" = "workflow_run" ]; then', self.text)
-        self.assertIn('ARTIFACT_COUNT=$(gh api "repos/$REPO/actions/runs/$SOURCE_RUN/artifacts?per_page=100"', self.text)
-        self.assertIn("['financial_run_id']", self.text)
-        self.assertIn('if [ "$ARTIFACT_COUNT" -ne 1 ]; then', self.text)
-        self.assertNotIn("değerleme toplaması atlandı", self.text)
-        self.assertNotIn('echo "collect=false"', self.text)
-        self.assertIn("'workflow_run' && '51' || '250'", self.text)
-        self.assertLess(self.text.index('if [ "$ARTIFACT_COUNT" -eq 0 ]'),
+    def test_sec_handoff_uses_current_production_checkpoint(self):
+        selector = 'SOURCE_RUN=$(python -m scripts.select_valuation_financial_source)'
+        self.assertIn(selector, self.text)
+        self.assertIn("SOURCE_RUN_INPUT: ${{ inputs.source_run_id }}", self.text)
+        self.assertNotIn("docs/evidence/first-live-score-2026-11-08.json", self.text)
+        self.assertLess(self.text.index(selector),
                         self.text.index('RESUME_RUN=$(python -m scripts.select_valuation_resume)'))
 
     def test_recovers_prior_valuation_and_bounds_requests(self):
