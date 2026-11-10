@@ -57,6 +57,12 @@ class FirstLiveScoreWorkflowTests(unittest.TestCase):
         self.assertLess(self.text.index("scripts/audit_score_valuation_gaps.py"),
                         self.text.index("audit=json.loads(gaps.read_text())"))
 
+    def test_no_comparison_candidates_skip_collection_but_still_build_report(self):
+        self.assertEqual(self.text.count("if: steps.plan.outputs.has_candidates == 'true'"), 2)
+        self.assertIn("if: steps.plan.outputs.ready == 'true'\n        id: score", self.text)
+        self.assertIn('if [ "$HAS_COMPARISON_CANDIDATES" = false ]; then', self.text)
+        self.assertIn('generated_at=sys.argv[1], companies=[]', self.text)
+
     def test_normal_resolver_and_official_scoring_are_used(self):
         self.assertIn("research-batch",self.text)
         self.assertIn("build_current_scores.py",self.text)

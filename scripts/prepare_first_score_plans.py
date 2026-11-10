@@ -150,7 +150,8 @@ def main():
         reasons=report["excluded_reasons"]), ensure_ascii=False))
     if "GITHUB_OUTPUT" in __import__("os").environ:
         with Path(__import__("os").environ["GITHUB_OUTPUT"]).open("a") as out:
-            out.write("ready=" + ("true" if report["selected"] else "false") + "\n")
+            out.write("ready=true\n")
+            out.write(f"has_candidates={str(bool(report['selected'])).lower()}\n")
 
 
 if __name__ == "__main__":

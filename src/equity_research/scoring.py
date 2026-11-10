@@ -69,18 +69,25 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
     verified inputs; critical review cannot be offset by any component points.
     """
     if not aware(as_of):raise ValueError('aware scoring cutoff required')
-    responses=list(responses);sources={}
+    sources = {}
     for response in responses:
         if response.retrieved_at>as_of:continue
         old=sources.get(response.url)
         if old is None or response.retrieved_at>old.retrieved_at:sources[response.url]=response
         elif old.retrieved_at==response.retrieved_at and old.sha256!=response.sha256:raise ValueError('conflicting raw observations')
     financial=build_report(batch)
-    comparison=build_comparative_report(current_comparison,prior_comparison)
-    if datetime.fromisoformat(str(comparison['as_of']))>as_of:raise ValueError('future comparison')
+    no_comparisons = all(
+        isinstance(period, dict) and period.get('schema_version') == 1 and period.get('companies') == []
+        for period in (current_comparison, prior_comparison)
+    )
+    comparative = {}
+    if not no_comparisons:
+        comparison = build_comparative_report(current_comparison, prior_comparison)
+        if datetime.fromisoformat(str(comparison['as_of'])) > as_of:
+            raise ValueError('future comparison')
+        comparative = {c['issuer_id']: c for c in comparison['companies']}
     provenance=score_input_provenance(batch,current_comparison,prior_comparison,as_of=as_of)
-    comparative={c['issuer_id']:c for c in comparison['companies']}
-    valuations=build_valuation_report(batch,responses,as_of=as_of)
+    valuations=build_valuation_report(batch,sources.values(),as_of=as_of)
     by_valuation={c['issuer_id']:c for c in valuations['companies']}
     companies=[]
     for company in financial['companies']:

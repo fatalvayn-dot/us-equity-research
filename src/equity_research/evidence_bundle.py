@@ -2,8 +2,8 @@
 import base64
 import gzip
 import hashlib
-import io
 import json
+from tempfile import TemporaryFile
 from datetime import datetime
 from pathlib import Path
 
@@ -47,23 +47,36 @@ def read_bundle(directory):
     directory=Path(directory);manifest=json.loads((directory/'manifest.json').read_text())
     if manifest.get('schema_version')!=1 or manifest.get('format')!='gzip-jsonl-public-response-observations-v1':
         raise ValueError('unsupported evidence bundle')
-    combined=io.BytesIO()
-    for index,part in enumerate(manifest['parts']):
-        if part['file']!=f'sources.jsonl.gz.part{index:04d}':raise ValueError('invalid part path/order')
-        body=(directory/part['file']).read_bytes()
-        if len(body)!=part['bytes'] or hashlib.sha256(body).hexdigest()!=part['sha256']:raise ValueError('bundle part integrity failure')
-        combined.write(body)
-    if hashlib.sha256(combined.getvalue()).hexdigest()!=manifest['compressed_sha256']:raise ValueError('bundle integrity failure')
-    combined.seek(0);count=0
-    with gzip.GzipFile(fileobj=combined,mode='rb') as raw:
-        for line in raw:
-            p=json.loads(line);public_url(p['url'])
-            r=Response(p['url'],base64.b64decode(p['body_base64'],validate=True),datetime.fromisoformat(p['retrieved_at']))
-            if r.sha256!=p['sha256'] or r.retrieved_at.utcoffset() is None:raise ValueError('raw source integrity failure')
-            count+=1
-    if count!=manifest['observations']:raise ValueError('observation count mismatch')
-    combined.seek(0)
-    with gzip.GzipFile(fileobj=combined,mode='rb') as raw:
-        for line in raw:
-            p=json.loads(line)
-            yield Response(p['url'],base64.b64decode(p['body_base64'],validate=True),datetime.fromisoformat(p['retrieved_at']))
+    # Keep one verified snapshot for both passes without retaining the
+    # compressed archive in memory while consumers retain selected bodies.
+    with TemporaryFile() as combined:
+        compressed_digest = hashlib.sha256()
+        for index, part in enumerate(manifest['parts']):
+            if part['file'] != f'sources.jsonl.gz.part{index:04d}':
+                raise ValueError('invalid part path/order')
+            body = (directory / part['file']).read_bytes()
+            if len(body) != part['bytes'] or hashlib.sha256(body).hexdigest() != part['sha256']:
+                raise ValueError('bundle part integrity failure')
+            combined.write(body)
+            compressed_digest.update(body)
+        if compressed_digest.hexdigest() != manifest['compressed_sha256']:
+            raise ValueError('bundle integrity failure')
+        combined.seek(0)
+        count = 0
+        with gzip.GzipFile(fileobj=combined, mode='rb') as raw:
+            for line in raw:
+                p = json.loads(line)
+                public_url(p['url'])
+                r = Response(p['url'], base64.b64decode(p['body_base64'], validate=True),
+                             datetime.fromisoformat(p['retrieved_at']))
+                if r.sha256 != p['sha256'] or r.retrieved_at.utcoffset() is None:
+                    raise ValueError('raw source integrity failure')
+                count += 1
+        if count != manifest['observations']:
+            raise ValueError('observation count mismatch')
+        combined.seek(0)
+        with gzip.GzipFile(fileobj=combined, mode='rb') as raw:
+            for line in raw:
+                p = json.loads(line)
+                yield Response(p['url'], base64.b64decode(p['body_base64'], validate=True),
+                               datetime.fromisoformat(p['retrieved_at']))
