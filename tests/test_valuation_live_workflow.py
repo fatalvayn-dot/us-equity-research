@@ -68,6 +68,17 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
                         self.text.index("python -m equity_research collect-valuation-sources"))
         self.assertIn("steps.verify_resume.outcome == 'success'", self.text)
 
+    def test_published_valuation_must_preserve_verified_observations(self):
+        saved = '--write-observations "$RUNNER_TEMP/valuation-observations.json"'
+        required = '--require-observations "$RUNNER_TEMP/valuation-observations.json"'
+        self.assertLess(self.text.index(saved),
+                        self.text.index("python -m equity_research collect-valuation-sources"))
+        self.assertLess(self.text.index("python -m equity_research collect-valuation-sources"),
+                        self.text.index(required))
+        self.assertLess(self.text.index(required),
+                        self.text.index("uses: actions/upload-artifact@v4"))
+        self.assertIn("always() && steps.select.outputs.collect == 'true'", self.text)
+
     def test_priority_is_bound_to_both_run_ids_and_report_digest(self):
         with tempfile.TemporaryDirectory() as folder:
             plan = Path(folder) / 'plan.json'
