@@ -32,6 +32,14 @@ def collection_skipped(run, fetch):
                 or (run["conclusion"] == "failure"
                     and (run["id"], run.get("head_sha"), run.get("run_attempt"))
                     == REVIEWED_STARTUP_FAILURE))
+    # GitHub omits all steps when the collect job condition is false.
+    if len(jobs) == 1 and run["conclusion"] == "skipped":
+        job = jobs[0]
+        if (job.get("name") == "collect" and job.get("status") == "completed"
+                and job.get("conclusion") == "skipped" and job.get("steps") in (None, [])):
+            return True
+    if any(not job.get("steps") for job in jobs):
+        return False
     steps = [step for job in jobs for step in job["steps"]
              if step["name"] == COLLECTION_STEP]
     return bool(steps) and all(step["conclusion"] == "skipped" for step in steps)

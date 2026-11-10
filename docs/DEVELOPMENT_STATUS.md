@@ -1,5 +1,30 @@
 # Development status
 
+## 10 Kasım 2026 — Atlanan değerleme işinden güvenli devam
+
+Başlangıç main `aedec67a9e2487eb48565b1f4e78f01407232021` (PR #87).
+Kesin head Foundation `42724187961` üç Python sürümünde başarılı.
+Gerçek arşivlerle 100 aday ve beş puan çevrimdışı yeniden üretildi.
+Boş karşılaştırma entegrasyonu tüm 100 adayı gerekçeleriyle raporladı.
+
+Planlı SEC `42735472737` sequence sınırındaki arşivi tekrar
+indirmedi ve veri toplamadı. Değerleme `42724077491` ile
+`42735560168` kaynak seçerken durdu. GitHub, `42720500779` için
+tek ve tamamen atlanan collect işini adım listesi olmadan döndürdü.
+Yeni seçici bu durumu, yalnız koşu ve iş birlikte atlanmışsa ve
+artifact listesi eksiksiz ve boşsa geçer. Eksik veya belirsiz
+durum paketi ve kurtarma arşivi hâlâ inceleme gerektirir.
+
+11 hedefli test başarılı. Gerçek Actions metadata entegrasyonunda
+eski seçici hatayı yeniden üretti. Düzeltme son doğrulanmış değerleme
+`42716717481` ve artifact `13718147549` kaydını seçti.
+Finansal üretim `42455760184`, sequence 10, 100 metadata, 100 adi hisse
+adayı, 98 finansal şirket, 961 değer ve 704 hesaplama. Son gerçek skor
+`42717115072` beş skor, 21 değerleme, 72 sektör modeli ve iki kritik
+finansal inceleme engeli içeriyor. Sıradaki iş olağan ana dal değerleme
+koşusunda devam paketinin kullanıldığını ve gerçek toplama sonucunu
+doğrulamak. Tam MVP kabulü açık.
+
 ## 10 Kasım 2026 — 100 adayın prototip radar çıktısı
 
 Başlangıç main `fcbfc4aa34e98214a99097ae21324c4bfb0ce8f1` (PR #86).

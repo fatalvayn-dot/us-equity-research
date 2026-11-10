@@ -43,6 +43,40 @@ class ValuationResumeSelectionTests(unittest.TestCase):
         self.assertEqual(select([run(3), run(2), run(1), run(0)], AUDITED_RUN + 3,
                                 fetch=self.fetch), AUDITED_RUN + 1)
 
+    def test_skipped_collect_job_without_steps_is_safe(self):
+        self.artifacts(2)
+        self.artifacts(1, artifact())
+        path = f"actions/runs/{AUDITED_RUN + 2}/jobs?filter=all&per_page=100"
+        for steps in (None, []):
+            with self.subTest(steps=steps):
+                self.responses[path] = {"total_count": 1, "jobs": [
+                    dict(name="collect", status="completed", conclusion="skipped", steps=steps)
+                ]}
+                self.assertEqual(
+                    select([run(2, conclusion="skipped"), run(1)], AUDITED_RUN + 3,
+                           fetch=self.fetch),
+                    AUDITED_RUN + 1,
+                )
+
+    def test_missing_steps_are_unsafe_without_exact_job_skip_evidence(self):
+        self.artifacts(2)
+        self.artifacts(1, artifact())
+        path = f"actions/runs/{AUDITED_RUN + 2}/jobs?filter=all&per_page=100"
+        job = dict(name="collect", status="completed", conclusion="skipped", steps=[])
+        for conclusion, jobs, total in (
+            ("failure", [job], 1),
+            ("skipped", [job | dict(name="unexpected")], 1),
+            ("skipped", [job | dict(status="in_progress")], 1),
+            ("skipped", [job | dict(conclusion="failure")], 1),
+            ("skipped", [job], 2),
+            ("skipped", [job, dict(steps=[dict(name=COLLECTION_STEP, conclusion="skipped")])], 2),
+        ):
+            with self.subTest(conclusion=conclusion, jobs=jobs, total=total):
+                self.responses[path] = dict(total_count=total, jobs=jobs)
+                with self.assertRaisesRegex(ValueError, "durum paketi eksik"):
+                    select([run(2, conclusion=conclusion), run(1)], AUDITED_RUN + 3,
+                           fetch=self.fetch)
+
     def test_missing_artifact_after_started_attempt_blocks_rollback(self):
         self.artifacts(2)
         self.jobs(2, "success", "skipped")
