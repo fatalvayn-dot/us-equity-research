@@ -23,6 +23,14 @@ class FirstLiveScoreWorkflowTests(unittest.TestCase):
         self.assertIn("name: live-acceptance-state",self.text)
         self.assertIn("name: live-acceptance-evidence",self.text)
 
+    def test_score_download_requires_the_latest_safe_valuation_run(self):
+        selector = 'RUN=$(RESUME_RUN_INPUT="$RUN" python -m scripts.select_valuation_resume)'
+        self.assertIn(selector, self.text)
+        self.assertLess(self.text.index(selector),
+                        self.text.index('echo "ready=true" >> "$GITHUB_OUTPUT"'))
+        self.assertLess(self.text.index(selector),
+                        self.text.index('name: Değerleme kaynak paketini indir'))
+
     def test_financial_evidence_must_be_exactly_linked(self):
         self.assertIn("financial-source-run.json",self.text)
         self.assertIn("steps.financial.outputs.source_run",self.text)
