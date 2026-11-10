@@ -8,13 +8,50 @@ from types import SimpleNamespace
 
 from equity_research.cache import encode
 from equity_research.companyfacts import SecCompanyFacts
+from equity_research.concept_diagnostics import inspect_concepts
 from equity_research.documents import document_key
+from equity_research.fields import SPECS
 from equity_research.models import Fact
 from equity_research.providers import ProviderFailure
 from equity_research.reporting import build_report
 from equity_research.scoring import REQUIRED, confirm_score_field
 from equity_research.transport import Response
 from live_checkpoint import verify
+
+
+RELATED_CONCEPTS = {
+    'revenue': 'revenue_total',
+    'capital_expenditure': 'productive_asset_cash_payments',
+}
+
+
+def audit_original_gaps(original, *, cik, start, end, missing_fields, cutoff):
+    """Explain missing score inputs without selecting a replacement value."""
+    fields = [name for name in RELATED_CONCEPTS if name in missing_fields]
+    if not fields:
+        return None
+    if original is None or original.retrieved_at > cutoff:
+        return dict(status='original_unavailable_at_cutoff', fields=fields)
+    if start is None:
+        return dict(status='annual_period_unavailable', fields=fields)
+    definitions = {name: (SPECS[name].accounting_definition,
+                          SPECS[RELATED_CONCEPTS[name]].accounting_definition)
+                   for name in fields}
+    proof = dict(url=original.url, sha256=original.sha256,
+                 retrieved_at=original.retrieved_at)
+    try:
+        scan = inspect_concepts(
+            original.body, cik=cik, period_start=start, period_end=end,
+            concepts=[concept for pair in definitions.values() for concept in pair])
+    except ValueError:
+        return dict(status='original_diagnostic_unavailable', fields=fields, source=proof)
+    concepts = {entry['concept']: entry for entry in scan['concepts']}
+    return dict(status='original_diagnostics', source=proof,
+                period_start=start, period_end=end, automatic_substitution=False,
+                fields=[dict(field=name, required=concepts[required],
+                             related=concepts[related],
+                             related_scope=SPECS[RELATED_CONCEPTS[name]].scope_note)
+                        for name, (required, related) in definitions.items()])
 
 
 def audit(root, run_id, symbols):
@@ -66,8 +103,15 @@ def audit(root, run_id, symbols):
                 except (ProviderFailure, ValueError, KeyError, TypeError, ArithmeticError) as exc:
                     checks.append(dict(field=name, status='unconfirmed',
                                        reason=exc.status.value if isinstance(exc, ProviderFailure) else str(exc)))
-            results.append(dict(symbol=symbol, issuer_id=cik, annual_accession=annual['accession'],
-                                confirmed_fields=sum(c['status'] == 'confirmed' for c in checks), checks=checks))
+            result = dict(symbol=symbol, issuer_id=cik, annual_accession=annual['accession'],
+                          confirmed_fields=sum(c['status'] == 'confirmed' for c in checks), checks=checks)
+            gaps = audit_original_gaps(
+                original, cik=cik, start=date.fromisoformat(company['period_start']) if company['period_start'] else None,
+                end=filing.report_end, missing_fields=[name for name in REQUIRED if name not in facts],
+                cutoff=cutoff)
+            if gaps is not None:
+                result['original_score_input_gaps'] = gaps
+            results.append(result)
     return dict(mode='offline_production_score_operands', run_id=run_id,
                 sequence=manifest['sequence'], as_of=cutoff, new_http_requests=0,
                 companies=results, scores_generated=False, mvp_accepted=False)

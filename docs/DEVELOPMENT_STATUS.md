@@ -1,5 +1,34 @@
 # Development status
 
+## 10 Kasım 2026 — Eksik skor girdilerini özgün yıllık belgeden ayırma
+
+Başlangıç main `6bf77f3c9ed6a21db4a8a7b3081951d7f3f8023e` (PR #92),
+ana dal CI `42768523803` başarılı. Son finansal üretim `42455760184`,
+kök `42223465006`, sequence 10. 100 metadata, 100 adi hisse adayı,
+98 finansal şirket, 961 kabul edilen değer ve 704 hesaplama.
+SEC `42766552291` veri toplamayı atladı. Son denetimli değerleme
+`42766626020`, skor `42767003664`: 5 puan, 72 sektör modeli,
+19 değerleme, 2 tam ve 2 kritik finansal inceleme engeli.
+
+Bekleyen skor girdisi denetimi, gelir ve maddi duran varlık harcaması
+eksikse özgün 10-K içindeki istenen ve ilişkili etiketleri ayrı raporlar.
+Dönem, kaynak URL'si, alınma tarihi ve SHA-256 çıktıda yer alır.
+İlişkili kavramlar skor girdisi veya sağlayıcı kazananı yapılmaz.
+
+67 hedefli test geçti. Gerçek üretim durumunun ZIP SHA-256 değeri
+GitHub'daki `425b11a0eb6143e34a7cb937317b5e41814b0b8a3297483b8db7ff6e2baa0dfd`
+değeriyle eşleşti. ZIP CRC, manifest ve SQLite bütünlük kontrolleri geçti.
+Ağsız NVDA denetiminde 7 mevcut skor girdisi doğrulandı. Özgün 10-K
+`0001045810-26-000021` (`5f16e34c2c3e8f9f8aa8ee4237226dd50d6b40f1b75bbcdee01573d3ae30bf8e`)
+2025-01-27–2026-01-25 kesiminde iki dar etiketi bildirmiyor.
+İlişkili `Revenues` 215.938.000.000 USD, `PaymentsToAcquireProductiveAssets`
+6.042.000.000 USD. Yeni skor veya finansal değer üretilmedi.
+
+Tekrar: `PYTHONPATH=src python scripts/verify_pending_score_inputs.py --state-dir <çıkarılmış-durum> --run-id 42455760184 NVDA`.
+Sonraki iş, dar harcama tanımı için ayrı yıllık kanıt aramak ve toplam
+gelirle iki dönemli model seçeneğini ayrı bir model incelemesinde değerlendirmek.
+Tam MVP kabulü açık.
+
 ## 10 Kasım 2026 — Değerleme yayını öncesi kaynak devamlılığı
 
 Başlangıç main `f016d658971e216c655501679781549d987aad69` (PR #91), main CI
