@@ -61,6 +61,8 @@ jobs:
             echo "::error::Değerleme kanıt paketi bulunamadı"
             exit 2
           fi
+          # An explicit or delayed trigger may point to an older package.
+          RUN=$(RESUME_RUN_INPUT="$RUN" python -m scripts.select_valuation_resume)
           echo "ready=true" >> "$GITHUB_OUTPUT"
           echo "valuation_run=$RUN" >> "$GITHUB_OUTPUT"
 

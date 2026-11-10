@@ -1,5 +1,31 @@
 # Development status
 
+## 10 Kasım 2026 — Skor için en güncel değerleme paketini doğrulama
+
+Başlangıç main `8439496987bfa763166f35e594e250326e63f1c5` (PR #90), main CI
+`42754214563` başarılı. SEC `42753893586` sequence sınırında veri
+toplamadı. Son finansal üretim `42455760184`, sequence 10.
+100 metadata, 100 adi hisse adayı, 98 finansal şirket, 961 kabul
+edilen değer ve 704 hesaplama.
+
+Değerleme `42753997785` 51 kaynak GET yaptı. 100 kimlik eşleşmesi,
+26 tarihli hisse sınıfı, 10 geçerli fiyat ve 10 geçerli geçmiş
+kayıtlı. Artifact `13734722220`; skor `42754328726`, artifact
+`13735470576`. İki ZIP'in SHA-256 ve CRC denetimi geçti. Skor makbuzu
+değerleme raporu ve kaynak manifestiyle eşleşti. Altı skor üretildi.
+94 puansız adayın 72'si sektör modeli, 19'u değerleme kanıtı, biri
+tam finansal inceleme ve ikisi kritik finansal inceleme bekliyor.
+Değerleme PR #90 öncesi commit'te çalıştı; yeni öncelik imlecinin
+canlı etkisi bu koşuyla doğrulanmadı.
+
+Skor iş akışı indirmeden önce ortak değerleme seçicisiyle kaynak
+kimliğini güncel ve güvenli ana dal üretimine karşı doğrular.
+19 hedefli test ve Bash sözdizimi denetimi başarılı. Gerçek Actions
+metadata entegrasyonu yeni değerleme run kimliğini kabul etti ve
+önceki kimliği reddetti. Sıradaki iş olağan değerleme koşusunda
+öncelik imlecini doğrulamak ve NVDA'nın eksik yıllık gelir ile
+sermaye harcaması kanıtını incelemek. Tam MVP kabulü açık.
+
 ## 10 Kasım 2026 — Canlı değerleme devri ve öncelik sırası
 
 Başlangıç main `4068ab399e5df1471c37028864fea6758dd33325` (PR #89), main CI
