@@ -138,11 +138,24 @@ class ValuationSourceCollector:
         retrying_partial = cursor_matches and prior.get('retrying_partial') is True
         rotation = list(enumerate(rows))
         rotation = rotation[start:] + rotation[:start]
-        # Reserve at least half the company budget for normal rotation. Keep
-        # the priority prefix in rotation order and exclude it from cursor writes.
+        # Reserve at least half the company budget for normal rotation.
+        # Keep a separate cursor so normal rotation cannot repeatedly select
+        # the same prefix when the priority cohort exceeds its budget share.
         priority_limit = self.limit // (2 * MAX_GETS_PER_CANDIDATE)
-        priority = [i for i, row in rotation
-                    if (row['issuer_id'], row['symbol']) in requested_priority][:priority_limit]
+        priority_order = [i for i, row in enumerate(rows)
+                          if (row['issuer_id'], row['symbol']) in requested_priority]
+        priority_cursor_key = 'valuation-priority-cursor-v1'
+        priority_partial = 0 < priority_limit < len(priority_order)
+        priority_prior = self.checkpoint.read(priority_cursor_key) if priority_partial else None
+        priority_start = 0
+        if (isinstance(priority_prior, dict)
+                and priority_prior.get('fingerprint') == fingerprint
+                and priority_prior.get('indices') == priority_order
+                and type(priority_prior.get('next_index')) is int
+                and 0 <= priority_prior['next_index'] < len(priority_order)):
+            priority_start = priority_prior['next_index']
+        priority_rotation = priority_order[priority_start:] + priority_order[:priority_start]
+        priority = priority_rotation[:priority_limit]
         priority_indices = set(priority)
         scan = [(i, rows[i]) for i in priority] + [
             (i, row) for i, row in rotation if i not in priority_indices]
@@ -243,6 +256,11 @@ class ValuationSourceCollector:
             next_index = (last_requested_index + (0 if retry_partial else 1)) % len(rows)
             self.checkpoint.write(cursor_key, dict(fingerprint=fingerprint,
                 next_index=next_index, retrying_partial=retry_partial),
+                self.owner, self.clock(), LEASE_TTL)
+        if priority_partial:
+            next_priority = (priority_start + len(priority)) % len(priority_order)
+            self.checkpoint.write(priority_cursor_key, dict(fingerprint=fingerprint,
+                indices=priority_order, next_index=next_priority),
                 self.owner, self.clock(), LEASE_TTL)
         order = {r['issuer_id']: i for i, r in enumerate(rows)}
         companies.sort(key=lambda company: order[company['issuer_id']])

@@ -84,6 +84,32 @@ class FairValuationCursorTests(unittest.TestCase):
         self.assertEqual(report['continuation']['next_symbol'], 'AAPL')
         self.assertFalse(report['mvp_accepted'])
 
+    def test_priority_cursor_rotates_independently_of_normal_boundary(self):
+        self.transport.responses.update({r.url: r for r in (filing(), price(), history())})
+        self.transport.responses[companyfacts_url(MSFT)] = ProviderFailure(Status.TIMEOUT)
+        self.transport.responses[price_url('MSFT')] = ProviderFailure(Status.TIMEOUT)
+        reports = [self.collector(10).collect(PLAN, priority_plan=PLAN) for _ in range(3)]
+        self.assertEqual([r['priority_symbols'] for r in reports], [['AAPL'], ['MSFT'], ['AAPL']])
+        self.assertTrue(all(r['summary']['new_get_invocations'] <= 10 for r in reports))
+        self.assertTrue(all([c['symbol'] for c in r['companies']] == ['AAPL', 'MSFT']
+                            for r in reports))
+        self.assertEqual(reports[2]['summary']['new_get_invocations'], 0)
+
+    def test_priority_cursor_survives_zero_budget_and_rejects_changed_order(self):
+        self.transport.responses.update({r.url: r for r in (filing(), price(), history())})
+        self.transport.responses[companyfacts_url(MSFT)] = ProviderFailure(Status.TIMEOUT)
+        self.transport.responses[price_url('MSFT')] = ProviderFailure(Status.TIMEOUT)
+        key = 'valuation-priority-cursor-v1'
+        self.collector(10).collect(PLAN, priority_plan=PLAN)
+        saved = self.lock.read(key)
+        self.assertEqual(saved['next_index'], 1)
+        self.assertEqual(self.collector(0).collect(PLAN, priority_plan=PLAN)['priority_symbols'], [])
+        self.assertEqual(self.lock.read(key), saved)
+        changed = dict(companies=list(reversed(PLAN['companies'])))
+        report = self.collector(10).collect(changed, priority_plan=PLAN)
+        self.assertEqual(report['priority_symbols'], ['MSFT'])
+        self.assertNotEqual(self.lock.read(key)['fingerprint'], saved['fingerprint'])
+
     def test_priority_symbol_cannot_override_issuer_identity(self):
         with self.assertRaises(ValueError):
             self.collector(10).collect(PLAN, priority_plan=dict(companies=[

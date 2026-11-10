@@ -1,5 +1,32 @@
 # Development status
 
+## 10 Kasım 2026 — Canlı değerleme devri ve öncelik sırası
+
+Başlangıç main `4068ab399e5df1471c37028864fea6758dd33325` (PR #89), main CI
+`42746002684` başarılı. SEC `42746934662` sequence sınırında
+toplamayı atladı. Değerleme `42747015607` doğrulanmış SEC
+`42455760184` kanıtını ve önceki değerleme durumunu kullandı.
+51 yeni kaynak GET çağrısı yaptı. 100 kimlik eşleşmesi, 27 tarihli
+hisse sınıfı, 14 geçerli fiyat ve 13 geçerli geçmiş kaydı raporlandı.
+Bunlar 100 güncel aktif adi hisse kabulü değildir.
+
+Yeni değerleme artifact'i `13731856624`, yeni skor `42747454922`,
+skor artifact'i `13732371007`. İki ZIP'in SHA-256 ve CRC denetimi
+geçti. Skor arşivi 100 aday ve beş puan içeriyor. 95 puansız adayın
+72'si sektör modeli, 17'si değerleme kanıtı, dördü tam finansal
+inceleme ve ikisi kritik finansal inceleme bekliyor. Piyasa kanıtı
+bekleyen 10 karşılaştırma adayının tamamı bu koşuda sorgulanmadı.
+Finansal üretim sequence 10, 100 metadata, 100 adi hisse adayı,
+98 finansal şirket, 961 değer ve 704 hesaplama.
+
+51 GET bütçesiyle 14 adaylık öncelik listesinin beşi seçiliyordu.
+Öncelik sırası artık normal tarama imlecinden bağımsız kaydedilir.
+Aynı aday listesiyle sınırlı dilimler sırayla ilerler. Sıfır
+bütçeli tekrar imleci değiştirmez. 72 hedefli test geçti.
+Sıradaki iş yeni canlı koşularda öncelik diliminin değiştiğini ve
+10 aday için piyasa kanıtı kapsamının arttığını doğrulamak. Tam
+MVP kabulü açık.
+
 ## 10 Kasım 2026 — Değerlemede güncel SEC devam paketini seçme
 
 Başlangıç main `f9415e20d5d0d09921a39e6c7dc7fa77b20afd0c` (PR #88).
