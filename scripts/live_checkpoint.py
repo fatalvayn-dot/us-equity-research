@@ -116,11 +116,35 @@ def api(path):
         return json.load(response)
 
 
-def safe_run_skip(run_id):
-    result = api(f'actions/runs/{run_id}/jobs?filter=all&per_page=100')
+def safe_run_skip(run_id, *, fetch=None):
+    fetch = fetch or api
+    result = fetch(f'actions/runs/{run_id}/jobs?filter=all&per_page=100')
     # A concurrency-cancelled queued run can have no jobs at all.
     return (result['total_count'] == len(result['jobs'])
             and (not result['jobs'] or collection_never_started(result['jobs'])))
+
+
+def find_checkpoint(current_run, requested='', *, fetch=None):
+    fetch = fetch or api
+    runs = []
+    for page in range(1, 11):
+        rows = fetch(f'actions/workflows/live-acceptance.yml/runs?branch=main&per_page=100&page={page}')['workflow_runs']
+        runs.extend(rows)
+        if len(rows) < 100 or min(r['id'] for r in rows) <= ROOT_RUN:
+            break
+    else:
+        raise ValueError('Çalışma araması sınırı aşıldı')
+
+    @cache
+    def artifacts(run_id):
+        result = fetch(f'actions/runs/{run_id}/artifacts?per_page=100')
+        if len(result['artifacts']) != result['total_count']:
+            raise ValueError('Durum paketleri listesi eksik')
+        return result['artifacts']
+
+    run_id = select(runs, artifacts, current_run, requested,
+                    safe_to_skip=lambda rid: safe_run_skip(rid, fetch=fetch))
+    return next(run for run in runs if run['id'] == run_id), artifacts(run_id)
 
 
 def is_reviewed_idle_state(run_id, items, evidence):
@@ -158,26 +182,10 @@ def main():
     root = Path(args.state_dir)
     if args.action == 'select':
         require_first_attempt()
-        runs = []
-        for page in range(1, 11):
-            rows = api(f'actions/workflows/live-acceptance.yml/runs?branch=main&per_page=100&page={page}')['workflow_runs']
-            runs.extend(rows)
-            if not rows or min(r['id'] for r in rows) <= ROOT_RUN:
-                break
-        else:
-            raise ValueError('Çalışma araması sınırı aşıldı')
-        @cache
-        def artifacts(rid):
-            result = api(f'actions/runs/{rid}/artifacts?per_page=100')
-            if len(result['artifacts']) != result['total_count']:
-                raise ValueError('Durum paketleri listesi eksik')
-            return result['artifacts']
-
-        run_id = select(runs, artifacts,
-                        int(os.environ['GITHUB_RUN_ID']), args.requested,
-                        safe_to_skip=safe_run_skip)
+        run, items = find_checkpoint(int(os.environ['GITHUB_RUN_ID']), args.requested)
+        run_id = run['id']
         idle = (os.environ.get('GITHUB_EVENT_NAME') == 'schedule'
-                and is_reviewed_idle_state(run_id, artifacts(run_id), json.loads(REVIEWED_STATE.read_text())))
+                and is_reviewed_idle_state(run_id, items, json.loads(REVIEWED_STATE.read_text())))
         with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
             f.write(f'run_id={run_id}\n')
             f.write(f"reviewed_idle={'true' if idle else 'false'}\n")
