@@ -45,12 +45,23 @@ def verified_observations(root: Path) -> set[tuple[str, str, str]]:
     return verified
 
 
-def verify(root: Path, *, previous_state: Path | None = None) -> int:
+def verify(root: Path, *, previous_state: Path | None = None,
+           write_observations: Path | None = None,
+           require_observations: Path | None = None) -> int:
     current = verified_observations(root)
-    if previous_state is not None:
-        missing = verified_observations(previous_state) - current
-        if missing:
-            raise ValueError(f"Önceki değerleme durumundan {len(missing)} kaynak gözlemi kayıp")
+    previous = verified_observations(previous_state) if previous_state is not None else set()
+    if require_observations is not None:
+        rows = json.loads(require_observations.read_text())
+        if not isinstance(rows, list) or any(
+                not isinstance(row, list) or len(row) != 3
+                or not all(isinstance(value, str) for value in row) for row in rows):
+            raise ValueError("Önceki değerleme gözlem kaydı geçersiz")
+        previous.update(map(tuple, rows))
+    missing = previous - current
+    if missing:
+        raise ValueError(f"Önceki değerleme durumundan {len(missing)} kaynak gözlemi kayıp")
+    if write_observations is not None:
+        write_observations.write_text(json.dumps(sorted(current)) + "\n")
     return len(current)
 
 
@@ -59,5 +70,11 @@ if __name__ == "__main__":
     parser.add_argument("state_dir", type=Path)
     parser.add_argument("--previous-state", type=Path,
                         help="Önceki doğrulanmış paketteki gözlemlerin tamamını karşılaştır")
+    receipt = parser.add_mutually_exclusive_group()
+    receipt.add_argument("--write-observations", type=Path)
+    receipt.add_argument("--require-observations", type=Path)
     args = parser.parse_args()
-    print(f"Doğrulanan değerleme kaynak gözlemi: {verify(args.state_dir, previous_state=args.previous_state)}")
+    count = verify(args.state_dir, previous_state=args.previous_state,
+                   write_observations=args.write_observations,
+                   require_observations=args.require_observations)
+    print(f"Doğrulanan değerleme kaynak gözlemi: {count}")

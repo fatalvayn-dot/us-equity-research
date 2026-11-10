@@ -77,6 +77,21 @@ class VerifyValuationStateTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "1 kaynak gözlemi kayıp"):
             verify(self.root, previous_state=previous)
 
+    def test_saved_observations_detect_loss_after_the_previous_state_is_replaced(self):
+        receipt = self.root / "observations.json"
+        self.assertEqual(verify(self.root, write_observations=receipt), 1)
+        self.assertEqual(verify(self.root, require_observations=receipt), 1)
+
+        with closing(sqlite3.connect(self.source)) as db, db:
+            db.execute("UPDATE response_observations_v1 SET url = ?",
+                       ("https://www.sec.gov/replacement",))
+        with closing(ResponseArchive(self.source)) as archive:
+            manifest = write_bundle(archive, self.bundle)
+        self.report.write_text(json.dumps({"source_bundle": manifest}))
+        self.assertEqual(verify(self.root), 1)
+        with self.assertRaisesRegex(ValueError, "1 kaynak gözlemi kayıp"):
+            verify(self.root, require_observations=receipt)
+
     def test_rejects_same_count_with_different_sqlite_observation(self):
         with closing(sqlite3.connect(self.source)) as db, db:
             db.execute(

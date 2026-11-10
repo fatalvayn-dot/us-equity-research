@@ -1,5 +1,36 @@
 # Development status
 
+## 10 Kasım 2026 — Değerleme yayını öncesi kaynak devamlılığı
+
+Başlangıç main `f016d658971e216c655501679781549d987aad69` (PR #91), main CI
+`42759463335` başarılı. SEC `42766552291` toplama adımını atladı.
+Son finansal üretim `42455760184`, sequence 10. 100 metadata,
+100 adi hisse adayı, 98 finansal şirket, 961 değer ve 704 hesaplama.
+
+Değerleme `42766626020` 51 kaynak isteği, 100 kimlik eşleşmesi,
+34 tarihli hisse sınıfı, 12 geçerli fiyat ve 9 geçerli geçmiş
+raporladı. Öncelik dilimi MRVL, CRM, INTU, NOW ve SNPS oldu.
+Değerleme artifact'i `13740765312`, skor `42767003664`, skor
+artifact'i `13740126653`. ZIP SHA-256 ve CRC geçti. Beş skor var.
+95 puansız adayın 72'si sektör modeli, 19'u değerleme, ikisi tam,
+ikisi kritik finansal inceleme bekliyor.
+
+Değerleme önceden doğrulanmış kaynak gözlemlerinin URL, SHA-256
+ve zaman üçlülerini toplama öncesinde kaydeder. Yayın öncesinde
+yeni SQLite, kaynak paketi ve bu gözlemlerin tamamı doğrulanır.
+Başarısız doğrulama skor zincirine geçişi durdurur, inceleme için
+durum paketi korunur. 22 yerel test ve Bash sözdizimi geçti.
+
+NVDA özgün 10-K accession `0001045810-26-000021`, kaynak SHA-256
+`5f16e34c2c3e8f9f8aa8ee4237226dd50d6b40f1b75bbcdee01573d3ae30bf8e`.
+Dönem 2025-01-27–2026-01-25, USD. Gelir `us-gaap:Revenues`
+215.938 milyon USD. `us-gaap:PaymentsToAcquireProductiveAssets`
+6.042 milyon USD tutarında ve maddi olmayan varlıkları da içeriyor.
+Dar maddi duran varlık harcaması alanına alınmadı. Sonraki iş gelir
+tanımının kaynağa sadık biçimde modelde ele alınmasını değerlendirmek
+ve dar sermaye harcaması için bağımsız yıllık kanıt aramak.
+Tam MVP kabulü açık.
+
 ## 10 Kasım 2026 — Skor için en güncel değerleme paketini doğrulama
 
 Başlangıç main `8439496987bfa763166f35e594e250326e63f1c5` (PR #90), main CI
