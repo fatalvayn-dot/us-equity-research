@@ -16,6 +16,7 @@ from equity_research.companyfacts import companyfacts_url
 from equity_research.mvp import save_json
 from equity_research.reporting import build_report
 from equity_research.scoring import MODELS, REQUIRED
+from equity_research.sector_policy import excluded_banking_or_insurance
 from equity_research.transport import strict_json
 
 
@@ -82,6 +83,8 @@ def plans(financial_batch, metadata, valuation, companyfacts_dir, *, maximum=10)
         rowmeta, market = metas.get(cik), prices.get(cik)
         if rowmeta is None or market is None or rowmeta["symbol"] != symbol or market["symbol"] != symbol:
             reason = "issuer_or_symbol_source_mismatch"
+        elif excluded_banking_or_insurance(rowmeta.get("snapshot", {}).get("sic_label")):
+            reason = "banking_or_insurance_permanently_excluded"
         elif reviewed[cik]["financial_assessment"]["quantitative_gate"] != "no_screen_trigger":
             reason = "financial_review_required"
         elif not (rowmeta.get("status") == "metadata_available_legal_type_pending"
