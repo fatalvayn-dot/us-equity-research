@@ -60,6 +60,15 @@ class CommonSampleTests(unittest.TestCase):
             responses[-1]=replace(r,body=r.body.replace(b'</html>',extra+b'</html>'))
             self.assertEqual(run(responses)['companies'][0]['blockers'],['reported_fund_bdc_or_shell'])
 
+    def test_banking_and_insurance_are_permanently_excluded_from_candidate_plan(self):
+        for sic in ('6021','6029','6035','6311','6324','6331','6411','6162'):
+            with self.subTest(sic=sic):
+                responses=sources();responses[-2]=metadata(sic=sic)
+                result=run(responses)
+                self.assertEqual(result['candidate_plan']['companies'],[])
+                self.assertEqual(result['companies'][0]['blockers'],['banking_or_insurance_permanently_excluded'])
+                self.assertFalse(result['target_sample_verified'])
+
     def test_unknown_investment_issuer_route_stays_review(self):
         responses=sources();responses[-2]=metadata(entity='investment')
         self.assertFalse(run(responses)['target_sample_verified'])
