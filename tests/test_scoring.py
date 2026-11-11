@@ -139,6 +139,15 @@ class ScoringTests(unittest.TestCase):
         self.assertEqual(c['components']['profitability']['score'],Decimal(10))
         self.assertEqual(c['model_id'],'prepackaged_software_v1')
 
+    def test_banking_insurance_exclusion_precedes_all_score_gates(self):
+        for sic in ('6021','6029','6035','6311','6324','6331','6411','6162'):
+            with self.subTest(sic=sic):
+                row=score(metadata_response=metadata(sic=sic))['companies'][0]
+                self.assertEqual(row['status'],'excluded_sector')
+                self.assertEqual(row['blockers'],['banking_or_insurance_permanently_excluded'])
+                self.assertIsNone(row['total_score'])
+                self.assertFalse(row['investment_approved'])
+
     def test_financial_reit_bdc_unknown_and_nonoperating_routes_never_scored(self):
         for sic,entity in [('6021','operating'),('6798','operating'),('6770','operating'),(None,'operating'),('9999','operating'),('3571','investment')]:
             c=score(metadata_response=metadata(sic=sic,entity=entity))['companies'][0]
