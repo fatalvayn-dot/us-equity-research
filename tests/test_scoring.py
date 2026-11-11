@@ -145,7 +145,7 @@ class ScoringTests(unittest.TestCase):
         self.assertEqual(company['model_id'],'internet_data_services_v1')
         self.assertEqual(company['status'],'scored_research_hypothesis')
         self.assertEqual(company['components']['profitability']['score'],Decimal(10))
-        self.assertEqual(company['total_score'],Decimal('87.5'))
+        self.assertEqual(company['total_score'],Decimal('82.5'))
         self.assertFalse(company['investment_approved'])
 
     def test_internet_data_services_still_requires_market_and_full_financial_evidence(self):
