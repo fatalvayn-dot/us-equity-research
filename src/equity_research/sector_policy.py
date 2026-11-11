@@ -65,9 +65,9 @@ def assess_profile(response, *, issuer_id, as_of, max_age=timedelta(hours=6)):
     if not isinstance(sic, str) or not re.fullmatch(r'[0-9]{4}', sic) or not 100 <= int(sic) <= 8999:
         result['status'] = 'unknown_sic'
         return result
-    if excluded_banking_or_insurance(sic) and sic not in INSURANCE_CODES:
+    if sic in BANK_CODES:
         profile = 'banking_signal'
-    elif excluded_banking_or_insurance(sic):
+    elif sic in INSURANCE_CODES:
         profile = 'insurance_signal'
     elif sic == '6798':
         profile = 'reit_signal'
