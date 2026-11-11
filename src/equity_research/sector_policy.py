@@ -13,6 +13,15 @@ SIC_REFERENCE = 'https://www.sec.gov/search-filings/standard-industrial-classifi
 BANK_CODES = frozenset({'6021', '6022', '6029', '6035', '6036'})
 INSURANCE_CODES = frozenset({'6311', '6321', '6324', '6331', '6351', '6361', '6399'})
 
+# Permanent user exclusion: deposit-taking banks, insurance carriers,
+# insurance agents/brokers, mortgage banking and investment banking/brokers. SIC alone is a conservative
+# filter, not a certification of participation-index eligibility.
+def excluded_banking_or_insurance(sic):
+    return isinstance(sic, str) and len(sic) == 4 and sic.isascii() and sic.isdigit() and (
+        sic.startswith(('60', '63', '64')) or sic in {'6111', '6162', '6163', '6199', '6211'}
+    )
+
+
 
 def assess_profile(response, *, issuer_id, as_of, max_age=timedelta(hours=6)):
     """Bind current metadata to issuer and cutoff; stale snapshots cannot grant eligibility.

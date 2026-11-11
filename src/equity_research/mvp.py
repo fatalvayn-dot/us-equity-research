@@ -18,7 +18,7 @@ from .mvp_scope import collect_common_evidence
 from .reporting import build_report, render_markdown
 from .response_archive import ResponseArchive, ArchivedTransport
 from .sec import SecDirectory
-from .sector_policy import assess_profile
+from .sector_policy import assess_profile, excluded_banking_or_insurance
 from .submissions import SecSubmissions
 from .transport import RateLimiter, Response
 
@@ -160,6 +160,11 @@ def run_mvp(payload, *, state_dir, user_agent, max_new_metadata=None, max_new_do
                     archive.record(response)
                 annual=snapshot.latest_annual()
                 out.update(status=snapshot.readiness(row['symbol']),snapshot=asdict(snapshot),annual=asdict(annual) if annual else None)
+                if excluded_banking_or_insurance(snapshot.sic_label):
+                    # Identity metadata is needed for classification, but excluded
+                    # issuers never enter the annual-document or financial queue.
+                    out.update(status='excluded_sector',annual=None,
+                               exclusion_reason='banking_or_insurance_permanently_excluded')
             except ProviderFailure as exc:
                 out.update(status=exc.status.value,http_status=exc.http_status)
             counts['metadata_network_requests']+=counts['public_transport_get_calls']-before
