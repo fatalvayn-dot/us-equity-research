@@ -13,6 +13,15 @@ SIC_REFERENCE = 'https://www.sec.gov/search-filings/standard-industrial-classifi
 BANK_CODES = frozenset({'6021', '6022', '6029', '6035', '6036'})
 INSURANCE_CODES = frozenset({'6311', '6321', '6324', '6331', '6351', '6361', '6399'})
 
+# Permanent user exclusion: deposit-taking banks, insurance carriers,
+# insurance agents/brokers and mortgage banking. SIC alone is a conservative
+# filter, not a certification of participation-index eligibility.
+def excluded_banking_or_insurance(sic):
+    return isinstance(sic, str) and len(sic) == 4 and sic.isascii() and sic.isdigit() and (
+        sic.startswith(('60', '63', '64')) or sic in {'6111', '6162', '6163'}
+    )
+
+
 
 def assess_profile(response, *, issuer_id, as_of, max_age=timedelta(hours=6)):
     """Bind current metadata to issuer and cutoff; stale snapshots cannot grant eligibility.
@@ -56,9 +65,9 @@ def assess_profile(response, *, issuer_id, as_of, max_age=timedelta(hours=6)):
     if not isinstance(sic, str) or not re.fullmatch(r'[0-9]{4}', sic) or not 100 <= int(sic) <= 8999:
         result['status'] = 'unknown_sic'
         return result
-    if sic in BANK_CODES:
+    if excluded_banking_or_insurance(sic) and sic not in INSURANCE_CODES:
         profile = 'banking_signal'
-    elif sic in INSURANCE_CODES:
+    elif excluded_banking_or_insurance(sic):
         profile = 'insurance_signal'
     elif sic == '6798':
         profile = 'reit_signal'
