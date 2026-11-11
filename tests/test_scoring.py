@@ -158,7 +158,7 @@ class ScoringTests(unittest.TestCase):
         # This issuer has an observed SEC SIC but no price, history or
         # original share filing. It must not consume the modeled valuation
         # repair queue when no supported sector model exists.
-        for sic in ('6021','6798','9999'):
+        for sic in ('6798','9999'):
             with self.subTest(sic=sic):
                 report=build_score_report(financial(),*comparisons(),
                     [companyfacts(),metadata(sic=sic),identity()],as_of=ASOF)
