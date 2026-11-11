@@ -21,7 +21,16 @@ from .providers import ProviderFailure,Status
 from .legal_evidence import registered_legal_contraindications as _legal_contraindications
 
 MODEL_VERSION='technology-research-v1'
-MODELS={'3571':'electronic_computers_v1','3674':'semiconductors_v1','7372':'prepackaged_software_v1'}
+MODELS={'3571':'electronic_computers_v1','3674':'semiconductors_v1',
+        '7370':'internet_data_services_v1','7372':'prepackaged_software_v1'}
+# Explicit, provisional research bands. These are hypotheses, not backtested
+# performance thresholds. Financial/balance-sheet, legal and market gates stay
+# identical for every supported operating-company model.
+PROFIT_MARGIN_BANDS={
+    '7370':[('.25',15),('.15',10),('.08',5),('0',2)],
+    '7372':[('.30',15),('.20',10),('.10',5),('0',2)],
+}
+INDUSTRIAL_PROFIT_BANDS=[('.20',15),('.10',10),('.05',5),('0',2)]
 REQUIRED=('assets','liabilities','current_assets','current_liabilities','net_income',
           'operating_income','operating_cash_flow','capital_expenditure','revenue')
 SHARE_UPLIFT=Decimal('.25')
@@ -197,7 +206,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
                 strength=_at_most(leverage,[('.3',10),('.5',7.5),('.7',5),('1',2.5)])+_at_least(liquidity,[('2',10),('1.5',7.5),('1',5),('.75',2.5)])
                 valuation=_at_least(stressed_yield,[('.08',20),('.06',15),('.04',10),('.02',5)])
                 growth_points=_at_least(growth['value'],[('.20',20),('.10',15),('.05',10),('0',5)])
-                thresholds=[('.30',15),('.20',10),('.10',5),('0',2)] if snapshot.sic_label=='7372' else [('.20',15),('.10',10),('.05',5),('0',2)]
+                thresholds=PROFIT_MARGIN_BANDS.get(snapshot.sic_label,INDUSTRIAL_PROFIT_BANDS)
                 profit=_at_least(margin,thresholds)
                 cash_points=_at_least(cash_margin,[('.20',15),('.10',10),('.05',5),('0',2)])
                 vol=market['annualized_sample_volatility'];dollar_volume=market['median_63_session_close_times_volume']
