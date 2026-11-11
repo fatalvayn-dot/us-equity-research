@@ -61,7 +61,7 @@ class CommonSampleTests(unittest.TestCase):
             self.assertEqual(run(responses)['companies'][0]['blockers'],['reported_fund_bdc_or_shell'])
 
     def test_banking_and_insurance_are_permanently_excluded_from_candidate_plan(self):
-        for sic in ('6021','6029','6035','6311','6324','6331','6411','6162'):
+        for sic in ('6021','6029','6035','6311','6324','6331','6411','6162','6199','6211'):
             with self.subTest(sic=sic):
                 responses=sources();responses[-2]=metadata(sic=sic)
                 result=run(responses)
