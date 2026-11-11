@@ -126,7 +126,7 @@ jobs:
         env:
           PYTHONPATH: src
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
-          MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'workflow_run' && '51' || '250') }}
+          MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'workflow_run' && '100' || '250') }}
           SOURCE_RUN: ${{ steps.select.outputs.source_run }}
           RESUME_RUN: ${{ steps.select.outputs.resume_run }}
         run: |
