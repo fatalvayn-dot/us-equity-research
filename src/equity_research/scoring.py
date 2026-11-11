@@ -16,6 +16,7 @@ from .score_inputs import score_input_provenance
 from .reporting import build_report
 from .sec import DIRECTORY_URL
 from .submissions import parse_submissions,submissions_url
+from .sector_policy import excluded_banking_or_insurance
 from .valuation import build_valuation_report
 from .providers import ProviderFailure,Status
 from .legal_evidence import registered_legal_contraindications as _legal_contraindications
@@ -99,6 +100,17 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
             limitations=['research_threshold_hypotheses_not_validated_return_prediction',
                 'qualitative_filings_news_governance_and_full_capital_changes_not_cleared'])
         companies.append(row)
+        # Permanent user policy takes precedence over financial quality and
+        # model eligibility. Never publish bank/insurance research scores.
+        metadata_for_exclusion=sources.get(submissions_url(cik))
+        if metadata_for_exclusion is not None:
+            try:
+                exclusion_snapshot=parse_submissions(metadata_for_exclusion,cik)
+            except (ProviderFailure,ValueError,KeyError,TypeError,ArithmeticError):
+                exclusion_snapshot=None
+            if exclusion_snapshot is not None and excluded_banking_or_insurance(exclusion_snapshot.sic_label):
+                row.update(status='excluded_sector',blockers=['banking_or_insurance_permanently_excluded'])
+                continue
         if gate=='critical_review_required':
             row.update(status='critical_review_required',blockers=['critical_financial_review']);continue
         if gate=='invalid_evidence':row['blockers']=['invalid_financial_evidence'];continue
