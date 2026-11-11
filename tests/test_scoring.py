@@ -139,6 +139,26 @@ class ScoringTests(unittest.TestCase):
         self.assertEqual(c['components']['profitability']['score'],Decimal(10))
         self.assertEqual(c['model_id'],'prepackaged_software_v1')
 
+    def test_internet_data_services_model_has_explicit_provisional_bands(self):
+        # A separate documented sector hypothesis; never reused for banks or REITs.
+        company=score(metadata_response=metadata(sic='7370'))['companies'][0]
+        self.assertEqual(company['model_id'],'internet_data_services_v1')
+        self.assertEqual(company['status'],'scored_research_hypothesis')
+        self.assertEqual(company['components']['profitability']['score'],Decimal(10))
+        self.assertEqual(company['total_score'],Decimal('87.5'))
+        self.assertFalse(company['investment_approved'])
+
+    def test_internet_data_services_still_requires_market_and_full_financial_evidence(self):
+        report=build_score_report(financial(),*comparisons(),
+            [companyfacts(),metadata(sic='7370'),identity()],as_of=ASOF)
+        company=report['companies'][0]
+        self.assertEqual(company['blockers'],['valuation_source_evidence_required'])
+        self.assertIsNone(company['total_score'])
+        incomplete=score(b=financial(capital_expenditure=None),
+                         metadata_response=metadata(sic='7370'))['companies'][0]
+        self.assertIsNone(incomplete['total_score'])
+        self.assertIn('capital_expenditure',incomplete['missing_fields'])
+
     def test_financial_reit_bdc_unknown_and_nonoperating_routes_never_scored(self):
         for sic,entity in [('6021','operating'),('6798','operating'),('6770','operating'),(None,'operating'),('9999','operating'),('3571','investment')]:
             c=score(metadata_response=metadata(sic=sic,entity=entity))['companies'][0]
