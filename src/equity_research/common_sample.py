@@ -13,6 +13,7 @@ from .providers import ProviderFailure
 from .scope import audit_sample
 from .sec import DIRECTORY_URL,parse_directory
 from .submissions import submissions_url,parse_submissions
+from .sector_policy import excluded_banking_or_insurance
 
 POLICY='registered-common-sample-v1'
 MAX_AGE=timedelta(days=4)
@@ -81,6 +82,11 @@ def verify_common_sample(payload,responses,*,as_of,target=100):
             if not timedelta(0)<=as_of-metadata.retrieved_at<=MAX_AGE:raise ValueError('stale metadata')
             snapshot=parse_submissions(metadata,cik)
             if symbol not in snapshot.tickers:raise ValueError('metadata symbol mismatch')
+            if excluded_banking_or_insurance(snapshot.sic_label):
+                row['blockers']=['banking_or_insurance_permanently_excluded']
+                row['excluded_sector_evidence']=dict(sic=snapshot.sic_label,source_url=metadata.url,
+                    raw_sha256=metadata.sha256,retrieved_at=metadata.retrieved_at)
+                continue
             if snapshot.entity_type_label not in ('operating','other') or not snapshot.sic_label or snapshot.sic_label in ('6722','6726','6770','6799'):
                 row['blockers']=['issuer_or_investment_company_model_review'];continue
             annual=snapshot.latest_annual()
