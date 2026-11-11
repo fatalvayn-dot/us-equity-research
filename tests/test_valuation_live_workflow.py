@@ -29,7 +29,7 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
 
     def test_workflow_edit_does_not_launch_a_second_collector(self):
         self.assertNotIn("  push:", self.text)
-        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'workflow_run' && '51' || '250') }}", self.text)
+        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'workflow_run' && '100' || '250') }}", self.text)
         self.assertIn("contents: read", self.text)
         self.assertIn("actions: read", self.text)
         self.assertNotIn("git push", self.text)
@@ -57,7 +57,7 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("run-id: ${{ steps.select.outputs.resume_run }}", self.text)
         self.assertIn("RESUME_RUN=$(python -m scripts.select_valuation_resume)", self.text)
         self.assertIn("options: ['0', '51', '100', '250', '501']", self.text)
-        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'workflow_run' && '51' || '250') }}", self.text)
+        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'workflow_run' && '100' || '250') }}", self.text)
         self.assertIn("cancel-in-progress: false", self.text)
 
     def test_resume_is_verified_before_writing_and_reupload(self):
@@ -119,7 +119,7 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertEqual(len(set(keys)),14)
         # The collector caps priority at budget // (2 * 5 GETs/company).
         self.assertLessEqual(len(keys)*5,250//2)
-        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'workflow_run' && '51' || '250') }}",self.text)
+        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || (github.event_name == 'workflow_run' && '100' || '250') }}",self.text)
         self.assertEqual(reviewed['financial_run_id'],42455760184)
         self.assertEqual(reviewed['valuation_run_id'],42598993077)
         self.assertEqual(reviewed['valuation_artifact_id'],13664443650)
