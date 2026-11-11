@@ -140,7 +140,7 @@ class ScoringTests(unittest.TestCase):
         self.assertEqual(c['model_id'],'prepackaged_software_v1')
 
     def test_banking_insurance_exclusion_precedes_all_score_gates(self):
-        for sic in ('6021','6029','6035','6311','6324','6331','6411','6162'):
+        for sic in ('6021','6029','6035','6311','6324','6331','6411','6162','6199','6211'):
             with self.subTest(sic=sic):
                 row=score(metadata_response=metadata(sic=sic))['companies'][0]
                 self.assertEqual(row['status'],'excluded_sector')
