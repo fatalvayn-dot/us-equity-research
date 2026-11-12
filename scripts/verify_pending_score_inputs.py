@@ -86,6 +86,26 @@ def selected_operating_symbols(metadata):
     return result
 
 
+def missing_companyfacts_result(company, annual, original, cutoff):
+    """Unverified proof report for an issuer lacking SEC Company Facts cache."""
+    cik, symbol = company['issuer_id'], company['symbol']
+    known_fields = {field['query']['field'] for field in company['fields']
+                    if field.get('fact')}
+    gaps = audit_original_gaps(
+        original, cik=cik,
+        start=date.fromisoformat(company['period_start']) if company['period_start'] else None,
+        end=date.fromisoformat(annual['report_end']),
+        missing_fields=[name for name in REQUIRED if name not in known_fields],
+        cutoff=cutoff)
+    result = dict(symbol=symbol, issuer_id=cik,
+                  annual_accession=annual['accession'], confirmed_fields=0,
+                  source_status='sec_companyfacts_cache_missing',
+                  checks=[dict(field=name, status='source_cache_missing') for name in REQUIRED])
+    if gaps is not None:
+        result['original_score_input_gaps'] = gaps
+    return result
+
+
 def audit(root, run_id, symbols):
     manifest, _ = verify(root, run_id, {})
     batch = json.loads((root / 'batch.json').read_text())
@@ -118,26 +138,7 @@ def audit(root, run_id, symbols):
                     raise ValueError('annual filing body integrity failure')
             cache_path = root / 'companyfacts' / (cik + '.json')
             if not cache_path.is_file():
-                # Absence of an original SEC Company Facts response does not
-                # certify absence or zero values. Continue other issuers with
-                # an explicit unverified-source disposition.
-                known_fields = {field['query']['field'] for field in company['fields']
-                                if field.get('fact')}
-                gaps = audit_original_gaps(
-                    original, cik=cik,
-                    start=date.fromisoformat(company['period_start']) if company['period_start'] else None,
-                    end=date.fromisoformat(annual['report_end']),
-                    missing_fields=[name for name in REQUIRED if name not in known_fields],
-                    cutoff=cutoff)
-                result = dict(symbol=symbol, issuer_id=cik,
-                              annual_accession=annual['accession'],
-                              confirmed_fields=0,
-                              source_status='sec_companyfacts_cache_missing',
-                              checks=[dict(field=name,status='source_cache_missing')
-                                      for name in REQUIRED])
-                if gaps is not None:
-                    result['original_score_input_gaps'] = gaps
-                results.append(result)
+                results.append(missing_companyfacts_result(company, annual, original, cutoff))
                 continue
             envelope = json.loads(cache_path.read_text())
             cf = Response(envelope['url'], envelope['body'].encode('utf-8'),
