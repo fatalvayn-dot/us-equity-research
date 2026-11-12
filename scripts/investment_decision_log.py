@@ -81,9 +81,10 @@ def validate_event(payload):
 
 def append_event(journal_path, event):
     validate_event(event)
-    journal = Path(journal_path).resolve()
-    if (journal.exists() and journal.is_symlink()):
+    original = Path(journal_path)
+    if original.is_symlink():
         raise ValueError("symlink journal not accepted")
+    journal = original.resolve()
     if journal.is_file():
         events = json.loads(journal.read_text(encoding="utf-8"))
     else:
