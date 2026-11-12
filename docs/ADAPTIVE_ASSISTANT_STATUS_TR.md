@@ -2,7 +2,7 @@
 
 ## Aktif kod parçaları
 
-- `scripts/adaptive_daily_brief.py` — ABD, BIST ve Avrupa'daki **örnek kamusal** dokuz hissenin tarihli fiyat kanıtını toplar.
+- `scripts/adaptive_daily_brief.py` — ABD, BIST ve Avrupa'daki **örnek kamusal** 23 örnek hissenin tarihli fiyat kanıtını toplar.
 - `scripts/adaptive_investment_assistant.py` — fiyatların güvenilirliğini kontrol eder, önemli günlük hareketleri ve kaynak sorunlarını araştırma kuyruğuna alır; `research-packet.json` ve `analyst-work-order.md` üretir.
 - `.github/workflows/adaptive-analyst-daily.yml` — hafta içi 14:15 UTC'de fiyat ve araştırma iş emri artifact'lerini üretmeyi dener.
 - `scripts/investment_decision_log.py` — **yalnızca yerel/özel dosyaya** zamanlı karar ve daha sonra sonuç kaydı ekler; her satır öncekinin SHA-256 değerine zincirlenir. İşlem açmaz.
@@ -12,7 +12,7 @@
 
 - GitHub'ın oluşturduğu iş emri GPT Work oturumunu **otomatik başlatmaz**. Work'te bağlantı ve günlük zamanlama ayrıca yapılandırılmalı, gerçek oturumla doğrulanmalıdır.
 - Portföyün son gerçek adet ve alış maliyetleri otomatik bağlı değildir. Midas hesabına otomatik erişim yoktur.
-- Kapsam üç piyasada **dokuz sembollük örnek**; bütün Midas evreni, tam katılım endeksi denetimi, temel değerleme ve finansal sağlık için geniş tarama henüz entegre değildir.
+- Kapsam üç piyasada **23 sembollük örnek**; bütün Midas evreni, tam katılım endeksi denetimi, temel değerleme ve finansal sağlık için geniş tarama henüz entegre değildir.
 - Günlük fiyat değişimi bir yatırım önerisi veya otomatik piyasa yönü tahmini değildir. Yapay zekâ güncel haber ve makro koşulları ayrıca araştırmalıdır.
 - Kendi kendine öğrenme, bu aşamada **denetlenebilir karar/sonuç günlüğü** demektir. Performans karşılaştırması ve kanıtlı strateji değişikliği ayrıca inşa edilmelidir.
 - Public depoya **asla** müşteri adı, portföy miktarı, alış maliyeti, bakiye, işlem geçmişi, broker şifresi veya özel görüş kaydı koyma.
