@@ -70,10 +70,11 @@ def history(*,split=False,volume=10000000):
     return Response(history_url('AAPL'),json.dumps(dict(chart=dict(error=None,result=[item]))).encode(),NOW+timedelta(minutes=1))
 
 
-def score(*,b=None,metadata_response=None,history_response=None,cf_response=None,filing_response=None,current=None,prior=None):
+def score(*,b=None,metadata_response=None,history_response=None,cf_response=None,filing_response=None,current=None,prior=None,model_version=None):
     b=b or financial();default_current,default_prior=comparisons(b)
     responses=[companyfacts() if cf_response is None else cf_response,metadata_response or metadata(),filing_response or filing(),identity(),price(),history_response or history()]
-    return build_score_report(b,current or default_current,prior or default_prior,responses,as_of=ASOF)
+    return build_score_report(b,current or default_current,prior or default_prior,responses,as_of=ASOF,
+                              **({'model_version':model_version} if model_version is not None else {}))
 
 
 class MarketHistoryTests(unittest.TestCase):
