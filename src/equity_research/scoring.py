@@ -23,7 +23,10 @@ from .legal_evidence import registered_legal_contraindications as _legal_contrai
 
 from .sector_models import MODELS, PROFIT_BANDS
 
-MODEL_VERSION='operating-sector-research-v1'
+MODEL_VERSION='technology-research-v1'
+ACTIVE_MODEL_VERSION='operating-sector-research-v1'
+LEGACY_MODELS={'3571':'electronic_computers_v1','3674':'semiconductors_v1',
+               '7372':'prepackaged_software_v1'}
 REQUIRED=('assets','liabilities','current_assets','current_liabilities','net_income',
           'operating_income','operating_cash_flow','capital_expenditure','revenue')
 SHARE_UPLIFT=Decimal('.25')
@@ -63,7 +66,7 @@ def confirm_score_field(fact, companyfacts, payload, *, annual, original, as_of)
                               'retrieved_at':original.retrieved_at, 'raw_sha256':original.sha256})
 
 
-def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_of):
+def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_of,model_version=MODEL_VERSION):
     """Rebuild evidence and all components; incoming scores/approvals are ignored.
 
     Model coverage is restricted to explicitly reviewed SIC-exact operating routes.
@@ -71,6 +74,9 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
     verified inputs; critical review cannot be offset by any component points.
     """
     if not aware(as_of):raise ValueError('aware scoring cutoff required')
+    if model_version not in (MODEL_VERSION, ACTIVE_MODEL_VERSION):
+        raise ValueError('unsupported model version')
+    model_registry=LEGACY_MODELS if model_version==MODEL_VERSION else MODELS
     sources = {}
     for response in responses:
         if response.retrieved_at>as_of:continue
@@ -94,7 +100,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
     companies=[]
     for company in financial['companies']:
         cik,symbol=company['issuer_id'],company['symbol'];gate=company['financial_assessment']['quantitative_gate']
-        row=dict(issuer_id=cik,symbol=symbol,status='review_required',model_version=MODEL_VERSION,
+        row=dict(issuer_id=cik,symbol=symbol,status='review_required',model_version=model_version,
             model_id=None,components={k:dict(weight=w,score=None) for k,w in SCORE_WEIGHTS.items()},
             total_score=None,rank=None,blockers=[],model_scope_eligible=False,investment_approved=False,
             financial_review=company['financial_assessment'],valuation=None,market_risk=None,
@@ -128,7 +134,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
                 scope_snapshot=None
             if (scope_snapshot is not None and
                     (scope_snapshot.entity_type_label!='operating'
-                     or scope_snapshot.sic_label not in MODELS)):
+                     or scope_snapshot.sic_label not in model_registry)):
                 row['sector_evidence']=dict(sic=scope_snapshot.sic_label,
                     entity_type=scope_snapshot.entity_type_label,
                     source_url=metadata_for_scope.url,
@@ -146,9 +152,9 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
             metadata=sources[submissions_url(cik)];snapshot=parse_submissions(metadata,cik)
             row['sector_evidence']=dict(sic=snapshot.sic_label,entity_type=snapshot.entity_type_label,
                 source_url=metadata.url,raw_sha256=metadata.sha256,retrieved_at=metadata.retrieved_at)
-            if snapshot.entity_type_label!='operating' or snapshot.sic_label not in MODELS:
+            if snapshot.entity_type_label!='operating' or snapshot.sic_label not in model_registry:
                 row['blockers']=['specialized_or_unmodeled_sector'];continue
-            row['model_id']=MODELS[snapshot.sic_label]
+            row['model_id']=model_registry[snapshot.sic_label]
             validation_stage='original_share_filing_legal_flags'
             legal=_legal_contraindications(sources[value['disclosed_shares']['original_filing']['url']],cik)
             row['legal_disclosure_review']=legal
@@ -251,11 +257,12 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
     ranking=[]
     for i,c in enumerate(ordered,1):
         c['rank']=i;ranking.append(dict(rank=i,symbol=c['symbol'],issuer_id=c['issuer_id'],score=c['total_score'],model_id=c['model_id']))
-    return dict(schema_version=1,model_version=MODEL_VERSION,as_of=as_of,score_weights=dict(SCORE_WEIGHTS),
+    return dict(schema_version=1,model_version=model_version,as_of=as_of,score_weights=dict(SCORE_WEIGHTS),
         companies=companies,ranking=ranking,input_provenance=provenance,summary=dict(candidates=len(companies),scored_companies=len(ranking),
             critical_review=sum(c['status']=='critical_review_required' for c in companies),unscored=len(companies)-len(ranking)),
         mvp_accepted=False,hundred_active_common_shares_accepted=False,new_network_requests=0,
-        limitations=['provisional_SIC_sector_hypotheses','no_strategy_performance_validation','not_investment_or_trade_approval'])
+        limitations=[('limited_SIC_model_coverage' if model_version==MODEL_VERSION else 'provisional_SIC_sector_hypotheses'),
+                     'no_strategy_performance_validation','not_investment_or_trade_approval'])
 
 
 def render_score_markdown(report):
