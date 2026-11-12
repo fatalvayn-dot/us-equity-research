@@ -136,7 +136,7 @@ class FirstScorePlansTests(unittest.TestCase):
         self.meta["companies"][0]["snapshot"]["sic_label"]="6021"
         _,_,report=self.runplan()
         self.assertEqual(report["selected"],0)
-        self.assertIn("unsupported_sector_or_entity_type",report["excluded_reasons"])
+        self.assertIn("banking_or_insurance_permanently_excluded",report["excluded_reasons"])
 
 
 if __name__=="__main__":
