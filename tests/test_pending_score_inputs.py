@@ -25,7 +25,7 @@ class OriginalScoreGapTests(unittest.TestCase):
 
     def test_all_modeled_operating_issuers_excludes_bank_insurer_and_reit(self):
         def row(symbol, sic, entity='operating'):
-            return dict(symbol=symbol, issuer_id=f'{len(symbol):010d}',
+            return dict(symbol=symbol, issuer_id=f'{sum(ord(c) for c in symbol):010d}',
                         snapshot=dict(sic_label=sic, entity_type_label=entity))
         metadata = dict(companies=[
             row('TECH', '3674'), row('PHARMA', '2834'),
