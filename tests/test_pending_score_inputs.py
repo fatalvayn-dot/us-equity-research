@@ -9,7 +9,7 @@ from equity_research.transport import Response
 
 ROOT = Path(__file__).resolve().parents[1]
 with patch.object(sys, 'path', [str(ROOT / 'scripts'), *sys.path]):
-    from verify_pending_score_inputs import audit_original_gaps, selected_operating_symbols
+    from verify_pending_score_inputs import audit_original_gaps, selected_operating_symbols, missing_companyfacts_result
 
 CIK = '0001045810'
 CUTOFF = datetime(2026, 11, 8, tzinfo=timezone.utc)
@@ -61,6 +61,20 @@ class OriginalScoreGapTests(unittest.TestCase):
             self.assertIsNone(row['required']['value'])
             self.assertEqual(row['related']['concept'], 'us-gaap:' + related)
             self.assertEqual(row['related']['value'], value)
+
+    def test_missing_sec_companyfacts_does_not_stop_other_originals_or_invent_values(self):
+        company=dict(symbol='GEV', issuer_id='0001996810',
+                     period_start='2025-01-01',
+                     fields=[dict(query=dict(field='assets'), fact=dict(value='100'))])
+        annual=dict(accession='0001996810-26-000001', report_end='2025-12-31')
+        row=missing_companyfacts_result(company, annual, None, CUTOFF)
+        self.assertEqual(row['source_status'], 'sec_companyfacts_cache_missing')
+        self.assertEqual(row['confirmed_fields'], 0)
+        self.assertTrue(all(c['status']=='source_cache_missing' for c in row['checks']))
+        self.assertEqual(row['original_score_input_gaps']['status'],
+                         'original_unavailable_at_cutoff')
+        self.assertEqual(row['original_score_input_gaps']['fields'],
+                         ['revenue', 'capital_expenditure'])
 
     def test_cutoff_and_unknown_annual_period_prevent_disclosure(self):
         late = Response(URL, b'body', CUTOFF + timedelta(seconds=1))
