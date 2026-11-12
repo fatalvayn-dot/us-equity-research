@@ -21,8 +21,9 @@ from .valuation import build_valuation_report
 from .providers import ProviderFailure,Status
 from .legal_evidence import registered_legal_contraindications as _legal_contraindications
 
-MODEL_VERSION='technology-research-v1'
-MODELS={'3571':'electronic_computers_v1','3674':'semiconductors_v1','7372':'prepackaged_software_v1'}
+from .sector_models import MODELS, PROFIT_BANDS
+
+MODEL_VERSION='operating-sector-research-v1'
 REQUIRED=('assets','liabilities','current_assets','current_liabilities','net_income',
           'operating_income','operating_cash_flow','capital_expenditure','revenue')
 SHARE_UPLIFT=Decimal('.25')
@@ -65,7 +66,7 @@ def confirm_score_field(fact, companyfacts, payload, *, annual, original, as_of)
 def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_of):
     """Rebuild evidence and all components; incoming scores/approvals are ignored.
 
-    Model coverage is deliberately restricted to three explicit SEC SIC routes.
+    Model coverage is restricted to explicitly reviewed SIC-exact operating routes.
     A score ranks research hypotheses, not purchases. All six components need
     verified inputs; critical review cannot be offset by any component points.
     """
@@ -209,7 +210,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
                 strength=_at_most(leverage,[('.3',10),('.5',7.5),('.7',5),('1',2.5)])+_at_least(liquidity,[('2',10),('1.5',7.5),('1',5),('.75',2.5)])
                 valuation=_at_least(stressed_yield,[('.08',20),('.06',15),('.04',10),('.02',5)])
                 growth_points=_at_least(growth['value'],[('.20',20),('.10',15),('.05',10),('0',5)])
-                thresholds=[('.30',15),('.20',10),('.10',5),('0',2)] if snapshot.sic_label=='7372' else [('.20',15),('.10',10),('.05',5),('0',2)]
+                thresholds=PROFIT_BANDS[row['model_id']]
                 profit=_at_least(margin,thresholds)
                 cash_points=_at_least(cash_margin,[('.20',15),('.10',10),('.05',5),('0',2)])
                 vol=market['annualized_sample_volatility'];dollar_volume=market['median_63_session_close_times_volume']
@@ -254,7 +255,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
         companies=companies,ranking=ranking,input_provenance=provenance,summary=dict(candidates=len(companies),scored_companies=len(ranking),
             critical_review=sum(c['status']=='critical_review_required' for c in companies),unscored=len(companies)-len(ranking)),
         mvp_accepted=False,hundred_active_common_shares_accepted=False,new_network_requests=0,
-        limitations=['limited_SIC_model_coverage','no_strategy_performance_validation','not_investment_or_trade_approval'])
+        limitations=['provisional_SIC_sector_hypotheses','no_strategy_performance_validation','not_investment_or_trade_approval'])
 
 
 def render_score_markdown(report):
