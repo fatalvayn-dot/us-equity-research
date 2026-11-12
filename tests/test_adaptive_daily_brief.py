@@ -29,6 +29,27 @@ class DailyBriefTests(unittest.TestCase):
         self.assertFalse(doc["participation_compliance_confirmed"])
         self.assertIn("ASELS.IS", render_markdown(doc))
 
+    def test_live_yahoo_chart_previous_close_is_used(self):
+        def yahoo_live(symbol):
+            data, url = fake_chart(symbol)
+            meta = data["chart"]["result"][0]["meta"]
+            meta["chartPreviousClose"] = meta.pop("previousClose")
+            return data, url
+        report = build_brief(SAMPLE, fetch=yahoo_live, clock=ASOF)
+        self.assertGreater(report["markets"]["ABD"][0]["change_1d_pct"], 3)
+        self.assertEqual(report["markets"]["ABD"][0]["research_trigger"],
+                         "price_move_abs_3pct")
+
+    def test_missing_previous_close_is_explicitly_flagged(self):
+        def no_baseline(symbol):
+            data, url = fake_chart(symbol)
+            data["chart"]["result"][0]["meta"].pop("previousClose")
+            return data, url
+        report = build_brief(SAMPLE, fetch=no_baseline, clock=ASOF)
+        self.assertIsNone(report["markets"]["ABD"][0]["change_1d_pct"])
+        self.assertEqual(report["markets"]["ABD"][0]["research_trigger"],
+                         "price_baseline_missing")
+
     def test_missing_provider_data_never_becomes_a_price(self):
         def failed(symbol):
             raise TimeoutError("provider down")

@@ -78,7 +78,11 @@ def parse_chart(payload, *, symbol, currency, url):
         at = datetime.fromtimestamp(stamp, timezone.utc)
         if at > datetime.now(timezone.utc):
             raise ValueError("future quote")
+        # Yahoo chart uses chartPreviousClose in many live quote payloads;
+        # previousClose is absent from those responses.
         prior = meta.get("previousClose")
+        if not valid_number(prior):
+            prior = meta.get("chartPreviousClose")
         change = round((price / prior - 1) * 100, 3) if valid_number(prior) else None
         return {"status": "observed", "price": float(price), "currency": currency,
                 "market_at": at.isoformat(), "change_1d_pct": change,
@@ -112,7 +116,8 @@ def build_brief(universe, *, fetch=get_chart, clock=None):
                     raise ValueError("future observation")
                 delta = observation["change_1d_pct"]
                 observation["research_trigger"] = (
-                    "price_move_abs_3pct" if delta is not None and abs(delta) >= 3
+                    "price_baseline_missing" if delta is None
+                    else "price_move_abs_3pct" if abs(delta) >= 3
                     else "no_price_move_trigger")
             except (ValueError, TypeError, KeyError, HTTPError, URLError, TimeoutError, OSError):
                 observation = {"status": "source_unavailable", "price": None,

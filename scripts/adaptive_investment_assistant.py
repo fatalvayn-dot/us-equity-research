@@ -64,7 +64,9 @@ def evidence_packet(brief):
                     raise ValueError("future observation")
                 if seconds > 4 * 86400:
                     issue.append("stale_price")
-                if pct is not None:
+                if pct is None:
+                    issue.append("missing_price_baseline")
+                else:
                     if type(pct) not in (int, float) or not isfinite(pct) or abs(pct) > 10000:
                         raise ValueError("invalid daily return")
                     if abs(pct) >= MAX_DAILY_MOVE:
