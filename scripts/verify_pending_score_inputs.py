@@ -116,7 +116,30 @@ def audit(root, run_id, symbols):
                 original = Response(url, body, datetime.fromisoformat(stamp))
                 if original.url != annual['source_url'] or original.sha256 != checksum:
                     raise ValueError('annual filing body integrity failure')
-            envelope = json.loads((root / 'companyfacts' / (cik + '.json')).read_text())
+            cache_path = root / 'companyfacts' / (cik + '.json')
+            if not cache_path.is_file():
+                # Absence of an original SEC Company Facts response does not
+                # certify absence or zero values. Continue other issuers with
+                # an explicit unverified-source disposition.
+                known_fields = {field['query']['field'] for field in company['fields']
+                                if field.get('fact')}
+                gaps = audit_original_gaps(
+                    original, cik=cik,
+                    start=date.fromisoformat(company['period_start']) if company['period_start'] else None,
+                    end=date.fromisoformat(annual['report_end']),
+                    missing_fields=[name for name in REQUIRED if name not in known_fields],
+                    cutoff=cutoff)
+                result = dict(symbol=symbol, issuer_id=cik,
+                              annual_accession=annual['accession'],
+                              confirmed_fields=0,
+                              source_status='sec_companyfacts_cache_missing',
+                              checks=[dict(field=name,status='source_cache_missing')
+                                      for name in REQUIRED])
+                if gaps is not None:
+                    result['original_score_input_gaps'] = gaps
+                results.append(result)
+                continue
+            envelope = json.loads(cache_path.read_text())
             cf = Response(envelope['url'], envelope['body'].encode('utf-8'),
                           datetime.fromisoformat(envelope['retrieved_at']))
             if cf.sha256 != envelope['sha256']:
