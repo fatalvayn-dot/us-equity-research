@@ -130,6 +130,22 @@ def analyst_prompt(packet):
                   "'İşlem önerisi veya işlem yapmama gerekçesi', 'Eksik veriler' ve 'Karar günlüğü'.",
                   "Kaynak bağlantısı ve zaman vermeden yeni olgu iddia etme.",
                   "Kişisel portföy kayıtlarını bu kamusal GitHub deposuna gönderme.", ""])
+    # Bu liste kaynak önerileri içerir; bağlantı kurulmuş veya veri çekilmiş sayılmaz.
+    catalog_path = Path(__file__).resolve().parents[1] / "data/analyst/research_source_catalog.json"
+    if catalog_path.is_file():
+        catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+        if catalog.get("schema_version") != 1:
+            raise ValueError("unsupported research source catalog")
+        lines.extend(["", "## Doğrulanacak araştırma kaynakları", "",
+                      "Katalog yalnızca araştırma planıdır; kaynak erişimi veya alım sinyali değildir."])
+        for source in sorted(catalog["sources"], key=lambda x: (x["priority"], x["id"])):
+            lines.append(f"- {source['name']} ({source['role']}): {source['strategy']} | "
+                         f"{source['url']} | Sınır: {source['guardrail']}")
+        lines.extend(["", "## Test edilecek yatırım hipotezleri", ""])
+        for hypothesis in catalog["hypotheses"]:
+            lines.append(f"- {hypothesis['title']}: {hypothesis['test']}")
+        lines.extend(["", "## Değişmez kaynak ilkeleri", ""])
+        lines.extend(f"- {rule}" for rule in catalog["global_rules"])
     return "\n".join(lines)
 
 
