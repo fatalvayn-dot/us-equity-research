@@ -1,6 +1,13 @@
 name: Adaptif yatırım uzmanı veri özeti
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/adaptive_daily_brief.py'
+      - 'scripts/adaptive_investment_assistant.py'
+      - 'data/analyst/public_research_universe.json'
+      - '.github/workflows/adaptive-analyst-daily.yml'
   workflow_dispatch:
   schedule:
     - cron: '15 14 * * 1-5'
