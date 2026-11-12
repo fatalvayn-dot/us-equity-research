@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 from decimal import Decimal
 
-from equity_research.scoring import build_score_report
+from equity_research.scoring import build_score_report, ACTIVE_MODEL_VERSION
 from equity_research.sector_models import FAMILY_CODES, MODELS, PROFIT_BANDS
 from equity_research.sector_policy import excluded_banking_or_insurance
 from test_scoring import score, metadata, financial, comparisons, companyfacts, identity, ASOF
@@ -44,7 +44,7 @@ class OperatingSectorCoverageTests(unittest.TestCase):
         for sic, family in (("7370", "digital_services_v1"), ("2834", "pharmaceuticals_biotech_v1"),
                             ("5331", "retail_and_distribution_v1")):
             with self.subTest(sic=sic):
-                completed = score(metadata_response=metadata(sic=sic))["companies"][0]
+                completed = score(metadata_response=metadata(sic=sic),model_version=ACTIVE_MODEL_VERSION)["companies"][0]
                 self.assertEqual(completed["model_id"], family)
                 self.assertEqual(completed["status"], "scored_research_hypothesis")
                 self.assertEqual(completed["components"]["profitability"]["score"],
@@ -53,20 +53,20 @@ class OperatingSectorCoverageTests(unittest.TestCase):
 
                 missing_market = build_score_report(
                     financial(), *comparisons(),
-                    [companyfacts(), metadata(sic=sic), identity()], as_of=ASOF
+                    [companyfacts(), metadata(sic=sic), identity()], as_of=ASOF,model_version=ACTIVE_MODEL_VERSION
                 )["companies"][0]
                 self.assertIsNone(missing_market["total_score"])
                 self.assertEqual(missing_market["blockers"], ["valuation_source_evidence_required"])
 
                 missing_capex = score(
                     b=financial(capital_expenditure=None),
-                    metadata_response=metadata(sic=sic)
+                    metadata_response=metadata(sic=sic),model_version=ACTIVE_MODEL_VERSION
                 )["companies"][0]
                 self.assertIsNone(missing_capex["total_score"])
 
     def test_new_registry_does_not_override_financial_sector_exclusion(self):
         for sic in ("6021", "6029", "6199", "6211", "6324", "6331"):
-            c = score(metadata_response=metadata(sic=sic))["companies"][0]
+            c = score(metadata_response=metadata(sic=sic),model_version=ACTIVE_MODEL_VERSION)["companies"][0]
             self.assertEqual(c["status"], "excluded_sector")
             self.assertIsNone(c["total_score"])
             self.assertFalse(c["investment_approved"])
