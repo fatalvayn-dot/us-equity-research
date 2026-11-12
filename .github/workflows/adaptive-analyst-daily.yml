@@ -30,7 +30,9 @@ jobs:
           python-version: '3.12'
       - name: Üç piyasa için salt-okunur günlük veri paketi
         run: python scripts/adaptive_daily_brief.py
-      - name: ETF ve kripto araştırma gözlemleri\n        run: python -m scripts.adaptive_multiactive_watchlist\n      - name: Günlük yapay zekâ araştırma iş emri
+      - name: ETF ve kripto araştırma gözlemleri
+        run: python -m scripts.adaptive_multiactive_watchlist
+      - name: Günlük yapay zekâ araştırma iş emri
         run: python scripts/adaptive_investment_assistant.py
       - name: Kısa özet
         run: |
