@@ -26,6 +26,15 @@ class SectorPolicyTests(unittest.TestCase):
         args.update(changes)
         return assess_profile(response, **args)
 
+    def test_permanent_bank_insurance_exclusion_covers_brokers_and_agents(self):
+        from equity_research.sector_policy import excluded_banking_or_insurance
+        for sic in ('6021', '6029', '6035', '6211', '6331', '6324', '6411', '6199'):
+            with self.subTest(sic=sic):
+                self.assertTrue(excluded_banking_or_insurance(sic))
+        for sic in ('3674', '7370', '2834', '6798', None, '9999'):
+            with self.subTest(sic=sic):
+                self.assertFalse(excluded_banking_or_insurance(sic))
+
     def test_bank_codes_require_special_model(self):
         for code in ('6021', '6022', '6029', '6035', '6036'):
             self.assertEqual(self.profile(metadata(code))['profile'], 'banking_signal')
