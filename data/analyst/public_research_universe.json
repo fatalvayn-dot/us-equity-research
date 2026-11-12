@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "description": "Kamusal araştırma örneklemi. Midas işlem erişimi veya katılım uygunluğu teyidi değildir; kişisel portföy değildir.",
+  "description": "Kamusal araştırma sembolleri. Kişisel adet, maliyet veya portföy sahipliği bilgisi içermez. Midas erişimi ve katılım uygunluğu doğrulanmamıştır.",
   "markets": {
     "ABD": [
       {
@@ -13,6 +13,46 @@
       },
       {
         "symbol": "AVGO",
+        "currency": "USD"
+      },
+      {
+        "symbol": "NDAQ",
+        "currency": "USD"
+      },
+      {
+        "symbol": "PDD",
+        "currency": "USD"
+      },
+      {
+        "symbol": "LI",
+        "currency": "USD"
+      },
+      {
+        "symbol": "SM",
+        "currency": "USD"
+      },
+      {
+        "symbol": "HEPS",
+        "currency": "USD"
+      },
+      {
+        "symbol": "SPCE",
+        "currency": "USD"
+      },
+      {
+        "symbol": "AAPL",
+        "currency": "USD"
+      },
+      {
+        "symbol": "AMZN",
+        "currency": "USD"
+      },
+      {
+        "symbol": "GOOGL",
+        "currency": "USD"
+      },
+      {
+        "symbol": "META",
         "currency": "USD"
       }
     ],
@@ -28,6 +68,18 @@
       {
         "symbol": "BIMAS.IS",
         "currency": "TRY"
+      },
+      {
+        "symbol": "THYAO.IS",
+        "currency": "TRY"
+      },
+      {
+        "symbol": "KARCL.IS",
+        "currency": "TRY"
+      },
+      {
+        "symbol": "ALBTN.IS",
+        "currency": "TRY"
       }
     ],
     "AVRUPA": [
@@ -41,6 +93,10 @@
       },
       {
         "symbol": "IFX.DE",
+        "currency": "EUR"
+      },
+      {
+        "symbol": "LHA.DE",
         "currency": "EUR"
       }
     ]
