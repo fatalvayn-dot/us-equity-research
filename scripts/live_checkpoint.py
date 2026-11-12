@@ -119,9 +119,19 @@ def api(path):
 def safe_run_skip(run_id, *, fetch=None):
     fetch = fetch or api
     result = fetch(f'actions/runs/{run_id}/jobs?filter=all&per_page=100')
-    # A concurrency-cancelled queued run can have no jobs at all.
-    return (result['total_count'] == len(result['jobs'])
-            and (not result['jobs'] or collection_never_started(result['jobs'])))
+    # GitHub can return one cancelled, unassigned job with no steps
+    # (observed run 43106314737). It never obtained a runner, so it cannot
+    # have started collection. Do NOT skip started/cancelled jobs, incomplete
+    # job lists or any job with missing/ambiguous step evidence.
+    jobs = result['jobs']
+    cancelled_unassigned = (bool(jobs) and all(
+        job.get('status') == 'completed'
+        and job.get('conclusion') == 'cancelled'
+        and not job.get('runner_name')
+        and job.get('steps') == []
+        for job in jobs))
+    return (result['total_count'] == len(jobs)
+            and (not jobs or collection_never_started(jobs) or cancelled_unassigned))
 
 
 def find_checkpoint(current_run, requested='', *, fetch=None):
