@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "description": "Kamusal araştırma örneklemi. Midas işlem erişimi veya katılım uygunluğu teyidi değildir; kişisel portföy değildir.",
+  "markets": {
+    "ABD": [
+      {
+        "symbol": "MSFT",
+        "currency": "USD"
+      },
+      {
+        "symbol": "NVDA",
+        "currency": "USD"
+      },
+      {
+        "symbol": "AVGO",
+        "currency": "USD"
+      }
+    ],
+    "BIST": [
+      {
+        "symbol": "ASELS.IS",
+        "currency": "TRY"
+      },
+      {
+        "symbol": "TUPRS.IS",
+        "currency": "TRY"
+      },
+      {
+        "symbol": "BIMAS.IS",
+        "currency": "TRY"
+      }
+    ],
+    "AVRUPA": [
+      {
+        "symbol": "DTE.DE",
+        "currency": "EUR"
+      },
+      {
+        "symbol": "SAP.DE",
+        "currency": "EUR"
+      },
+      {
+        "symbol": "IFX.DE",
+        "currency": "EUR"
+      }
+    ]
+  }
+}

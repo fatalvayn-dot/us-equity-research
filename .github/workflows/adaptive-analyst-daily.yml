@@ -1,0 +1,32 @@
+name: Adaptif yatırım uzmanı veri özeti
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 14 * * 1-5'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: adaptive-analyst-daily
+  cancel-in-progress: false
+
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Üç piyasa için salt-okunur günlük veri paketi
+        run: python scripts/adaptive_daily_brief.py
+      - name: Kısa özet
+        run: cat data/analyst-output/daily-brief.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: adaptive-analyst-daily-evidence
+          path: data/analyst-output/
+          retention-days: 14
