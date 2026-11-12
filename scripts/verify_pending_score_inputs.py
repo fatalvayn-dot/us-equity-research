@@ -11,6 +11,7 @@ from equity_research.companyfacts import SecCompanyFacts
 from equity_research.concept_diagnostics import inspect_concepts
 from equity_research.documents import document_key
 from equity_research.fields import SPECS
+from equity_research.filingcheck import filing_derived_liabilities
 from equity_research.models import Fact
 from equity_research.providers import ProviderFailure
 from equity_research.reporting import build_report
@@ -86,6 +87,25 @@ def selected_operating_symbols(metadata):
     return result
 
 
+def audit_liability_equation(original, *, cik, end, missing, cutoff):
+    """Independently identify a usable original balance equation, not a fact."""
+    if not missing:
+        return None
+    if original is None or original.retrieved_at > cutoff:
+        return dict(status='original_unavailable_at_cutoff',
+                    automatic_substitution=False)
+    evidence = dict(url=original.url, sha256=original.sha256,
+                    retrieved_at=original.retrieved_at)
+    try:
+        proof = filing_derived_liabilities(original.body, cik=cik, period_end=end)
+    except (ProviderFailure, ValueError, KeyError, TypeError, ArithmeticError):
+        return dict(status='equation_not_proven', source=evidence,
+                    automatic_substitution=False)
+    return dict(status='original_balance_equation_proven',
+                source=evidence, proof=proof, automatic_substitution=False,
+                score_generated=False)
+
+
 def missing_companyfacts_result(company, annual, original, cutoff):
     """Unverified proof report for an issuer lacking SEC Company Facts cache."""
     cik, symbol = company['issuer_id'], company['symbol']
@@ -103,6 +123,9 @@ def missing_companyfacts_result(company, annual, original, cutoff):
                   checks=[dict(field=name, status='source_cache_missing') for name in REQUIRED])
     if gaps is not None:
         result['original_score_input_gaps'] = gaps
+    result['liability_equation_review'] = audit_liability_equation(
+        original, cik=cik, end=date.fromisoformat(annual['report_end']),
+        missing='liabilities' not in known_fields, cutoff=cutoff)
     return result
 
 
@@ -170,6 +193,9 @@ def audit(root, run_id, symbols):
                 cutoff=cutoff)
             if gaps is not None:
                 result['original_score_input_gaps'] = gaps
+            result['liability_equation_review'] = audit_liability_equation(
+                original, cik=cik, end=filing.report_end,
+                missing='liabilities' not in facts, cutoff=cutoff)
             results.append(result)
     return dict(mode='offline_production_score_operands', run_id=run_id,
                 sequence=manifest['sequence'], as_of=cutoff, new_http_requests=0,
