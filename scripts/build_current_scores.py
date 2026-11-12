@@ -12,7 +12,7 @@ from pathlib import Path
 from equity_research.cache import encode
 from equity_research.evidence_bundle import read_bundle
 from equity_research.mvp import save_json, save_text
-from equity_research.scoring import build_score_report, render_score_markdown
+from equity_research.scoring import build_score_report, ACTIVE_MODEL_VERSION, render_score_markdown
 from equity_research.score_html import render_score_html
 
 
@@ -27,7 +27,8 @@ def build(*, financial, current, prior, sources, output, as_of, financial_source
         data=path.read_bytes()
         return json.loads(gzip.decompress(data) if str(path).endswith('.gz') else data)
     responses=chain(read_bundle(inputs[3]),*(read_bundle(p) for p in extra_sources))
-    report=build_score_report(*(read(p) for p in inputs[:3]),responses,as_of=as_of)
+    report=build_score_report(*(read(p) for p in inputs[:3]),responses,as_of=as_of,
+                              model_version=ACTIVE_MODEL_VERSION)
     output.mkdir(parents=True,exist_ok=True)
     data=json.dumps(report,default=encode,sort_keys=True).encode()
     # Replace the directory entry atomically; never follow an existing output
