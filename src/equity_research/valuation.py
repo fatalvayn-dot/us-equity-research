@@ -160,6 +160,100 @@ def _share_number(fact, inventory, *, allow_zero=False):
     return value,decimals
 
 
+
+def original_filing_shares(metadata, filing, *, cik, symbol, as_of):
+    """Independent SEC original-filing DEI shares fallback, never an estimate.
+
+    Exact SEC submission filing metadata, original URL, nondimensional issuer
+    context and one disclosed instant are mandatory. Class reconciliation is
+    still required separately by verify_share_class().
+    """
+    from .transport import strict_json
+    from .concept_diagnostics import Inventory
+    if not aware(as_of) or filing.retrieved_at > as_of or metadata.retrieved_at > as_of:
+        raise ProviderFailure(Status.INVALID_DATA)
+    snapshot = parse_submissions(metadata, cik)
+    if symbol not in snapshot.tickers:
+        raise ProviderFailure(Status.SYMBOL_MISMATCH)
+    recent = strict_json(metadata.body)['filings']['recent']
+    matches = []
+    for i, accession in enumerate(recent['accessionNumber']):
+        form = recent['form'][i]
+        if form not in ('10-Q', '10-K', '10-Q/A', '10-K/A'):
+            continue
+        document = recent['primaryDocument'][i]
+        if not re.fullmatch(r'[A-Za-z0-9_-][A-Za-z0-9_.-]*', document) or '..' in document:
+            raise ProviderFailure(Status.INVALID_DATA)
+        url = f'https://www.sec.gov/Archives/edgar/data/{int(cik)}/{accession.replace("-", "")}/{document}'
+        if url == filing.url:
+            matches.append((i, accession, form))
+    if len(matches) != 1:
+        raise ProviderFailure(Status.INVALID_DATA)
+    i, accession, form = matches[0]
+    filed = date.fromisoformat(recent['filingDate'][i])
+    report_end = date.fromisoformat(recent['reportDate'][i])
+    available = datetime.combine(filed + timedelta(days=1), time(5), timezone.utc)
+    if (filed > filing.retrieved_at.date() or available > as_of
+            or not timedelta(0) <= as_of - filing.retrieved_at <= SNAPSHOT_TTL):
+        raise ProviderFailure(Status.INVALID_DATA)
+    filing_security_metadata(filing.body, cik=cik, symbol=symbol,
+                             report_end=report_end, document_type=form)
+    p = Inventory()
+    p.feed(filing.body.decode('utf-8'))
+    p.close()
+    if (p.conflict or p.stack or p.context is not None or p.unit is not None
+            or not re.fullmatch(r'http://xbrl.sec.gov/dei/20[0-9]{2}', p.namespaces.get('dei', ''))):
+        raise ProviderFailure(Status.INVALID_DATA)
+    values = []
+    for fact in p.facts:
+        if fact['attrs'].get('name', '').lower() != SHARE_CONCEPT.lower():
+            continue
+        ctx = p.contexts.get(fact['attrs'].get('contextref'))
+        if (ctx is None or ctx.get('scheme') != 'http://www.sec.gov/CIK'
+                or ctx.get('identifier', '').strip().zfill(10) != cik
+                or ctx['dimensional'] or ctx.get('startdate') or not ctx.get('instant')):
+            raise ProviderFailure(Status.INVALID_DATA)
+        stamp = date.fromisoformat(ctx['instant'].strip())
+        if not report_end <= stamp <= filed:
+            continue
+        value, precision = _share_number(fact, p)
+        values.append((stamp, value, precision))
+    if not values:
+        return None
+    newest = max(v[0] for v in values)
+    matching = {(v, precision) for d, v, precision in values if d == newest}
+    if len(matching) != 1:
+        raise ProviderFailure(Status.INVALID_DATA)
+    value, precision = matching.pop()
+    if (not timedelta(0) <= as_of.date() - newest <= SHARE_MAX_AGE
+            or not value.is_finite() or value <= 0):
+        raise ShareFailure(ShareIssue.STALE_DISCLOSURE)
+    return dict(value=value, end=newest, filed=filed, accession=accession,
+                form=form, available_at=available, issuer_id=cik,
+                concept=SHARE_CONCEPT, unit='shares', source_url=filing.url,
+                raw_sha256=filing.sha256, retrieved_at=filing.retrieved_at,
+                evidence_method='original_sec_filing_dei_exact')
+
+
+def latest_original_share_filing_urls(metadata, *, cik, max_filings=2):
+    """Bounded exact original SEC 10-Q/10-K filing URLs, newest first."""
+    from .transport import strict_json
+    parse_submissions(metadata, cik)
+    recent = strict_json(metadata.body)['filings']['recent']
+    result = []
+    for i, accession in enumerate(recent['accessionNumber']):
+        if recent['form'][i] not in ('10-Q', '10-K', '10-Q/A', '10-K/A'):
+            continue
+        document = recent['primaryDocument'][i]
+        if (not re.fullmatch(r'[A-Za-z0-9_-][A-Za-z0-9_.-]*', document)
+                or '..' in document or not re.fullmatch(r'[0-9]{10}-[0-9]{2}-[0-9]{6}', accession)):
+            raise ProviderFailure(Status.INVALID_DATA)
+        result.append(f'https://www.sec.gov/Archives/edgar/data/{int(cik)}/{accession.replace("-", "")}/{document}')
+        if len(result) == max_filings:
+            break
+    return result
+
+
 def verify_share_class(shares, metadata, filing, *, symbol, as_of):
     """Reparse exact original filing and reject listed or disclosed class ambiguity."""
     cik=shares['issuer_id'];snapshot=parse_submissions(metadata,cik)
