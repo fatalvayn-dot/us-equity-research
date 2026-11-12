@@ -29,16 +29,37 @@ class DailyBriefTests(unittest.TestCase):
         self.assertFalse(doc["participation_compliance_confirmed"])
         self.assertIn("ASELS.IS", render_markdown(doc))
 
-    def test_live_yahoo_chart_previous_close_is_used(self):
+    def test_daily_return_uses_dated_previous_session_not_chart_window_base(self):
         def yahoo_live(symbol):
             data, url = fake_chart(symbol)
-            meta = data["chart"]["result"][0]["meta"]
-            meta["chartPreviousClose"] = meta.pop("previousClose")
+            item = data["chart"]["result"][0]
+            meta = item["meta"]
+            meta.pop("previousClose")
+            meta["chartPreviousClose"] = 75  # five-day starting price, NOT yesterday
+            meta["exchangeTimezoneName"] = "America/New_York"
+            item["timestamp"] = [
+                int(datetime(2026, 11, 11, 15, tzinfo=timezone.utc).timestamp()),
+                int(datetime(2026, 11, 12, 15, tzinfo=timezone.utc).timestamp())]
+            item["indicators"] = {"quote": [{"close": [115, 120]}]}
             return data, url
         report = build_brief(SAMPLE, fetch=yahoo_live, clock=ASOF)
-        self.assertGreater(report["markets"]["ABD"][0]["change_1d_pct"], 3)
+        row = report["markets"]["ABD"][0]
+        self.assertEqual(row["change_1d_pct"], round((120/115-1)*100, 3))
+        self.assertEqual(row["baseline_method"], "prior_dated_trading_session_close")
+        self.assertEqual(row["baseline_date"], "2026-11-11")
+        self.assertEqual(row["research_trigger"], "price_move_abs_3pct")
+
+    def test_window_start_price_must_not_be_used_as_previous_close(self):
+        def no_dated_bars(symbol):
+            data, url = fake_chart(symbol)
+            meta = data["chart"]["result"][0]["meta"]
+            meta.pop("previousClose")
+            meta["chartPreviousClose"] = 75
+            return data, url
+        report = build_brief(SAMPLE, fetch=no_dated_bars, clock=ASOF)
+        self.assertIsNone(report["markets"]["ABD"][0]["change_1d_pct"])
         self.assertEqual(report["markets"]["ABD"][0]["research_trigger"],
-                         "price_move_abs_3pct")
+                         "price_baseline_missing")
 
     def test_missing_previous_close_is_explicitly_flagged(self):
         def no_baseline(symbol):

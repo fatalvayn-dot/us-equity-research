@@ -78,14 +78,46 @@ def parse_chart(payload, *, symbol, currency, url):
         at = datetime.fromtimestamp(stamp, timezone.utc)
         if at > datetime.now(timezone.utc):
             raise ValueError("future quote")
-        # Yahoo chart uses chartPreviousClose in many live quote payloads;
-        # previousClose is absent from those responses.
+        # chartPreviousClose can refer to the start of the requested 5-day
+        # range, not the previous trading session. Never use it for 1D return.
         prior = meta.get("previousClose")
+        baseline_method = "meta_previous_close" if valid_number(prior) else None
+        baseline_date = None
         if not valid_number(prior):
-            prior = meta.get("chartPreviousClose")
+            from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
+            zone_name = meta.get("exchangeTimezoneName")
+            try:
+                if zone_name not in ("America/New_York", "Europe/Istanbul", "Europe/Berlin"):
+                    raise ValueError("unsupported exchange timezone")
+                zone = ZoneInfo(zone_name)
+                day = datetime.fromtimestamp(stamp, timezone.utc).astimezone(zone).date()
+                timestamps = results[0]["timestamp"]
+                closes = results[0]["indicators"]["quote"][0]["close"]
+                if (not isinstance(timestamps, list) or not isinstance(closes, list)
+                        or len(timestamps) != len(closes)):
+                    raise ValueError("incompatible daily bar columns")
+                observed_prior = []
+                for instant, close in zip(timestamps, closes):
+                    if type(instant) is not int or not valid_number(close):
+                        continue
+                    observed_day = datetime.fromtimestamp(instant, timezone.utc).astimezone(zone).date()
+                    if observed_day < day:
+                        observed_prior.append((observed_day, close))
+                if observed_prior:
+                    baseline_date, prior = max(observed_prior, key=lambda row: row[0])
+                    if (day - baseline_date).days > 10:
+                        prior = None
+                        baseline_date = None
+                    else:
+                        baseline_method = "prior_dated_trading_session_close"
+            except (KeyError, TypeError, ValueError, OverflowError, ZoneInfoNotFoundError):
+                prior = None
         change = round((price / prior - 1) * 100, 3) if valid_number(prior) else None
         return {"status": "observed", "price": float(price), "currency": currency,
                 "market_at": at.isoformat(), "change_1d_pct": change,
+                "baseline_method": baseline_method,
+                "baseline_date": baseline_date.isoformat() if baseline_date else None,
+                "baseline_price": float(prior) if valid_number(prior) else None,
                 "source_url": url, "source": "Yahoo Finance chart"}
     except (KeyError, TypeError, IndexError, ValueError, OverflowError) as exc:
         raise ValueError("unusable quoted market evidence") from exc
