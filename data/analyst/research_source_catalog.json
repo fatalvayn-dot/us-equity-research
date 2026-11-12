@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "updated_on": "2026-11-12",
+  "purpose": "Adaptif yatırım asistanı için kaynak ve strateji araştırma kataloğu; otomatik erişim/işlem yetkisi değildir.",
+  "global_rules": [
+    "Katılım uygunluğu doğrulanmamış varlığı AL listesine alma; banka ve sigortayı araştırma evreninden çıkar.",
+    "13F işlemini çeyrek sonuna değil ilk kamusal yayımlanma tarihinden sonrasına bağla.",
+    "Yalnızca fiyat, 13F, içeriden alım veya makro göstergelerden otomatik AL/SAT üretme.",
+    "Ücretli, engellenmiş veya lisanslı veri kaynağını izinsiz kullanma; kaynak yoksa belirsizliği raporla.",
+    "EUR bazında net performans, komisyon, kur, temettü, kıyas endeksi ve işlem tarihi ile test et."
+  ],
+  "sources": [
+    {
+      "id": "sec_13f",
+      "name": "SEC EDGAR 13F",
+      "url": "https://www.investor.gov/introduction-investing/investing-basics/glossary/form-13f-reports-filed-institutional-investment",
+      "markets": [
+        "ABD"
+      ],
+      "priority": 1,
+      "role": "primary",
+      "access": "public_filings",
+      "cadence": "quarterly_up_to_45_days_delayed",
+      "strategy": "institutional_conviction_changes",
+      "guardrail": "Dönem sonu alım tarihi değildir; pozisyon değişimi işlem gününü ve maliyeti göstermez."
+    },
+    {
+      "id": "sec_xbrl",
+      "name": "SEC EDGAR XBRL ve şirket bildirimleri",
+      "url": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+      "markets": [
+        "ABD"
+      ],
+      "priority": 1,
+      "role": "primary",
+      "access": "public_api",
+      "cadence": "filing_driven",
+      "strategy": "quality_value_growth_earnings",
+      "guardrail": "Yayımlanma zamanı, dönem, para birimi ve muhasebe kavramı eşleşmeli."
+    },
+    {
+      "id": "bist_participation",
+      "name": "Borsa İstanbul Katılım Endeksleri ve KAP KAFİF",
+      "url": "https://www.borsaistanbul.com/endeksler/bist-pay/katilim",
+      "markets": [
+        "BIST"
+      ],
+      "priority": 1,
+      "role": "primary",
+      "access": "public_reference",
+      "cadence": "index_reviews_and_disclosures",
+      "strategy": "participation_eligibility",
+      "guardrail": "Endeksin güncel dönemi ve şirketin KAFİF formu kontrol edilmeden uygun ilan edilmez."
+    },
+    {
+      "id": "kap",
+      "name": "Kamuyu Aydınlatma Platformu",
+      "url": "https://www.kap.org.tr/en/about/general-information",
+      "markets": [
+        "BIST"
+      ],
+      "priority": 1,
+      "role": "primary",
+      "access": "public_filings",
+      "cadence": "event_driven",
+      "strategy": "corporate_events_earnings",
+      "guardrail": "Şirket duyurularında tarih ve içerik doğrulanmalı."
+    },
+    {
+      "id": "fred",
+      "name": "FRED ve ALFRED",
+      "url": "https://fred.stlouisfed.org/docs/api/fred/",
+      "markets": [
+        "ABD",
+        "BIST",
+        "AVRUPA"
+      ],
+      "priority": 2,
+      "role": "primary",
+      "access": "api_key_may_be_required",
+      "cadence": "series_dependent",
+      "strategy": "macro_regime_and_revisions",
+      "guardrail": "Backtest için o gün bilinen ALFRED vintage verisi; makro tek başına işlem önerisi değil."
+    },
+    {
+      "id": "ecb",
+      "name": "ECB Data Portal",
+      "url": "https://data.ecb.europa.eu/help/getting-data-web-services-sdmx-0",
+      "markets": [
+        "AVRUPA"
+      ],
+      "priority": 2,
+      "role": "primary",
+      "access": "public_api",
+      "cadence": "series_dependent",
+      "strategy": "eu_rates_fx_liquidity",
+      "guardrail": "Kur ve faiz verilerini piyasa saatleri ve yayımlanma zamanlarıyla eşleştir."
+    },
+    {
+      "id": "french_factors",
+      "name": "Kenneth French Data Library",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html",
+      "markets": [
+        "ABD",
+        "AVRUPA"
+      ],
+      "priority": 2,
+      "role": "academic",
+      "access": "public_download",
+      "cadence": "periodic",
+      "strategy": "quality_value_momentum_benchmark",
+      "guardrail": "Akademik faktör serisi gelecekte garanti getiri veya satın alınabilir fon değildir."
+    },
+    {
+      "id": "cftc_cot",
+      "name": "CFTC Commitments of Traders",
+      "url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm",
+      "markets": [
+        "ABD",
+        "AVRUPA"
+      ],
+      "priority": 3,
+      "role": "primary",
+      "access": "public_reports",
+      "cadence": "weekly_tuesday_position_friday_release",
+      "strategy": "positioning_risk_context",
+      "guardrail": "Vadeli işlem pozisyonu tek bir hissenin veya endeksin kesin yön sinyali değildir."
+    },
+    {
+      "id": "dataroma",
+      "name": "Dataroma Superinvestor Portfolios",
+      "url": "https://www.dataroma.com/m/g/portfolio.php",
+      "markets": [
+        "ABD"
+      ],
+      "priority": 3,
+      "role": "secondary",
+      "access": "public_browser_review",
+      "cadence": "quarterly_delayed",
+      "strategy": "institutional_discovery_only",
+      "guardrail": "13F ile kaynak bazında doğrula; sayfayı sınırsız tarama veya ücretli erişim yok."
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "copycat_lagged",
+      "title": "Büyük yatırımcı yoğunlaşması",
+      "test": "13F ilk yayımlanma gününden sonra 1/3/6/12 ay getiriler; alternatif ağırlık ve komisyon; seçilim ve hayatta kalma yanlılığı; katılım filtresi",
+      "decision": "research_only_until_out_of_sample"
+    },
+    {
+      "id": "quality_value",
+      "title": "Kalite ve makul değerleme",
+      "test": "Sektöre uygun nakit akışı, borç, büyüme ve makul değerleme; bilanço yayımlanma günü; yatırım yapılabilir karşılaştırma",
+      "decision": "research_only_until_out_of_sample"
+    },
+    {
+      "id": "momentum_context",
+      "title": "Momentum ve eğilim",
+      "test": "6-12 ay momentum, trend dönüşü ve risk rejimi; çapraz piyasa ve yüksek işlem maliyeti testi",
+      "decision": "supporting_signal_only"
+    },
+    {
+      "id": "macro_context",
+      "title": "Makro rejim",
+      "test": "Faiz, enflasyon, kur, risk primi; açıklanma anı ve vintage kullan; baz senaryo ile kıyasla",
+      "decision": "risk_context_only"
+    }
+  ]
+}
