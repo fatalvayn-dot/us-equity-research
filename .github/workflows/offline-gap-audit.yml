@@ -1,0 +1,74 @@
+name: Mevcut arşivden eksik finansal kanıt denetimi
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/offline-gap-audit.yml
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: original-gap-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: İncelenmiş son finansal arşivi indir
+        uses: actions/download-artifact@v4
+        with:
+          name: live-acceptance-state
+          path: data/live-acceptance
+          github-token: ${{ github.token }}
+          run-id: 42455760184
+      - name: Arşiv özetlerini, finansal kayıtları ve SQLite bütünlüğünü doğrula
+        run: >-
+          python scripts/live_checkpoint.py verify
+          --state-dir data/live-acceptance --run-id 42455760184
+      - name: Model kapsamındaki bütün şirketlerin eksik yıllık kanıtlarını tara
+        env:
+          PYTHONPATH: src:scripts
+        run: |
+          mkdir -p data/gap-audit
+          python scripts/verify_pending_score_inputs.py \
+            --state-dir data/live-acceptance \
+            --run-id 42455760184 \
+            --all-modeled > data/gap-audit/original-score-gaps.json
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+          data=json.loads(Path('data/gap-audit/original-score-gaps.json').read_text())
+          status=Counter()
+          for company in data['companies']:
+              for field in company['checks']:
+                  if field['status'] != 'confirmed':
+                      status[field['field']+':'+field['status']] += 1
+          summary=dict(archived_run_id=data['run_id'],
+                       eligible_companies=len(data['companies']),
+                       missing_or_unconfirmed=dict(sorted(status.items())),
+                       new_http_requests=data['new_http_requests'],
+                       generated_scores=data['scores_generated'],
+                       mvp_accepted=data['mvp_accepted'])
+          Path('data/gap-audit/summary.json').write_text(
+              json.dumps(summary,indent=2,ensure_ascii=False)+'\n')
+          print(json.dumps(summary,ensure_ascii=False))
+          PY
+      - name: Kaynaklı eksik alan raporunu sakla
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: original-financial-gap-audit
+          path: data/gap-audit/
+          if-no-files-found: warn
+          retention-days: 30
