@@ -26,6 +26,14 @@ class ResearchPacketTests(unittest.TestCase):
         self.assertFalse(packet["personal_portfolio_included"])
         self.assertIn("işlem", analyst_prompt(packet).lower())
 
+    def test_missing_baseline_requires_research_not_no_change(self):
+        missing = copy.deepcopy(BASE)
+        missing["markets"]["ABD"][0]["change_1d_pct"] = None
+        packet = evidence_packet(missing)
+        self.assertIn("missing_price_baseline",
+                      packet["markets"]["ABD"][0]["attention_reasons"])
+        self.assertIn("MSFT", [row["symbol"] for row in packet["work_queue"]])
+
     def test_no_price_failure_becomes_market_signal(self):
         packet = evidence_packet(BASE)
         row = packet["markets"]["BIST"][0]
