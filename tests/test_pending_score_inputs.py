@@ -9,7 +9,8 @@ from equity_research.transport import Response
 
 ROOT = Path(__file__).resolve().parents[1]
 with patch.object(sys, 'path', [str(ROOT / 'scripts'), *sys.path]):
-    from verify_pending_score_inputs import audit_original_gaps, selected_operating_symbols, missing_companyfacts_result
+    from verify_pending_score_inputs import audit_original_gaps, selected_operating_symbols, missing_companyfacts_result, audit_liability_equation
+from test_filingcheck import equation_html
 
 CIK = '0001045810'
 CUTOFF = datetime(2026, 11, 8, tzinfo=timezone.utc)
@@ -75,6 +76,30 @@ class OriginalScoreGapTests(unittest.TestCase):
                          'original_unavailable_at_cutoff')
         self.assertEqual(row['original_score_input_gaps']['fields'],
                          ['revenue', 'capital_expenditure'])
+
+    def test_missing_liability_equation_proves_only_original_scope_not_score(self):
+        original=Response('https://www.sec.gov/Archives/edgar/data/320193/original.htm',
+                          equation_html(), CUTOFF)
+        got=audit_liability_equation(original, cik='0000320193',
+                                    end=date(2025,9,27),missing=True,cutoff=CUTOFF)
+        self.assertEqual(got['status'], 'original_balance_equation_proven')
+        self.assertEqual(got['proof']['value'], '40')
+        self.assertEqual(got['source']['sha256'], original.sha256)
+        self.assertFalse(got['automatic_substitution'])
+        self.assertFalse(got['score_generated'])
+        self.assertIsNone(audit_liability_equation(original,cik='0000320193',
+                         end=date(2025,9,27),missing=False,cutoff=CUTOFF))
+
+    def test_missing_liability_equation_rejects_wrong_scope_and_stale_cutoff(self):
+        source=Response('https://www.sec.gov/Archives/edgar/data/320193/original.htm',
+                        equation_html(),CUTOFF)
+        wrong=audit_liability_equation(source,cik='0000789019',
+                                      end=date(2025,9,27),missing=True,cutoff=CUTOFF)
+        self.assertEqual(wrong['status'],'equation_not_proven')
+        late=audit_liability_equation(source,cik='0000320193',
+                                     end=date(2025,9,27),missing=True,
+                                     cutoff=CUTOFF-timedelta(minutes=1))
+        self.assertEqual(late['status'],'original_unavailable_at_cutoff')
 
     def test_cutoff_and_unknown_annual_period_prevent_disclosure(self):
         late = Response(URL, b'body', CUTOFF + timedelta(seconds=1))
