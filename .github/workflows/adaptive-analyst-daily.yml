@@ -23,8 +23,13 @@ jobs:
           python-version: '3.12'
       - name: Üç piyasa için salt-okunur günlük veri paketi
         run: python scripts/adaptive_daily_brief.py
+      - name: Günlük yapay zekâ araştırma iş emri
+        run: python scripts/adaptive_investment_assistant.py
       - name: Kısa özet
-        run: cat data/analyst-output/daily-brief.md >> "$GITHUB_STEP_SUMMARY"
+        run: |
+          cat data/analyst-output/daily-brief.md >> "$GITHUB_STEP_SUMMARY"
+          echo '' >> "$GITHUB_STEP_SUMMARY"
+          cat data/analyst-output/analyst-work-order.md >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
           name: adaptive-analyst-daily-evidence
