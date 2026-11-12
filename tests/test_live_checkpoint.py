@@ -198,6 +198,33 @@ class CheckpointTests(unittest.TestCase):
         with patch.object(m, 'api', return_value=dict(total_count=1, jobs=[job])):
             self.assertTrue(m.safe_run_skip(m.ROOT_RUN+1))
 
+    def test_cancelled_unassigned_job_without_steps_is_safe_to_skip(self):
+        from unittest.mock import patch
+        # GitHub Actions run 43106314737: cancelled before runner assignment.
+        queued = dict(status='completed', conclusion='cancelled',
+                      runner_name=None, steps=[])
+        with patch.object(m, 'api', return_value=dict(total_count=1, jobs=[queued])):
+            self.assertTrue(m.safe_run_skip(43106314737))
+
+    def test_cancelled_or_missing_job_evidence_never_masks_started_collection(self):
+        from unittest.mock import patch
+        candidates = [
+            dict(status='completed', conclusion='cancelled', runner_name='runner-1', steps=[]),
+            dict(status='completed', conclusion='failure', runner_name=None, steps=[]),
+            dict(status='completed', conclusion='cancelled', runner_name=None),
+            dict(status='in_progress', conclusion=None, runner_name=None, steps=[]),
+            dict(status='completed', conclusion='cancelled', runner_name=None,
+                 steps=[dict(name='Devam ettirilebilir finansal veri toplamasını çalıştır',
+                             conclusion='failure')]),
+        ]
+        for row in candidates:
+            with self.subTest(row=row), patch.object(m, 'api',
+                    return_value=dict(total_count=1, jobs=[row])):
+                self.assertFalse(m.safe_run_skip(43106314737))
+        queued = dict(status='completed', conclusion='cancelled', runner_name=None, steps=[])
+        with patch.object(m, 'api', return_value=dict(total_count=2, jobs=[queued])):
+            self.assertFalse(m.safe_run_skip(43106314737))
+
     def test_cancelled_queue_without_any_job_can_be_skipped(self):
         from unittest.mock import patch
         with patch.object(m, 'api', return_value=dict(total_count=0, jobs=[])):
