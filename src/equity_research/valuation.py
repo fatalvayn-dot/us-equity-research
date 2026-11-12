@@ -364,7 +364,7 @@ def verify_share_class(shares, metadata, filing, *, symbol, as_of):
 
 
 def indicative_valuation(*, price_response, identity, companyfacts, metadata, filing,
-                         financial_company, as_of, diagnostics=None):
+                         financial_company, as_of, diagnostics=None, shares_override=None):
     """Price times *dated* disclosed shares. No corporate-action adjustment guessed.
 
     The resulting indication cannot feed scores until capital changes and the
@@ -388,8 +388,11 @@ def indicative_valuation(*, price_response, identity, companyfacts, metadata, fi
     price=parse_price(price_response,identity,cik=cik,symbol=symbol,as_of=as_of)
     if price is None:raise ProviderFailure(Status.MISSING)
     stage('disclosed_shares')
-    shares=disclosed_shares(companyfacts,cik=cik,as_of=as_of)
+    shares=(shares_override if shares_override is not None else
+            disclosed_shares(companyfacts,cik=cik,as_of=as_of))
     if shares is None:raise ProviderFailure(Status.MISSING)
+    if shares_override is not None and shares.get('evidence_method')!='original_sec_filing_dei_exact':
+        raise ProviderFailure(Status.INVALID_DATA)
     stage('share_class')
     proof=verify_share_class(shares,metadata,filing,symbol=symbol,as_of=as_of)
     stage('share_price_chronology')
@@ -455,7 +458,7 @@ def indicative_valuation(*, price_response, identity, companyfacts, metadata, fi
                      'ocf_less_ppe_payments_not_complete_owner_earnings'])
 
 
-def build_valuation_report(batch, responses, *, as_of):
+def build_valuation_report(batch, responses, *, as_of, allow_original_share_fallback=False):
     from .reporting import build_report
     if not aware(as_of):raise ValueError('aware cutoff required')
     financial=build_report(batch)
@@ -481,18 +484,44 @@ def build_valuation_report(batch, responses, *, as_of):
             row['source_observations']=[dict(url=url,raw_sha256=latest[url].sha256,retrieved_at=latest[url].retrieved_at.isoformat()) for url in required if url in latest]
             if row['missing_source_urls']:companies.append(row);continue
             diagnostics['validation_stage']='disclosed_shares'
-            shares=disclosed_shares(cf,cik=cik,as_of=as_of)
+            share_stale=False
+            try:
+                shares=disclosed_shares(cf,cik=cik,as_of=as_of)
+            except ShareFailure as exc:
+                if not allow_original_share_fallback or exc.issue!=ShareIssue.STALE_DISCLOSURE:
+                    raise
+                shares=None
+                share_stale=True
+            alternate_filing=None
+            if shares is None and allow_original_share_fallback:
+                for url in latest_original_share_filing_urls(meta,cik=cik):
+                    original=latest.get(url)
+                    if original is None:
+                        continue
+                    try:
+                        alternate=original_filing_shares(meta,original,cik=cik,symbol=symbol,as_of=as_of)
+                        if alternate is not None:
+                            shares=alternate
+                            alternate_filing=original
+                            break
+                    except (ProviderFailure,ValueError,KeyError,TypeError):
+                        continue
             if shares is None:
-                row['missing_evidence']=['disclosed_shares'];companies.append(row);continue
+                row['missing_evidence']=['disclosed_shares']
+                if share_stale:
+                    row['source_status']='stale_sec_companyfacts_share_and_no_verified_original_fallback'
+                companies.append(row);continue
             diagnostics['validation_stage']='original_share_filing'
-            candidates=[r for url,r in latest.items() if url.startswith(f'https://www.sec.gov/Archives/edgar/data/{int(cik)}/{shares["accession"].replace("-", "")}/')]
+            candidates=([alternate_filing] if alternate_filing is not None else
+                        [r for url,r in latest.items() if url.startswith(f'https://www.sec.gov/Archives/edgar/data/{int(cik)}/{shares["accession"].replace("-", "")}/')])
             if len(candidates)!=1:
                 if not candidates:row['missing_source_urls'].append('exact_original_share_filing')
                 else:row.update(status='source_contract_rejected',provider_status='invalid_data',failure_detail='ambiguous_original_share_filing')
                 row['failed_validation_stage']=diagnostics['validation_stage'];companies.append(row);continue
             row['source_observations'].append(dict(url=candidates[0].url,raw_sha256=candidates[0].sha256,retrieved_at=candidates[0].retrieved_at.isoformat()))
             row['valuation']=indicative_valuation(price_response=latest[price_url(symbol)],identity=latest[DIRECTORY_URL],
-                companyfacts=cf,metadata=meta,filing=candidates[0],financial_company=company,as_of=as_of,diagnostics=diagnostics)
+                companyfacts=cf,metadata=meta,filing=candidates[0],financial_company=company,as_of=as_of,diagnostics=diagnostics,
+                shares_override=shares if alternate_filing is not None else None)
             row['status']='indicative_arithmetic_only'
         except ProviderFailure as exc:
             row.update(status='source_contract_rejected',provider_status=exc.status.value,failed_validation_stage=diagnostics['validation_stage'])
