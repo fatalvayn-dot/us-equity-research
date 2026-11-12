@@ -9,7 +9,7 @@ from equity_research.transport import Response
 
 ROOT = Path(__file__).resolve().parents[1]
 with patch.object(sys, 'path', [str(ROOT / 'scripts'), *sys.path]):
-    from verify_pending_score_inputs import audit_original_gaps
+    from verify_pending_score_inputs import audit_original_gaps, selected_operating_symbols
 
 CIK = '0001045810'
 CUTOFF = datetime(2026, 11, 8, tzinfo=timezone.utc)
@@ -22,6 +22,29 @@ class OriginalScoreGapTests(unittest.TestCase):
         inputs = dict(cik=CIK, start=date(2025, 1, 27), end=date(2026, 1, 25),
                       missing_fields=['revenue', 'capital_expenditure'], cutoff=CUTOFF)
         return audit_original_gaps(original, **(inputs | overrides))
+
+    def test_all_modeled_operating_issuers_excludes_bank_insurer_and_reit(self):
+        def row(symbol, sic, entity='operating'):
+            return dict(symbol=symbol, issuer_id=f'{sum(ord(c) for c in symbol):010d}',
+                        snapshot=dict(sic_label=sic, entity_type_label=entity))
+        metadata = dict(companies=[
+            row('TECH', '3674'), row('PHARMA', '2834'),
+            row('BANK', '6021'), row('INSURE', '6331'),
+            row('REIT', '6798'), row('FUND', '3674', 'investment'),
+            row('UNKNOWN', None),
+        ])
+        self.assertEqual(selected_operating_symbols(metadata), ['TECH', 'PHARMA'])
+        self.assertEqual(len(metadata['companies']), 7)
+
+    def test_all_modeled_refuses_ambiguous_metadata_identity(self):
+        safe = dict(symbol='ABC', issuer_id='0000000001',
+                    snapshot=dict(sic_label='3674', entity_type_label='operating'))
+        with self.assertRaises(ValueError):
+            selected_operating_symbols(dict(companies=[safe, dict(safe)]))
+        with self.assertRaises(ValueError):
+            selected_operating_symbols(dict(companies=[dict(safe, issuer_id='bad')]))
+        self.assertEqual(selected_operating_symbols(dict(companies=[
+            dict(safe, snapshot=None)])), [])
 
     def test_original_nvda_filing_keeps_both_accounting_scopes_separate(self):
         original = Response(URL, gzip.decompress(FIXTURE.read_bytes()), CUTOFF)

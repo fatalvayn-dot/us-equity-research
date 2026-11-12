@@ -15,6 +15,8 @@ from equity_research.models import Fact
 from equity_research.providers import ProviderFailure
 from equity_research.reporting import build_report
 from equity_research.scoring import REQUIRED, confirm_score_field
+from equity_research.sector_models import MODELS
+from equity_research.sector_policy import excluded_banking_or_insurance
 from equity_research.transport import Response
 from live_checkpoint import verify
 
@@ -54,13 +56,46 @@ def audit_original_gaps(original, *, cik, start, end, missing_fields, cutoff):
                         for name, (required, related) in definitions.items()])
 
 
+def selected_operating_symbols(metadata):
+    """Select only modeled operating issuers from original SEC metadata.
+
+    Fail closed on absent/unknown SIC, unmodeled legal entities and duplicated
+    identities. A registry match is not participation-index certification.
+    """
+    if not isinstance(metadata, dict) or not isinstance(metadata.get('companies'), list):
+        raise ValueError('SEC metadata companies required')
+    result = []
+    seen_symbols, seen_ids = set(), set()
+    for row in metadata['companies']:
+        if not isinstance(row, dict):
+            raise ValueError('invalid metadata row')
+        symbol, cik = row.get('symbol'), row.get('issuer_id')
+        if (not isinstance(symbol, str) or not symbol or not isinstance(cik, str)
+                or len(cik) != 10 or not cik.isascii() or not cik.isdigit()
+                or not int(cik) or symbol in seen_symbols or cik in seen_ids):
+            raise ValueError('duplicate or invalid SEC metadata identity')
+        seen_symbols.add(symbol); seen_ids.add(cik)
+        snapshot = row.get('snapshot')
+        if not isinstance(snapshot, dict):
+            continue
+        sic = snapshot.get('sic_label')
+        if (snapshot.get('entity_type_label') == 'operating'
+                and not excluded_banking_or_insurance(sic)
+                and sic in MODELS):
+            result.append(symbol)
+    return result
+
+
 def audit(root, run_id, symbols):
     manifest, _ = verify(root, run_id, {})
     batch = json.loads((root / 'batch.json').read_text())
     cutoff = datetime.fromisoformat(batch['generated_at'])
     metadata = {row['issuer_id']: row for row in
                 json.loads((root / 'metadata.json').read_text())['companies']}
-    requested = set(symbols)
+    requested = set(selected_operating_symbols(json.loads(
+        (root / 'metadata.json').read_text()))) if symbols is None else set(symbols)
+    if not requested:
+        raise ValueError('no eligible score audit candidates')
     companies = [row for row in build_report(batch)['companies'] if row['symbol'] in requested]
     if {row['symbol'] for row in companies} != requested:
         raise ValueError('unknown score audit candidate')
@@ -121,9 +156,17 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--state-dir', type=Path, required=True)
     parser.add_argument('--run-id', type=int, required=True)
-    parser.add_argument('symbols', nargs='+')
+    parser.add_argument('--all-modeled', action='store_true',
+                        help='Audit every SEC-confirmed modeled operating issuer; exclude banks, insurers and unmodeled entities')
+    parser.add_argument('symbols', nargs='*')
     args = parser.parse_args()
-    print(json.dumps(audit(args.state_dir, args.run_id, args.symbols), default=encode, indent=2))
+    if args.all_modeled and args.symbols:
+        parser.error('--all-modeled cannot be combined with explicit symbols')
+    if not args.all_modeled and not args.symbols:
+        parser.error('provide symbols or --all-modeled')
+    print(json.dumps(audit(args.state_dir, args.run_id,
+                           None if args.all_modeled else args.symbols),
+                     default=encode, indent=2))
 
 
 if __name__ == '__main__':
