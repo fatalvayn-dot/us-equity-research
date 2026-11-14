@@ -1,3 +1,7 @@
+# Güncel kapsam — 14 Kasım 2026
+
+[Çalışma politikası](RESEARCH_OPERATING_POLICY.md) güncel kapsam ve oturum kurallarını belirler. ABD/BIST/Avrupa araştırması kapsam içindedir; bankacılık ve sigortacılık kapsam dışıdır. Aşağıdaki eski kapsam kararları tarihsel kayıttır. Önceki kabul ve veri doğrulama eksikleri kendiliğinden kapanmış sayılmaz.
+
 # 5 Kasım 2026 — Türkçe dil kararı ve devam önceliği
 
 Kullanıcının kararı: süreç proje yönetiminde belirlenen sırayla devam edecek;
