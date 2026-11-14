@@ -1,6 +1,9 @@
 # Development contract
 
-Read docs/PROJECT_BRIEF.md and docs/DEVELOPMENT_STATUS.md before changes.
+Read docs/RESEARCH_OPERATING_POLICY.md, docs/PROJECT_BRIEF.md and
+docs/DEVELOPMENT_STATUS.md before changes. The operating policy supersedes
+historical scope and cadence statements. Choose at most one main task and an
+optional bug fix; research or testing may be sufficient without new code.
 Inspect main, open PRs and Actions when GitHub is available. Use a feature
 branch, execute unit/regression and relevant integration tests, create a PR,
 and merge only verified changes. Do not commit secrets or cached provider data.
