@@ -1,5 +1,23 @@
 # Development status
 
+## 14 Kasım 2026 — Araştırma/geliştirme görev paylaşımı
+Ana iş yeni çalışma politikasını kalıcılaştırmaktır. Başlangıç main:
+f4aa6c4151465ac8f15689c7f4114d72205db69b. Açık PR: #106, #111, #112.
+Son sekiz Actions çalışması başarılı; bu metadata veri kabulü değildir.
+Son skor koşusu: 43568226404 (2026-11-14T06:49:52Z).
+Son başarısız örnekler: 43263530449 ve 43263458957 (günlük özet),
+43219432548 (#106 Foundation). Kök nedenleri bu oturumda doğrulanmadı.
+
+Yeni politika ABD/BIST/Avrupa araştırmasını, banka/sigorta dışlamasını,
+yatırım uzmanına karar devrini ve oturum başına tek ana işi belirler.
+Eski PROJECT_BRIEF kapsamına güncel politika bağlantısı eklendi.
+Kod ve finansal sonuç değiştirilmedi; yeni veri veya geçmiş performans
+üretilmedi. Dal: docs/research-operating-policy-20261114.
+PR/CI/birleştirme sonucu özel oturum raporunda kaydedilecektir.
+Kota ölçümü erişilebilir değil. Sonraki tek görev: günlük veri özeti
+iş akışının son başarısızlığının güncel main üzerinde sürüp sürmediğini
+ve en yeni veri paketinin güncelliğini doğrulamak.
+
 ## 10 Kasım 2026 — Eksik skor girdilerini özgün yıllık belgeden ayırma
 
 Başlangıç main `6bf77f3c9ed6a21db4a8a7b3081951d7f3f8023e` (PR #92),
