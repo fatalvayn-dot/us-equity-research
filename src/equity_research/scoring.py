@@ -95,7 +95,8 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
             raise ValueError('future comparison')
         comparative = {c['issuer_id']: c for c in comparison['companies']}
     provenance=score_input_provenance(batch,current_comparison,prior_comparison,as_of=as_of)
-    valuations=build_valuation_report(batch,sources.values(),as_of=as_of)
+    valuations=build_valuation_report(batch,sources.values(),as_of=as_of,
+        allow_original_share_fallback=(model_version==ACTIVE_MODEL_VERSION))
     by_valuation={c['issuer_id']:c for c in valuations['companies']}
     companies=[]
     for company in financial['companies']:

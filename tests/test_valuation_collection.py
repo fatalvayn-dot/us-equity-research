@@ -57,6 +57,18 @@ class CollectionTests(unittest.TestCase):
         self.assertEqual(replay['summary']['new_get_invocations'],0)
         for leg in ('share_check','price_check','history_check'):self.assertEqual(company[leg],replay['companies'][0][leg])
         self.assertFalse(initial['mvp_accepted']);self.assertFalse(company['scope_approved']);self.assertIsNone(company['total_score'])
+    def test_collector_uses_original_sec_filing_if_companyfacts_dei_missing(self):
+        original=cf()
+        body=json.loads(original.body)
+        body['facts'].pop('dei')
+        self.transport.responses[original.url]=replace(
+            original,body=json.dumps(body).encode())
+        company=self.collector().collect(PLAN)['companies'][0]
+        self.assertEqual(company['share_check']['status'],'verified_dated_share_class')
+        self.assertEqual(company['share_fallback_source'],'original_sec_filing_dei_exact')
+        self.assertEqual(company['share_fallback_url'],filing().url)
+        self.assertEqual(company['history_check']['status'],'valid')
+
     def test_partial_budget_resumes_without_repeating_successful_requests(self):
         first=self.collector(2).collect(PLAN)
         self.assertEqual(first['summary']['new_get_invocations'],2)
