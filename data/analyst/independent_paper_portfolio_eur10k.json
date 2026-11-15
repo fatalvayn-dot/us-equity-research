@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "id": "adaptive-independent-paper-eur10k",
+  "name": "Yatırım Asistanının Bağımsız Sanal Portföyü",
+  "created_on": "2026-11-15",
+  "currency": "EUR",
+  "starting_cash_eur": "10000.00",
+  "cash_eur": "10000.00",
+  "holdings": [],
+  "trades": [],
+  "status": "cash_only_researched_replacement_portfolio_compliance_and_execution_pending",
+  "real_money": false,
+  "user_portfolio_independent": true,
+  "public_no_user_holdings": true,
+  "last_reference": {
+    "date": "2026-11-13",
+    "eur_usd": "1.1052",
+    "fx_source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
+    "price_sources": [
+      "https://stockanalysis.com/etf/spus/history/",
+      "https://stockanalysis.com/etf/spwo/history/",
+      "https://stockanalysis.com/etf/spre/history/"
+    ]
+  },
+  "pending_virtual_orders": [],
+  "execution_policy": [
+    "İlk SPUS/SPWO/SPRE taslak emirleri 15 Kasım'da iptal edildi; hiçbiri gerçekleşmedi.",
+    "Şirket/sektör teması alım gerekçesi değildir: tarihlenmiş bilanço, fiyat, beklenen getiri ve katılım uygunluğu birlikte aranır.",
+    "Tüm şirketler bugün yalnız araştırma/hedef niteliğindedir; katılım uygunlukları teyit edilmediğinden alım/pozisyon gerçek veya sanal olarak gerçekleşmiş sayılamaz.",
+    "Gerçek olmayan ileri tarihli emirleri otomatik gerçekleşti sayma; işlem tarihi geldiğinde yürütme için doğrulanmış açılış/en düşük/gün sonu verisi kullan.",
+    "Komisyonlar emir başına 1.50 USD, USD işlemler için EUR çevirim kaynağı ve tarihini kaydet; tek varlık tek emir.",
+    "Belirlenmiş yüzde hedefler piyasa değerli tutardır, pay adedi değildir. İşleme geçişte gerçek fiyat, lot/adet, toplam maliyet ve değişim hesaplanır.",
+    "Kullanıcı gerçek portföyünden tümüyle bağımsız ve sanal, gerçek işlem yok.",
+    "Portföy kararları haber/şirket fiili gelişmeyle yeniden tartılır; sırf fiyat düştü diye zorunlu satış, sırf fiyat yükseldi diye alım yok."
+  ],
+  "method": "macro_to_industry_to_company_valuation_risk_reward_with_execution_gates",
+  "target_allocation_percent": {
+    "ETN": 16,
+    "VRT": 10,
+    "TSM": 16,
+    "LNG": 16,
+    "CF": 12,
+    "MSFT": 12,
+    "QS": 3,
+    "EUR_CASH": 15
+  },
+  "benchmark": "EURO nakit bazlı 10000 EUR başlangıç, ilk gerçekleşen sanal alıştan sonra SPUS toplam getiri (EUR) ve MSCI World uygun kıyas olarak izlenecek.",
+  "notes": "2. sürüm hedef dağılımı; hiçbir şirket alımı gerçekleşmedi ve katılım finansal uygunluğu doğrulanmadı. EUR nakit hala 10000. Güncel tarihli makro araştırma kaynakları: IEA Electricity Mid-Year Update 2026; IEA Global Gas Security Review 2026; şirketlerin 2026 Q3 açıklamaları. 2026-11-13 kapanışları yalnız gözlenen referans, gelecekte garanti emir fiyatı değil.",
+  "cancelled_virtual_orders": [
+    {
+      "symbol": "SPUS",
+      "quantity": 70,
+      "reason": "İlk dağılım şirket bazında değerleme ve risk karşılaştırmasına dayanmıyordu.",
+      "cancelled_on": "2026-11-15",
+      "filled": false
+    },
+    {
+      "symbol": "SPWO",
+      "quantity": 70,
+      "reason": "İlk dağılım şirket bazında değerleme ve risk karşılaştırmasına dayanmıyordu.",
+      "cancelled_on": "2026-11-15",
+      "filled": false
+    },
+    {
+      "symbol": "SPRE",
+      "quantity": 50,
+      "reason": "Gayrimenkul ağırlığı için ikna edici göreli değerleme tezi kanıtlanmadı.",
+      "cancelled_on": "2026-11-15",
+      "filled": false
+    }
+  ],
+  "research_date": "2026-11-15",
+  "research_fx_reference": {
+    "date": "2026-11-13",
+    "eur_usd": "1.1052",
+    "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
+  },
+  "valuation_policy": "Fiyat ve şirket kârı beraber analiz edilir. Senaryo hedefleri hesaplanmadan ya da yeterli katılım uygunluğu ve kote fiyat teyidi olmadan yeni sanal alım yapılmaz.",
+  "researched_targets": [
+    {
+      "symbol": "ETN",
+      "target_percent": 16,
+      "reference_close_usd": 352.97,
+      "reference_date": "2026-11-13",
+      "estimated_2026_adjusted_eps_midpoint_usd": 13.75,
+      "estimated_price_to_2026_adjusted_earnings": 25.67,
+      "thesis": "Veri merkezi ve şebeke elektrifikasyonu için güç yönetimi, elektrik dağıtımı; 2026 Q3 %19 organik büyüme, elektrik sipariş ve birikim artışı.",
+      "risk": "Sipariş döngüsü soğuyabilir, yüksek çarpan, satın alma entegrasyonu.",
+      "buy_rule": "Katılım kontrolünden sonra ve ileriye dönük sipariş/birikim artışı sürüyorsa, tercih edilen fiyat <=353 USD; yeni fiyatla yeniden değerleme.",
+      "sell_rule": "İki çeyrek boyunca elektrik siparişlerinde kötüleşme, büyüme tezinin bozulması veya değerlemeye göre makul getirinin kalmaması.",
+      "source": "https://www.eaton.com/us/en-us/company/news-insights/news-releases/2026/eaton-reports-record-third-quarter-2026-results.html",
+      "compliance": "unverified"
+    },
+    {
+      "symbol": "VRT",
+      "target_percent": 10,
+      "reference_close_usd": 202.07,
+      "reference_date": "2026-11-13",
+      "estimated_2026_adjusted_eps_midpoint_usd": 7.15,
+      "estimated_price_to_2026_adjusted_earnings": 28.26,
+      "thesis": "Veri merkezi soğutma ve kritik altyapı; Q3 satış +%61, organik sipariş >%100, FCF artışı.",
+      "risk": "Yüksek oynaklık, kapasite yatırımları, büyümenin normalleşmesi; %10 ile sınırlandı.",
+      "buy_rule": "Katılım kontrolü ve gelir büyümesi doğrulaması sonrası <=202.07 USD referans fiyat; yeni fiyat ve risk tekrar değerlendirilir.",
+      "sell_rule": "Sipariş dönüşümü ve marj trendi belirgin bozulursa veya net kâr büyümesi değerlemeyi desteklemezse.",
+      "source": "https://investors.vertiv.com/news/news-details/2026/Vertiv-Reports-Strong-Third-Quarter-2026-with-Net-Sales-Growth-of-61-Organic-Orders-Growth-over-100-and-Diluted-EPS-Growth-of-91-Adjusted-Diluted-EPS-Growth-of-78-Raises-Full-Year-2026-Guidance-Across-All-Key-Metrics/",
+      "compliance": "unverified"
+    },
+    {
+      "symbol": "TSM",
+      "target_percent": 16,
+      "reference_close_usd": 398.73,
+      "reference_date": "2026-11-13",
+      "thesis": "Gelişmiş 2nm/3nm dökümhane kapasitesi; Q3 gelir +%50.9, kâr +%68.7; AI çiplerinin altyapı üreticisi.",
+      "risk": "Tayvan jeopolitik risk, ihracat kısıtları, yoğun yatırım harcaması.",
+      "buy_rule": "Katılım teyidi, fiyat ve ADR-kâr katsayı denetimi sonrası <=398.73 USD referans, yüksek jeopolitik risk için %16 üst sınır.",
+      "sell_rule": "İleri üretim teknolojisinde rekabet avantajının kaybı, büyük müşteri kaybı veya jeopolitik maruziyetin keskin artışı.",
+      "source": "https://pr.tsmc.com/english/news/3346",
+      "compliance": "unverified"
+    },
+    {
+      "symbol": "LNG",
+      "target_percent": 16,
+      "reference_close_usd": 308.75,
+      "reference_date": "2026-11-13",
+      "estimated_market_cap_billion_usd": 63.05,
+      "estimated_2026_distributable_cash_flow_midpoint_billion_usd": 6.3,
+      "estimated_market_cap_to_2026_distributable_cash_flow": 10.01,
+      "thesis": "LNG ihracat kapasitesi ve uzun dönem sözleşmeleri; 2026 beklenen dağıtılabilir nakit akımı 6.05-6.55 milyar USD.",
+      "risk": "Hormuz normalleşmesi gaz fiyatlarını düşürebilir; yüksek borç ve borç faizi katılım kontrolünde başarısızlığa yol açabilir.",
+      "buy_rule": "Önce kesin katılım filtre ve toplam borç oranı kontrolü; sonra <=308.75 USD ve nakit akışından değerleme teyidi.",
+      "sell_rule": "Dağıtılabilir nakit akımı beklentisi veya sözleşme ekonomisi bozulursa; katılım başarısızsa alım yapılmaz.",
+      "source": "https://lngir.cheniere.com/news-events/press-releases/detail/349/cheniere-reports-third-quarter-2026-results-raises-full",
+      "compliance": "unverified_high_debt_risk"
+    },
+    {
+      "symbol": "CF",
+      "target_percent": 12,
+      "reference_close_usd": 125.09,
+      "reference_date": "2026-11-13",
+      "estimated_market_cap_billion_usd": 18.3,
+      "estimated_trailing_fcf_billion_usd": 2.03,
+      "estimated_fcf_yield_percent": 11.09,
+      "thesis": "Gübre/azot talebi, düşük maliyetli Kuzey Amerika üretimi ve güçlü serbest nakit akımı.",
+      "risk": "Azot fiyatları döngüsel, doğal gaz maliyetleri artabilir; son nakit akımı döngüsel zirve olabilir.",
+      "buy_rule": "Katılım incelemesi ve normalleştirilmiş nakit akımı sonrası <=125.09 USD; yaklaşık %11 tarihli FCF getirisi sürdürülebilir sayılmaz.",
+      "sell_rule": "Marjların yapısal bozulması, üretim maliyet avantajının kaybı veya FCF daralması.",
+      "source": "https://www.cfindustries.com/newsroom/2026/cf-9m-2026-earnings",
+      "compliance": "unverified"
+    },
+    {
+      "symbol": "MSFT",
+      "target_percent": 12,
+      "reference_close_usd": 523.88,
+      "reference_date": "2026-11-13",
+      "thesis": "Bulut, işletme yazılımı ve AI platformu; FY27 Q1 gelir +%19 faaliyet kârı +%21.",
+      "risk": "AI sermaye harcaması ve marj baskısı, yüksek piyasa beklentileri.",
+      "buy_rule": "Katılım finansal oran testi ve serbest nakit akışı değerlemesi sonrası <=523.88 USD referans.",
+      "sell_rule": "Azure talebinde kalıcı yavaşlama, capex getirilerinin yetersizliği veya aşırı değerleme.",
+      "source": "https://www.microsoft.com/en-us/investor/earnings/fy-2027-q1/press-release-webcast",
+      "compliance": "unverified"
+    },
+    {
+      "symbol": "QS",
+      "target_percent": 3,
+      "reference_close_usd": 3.68,
+      "reference_date": "2026-11-13",
+      "thesis": "Katı hâl pil platformu lisans ve ticarileştirme opsiyonu; teknoloji dönüştürücü olabilir.",
+      "risk": "Ürün ölçekleme belirsiz, gelir/kâr henüz kanıtlanmamış, sulanma riski; yüksek kayıp olasılığı.",
+      "buy_rule": "Katılım teyidi, nakit tüketimi ve üretim kilometre taşı doğrulanırsa en fazla %3; teknoloji haberine dayanarak kör alım yapılmaz.",
+      "sell_rule": "Teknik ölçekleme hedefleri kaçarsa, nakit finansman maliyeti artarsa veya tezin başlıca varsayımları bozulursa.",
+      "source": "https://www.quantumscape.com/quantumscape-expands-commercial-roadmap-with-osprey-the-open-all-solid-state-platform-for-battery-development/",
+      "compliance": "unverified"
+    }
+  ],
+  "rejected_for_now": [
+    {
+      "symbol": "GEV",
+      "reason": "Büyüme/sipariş görünümü güçlü fakat 803.13 USD kapanışla yeterli değerleme güvenlik marjı henüz oluşturulmadı; ETN/VRT ile faktör tekrarı."
+    },
+    {
+      "symbol": "CEG",
+      "reason": "Nükleer tema güçlü, ancak kâr normalizasyonu ve piyasa değeri karşılaştırması tamamlanmadan yer verilmedi."
+    },
+    {
+      "symbol": "BA",
+      "reason": "Operasyonel toparlanma ve nakit dönüşümünde belirsizlik; çoklu erken döngü riskini artırmak istemiyorum."
+    },
+    {
+      "symbol": "LMT",
+      "reason": "Savunma harcaması artışı hisse beklenen getirisi değildir; güncel değerleme ve katılım uygunluğu netleşmeden alım yok."
+    },
+    {
+      "symbol": "SPUS",
+      "reason": "Geniş ETF çekirdeği yerine doğrulanmış büyüme ve nakit akışı tezlerine dayalı şirket ağırlıkları tercih edildi."
+    }
+  ]
+}
