@@ -8,7 +8,7 @@
   "cash_eur": "10000.00",
   "holdings": [],
   "trades": [],
-  "status": "cash_only_researched_replacement_portfolio_compliance_and_execution_pending",
+  "status": "third_final_initial_plan_cash_only_awaiting_compliance_and_next_session",
   "real_money": false,
   "user_portfolio_independent": true,
   "public_no_user_holdings": true,
@@ -35,17 +35,15 @@
   ],
   "method": "macro_to_industry_to_company_valuation_risk_reward_with_execution_gates",
   "target_allocation_percent": {
-    "ETN": 16,
-    "VRT": 10,
-    "TSM": 16,
-    "LNG": 16,
-    "CF": 12,
-    "MSFT": 12,
-    "QS": 3,
+    "SPUS": 30,
+    "SPWO": 20,
+    "TSM": 15,
+    "ETN": 10,
+    "CF": 10,
     "EUR_CASH": 15
   },
   "benchmark": "EURO nakit bazlı 10000 EUR başlangıç, ilk gerçekleşen sanal alıştan sonra SPUS toplam getiri (EUR) ve MSCI World uygun kıyas olarak izlenecek.",
-  "notes": "2. sürüm hedef dağılımı; hiçbir şirket alımı gerçekleşmedi ve katılım finansal uygunluğu doğrulanmadı. EUR nakit hala 10000. Güncel tarihli makro araştırma kaynakları: IEA Electricity Mid-Year Update 2026; IEA Global Gas Security Review 2026; şirketlerin 2026 Q3 açıklamaları. 2026-11-13 kapanışları yalnız gözlenen referans, gelecekte garanti emir fiyatı değil.",
+  "notes": "15 Kasım 2026 son başlangıç planı; 3 aylık ileriye dönük deneme 15 Şubat 2027'de değerlendirilir. Tüm sermaye halen 10.000 EUR nakitte; eski herhangi bir taslak işleme dönüşmedi.",
   "cancelled_virtual_orders": [
     {
       "symbol": "SPUS",
@@ -75,7 +73,7 @@
     "eur_usd": "1.1052",
     "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
   },
-  "valuation_policy": "Fiyat ve şirket kârı beraber analiz edilir. Senaryo hedefleri hesaplanmadan ya da yeterli katılım uygunluğu ve kote fiyat teyidi olmadan yeni sanal alım yapılmaz.",
+  "valuation_policy": "3. sürüm; her fon ve şirket için tez, karşıt senaryo, uygunluk, fiyat, işlem maliyeti ve satış tetikleyicisi. Tekil şirketlerde uygunluk doğrulanana kadar hedef ağırlığı sanal nakitte tut.",
   "researched_targets": [
     {
       "symbol": "ETN",
@@ -193,5 +191,147 @@
       "symbol": "SPUS",
       "reason": "Geniş ETF çekirdeği yerine doğrulanmış büyüme ve nakit akışı tezlerine dayalı şirket ağırlıkları tercih edildi."
     }
-  ]
+  ],
+  "strategy_version": 3,
+  "test_window": {
+    "start": "2026-11-15",
+    "end": "2027-02-15",
+    "performance_start": "first_verified_virtual_fill",
+    "purpose": "3 aylık ileriye dönük disiplin/uygulama testi; istatistiksel alfa kanıtı değildir"
+  },
+  "third_plan": {
+    "decided_on": "2026-11-15",
+    "approach": "Dönem başında iyi belgelenmiş katılım ETF çekirdeği + daha yüksek ikna düzeyi gerektiren tekil şirket uydu pozisyonları; gerçekleşen fiyat olmadan geriye dönük emir yazılmaz.",
+    "base_currency": "EUR",
+    "benchmark": {
+      "primary": "SPUS total return EUR",
+      "secondary": "SPUS/SPWO 60/40 EUR buy-and-hold",
+      "compare_cash_drag": true
+    },
+    "allocation": {
+      "SPUS": 30,
+      "SPWO": 20,
+      "TSM": 15,
+      "ETN": 10,
+      "CF": 10,
+      "EUR_CASH": 15
+    },
+    "candidates": [
+      {
+        "symbol": "SPUS",
+        "allocation_pct": 30,
+        "classification": "fund",
+        "reference_price_usd": 57.04,
+        "reference_date": "2026-11-13",
+        "participation_evidence": "SP Funds resmi AAOIFI çerçevesi ve Şeriat denetim raporu; uygulama tarihi ve sepetin en yeni denetimi gerektiğinde kontrol edilir.",
+        "thesis": "ABD kalite ve büyüme hisselerine filtrelenmiş çeşitlendirilmiş erişim; tekil hisse hata riskini düşürür.",
+        "bear_case": "ABD büyüme hisseleri pahalı, teknoloji ağırlığı yüksek; fon masrafı %0,45.",
+        "buy_gate": "İlk açılışta doğrulanmış piyasa ve FX fiyatı, fon uygunluk dokümanı, limit fiyatının altında icra; pozisyon üst sınırı %30; kullanıcı portföyünden bağımsız.",
+        "exit_rule": "Metodoloji uyumu kaybolursa ya da üç aylık değerlendirmede sektörel risk gereğinden fazla artarsa azalt; sırf düşüş olduğu için otomatik satma.",
+        "source": "https://www.sp-funds.com/SPUS/",
+        "compliance_status": "fund_manager_sharia_screened_requires_current_filing_check"
+      },
+      {
+        "symbol": "SPWO",
+        "allocation_pct": 20,
+        "classification": "fund",
+        "reference_price_usd": 30.32,
+        "reference_date": "2026-11-13",
+        "participation_evidence": "SP Funds AAOIFI ilkesine göre ABD dışı uygunluk taramalı fon.",
+        "thesis": "ABD riskine ve dolara tek başına bağımlılığı azaltır; Avrupa/Asya/Gelişen piyasa payı.",
+        "bear_case": "Fon daha küçük; likidite ve spread ile kur riskleri; %0,55 gider oranı.",
+        "buy_gate": "Kote fiyat, spread, fon güncel liste ve uygunluk kontrolü; hedef %20.",
+        "exit_rule": "Endeks metodolojisi değişirse, spread/likidite uygunsuzlaşırsa veya alternatif daha iyi net getiri sunarsa azalt.",
+        "source": "https://www.sp-funds.com/SPWO/",
+        "compliance_status": "fund_manager_sharia_screened_requires_current_filing_check"
+      },
+      {
+        "symbol": "TSM",
+        "allocation_pct": 15,
+        "classification": "equity",
+        "reference_price_usd": 398.73,
+        "reference_date": "2026-11-13",
+        "participation_evidence": "Finansal oranlar ve ticari faaliyet katılım standardına göre henüz doğrulanmadı; emir kapalı.",
+        "thesis": "Gelişmiş dökümhanede teknolojik avantaj, AI ve çip yoğunluğu; 13 Kasım ~19x ileriye dönük kâr, birincil EPS kaynağıyla ayrıca kontrol edilir.",
+        "bear_case": "Tayvan jeopolitiği, talep döngüsü, capex ve tek ülke fabrika yoğunlaşması.",
+        "buy_gate": "Güncel mali tabloyla AAOIFI faaliyet+borç+faiz geliri taraması, tarihli fiyat, ADR doğrulaması, nakit akışı senaryosu ve en az %20 aşağı yönlü senaryo hesaplanmadan işlem yok.",
+        "exit_rule": "Üretim teknolojisi avantajı veya net büyüme bozulursa, büyük jeopolitik risk gerçekleşirse ya da beklenen EUR getirisi risk karşısında zayıflarsa azalt/sat.",
+        "source": "https://pr.tsmc.com/english/news/3346",
+        "compliance_status": "unverified_hold_cash"
+      },
+      {
+        "symbol": "ETN",
+        "allocation_pct": 10,
+        "classification": "equity",
+        "reference_price_usd": 352.97,
+        "reference_date": "2026-11-13",
+        "participation_evidence": "Güncel finansal ve faaliyet taraması henüz doğrulanmadı; emir kapalı.",
+        "thesis": "Şebeke elektrifikasyonu ve veri merkezi güç ekipmanlarına artan talep; 2026 Q3 %19 organik büyüme ve sipariş kanıtı.",
+        "bear_case": "2026 düzeltilmiş F/K yaklaşık 25,7; büyüme çarpanı ve AI sermaye harcaması döngüsü.",
+        "buy_gate": "Katılım uygunluğu + 2027 sipariş/birikim trendi + nakit akışı ve alternatiflere göre getiri karşılaştırması + limitli gerçekleşme denetimi.",
+        "exit_rule": "İki çeyrek zayıf sipariş trendi, marj bozulması veya yatırım getirisinde ciddi düşüş.",
+        "source": "https://www.eaton.com/us/en-us/company/news-insights/news-releases/2026/eaton-reports-record-third-quarter-2026-results.html",
+        "compliance_status": "unverified_hold_cash"
+      },
+      {
+        "symbol": "CF",
+        "allocation_pct": 10,
+        "classification": "equity",
+        "reference_price_usd": 125.09,
+        "reference_date": "2026-11-13",
+        "participation_evidence": "Güncel katılım oranları henüz doğrulanmadı; emir kapalı.",
+        "thesis": "Azotlu gübre maliyet avantajı ve yüksek tarihsel FCF; gıda arzı ve jeopolitik gübre fiyatlaması portföyde farklı kazanç kaynağı.",
+        "bear_case": "Gübre fiyatları döngüsel, enerji girdisi ve FCF normalizasyonu; tarihsel %11 FCF getirisini kalıcı sayma.",
+        "buy_gate": "Katılım taraması, normalleştirilmiş gübre fiyatında FCF hesaplaması, fiyat ve likidite doğrulaması.",
+        "exit_rule": "Üretim maliyet avantajı veya normalize FCF sürdürülemezse; fiyat ve döngü kârı beklentiyi aşarsa kar al.",
+        "source": "https://www.cfindustries.com/newsroom/2026/cf-9m-2026-earnings",
+        "compliance_status": "unverified_hold_cash"
+      }
+    ],
+    "reserve": {
+      "eur": 1500,
+      "description": "İşlem gününde tüm hedef ağırlıklar uygun çıksa dahi nakit rezervi; uygun olmayan paylar bunun üzerine eklenir."
+    },
+    "excluded_for_now": [
+      {
+        "symbol": "LNG",
+        "reason": "Katılım borç/finansman taraması tamamlanmadı; gaz fiyatı haberinin kendisi beklenen hisse getirisine yeterli değil."
+      },
+      {
+        "symbol": "QS",
+        "reason": "Teknolojik opsiyon cazip ancak ticari ölçekleme ve uygunluk sınırları eksik; araştırma izleme listesi."
+      },
+      {
+        "symbol": "VRT",
+        "reason": "ETN ile veri merkezi capex korelasyonu yüksek; mevcut değerlemede konsantrasyonu artırmama kararı."
+      },
+      {
+        "symbol": "MSFT",
+        "reason": "SPUS içinde örtüşebilecek kalite/AI maruziyeti; look-through netleşmeden çift ağırlık istemiyorum."
+      },
+      {
+        "symbol": "SPRE",
+        "reason": "GYO sektörünün fırsat maliyeti ve makro değerlemesi tezini desteklemediği için çıkartıldı."
+      }
+    ],
+    "compliance_policy": {
+      "standard": "AAOIFI esaslı faaliyet ve mali oran taraması; fonlar için yöneticinin yayımladığı güncel uygunluk denetimi",
+      "borderline": "Yasal geçiş istisnası olan endeks kuralları standartlar arasında aktarılmaz. Oran sınıra yakınsa WATCH_NO_BUY; en güncel iki bilanço, piyasa değeri metodolojisi ve arındırma yükümlülüğü kontrol edilir. Eşik üstü veya belirsizse işlem yapılmaz.",
+      "review_frequency": "Çeyreklik bilanço, metodoloji/yasak faaliyet değişimi ve fiyat hareketiyle yeniden hesapla."
+    },
+    "execution": {
+      "status": "no_orders_submitted",
+      "earliest": "2026-11-16",
+      "rule": "16 Kasım sonrası, ancak fiyat/FX ve uygunluk teyidi olan araçlar için belgelenmiş sanal limit emir; emir yaratılırken tarihli fiyat ve hedef adet kaydedilir. Geriye dönük doldurma yok.",
+      "transaction_fee_usd_per_order": "1.50",
+      "no_auto_live_trades": true
+    },
+    "performance_policy": "Başlangıçtaki nakit dahil %0 getiri, karşılaştırmalarda aynı başlangıç tarih ve fon nakit akışı; üç ay disiplin denemesi, alfa kanıtı değildir.",
+    "catalyst_monitoring": [
+      "SEC/KAP ve resmi fon uygunluk dokümanları",
+      "IEA elektrik-gaz, FRED/ECB para politikası ve döviz",
+      "Arz darboğazı/savaş haberlerinde fiyatın önceden reaksiyonu ve şirket nakit akışına iletim",
+      "Volatilite, hacim, kredi spread ve fon rotasyonu - yalnız kaynakla doğrulanmış sinyaller"
+    ]
+  }
 }

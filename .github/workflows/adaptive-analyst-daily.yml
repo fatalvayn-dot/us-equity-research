@@ -8,6 +8,7 @@ on:
       - 'scripts/adaptive_investment_assistant.py'
       - 'data/analyst/public_research_universe.json'
       - '.github/workflows/adaptive-analyst-daily.yml'
+      - 'scripts/build_analyst_handoff.py'
   workflow_dispatch:
   schedule:
     - cron: '15 14 * * 1-5'
@@ -34,9 +35,11 @@ jobs:
         run: python -m scripts.adaptive_multiactive_watchlist
       - name: Günlük yapay zekâ araştırma iş emri
         run: python scripts/adaptive_investment_assistant.py
+      - name: Analist için veri ve araştırma devir paketi
+        run: python scripts/build_analyst_handoff.py
       - name: Kısa özet
         run: |
-          cat data/analyst-output/daily-brief.md >> "$GITHUB_STEP_SUMMARY"
+          cat data/analyst-output/analyst-handoff.md >> "$GITHUB_STEP_SUMMARY"
           echo '' >> "$GITHUB_STEP_SUMMARY"
           cat data/analyst-output/analyst-work-order.md >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
