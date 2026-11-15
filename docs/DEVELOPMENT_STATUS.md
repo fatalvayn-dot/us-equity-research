@@ -1,5 +1,27 @@
 # Development status
 
+## 15 Kasım 2026 — Günlük özet ile araştırma paketini doğrulama
+
+Main başlangıcı `9ddcc809e72ae5f566fdad38b08a35555e50d177`.
+Günlük özet `43710167029` başarılı. Arşiv özet ve CRC
+doğrulamasından geçti. 23 fiyatın tamamı 13 Kasım seansına ait
+(ABD 13, BIST 6, Avrupa 4). 4 hareket araştırma kuyruğunda.
+Son iki günlük özet hatası eski geliştirme dalına ait ve iş adımı
+kayıtları dönmedi. Güncel main'de aynı başarısızlık gözlenmedi.
+
+Araştırma paketindeki fiyat veya araştırma kuyruğu, aynı kaynak
+zamanını taşısa dahi değiştirilebiliyordu. Analist devri artık günlük
+özetten mevcut yöntemle yeniden üretilen paketle tam eşleşme arar.
+22 yerel test geçti. Gerçek arşivle günlük giriş komutu özgün JSON
+ve Markdown çıktısını birebir üretti. Dal `fix/bind-analyst-handoff-source`.
+
+Skor koşusu `43708399717` arşivinde 100 aday ve 13 puan var.
+Finansal paket `42455760184`, veri kesimi 8 Kasım 2026 07.01 UTC.
+Günlük fiyat özetinin başarılı olması finansal yenileme veya katılım
+uygunluğu kanıtı değildir. Yatırım kararı ve performans üretilmedi.
+Kota ölçümü erişilebilir değil. Sonraki öncelik, güncel finansal
+bildirimleri kayıtlı finansal kesimle karşılaştırarak yenileme kapsamını belirlemek.
+
 ## 14 Kasım 2026 — Araştırma/geliştirme görev paylaşımı
 Ana iş yeni çalışma politikasını kalıcılaştırmaktır. Başlangıç main:
 f4aa6c4151465ac8f15689c7f4114d72205db69b. Açık PR: #106, #111, #112.
