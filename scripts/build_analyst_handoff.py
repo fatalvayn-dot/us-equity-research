@@ -3,6 +3,11 @@ import json
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
+if __package__:
+    from .adaptive_investment_assistant import evidence_packet
+else:
+    from adaptive_investment_assistant import evidence_packet
+
 ROOT = Path("data/analyst-output")
 MARKETS = ("ABD", "BIST", "AVRUPA")
 
@@ -27,6 +32,8 @@ def build_handoff(brief, packet, multi):
     created = [parse_dt(x["created_at"]) for x in (brief, packet, multi)]
     if max(created) - min(created) > timedelta(minutes=30):
         raise ValueError("mixed-day evidence")
+    if packet != evidence_packet(brief):
+        raise ValueError("research packet does not match the daily source brief")
     seen = set()
     markets = {}
     for name in MARKETS:
