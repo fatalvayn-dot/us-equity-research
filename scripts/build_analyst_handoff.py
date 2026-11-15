@@ -1,6 +1,6 @@
 """Compact public evidence handoff for an analyst; no decisions, no personal data."""
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 ROOT = Path("data/analyst-output")
@@ -25,7 +25,7 @@ def build_handoff(brief, packet, multi):
             or set(packet.get("markets", {})) != set(MARKETS)):
         raise ValueError("market coverage mismatch")
     created = [parse_dt(x["created_at"]) for x in (brief, packet, multi)]
-    if max(created) - min(created) > __import__("datetime").timedelta(minutes=30):
+    if max(created) - min(created) > timedelta(minutes=30):
         raise ValueError("mixed-day evidence")
     seen = set()
     markets = {}
@@ -86,7 +86,7 @@ def main():
                   "Work raporu ayrıca okunmalı; bu devrin tamamlanması yatırım asistanının "
                   "otomatik analiz yaptığı anlamına gelmez.", ""])
     (ROOT / "analyst-handoff.md").write_text("\n".join(lines), encoding="utf-8")
-    print(json.dumps({"markets": markets if False else output["market_quality"],
+    print(json.dumps({"markets": output["market_quality"],
                       "research_queue": len(output["research_queue"])}, ensure_ascii=False))
 
 
