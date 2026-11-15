@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "id": "adaptive-independent-paper-eur10k",
+  "name": "Yatırım Asistanının Bağımsız Sanal Portföyü",
+  "created_on": "2026-11-15",
+  "currency": "EUR",
+  "starting_cash_eur": "10000.00",
+  "cash_eur": "10000.00",
+  "holdings": [],
+  "trades": [],
+  "status": "cash_only_pending_first_market_session",
+  "real_money": false,
+  "user_portfolio_independent": true,
+  "public_no_user_holdings": true,
+  "last_reference": {
+    "date": "2026-11-13",
+    "eur_usd": "1.1052",
+    "fx_source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
+    "price_sources": [
+      "https://stockanalysis.com/etf/spus/history/",
+      "https://stockanalysis.com/etf/spwo/history/",
+      "https://stockanalysis.com/etf/spre/history/"
+    ]
+  },
+  "pending_virtual_orders": [
+    {
+      "symbol": "SPUS",
+      "instrument": "SP Funds S&P 500 Sharia Industry Exclusions ETF",
+      "side": "BUY",
+      "quantity": "70",
+      "limit_price_usd": "57.04",
+      "reference_close_usd": "57.04",
+      "reference_date": "2026-11-13",
+      "valid_from": "2026-11-16",
+      "expiry": "2026-11-20",
+      "commission_usd": "1.50",
+      "state": "planned_not_submitted"
+    },
+    {
+      "symbol": "SPWO",
+      "instrument": "SP Funds S&P World (ex-US) ETF",
+      "side": "BUY",
+      "quantity": "70",
+      "limit_price_usd": "30.32",
+      "reference_close_usd": "30.32",
+      "reference_date": "2026-11-13",
+      "valid_from": "2026-11-16",
+      "expiry": "2026-11-20",
+      "commission_usd": "1.50",
+      "state": "planned_not_submitted"
+    },
+    {
+      "symbol": "SPRE",
+      "instrument": "SP Funds S&P Global REIT Sharia ETF",
+      "side": "BUY",
+      "quantity": "50",
+      "limit_price_usd": "19.17",
+      "reference_close_usd": "19.17",
+      "reference_date": "2026-11-13",
+      "valid_from": "2026-11-16",
+      "expiry": "2026-11-20",
+      "commission_usd": "1.50",
+      "state": "planned_not_submitted"
+    }
+  ],
+  "execution_policy": [
+    "Sanal işlemler yalnız doğrulanmış ilgili seans fiyatlarıyla kayda geçirilir; eski kapanış fiyatından geriye dönük gerçekleşme yazılmaz.",
+    "Limit emir işlem kontrolü için emir başlangıç tarihi ile günün açılış ve en düşük fiyat kanıtı gerekir; veri yoksa emir beklemede kalır.",
+    "Emirler gerçek piyasaya gönderilmez ve otomatik gerçekleşmez; bir sonraki aktif değerlendirmede denetlenir.",
+    "Bir varlık için tek sanal emir; toplam gerçekleşme maliyeti ve varsayımsal 1.50 USD emir komisyonu kaydedilir.",
+    "Açık sanal emir varken yeni EUR nakit ve USD fiyatlar güncel ECB veya belgelenmiş FX kuru ile karşılaştırılır.",
+    "Sanal portföy ile gerçek kullanıcı portföyü hiçbir şekilde birleştirilmez; günlük performans EUR bazında ve dış nakit akışlarıyla ayrıştırılır."
+  ],
+  "method": "moderate_risk_sharia_equity_core_plus_cash_optionalities",
+  "target_allocation_percent": {
+    "SPUS": 36,
+    "SPWO": 19,
+    "SPRE": 9,
+    "EUR_CASH": 36
+  },
+  "benchmark": "Benchmark: EUR cinsinden aynı başlangıç günündeki SPUS toplam getiri; ilk işlem gününden sonra uygulanır.",
+  "notes": "Bu sadece ilk yatırım planıdır; emirler verilmeyip gerçekleşmediği için henüz performans oluşmamıştır. Fon adları ve yöneticinin şeriat uyum beyanı bağımsız günlük bileşen onayı değildir."
+}
