@@ -1,5 +1,29 @@
 # Development status
 
+## 16 Kasım 2026 — SEC bildirimleri ve finansal yenileme kapsamı
+
+Başlangıç main `17e13de418a052fd673db530c8b6c574e6ce5535`.
+16 Kasım skor koşusu `43861287516`, 100 aday ve 13 skor içeriyor.
+Skor arşivi SHA-256 ve iç dosya özetleri doğrulandı. Kaynak
+makbuzundaki finansal batch özeti, `42455760184` arşivindeki
+8 Kasım 07.01 UTC kesimiyle eşleşti. `43859075620` koşusu
+toplama adımını atladı ve yeni finansal paket üretmedi.
+
+8 Kasım kesiminden sonra, EDGAR'ın 9, 10, 12 ve 13 Kasım
+günlük endeksleri eski evrendeki sektör filtresinden geçen
+89 CIK ile eşleştirildi. 11 Kasım EDGAR tatili. 16 Kasım
+endeksi deneme sırasında HTTP 503 döndürdü ve kapsama alınmadı.
+13 şirkette 16 seçili form bulundu. Bunlardan tek dönemsel
+bildirim SWKS'nin `0000004127-26-000055` sayılı 10-K'sı.
+SEC kabulü 10 Kasım 21.17.18 UTC, dönem sonu 2 Ekim 2026.
+Kayıtlı yıllık girdilerin dönem sonu 3 Ekim 2025. Diğer 15
+form 8-K veya 8-K/A ve olay incelemesi için ayrı tutuldu.
+
+Uygulama kodu, skor ve üretim arşivi değişmedi. Sonraki tek iş,
+SWKS'nin 10-K'sını kullanarak 14 finansal alanı ve yıllık
+karşılaştırma dönemini ayrı bir aday çalışmasında doğrulamak.
+Kullanım oranı ölçülemedi.
+
 ## 15 Kasım 2026 — Günlük özet ile araştırma paketini doğrulama
 
 Main başlangıcı `9ddcc809e72ae5f566fdad38b08a35555e50d177`.
