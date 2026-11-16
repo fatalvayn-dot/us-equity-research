@@ -29,5 +29,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: crible-ten-stock-coverage
-          path: crible_coverage/
+          path: |
+            crible_coverage/coverage.json
+            crible_coverage/bootstrap_stdout.txt
           if-no-files-found: warn
