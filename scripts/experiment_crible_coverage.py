@@ -8,7 +8,7 @@ from pathlib import Path
 
 SYMBOLS = ["BAC", "AMAT", "PGR", "APH", "AMGN", "WELL", "SPGI", "TMO", "SCHW", "AAPL"]
 FIELDS = {
-    "financial": ["total_revenue", "net_income", "total_assets", "total_liabilities", "operating_cash_flow", "capital_expenditure", "total_debt"],
+    "financial": ["revenue", "net_income", "total_assets", "total_liabilities", "operating_cashflow", "capital_expenditure", "total_debt"],
     "market": ["price", "market_cap", "shares_outstanding", "price_to_earnings_ratio", "price_to_book_ratio"],
     "scoring": ["sector", "piotroski_f", "altman_z", "composite_rank"],
 }
@@ -24,6 +24,8 @@ result = {
     "status": "not_run",
     "source": "crible published snapshot, not a direct live quote",
     "fields_requested": FIELDS,
+    "field_mapping_correction": {"total_revenue": "revenue", "operating_cash_flow": "operating_cashflow"},
+    "price_note": "Snapshot lacks direct price field under tested name; derived price is diagnostic only.",
     "records": [],
 }
 try:
@@ -46,13 +48,20 @@ try:
                        "missing" if row.get(name) is None else "available")
                 for name in names
             }
+        derived_price = None
+        if row is not None and isinstance(row.get("market_cap"), (int, float)) and isinstance(row.get("shares_outstanding"), (int, float)) and row["shares_outstanding"] > 0:
+            derived_price = row["market_cap"] / row["shares_outstanding"]
         result["records"].append({
             "symbol": symbol,
             "in_snapshot": row is not None,
             "period": row.get("period") if row else None,
+            "price_asof": row.get("price_asof") if row else None,
+            "provider": row.get("provider") if row else None,
+            "price_derived_from_cap_and_shares_unverified": derived_price,
             "field_status": fielddata,
         })
     result["status"] = "complete"
+    result["by_field"] = {section: {name: {"available": sum(r["field_status"][section][name] == "available" for r in result["records"]), "count": len(SYMBOLS)} for name in names} for section, names in FIELDS.items()}
     result["count_in_snapshot"] = sum(r["in_snapshot"] for r in result["records"])
     result["field_count_available"] = sum(
         status == "available"
@@ -65,6 +74,6 @@ except Exception as exc:
     result["error"] = str(exc)[:1500]
 finally:
     (OUT / "coverage.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(json.dumps({k: result[k] for k in ("status", "symbols")}, ensure_ascii=False))
+    print(json.dumps({k: result[k] for k in ("status", "symbols", "count_in_snapshot", "field_count_available") if k in result}, ensure_ascii=False))
     if result["status"] != "complete":
         raise SystemExit(1)
