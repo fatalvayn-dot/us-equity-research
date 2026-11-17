@@ -18,8 +18,8 @@ FIELDS = {
     "operating_cashflow": "Faaliyetlerden nakit akışı",
     "capital_expenditure": "Maddi duran varlık alım ödemeleri",
 }
-ARTICLE = re.compile(r"<article\\b[^>]*>\\s*<h2>([A-Z0-9.]+)\\s*<small.*?</article>", re.S)
-ROW = re.compile(r"<tr>\\s*<td>(.*?)</td>\\s*<td>(.*?)</td>\\s*<td>", re.S)
+ARTICLE = re.compile(r"<article\b[^>]*>\s*<h2>([A-Z0-9.]+)\s*<small.*?</article>", re.S)
+ROW = re.compile(r"<tr>\s*<td>(.*?)</td>\s*<td>(.*?)</td>\s*<td>", re.S)
 TAGS = re.compile(r"<[^>]*>")
 
 
