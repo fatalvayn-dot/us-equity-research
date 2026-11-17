@@ -1,5 +1,20 @@
 # Development status
 
+## 17 Kasım 2026 — 100 aday karşılaştırma bütçesi için PR (CI bekliyor)
+
+İlk gerçek skor iş akışındaki `--maximum 14` sınırı, mevcut 14 şirketlik
+değerleme inceleme grubuna göre sabitlenmişti. Aday evreni 100 olsa da
+karşılaştırma planlayıcısı daha fazla uygun şirketi alamıyordu. Ayrı dalda
+iş akışı sınırı 100'e çıkarıldı ve 14'ü aşan uygun adaylarla regresyon
+testi eklendi. Var olan SEC kaynak hash'i, tam dönem, SIC/finans dışlama,
+piyasa kanıtı ve 9 finansal alan kapıları **değiştirilmedi**.
+
+Bu değişiklik mevcut 13 puanı artırdığı veya eksik alanları tamamladığı
+anlamına gelmez. PR/CI ve yeni gerçek skor çalışması tamamlanmadan
+100 şirketlik MVP kabul edilmez. Dış Crible değerleri kaynak kanıtı
+yerine geçmez. Sonraki tek iş: başarılı CI sonrası aynı 100 adayın
+kaynaklı yeniden puanlaması ve puansızların nedenlerini raporlama.
+
 ## 17 Kasım 2026 — SWKS mali yıl kanıtı
 
 Başlangıç main `1a58ef3a2d4f2ffaeb0eecab81786d7645570c94` (#122).
