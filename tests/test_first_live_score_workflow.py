@@ -46,11 +46,9 @@ class FirstLiveScoreWorkflowTests(unittest.TestCase):
         self.assertIn("VALUATION_RUN: ${{ steps.select.outputs.valuation_run }}", self.text)
         self.assertIn("FINANCIAL_RUN: ${{ steps.financial.outputs.source_run }}", self.text)
 
-    def test_comparison_cap_covers_reviewed_valuation_cohort(self):
-        reviewed = FILE.parents[2] / "docs/evidence/valuation-priority-candidates-2026-11-09.json"
-        cohort_size = len(json.loads(reviewed.read_text())["companies"])
-        self.assertEqual(cohort_size, 14)
-        self.assertIn(f"--maximum {cohort_size}\n", self.text)
+    def test_comparison_cap_covers_full_hundred_candidate_universe(self):
+        self.assertIn("--maximum 100\n", self.text)
+        self.assertNotIn("--maximum 14\n", self.text)
 
     def test_source_gap_trace_runs_only_after_successful_official_score(self):
         self.assertIn("name: Skor engellerini özgün değerleme kaynaklarına bağla",self.text)
