@@ -6,7 +6,7 @@ import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
-SYMBOLS = ["BAC", "AMAT", "PGR", "APH", "AMGN", "WELL", "SPGI", "TMO", "SCHW", "AAPL"]
+SYMBOLS = ["NVDA","AAPL","MSFT","GOOGL","AMZN","AVGO","META","TSLA","LLY","MU","WMT","AMD","JPM","JNJ","MA","ABBV","INTC","PLTR","CVX","COST","CSCO","ORCL","KO","PG","UNH","MRK","BAC","AMAT","HD","PM","GE","LRCX","PANW","DELL","MS","CAT","TXN","RY","GS","RTX","CRWD","TMO","NFLX","AMGN","GEV","ANET","LIN","KLAC","AXP","ADI","GILD","APH","QCOM","SNDK","MRVL","CRM","PEP","BLK","MCD","ABT","COP","UNP","DE","NEE","WELL","PFE","DHR","ACN","SCCO","STX","TMUS","ISRG","TJX","SCHW","ETN","LMT","WDC","CB","VRTX","BA","UBER","PGR","SPGI","ADBE","INTU","NOW","SNPS","CDNS","FTNT","WDAY","ADSK","ROP","MCHP","MPWR","ON","SWKS","NTAP","AKAM","FFIV","TYL"]
 FIELDS = {
     "financial": ["revenue", "net_income", "total_assets", "total_liabilities", "operating_cashflow", "capital_expenditure", "total_debt"],
     "market": ["price", "market_cap", "shares_outstanding", "price_to_earnings_ratio", "price_to_book_ratio"],
