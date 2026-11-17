@@ -1,5 +1,29 @@
 # Development status
 
+## 17 Kasım 2026 — SWKS mali yıl kanıtı
+
+Başlangıç main `1a58ef3a2d4f2ffaeb0eecab81786d7645570c94` (#122).
+Son Foundation `44064150138` başarılı. Açık Crible #121 ve
+sağlayıcı/değerleme PR'ları bu SEC araştırmasıyla çakışmadı.
+
+SWKS CIK `0000004127`, 10-K accession `0000004127-26-000055`.
+SEC kabulü 10 Kasım 21.17.18 UTC. Özgün iXBRL ve CompanyFacts,
+aynı accession, USD ve bağlamda 2025-10-04–2026-10-02 ve
+2024-09-28–2025-10-03 dönemlerinde 12/14 alanı birebir doğruladı.
+İki dönem sırasıyla 52 ve 53 hafta. `ProfitLoss` ve
+`PaymentsToAcquireProductiveAssets` iki dönemin de tam bağlamında
+yok. `NetIncomeLoss` ve maddi duran varlık alım ödemeleri ayrı
+kavramlardır. Hasılat %3,11, faaliyet nakit akışı %57,73 azaldı.
+Hafta farkı nedeniyle bunlar bildirilen yıllık tutarların ham
+karşılaştırmasıdır. Yerel karşılaştırma planı kabulü ve tam
+etiket eşleştirmesi geçti. Üretim arşivi ve skorlar değişmedi.
+
+Sonraki öncelik SWKS için kaynak sırası korunarak tek adaylı
+aday veri paketi oluşturmak ve tamamlama öncesi puan girdileriyle
+uyumunu doğrulamak. Katılım uygunluğu ve kota ölçümü mevcut değil.
+
+[Özgün SEC belgesi](https://www.sec.gov/Archives/edgar/data/4127/000000412726000055/swks-20261002.htm)
+
 ## 16 Kasım 2026 — SEC bildirimleri ve finansal yenileme kapsamı
 
 Başlangıç main `17e13de418a052fd673db530c8b6c574e6ce5535`.
