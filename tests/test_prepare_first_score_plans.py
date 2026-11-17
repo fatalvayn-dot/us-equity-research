@@ -132,6 +132,34 @@ class FirstScorePlansTests(unittest.TestCase):
             "market_or_original_share_evidence_incomplete": 1,
         })
 
+    def test_full_budget_includes_eligible_companies_beyond_old_fourteen(self):
+        batch, meta, valuation = ({"companies": []} for _ in range(3))
+        symbols = ["BASE", *[f"P{index}" for index in range(14)], "EXTRA"]
+        valuation["priority_symbols"] = symbols[1:-1]
+        assessment = []
+        for index, symbol in enumerate(symbols):
+            identity = dict(issuer_id=f"{index + 1:010}", symbol=symbol)
+            for target, original in ((batch, self.batch), (meta, self.meta),
+                                     (valuation, self.valuation)):
+                target["companies"].append(deepcopy(original["companies"][0]) | identity)
+            assessment.append(identity | {
+                "financial_assessment": {"quantitative_gate": "no_screen_trigger"},
+            })
+        periods = (dict(start="2025-01-01", end="2025-12-31", accn="current"),
+                   dict(start="2024-01-01", end="2024-12-31", accn="current"))
+        with (patch("scripts.prepare_first_score_plans.build_report",
+                    return_value={"companies": assessment}),
+              patch("scripts.prepare_first_score_plans.revenue_periods",
+                    return_value=(periods, None))):
+            current, prior, report = plans(batch, meta, valuation, self.root, maximum=100)
+        self.assertEqual(report["evaluated"], len(symbols))
+        self.assertEqual(report["selected"], len(symbols))
+        self.assertEqual(set(report["selected_symbols"]), set(symbols))
+        self.assertEqual(len(current["companies"]), len(symbols))
+        self.assertEqual(len(prior["companies"]), len(symbols))
+        self.assertNotIn("candidate_budget_exceeded", report["excluded_reasons"])
+        self.assertFalse(report["mvp_accepted"])
+
     def test_unsupported_sector_is_not_scored(self):
         self.meta["companies"][0]["snapshot"]["sic_label"]="6021"
         _,_,report=self.runplan()
