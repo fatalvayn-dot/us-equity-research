@@ -126,7 +126,7 @@ jobs:
             --current-plan data/first-score-work/current-plan.json \
             --prior-plan data/first-score-work/prior-plan.json \
             --report data/first-score-work/selection.json \
-            --maximum 14
+            --maximum 100
 
       - name: Güncel yıl gelirini kaynak sırasıyla topla
         if: steps.plan.outputs.has_candidates == 'true'
