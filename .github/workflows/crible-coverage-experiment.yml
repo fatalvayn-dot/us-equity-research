@@ -1,4 +1,4 @@
-name: Crible 10-stock coverage experiment
+name: Crible 100-stock coverage experiment
 on:
   workflow_dispatch:
   pull_request:
@@ -20,7 +20,7 @@ jobs:
         run: |
           python -m venv .crible-venv
           .crible-venv/bin/python -m pip install --disable-pip-version-check 'git+https://github.com/maxgfr/crible.git'
-      - name: Check 10-stock published data availability
+      - name: Check 100-stock published data availability
         env:
           CRIBLE_COMMAND: .crible-venv/bin/crible
         run: python scripts/experiment_crible_coverage.py
@@ -28,7 +28,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: crible-ten-stock-coverage
+          name: crible-hundred-stock-coverage
           path: |
             crible_coverage/coverage.json
             crible_coverage/bootstrap_stdout.txt
