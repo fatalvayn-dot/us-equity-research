@@ -7,6 +7,7 @@
 - Gerekli çalışma durumlarında isteğe bağlı `max_pages` ve `max_records` kontrolleri açıkça seçilebilir; varsayılanlar toplam şirket limitine dönüşmez.
 - SEC/yahoo/diğer sağlayıcıların hız, erişim ve lisans kuralları; canlı çalışmadaki 501 dış GET bütçesi, tek çalışma kilidi ve devam kontrolü değişmedi.
 - `common-sample` için `--sample-size 100` varsayılanı ve 100 şirketin kabul raporu **ayrı bir kalite sınavıdır**, küresel arama tavanı değildir. Büyük hedef sayı desteklenir, yeterli veri yoksa kabul edilmez.
+- Skor dönem planlayıcısının `--maximum 100` otomatik sınırı kaldırıldı. İstenirse `--maximum N` yalnız açıkça sınırlandırılmış deneylerde kullanılabilir. `first-live-score` artık otomatik bir seçme sayısı üst sınırı geçirmez; giriş arşivindeki şirketlerden verisi uygun olanların hepsi değerlendirilir.
 - Gerçek yıllık finansal veri, katılım uygunluğu, piyasa fiyatı ve nihai puanlama her şirket için ayrıca doğrulanmalıdır. Keşfedilmiş şirket, puanlanmış şirket değildir.
 - Ana dalda yeni keşif başlatılması veya mevcut 100 puanlama koşusunun başarı sayısı bu kod değişikliğiyle kendiliğinden artmaz.
 
