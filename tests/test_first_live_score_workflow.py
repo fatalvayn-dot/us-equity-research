@@ -46,9 +46,9 @@ class FirstLiveScoreWorkflowTests(unittest.TestCase):
         self.assertIn("VALUATION_RUN: ${{ steps.select.outputs.valuation_run }}", self.text)
         self.assertIn("FINANCIAL_RUN: ${{ steps.financial.outputs.source_run }}", self.text)
 
-    def test_comparison_cap_covers_full_hundred_candidate_universe(self):
-        self.assertIn("--maximum 100\n", self.text)
-        self.assertNotIn("--maximum 14\n", self.text)
+    def test_comparison_plan_does_not_cap_eligible_companies(self):
+        self.assertNotIn("--maximum ", self.text)
+        self.assertIn("--report data/first-score-work/selection.json", self.text)
 
     def test_source_gap_trace_runs_only_after_successful_official_score(self):
         self.assertIn("name: Skor engellerini özgün değerleme kaynaklarına bağla",self.text)
