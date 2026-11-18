@@ -10,7 +10,7 @@ from .companyfacts import SecCompanyFacts, companyfacts_url, FORMS
 from .concept_diagnostics import Inventory
 from .filing_metadata import filing_security_metadata
 from .models import Fact, FactRequest, aware
-from .prices import PriceFailure, parse_price, price_url
+from .prices import PriceFailure, parse_price, price_url, PRICE_TTL
 from .providers import ProviderFailure, Status
 from .sec import DIRECTORY_URL
 from .submissions import parse_submissions, submissions_url
@@ -270,7 +270,7 @@ def verify_share_class(shares, metadata, filing, *, symbol, as_of):
 
 
 def indicative_valuation(*, price_response, identity, companyfacts, metadata, filing,
-                         financial_company, as_of, diagnostics=None):
+                         financial_company, as_of, diagnostics=None, market_ttl=PRICE_TTL):
     """Price times *dated* disclosed shares. No corporate-action adjustment guessed.
 
     The resulting indication cannot feed scores until capital changes and the
@@ -291,7 +291,7 @@ def indicative_valuation(*, price_response, identity, companyfacts, metadata, fi
     financial_company=build_report(normalized)['companies'][0]
     cik=financial_company['issuer_id'];symbol=financial_company['symbol']
     stage('price')
-    price=parse_price(price_response,identity,cik=cik,symbol=symbol,as_of=as_of)
+    price=parse_price(price_response,identity,cik=cik,symbol=symbol,as_of=as_of,price_ttl=market_ttl)
     if price is None:raise ProviderFailure(Status.MISSING)
     stage('disclosed_shares')
     shares=disclosed_shares(companyfacts,cik=cik,as_of=as_of)
@@ -361,7 +361,7 @@ def indicative_valuation(*, price_response, identity, companyfacts, metadata, fi
                      'ocf_less_ppe_payments_not_complete_owner_earnings'])
 
 
-def build_valuation_report(batch, responses, *, as_of):
+def build_valuation_report(batch, responses, *, as_of, market_ttl=PRICE_TTL):
     from .reporting import build_report
     if not aware(as_of):raise ValueError('aware cutoff required')
     financial=build_report(batch)
@@ -398,7 +398,7 @@ def build_valuation_report(batch, responses, *, as_of):
                 row['failed_validation_stage']=diagnostics['validation_stage'];companies.append(row);continue
             row['source_observations'].append(dict(url=candidates[0].url,raw_sha256=candidates[0].sha256,retrieved_at=candidates[0].retrieved_at.isoformat()))
             row['valuation']=indicative_valuation(price_response=latest[price_url(symbol)],identity=latest[DIRECTORY_URL],
-                companyfacts=cf,metadata=meta,filing=candidates[0],financial_company=company,as_of=as_of,diagnostics=diagnostics)
+                companyfacts=cf,metadata=meta,filing=candidates[0],financial_company=company,as_of=as_of,diagnostics=diagnostics,market_ttl=market_ttl)
             row['status']='indicative_arithmetic_only'
         except ProviderFailure as exc:
             row.update(status='source_contract_rejected',provider_status=exc.status.value,failed_validation_stage=diagnostics['validation_stage'])

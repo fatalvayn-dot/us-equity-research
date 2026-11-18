@@ -1,7 +1,7 @@
 """Explainable, limited-sector research hypotheses, not investment approval."""
 from .turkish import label, calculation_label
 from dataclasses import asdict
-from datetime import date,datetime
+from datetime import date,datetime,timedelta
 from decimal import Decimal,localcontext
 
 from .cache import encode
@@ -12,6 +12,7 @@ from .filingcheck import filing_derived_liabilities
 from .market_history import parse_history,history_url
 from .models import Fact,FactRequest,aware
 from .policy import SCORE_WEIGHTS
+from .prices import PRICE_TTL
 from .score_inputs import score_input_provenance
 from .reporting import build_report
 from .sec import DIRECTORY_URL
@@ -24,7 +25,11 @@ from .legal_evidence import registered_legal_contraindications as _legal_contrai
 from .sector_models import MODELS, PROFIT_BANDS
 
 MODEL_VERSION='technology-research-v1'
-ACTIVE_MODEL_VERSION='operating-sector-research-v1'
+OPERATING_MODEL_V1='operating-sector-research-v1'
+ACTIVE_MODEL_VERSION='operating-sector-research-batch-v2'
+# Batch artifacts are verified and transferred before scoring. This research
+# policy allows that processing delay; live collectors keep their 15-minute TTL.
+BATCH_MARKET_TTL=timedelta(hours=1)
 LEGACY_MODELS={'3571':'electronic_computers_v1','3674':'semiconductors_v1',
                '7372':'prepackaged_software_v1'}
 REQUIRED=('assets','liabilities','current_assets','current_liabilities','net_income',
@@ -74,7 +79,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
     verified inputs; critical review cannot be offset by any component points.
     """
     if not aware(as_of):raise ValueError('aware scoring cutoff required')
-    if model_version not in (MODEL_VERSION, ACTIVE_MODEL_VERSION):
+    if model_version not in (MODEL_VERSION, OPERATING_MODEL_V1, ACTIVE_MODEL_VERSION):
         raise ValueError('unsupported model version')
     model_registry=LEGACY_MODELS if model_version==MODEL_VERSION else MODELS
     sources = {}
@@ -95,7 +100,8 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
             raise ValueError('future comparison')
         comparative = {c['issuer_id']: c for c in comparison['companies']}
     provenance=score_input_provenance(batch,current_comparison,prior_comparison,as_of=as_of)
-    valuations=build_valuation_report(batch,sources.values(),as_of=as_of)
+    market_ttl=BATCH_MARKET_TTL if model_version==ACTIVE_MODEL_VERSION else PRICE_TTL
+    valuations=build_valuation_report(batch,sources.values(),as_of=as_of,market_ttl=market_ttl)
     by_valuation={c['issuer_id']:c for c in valuations['companies']}
     companies=[]
     for company in financial['companies']:
@@ -193,7 +199,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
             if history is None:row['blockers']=['market_history_required'];continue
             validation_stage='market_history'
             market=parse_history(history,sources[DIRECTORY_URL],cik=cik,symbol=symbol,
-                share_date=shares['disclosed_on'],price_market_at=price['market_at'],as_of=as_of)
+                share_date=shares['disclosed_on'],price_market_at=price['market_at'],as_of=as_of,market_ttl=market_ttl)
             row['market_risk']=market
             if market['split_window_status']!='no_split_record_in_returned_window':
                 row['blockers']=['split_since_disclosed_count_requires_review'];continue
@@ -257,7 +263,10 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
     ranking=[]
     for i,c in enumerate(ordered,1):
         c['rank']=i;ranking.append(dict(rank=i,symbol=c['symbol'],issuer_id=c['issuer_id'],score=c['total_score'],model_id=c['model_id']))
-    return dict(schema_version=1,model_version=model_version,as_of=as_of,score_weights=dict(SCORE_WEIGHTS),
+    market_policy={} if model_version!=ACTIVE_MODEL_VERSION else dict(market_evidence_policy=dict(
+        mode='dated_batch_research',maximum_response_age_seconds=int(market_ttl.total_seconds()),
+        live_price_ttl_seconds=int(PRICE_TTL.total_seconds()),live_price_service=False))
+    return dict(**market_policy,schema_version=1,model_version=model_version,as_of=as_of,score_weights=dict(SCORE_WEIGHTS),
         companies=companies,ranking=ranking,input_provenance=provenance,summary=dict(candidates=len(companies),scored_companies=len(ranking),
             critical_review=sum(c['status']=='critical_review_required' for c in companies),unscored=len(companies)-len(ranking)),
         mvp_accepted=False,hundred_active_common_shares_accepted=False,new_network_requests=0,
@@ -273,6 +282,8 @@ def render_score_markdown(report):
         '| Sıra | Sembol | Puan / 100 | Model |','| ---: | --- | ---: | --- |']
     if report.get('input_provenance'):
         lines[4:4]=['Finansal ve karşılaştırma girdilerinin özgün kaynak tarihleri korunmuştur. Bu raporun üretilmesi 100 şirketin tüm finansal girdilerinin güncellendiği anlamına gelmez.', '']
+    if report.get('market_evidence_policy'):
+        lines[4:4]=['Toplu araştırma puanı: fiyat ve piyasa geçmişi yanıtları en fazla 60 dakika önce alınmış olabilir. Özgün fiyat ve erişim tarihleri korunur; canlı fiyat hizmeti değildir.', '']
         for name, source in report['input_provenance']['batches'].items():
             lines[4:4]=[cell(name)+': üretim zamanı '+cell(source['generated_at'])+'; seçili gözlemler '+cell(source['oldest_selected_observation'])+' ile '+cell(source['newest_selected_observation'])+'; SHA-256 '+cell(source['sha256'])+'.', '']
     for c in report['ranking']:lines.append('| '+' | '.join(cell(c[k]) for k in ('rank','symbol','score','model_id'))+' |')

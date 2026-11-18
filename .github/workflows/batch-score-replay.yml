@@ -1,0 +1,111 @@
+name: Toplu puan gecikmesi gerçek kaynak denemesi
+
+on:
+  pull_request:
+    paths:
+      - 'src/equity_research/scoring.py'
+      - 'src/equity_research/valuation.py'
+      - 'src/equity_research/market_history.py'
+      - '.github/workflows/batch-score-replay.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  replay:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: first-live-score-evidence
+          path: data/recorded-score
+          github-token: ${{ github.token }}
+          run-id: 44369799600
+      - uses: actions/download-artifact@v4
+        with:
+          name: valuation-source-state
+          path: data/valuation
+          github-token: ${{ github.token }}
+          run-id: 44366041370
+      - uses: actions/download-artifact@v4
+        with:
+          name: live-acceptance-state
+          path: data/financial
+          github-token: ${{ github.token }}
+          run-id: 42455760184
+      - uses: actions/download-artifact@v4
+        with:
+          name: live-acceptance-evidence
+          path: data/financial-evidence
+          github-token: ${{ github.token }}
+          run-id: 42455760184
+      - name: Özgün girdileri makbuzla eşleştir
+        run: |
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          root=Path('data')
+          proof=json.loads((root/'recorded-score/run-provenance.json').read_text())
+          assert proof['score_run_id']==44369799600
+          assert proof['valuation_run_id']==44366041370
+          assert proof['financial_run_id']==42455760184
+          paths={'valuation_report':'valuation/report.json',
+            'valuation_source_manifest':'valuation/source-bundle/manifest.json',
+            'financial_batch':'financial/batch.json',
+            'financial_source_manifest':'financial-evidence/live-sources/manifest.json',
+            'current_comparison':'recorded-score/current.json',
+            'prior_comparison':'recorded-score/prior.json',
+            'score_manifest':'recorded-score/output/manifest.json'}
+          for name,path in paths.items():
+              assert hashlib.sha256((root/path).read_bytes()).hexdigest()==proof['sha256'][name],name
+          PY
+      - name: Aynı tarihli 100 adayı yeni toplu modelle yeniden hesapla
+        env:
+          PYTHONPATH: src
+        run: |
+          AS_OF=$(python -c "import json,gzip; print(json.loads(gzip.decompress(open('data/recorded-score/output/report.json.gz','rb').read()))['as_of'])")
+          python scripts/build_current_scores.py \
+            --financial data/financial/batch.json \
+            --current data/recorded-score/current.json \
+            --prior data/recorded-score/prior.json \
+            --sources data/valuation/source-bundle \
+            --financial-sources data/financial-evidence/live-sources \
+            --output data/batch-replay --as-of "$AS_OF"
+      - name: Sonucu eski çalışma ile karşılaştır
+        run: |
+          python - <<'PY'
+          import gzip,json,os
+          from pathlib import Path
+          def read(path):return json.loads(gzip.decompress(Path(path).read_bytes()))
+          before=read('data/recorded-score/output/report.json.gz')
+          after=read('data/batch-replay/report.json.gz')
+          assert after['as_of']==before['as_of']
+          assert after['summary']['candidates']==before['summary']['candidates']==100
+          assert after['summary']['scored_companies']>before['summary']['scored_companies']
+          assert not after['mvp_accepted']
+          assert all(not row['investment_approved'] for row in after['companies'])
+          audit=dict(mode='recorded_source_replay_not_live_refresh',
+              score_run_id=44369799600,valuation_run_id=44366041370,
+              before=before['summary'],after=after['summary'],ranking=after['ranking'])
+          Path('data/batch-replay/comparison.json').write_text(json.dumps(audit,indent=2))
+          print(json.dumps(audit))
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as out:
+              out.write('## Gerçek kaynaklarla tarihli yeniden hesaplama\n\n')
+              out.write(f"Önce: {before['summary']['scored_companies']} puan; sonra: {after['summary']['scored_companies']} puan.\n\n")
+              out.write('Yeni veri toplaması veya 100 şirketlik MVP kabulü değildir.\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: batch-market-freshness-replay
+          path: data/batch-replay
+          if-no-files-found: warn
+          retention-days: 14

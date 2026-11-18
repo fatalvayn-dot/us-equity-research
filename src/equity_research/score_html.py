@@ -42,6 +42,9 @@ Bu, gerçek hisse sayısı veya istatistiksel güven aralığı değildir. Böl�
 <p>Nitel riskler, yönetim ve tüm sermaye değişiklikleri onaylanmış değildir. Yatırım onayı: verilmedi.</p></details></article>''')
     summary=report['summary']
     provenance=''
+    market_policy=''
+    if report.get('market_evidence_policy'):
+        market_policy='<p class="notice">Toplu araştırma puanı: fiyat ve piyasa geçmişi yanıtları en fazla 60 dakika önce alınmış olabilir. Özgün fiyat ve erişim tarihleri korunur; canlı fiyat hizmeti değildir.</p>'
     if report.get('input_provenance'):
         dates=''.join('<li>'+e(name)+': '+e(s['oldest_selected_observation'])+' / '+e(s['newest_selected_observation'])+'<small>SHA-256 '+e(s['sha256'])+'</small></li>' for name,s in report['input_provenance']['batches'].items())
         provenance='<p class="notice">Finansal ve karşılaştırma girdilerinin kaynak tarihleri korunmuştur. Raporun üretilmesi bütün 100 şirketin finansal verilerinin yeniden toplandığı anlamına gelmez.</p><ul>'+dates+'</ul>'
@@ -56,7 +59,7 @@ table{{border-collapse:collapse;width:100%;margin:12px 0}}td,th{{text-align:left
 summary{{cursor:pointer;font-weight:600}}label{{display:inline-block;margin:10px 16px 10px 0}}input,select{{padding:7px;font:inherit;max-width:100%}}
 [hidden]{{display:none!important}}a{{color:#075b9e}}
 </style></head><body><header><h1>ABD Hisse Araştırması</h1><p>Araştırma puanlama prototipi · Kaynak verilerinin kesim zamanı: {e(report['as_of'])}</p>
-{provenance}<p>{summary['candidates']} aday · {summary['scored_companies']} araştırma puanı · {summary['unscored']} puansız · {summary['critical_review']} kritik inceleme</p>
+{provenance}{market_policy}<p>{summary['candidates']} aday · {summary['scored_companies']} araştırma puanı · {summary['unscored']} puansız · {summary['critical_review']} kritik inceleme</p>
 <p class="notice">100 aktif adi hisselik MVP henüz kabul edilmedi. Puanlar sınırlı sektör modelinin başlangıç hipotezidir;
 getiri başarısı, alım önerisi veya yatırım onayı değildir. Kayıtlı veriler canlı fiyat hizmeti olarak sunulmaz.</p>
 <h2>Puanlanabilen örnek şirketler</h2><div class="scroll"><table><thead><tr><th>Sıra</th><th>Sembol</th><th>Puan / 100</th><th>Model</th></tr></thead><tbody>{ranked}</tbody></table></div>
