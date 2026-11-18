@@ -24,7 +24,7 @@ Bu tarihli yeniden hesaplamadır; yeni finansal veri veya canlı fiyat yenilemes
 Kalan 80: 35 değerleme kanıtı, 29 tam finansal inceleme/eksik alan,
 11 kalıcı finans sektörü dışlaması, 2 kritik finansal inceleme,
 2 desteklenmeyen sektör ve 1 son yıllık dönem teyidi. 35 değerleme
-engelinin 21'inde eski yanıt süresi hâlâ aşılmıştır; yeni kaynak toplama
+engelinin 20'sinde eski yanıt süresi hâlâ aşılmıştır; yeni kaynak toplama
 bütçesinin kapsaması ayrıca çözülmelidir. 29 finansal engelin önemli
 bölümünde eksik yükümlülük etiketi vardır. Banka/sigorta adayları kabul
 hedefine sayılmaz. Tam MVP kabulü açık.
