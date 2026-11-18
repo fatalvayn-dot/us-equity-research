@@ -43,8 +43,8 @@ def save_text(path, content):
 
 def validate_candidates(payload):
     rows=payload['companies']
-    if not isinstance(rows,list) or not 1<=len(rows)<=100:
-        raise ValueError('MVP requires 1..100 explicit candidates')
+    if not isinstance(rows, list) or not rows:
+        raise ValueError('nonempty explicit candidate list required')
     symbols=set();ciks=set()
     for row in rows:
         cik=row['issuer_id'];symbol=row['symbol']
