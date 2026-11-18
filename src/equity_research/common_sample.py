@@ -54,8 +54,8 @@ def strict_cover(response):
 
 def verify_common_sample(payload,responses,*,as_of,target=100):
     rows=candidate_pool(payload)
-    if not aware(as_of) or type(target) is not int or not 1 <= target <= len(rows):
-        raise ValueError('aware cutoff and target within available candidates required')
+    if not aware(as_of) or type(target) is not int or target < 1:
+        raise ValueError('aware cutoff and positive target required')
     sources={}
     for r in responses:
         if '/api/xbrl/companyfacts/' in r.url or 'finance.yahoo.com/' in r.url:continue
