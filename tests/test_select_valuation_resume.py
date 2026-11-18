@@ -4,7 +4,8 @@ import unittest
 from unittest.mock import patch
 
 from scripts.select_valuation_resume import (
-    AUDITED_RUN, COLLECTION_STEP, REVIEWED_STARTUP_FAILURE, main_runs, select,
+    AUDITED_RUN, COLLECTION_STEP, REVIEWED_STARTUP_FAILURE, REVIEWED_PUBLISHED_RERUN,
+    main_runs, select,
 )
 
 
@@ -151,3 +152,32 @@ class ValuationResumeSelectionTests(unittest.TestCase):
         with patch.dict(os.environ, {"GITHUB_RUN_ATTEMPT": "2"}):
             with self.assertRaisesRegex(ValueError, "yeniden denenemez"):
                 runpy.run_path("scripts/select_valuation_resume.py", run_name="__main__")
+
+    def test_reviewed_published_state_survives_rejected_retry(self):
+        run_id, head, artifact_id, digest = REVIEWED_PUBLISHED_RERUN
+        offset = run_id - AUDITED_RUN
+        failed = run(offset, conclusion="failure") | dict(head_sha=head, run_attempt=2)
+        state = artifact(id=artifact_id, digest=digest, created_at="2026-11-18T04:43:47Z")
+        self.artifacts(offset, state)
+        self.responses[f"actions/runs/{run_id}/attempts/1"] = failed | dict(
+            run_attempt=1, conclusion="success")
+        path = f"actions/runs/{run_id}/jobs?filter=all&per_page=100"
+        original = dict(run_attempt=1, conclusion="success",
+                        started_at="2026-11-18T04:30:35Z", completed_at="2026-11-18T04:44:00Z",
+                        steps=[dict(name=name, conclusion="success") for name in (
+                            COLLECTION_STEP, "Yeni değerleme durumunu ve kaynak devamlılığını doğrula",
+                            "Değerleme kanıtını ve devam durumunu koru")])
+        retry = dict(run_attempt=2, status="completed", conclusion="failure",
+                     started_at="2026-11-18T09:44:00Z",
+                     steps=[dict(name=COLLECTION_STEP, conclusion="skipped")])
+        self.responses[path] = dict(total_count=2, jobs=[original, retry])
+        self.assertEqual(select([failed], run_id + 1, fetch=self.fetch), run_id)
+        for changes in (dict(digest="wrong"), dict(created_at="2026-11-18T10:00:00Z")):
+            with self.subTest(changes=changes):
+                self.artifacts(offset, state | changes)
+                with self.assertRaises(ValueError):
+                    select([failed], run_id + 1, fetch=self.fetch)
+        self.artifacts(offset, state)
+        retry["steps"][0]["conclusion"] = "success"
+        with self.assertRaises(ValueError):
+            select([failed], run_id + 1, fetch=self.fetch)

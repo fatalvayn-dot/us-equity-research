@@ -1,5 +1,28 @@
 # Development status
 
+## 18 Kasım 2026 — Değerleme devamını başarısız yeniden denemeden kurtarma
+
+Main `ee31816b7043d87d170a8db117b5bb85af313bdc` (#125).
+Son skor `44239340024`, 18 Kasım 04.45 UTC kesiminde 0 puan,
+100 puansız: 85 değerleme, 11 kalıcı finans sektörü dışlaması,
+2 kritik finans incelemesi ve 2 sektör modeli engeli. Finansal kaynak
+`42455760184`. ZIP ve rapor dosya özetleri doğrulandı.
+
+`44237805936` deneme 1 başarılı, toplama, kaynak devamlılığı
+ve artifact yayını geçti. Deneme 2 mevcut yeniden-deneme korumasında
+toplama başlamadan durdu ve run sonucunu başarısıza çevirdi.
+`44281295470` bu nedenle devam paketini reddetti. Düzeltme yalnız
+incelenen run/commit/artifact/digest bileşimini, ilk denemenin
+başarısını, tam iş listesini ve sonraki denemede toplamanın atlandığını
+doğrular. Aynı yeni toplayıcıyı tekrar çalıştırma koruması sürer.
+
+Gerçek GitHub metadata'sıyla ağsız seçici entegrasyonu son paketi
+`44237805936` olarak seçti. Büyük değerleme ZIP'i 512 MiB indirme
+aracı sınırına takıldı. Bu oturumda SQLite/source gövdeleri tekrar
+doğrulanamadı. Normal Actions indirmesinden sonraki bütünlük adımı
+çalışmadan yeni üretim kabulü verilmez. 68 Crible adayı için mevcut
+finansal arşiv ve depo kaynakları ayrı denetim kuyruğuna alındı.
+
 ## 17 Kasım 2026 — 100 aday karşılaştırma bütçesi için PR (CI bekliyor)
 
 İlk gerçek skor iş akışındaki `--maximum 14` sınırı, mevcut 14 şirketlik
