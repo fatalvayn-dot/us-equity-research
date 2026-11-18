@@ -1,5 +1,39 @@
 # Development status
 
+## 18 Kasım 2026 — Toplu puanlamada fiyat kanıtının aktarımda eskimesi
+
+Son gerçek skor `44369799600`, değerleme `44366041370` ve finansal
+`42455760184` kayıtları incelendi. Skor ZIP SHA-256 değeri Actions
+makbuzuyla eşleşti. 77 adayda değerleme fiyat aşaması `stale_response`:
+AAPL yanıtı 18.13.03 UTC, puan kesimi 18.32.03 UTC. Canlı toplayıcının
+15 dakikalık yanıt önbelleği, toplu araştırma raporu için de kullanılıyordu.
+
+Yeni `operating-sector-research-batch-v2`, fiyat ve piyasa geçmişi için
+60 dakikalık açık yanıt yaşı politikası kullanır. Canlı toplayıcı ve
+eski iki model 15 dakikada kalır. Özgün fiyat/erişim tarihleri ve hash'ler,
+4 günlük seans fiyatı yaşı, şirket/döviz/sektör/finansal kontroller korunur.
+HTML, Markdown ve JSON bu toplu araştırma politikasını açıkça gösterir.
+
+914/914 yerel test ve kesin kod head `a742e71233752881b52e5bfe90f67df3797e2b8e`
+için CI `44387951579` üç Python sürümünde geçti. İlk tam testte görülen
+Markdown kaynak tarihi gösterim hatası düzeltildi. PR #127 gerçek kaynak
+denemesi `44387418509`, aynı 18 Kasım 18.32 UTC kesiminde 100 adayı
+sıfırdan 20 puana çıkardı. Girdi makbuzları ve kaynak paketi özetleri eşleşti.
+Bu tarihli yeniden hesaplamadır; yeni finansal veri veya canlı fiyat yenilemesi değildir.
+
+Kalan 80: 35 değerleme kanıtı, 29 tam finansal inceleme/eksik alan,
+11 kalıcı finans sektörü dışlaması, 2 kritik finansal inceleme,
+2 desteklenmeyen sektör ve 1 son yıllık dönem teyidi. 35 değerleme
+engelinin 20'sinde eski yanıt süresi hâlâ aşılmıştır; yeni kaynak toplama
+bütçesinin kapsaması ayrıca çözülmelidir. 29 finansal engelin önemli
+bölümünde eksik yükümlülük etiketi vardır. Banka/sigorta adayları kabul
+hedefine sayılmaz. Tam MVP kabulü açık.
+
+Kanıt: `docs/evidence/batch-market-freshness-2026-11-18.json`.
+Sonraki öncelik: 35 değerleme adayının eksik/eski kaynaklarını tamamlamak;
+ardından 29 finansal eksik için özgün yıllık belgedeki kesin kavramları işlemek.
+
+
 ## 18 Kasım 2026 — Değerleme devamını başarısız yeniden denemeden kurtarma
 
 Main `ee31816b7043d87d170a8db117b5bb85af313bdc` (#125).

@@ -31,6 +31,8 @@ LABELS = {
     'semiconductors_v1': 'Yarı iletkenler (v1)', 'prepackaged_software_v1': 'Hazır yazılım (v1)',
     'electronic_computers_v1': 'Bilgisayar üretimi (v1)',
     'technology-research-v1': 'Teknoloji araştırması (v1)',
+    'operating-sector-research-v1': 'Faaliyet sektörleri araştırması (v1)',
+    'operating-sector-research-batch-v2': 'Faaliyet sektörleri toplu araştırması (v2)',
     'valid': 'Geçerli', 'missing': 'Kaynakta bulunamadı', 'unavailable': 'Mevcut değil',
     'not_started': 'Henüz denenmedi', 'not attempted': 'Henüz denenmedi', 'unresolved': 'Çözümlenmedi',
     'unknown': 'Bilinmiyor', 'instant': 'Bilanço tarihi', 'currency': 'Para tutarı', 'ratio': 'Oran',

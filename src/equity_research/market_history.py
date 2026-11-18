@@ -13,17 +13,17 @@ def history_url(symbol):
     return price_url(symbol).split('?')[0]+'?interval=1d&range=1y&events=div%2Csplits'
 
 
-def parse_history(response,identity,*,cik,symbol,share_date,price_market_at,as_of):
+def parse_history(response,identity,*,cik,symbol,share_date,price_market_at,as_of,market_ttl=PRICE_TTL):
     """No missing-bar interpolation; exclude the quote's possibly unfinished day.
 
     No split record means only that this returned window contains none. It does
     not establish absence of issuance, repurchases or every capital action.
     """
-    if type(share_date) is not date or not aware(as_of) or not aware(price_market_at):
+    if type(share_date) is not date or not aware(as_of) or not aware(price_market_at) or market_ttl <= timedelta(0):
         raise ValueError('exact share date and aware quote/cutoff required')
     entry=_identity(identity,cik,symbol,as_of,IDENTITY_TTL)
     if (response.url!=history_url(symbol) or not aware(response.retrieved_at)
-            or not timedelta(0)<=as_of-response.retrieved_at<=PRICE_TTL
+            or not timedelta(0)<=as_of-response.retrieved_at<=market_ttl
             or response.retrieved_at<price_market_at or share_date>price_market_at.date()):
         raise ProviderFailure(Status.INVALID_DATA)
     payload=strict_json(response.body)
