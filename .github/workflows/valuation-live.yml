@@ -1,6 +1,10 @@
 name: Canlı değerleme kaynakları
 
 on:
+  # Yalnız açıkça kaydedilen çalıştırma isteği; sıradan kod değişikliği toplamaz.
+  push:
+    branches: [main]
+    paths: ['docs/operations/valuation-collection-request.json']
   # SEC toplaması yeni artifact üretmediğinde bile, eski kanıtı yeni tarihli
   # saymadan piyasa kaynaklarını kontrollü şekilde yenile.
   schedule:
@@ -21,7 +25,7 @@ on:
       max_new_requests:
         description: Bu çalışmada yeni dış kaynak GET bütçesi
         required: true
-        default: '51'
+        default: '501'
         type: choice
         options: ['0', '51', '100', '250', '501']
 
@@ -126,7 +130,7 @@ jobs:
         env:
           PYTHONPATH: src
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
-          MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '250' }}
+          MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '501' }}
           SOURCE_RUN: ${{ steps.select.outputs.source_run }}
           RESUME_RUN: ${{ steps.select.outputs.resume_run }}
         run: |

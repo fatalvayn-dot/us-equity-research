@@ -1,0 +1,7 @@
+{
+  "requested_on": "2026-11-18",
+  "purpose": "100 adayın piyasa kaynaklarını 501 istek üst sınırıyla tek çalışmada yenile",
+  "reason": "Önceki 250 istek çalışması sonrasında 20 adayın fiyat yanıtı süreyi aştı",
+  "maximum_get_invocations": 501,
+  "investment_orders": false
+}

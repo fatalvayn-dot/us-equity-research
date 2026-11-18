@@ -1,5 +1,26 @@
 # Development status
 
+## 18 Kasım 2026 — 100 aday için tam piyasa toplama bütçesi
+
+PR #127 sonrasında ana dal `ac921dfa3ff81e46583c9c37150c3ab7a6792116`.
+Gerçek kaynak tekrarında 20 skor ve 35 değerleme engeli var; 20 adayın fiyat
+yanıtı eski kaldı. Günlük 250 GET sınırı, boş önbellekte 100 aday için gereken
+1 kimlik + 100 × 5 kaynak isteğinin tamamını karşılamıyordu.
+
+Günlük ve elle varsayılan bütçe, mevcut toplayıcının zaten izin verdiği
+501 GET üst sınırına alındı. Küçük ve sıfır bütçeli açık seçimler korunur.
+Sıradan kod/workflow değişikliği veri toplamayı başlatmaz. Yalnız main'deki
+`docs/operations/valuation-collection-request.json` değişikliği, kullanıcının
+istediği hemen çalıştırma yoludur. Günlük program, tek çalışma kilidi,
+kaynak seçicileri, devam bütünlüğü ve 15 dakikalık canlı önbellek korunur.
+Yeni izin, ücretli servis veya para işlemi yoktur.
+
+23 hedefli test geçti. İki yeni sentetik entegrasyon, gerçek kimlik/hisse/fiyat/
+geçmiş ayrıştırıcılarıyla 100 adayı sınadı: 501 GET bütün kaynak basamaklarını
+tamamladı; 250 GET bazı adayları bekletti. Bu canlı veri başarısı değildir.
+CI ve gerçek toplama sonucu henüz bekleniyor; 100 skor/MVP kabulü verilmedi.
+Sonraki iş, bu istekle başlayan gerçek değerleme ve bağlı skor sonucunu incelemek.
+
 ## 18 Kasım 2026 — Toplu puanlamada fiyat kanıtının aktarımda eskimesi
 
 Son gerçek skor `44369799600`, değerleme `44366041370` ve finansal
