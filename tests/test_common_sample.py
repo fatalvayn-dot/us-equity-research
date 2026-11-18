@@ -104,6 +104,12 @@ class CommonSampleTests(unittest.TestCase):
         for target in (0,101,True):
             with self.assertRaises(ValueError):run(target=target)
 
+    def test_more_than_125_unique_pool_candidates_supported(self):
+        rows = [{'symbol': f'S{i}', 'issuer_id': f'{i+1:010d}'}
+                for i in range(130)]
+        accepted = candidate_pool({'companies': rows})
+        self.assertEqual(len(accepted), 130)
+
     def test_conflicting_observations_at_same_time_cannot_win(self):
         responses=sources();responses.append(replace(annual(),body=annual().body+b'conflicting'))
         with self.assertRaises(ValueError):run(responses)
