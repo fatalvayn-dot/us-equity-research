@@ -282,10 +282,10 @@ def render_score_markdown(report):
         '| Sıra | Sembol | Puan / 100 | Model |','| ---: | --- | ---: | --- |']
     if report.get('input_provenance'):
         lines[4:4]=['Finansal ve karşılaştırma girdilerinin özgün kaynak tarihleri korunmuştur. Bu raporun üretilmesi 100 şirketin tüm finansal girdilerinin güncellendiği anlamına gelmez.', '']
-    if report.get('market_evidence_policy'):
-        lines[4:4]=['Toplu araştırma puanı: fiyat ve piyasa geçmişi yanıtları en fazla 60 dakika önce alınmış olabilir. Özgün fiyat ve erişim tarihleri korunur; canlı fiyat hizmeti değildir.', '']
         for name, source in report['input_provenance']['batches'].items():
             lines[4:4]=[cell(name)+': üretim zamanı '+cell(source['generated_at'])+'; seçili gözlemler '+cell(source['oldest_selected_observation'])+' ile '+cell(source['newest_selected_observation'])+'; SHA-256 '+cell(source['sha256'])+'.', '']
+    if report.get('market_evidence_policy'):
+        lines[4:4]=['Toplu araştırma puanı: fiyat ve piyasa geçmişi yanıtları en fazla 60 dakika önce alınmış olabilir. Özgün fiyat ve erişim tarihleri korunur; canlı fiyat hizmeti değildir.', '']
     for c in report['ranking']:lines.append('| '+' | '.join(cell(c[k]) for k in ('rank','symbol','score','model_id'))+' |')
     lines.extend(['','| Aday | Durum | Puanın hesaplanmama nedenleri |','| --- | --- | --- |'])
     for c in report['companies']:lines.append('| '+' | '.join(cell(v) for v in (c['symbol'],c['status'],'; '.join(c['blockers']+([c['failed_validation_stage']] if c.get('failed_validation_stage') else [])) or 'none for numeric research model'))+' |')

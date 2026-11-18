@@ -1,5 +1,26 @@
 # Development status
 
+## 18 Kasım 2026 — Toplu puanlamada fiyat kanıtının aktarımda eskimesi
+
+Son gerçek skor `44369799600`, değerleme `44366041370` ve finansal
+`42455760184` kayıtları incelendi. Skor ZIP SHA-256 değeri Actions
+makbuzuyla eşleşti. 77 adayda değerleme fiyat aşaması `stale_response`:
+AAPL yanıtı 18.13.03 UTC, puan kesimi 18.32.03 UTC. Canlı toplayıcının
+15 dakikalık yanıt önbelleği, toplu araştırma raporu için de kullanılıyordu.
+
+Yeni `operating-sector-research-batch-v2`, fiyat ve piyasa geçmişi için
+60 dakikalık açık yanıt yaşı politikası kullanır. Canlı toplayıcı ve
+eski iki model 15 dakikada kalır. Özgün fiyat/erişim tarihleri ve hash'ler,
+4 günlük seans fiyatı yaşı, şirket/döviz/sektör/finansal kontroller korunur.
+HTML, Markdown ve JSON bu toplu araştırma politikasını açıkça gösterir.
+
+58 hedefli test geçti. İlk tam 914 testte 913 başarı ve bir Markdown
+kaynak tarihi gösterim hatası saptandı; eklenen koşulun yanlış girintisi
+düzeltildi. Gerçek 100 aday kaydının aynı tarihli kaynaklarla yeniden
+hesaplaması PR #127 Actions çalışmasında sürüyor; yeni canlı veri veya
+tam MVP kabulü sayılmayacak. Sonuç ve kesin CI durumu takip kaydına eklenecek.
+
+
 ## 18 Kasım 2026 — Değerleme devamını başarısız yeniden denemeden kurtarma
 
 Main `ee31816b7043d87d170a8db117b5bb85af313bdc` (#125).
