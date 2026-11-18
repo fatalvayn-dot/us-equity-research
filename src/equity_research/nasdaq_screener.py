@@ -71,22 +71,28 @@ def parse_page(response: Response, *, limit: int, offset: int) -> ScreenerPage:
 
 
 class NasdaqScreener:
-    def __init__(self, transport, *, page_size=1000, max_pages=20, max_records=20000):
+    def __init__(self, transport, *, page_size=1000, max_pages=None, max_records=None):
+        # Page size is limited by the upstream endpoint, not the total universe.
+        # Optional finite limits remain available for isolated or budgeted jobs.
         screener_url(page_size, 0)
-        if type(max_pages) is not int or max_pages <= 0 or type(max_records) is not int or max_records <= 0:
-            raise ValueError("positive collection bounds required")
+        if any(bound is not None and (type(bound) is not int or bound <= 0)
+               for bound in (max_pages, max_records)):
+            raise ValueError("optional collection bounds must be positive integers")
         self.transport, self.page_size = transport, page_size
         self.max_pages, self.max_records = max_pages, max_records
 
     def fetch(self) -> DiscoverySnapshot:
         records, pages, seen = [], [], set()
         total, label = None, None
-        for _ in range(self.max_pages):
+        while True:
+            if self.max_pages is not None and len(pages) >= self.max_pages:
+                # Never return a truncated or partly verified universe.
+                raise ProviderFailure(Status.INVALID_DATA)
             offset = len(records)
             page = parse_page(self.transport.get(screener_url(self.page_size, offset)),limit=self.page_size,offset=offset)
             if total is None:
                 total, label = page.total_records, page.source_asof_label
-                if total > self.max_records:
+                if self.max_records is not None and total > self.max_records:
                     raise ProviderFailure(Status.INVALID_DATA)
             elif (total, label) != (page.total_records, page.source_asof_label):
                 raise ProviderFailure(Status.INVALID_DATA)
@@ -100,4 +106,3 @@ class NasdaqScreener:
                 return DiscoverySnapshot(tuple(records), tuple(pages), label)
             if len(records) > total:
                 raise ProviderFailure(Status.INVALID_DATA)
-        raise ProviderFailure(Status.INVALID_DATA)
