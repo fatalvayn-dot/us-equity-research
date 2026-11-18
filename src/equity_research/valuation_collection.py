@@ -20,7 +20,7 @@ from .response_archive import ResponseArchive, ArchivedTransport
 from .sec import DIRECTORY_URL, parse_directory
 from .submissions import parse_submissions, submissions_url
 from .transport import RateLimiter, strict_json
-from .valuation import disclosed_shares, verify_share_class, SNAPSHOT_TTL, ShareFailure
+from .valuation import disclosed_shares, verify_share_class, original_filing_shares, latest_original_share_filing_urls, SNAPSHOT_TTL, ShareFailure, ShareIssue
 
 LEASE_TTL = timedelta(minutes=15)
 RETRY_DELAY = timedelta(minutes=5)
@@ -197,11 +197,35 @@ class ValuationSourceCollector:
             shares = None
             try:
                 cf = self.get(companyfacts_url(cik), SNAPSHOT_TTL, result['attempts'], 'companyfacts')
-                shares = disclosed_shares(cf, cik=cik, as_of=self.clock())
+                try:
+                    shares = disclosed_shares(cf, cik=cik, as_of=self.clock())
+                except ShareFailure as exc:
+                    if exc.issue != ShareIssue.STALE_DISCLOSURE:
+                        raise
+                    shares = None
+                meta = None
+                if shares is None:
+                    # Independently verify the exact DEI share count from the
+                    # original SEC filing, rather than treating missing DEI
+                    # companyfacts as a permanently unavailable value.
+                    meta = self.get(submissions_url(cik), SNAPSHOT_TTL,
+                                    result['attempts'], 'submissions')
+                    for url in latest_original_share_filing_urls(meta, cik=cik):
+                        original = self.get(url, SNAPSHOT_TTL, result['attempts'],
+                                            'original_share_fallback')
+                        candidate = original_filing_shares(
+                            meta, original, cik=cik, symbol=symbol, as_of=self.clock())
+                        if candidate is not None:
+                            shares = candidate
+                            result['share_fallback_source'] = 'original_sec_filing_dei_exact'
+                            result['share_fallback_url'] = original.url
+                            break
                 if shares is None:
                     result['share_check'] = dict(status='missing_disclosed_shares')
                 else:
-                    meta = self.get(submissions_url(cik), SNAPSHOT_TTL, result['attempts'], 'submissions')
+                    if meta is None:
+                        meta = self.get(submissions_url(cik), SNAPSHOT_TTL,
+                                        result['attempts'], 'submissions')
                     snapshot = parse_submissions(meta, cik)
                     if symbol not in snapshot.tickers:
                         raise ProviderFailure(Status.SYMBOL_MISMATCH)

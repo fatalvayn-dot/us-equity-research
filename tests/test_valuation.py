@@ -15,7 +15,7 @@ from equity_research.reporting import build_report
 from equity_research.sec import DIRECTORY_URL
 from equity_research.submissions import submissions_url
 from equity_research.transport import Response
-from equity_research.valuation import disclosed_shares,verify_share_class,indicative_valuation,build_valuation_report
+from equity_research.valuation import disclosed_shares,original_filing_shares,verify_share_class,indicative_valuation,build_valuation_report
 from equity_research.companyfacts import companyfacts_url
 
 NOW=datetime(2026,11,2,20,tzinfo=timezone.utc);CIK='0000320193';ACC='0000320193-26-000020'
@@ -91,6 +91,38 @@ def valuation(**changes):
 
 
 class ValuationTests(unittest.TestCase):
+    def test_original_sec_share_fallback_when_companyfacts_lacks_dei(self):
+        original=filing()
+        proof=original_filing_shares(meta(),original,cik=CIK,symbol='AAPL',as_of=NOW)
+        self.assertEqual(proof['value'],Decimal(100))
+        self.assertEqual(proof['source_url'],original.url)
+        self.assertEqual(proof['raw_sha256'],original.sha256)
+        self.assertEqual(proof['evidence_method'],'original_sec_filing_dei_exact')
+        raw=json.loads(cf().body)
+        raw['facts'].pop('dei')
+        missing=Response(companyfacts_url(CIK),json.dumps(raw).encode(),NOW-timedelta(minutes=2))
+        historical=build_valuation_report(batch(),[missing,meta(),original,identity(),price()],as_of=NOW)
+        self.assertIsNone(historical['companies'][0]['valuation'])
+        latest=build_valuation_report(batch(),[missing,meta(),original,identity(),price()],
+                                      as_of=NOW,allow_original_share_fallback=True)
+        self.assertEqual(latest['summary']['indicative_valuations'],1)
+        v=latest['companies'][0]['valuation']
+        self.assertEqual(v['indicated_capitalization'],Decimal(1000))
+        self.assertEqual(v['disclosed_shares']['companyfacts']['evidence_method'],
+                         'original_sec_filing_dei_exact')
+
+    def test_original_share_fallback_rejects_wrong_issuer_count_and_class(self):
+        from equity_research.valuation import original_filing_shares
+        with self.assertRaises(ProviderFailure):
+            original_filing_shares(meta(),filing(),cik='0000789019',symbol='AAPL',as_of=NOW)
+        with self.assertRaises(ProviderFailure):
+            original_filing_shares(meta(),filing(value='99x'),cik=CIK,symbol='AAPL',as_of=NOW)
+        raw=json.loads(cf().body);raw['facts'].pop('dei')
+        missing=Response(companyfacts_url(CIK),json.dumps(raw).encode(),NOW-timedelta(minutes=2))
+        report=build_valuation_report(batch(),[missing,meta(),filing(title='Class A Common Stock'),
+                                               identity(),price()],as_of=NOW,allow_original_share_fallback=True)
+        self.assertEqual(report['summary']['indicative_valuations'],0)
+
     def test_latest_exact_disclosed_shares_preserves_dates_units_and_source(self):
         s=disclosed_shares(cf(),cik=CIK,as_of=NOW)
         self.assertEqual(s['value'],Decimal(100));self.assertEqual(s['end'],date(2026,10,20))
