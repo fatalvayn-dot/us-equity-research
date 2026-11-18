@@ -160,6 +160,30 @@ class FirstScorePlansTests(unittest.TestCase):
         self.assertNotIn("candidate_budget_exceeded", report["excluded_reasons"])
         self.assertFalse(report["mvp_accepted"])
 
+    def test_default_score_plan_accepts_more_than_hundred_eligible_companies(self):
+        batch, meta, valuation = ({"companies": []} for _ in range(3))
+        assessment = []
+        for index in range(121):
+            identity = dict(issuer_id=f"{index + 1:010}", symbol=f"Q{index}")
+            for target, original in ((batch, self.batch), (meta, self.meta),
+                                     (valuation, self.valuation)):
+                target["companies"].append(deepcopy(original["companies"][0]) | identity)
+            assessment.append(identity | {
+                "financial_assessment": {"quantitative_gate": "no_screen_trigger"},
+            })
+        periods = (dict(start="2025-01-01", end="2025-12-31", accn="current"),
+                   dict(start="2024-01-01", end="2024-12-31", accn="current"))
+        with (patch("scripts.prepare_first_score_plans.build_report",
+                    return_value={"companies": assessment}),
+              patch("scripts.prepare_first_score_plans.revenue_periods",
+                    return_value=(periods, None))):
+            current, prior, report = plans(batch, meta, valuation, self.root)
+        self.assertEqual(report["evaluated"], 121)
+        self.assertEqual(report["selected"], 121)
+        self.assertEqual(len(current["companies"]), 121)
+        self.assertEqual(len(prior["companies"]), 121)
+        self.assertNotIn("candidate_budget_exceeded", report["excluded_reasons"])
+
     def test_unsupported_sector_is_not_scored(self):
         self.meta["companies"][0]["snapshot"]["sic_label"]="6021"
         _,_,report=self.runplan()
