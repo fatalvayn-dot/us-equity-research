@@ -40,6 +40,17 @@ class PriceFailure(ProviderFailure):
 class PriceNotStarted(Exception): pass
 
 
+def yahoo_chart_error_status(error, *, invalid_code_message='invalid error code'):
+    """Map identical Yahoo chart errors for quotes and daily history."""
+    code = error.get('code', '') if isinstance(error, dict) else ''
+    if not isinstance(code, str):
+        raise ValueError(invalid_code_message)
+    code = code.lower()
+    return (Status.ACCESS_DENIED if code in ('unauthorized', 'forbidden') else
+            Status.RATE_LIMIT if code in ('too many requests', 'ratelimit') else
+            Status.API_ERROR)
+
+
 def price_url(symbol):
     if not isinstance(symbol, str) or not re.fullmatch(r'[A-Z][A-Z0-9.-]{0,15}', symbol):
         raise ValueError('exact uppercase class symbol required; no punctuation conversion')
@@ -116,13 +127,7 @@ def parse_price(response, identity, *, cik, symbol, as_of,
         chart = payload['chart']
         if not isinstance(chart, dict): raise ValueError('chart object required')
         if chart.get('error') is not None:
-            error = chart['error']
-            code = error.get('code', '') if isinstance(error, dict) else ''
-            if not isinstance(code, str): raise ValueError('invalid error code')
-            code = code.lower()
-            status = (Status.ACCESS_DENIED if code in ('unauthorized', 'forbidden') else
-                      Status.RATE_LIMIT if code in ('too many requests', 'ratelimit') else Status.API_ERROR)
-            raise ProviderFailure(status)
+            raise ProviderFailure(yahoo_chart_error_status(chart['error']))
         results = chart['result']
         if not isinstance(results, list) or len(results) != 1: raise ValueError('one exact result required')
         meta = results[0]['meta']

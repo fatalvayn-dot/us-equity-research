@@ -4,7 +4,7 @@ from decimal import Decimal,localcontext
 from statistics import median
 
 from .models import aware
-from .prices import _identity,EXCHANGES,IDENTITY_TTL,PRICE_TTL,price_url
+from .prices import _identity,EXCHANGES,IDENTITY_TTL,PRICE_TTL,price_url,yahoo_chart_error_status
 from .providers import ProviderFailure,Status
 from .transport import strict_json
 
@@ -30,11 +30,8 @@ def parse_history(response,identity,*,cik,symbol,share_date,price_market_at,as_o
     try:
         chart=payload['chart']
         if chart.get('error') is not None:
-            error=chart['error'];code=error.get('code','') if isinstance(error,dict) else ''
-            if not isinstance(code,str):raise ValueError('invalid provider error code')
-            code=code.lower()
-            raise ProviderFailure(Status.ACCESS_DENIED if code in ('unauthorized','forbidden') else
-                Status.RATE_LIMIT if code in ('too many requests','ratelimit') else Status.API_ERROR)
+            raise ProviderFailure(yahoo_chart_error_status(
+                chart['error'], invalid_code_message='invalid provider error code'))
         if len(chart['result'])!=1:raise ValueError('one exact chart required')
         item=chart['result'][0];meta=item['meta']
         if meta['symbol']!=symbol:raise ProviderFailure(Status.SYMBOL_MISMATCH)
