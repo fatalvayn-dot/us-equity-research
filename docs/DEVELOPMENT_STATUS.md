@@ -1,5 +1,41 @@
 # Development status
 
+## 19 Kasım 2026 — Eksik skor girdileri için SEC belge incelemesi
+
+[Skor 44394449773](https://github.com/fatalvayn-dot/us-equity-research/actions/runs/44394449773) tamamlandı.
+100 aday, 23 skor, 77 puansız. Finansal kaynak 42455760184; değerleme 44390737328.
+Skor arşivinin SHA-256 değeri Actions kaydıyla eşleşti. Değerleme koşusunda 100
+geçerli fiyat, 74 doğrulanmış hisse sınıfı ve 74 geçerli fiyat geçmişi vardı.
+
+Orijinal konsolide bilançolardan hesaplanan toplam yükümlülük (USD):
+
+| Sembol | Tarih | Tutar | SEC bildirimi |
+|---|---|---:|---|
+| WMT | 2026-01-31 | 178488000000 | [0000104169-26-000055](https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/R5.htm) |
+| AMD | 2025-12-27 | 13927000000 | [0000002488-26-000018](https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm) |
+| FFIV | 2025-09-30 | 2727493000 | [0001048695-25-000157](https://www.sec.gov/Archives/edgar/data/1048695/000104869525000157/ffiv-20250930.htm) |
+| FFIV | 2026-09-30 | 3056877000 | [0001048695-26-000077](https://www.sec.gov/Archives/edgar/data/1048695/000104869526000077/ffiv-20260930.htm) |
+
+Dört tutar, özkaynak çıkarımı ile yükümlülük kalemlerinin toplamı karşılaştırılarak
+doğrulandı. WMT için 293 milyon USD tutarındaki itfaya tabi kontrol gücü olmayan
+pay, özkaynakla birlikte varlıklardan çıkarıldı. FFIV'nin 2026 dönemi ileriye
+dönük girdidir; 18 Kasım skorunun kullandığı 2025 dönemiyle karıştırılmaz.
+
+10-Q kapaklarında bulunan A sınıfı pay adetleri:
+[GOOGL](https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/goog-20260930.htm)
+2026-10-21 itibarıyla 5.888 milyon (raporlama hassasiyeti milyon),
+[META](https://www.sec.gov/Archives/edgar/data/1326801/000162828026066773/meta-20260930.htm)
+2026-10-16 itibarıyla 2214472367 ve
+[PLTR](https://www.sec.gov/Archives/edgar/data/1321655/000132165526000048/pltr-20260930.htm)
+2026-10-26 itibarıyla 2306705341. Bu adetler A sınıfına aittir.
+
+Yerel paket deposu EdgarTools dağıtımını sunmadı ve doğrudan SEC indirmesi
+zaman aşımına uğradı. Resmi SEC belgelerinin görüntülenen tabloları kullanıldı.
+Ham belge SHA değerleri ve otomatik skor entegrasyonu henüz doğrulanmadı.
+Sonraki iş, orijinal belgeleri mevcut alım hattına bağlayıp üç yükümlülük
+girdisini kaynağıyla yeniden puanlamak. Hisse sınıfı entegrasyonu açık PR #106
+ile çakıştığı için paralel kod değişikliği yapılmadı.
+
 ## 18 Kasım 2026 — 100 aday için tam piyasa toplama bütçesi
 
 PR #127 sonrasında ana dal `ac921dfa3ff81e46583c9c37150c3ab7a6792116`.
