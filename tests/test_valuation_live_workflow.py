@@ -28,8 +28,12 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("github.event.workflow_run.head_repository.full_name == github.repository", self.text)
 
     def test_workflow_edit_does_not_launch_a_second_collector(self):
-        self.assertNotIn("  push:", self.text)
-        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '250' }}", self.text)
+        push=self.text.split('  push:',1)[1].split('  schedule:',1)[0]
+        self.assertIn('branches: [main]',push)
+        self.assertIn("paths: ['docs/operations/valuation-collection-request.json']",push)
+        self.assertNotIn('valuation-live.yml',push)
+        self.assertNotIn('src/',push)
+        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '501' }}", self.text)
         self.assertIn("contents: read", self.text)
         self.assertIn("actions: read", self.text)
         self.assertNotIn("git push", self.text)
@@ -57,7 +61,7 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertIn("run-id: ${{ steps.select.outputs.resume_run }}", self.text)
         self.assertIn("RESUME_RUN=$(python -m scripts.select_valuation_resume)", self.text)
         self.assertIn("options: ['0', '51', '100', '250', '501']", self.text)
-        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '250' }}", self.text)
+        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '501' }}", self.text)
         self.assertIn("cancel-in-progress: false", self.text)
 
     def test_resume_is_verified_before_writing_and_reupload(self):
@@ -119,7 +123,7 @@ class ValuationLiveWorkflowTests(unittest.TestCase):
         self.assertEqual(len(set(keys)),14)
         # The collector caps priority at budget // (2 * 5 GETs/company).
         self.assertLessEqual(len(keys)*5,250//2)
-        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '250' }}",self.text)
+        self.assertIn("MAX_NEW_REQUESTS: ${{ inputs.max_new_requests || '501' }}",self.text)
         self.assertEqual(reviewed['financial_run_id'],42455760184)
         self.assertEqual(reviewed['valuation_run_id'],42598993077)
         self.assertEqual(reviewed['valuation_artifact_id'],13664443650)
