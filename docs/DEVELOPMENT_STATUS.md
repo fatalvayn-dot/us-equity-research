@@ -14,11 +14,24 @@ eski iki model 15 dakikada kalır. Özgün fiyat/erişim tarihleri ve hash'ler,
 4 günlük seans fiyatı yaşı, şirket/döviz/sektör/finansal kontroller korunur.
 HTML, Markdown ve JSON bu toplu araştırma politikasını açıkça gösterir.
 
-58 hedefli test geçti. İlk tam 914 testte 913 başarı ve bir Markdown
-kaynak tarihi gösterim hatası saptandı; eklenen koşulun yanlış girintisi
-düzeltildi. Gerçek 100 aday kaydının aynı tarihli kaynaklarla yeniden
-hesaplaması PR #127 Actions çalışmasında sürüyor; yeni canlı veri veya
-tam MVP kabulü sayılmayacak. Sonuç ve kesin CI durumu takip kaydına eklenecek.
+914/914 yerel test ve kesin kod head `a742e71233752881b52e5bfe90f67df3797e2b8e`
+için CI `44387951579` üç Python sürümünde geçti. İlk tam testte görülen
+Markdown kaynak tarihi gösterim hatası düzeltildi. PR #127 gerçek kaynak
+denemesi `44387418509`, aynı 18 Kasım 18.32 UTC kesiminde 100 adayı
+sıfırdan 20 puana çıkardı. Girdi makbuzları ve kaynak paketi özetleri eşleşti.
+Bu tarihli yeniden hesaplamadır; yeni finansal veri veya canlı fiyat yenilemesi değildir.
+
+Kalan 80: 35 değerleme kanıtı, 29 tam finansal inceleme/eksik alan,
+11 kalıcı finans sektörü dışlaması, 2 kritik finansal inceleme,
+2 desteklenmeyen sektör ve 1 son yıllık dönem teyidi. 35 değerleme
+engelinin 21'inde eski yanıt süresi hâlâ aşılmıştır; yeni kaynak toplama
+bütçesinin kapsaması ayrıca çözülmelidir. 29 finansal engelin önemli
+bölümünde eksik yükümlülük etiketi vardır. Banka/sigorta adayları kabul
+hedefine sayılmaz. Tam MVP kabulü açık.
+
+Kanıt: `docs/evidence/batch-market-freshness-2026-11-18.json`.
+Sonraki öncelik: 35 değerleme adayının eksik/eski kaynaklarını tamamlamak;
+ardından 29 finansal eksik için özgün yıllık belgedeki kesin kavramları işlemek.
 
 
 ## 18 Kasım 2026 — Değerleme devamını başarısız yeniden denemeden kurtarma
