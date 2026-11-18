@@ -125,8 +125,7 @@ jobs:
             --companyfacts-dir data/financial/companyfacts \
             --current-plan data/first-score-work/current-plan.json \
             --prior-plan data/first-score-work/prior-plan.json \
-            --report data/first-score-work/selection.json \
-            --maximum 100
+            --report data/first-score-work/selection.json
 
       - name: Güncel yıl gelirini kaynak sırasıyla topla
         if: steps.plan.outputs.has_candidates == 'true'
