@@ -162,6 +162,10 @@ def assess_participation(company, rulebook=None, *, as_of):
     instrument = company.get("instrument_type")
     if instrument != "common_share":
         reasons.append("special_instrument_review_required")
+    try:
+        _source(company.get("instrument_source"), as_of=cutoff, issuer_key=issuer_key)
+    except (ValueError, TypeError):
+        reasons.append("security_type_evidence_unverified")
 
     activity = company.get("activities") if isinstance(company.get("activities"), dict) else {}
     try:
@@ -170,6 +174,8 @@ def assess_participation(company, rulebook=None, *, as_of):
             blockers.append("prohibited_business_activity")
         elif activity.get("conclusion") != "permitted":
             reasons.append("unreviewed_business_activity")
+        elif activity.get("all_reported_segments_reviewed") is not True:
+            reasons.append("business_segment_coverage_unverified")
     except (ValueError, TypeError):
         reasons.append("business_activity_evidence_unverified")
 
