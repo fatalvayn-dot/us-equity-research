@@ -1,0 +1,59 @@
+name: Five source independent 100 company benchmark
+on:
+  push:
+    branches: [research/five-source-100-benchmark-20261119]
+    paths:
+      - 'experiments/five_source_100/**'
+      - '.github/workflows/five-source-100-experiment.yml'
+permissions:
+  contents: read
+jobs:
+  source_test:
+    strategy:
+      fail-fast: false
+      matrix:
+        source: [google_scraper, tickeratlas, yfinance, openbb, us_screener]
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      SOURCE: ${{ matrix.source }}
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install only this project's dependencies
+        shell: bash
+        run: |
+          set -eux
+          python -m pip install --upgrade pip
+          if [ "$SOURCE" = "google_scraper" ]; then
+            git clone --depth 1 https://github.com/omkarcloud/google-finance-scraper.git /tmp/google-finance-scraper
+            python -m pip install -r /tmp/google-finance-scraper/requirements.txt
+            cd /tmp/google-finance-scraper
+            nohup python run.py >/tmp/google-scraper-server.log 2>&1 &
+            sleep 8
+            curl --max-time 10 --fail http://127.0.0.1:8000/health
+          elif [ "$SOURCE" = "yfinance" ]; then
+            python -m pip install yfinance
+          elif [ "$SOURCE" = "openbb" ]; then
+            python -m pip install openbb openbb-yfinance
+          elif [ "$SOURCE" = "us_screener" ]; then
+            git clone --depth 1 https://github.com/Entangled-Query/us-stocks-screener.git /tmp/us-stocks-screener
+            python -m pip install -r /tmp/us-stocks-screener/requirements.txt
+          fi
+      - name: Test 100 identical symbols without provider substitution
+        shell: bash
+        run: |
+          python experiments/five_source_100/benchmark.py
+      - name: Upload independent evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: five-source-${{ matrix.source }}-100
+          path: benchmark_output/
+          retention-days: 14
+          if-no-files-found: warn
