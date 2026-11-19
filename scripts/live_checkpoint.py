@@ -12,8 +12,10 @@ from urllib.request import Request, urlopen
 ROOT_RUN = 42223465006
 # Run 42453626663 (sequence 9) preserved all 100 filings and 1400 keys;
 # 1189 sources and 1037 financial references audited. See sequence9 audit.
-# Authorize one slice for the Nasdaq text/plain correction, then review again.
-MAX_REVIEWED_SEQUENCE = 10
+# Sequence 10 was audited: root/parent/artifact digest and 100 filing, 1400 field keys.
+# Authorize exactly one additional slice to refresh late SEC filings (e.g. SWKS).
+# Do not increase again before verifying the produced sequence-11 evidence.
+MAX_REVIEWED_SEQUENCE = 11
 REPO = 'fatalvayn-dot/us-equity-research'
 MANIFEST = 'checkpoint-manifest.json'
 REQUIRED = {'submissions.sqlite', 'documents.sqlite', 'financial.sqlite',
@@ -170,6 +172,20 @@ def is_reviewed_idle_state(run_id, items, evidence):
             and states[0].get('digest') == 'sha256:' + evidence['artifact_sha256']['financial'])
 
 
+def approved_extension_parent(run_id, items, evidence):
+    """Bind the one newly reviewed slice to the exact immutable GitHub artifact."""
+    lineage = evidence['financial_lineage']
+    states = [item for item in items if item.get('name') == 'live-acceptance-state']
+    return (lineage['root_run_id'] == ROOT_RUN
+            and lineage['sequence'] + 1 == MAX_REVIEWED_SEQUENCE
+            and lineage['run_id'] == run_id
+            and len(states) == 1
+            and states[0].get('expired') is False
+            and states[0].get('id') == evidence['financial_artifact_id']
+            and states[0].get('digest') == 'sha256:' + evidence['artifact_sha256']['financial']
+            and not any(item.get('name') == 'live-acceptance-recovery' for item in items))
+
+
 def require_first_attempt():
     # GitHub reruns reuse the run ID. select() excludes that ID, so a retry
     # could restore its older parent instead of the first attempt's new data.
@@ -194,8 +210,13 @@ def main():
         require_first_attempt()
         run, items = find_checkpoint(int(os.environ['GITHUB_RUN_ID']), args.requested)
         run_id = run['id']
+        reviewed = json.loads(REVIEWED_STATE.read_text())
+        if (MAX_REVIEWED_SEQUENCE == reviewed['financial_lineage']['sequence'] + 1
+                and run_id == reviewed['financial_lineage']['run_id']
+                and not approved_extension_parent(run_id, items, reviewed)):
+            raise ValueError('Yeni SEC toplama dilimi icin onayli ana kaynak paketi degismis')
         idle = (os.environ.get('GITHUB_EVENT_NAME') == 'schedule'
-                and is_reviewed_idle_state(run_id, items, json.loads(REVIEWED_STATE.read_text())))
+                and is_reviewed_idle_state(run_id, items, reviewed))
         with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
             f.write(f'run_id={run_id}\n')
             f.write(f"reviewed_idle={'true' if idle else 'false'}\n")
@@ -205,6 +226,12 @@ def main():
         print(json.dumps({'resume_run_id': run_id}))
     elif args.action == 'verify':
         saved, counts = verify(root, args.run_id, json.loads(Path(args.baseline).read_text()))
+        reviewed = json.loads(REVIEWED_STATE.read_text())
+        if (saved['sequence'] == MAX_REVIEWED_SEQUENCE - 1
+                and MAX_REVIEWED_SEQUENCE == reviewed['financial_lineage']['sequence'] + 1
+                and (args.run_id != reviewed['financial_lineage']['run_id']
+                     or saved['root_run_id'] != ROOT_RUN)):
+            raise ValueError('Yenilenecek finansal kaynak devam kimligi onayli degil')
         # Preserve the exact parent reference before changing any collection file.
         receipt = dict(parent_run_id=args.run_id, root_run_id=ROOT_RUN, sequence=saved['sequence'])
         (root.parent / 'resume-receipt.json').write_text(json.dumps(receipt))
