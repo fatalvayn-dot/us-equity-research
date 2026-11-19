@@ -21,7 +21,9 @@ class CheckpointTests(unittest.TestCase):
         artifact = dict(name='live-acceptance-state', expired=False,
                         id=evidence['financial_artifact_id'],
                         digest='sha256:' + evidence['artifact_sha256']['financial'])
-        self.assertTrue(m.is_reviewed_idle_state(run_id, [artifact], evidence))
+        self.assertFalse(m.is_reviewed_idle_state(run_id, [artifact], evidence))
+        with patch.object(m, 'MAX_REVIEWED_SEQUENCE', evidence['financial_lineage']['sequence']):
+            self.assertTrue(m.is_reviewed_idle_state(run_id, [artifact], evidence))
         self.assertFalse(m.is_reviewed_idle_state(run_id + 1, [artifact], evidence))
         for change in (dict(digest='sha256:changed'), dict(id=0), dict(expired=True)):
             with self.subTest(change=change):
