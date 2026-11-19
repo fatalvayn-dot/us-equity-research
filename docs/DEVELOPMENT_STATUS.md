@@ -1,5 +1,34 @@
 # Development status
 
+## 19 Kasım 2026 — Finansal toplama sequence-11 kontrollü yeniden açma (PR/CI bekliyor)
+
+Ana iş: #136 finansal ve değerleme kaynaklarının 8 Kasım'dan yeni SEC bildirimlerine güncellenebilmesi.
+#135'teki ham SEC ve MotherDuck uçtan uca kabulü henüz açık; aşama 3 üretim kabulü yok.
+
+Finansal state lineage: root run `42223465006`, sequence-10 son doğrulanmış
+run `42455760184`, immutable `live-acceptance-state` artifact
+`13608291162`, GitHub SHA-256
+`425b11a0eb6143e34a7cb937317b5e41814b0b8a3297483b8db7ff6e2baa0dfd`.
+19 Kasım'da GitHub artifact **expired=false** olarak doğrulandı. Bu,
+orijinal finansal kaynakların *yeni* olduğu anlamına gelmez;
+finansal veri kesimi 8 Kasım. 19 Kasım puan run `44455019457`: 100
+adaydan 23 araştırma puanı (77 puansız). SWKS 10-K 10 Kasım tarihli,
+eski financial state'de yok.
+
+Kod: `MAX_REVIEWED_SEQUENCE` değerini **11** ile sınırla; sıra-10
+devamını yalnızca yukarıdaki özgün run ve artifact hash'i ile doğrula;
+yeni birleştirme sonrası `docs/operations/financial-collection-request.json`
+ana dala kaydedilirse bir defalık `push` çalışması başlasın. Rate-limit,
+SEC User-Agent, SHA-256, SQLite bütünlüğü, kira kontrolü ve kayıp/bozuk
+artifact'ten geriye dönüş yasağı değişmez. İş akışı sonucu ve CI
+doğrulanmadan bu geliştirme bitmiş sayılmaz. Sequence-11 sonrası
+yeni veri toplama yine bloke olacaktır; önce yeni paketi denetle.
+
+Sıradaki tek iş: CI ve inceleme başarılıysa ana dala merge, açık
+finansal çalıştırma isteği; gerçek 100 şirket raporundaki yeni kanıt
+paketleri ve puansız gerekçelerini incele, sonra #137 aşama 3 geçişini değerlendir.
+
+
 ## 19 Kasım 2026 — Sekiz aşamalı görev zinciri ve SEC veri köprüsü
 
 GitHub #134 ana görev ve #135–#142 sıralı alt görevler açıldı. Etkin günlük
