@@ -1,5 +1,49 @@
 # Development status
 
+## 19 Kasım 2026 — 1. aşama SEC gerçek ham SHA ve puanlama kaynak koruması
+
+**Gerçek kaynak kanıtı:** PR #150 CI Python 3.11/3.12/3.13 başarılı,
+main commit `4d93cab29b7e221d6c3e21cfc1976225d2167db5`.
+Ana dalın açık istek dosyası ile SEC CompanyConcept'den iki doğrudan
+orijinal JSON indirmesi [GitHub run 44543645240]
+(https://github.com/fatalvayn-dot/us-equity-research/actions/runs/44543645240)
+**success**. `sec-stage1-original-raw-evidence` artifact ID
+`14539511083`, zip digest
+`sha256:9e9221a0f4cd98faaa02508b28538f25f83d4baa9fe1982b58bfb9eaf3234576`.
+CIK 0001045810, 10-K `0001045810-26-000021`, 2026-01-25,
+Liabilities 49.510.000.000 USD: SEC ham yanıt 11924 bayt,
+SHA-256 `640d99b08c00320f488a48cd60c75258d57ddf7d6fea86a6490b8cd718551c03`.
+CIK 0000004127, 10-K `0000004127-26-000055`, 2026-10-02,
+Liabilities 3.721.100.000 USD: 18180 bayt,
+SHA-256 `999be6a1a9188eb8d085f48f1a1b25976926ca318384d0db2b0d79001cbba379`.
+SEC kaynak gövdelerinin kimlik/accn/dönem/filing/tutar eşleşmesi
+**iki kez aynı arşivden** başarıyla doğrulandı. Bu, SEC
+CompanyConcept HTTP yanıtı hash'idir, tüm 10-K HTML hash'i değildir.
+
+**Veritabanı:** Kullanıcı onayıyla, yalnız bu 2 kamusal kayıt
+`my_db.main.sec_evidence_staging` içinde `source_verified`
+ve özgün SHA-256 ile güncellendi; SELECT iki kaydı doğruladı.
+Kişisel portföy/anahtar ve gerçek emir yok.
+
+**Puanlama koruması:** PR #150 ile `sec_attestation.py` ve
+`build_current_scores.py` isteğe bağlı resmî SEC ham kaynak
+eşleştirmesini ekledi; seçilmiş `liabilities` mevcut fact'i
+tam accession/dönem/tutar eşleşirse kontrol eder, çelişirse
+başlamadan durur. Hiçbir yeni mali fact ikame edilmez,
+Yahoo > SEC > Nasdaq > Finnhub sırası ve ağırlıklar değişmez.
+PR #151 (bu dal), doğrulanmış arşiv ID/digest'i mevcut
+`first-live-score.yml` akışına bağlar ve eski gerçek 100 şirket
+finansal paketinde iki kez ağsız replay için ayrı onaylı iş akışını
+oluşturur. **CI ve gerçek finansal batch replay sonucu henüz
+doğrulanmadan kabul edilmiş sayma.** 100/100 puan veya katılım
+uygunluğu otomatik onay değildir.
+
+Sonraki tek iş: PR #151 CI; başarılıysa merge ve kullanıcı yetkili
+bir defalık `sec-stage1-financial-replay-request.json`
+çalıştırması; orijinal finansal seçili satırlar eşleştiğinde
+kanıt/engelleri issue #135'e kaydet.
+
+
 ## 19 Kasım 2026 — 7. aşama Türkçe karar destek görünümü (CI bekliyor)
 
 #141 araştırma ön hazırlığı: mevcut `scoring`, `score_html`

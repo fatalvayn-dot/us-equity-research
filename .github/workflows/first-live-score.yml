@@ -112,6 +112,53 @@ jobs:
           github-token: ${{ github.token }}
           run-id: ${{ steps.financial.outputs.source_run }}
 
+      - name: Onayli SEC staging ham arşivini indir ve hash'ini dogrula
+        if: steps.financial.outputs.ready == 'true'
+        id: sec_stage1
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os,re
+          from pathlib import Path
+          p=json.loads(Path('docs/operations/sec-stage1-accepted.json').read_text())
+          expected={
+              '0001045810': ('0001045810-26-000021','640d99b08c00320f488a48cd60c75258d57ddf7d6fea86a6490b8cd718551c03'),
+              '0000004127': ('0000004127-26-000055','999be6a1a9188eb8d085f48f1a1b25976926ca318384d0db2b0d79001cbba379')}
+          if (p.get('schema_version')!=1
+              or p.get('purpose')!='immutable_original_sec_shadow_corroboration'
+              or p.get('status')!='reviewed_original_sec_bytes_not_investment_approval'
+              or p.get('artifact_name')!='sec-stage1-original-raw-evidence'
+              or p.get('source_run_id')!=44543645240
+              or p.get('artifact_id')!=14539511083
+              or p.get('artifact_digest')!='sha256:9e9221a0f4cd98faaa02508b28538f25f83d4baa9fe1982b58bfb9eaf3234576'
+              or {r.get('issuer_id'):(r.get('accession'),r.get('source_raw_sha256'))
+                  for r in p.get('source_records',[])}!=expected
+              or len(p.get('source_records',[]))!=2):
+              raise SystemExit('SEC kanit arşivi veya kimlik sabitlemesi degismis')
+          with open(os.environ['GITHUB_OUTPUT'],'a') as o:
+              o.write(f"artifact_id={p['artifact_id']}\nsource_run_id={p['source_run_id']}\n")
+          PY
+          ARTIFACT_JSON=$(gh api "repos/$REPO/actions/artifacts/14539511083")
+          printf '%s' "$ARTIFACT_JSON" | python -c "import json,sys; x=json.load(sys.stdin); assert x.get('name')=='sec-stage1-original-raw-evidence' and x.get('expired') is False and x.get('digest')=='sha256:9e9221a0f4cd98faaa02508b28538f25f83d4baa9fe1982b58bfb9eaf3234576' and x.get('workflow_run',{}).get('id')==44543645240, 'SEC GitHub artifact kimligi veya digest uyusmuyor'"
+          mkdir -p data/sec-stage1
+          gh run download 44543645240 --repo "$REPO" \
+            --name sec-stage1-original-raw-evidence --dir data/sec-stage1
+          PYTHONPATH=src python - <<'PY'
+          import json
+          from datetime import datetime,timezone
+          from pathlib import Path
+          from equity_research.sec_attestation import verify_stage1_artifact
+          raw=Path('data/sec-stage1')
+          m=json.loads((raw/'verified-sec-stage1.json').read_text())
+          checked=verify_stage1_artifact(m,raw,as_of=datetime.now(timezone.utc))
+          assert set(checked)=={'0001045810','0000004127'}
+          print('Iki SEC orijinal JSON hash ve 10-K kimligi yeniden onaylandi')
+          PY
+          echo 'ready=true' >> "$GITHUB_OUTPUT"
+
       - name: SEC kimliği ve açık yıllık karşılaştırma dönemlerini hazırla
         if: steps.financial.outputs.ready == 'true'
         id: plan
@@ -168,6 +215,7 @@ jobs:
           VALUATION_RUN: ${{ steps.select.outputs.valuation_run }}
           FINANCIAL_RUN: ${{ steps.financial.outputs.source_run }}
           HAS_COMPARISON_CANDIDATES: ${{ steps.plan.outputs.has_candidates }}
+          STAGE1_READY: ${{ steps.sec_stage1.outputs.ready }}
         run: |
           set -euo pipefail
           AS_OF=$(python -c 'from datetime import datetime,timezone; print(datetime.now(timezone.utc).isoformat())')
@@ -186,6 +234,11 @@ jobs:
           test -f data/first-score-work/prior.json
           test -f data/valuation/source-bundle/manifest.json
           test -f data/financial-evidence/live-sources/manifest.json
+          STAGE1_ARGS=()
+          if [ "$STAGE1_READY" = 'true' ]; then
+            STAGE1_ARGS=(--sec-stage1 data/sec-stage1/verified-sec-stage1.json
+                         --sec-raw-dir data/sec-stage1)
+          fi
           python scripts/build_current_scores.py \
             --financial data/financial/batch.json \
             --current data/first-score-work/current.json \
@@ -193,7 +246,7 @@ jobs:
             --sources data/valuation/source-bundle \
             --financial-sources data/financial-evidence/live-sources \
             --output data/first-score-work/output \
-            --as-of "$AS_OF"
+            --as-of "$AS_OF" "${STAGE1_ARGS[@]}"
           python -m scripts.write_score_run_provenance \
             --data data --valuation-run "$VALUATION_RUN" --financial-run "$FINANCIAL_RUN"
 
