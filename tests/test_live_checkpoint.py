@@ -56,11 +56,13 @@ class CheckpointTests(unittest.TestCase):
         summary=self.root/'summary.md'
         state=self.root/'state'
         for sequence,expected in ((9,'true'),(10,'true'),(11,'false'),(12,'false')):
+            run_id = (json.loads(m.REVIEWED_STATE.read_text())['financial_lineage']['run_id']
+                      if sequence == 10 else m.ROOT_RUN + 1)
             with self.subTest(sequence=sequence), patch.object(
                     m,'verify',return_value=({'sequence':sequence, 'root_run_id':m.ROOT_RUN},{})), patch.dict(
                     'os.environ',{'GITHUB_OUTPUT':str(output), 'GITHUB_STEP_SUMMARY':str(summary)}), patch(
                     'sys.argv',['live_checkpoint.py','verify','--state-dir',str(state),
-                                '--run-id',str(m.ROOT_RUN+1),'--baseline',str(baseline)]):
+                                '--run-id',str(run_id),'--baseline',str(baseline)]):
                 output.write_text('')
                 summary.write_text('Önceki özet\n')
                 m.main()
@@ -68,7 +70,7 @@ class CheckpointTests(unittest.TestCase):
                 self.assertTrue(summary.read_text().startswith('Önceki özet\n'))
                 self.assertEqual('yeni finansal veri toplamaz' in summary.read_text(), expected == 'false')
                 if expected == 'false':
-                    self.assertIn(str(m.ROOT_RUN+1), summary.read_text())
+                    self.assertIn(str(run_id), summary.read_text())
                     self.assertIn(f'devam sırası: {sequence}', summary.read_text())
                 self.assertEqual(json.loads((self.root/'resume-receipt.json').read_text())['sequence'],sequence)
 
