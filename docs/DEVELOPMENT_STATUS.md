@@ -1,5 +1,29 @@
 # Development status
 
+## 19 Kasım 2026 — Aşama 5 BIST/Avrupa kaynak ve döviz denetimi (CI bekliyor)
+
+#139 hazırlığı, ön koşullar açıkken araştırma seviyesinde yapıldı.
+KAP resmî şirket özetlerinde ASELS, TUPRS, BIMAS kimlik bağlantıları;
+Avrupa resmî şirket kaynaklarında SAP, IFX, DTE yatırımcı ilişkileri;
+ESMA ESEF ve ECB EXR kur sözleşmesi incelendi.
+Borsa İstanbul fiyatları lisanslı dağıtıcı ve DataStore şartlarına tabidir.
+`src/equity_research/regional_evidence.py`, altı kamusal kaynak
+sayfasının tam adres kimliğini ve ECB referans CSV'sinin USD/TRY-EUR
+seri kimliğini, tarihini, tutarını ve ham bayt özetini çevrimdışı
+denetler. Bu kaynaklar yatırım puanı, uygunluk veya tarihsel getiri
+üretmez; resmî tekil bilanço/özgün iXBRL kanıtı ayrıca gerekir.
+Regresyon testleri `tests/test_regional_evidence.py`; kapsam notu
+`docs/reviews/REGIONAL_SOURCES_STAGE5_2026_11_19.md`.
+Bu kod için henüz gerçek ECB döviz yanıtı ya da şirket finansal
+kalemi canlı doğrulanmadı. PR, CI ve merge ayrı doğrulanmalıdır.
+
+Aşama 3 SEC yenileme run `44526775886` 19 Kasım 13.00 UTC'de
+henüz sürüyordu. #135–#138 kabulü tamamlanmadığından #139
+**üretim için geçerli** sayılmaz. Tek sonraki iş: ilk KAP ve ESEF
+özgün bildirimlerine kaynak-yayın anı doğrulaması, kota ve lisans
+politikası içinde salt okunur tanılama; sonra finansal sınıflandırma.
+
+
 ## 19 Kasım 2026 — Finansal toplama sequence-11 kontrollü yeniden açma (PR/CI bekliyor)
 
 Ana iş: #136 finansal ve değerleme kaynaklarının 8 Kasım'dan yeni SEC bildirimlerine güncellenebilmesi.
