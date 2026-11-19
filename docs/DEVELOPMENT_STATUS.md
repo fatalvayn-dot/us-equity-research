@@ -1,5 +1,36 @@
 # Development status
 
+## 19 Kasım 2026 — Sekiz aşamalı görev zinciri ve SEC veri köprüsü
+
+GitHub #134 ana görev ve #135–#142 sıralı alt görevler açıldı. Etkin günlük
+araştırma otomasyonu aynı zincire yönlendirildi; yeni paralel otomasyon eklenmedi.
+
+#143 değişikliği: salt okunur Firecrawl Alexandria denetçisini kullanarak SEC
+staging CSV'si ve SHA-256 manifesti üretme, çelişki/kimlik/DECIMAL hassasiyeti
+kontrolü. Üç Python sürümünde CI geçti ve main'e birleşti (`8b6337c9`).
+MotherDuck `my_db.main.sec_evidence_staging` 15 sütunlu şeması doğrulandı;
+salt okunur sorguda 0 kayıt vardı. CSV hazır olması veritabanına aktarım
+veya yatırım skoru anlamına gelmez.
+
+Firecrawl Alexandria SEC CompanyConcept üzerinden NVDA `Liabilities`
+(2026-01-25, 49.510 milyon USD, accession 0001045810-26-000021) ve
+SWKS `Liabilities` (2026-10-02, 3.721,1 milyon USD,
+0000004127-26-000055) canlı okundu. Bunlar üçüncü taraf sağlayıcının
+SEC-kaynaklı yapılandırılmış sonuçlarıdır; özgün SEC HTTP gövdesi/hash
+kontrol edilmedi. Aynı örnekler 29 finansal engelin çözüldüğünü kanıtlamaz.
+
+Bu dalda #144 özgün SEC companyconcept JSON baytlarını hash'leyip kavram,
+dönem, birim, accession ve tutarı birebir karşılaştıran salt okunur bir
+araç ve ağsız negatif testler hazırlandı. CI ve main merge sonucu ayrıca
+doğrulanmadan tamamlandı denmeyecek. Gerçek MotherDuck INSERT için açık
+veritabanı yazma onayı gerekli. Son doğrulanmış üretim skoru hâlâ 20/100;
+100 uygun şirketlik kabul ve sonraki aşamalar açık.
+
+Sonraki öncelik #135'in gerçek ham SEC verisi doğrulamasını çalıştırmak,
+izinli MotherDuck yüklemesi ve tekrar-gözlem denetimini yapmak; #136'ya
+ancak kabul kapısından sonra geçmek.
+
+
 ## 18 Kasım 2026 — 100 aday için tam piyasa toplama bütçesi
 
 PR #127 sonrasında ana dal `ac921dfa3ff81e46583c9c37150c3ab7a6792116`.
