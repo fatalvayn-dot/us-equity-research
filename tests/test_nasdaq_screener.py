@@ -37,6 +37,31 @@ class ScreenerTests(unittest.TestCase):
         self.assertFalse(hasattr(snapshot.records[0],'exchange'))
         self.assertFalse(hasattr(snapshot.records[0],'security_type'))
 
+    def test_default_discovery_has_no_twenty_page_ceiling(self):
+        total = 42
+        responses = [page((f'S{i}', f'S{i+1}'), total=total, offset=i)
+                     for i in range(0, total, 2)]
+        snapshot = NasdaqScreener(Replay(responses), page_size=2).fetch()
+        self.assertEqual(len(snapshot.pages), 21)
+        self.assertEqual(len(snapshot.records), total)
+
+    def test_default_discovery_has_no_twenty_thousand_record_ceiling(self):
+        total = 20001
+        responses = []
+        for offset in range(0, total, 10000):
+            stop = min(offset + 10000, total)
+            rows = [{'symbol': f'S{i}', 'name': f'Company {i} Common Stock'}
+                    for i in range(offset, stop)]
+            payload = {'status': {'rCode': 200},
+                       'data': {'totalrecords': total,
+                                'asof': 'same vendor snapshot',
+                                'table': {'rows': rows}}}
+            responses.append(Response(screener_url(10000, offset),
+                                      json.dumps(payload).encode(), NOW))
+        snapshot = NasdaqScreener(Replay(responses), page_size=10000).fetch()
+        self.assertEqual(len(snapshot.records), total)
+        self.assertEqual(len(snapshot.pages), 3)
+
     def test_duplicate_changed_total_and_changed_asof_abort(self):
         for last in (page(('A',),offset=2),page(('C',),total=4,offset=2),page(('C',),offset=2,label='changed')):
             with self.subTest(last=last),self.assertRaises(ProviderFailure):

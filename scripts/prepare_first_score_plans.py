@@ -64,9 +64,11 @@ def revenue_periods(revenue, annual, companyfacts_dir, cik):
     return (current_rows[0], previous_rows[0]), None
 
 
-def plans(financial_batch, metadata, valuation, companyfacts_dir, *, maximum=10):
-    if not isinstance(maximum, int) or not 1 <= maximum <= 100:
-        raise ValueError("bounded candidate selection required")
+def plans(financial_batch, metadata, valuation, companyfacts_dir, *, maximum=None):
+    # Default: consider every eligible input company. An explicit positive
+    # maximum remains available only when a caller needs a bounded batch.
+    if maximum is not None and (type(maximum) is not int or maximum < 1):
+        raise ValueError("explicit maximum must be a positive integer")
     financial_report = build_report(financial_batch)
     reviewed = {c["issuer_id"]: c for c in financial_report["companies"]}
     metas = {c["issuer_id"]: c for c in metadata["companies"]}
@@ -114,7 +116,7 @@ def plans(financial_batch, metadata, valuation, companyfacts_dir, *, maximum=10)
                             current_period=[latest["start"], latest["end"]],
                             prior_period=[previous["start"], previous["end"]],
                             accession=latest["accn"], raw_sha256=facts["revenue"]["raw_sha256"]))
-                    elif len(current) >= maximum:
+                    elif maximum is not None and len(current) >= maximum:
                         reason = "candidate_budget_exceeded"
                     else:
                         basis = dict(symbol=symbol, issuer_id=cik, currency="USD",
@@ -141,7 +143,7 @@ def main():
     for name in ("financial", "metadata", "valuation", "companyfacts-dir",
                  "current-plan", "prior-plan", "report"):
         p.add_argument("--" + name, required=True)
-    p.add_argument("--maximum", type=int, default=10)
+    p.add_argument("--maximum", type=int)
     args = p.parse_args()
     read = lambda path: json.loads(Path(path).read_text())
     current, prior, report = plans(read(args.financial), read(args.metadata),

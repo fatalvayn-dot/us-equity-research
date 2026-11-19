@@ -101,8 +101,15 @@ class CommonSampleTests(unittest.TestCase):
     def test_duplicate_identity_and_outside_target_bounds_are_rejected(self):
         for rows in ([],PLAN['companies']*2,PLAN['companies']*126):
             with self.assertRaises(ValueError):candidate_pool({'companies':rows})
-        for target in (0,101,True):
+        for target in (0,-1,True):
             with self.assertRaises(ValueError):run(target=target)
+        self.assertFalse(run(target=101)['target_sample_verified'])
+
+    def test_more_than_125_unique_pool_candidates_supported(self):
+        rows = [{'symbol': f'S{i}', 'issuer_id': f'{i+1:010d}'}
+                for i in range(130)]
+        accepted = candidate_pool({'companies': rows})
+        self.assertEqual(len(accepted), 130)
 
     def test_conflicting_observations_at_same_time_cannot_win(self):
         responses=sources();responses.append(replace(annual(),body=annual().body+b'conflicting'))

@@ -55,7 +55,7 @@ def priority_keys(plan, rows):
 
 def request_limit(value):
     if type(value) is not int or not 0 <= value <= 501:
-        raise ValueError('0..501 new GET invocations required for at most 100 candidates')
+        raise ValueError('0..501 new GET invocations required per collection run')
     return value
 
 

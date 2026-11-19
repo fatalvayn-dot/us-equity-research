@@ -25,7 +25,7 @@ TRANSFORMS={
 
 def candidate_pool(payload):
     rows=payload['companies']
-    if not isinstance(rows,list) or not 1<=len(rows)<=125:raise ValueError('1..125 explicit pool candidates required')
+    if not isinstance(rows,list) or not rows:raise ValueError('nonempty explicit pool candidates required')
     result=[]
     for row in rows:
         cik,symbol=row['issuer_id'],row['symbol']
@@ -54,7 +54,8 @@ def strict_cover(response):
 
 def verify_common_sample(payload,responses,*,as_of,target=100):
     rows=candidate_pool(payload)
-    if not aware(as_of) or type(target) is not int or not 1<=target<=100:raise ValueError('aware cutoff and target 1..100 required')
+    if not aware(as_of) or type(target) is not int or target < 1:
+        raise ValueError('aware cutoff and positive target required')
     sources={}
     for r in responses:
         if '/api/xbrl/companyfacts/' in r.url or 'finance.yahoo.com/' in r.url:continue

@@ -113,6 +113,13 @@ class MvpTests(unittest.TestCase):
     def test_duplicate_candidates_rejected_before_network(self):
         with self.assertRaises(ValueError):validate_candidates(dict(companies=CANDIDATES['companies']*2))
 
+    def test_more_than_hundred_unique_candidates_supported(self):
+        rows = [{'symbol': f'S{i}', 'issuer_id': f'{i+1:010d}'}
+                for i in range(151)]
+        result = validate_candidates({'companies': rows})
+        self.assertEqual(len(result), 151)
+        self.assertEqual(result[-1]['symbol'], 'S150')
+
     def test_invalid_identity_or_outside_mvp_count_rejected(self):
         for value in (dict(companies=[]),dict(companies=[dict(symbol='AAPL',issuer_id='320193')]),dict(companies=[dict(symbol=' AAPL',issuer_id=CIK)])):
             with self.assertRaises(ValueError):validate_candidates(value)
