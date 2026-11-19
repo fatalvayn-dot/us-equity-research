@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def mocks():
-    old = json.loads((ROOT / "docs/evidence/common100/candidates.json").read_text())
+    old = json.loads((ROOT / "docs/evidence/archived100/candidates-2026-11-19.json").read_text())
     symbols = [s for s in priority_symbols() if s not in {r["symbol"] for r in old["companies"]}]
     fields = ["cik", "name", "ticker", "exchange"]
     records = []
