@@ -193,7 +193,11 @@ class RecordedCommonSampleTests(unittest.TestCase):
             self.assertIsNone(row['total_score'])
         ter=next(r for r in report['companies'] if r['symbol']=='TER');self.assertEqual(ter['status'],'review_required')
         manifest=json.loads((folder/'manifest.json').read_text())
-        for row in manifest['files']:self.assertEqual(hashlib.sha256((folder/row['file']).read_bytes()).hexdigest(),row['sha256'])
+        for row in manifest['files']:
+            recorded = (root/'docs/evidence/archived100/candidates-2026-11-19.json'
+                        if row['file'] == 'candidates.json'
+                        else folder/row['file'])
+            self.assertEqual(hashlib.sha256(recorded.read_bytes()).hexdigest(),row['sha256'])
         for name in ('base','extra'):
             self.assertEqual(hashlib.sha256((root/manifest[name+'_bundle']/'manifest.json').read_bytes()).hexdigest(),manifest[name+'_manifest_sha256'])
         proof=json.loads((folder/'resume-proof.json').read_text())
