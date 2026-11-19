@@ -42,6 +42,32 @@ indirip **doğrulamaz**; `evidence_scope` bu sınırı açıkça
 bildirir. Tarihsel dönem için yeniden düzenlenen tablolar, yayım anı,
 konsolide kapsam, faiz/borç tanımı ve hisse sınıfı ayrıca incelenecek.
 
+## Borsa İstanbul için doğrulanan Ekim 2026 kuralı
+
+Güncel birincil kaynak: Borsa İstanbul, **Ekim 2026**
+[BIST Piyasa Değeri Ağırlıklı Pay Endeksleri Kural Seti](https://borsaistanbul.com/files/bist-pd-agirlikli-pay-endeksleri-ks-tr-2026-ekim-temiz.pdf),
+madde **6.8 (e)–(f)**. BIST Katılım Tüm Endeksi için:
+
+- Rehber madde 3.2 uygun olmayan faaliyet geliri / toplam gelir **%5**,
+- faizli varlıklar / toplam varlıklar **%33**,
+- faizli borçlar / toplam varlıklar **%33**.
+
+Bunlar **Ekim 2026 sürümüne** aittir; eski PDF'deki
+`toplam varlıklar veya ortalama piyasa değeri` alternatifini
+bu sürümün hesaplama paydası gibi kullanmak **yanlıştır**.
+Konsolide tablo varsa konsolide tutar kullanılır. Kurallar
+mevcut endeks üyeleri için %10 eşik aşımı ve birbirini izleyen
+dönemlere bağlı ayrı tolerans da içerir; bu bir **yeni aday
+uygunluk onayı** olarak yorumlanmaz.
+
+Resmî katılım sürecinde şirketin [KAP Katılım Finansı İlkeleri Bilgi
+Formu (KAFİF)](https://www.kap.org.tr/tr/bist-sirketler)
+ve KAFİF Komitesi incelemesi bulunur:
+[Borsa İstanbul Katılım kaynak sayfası](https://www.borsaistanbul.com/endeksler/bist-pay/katilim).
+Kod bu formu **henüz okumaz**; katılım endeksi üyeliği kararı
+üretmez. Genel araştırma kapısı kural sürümü ve resmî
+finansal değerler bağımsız teyit edilene kadar üretim için açılmaz.
+
 ## Test durumu ve sonraki kabul
 
 `tests/test_participation_screen.py` tamamen **sentetik** numaralar
