@@ -65,7 +65,7 @@ def excluded_sic(sic):
     if not isinstance(sic, str) or not re.fullmatch("[0-9]{4}", sic):
         return True
     i = int(sic)
-    return (excluded_banking_or_insurance(sic)
+    return (not 100 <= i <= 8999 or excluded_banking_or_insurance(sic)
             or 6000 <= i <= 6999
             or 2100 <= i <= 2199
             or i in {2082, 2083, 2084, 2085, 2086, 2087}
