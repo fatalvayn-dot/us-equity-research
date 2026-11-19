@@ -49,7 +49,8 @@ def candidate():
                        "all_reported_segments_reviewed": True,
                        "source": proof()},
         "ratios": {name: {
-            "numerator": "10", "denominator": "100",
+            "numerator": "1" if name == "impermissible_income" else "10",
+            "denominator": "100",
             "currency": "USD", "period_end": "2026-09-30",
             "numerator_definition": rules[name]["numerator_definition"],
             "denominator_definition": rules[name]["denominator_definition"],
