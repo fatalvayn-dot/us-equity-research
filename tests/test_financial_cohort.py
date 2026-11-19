@@ -104,7 +104,7 @@ class RecordedFinancialCohortTests(unittest.TestCase):
         def read(path):return json.loads(gzip.decompress((root/path).read_bytes()))
         old=read('docs/evidence/liquidity100/batch.json.gz');new=read('docs/evidence/common-financial17/batch.json.gz')
         expected=read('docs/evidence/common-financial100/report.json.gz')
-        plan=json.loads((root/'docs/evidence/common100/candidates.json').read_text())
+        plan=json.loads((root/'docs/evidence/archived100/candidates-2026-11-19.json').read_text())
         merged,report=assemble_financial_cohort(plan,[old,new])
         self.assertEqual(json.loads(json.dumps(report,default=encode)),expected)
         self.assertEqual(json.loads(json.dumps(merged,default=encode)),read('docs/evidence/common-financial100/batch.json.gz'))
