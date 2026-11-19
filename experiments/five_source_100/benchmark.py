@@ -53,7 +53,7 @@ try:
         if out.exists():
             for e in csv.DictReader(out.open()):
                 s=e.get("Symbol") or e.get("symbol")
-                if s in by: by[s]["identity"]="found";by[s]["financials"]="unsupported"
+                if s in by: by[s]["identity"]="input_echoed";by[s]["financials"]="unsupported"
         if p.returncode: 
             for r in rows:r["error"]="CLI exit "+str(p.returncode)
     elif SRC=="yfinance":
@@ -99,8 +99,8 @@ try:
                         r["identity"]="found";r["recent_price"]=str(price)
                         r["price_date"]=datetime.now(timezone.utc).date().isoformat()
                         try:
-                            h=json.loads(get(base+"/chart?"+urlencode({"symbol":s+":"+exch,"range":"1Y"}),30))
-                            r["history_rows"]=len(h.get("data",[]) if isinstance(h,dict) else [])
+                            h=json.loads(get(base+"/chart?"+urlencode({"symbol":s+":"+exch,"window":"1Y"}),30))
+                            r["history_rows"]=int(h.get("count",0)) if isinstance(h,dict) else 0
                         except Exception as exc:errs.append("chart "+str(exc)[:80])
                         break
                 except Exception as exc:errs.append(str(exc)[:70])
