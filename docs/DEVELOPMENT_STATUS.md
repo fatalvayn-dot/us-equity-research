@@ -1,5 +1,33 @@
 # Development status
 
+## 19 Kasım 2026 — Aşama 6 katılım araştırma filtresi (CI bekliyor)
+
+#140 kapsamında banka/sigorta kalıcı dışlama korunurken faaliyet,
+hisse türü ve borç/faiz getirili nakit/uygunsuz gelir oranları için
+**üç durumlu** kaynak denetim prototipi geliştirildi.
+`src/equity_research/participation_screen.py` farklı piyasalarda
+tam kaynak kimliği, rapor dönemi, SEC/KAP/LEI isim alanı, timestamp,
+tam finansal pay/payda tanımı ve SHA-256 referansını kontrol eder.
+Kaynak kimliği veya standart/kriter eksikse `bilinmiyor`, kanıtlı
+yasak iş/finansal eşik aşımı varsa `uygunsuz`, tüm kullanıcıca
+sağlanan değerlendirme kuralları geçerse yalnız
+`kosullu_esik_gecisi` sonucu verir. Bu, katılım uygunluğu sertifikası,
+endeks üyeliği veya yeni AL izni değildir. Üretim skoru
+ve gerçek alım-satım devresi değişmedi.
+
+Sabit yatırım standardı oranı **yoktur**; `tests/test_participation_screen.py`
+içindeki numerik örnekler tümüyle sentetiktir. 0 gerçek şirket
+uygunluk onayı. Veri sağlayıcı API'sine ağ çağrısı yapılmadı.
+`docs/reviews/PARTICIPATION_GATE_STAGE6_2026_11_19.md`
+açık kabul kapılarını ve yöntem gereksinimlerini listeler.
+
+Ön koşul #135–#139 açık, #140 üretim için kapatılamaz.
+Bu PR'nin CI/merge kaydı ayrıca doğrulanmalıdır.
+Sonraki tek iş: tanımlı yayınlanmış bir katılım standardını ve
+örnek şirket orijinal faaliyet/finansal raporlarını kanıtlayarak
+araştırma filtresini gerçek kaynağa bağlamak.
+
+
 ## 19 Kasım 2026 — Aşama 5 BIST/Avrupa kaynak ve döviz denetimi (CI bekliyor)
 
 #139 hazırlığı, ön koşullar açıkken araştırma seviyesinde yapıldı.
