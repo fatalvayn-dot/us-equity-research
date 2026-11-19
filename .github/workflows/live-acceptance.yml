@@ -1,11 +1,6 @@
 name: Canlı 100 şirket kabulü
 
 on:
-  # Yalnız kullanıcının açık talebiyle ana dala kaydedilen çalışma isteği.
-  # Sıradan kod, PR veya belge değişiklikleri canlı kaynak toplamayı başlatmaz.
-  push:
-    branches: [main]
-    paths: ['docs/operations/financial-collection-request.json']
   schedule:
     - cron: '17 * * * *'
   workflow_dispatch:
