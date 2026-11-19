@@ -1,5 +1,28 @@
 # Development status
 
+## 19 Kasım 2026 — 7. aşama Türkçe karar destek görünümü (CI bekliyor)
+
+#141 araştırma ön hazırlığı: mevcut `scoring`, `score_html`
+ve Türkçe rapor çıktıları korunarak ayrı bir kanıt-koruyucu
+`decision_report.py` eklendi. Finansal/büyüme/kârlılık/nakit
+bileşenleri, değerleme, risk, katılım denetimi ve gerçek uzman
+kararı ayrı alanlara yazılır. Katılım araştırma kapısı
+onaylanmadıysa `bilinmiyor`, koşullu geçmişse sertifika
+değil. Karar alanı `null`, yatırım ve otomatik emir `false`.
+Verilmemiş komisyon, EUR getirisi ve endeks verisi sıfır
+sayılmaz. Puansızların engelleri ve özgün kaynak referansları
+korunur; yeni skor, piyasa isteği veya emir yok.
+
+`scripts/export_decision_report.py` verilen yerel zaman damgalı
+rapordan salt-okunur Türkçe Markdown üretir, kaynak SHA-256'sını
+makbuza koyar. `tests/test_decision_report.py` sentetik karar
+sözleşmesini ve daha eski tarihte kaydedilmiş 100 şirket
+skor arşivinin görünümünü sınar. Eski arşivin 18 puanı ile
+19 Kasım canlı 23/100 sonucu karıştırılmamalı.
+#135–#140 üretim kabulü açık, #141 kapanmadı.
+PR ve CI durumu ayrı doğrulanacak.
+
+
 ## 19 Kasım 2026 — Aşama 6 katılım araştırma filtresi (CI bekliyor)
 
 #140 kapsamında banka/sigorta kalıcı dışlama korunurken faaliyet,
