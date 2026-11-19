@@ -31,15 +31,33 @@ class CheckpointTests(unittest.TestCase):
         with patch.object(m, 'MAX_REVIEWED_SEQUENCE', evidence['financial_lineage']['sequence'] + 1):
             self.assertFalse(m.is_reviewed_idle_state(run_id, [artifact], evidence))
 
+    def test_sequence_eleven_requires_exact_reviewed_parent_artifact(self):
+        evidence = json.loads(m.REVIEWED_STATE.read_text())
+        source_id = evidence['financial_lineage']['run_id']
+        artifact = dict(name='live-acceptance-state', id=evidence['financial_artifact_id'],
+                        expired=False, digest='sha256:' + evidence['artifact_sha256']['financial'])
+        self.assertTrue(m.approved_extension_parent(source_id, [artifact], evidence))
+        self.assertFalse(m.approved_extension_parent(source_id + 1, [artifact], evidence))
+        for change in (dict(id=0), dict(expired=True), dict(digest='sha256:wrong'),
+                       dict(name='not-a-state')):
+            with self.subTest(change=change):
+                self.assertFalse(m.approved_extension_parent(
+                    source_id, [artifact | change], evidence))
+        self.assertFalse(m.approved_extension_parent(
+            source_id, [artifact, dict(name='live-acceptance-recovery')], evidence))
+        from unittest.mock import patch
+        with patch.object(m, 'MAX_REVIEWED_SEQUENCE', 10):
+            self.assertFalse(m.approved_extension_parent(source_id, [artifact], evidence))
+
     def test_review_allows_one_more_slice_then_closes_collection_gate(self):
         from unittest.mock import patch
         baseline=self.root/'baseline.json';baseline.write_text('{}')
         output=self.root/'outputs'
         summary=self.root/'summary.md'
         state=self.root/'state'
-        for sequence,expected in ((9,'true'),(10,'false'),(11,'false')):
+        for sequence,expected in ((9,'true'),(10,'true'),(11,'false'),(12,'false')):
             with self.subTest(sequence=sequence), patch.object(
-                    m,'verify',return_value=({'sequence':sequence},{})), patch.dict(
+                    m,'verify',return_value=({'sequence':sequence, 'root_run_id':m.ROOT_RUN},{})), patch.dict(
                     'os.environ',{'GITHUB_OUTPUT':str(output), 'GITHUB_STEP_SUMMARY':str(summary)}), patch(
                     'sys.argv',['live_checkpoint.py','verify','--state-dir',str(state),
                                 '--run-id',str(m.ROOT_RUN+1),'--baseline',str(baseline)]):
