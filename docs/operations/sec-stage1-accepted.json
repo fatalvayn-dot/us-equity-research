@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "purpose": "immutable_original_sec_shadow_corroboration",
+  "source_run_id": 44543645240,
+  "artifact_id": 14539511083,
+  "artifact_name": "sec-stage1-original-raw-evidence",
+  "artifact_digest": "sha256:9e9221a0f4cd98faaa02508b28538f25f83d4baa9fe1982b58bfb9eaf3234576",
+  "source_records": [
+    {
+      "issuer_id": "0001045810",
+      "accession": "0001045810-26-000021",
+      "source_raw_sha256": "640d99b08c00320f488a48cd60c75258d57ddf7d6fea86a6490b8cd718551c03"
+    },
+    {
+      "issuer_id": "0000004127",
+      "accession": "0000004127-26-000055",
+      "source_raw_sha256": "999be6a1a9188eb8d085f48f1a1b25976926ca318384d0db2b0d79001cbba379"
+    }
+  ],
+  "status": "reviewed_original_sec_bytes_not_investment_approval",
+  "reporting_note": "Immutable public SEC CompanyConcept source; not complete 10-K document hash. No selected score source replaced."
+}
