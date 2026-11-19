@@ -1,8 +1,10 @@
 name: Canlı 100 şirket kabulü
 
+# Legacy 100-company checkpoint is frozen after the user-directed cohort
+# replacement. Do not let it resume old issuer-specific SQLite state with
+# the new 100 SEC identities. New isolated research runs use
+# fresh100-isolated-live.yml, triggered only by a reviewed request file.
 on:
-  schedule:
-    - cron: '17 * * * *'
   workflow_dispatch:
     inputs:
       resume_run_id:
@@ -37,7 +39,9 @@ concurrency:
 
 jobs:
   collect:
-    if: (github.event_name != 'pull_request' && github.ref == 'refs/heads/main') || github.event.pull_request.head.repo.full_name == github.repository
+    # Archived original cohort only. Disallow production/manual/scheduled
+    # resume until a new zero-state checkpoint migration is reviewed.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:

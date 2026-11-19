@@ -130,7 +130,7 @@ class RecordedCommonComparisonTests(unittest.TestCase):
             b=(folder/name).read_bytes();return json.loads(gzip.decompress(b) if name.endswith('.gz') else b)
         current,prior=read('current-batch.json.gz'),read('prior-batch.json.gz')
         report=build_comparative_report(current,prior);audit=read('audit.json')
-        candidates=json.loads((root/'docs/evidence/common100/candidates.json').read_text())['companies']
+        candidates=json.loads((root/'docs/evidence/archived100/candidates-2026-11-19.json').read_text())['companies']
         wanted=[(r['symbol'],r['issuer_id']) for r in candidates]
         for side in (current,prior):
             self.assertEqual([(r['symbol'],r['issuer_id']) for r in side['companies']],wanted)

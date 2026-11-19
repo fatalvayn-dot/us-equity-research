@@ -13,7 +13,8 @@ class LiveAcceptanceWorkflowTests(unittest.TestCase):
 
     def test_manual_collection_is_bounded_and_targets_exact_common100(self):
         self.assertIn('workflow_dispatch:',self.body)
-        self.assertIn("cron: '17 * * * *'",self.body)
+        self.assertNotIn("cron: '17 * * * *'",self.body)
+        self.assertIn("if: github.event_name == 'pull_request'", self.body)
         self.assertIn('--candidates docs/evidence/common100/candidates.json',self.body)
         self.assertIn("options: ['25', '50', '100']",self.body)
         self.assertIn("options: ['250', '500', '900', '1400']",self.body)

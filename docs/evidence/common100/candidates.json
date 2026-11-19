@@ -1,404 +1,404 @@
 {
   "companies": [
     {
-      "symbol": "NVDA",
-      "issuer_id": "0001045810"
+      "symbol": "ZTS",
+      "issuer_id": "0001555280"
     },
     {
-      "symbol": "AAPL",
-      "issuer_id": "0000320193"
+      "symbol": "HON",
+      "issuer_id": "0000773840"
     },
     {
-      "symbol": "MSFT",
-      "issuer_id": "0000789019"
+      "symbol": "LOW",
+      "issuer_id": "0000060667"
     },
     {
-      "symbol": "GOOGL",
-      "issuer_id": "0001652044"
+      "symbol": "IBM",
+      "issuer_id": "0000051143"
     },
     {
-      "symbol": "AMZN",
-      "issuer_id": "0001018724"
+      "symbol": "XOM",
+      "issuer_id": "0002115436"
     },
     {
-      "symbol": "AVGO",
-      "issuer_id": "0001730168"
+      "symbol": "SHW",
+      "issuer_id": "0000089800"
     },
     {
-      "symbol": "META",
-      "issuer_id": "0001326801"
+      "symbol": "AEP",
+      "issuer_id": "0000004904"
     },
     {
-      "symbol": "TSLA",
-      "issuer_id": "0001318605"
+      "symbol": "SYK",
+      "issuer_id": "0000310764"
     },
     {
-      "symbol": "LLY",
-      "issuer_id": "0000059478"
+      "symbol": "MMM",
+      "issuer_id": "0000066740"
     },
     {
-      "symbol": "MU",
-      "issuer_id": "0000723125"
+      "symbol": "TGT",
+      "issuer_id": "0000027419"
     },
     {
-      "symbol": "WMT",
-      "issuer_id": "0000104169"
+      "symbol": "ECL",
+      "issuer_id": "0000031462"
     },
     {
-      "symbol": "AMD",
-      "issuer_id": "0000002488"
+      "symbol": "D",
+      "issuer_id": "0000715957"
     },
     {
-      "symbol": "JPM",
-      "issuer_id": "0000019617"
+      "symbol": "BSX",
+      "issuer_id": "0000885725"
     },
     {
-      "symbol": "JNJ",
-      "issuer_id": "0000200406"
+      "symbol": "EMR",
+      "issuer_id": "0000032604"
     },
     {
-      "symbol": "MA",
-      "issuer_id": "0001141391"
+      "symbol": "DG",
+      "issuer_id": "0000029534"
     },
     {
-      "symbol": "ABBV",
-      "issuer_id": "0001551152"
+      "symbol": "HPQ",
+      "issuer_id": "0000047217"
     },
     {
-      "symbol": "INTC",
-      "issuer_id": "0000050863"
+      "symbol": "EOG",
+      "issuer_id": "0000821189"
     },
     {
-      "symbol": "PLTR",
-      "issuer_id": "0001321655"
+      "symbol": "APD",
+      "issuer_id": "0000002969"
     },
     {
-      "symbol": "CVX",
-      "issuer_id": "0000093410"
+      "symbol": "EW",
+      "issuer_id": "0001099800"
     },
     {
-      "symbol": "COST",
-      "issuer_id": "0000909832"
+      "symbol": "PH",
+      "issuer_id": "0000076334"
     },
     {
-      "symbol": "CSCO",
-      "issuer_id": "0000858877"
+      "symbol": "DLTR",
+      "issuer_id": "0000935703"
     },
     {
-      "symbol": "ORCL",
-      "issuer_id": "0001341439"
+      "symbol": "KEYS",
+      "issuer_id": "0001601046"
     },
     {
-      "symbol": "KO",
-      "issuer_id": "0000021344"
+      "symbol": "SLB",
+      "issuer_id": "0000087347"
     },
     {
-      "symbol": "PG",
-      "issuer_id": "0000080424"
+      "symbol": "FCX",
+      "issuer_id": "0000831259"
     },
     {
-      "symbol": "UNH",
-      "issuer_id": "0000731766"
+      "symbol": "HCA",
+      "issuer_id": "0000860730"
     },
     {
-      "symbol": "MRK",
-      "issuer_id": "0000310158"
+      "symbol": "ITW",
+      "issuer_id": "0000049826"
     },
     {
-      "symbol": "BAC",
-      "issuer_id": "0000070858"
+      "symbol": "ROST",
+      "issuer_id": "0000745732"
     },
     {
-      "symbol": "AMAT",
-      "issuer_id": "0000006951"
+      "symbol": "TER",
+      "issuer_id": "0000097210"
     },
     {
-      "symbol": "HD",
-      "issuer_id": "0000354950"
+      "symbol": "HAL",
+      "issuer_id": "0000045012"
     },
     {
-      "symbol": "PM",
-      "issuer_id": "0001413329"
+      "symbol": "EXC",
+      "issuer_id": "0001109357"
     },
     {
-      "symbol": "GE",
-      "issuer_id": "0000040545"
+      "symbol": "MCK",
+      "issuer_id": "0000927653"
     },
     {
-      "symbol": "LRCX",
-      "issuer_id": "0000707549"
+      "symbol": "OTIS",
+      "issuer_id": "0001781335"
     },
     {
-      "symbol": "PANW",
-      "issuer_id": "0001327567"
+      "symbol": "ORLY",
+      "issuer_id": "0000898173"
     },
     {
-      "symbol": "DELL",
-      "issuer_id": "0001571996"
+      "symbol": "BKR",
+      "issuer_id": "0001701605"
     },
     {
-      "symbol": "MS",
-      "issuer_id": "0000895421"
+      "symbol": "NUE",
+      "issuer_id": "0000073309"
     },
     {
-      "symbol": "CAT",
-      "issuer_id": "0000018230"
+      "symbol": "CAH",
+      "issuer_id": "0000721371"
     },
     {
-      "symbol": "TXN",
-      "issuer_id": "0000097476"
+      "symbol": "CARR",
+      "issuer_id": "0001783180"
     },
     {
-      "symbol": "RY",
-      "issuer_id": "0001000275"
+      "symbol": "AZO",
+      "issuer_id": "0000866787"
     },
     {
-      "symbol": "GS",
-      "issuer_id": "0000886982"
+      "symbol": "ALGM",
+      "issuer_id": "0000866291"
     },
     {
-      "symbol": "RTX",
-      "issuer_id": "0000101829"
+      "symbol": "DVN",
+      "issuer_id": "0001090012"
     },
     {
-      "symbol": "CRWD",
-      "issuer_id": "0001535527"
+      "symbol": "STLD",
+      "issuer_id": "0001022671"
     },
     {
-      "symbol": "TMO",
-      "issuer_id": "0000097745"
+      "symbol": "EIX",
+      "issuer_id": "0000827052"
     },
     {
-      "symbol": "NFLX",
-      "issuer_id": "0001065280"
+      "symbol": "COR",
+      "issuer_id": "0001140859"
     },
     {
-      "symbol": "AMGN",
-      "issuer_id": "0000318154"
+      "symbol": "GNRC",
+      "issuer_id": "0001474735"
     },
     {
-      "symbol": "GEV",
-      "issuer_id": "0001996810"
+      "symbol": "TSCO",
+      "issuer_id": "0000916365"
     },
     {
-      "symbol": "ANET",
-      "issuer_id": "0001596532"
+      "symbol": "ACLS",
+      "issuer_id": "0001113232"
     },
     {
-      "symbol": "LIN",
-      "issuer_id": "0001707925"
+      "symbol": "FANG",
+      "issuer_id": "0001539838"
     },
     {
-      "symbol": "KLAC",
-      "issuer_id": "0000319201"
+      "symbol": "RS",
+      "issuer_id": "0000861884"
     },
     {
-      "symbol": "AXP",
-      "issuer_id": "0000004962"
+      "symbol": "ES",
+      "issuer_id": "0000072741"
     },
     {
-      "symbol": "ADI",
-      "issuer_id": "0000006281"
+      "symbol": "REGN",
+      "issuer_id": "0000872589"
     },
     {
-      "symbol": "GILD",
-      "issuer_id": "0000882095"
+      "symbol": "HUBB",
+      "issuer_id": "0000048898"
     },
     {
-      "symbol": "APH",
-      "issuer_id": "0000820313"
+      "symbol": "ULTA",
+      "issuer_id": "0001403568"
     },
     {
-      "symbol": "QCOM",
-      "issuer_id": "0000804328"
+      "symbol": "LSCC",
+      "issuer_id": "0000855658"
     },
     {
-      "symbol": "SNDK",
-      "issuer_id": "0002023554"
+      "symbol": "MPC",
+      "issuer_id": "0001510295"
     },
     {
-      "symbol": "MRVL",
-      "issuer_id": "0001835632"
+      "symbol": "LECO",
+      "issuer_id": "0000059527"
     },
     {
-      "symbol": "CRM",
-      "issuer_id": "0001108524"
+      "symbol": "SBUX",
+      "issuer_id": "0000829224"
     },
     {
-      "symbol": "PEP",
-      "issuer_id": "0000077476"
+      "symbol": "INDI",
+      "issuer_id": "0001841925"
     },
     {
-      "symbol": "BLK",
-      "issuer_id": "0002012383"
+      "symbol": "VLO",
+      "issuer_id": "0001035002"
     },
     {
-      "symbol": "MCD",
-      "issuer_id": "0000063908"
+      "symbol": "MOS",
+      "issuer_id": "0001285785"
     },
     {
-      "symbol": "ABT",
-      "issuer_id": "0000001800"
+      "symbol": "ED",
+      "issuer_id": "0001047862"
     },
     {
-      "symbol": "COP",
-      "issuer_id": "0001163165"
+      "symbol": "BIIB",
+      "issuer_id": "0000875045"
     },
     {
-      "symbol": "UNP",
-      "issuer_id": "0000100885"
+      "symbol": "DOV",
+      "issuer_id": "0000029905"
     },
     {
-      "symbol": "DE",
-      "issuer_id": "0000315189"
+      "symbol": "CMG",
+      "issuer_id": "0001058090"
     },
     {
-      "symbol": "NEE",
-      "issuer_id": "0000753308"
+      "symbol": "COHR",
+      "issuer_id": "0000820318"
     },
     {
-      "symbol": "WELL",
-      "issuer_id": "0000766704"
+      "symbol": "PSX",
+      "issuer_id": "0001534701"
     },
     {
-      "symbol": "PFE",
-      "issuer_id": "0000078003"
+      "symbol": "CF",
+      "issuer_id": "0001324404"
     },
     {
-      "symbol": "DHR",
-      "issuer_id": "0000313616"
+      "symbol": "WEC",
+      "issuer_id": "0000783325"
     },
     {
-      "symbol": "ACN",
-      "issuer_id": "0001467373"
+      "symbol": "IDXX",
+      "issuer_id": "0000874716"
     },
     {
-      "symbol": "SCCO",
-      "issuer_id": "0001001838"
+      "symbol": "FTV",
+      "issuer_id": "0001659166"
     },
     {
-      "symbol": "STX",
-      "issuer_id": "0001137789"
+      "symbol": "YUM",
+      "issuer_id": "0001041061"
     },
     {
-      "symbol": "TMUS",
-      "issuer_id": "0001283699"
+      "symbol": "VIAV",
+      "issuer_id": "0000912093"
     },
     {
-      "symbol": "ISRG",
-      "issuer_id": "0001035267"
+      "symbol": "OKE",
+      "issuer_id": "0001039684"
     },
     {
-      "symbol": "TJX",
-      "issuer_id": "0000109198"
+      "symbol": "CE",
+      "issuer_id": "0001306830"
     },
     {
-      "symbol": "SCHW",
-      "issuer_id": "0000316709"
+      "symbol": "IQV",
+      "issuer_id": "0001478242"
     },
     {
-      "symbol": "ETN",
-      "issuer_id": "0001551182"
+      "symbol": "WAB",
+      "issuer_id": "0000943452"
     },
     {
-      "symbol": "LMT",
-      "issuer_id": "0000936468"
+      "symbol": "DPZ",
+      "issuer_id": "0001286681"
     },
     {
-      "symbol": "WDC",
-      "issuer_id": "0000106040"
+      "symbol": "CIEN",
+      "issuer_id": "0000936395"
     },
     {
-      "symbol": "CB",
-      "issuer_id": "0000896159"
+      "symbol": "FMC",
+      "issuer_id": "0000037785"
     },
     {
-      "symbol": "VRTX",
-      "issuer_id": "0000875320"
+      "symbol": "CNP",
+      "issuer_id": "0001130310"
     },
     {
-      "symbol": "BA",
-      "issuer_id": "0000012927"
+      "symbol": "PTC",
+      "issuer_id": "0000857005"
     },
     {
-      "symbol": "UBER",
-      "issuer_id": "0001543151"
+      "symbol": "DRI",
+      "issuer_id": "0000940944"
     },
     {
-      "symbol": "PGR",
-      "issuer_id": "0000080661"
+      "symbol": "GLW",
+      "issuer_id": "0000024741"
     },
     {
-      "symbol": "SPGI",
-      "issuer_id": "0000064040"
+      "symbol": "WMB",
+      "issuer_id": "0000107263"
     },
     {
-      "symbol": "ADBE",
-      "issuer_id": "0000796343"
+      "symbol": "PPG",
+      "issuer_id": "0000079879"
     },
     {
-      "symbol": "INTU",
-      "issuer_id": "0000896878"
+      "symbol": "FE",
+      "issuer_id": "0001031296"
     },
     {
-      "symbol": "NOW",
-      "issuer_id": "0001373715"
+      "symbol": "GEHC",
+      "issuer_id": "0001932393"
     },
     {
-      "symbol": "SNPS",
-      "issuer_id": "0000883241"
+      "symbol": "CAVA",
+      "issuer_id": "0001639438"
     },
     {
-      "symbol": "CDNS",
-      "issuer_id": "0000813672"
+      "symbol": "LNG",
+      "issuer_id": "0000003570"
     },
     {
-      "symbol": "FTNT",
-      "issuer_id": "0001262039"
+      "symbol": "RPM",
+      "issuer_id": "0000110621"
     },
     {
-      "symbol": "WDAY",
-      "issuer_id": "0001327811"
+      "symbol": "NTRA",
+      "issuer_id": "0001604821"
     },
     {
-      "symbol": "ADSK",
-      "issuer_id": "0000769397"
+      "symbol": "XYL",
+      "issuer_id": "0001524472"
     },
     {
-      "symbol": "ROP",
-      "issuer_id": "0000882835"
+      "symbol": "TXRH",
+      "issuer_id": "0001289460"
     },
     {
-      "symbol": "MCHP",
-      "issuer_id": "0000827054"
+      "symbol": "DOCU",
+      "issuer_id": "0001261333"
     },
     {
-      "symbol": "MPWR",
-      "issuer_id": "0001280452"
+      "symbol": "EQT",
+      "issuer_id": "0000033213"
     },
     {
-      "symbol": "ON",
-      "issuer_id": "0001097864"
+      "symbol": "MLM",
+      "issuer_id": "0000916076"
     },
     {
-      "symbol": "SWKS",
-      "issuer_id": "0000004127"
+      "symbol": "PEG",
+      "issuer_id": "0000788784"
     },
     {
-      "symbol": "NTAP",
-      "issuer_id": "0001002047"
+      "symbol": "INCY",
+      "issuer_id": "0000879169"
     },
     {
-      "symbol": "AKAM",
-      "issuer_id": "0001086222"
+      "symbol": "IEX",
+      "issuer_id": "0000832101"
     },
     {
-      "symbol": "FFIV",
-      "issuer_id": "0001048695"
+      "symbol": "BROS",
+      "issuer_id": "0001866581"
     },
     {
-      "symbol": "TYL",
-      "issuer_id": "0000860731"
+      "symbol": "ZM",
+      "issuer_id": "0001585521"
     }
   ]
 }
