@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 import tempfile
 
-from audit_alexandria_sec_concept import audit_alexandria
+from scripts.audit_alexandria_sec_concept import audit_alexandria
 
 FIELDS = (
     "issuer_id", "concept", "taxonomy", "source_url", "accession",
