@@ -40,7 +40,7 @@ ALLOWED_EXCHANGES = {"Nasdaq", "NYSE", "NYSE American"}
 EXCLUDED_WORDS = re.compile(
     r"(BANK|BANCORP|INSURANCE|REINSURANCE|BROKER|CASINO|LOTTER|"
     r"TOBACCO|CIGARETTE|VAPING|BREWER|BREWING|WINERY|ALCOHOL|"
-    r"REAL ESTATE INVESTMENT TRUST|\\bREIT\\b|\\bFUND\\b|"
+    r"REAL ESTATE INVESTMENT TRUST|\bREIT\b|\bFUND\b|"
     r"MORTGAGE TRUST|INVESTMENT MANAGEMENT)",
     re.I,
 )
@@ -128,7 +128,7 @@ def fetch(url, agent):
     if not agent or not isinstance(agent, str):
         raise ValueError("SEC_USER_AGENT required")
     if url != DIRECTORY_URL and not re.fullmatch(
-        r"https://data\\.sec\\.gov/submissions/CIK[0-9]{10}\\.json", url
+        r"https://data\.sec\.gov/submissions/CIK[0-9]{10}\.json", url
     ):
         raise ValueError("only exact SEC company directory or submissions URLs allowed")
     request = Request(url, headers={
