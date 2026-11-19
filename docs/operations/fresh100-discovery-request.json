@@ -1,0 +1,10 @@
+{
+  "purpose": "select_100_distinct_nonfinancial_sec_candidates",
+  "requested_on": "2026-11-19",
+  "old_cohort_size": 100,
+  "target_cohort_size": 100,
+  "max_sec_submissions": 240,
+  "investment_orders": false,
+  "source": "https://www.sec.gov/files/company_tickers_exchange.json",
+  "notes": "No old SEC CIK or ticker, no bank/insurance/fund/gambling/alcohol tobacco sector by initial SEC SIC name gate. Securities and participation remain unapproved. Google Finance used only for manual gap diagnosis."
+}
