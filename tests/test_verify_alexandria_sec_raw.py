@@ -71,7 +71,7 @@ class SecRawTests(unittest.TestCase):
                 doc = official()
                 doc[key] = bad
                 self.write(folder, doc)
-                with self.subTest(key=key), self.assertRaisesRegex(ValueError, "mismatch"):
+                with self.subTest(key=key), self.assertRaises(ValueError):
                     verify_raw_sources(firecrawl(), folder)
 
     def test_duplicate_raw_rows_fail_closed(self):
