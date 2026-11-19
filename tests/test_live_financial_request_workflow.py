@@ -17,7 +17,8 @@ class FinancialRequestTriggerTests(unittest.TestCase):
         self.assertNotIn("  push:", self.live)
         self.assertIn("  push:\n    branches: [main]\n    paths: ['docs/operations/financial-collection-request.json']", self.request)
         self.assertIn("  workflow_dispatch:", self.live)
-        self.assertIn("  schedule:\n    - cron: '17 * * * *'", self.live)
+        self.assertNotIn("  schedule:\n    - cron: '17 * * * *'", self.live)
+        self.assertIn("if: github.event_name == 'pull_request'", self.live)
 
     def test_dispatch_guard_binds_reviewed_financial_state(self):
         self.assertIn("expected_parent_run_id", self.request)
