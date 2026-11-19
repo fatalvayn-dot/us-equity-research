@@ -179,7 +179,7 @@ class RecordedCommonSampleTests(unittest.TestCase):
         import hashlib
         root=Path(__file__).resolve().parents[1];folder=root/'docs/evidence/common100'
         report=json.loads(gzip.decompress((folder/'report.json.gz').read_bytes()))
-        plan=json.loads((folder/'candidates.json').read_text())
+        plan=json.loads((root/'docs/evidence/archived100/candidates-2026-11-19.json').read_text())
         self.assertEqual(report['summary']['evaluated'],101);self.assertEqual(report['summary']['selected'],100)
         self.assertEqual(len(plan['companies']),100);self.assertEqual(len({r['issuer_id'] for r in plan['companies']}),100)
         self.assertTrue(report['hundred_common_share_sample_verified']);self.assertFalse(report['mvp_accepted'])
@@ -224,7 +224,7 @@ class RecordedCommonPriceTests(unittest.TestCase):
         from equity_research.sec import DIRECTORY_URL
         root=Path(__file__).resolve().parents[1];folder=root/'docs/evidence/common-price100'
         report=json.loads(gzip.decompress((folder/'report.json.gz').read_bytes()))
-        plan=json.loads((root/'docs/evidence/common100/candidates.json').read_text())
+        plan=json.loads((root/'docs/evidence/archived100/candidates-2026-11-19.json').read_text())
         self.assertEqual(report['summary']['collected_prices'],100)
         self.assertEqual([dict(symbol=r['symbol'],issuer_id=r['issuer_id']) for r in report['companies']],plan['companies'])
         raw={(r.url,r.sha256,r.retrieved_at.isoformat()):r for r in read_bundle(root/'tests/fixtures/common-price100-sources')}
