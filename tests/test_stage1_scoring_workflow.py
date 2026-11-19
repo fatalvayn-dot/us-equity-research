@@ -19,6 +19,18 @@ class SecScoreWorkflowWiringTests(unittest.TestCase):
         self.assertIn("640d99b08c00320f488a48cd60c75258d57ddf7d6fea86a6490b8cd718551c03", self.pinning)
         self.assertIn("999be6a1a9188eb8d085f48f1a1b25976926ca318384d0db2b0d79001cbba379", self.pinning)
 
+    def test_standalone_replay_requires_exact_previous_real_financial_run(self):
+        workflow = (ROOT / ".github/workflows/sec-stage1-financial-replay.yml").read_text()
+        self.assertIn("docs/operations/sec-stage1-financial-replay-request.json", workflow)
+        self.assertIn("run-id: 44526775886", workflow)
+        self.assertIn("run-id: 44543645240", workflow)
+        self.assertIn("guard_selected_batch(financial,raw,manifest,as_of=cutoff)", workflow)
+        self.assertIn("source_selected_facts_mutated=False", workflow)
+        self.assertIn("scored_companies_added=0", workflow)
+        self.assertIn("replay_runs=2", workflow)
+        self.assertIn("cancel-in-progress: false", workflow)
+        self.assertNotIn("query_rw", workflow)
+
     def test_no_new_network_provider_and_score_uses_sha_gate(self):
         self.assertIn("steps.financial.outputs.ready == 'true'", self.workflow)
         self.assertIn("gh run download 44543645240", self.workflow)
