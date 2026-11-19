@@ -35,10 +35,10 @@ class SecScoreWorkflowWiringTests(unittest.TestCase):
         self.assertIn("steps.financial.outputs.ready == 'true'", self.workflow)
         self.assertIn("gh run download 44543645240", self.workflow)
         self.assertIn("verify_stage1_artifact(m,raw,as_of=datetime.now(timezone.utc))", self.workflow)
-        self.assertIn("STAGE1_READY: \${{ steps.sec_stage1.outputs.ready }}", self.workflow)
+        self.assertIn("STAGE1_READY: ${{ steps.sec_stage1.outputs.ready }}", self.workflow)
         self.assertIn("STAGE1_ARGS=(--sec-stage1 data/sec-stage1/verified-sec-stage1.json", self.workflow)
         self.assertIn("--sec-raw-dir data/sec-stage1", self.workflow)
-        self.assertIn('--as-of "$AS_OF" "\${STAGE1_ARGS[@]}"', self.workflow)
+        self.assertIn('--as-of "$AS_OF" "${STAGE1_ARGS[@]}"', self.workflow)
         self.assertIn("scripts/build_current_scores.py", self.workflow)
         self.assertNotIn("query_rw", self.workflow)
 
