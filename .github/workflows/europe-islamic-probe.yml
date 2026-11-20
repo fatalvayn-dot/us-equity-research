@@ -31,4 +31,12 @@ jobs:
                           print("term",word,bool(re.search(word,txt,re.I)))
                       print("title",re.findall(r"<title[^>]*>(.*?)</title>",txt,re.I|re.S)[:1])
               except Exception as ex:print(key,"ERROR",type(ex).__name__,str(ex)[:180])
+          print("HSBC_HOLDINGS_CONTEXT")
+          try:
+              url=urls["hsbc_etf"]
+              req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0"})
+              with urllib.request.urlopen(req,timeout=30) as resp: doc=resp.read().decode("utf-8",errors="replace")
+              for match in list(re.finditer(r"holdings|portfolio|download|factsheet",doc,re.I))[:35]:
+                  print(re.sub(r"\\s+"," ",doc[max(0,match.start()-120):match.end()+160])[:350])
+          except Exception as ex:print("context_failed",type(ex).__name__,str(ex)[:130])
           PY
