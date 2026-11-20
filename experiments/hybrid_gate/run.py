@@ -196,6 +196,15 @@ def run():
     if args.limit_per_region < 1 or args.limit_per_region > 100:
         parser.error("limit must be 1..100")
     import yfinance as yf
+    from experiments.hybrid_gate.europe_msci_gate import index_membership, classify
+    official_europe = None
+    official_europe_metadata = None
+    if args.europe_index_csv:
+        if not (args.europe_index_date and args.europe_expected_count):
+            parser.error("complete Europe index CSV requires date and independent count")
+        official_europe, official_europe_metadata = index_membership(
+            args.europe_index_csv, reference_date=args.europe_index_date,
+            expected_count=args.europe_expected_count)
     # Clone of MIT project, isolated in runner. Its default missing->zero path is forbidden here.
     sys.path.insert(0, "/tmp/halal-stock-analyst")
     from src.screening import screen_company
@@ -218,8 +227,16 @@ def run():
             try:
                 t = yf.Ticker(company["yahoo_symbol"])
                 snap, sector, industry, date, info = financial_snapshot(t)
-                decision = screen_snapshot(snap, sector, industry, screen_company)
-                row.update(decision)
+                if region == "AVRUPA":
+                    membership = classify({"isin":info.get("isin")}, official=official_europe)
+                    row.update({"europe_index_membership":membership,
+                                "eligibility_source":"MSCI Europe IMI Islamic Index",
+                                "status":"kosullu_gecti" if membership=="resmi_msci_uyesi" else "belirsiz",
+                                "reason":membership,
+                                "missing":[] if membership=="resmi_msci_uyesi" else ["official_index_membership"]})
+                else:
+                    decision = screen_snapshot(snap, sector, industry, screen_company)
+                    row.update(decision)
                 row["snapshot_date"] = date
                 if row["status"] == "kosullu_gecti":
                     hist = t.history(period="1y", auto_adjust=True)
