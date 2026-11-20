@@ -3,7 +3,7 @@ on:
   push:
     branches: [feat/europe-msci-islamic-gate-20261120]
     paths:
-      - 'experiments/hybrid_gate/europe_msci_gate.py'
+      - 'experiments/hybrid_gate/europe_msci_gate.py'\n      - 'experiments/hybrid_gate/run.py'
       - 'experiments/hybrid_gate/test_europe_msci_gate.py'
       - '.github/workflows/europe-msci-gate.yml'
 permissions:
@@ -43,5 +43,50 @@ jobs:
         with:
           name: europe-msci-islamic-gate-research
           path: europe_gate_output/
+          retention-days: 30
+          if-no-files-found: warn
+
+  hybrid_live:
+    needs: europe_gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install two market data providers and independent reference engine
+        run: |
+          set -euxo pipefail
+          git clone --depth 1 https://github.com/omkarcloud/google-finance-scraper.git /tmp/google-finance-scraper
+          git clone --depth 1 https://github.com/bamlhs/halal-stock-analyst.git /tmp/halal-stock-analyst
+          python -m pip install -r /tmp/google-finance-scraper/requirements.txt
+          python -m pip install yfinance pandas requests
+          cd /tmp/google-finance-scraper
+          nohup python run.py >/tmp/google-finance-server.log 2>&1 &
+          sleep 8
+          curl -fsS --max-time 15 http://127.0.0.1:8000/health
+      - name: Gate Europe without inventing an official full roster
+        run: |
+          python -m experiments.hybrid_gate.run --limit-per-region 4 --output europe_gate_hybrid_output
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('europe_gate_hybrid_output')
+          report=json.loads((root/'summary.json').read_text())
+          europe=report['markets']['AVRUPA']
+          assert report['europe_full_roster_verified'] is False
+          assert europe['passed']==0 and europe['scored']==0
+          rows=json.loads((root/'avrupa.json').read_text())
+          assert all(r['status']=='belirsiz' for r in rows)
+          assert all(r.get('eligibility_source')=='MSCI Europe IMI Islamic Index' or r.get('reason')=='data_request_error' for r in rows)
+          print('EUROPE_FAIL_CLOSED',europe['unique'],europe['passed'],europe['unknown'])
+          PY
+      - name: Upload hybrid gate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: europe-msci-hybrid-no-roster-acceptance
+          path: europe_gate_hybrid_output/
           retention-days: 30
           if-no-files-found: warn
