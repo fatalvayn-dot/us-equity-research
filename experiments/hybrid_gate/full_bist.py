@@ -31,7 +31,7 @@ def normalize_yahoo(entry):
     ticker=str(entry.get("symbol") or "").strip().upper()
     exch=str(entry.get("exchange") or "").upper()
     kind=str(entry.get("quoteType") or "").upper()
-    if not re.fullmatch(r"[A-Z0-9-]+\\.IS",ticker) or exch!="IST" or kind!="EQUITY":
+    if not re.fullmatch(r"[A-Z0-9-]+\.IS",ticker) or exch!="IST" or kind!="EQUITY":
         return None
     return {"symbol":ticker,"company_name":entry.get("shortName") or entry.get("longName") or ticker,
             "exchange":exch,"asset_class":kind,"source":["yfinance"],"google_symbol":None,
@@ -85,7 +85,7 @@ def discover_google(base,limit):
     accepted={}
     for row in rows:
         ticker=str(row.get("yahoo_symbol") or "").upper()
-        if re.fullmatch(r"[A-Z0-9-]+\\.IS",ticker):
+        if re.fullmatch(r"[A-Z0-9-]+\.IS",ticker):
             accepted[ticker]={"symbol":ticker,"company_name":row.get("name") or ticker,
                               "exchange":"IST","asset_class":"EQUITY_UNVERIFIED",
                               "google_symbol":row.get("google_symbol"),
