@@ -32,7 +32,7 @@ def parse_official_csv(data):
         if index!="XKTUM":
             continue
         original=row[0].strip().upper()
-        if not re.fullmatch(r"[A-Z0-9-]+\\.E",original):
+        if not re.fullmatch(r"[A-Z0-9-]+\.E",original):
             raise ValueError("Unexpected XKTUM constituent code "+original)
         symbol=original.removesuffix(".E")+".IS"
         date=datetime.strptime(row[5].strip(),"%d/%m/%Y").date()
