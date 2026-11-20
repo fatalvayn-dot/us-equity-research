@@ -131,7 +131,7 @@ def parse_ishares_holdings(raw):
             header_idx=i
             break
     if header_idx is None:
-        raise ValueError("iShares holdings columns not found")
+        raise ValueError("iShares holdings columns not found; preview="+repr(txt[:160]))
     keys=[x.strip() for x in lines[header_idx]]
     data=[dict(zip(keys,row)) for row in lines[header_idx+1:] if len(row)>=len(keys)]
     isin_key=next(k for k in keys if k.lower()=="isin")
