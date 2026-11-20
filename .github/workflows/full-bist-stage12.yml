@@ -1,0 +1,64 @@
+name: BIST full-universe stage1 and stage2 verification
+on:
+  push:
+    branches: [test/full-bist-hybrid-stage1-stage2-20261120]
+    paths:
+      - 'experiments/hybrid_gate/**'
+      - '.github/workflows/full-bist-stage12.yml'
+permissions:
+  contents: read
+jobs:
+  full_bist:
+    runs-on: ubuntu-latest
+    timeout-minutes: 125
+    env:
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prepare two discovery sources and compliance adapter
+        run: |
+          set -euxo pipefail
+          python -m pip install --upgrade pip
+          git clone --depth 1 https://github.com/omkarcloud/google-finance-scraper.git /tmp/google-finance-scraper
+          git clone --depth 1 https://github.com/bamlhs/halal-stock-analyst.git /tmp/halal-stock-analyst
+          python -m pip install -r /tmp/google-finance-scraper/requirements.txt
+          python -m pip install yfinance pandas requests
+          cd /tmp/google-finance-scraper
+          nohup python run.py >/tmp/google-finance-server.log 2>&1 &
+          sleep 8
+          curl -fsS --max-time 20 http://127.0.0.1:8000/health
+      - name: Run offline BIST universe and gate regressions
+        run: |
+          python -m unittest discover -s experiments/hybrid_gate -p 'test_*.py' -v
+      - name: Page BIST universe and screen every discovered candidate
+        run: |
+          python -m experiments.hybrid_gate.full_bist --max-pages 30 --workers 4 --output bist_full_output
+      - name: Validate output disclosure and company reconciliation
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          root=Path('bist_full_output')
+          s=json.loads((root/'summary.json').read_text())
+          d=s['phase1']
+          c=s['phase2']
+          assert d['unique_symbols']>0, 'BIST discovery empty'
+          assert c['attempted']==c['discovered']
+          assert sum(c['statuses'].values())==c['attempted']
+          assert s['phase3_scoring_started'] is False
+          assert d['all_bist_claim_verified'] is False
+          assert c['all_BIST_screened'] is False
+          print('RECONCILED', c['attempted'],c['statuses'])
+          PY
+      - name: Preserve full market evidence and any partial outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bist-full-universe-stage1-stage2-results
+          path: |
+            bist_full_output/
+          retention-days: 30
+          if-no-files-found: warn
