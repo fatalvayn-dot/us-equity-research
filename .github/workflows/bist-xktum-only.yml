@@ -1,0 +1,44 @@
+name: BIST 627 vs official XKTUM membership only
+on:
+  push:
+    branches: [test/bist-xktum-membership-only-20261120]
+    paths:
+      - 'experiments/hybrid_gate/xktum_only.py'
+      - 'experiments/hybrid_gate/test_xktum_only.py'
+      - '.github/workflows/bist-xktum-only.yml'
+permissions:
+  contents: read
+jobs:
+  xktum_only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install yfinance only for BIST universe discovery
+        run: python -m pip install yfinance
+      - name: XKTUM parser and membership regression
+        run: python -m unittest discover -s experiments/hybrid_gate -p 'test_xktum_only.py' -v
+      - name: Recheck full BIST universe solely against official XKTUM CSV
+        run: python -m experiments.hybrid_gate.xktum_only --output bist_xktum_output
+      - name: Verify membership reconciliation
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('bist_xktum_output/summary.json').read_text())
+          assert s['universe_count'] == s['matched_member_count']+s['yahoo_universe_not_xktum']
+          assert s['eligibility_source']['xktum_constituents'] == s['matched_member_count']+s['xktum_not_found_in_yahoo']
+          assert not s['financial_ratios_used'] and not s['stage3_scoring_started']
+          print('XKTUM_ACCEPTANCE',s['eligibility_source']['dates'],s['universe_count'],s['matched_member_count'],s['xktum_not_found_in_yahoo'])
+          PY
+      - name: Preserve official snapshot and full classification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bist-xktum-only-official-20261120
+          path: bist_xktum_output/
+          retention-days: 30
+          if-no-files-found: warn
