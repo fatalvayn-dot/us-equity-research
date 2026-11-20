@@ -189,6 +189,9 @@ def run():
     parser.add_argument("--google-base", default="http://127.0.0.1:8000")
     parser.add_argument("--limit-per-region", type=int, default=12)
     parser.add_argument("--output", default="hybrid_gate_output")
+    parser.add_argument("--europe-index-csv", help="verified COMPLETE MSCI Europe IMI Islamic roster")
+    parser.add_argument("--europe-index-date", help="date in official roster YYYY-MM-DD")
+    parser.add_argument("--europe-expected-count", type=int)
     args = parser.parse_args()
     if args.limit_per_region < 1 or args.limit_per_region > 100:
         parser.error("limit must be 1..100")
@@ -199,7 +202,11 @@ def run():
     out = Path(args.output); out.mkdir(parents=True, exist_ok=True)
     summary = {"created_utc": datetime.now(timezone.utc).isoformat(),
                "method": "halal-stock-analyst market-cap variant, NOT certified AAOIFI",
-               "live_discovery_exhaustive": False, "markets": {}}
+               "live_discovery_exhaustive": False,
+               "europe_membership_gate": "MSCI Europe IMI Islamic Index",
+               "europe_full_roster_verified": official_europe is not None,
+               "europe_roster_metadata": official_europe_metadata,
+               "markets": {}}
     for region in REGIONS:
         gf, gw = collect_google(args.google_base, region, args.limit_per_region)
         yy, yw = collect_yahoo(region, args.limit_per_region)
