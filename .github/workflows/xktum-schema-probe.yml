@@ -1,0 +1,32 @@
+name: Probe official XKTUM CSV schema
+on:
+  push:
+    branches: [test/bist-xktum-membership-only-20261120]
+    paths: ['.github/workflows/xktum-schema-probe.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch official Borsa Istanbul index composition CSV
+        shell: bash
+        run: |
+          python - <<'PY'
+          import urllib.request, csv, io
+          u='https://borsaistanbul.com/datum/hisse_endeks_katilim_ds.csv'
+          req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0','Accept':'text/csv,*/*'})
+          with urllib.request.urlopen(req,timeout=35) as r:
+              raw=r.read()
+              print('HTTP',r.status,'CT',r.headers.get('Content-Type'),'LENGTH',len(raw))
+          for enc in ('utf-8-sig','cp1254','iso-8859-9'):
+              try: s=raw.decode(enc);print('ENCODING',enc);break
+              except UnicodeDecodeError: continue
+          print('FIRST_LINES')
+          for line in s.splitlines()[:20]:print(repr(line[:330]))
+          print('SYMBOL_MATCHES')
+          for needle in ('XKTUM','ASELS','BIMAS','ALBRK'):
+              print(needle, s.upper().find(needle))
+          PY
