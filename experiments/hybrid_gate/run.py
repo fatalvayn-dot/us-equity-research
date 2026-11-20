@@ -54,9 +54,12 @@ def collect_google(base, region, limit):
     for country in REGIONS[region]["countries"]:
         for endpoint in ("market-movers", "trending", "search"):
             try:
-                res = requests.get(base.rstrip("/") + "/" + endpoint,
-                                   params={"country": country, "limit": min(50, limit)},
-                                   timeout=35)
+                params = {"country": country}
+                if endpoint == "market-movers":
+                    params["limit"] = 50
+                elif endpoint == "search":
+                    params.update({"query": "a", "limit": 50})
+                res = requests.get(base.rstrip("/") + "/" + endpoint, params=params, timeout=35)
                 res.raise_for_status()
                 payload = res.json()
                 if "error" in payload:
@@ -66,11 +69,10 @@ def collect_google(base, region, limit):
                     if not isinstance(group, list):
                         continue
                     for q in group:
-                        if not isinstance(q, dict):
-                            continue
-                        row = map_symbol(q)
-                        if row and row["exchange"] in REGIONS[region]["suffixes"]:
-                            found[row["yahoo_symbol"]] = row
+                        if isinstance(q, dict):
+                            row = map_symbol(q)
+                            if row and row["exchange"] in REGIONS[region]["suffixes"]:
+                                found[row["yahoo_symbol"]] = row
             except Exception as exc:
                 warnings.append(f"{country}/{endpoint}: {type(exc).__name__}: {str(exc)[:120]}")
     return list(found.values())[:limit], warnings
@@ -78,22 +80,24 @@ def collect_google(base, region, limit):
 
 def collect_yahoo(region, limit):
     import yfinance as yf
+    from yfinance import EquityQuery
     out, warnings = [], []
-    country = {"ABD": "us", "BIST": "tr", "AVRUPA": "de"}[region]
-    try:
-        from yfinance import EquityQuery
-        q = EquityQuery("and", [EquityQuery("eq", ["region", country]),
-                                EquityQuery("eq", ["quoteType", "EQUITY"])])
-        payload = yf.screen(q, size=min(limit, 100), sortField="intradaymarketcap", sortAsc=False)
-        for x in payload.get("quotes", []):
-            symbol = x.get("symbol")
-            if symbol:
-                out.append({"yahoo_symbol": symbol, "name": x.get("shortName") or symbol,
-                            "source": "yfinance", "exchange": x.get("exchange"),
-                            "google_symbol": None})
-    except Exception as exc:
-        warnings.append(f"yfinance screener {country}: {type(exc).__name__}: {str(exc)[:180]}")
-    return out, warnings
+    countries = {"ABD": ["us"], "BIST": ["tr"],
+                 "AVRUPA": ["de", "fr", "gb", "nl", "it", "es"]}[region]
+    for country in countries:
+        try:
+            q = EquityQuery("eq", ["region", country])
+            payload = yf.screen(q, size=min(limit, 100),
+                                sortField="intradaymarketcap", sortAsc=False)
+            for x in payload.get("quotes", []):
+                symbol = x.get("symbol")
+                if symbol and x.get("quoteType") in (None, "EQUITY"):
+                    out.append({"yahoo_symbol": symbol, "name": x.get("shortName") or symbol,
+                                "source": "yfinance", "exchange": x.get("exchange"),
+                                "google_symbol": None})
+        except Exception as exc:
+            warnings.append(f"yfinance screener {country}: {type(exc).__name__}: {str(exc)[:180]}")
+    return out[:limit], warnings
 
 
 def merge_discovery(google, yahoo):
