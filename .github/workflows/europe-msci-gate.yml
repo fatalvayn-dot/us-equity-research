@@ -1,0 +1,47 @@
+name: Europe MSCI Islamic gate research acceptance
+on:
+  push:
+    branches: [feat/europe-msci-islamic-gate-20261120]
+    paths:
+      - 'experiments/hybrid_gate/europe_msci_gate.py'
+      - 'experiments/hybrid_gate/test_europe_msci_gate.py'
+      - '.github/workflows/europe-msci-gate.yml'
+permissions:
+  contents: read
+jobs:
+  europe_gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify official roster strictness and proxy separation
+        run: |
+          python -m compileall -q experiments/hybrid_gate/europe_msci_gate.py
+          python -m unittest discover -s experiments/hybrid_gate -p 'test_europe_msci_gate.py' -v
+      - name: Probe MSCI official full list and iShares ETF fallback
+        run: python -m experiments.hybrid_gate.europe_msci_gate --output europe_gate_output
+      - name: Protect against false production acceptance
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('europe_gate_output/summary.json').read_text())
+          if not s['official_index_full_roster']:
+              assert not s['can_approve_from_official_index']
+              assert not s['next_stage_scoring_authorized']
+              assert s['verified_official_members']==0
+          assert s['etf_is_not_equivalent_to_target_index']
+          print('GATE_VALIDATED', s['official_index_page']['page_access'], 
+                s['etf_fallback_online_probe']['status'],s['next_stage_scoring_authorized'])
+          PY
+      - name: Upload evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: europe-msci-islamic-gate-research
+          path: europe_gate_output/
+          retention-days: 30
+          if-no-files-found: warn
