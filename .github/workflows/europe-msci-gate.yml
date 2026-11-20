@@ -3,7 +3,8 @@ on:
   push:
     branches: [feat/europe-msci-islamic-gate-20261120]
     paths:
-      - 'experiments/hybrid_gate/europe_msci_gate.py'\n      - 'experiments/hybrid_gate/run.py'
+      - 'experiments/hybrid_gate/europe_msci_gate.py'
+      - 'experiments/hybrid_gate/run.py'
       - 'experiments/hybrid_gate/test_europe_msci_gate.py'
       - '.github/workflows/europe-msci-gate.yml'
 permissions:
