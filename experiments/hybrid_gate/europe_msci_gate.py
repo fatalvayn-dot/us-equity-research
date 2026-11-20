@@ -120,17 +120,56 @@ def classify(issuer, *, official=None, proxy=None):
     return "endeks_uyeligi_dogrulanamadi"
 
 
+def parse_ishares_holdings(raw):
+    """Parse provider CSV, distinguishing holdings from metadata and derivatives."""
+    txt=raw.decode("utf-8-sig",errors="replace")
+    lines=list(csv.reader(io.StringIO(txt)))
+    header_idx=None
+    for i,row in enumerate(lines[:35]):
+        cols=[x.strip().lstrip("\\ufeff").lower() for x in row]
+        if "isin" in cols and any(x in cols for x in ("location","country")):
+            header_idx=i
+            break
+    if header_idx is None:
+        raise ValueError("iShares holdings columns not found")
+    keys=[x.strip() for x in lines[header_idx]]
+    data=[dict(zip(keys,row)) for row in lines[header_idx+1:] if len(row)>=len(keys)]
+    isin_key=next(k for k in keys if k.lower()=="isin")
+    country_key=next(k for k in keys if k.lower() in ("location","country"))
+    type_key=next((k for k in keys if k.lower()=="asset class"),None)
+    eu={}
+    for r in data:
+        isin=r.get(isin_key,"").strip().upper()
+        if r.get(country_key,"").strip() not in EUROPE:
+            continue
+        if type_key and r.get(type_key,"").strip().lower() not in ("equity","stock"):
+            continue
+        if not re.fullmatch(r"[A-Z]{2}[A-Z0-9]{9}[0-9]",isin):
+            continue
+        eu[isin]={"name":r.get("Name") or r.get("name") or "",
+                  "country":r[country_key],"isin":isin}
+    return eu, len(data)
+
+
 def probe_proxy():
-    try:
-        raw,ctype=fetch(ISHARES_WORLD_CSV)
-        first=raw[:320].decode("utf-8-sig",errors="replace")
-        status={"status":"downloaded","bytes":len(raw),"sha256":sha256(raw).hexdigest(),
-                "content_type":ctype,"preview":first[:160]}
-        if "<html" in first.lower() or "error" in first.lower()[:80]:
-            status["status"]="unexpected_response"
-        return status
-    except Exception as exc:
-        return {"status":"unavailable","error":f"{type(exc).__name__}: {str(exc)[:180]}"}
+    base="https://www.ishares.com/uk/individual/en/products/251394/ishares-msci-world-islamic-ucits-etf/"
+    urls=[ISHARES_WORLD_CSV,
+          base+"1478358465952.ajax?fileType=csv&fileName=ISWD_holdings&dataType=fund",
+          base+"1506575576011.ajax?fileType=csv&fileName=ISWD_holdings&dataType=fund"]
+    attempts=[]
+    for url in urls:
+        try:
+            raw,ctype=fetch(url)
+            preview=raw[:200].decode("utf-8-sig",errors="replace")
+            eu,total=parse_ishares_holdings(raw)
+            return {"status":"accessible_proxy","bytes":len(raw),
+                    "source_url":url,"sha256":sha256(raw).hexdigest(),
+                    "content_type":ctype,"total_rows":total,
+                    "european_equity_rows":len(eu),
+                    "proxy_only":True,"index_membership_verified":False}
+        except Exception as exc:
+            attempts.append({"url":url,"error":f"{type(exc).__name__}: {str(exc)[:120]}"})
+    return {"status":"unavailable","attempts":attempts}
 
 
 def main():
