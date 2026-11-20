@@ -52,7 +52,7 @@ def collect_google(base, region, limit):
     import requests
     found, warnings = {}, []
     for country in REGIONS[region]["countries"]:
-        for endpoint in ("market-movers", "trending"):
+        for endpoint in ("market-movers", "trending", "search"):
             try:
                 res = requests.get(base.rstrip("/") + "/" + endpoint,
                                    params={"country": country, "limit": min(50, limit)},
