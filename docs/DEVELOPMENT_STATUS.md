@@ -1,5 +1,39 @@
 # Development status
 
+## 20 Kasım 2026 — #135 canlı skorlama kaynak kapısı kabul edildi
+
+En düşük açık zincir kapısı #135'in son koşulu gerçek `first-live-score.yml`
+çalışmasında doğrulandı. [Run 44589474319](https://github.com/fatalvayn-dot/us-equity-research/actions/runs/44589474319)
+genel sonuçta başarısız olsa da önce sabitlenmiş
+`sec-stage1-original-raw-evidence` arşivini indirdi; artifact kimliği, ZIP
+digest'i, iki CIK/accession ve özgün SEC CompanyConcept SHA-256 değeri
+başarıyla doğrulandı. Skor manifestindeki `supplemental_sec_evidence`:
+2 özgün kaynak doğrulandı, SWKS için 1 seçilmiş finansal fact eşleşti,
+NVDA seçilmiş dönemle uyuşmadığı için değiştirilmedi; `financial_facts_substituted=0`,
+`provider_order_changed=false`, `scoring_weights_changed=false`,
+`investment_approved=false`. Kanıt artifact `14563731611`, ZIP SHA-256
+`677806fb65935289b996ea1aa8a844fea2affe5d6f2a6da18ec32706e99b3673`.
+
+Canlı/yerel ayrımı: bu sonuç gerçek GitHub Actions ve gerçek arşiv indirme
+kanıtıdır; bu oturumda yeni yerel fixture testi veya MotherDuck yazımı yoktur.
+#135'in ham SEC → kontrollü staging → finansal batch replay → canlı skor
+SHA kapısı zinciri kabul edilmiştir.
+
+Aynı run'ın sonraki `audit_score_valuation_gaps.py` adımı
+`skor ve değerleme şirket kimlikleri uyuşmuyor` hatasıyla durdu. Nedeni,
+aktif 100 şirket değiştirildikten sonra yeni değerleme kohortunun eski
+100 şirketlik finansal batch ile eşleştirilmesidir. Rapor 0/100 üretmiştir;
+bu yeni skor veya veri kalitesi sonucu değildir ve kabul edilmez.
+Yeni bağımsız kohort run `44554274252` ise artifact
+`14548736470` içinde 9/100 puan üretmiştir; bu ayrı test #136/#137
+kabulü değildir.
+
+Sıradaki tek iş: #136 kapsamında aktif yeni 100 kohort için finansal ve
+değerleme artifact kimliklerini aynı kaynak zincirine bağlamak; eski
+checkpoint'i yeni kohorta taşımadan kimlik eşleşmesini test etmek ve sonra
+tek canlı skorlama çalıştırmak.
+
+
 ## 19 Kasım 2026 — 1. aşama SEC gerçek ham SHA ve puanlama kaynak koruması
 
 **Gerçek kaynak kanıtı:** PR #150 CI Python 3.11/3.12/3.13 başarılı,
