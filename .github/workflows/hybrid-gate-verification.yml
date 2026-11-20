@@ -46,6 +46,20 @@ jobs:
       - name: Live market discovery -> eligibility -> gated experimental scoring
         run: |
           python -m experiments.hybrid_gate.run --limit-per-region 8 --output hybrid_gate_output
+      - name: Enforce minimum real coverage for all three markets
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          summary=json.loads(Path("hybrid_gate_output/summary.json").read_text())
+          assert set(summary["markets"]) == {"ABD", "BIST", "AVRUPA"}
+          for name, market in summary["markets"].items():
+              assert market["unique"] > 0, f"{name}: no discovered company"
+              assert market["screened"] == market["unique"], f"{name}: incomplete gate screening"
+              assert market["passed"]+market["rejected"]+market["unknown"] == market["unique"]
+              assert market["scored"] <= market["passed"]
+              print(name, market["unique"], market["passed"], market["scored"])
+          PY
       - name: Preserve results for independent inspection
         if: always()
         uses: actions/upload-artifact@v4
