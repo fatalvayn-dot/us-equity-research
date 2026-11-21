@@ -5,7 +5,7 @@
 
 ## Görev devri
 - **Müdür:** koşuyu yönetir, diğer işlevlerin durumlarını birleştirir.
-- **Veri işçisi:** mevcut Stooq pilotundan yedi varlığın günlük tarihli fiyatlarını almayı dener.
+- **Veri işçisi:** sabitlenmiş yfinance 1.8.0 adaptörünü kullanarak ABD/ETF/emtia vekilleri ve BIST/Avrupa örneklerinin günlük fiyatını dener; Yahoo Chart ve Stooq uygun sembollerde yedektir.
 - **Tahmin işçisi:** 5/20 işlem günü momentum yön sinyalleri üretir; güven olasılığı hesaplamaz.
 - **Haber işçisi:** isteğe bağlı \`MARKET_RSS_URL\` değişkeninden RSS başlıklarını kategoriler; fiyat sinyaline dahil etmez.
 - **Geçmiş denetçisi:** beş işlem gününü dolduran geçmiş tahminleri değerlendirir.
@@ -20,4 +20,4 @@ GitHub'da yalnız kamusal ve kişisel olmayan araştırma kayıtları için ayr�
 Bir veri sağlayıcısı erişilemezse veya veri doğrulanmazsa bunu açıkça raporlar; sıfır sinyalli üretimi başarılı saymaz. Ana dala merge ve ilk canlı Actions koşusu henüz doğrulanmadan sistemin etkinleştiği iddia edilmez.
 
 ## Güvenlik ve kapsam
-Otomatik emir, ücretli hizmet, portföy özel verisi, katılım uygunluğu onayı veya kaldıraçlı işlem yoktur. İlk kapsam yalnız yedi ABD hisse/ETF sembolüdür; GLD/SLV/USO spot emtia değildir. BIST, Avrupa ve küresel bütün varlıklar henüz entegre değildir. Yeni teknik araştırma için ayrı geliştirme ve bağımsız kabul kapıları uygulanır.
+Otomatik emir, ücretli hizmet, portföy özel verisi, katılım uygunluğu onayı veya kaldıraçlı işlem yoktur. İlk kapsam yedi ABD hisse/ETF/emtia-vekili sembolü ile BIST için ASELS.IS ve Avrupa için SAP.DE örnekleridir. GLD/SLV/USO spot emtia değildir. BIST/Avrupa örnek fiyatı alınabilmesi tam piyasa sembol kataloğunun kurulduğu anlamına gelmez; küresel tüm varlıklar henüz entegre değildir. Yeni teknik araştırma için ayrı geliştirme ve bağımsız kabul kapıları uygulanır.
