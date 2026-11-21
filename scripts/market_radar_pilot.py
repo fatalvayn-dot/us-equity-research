@@ -170,12 +170,20 @@ def evaluate(old_predictions, current_prices):
                         "realized_5d": round(movement, 6), "actual": actual, "hit": hit})
     return results
 
-def run(fixture=None, prior=None, feed=None):
+def run(fixture=None, prior=None, feed=None, universe=None):
+    # A public research list extends price observations, never investment eligibility.
+    if universe:
+        from scripts.market_radar_universe import load_public_watch
+        watch, universe_info = load_public_watch(universe, DEFAULT_WATCH)
+    else:
+        watch = DEFAULT_WATCH
+        universe_info = {"status": "pilot_static", "official_listing_verified": False,
+                         "participation_verified": False, "investment_candidates": False}
     history = load_fixture(fixture) if fixture else {}
     errors = []
     coverage = {}
     sources = {}
-    for category, symbols in DEFAULT_WATCH.items():
+    for category, symbols in watch.items():
         for symbol, provider_symbol in symbols.items():
             if fixture and symbol in history:
                 sources[symbol] = "fixture"
@@ -206,7 +214,7 @@ def run(fixture=None, prior=None, feed=None):
             forecast = signal(history[symbol])
             forecast.update({"symbol": symbol, "asset_group": category,
                              "source": sources.get(symbol, "unknown"),
-                             "source_symbol": symbol, "stooq_symbol": DEFAULT_WATCH[category][symbol]})
+                             "source_symbol": symbol, "stooq_symbol": watch[category][symbol]})
             forecasts.append(forecast)
         except (ValueError, KeyError, TypeError) as exc:
             errors.append({"symbol": symbol, "reason": type(exc).__name__,
@@ -221,8 +229,8 @@ def run(fixture=None, prior=None, feed=None):
     dated = datetime.now(timezone.utc).isoformat()
     return {"generated_at_utc": dated, "mode": "historical_fixture" if fixture else "live_attempt",
             "forecast_status": "uncalibrated_research_only", "news": headlines,
-            "forecasts": forecasts, "evaluation": review, "errors": errors,
-            "coverage": {"forecast_count": len(forecasts), "requested": sum(map(len, DEFAULT_WATCH.values())),
+            "forecasts": forecasts, "evaluation": review, "errors": errors, "universe": universe_info,
+            "coverage": {"forecast_count": len(forecasts), "requested": sum(map(len, watch.values())),
                          "bist": "sample_only" if "ASELS.IS" in coverage else "unavailable",
                          "europe": "sample_only" if "SAP.DE" in coverage else "unavailable",
                          "global_equities_and_etfs": "not_implemented",
@@ -235,9 +243,10 @@ def main():
     ap.add_argument("--fixture", help="Offline test JSON of date/close rows per symbol")
     ap.add_argument("--prior", help="Previous forecasts JSON array; 5-session evaluation")
     ap.add_argument("--rss", help="Optional publicly accessible RSS feed URL")
+    ap.add_argument("--universe", help="Versioned public research observation file; no eligibility")
     ap.add_argument("--out", default="radar-pilot-report.json")
     args = ap.parse_args()
-    result = run(args.fixture, args.prior, args.rss)
+    result = run(args.fixture, args.prior, args.rss, args.universe)
     pathlib.Path(args.out).write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("Radar pilot:", result["mode"], "forecasts", len(result["forecasts"]),
           "errors", len(result["errors"]), "file", args.out)

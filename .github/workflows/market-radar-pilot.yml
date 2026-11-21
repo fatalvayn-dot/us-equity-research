@@ -17,11 +17,11 @@ jobs:
       - name: Offline regression tests
         env:
           PYTHONPATH: .:src
-        run: python -m unittest tests.test_market_radar_pilot -v
+        run: python -m unittest tests.test_market_radar_pilot tests.test_market_radar_universe -v
       - name: Read-only live market-data attempt
         env:
           PYTHONPATH: .:src
-        run: python scripts/market_radar_pilot.py --out radar-pilot-report.json
+        run: python scripts/market_radar_pilot.py --universe data/analyst/radar_small_us_trial.json --out radar-pilot-report.json
       - name: Save evidence
         uses: actions/upload-artifact@v4
         with:
