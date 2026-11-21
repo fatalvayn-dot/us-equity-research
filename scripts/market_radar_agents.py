@@ -48,7 +48,7 @@ def process(raw, previous, evaluations):
     new_predictions, new_evaluations, warnings = [], [], []
     is_live = raw.get("mode") == "live_attempt"
     for f in raw.get("forecasts", []):
-        if not is_live or f.get("source") not in ("yahoo_chart_daily", "stooq_daily"):
+        if not is_live or f.get("source") not in ("yfinance_daily", "yahoo_chart_daily", "stooq_daily"):
             continue
         key = identity(f)
         if not all(key) or key in seen:
