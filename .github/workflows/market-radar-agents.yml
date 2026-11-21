@@ -101,7 +101,7 @@ jobs:
           if [ -n "$PUBLIC_RSS_URL" ]; then
             python scripts/market_radar_agents.py --output radar-output --universe data/analyst/public_research_universe.json --rss "$PUBLIC_RSS_URL"
           else
-            python scripts/market_radar_agents.py --output radar-output
+            python scripts/market_radar_agents.py --output radar-output --universe data/analyst/public_research_universe.json
           fi
       - name: Upload evidence
         if: always()
