@@ -48,7 +48,7 @@ def process(raw, previous, evaluations):
     new_predictions, new_evaluations, warnings = [], [], []
     is_live = raw.get("mode") == "live_attempt"
     for f in raw.get("forecasts", []):
-        if not is_live or f.get("source") != "stooq_daily":
+        if not is_live or f.get("source") not in ("yahoo_chart_daily", "stooq_daily"):
             continue
         key = identity(f)
         if not all(key) or key in seen:
@@ -96,7 +96,7 @@ def process(raw, previous, evaluations):
     full_evaluations = evaluations + new_evaluations
     hits = [e["hit"] for e in full_evaluations if isinstance(e.get("hit"), bool)]
     count = len(raw.get("forecasts", []))
-    status = "ok" if count and not raw.get("errors") else ("kismi" if count else "canli_veri_yok")
+    status = "ok" if count and not raw.get("errors") and not warnings else ("kismi" if count else "canli_veri_yok")
     if not is_live:
         status = "test_verisi"
     return ({
