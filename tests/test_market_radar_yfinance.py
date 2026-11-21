@@ -1,7 +1,7 @@
 """Network-free tests for the upstream yfinance adapter and source priority."""
 import sys
 import unittest
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from types import SimpleNamespace
 from unittest.mock import patch
 
@@ -19,7 +19,7 @@ class FakeHistory:
 
     def iterrows(self):
         for row in history_rows():
-            yield (date.fromisoformat(row["date"]), {"Close": row["close"]})
+            yield (datetime.fromisoformat(row["date"]), {"Close": row["close"]})
 
 
 class YFinanceAdapterTests(unittest.TestCase):
