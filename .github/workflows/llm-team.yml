@@ -1,6 +1,10 @@
 name: LLM manager team (opt-in)
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/llm-team.yml
   pull_request:
     paths:
       - scripts/llm_team.py
@@ -22,7 +26,7 @@ jobs:
           PYTHONPATH: .:src
         run: python -m unittest tests.test_llm_team -v
   llm-execution:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     needs: agent-contract
     runs-on: ubuntu-latest
     timeout-minutes: 7
