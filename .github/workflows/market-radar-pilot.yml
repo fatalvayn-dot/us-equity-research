@@ -1,6 +1,12 @@
 name: Market radar manual pilot
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'scripts/market_radar_pilot.py'
+      - 'tests/test_market_radar_pilot.py'
+      - 'requirements/market-radar.txt'
+      - '.github/workflows/market-radar-pilot.yml'
 permissions:
   contents: read
 jobs:
