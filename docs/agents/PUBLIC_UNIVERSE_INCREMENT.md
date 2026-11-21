@@ -1,28 +1,15 @@
-# Public research universe — incremental radar observation
+# Küçük ölçekli ABD fiyat gözlem denemesi — 21 Kasım 2026
 
-21 Kasım 2026, P1 için sınırlı veri gözlem denemesi. #158 kapsamındaki tam borsa evreni kabulü **değildir**.
+## Deneme kapsamı
+İlk ana dal pilotundaki dokuz sembol (AAPL, MSFT, SPY, QQQ, GLD, SLV, USO, ASELS.IS, SAP.DE) korunur. Yeni tarama yalnız ABD'den NVDA, AVGO, AMZN, GOOGL ve META sembollerini ekler. Toplam 14 benzersiz günlük fiyat gözlemi denenir; bu sayı veri başarı garantisi veya yatırım tavsiyesi değildir.
 
-## Giriş
-- Tek giriş `data/analyst/public_research_universe.json` (depo sürümü ve SHA-256 kaydedilir).
-- Bu dosya zaten kamuya açık araştırma sembollerini içeriyor: ABD 13, BIST 6, Avrupa 4. Liste resmi borsa üyelik teyidi değildir.
-- Önceki pilotun 9 gözlemi korunur. Aynı sembol ikinci defa sorgulanmaz.
-- Toplamda 28 benzersiz fiyat gözlemi denenecek; bu sayı gerçek başarılı veri sayısı değildir.
-- Yeni listede üst sınır 40 şirket, pilotlarla birlikte 50 semboldür. Yanlış kimlik, para birimi, yinelenen sembol, beklenmeyen alan veya aşırı büyük dosya koşuyu durdurur.
+Kaynak dosyası `data/analyst/radar_small_us_trial.json`, mevcut `data/analyst/public_research_universe.json` listesinden seçilmiş kamuya açık beş araştırma sembolünü taşır. Orijinal tam liste değiştirilmedi. Araç giriş SHA-256 değerini çıktı manifestine kaydeder. Yazılım beşten fazla ek sembolü veya toplam 14'ten fazlasını reddeder.
 
-## İşleyiş ve denetim
-- Kaynak sırası: yfinance (tarihli günlük kapanış) → Yahoo Chart → uygun Stooq sembolü.
-- Başarılı fiyatın kaynak etiketi saklanır; boş/veri hatası bulunan hisseyi başarılı göstermez.
-- Tahmin geçmişinin anahtarı `(sembol, veri_tarihi)`; aynı işlem günü yinelenen çalışma eski kaydı değiştirmez. Eski tahminlerin gerçekleşmesi ancak 5 tam işlem günü sonrasında değerlendirilir.
-- BIST ve Avrupa eklemeleri tamamlanmış borsa taraması değil, gözlemsel örneklerdir.
-- Banka/sigorta dışlaması ve katılım uygunluğu bu fiyat modülünde araştırma amaçlı gözlemden yatırım adayına terfi ettirilmez. **BIST katılım filtresinde yalnız resmî XKTUM bileşen listesi** kullanılacak; bu listede üyelik doğrulanmadığı için bütün sembollerin yatırım uygunluğu `bilinmiyor`.
-- Avrupa/ABD için ilgili katılım standardı ve bileşen/finansal denetim bağımsız doğrulanana kadar öneri üretilmez.
-- Herhangi bir gerçek emir, nakit dönüşümü, broker yetkisi, özel portföy okuması, ücretli servis veya öz-öğrenen model yoktur.
+## Kabul kapısı
+1. PR içinde ağsız testler ve Yahoo/yfinance fallback kontrolleri başarılı olmalı.
+2. Gerçek GitHub Actions'da 14 sembol istenmeli; kaçından kapanış verisi geldiği açıkça raporlanmalı.
+3. Python 3.11, 3.12, 3.13 temel testleri tamamlanmalı.
+4. İlk ana dal çalışması dokuz eski tahmini korumalı ve aynı veri tarihi için tekrar kayıt üretmemeli.
+5. Herhangi bir veri eksikliği varsa gerçek durum açıkça yazılmalı; kaynak erişilememesi sıfır fiyat sayılamaz.
 
-## Kabul ölçütü
-1. `tests.test_market_radar_universe` ve mevcut pilot/ajan testlerinin gerçek Actions koşusunda tamamlanması.
-2. Canlı veri denemesinde kapsam sayısının ve hata nedenlerinin raporlanması. 28/28 başarı iddiası ancak kanıt varsa.
-3. Üç Python sürümünde temel testler, PR sınırlı fark kontrolü, sonra ana dal birleştirmesi.
-4. Ana dalda en az bir çalışmada `radar-ledger` tahminlerinin silinmeden korunduğunu doğrulama.
-
-## Kalan P1
-Resmî ABD/Avrupa/BIST aktif hisse/ETF listelerinin tam sürüm kimlikleri, tarihli dosyaları, delist/sınıf/giriş-çıkış kontrolü, hız bütçesi ve BIST XKTUM bileşen eşleştirmesi. Güncel araştırma listesi bunun yerine geçirilemez.
+Bu geçici fiyat gözlemidir. Resmî bütün ABD, BIST veya Avrupa hisse kataloğu değildir. Banka ve sigorta, katılım uygunluğu ve aktif borsa üyeliği ayrıca doğrulanmadıkça yatırım önerisi üretilemez. BIST yatırım uygunluğu için yalnız resmî XKTUM üyeliği ölçütü, Avrupa ve ABD için ayrıca doğrulanmış ilgili standart uygulanacak. Gerçek alım-satım, özel portföy ve ücretli kaynak yoktur.
