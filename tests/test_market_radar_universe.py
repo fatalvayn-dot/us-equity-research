@@ -16,8 +16,7 @@ def example():
                     {"symbol": "NVDA", "currency": "USD"}],
             "BIST": [{"symbol": "ASELS.IS", "currency": "TRY"},
                      {"symbol": "TUPRS.IS", "currency": "TRY"}],
-            "AVRUPA": [{"symbol": "SAP.DE", "currency": "EUR"},
-                       {"symbol": "DTE.DE", "currency": "EUR"}],
+            "AVRUPA": [{"symbol": "SAP.DE", "currency": "EUR"}],
         },
     }
 
@@ -31,13 +30,13 @@ class UniverseGuardTests(unittest.TestCase):
 
     def test_merge_preserves_pilot_and_deduplicates_known_symbols(self):
         watch, audit = self.load(example())
-        self.assertEqual(audit["total_requested_symbols"], 12)
-        self.assertEqual(sum(map(len, watch.values())), 12)
+        self.assertEqual(audit["total_requested_symbols"], 11)
+        self.assertEqual(sum(map(len, watch.values())), 11)
         self.assertEqual(watch["ABD_HISSE"]["MSFT"], "msft.us")
         self.assertIsNone(watch["ABD_HISSE"]["NVDA"])
         self.assertIsNone(watch["BIST_HISSE_ORNEK"]["TUPRS.IS"])
         self.assertEqual(audit["source_count_by_market"],
-                         {"ABD": 2, "BIST": 2, "AVRUPA": 2})
+                         {"ABD": 2, "BIST": 2, "AVRUPA": 1})
         self.assertFalse(audit["investment_candidates"])
         self.assertFalse(audit["participation_verified"])
 
@@ -49,7 +48,7 @@ class UniverseGuardTests(unittest.TestCase):
 
     def test_reject_duplicate_and_wrong_currency(self):
         data = example()
-        data["markets"]["ABD"].append({"symbol": "MSFT", "currency": "USD"})
+        data["markets"]["ABD"][1]["symbol"] = "MSFT"
         with self.assertRaises(ValueError):
             self.load(data)
         data = example()
@@ -66,7 +65,7 @@ class UniverseGuardTests(unittest.TestCase):
     def test_finite_budget_enforced_before_fetch(self):
         data = example()
         data["markets"]["ABD"] = [
-            {"symbol": "TEST" + str(i), "currency": "USD"} for i in range(45)
+            {"symbol": "TEST" + str(i), "currency": "USD"} for i in range(6)
         ]
         with self.assertRaises(ValueError):
             self.load(data)
@@ -83,7 +82,7 @@ class UniverseGuardTests(unittest.TestCase):
                           "close": 100 + i} for i in range(1, 29)]
             }), encoding="utf-8")
             out = run(fixture=str(prices), universe=str(file))
-        self.assertEqual(out["coverage"]["requested"], 12)
+        self.assertEqual(out["coverage"]["requested"], 11)
         self.assertEqual(out["coverage"]["forecast_count"], 1)
         self.assertEqual(out["forecasts"][0]["symbol"], "NVDA")
         self.assertEqual(out["forecasts"][0]["source"], "fixture")
@@ -91,12 +90,19 @@ class UniverseGuardTests(unittest.TestCase):
         self.assertFalse(out["restrictions"]["trading_recommendations"])
 
     def test_repo_public_list_loads_as_observational_sample(self):
-        path = pathlib.Path("data/analyst/public_research_universe.json")
+        path = pathlib.Path("data/analyst/radar_small_us_trial.json")
         watch, audit = load_public_watch(path, DEFAULT_WATCH)
         self.assertEqual(audit["source_count_by_market"],
-                         {"ABD": 13, "BIST": 6, "AVRUPA": 4})
-        self.assertEqual(audit["total_requested_symbols"], 28)
-        self.assertEqual(sum(map(len, watch.values())), 28)
+                         {"ABD": 5, "BIST": 0, "AVRUPA": 0})
+        self.assertEqual(audit["total_requested_symbols"], 14)
+        self.assertEqual(sum(map(len, watch.values())), 14)
+        self.assertEqual(set(watch["ABD_HISSE"]),
+                         {"AAPL", "MSFT", "NVDA", "AVGO", "AMZN", "GOOGL", "META"})
+
+    def test_reject_original_full_research_file_at_small_trial_limit(self):
+        path = pathlib.Path("data/analyst/public_research_universe.json")
+        with self.assertRaises(ValueError):
+            load_public_watch(path, DEFAULT_WATCH)
 
 
 if __name__ == "__main__":
