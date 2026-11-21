@@ -112,6 +112,13 @@ jobs:
           github-token: ${{ github.token }}
           run-id: ${{ steps.financial.outputs.source_run }}
 
+      - name: Finansal ve değerleme şirket kohortunu doğrula
+        if: steps.financial.outputs.ready == 'true'
+        run: |
+          python -m scripts.verify_score_input_cohort \
+            --financial data/financial/batch.json \
+            --valuation data/valuation/report.json
+
       - name: Onayli SEC staging ham arşivini indir ve hash'ini dogrula
         if: steps.financial.outputs.ready == 'true'
         id: sec_stage1
