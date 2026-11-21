@@ -21,7 +21,7 @@ jobs:
       - name: Read-only live market-data attempt
         env:
           PYTHONPATH: .:src
-        run: python scripts/market_radar_pilot.py --universe data/analyst/public_research_universe.json --out radar-pilot-report.json
+        run: python scripts/market_radar_pilot.py --universe data/analyst/radar_small_us_trial.json --out radar-pilot-report.json
       - name: Save evidence
         uses: actions/upload-artifact@v4
         with:
