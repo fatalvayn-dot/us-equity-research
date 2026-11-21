@@ -19,8 +19,23 @@ class LLMTeamTests(unittest.TestCase):
         with self.assertRaises(ValueError): ask("broker",{},transport=lambda _: {})
     def test_no_key(self):
         import os
-        key=os.environ.pop("OPENAI_API_KEY",None)
+        key=os.environ.pop("OPENROUTER_API_KEY",None)
         try:
             with self.assertRaises(RuntimeError): ask("manager",{})
         finally:
-            if key is not None: os.environ["OPENAI_API_KEY"]=key
+            if key is not None: os.environ["OPENROUTER_API_KEY"]=key
+
+    def test_free_router_is_locked(self):
+        import os
+        old=os.environ.get("RADAR_LLM_MODEL")
+        os.environ["RADAR_LLM_MODEL"]="openai/gpt-4.1"
+        seen=[]
+        def mock(request):
+            seen.append(request)
+            return {"choices":[{"message":{"content":"test"}}]}
+        try:
+            ask("manager",{},transport=mock)
+            self.assertEqual(seen[0]["model"],"openrouter/free")
+        finally:
+            if old is None: os.environ.pop("RADAR_LLM_MODEL",None)
+            else: os.environ["RADAR_LLM_MODEL"]=old
