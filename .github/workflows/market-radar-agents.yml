@@ -9,6 +9,8 @@ on:
     paths:
       - 'scripts/market_radar_agents.py'
       - 'scripts/market_radar_pilot.py'
+      - 'requirements/market-radar.txt'
+      - 'tests/test_market_radar_yfinance.py'
       - '.github/workflows/market-radar-agents.yml'
   pull_request:
     paths:
@@ -16,6 +18,8 @@ on:
       - 'tests/test_market_radar_agents.py'
       - '.github/workflows/market-radar-agents.yml'
       - 'scripts/market_radar_pilot.py'
+      - 'requirements/market-radar.txt'
+      - 'tests/test_market_radar_yfinance.py'
 
 permissions:
   contents: read
@@ -34,10 +38,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install upstream market-data adapter
+        run: python -m pip install --disable-pip-version-check -r requirements/market-radar.txt
       - name: Offline pilot and agent regression
         env:
           PYTHONPATH: .:src
-        run: python -m unittest tests.test_market_radar_pilot tests.test_market_radar_agents -v
+        run: python -m unittest tests.test_market_radar_pilot tests.test_market_radar_agents tests.test_market_radar_yfinance -v
       - name: Live public-market-data smoke attempt
         env:
           PYTHONPATH: .:src
@@ -62,10 +68,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install upstream market-data adapter
+        run: python -m pip install --disable-pip-version-check -r requirements/market-radar.txt
       - name: Offline regression
         env:
           PYTHONPATH: .:src
-        run: python -m unittest tests.test_market_radar_pilot tests.test_market_radar_agents -v
+        run: python -m unittest tests.test_market_radar_pilot tests.test_market_radar_agents tests.test_market_radar_yfinance -v
       - name: Restore public forecast history
         shell: bash
         run: |
