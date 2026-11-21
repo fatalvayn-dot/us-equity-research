@@ -42,10 +42,9 @@ jobs:
             echo "LLM opt-in or API key missing: no charge, no execution"
             exit 0
           fi
-          if [ ! -f radar-input/latest.json ]; then
-            echo "No validated local radar report. Provide evidence to runner before activation."
-            exit 1
-          fi
+          python -m pip install --disable-pip-version-check -r requirements/market-radar.txt
+          mkdir -p radar-input
+          python scripts/market_radar_agents.py --output radar-input
           python scripts/llm_team.py --input radar-input/latest.json --output llm-team-report.json
       - name: Upload non-sensitive manager report
         if: always()
