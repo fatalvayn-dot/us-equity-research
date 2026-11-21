@@ -1,0 +1,147 @@
+name: Market radar scheduled agents
+on:
+  schedule:
+    - cron: '17 */3 * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/market_radar_agents.py'
+      - 'scripts/market_radar_pilot.py'
+      - 'requirements/market-radar.txt'
+      - 'tests/test_market_radar_yfinance.py'
+      - '.github/workflows/market-radar-agents.yml'
+  pull_request:
+    paths:
+      - 'scripts/market_radar_agents.py'
+      - 'tests/test_market_radar_agents.py'
+      - '.github/workflows/market-radar-agents.yml'
+      - 'scripts/market_radar_pilot.py'
+      - 'requirements/market-radar.txt'
+      - 'tests/test_market_radar_yfinance.py'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: market-radar-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify-pr:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install upstream market-data adapter
+        run: python -m pip install --disable-pip-version-check -r requirements/market-radar.txt
+      - name: Offline pilot and agent regression
+        env:
+          PYTHONPATH: .:src
+        run: python -m unittest tests.test_market_radar_pilot tests.test_market_radar_agents tests.test_market_radar_yfinance -v
+      - name: Live public-market-data smoke attempt
+        env:
+          PYTHONPATH: .:src
+        run: python scripts/market_radar_agents.py --output radar-output
+      - name: Preserve smoke report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: radar-pr-smoke
+          path: radar-output/
+          if-no-files-found: warn
+          retention-days: 14
+
+  scheduled:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install upstream market-data adapter
+        run: python -m pip install --disable-pip-version-check -r requirements/market-radar.txt
+      - name: Offline regression
+        env:
+          PYTHONPATH: .:src
+        run: python -m unittest tests.test_market_radar_pilot tests.test_market_radar_agents tests.test_market_radar_yfinance -v
+      - name: Restore public forecast history
+        shell: bash
+        run: |
+          mkdir -p radar-input
+          touch radar-input/predictions.jsonl radar-input/evaluations.jsonl
+          if git ls-remote --exit-code --heads origin radar-ledger >/dev/null 2>&1; then
+            git fetch --depth=1 origin +refs/heads/radar-ledger:refs/remotes/origin/radar-ledger
+            git show refs/remotes/origin/radar-ledger:predictions.jsonl > radar-input/predictions.jsonl
+            git show refs/remotes/origin/radar-ledger:evaluations.jsonl > radar-input/evaluations.jsonl
+          fi
+      - name: Execute autonomous bounded research loop
+        id: radar
+        continue-on-error: true
+        shell: bash
+        env:
+          PYTHONPATH: .:src
+          PUBLIC_RSS_URL: ${{ vars.MARKET_RSS_URL }}
+        run: |
+          if [ -n "$PUBLIC_RSS_URL" ]; then
+            python scripts/market_radar_agents.py --output radar-output --rss "$PUBLIC_RSS_URL"
+          else
+            python scripts/market_radar_agents.py --output radar-output
+          fi
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-radar-${{ github.run_id }}
+          path: radar-output/
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Persist public append-only research ledger
+        if: steps.radar.outcome == 'success'
+        shell: bash
+        run: |
+          set -euo pipefail
+          STATE="$RUNNER_TEMP/radar-ledger"
+          if git show-ref --verify --quiet refs/remotes/origin/radar-ledger; then
+            git worktree add --detach "$STATE" refs/remotes/origin/radar-ledger
+            git -C "$STATE" switch -c radar-ledger
+          else
+            git worktree add --detach "$STATE" HEAD
+            git -C "$STATE" switch --orphan radar-ledger
+          fi
+          # Orphan checkout clears tracked directories; recreate after switching.
+          mkdir -p "$STATE/runs"
+          python - <<'PY'
+          from pathlib import Path
+          for filename in ("predictions.jsonl", "evaluations.jsonl"):
+              prior = Path("radar-input", filename).read_bytes()
+              current = Path("radar-output", filename).read_bytes()
+              if not current.startswith(prior):
+                  raise SystemExit("append-only ledger check failed: " + filename)
+          PY
+          cp radar-output/predictions.jsonl "$STATE/predictions.jsonl"
+          cp radar-output/evaluations.jsonl "$STATE/evaluations.jsonl"
+          cp radar-output/latest.json "$STATE/latest.json"
+          cp radar-output/latest.md "$STATE/latest.md"
+          cp radar-output/latest.json "$STATE/runs/${{ github.run_id }}-${{ github.run_attempt }}.json"
+          git -C "$STATE" config user.name "radar-research-bot"
+          git -C "$STATE" config user.email "radar-research-bot@users.noreply.github.com"
+          git -C "$STATE" add predictions.jsonl evaluations.jsonl latest.json latest.md runs
+          if ! git -C "$STATE" diff --cached --quiet; then
+            git -C "$STATE" commit -m "research: append radar run ${{ github.run_id }}"
+            git -C "$STATE" push origin HEAD:radar-ledger
+          fi
+      - name: Fail run when live source is unavailable
+        if: steps.radar.outcome != 'success'
+        run: |
+          echo "No verified live-data radar report; production run not accepted." >&2
+          exit 1
