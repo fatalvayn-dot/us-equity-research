@@ -1,9 +1,0 @@
-{
-  "requested_on": "2026-11-19",
-  "purpose": "readonly_original_sec_against_selected_financial_batch",
-  "financial_source_run_id": 44526775886,
-  "sec_original_source_run_id": 44543645240,
-  "investment_orders": false,
-  "motherduck_write": false,
-  "reason": "Reproducible read-only two-company original SEC SHA proof against live financial batch without score substitutions"
-}
