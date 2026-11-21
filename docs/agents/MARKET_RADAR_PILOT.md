@@ -2,6 +2,13 @@
 
 Bu sürüm **tüm piyasaları taramaz** ve **yapay zekâ ile eğitilmiş tahmin modeli değildir**. Çalışan veri/toplama → basit referans sinyali → kaydedilmiş tahmin → 5 işlem günü sonrasında değerlendirme zinciridir. Yatırım tavsiyesi, katılım onayı, portföy işlem önerisi veya gerçek emir üretmez.
 
+## Hazır açık kaynak veri adaptörü (21 Kasım 2026)
+İlk fiyat kaynağı `ranaroussi/yfinance` (Apache-2.0, sabitlenen sürüm 1.8.0) artık `requirements/market-radar.txt` üzerinden kuruluyor; upstream kaynak kodunun tümü depoya kopyalanmadı. Günlük kapanış fiyatı sağlayıcısı sırası **yfinance → Yahoo Chart → Stooq (yalnız eşlemesi bilinen semboller)**. Her tahmin gerçek kaynak etiketiyle kaydedilir; başarısız kaynak sessizce sıfıra dönüştürülmez.
+
+Yahoo'nun veri lisansı yfinance'ın Apache lisansından ayrıdır. Yahoo verisinin kullanım/yeniden dağıtım şartları ayrıca geçerlidir; sağlayıcı, araştırma/kişisel kullanım çerçevesinin dışına çıkarılmamalıdır. Kaynak: https://github.com/ranaroussi/yfinance ve https://pypi.org/project/yfinance/1.8.0/ .
+
+ABD pilotuna ilaveten **ASELS.IS (BIST)** ve **SAP.DE (Avrupa)** araştırma örneği denenir; bunlar herhangi bir tam piyasa evreni veya katılım onayı değildir. Otomatik varlık kataloğu, gerçek emtia spot fiyatları, finansal tablo doğrulama ve makro/olay veri hattı henüz bu pilotun parçası değildir.
+
 ## Çalıştırma
 - Çevrimdışı test: \`PYTHONPATH=.:src python -m unittest tests.test_market_radar_pilot -v\`
 - Canlı veri denemesi: \`PYTHONPATH=.:src python scripts/market_radar_pilot.py\`
@@ -9,7 +16,7 @@ Bu sürüm **tüm piyasaları taramaz** ve **yapay zekâ ile eğitilmiş tahmin 
 - Sonuç: \`radar-pilot-report.json\` ve 7 günlük Actions artifact.
 
 ## Mevcut kapsam
-Stooq günlük CSV üzerinden AAPL, MSFT, SPY, QQQ ve emtia **ETF vekilleri** GLD, SLV, USO denenir. GLD/SLV/USO spot altın/gümüş/petrol fiyatı değildir. Sağlayıcı erişilemiyorsa eksik veri açıkça raporlanır. BIST, Avrupa, tüm hisse ve ETF evreni, haber akışı, bilanço, portföy, siyasi olay modellemesi ve model adaptasyonu bu sürümde tamamlanmış değildir. RSS girişi opsiyoneldir; başlık kategorilemesi öngörü modeline etki etmez.
+yfinance / Yahoo Chart / Stooq yedeklemesi ile AAPL, MSFT, SPY, QQQ, emtia **ETF vekilleri** GLD, SLV, USO ve örnek BIST/Avrupa sembolleri ASELS.IS/SAP.DE denenir. GLD/SLV/USO spot altın/gümüş/petrol fiyatı değildir. Sağlayıcı erişilemiyorsa eksik veri açıkça raporlanır. BIST ve Avrupa'nın tam evrenleri, tüm hisse ve ETF evreni, haber akışı, bilanço, portföy, siyasi olay modellemesi ve model adaptasyonu bu sürümde tamamlanmış değildir. RSS girişi opsiyoneldir; başlık kategorilemesi öngörü modeline etki etmez.
 
 ## Ajana verilecek roller
 - Müdür: tek ana görev, kanıt kapısı, maliyet, Türkçe rapor.
