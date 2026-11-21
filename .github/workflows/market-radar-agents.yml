@@ -118,6 +118,7 @@ jobs:
             git worktree add --detach "$STATE" HEAD
             git -C "$STATE" switch --orphan radar-ledger
           fi
+          # Orphan checkout clears tracked directories; recreate after switching.
           mkdir -p "$STATE/runs"
           python - <<'PY'
           from pathlib import Path
