@@ -1,0 +1,71 @@
+name: Hybrid markets and participation gate - isolated verification
+on:
+  push:
+    branches: [feat/hybrid-discovery-participation-gate-20261120]
+    paths:
+      - 'experiments/hybrid_gate/**'
+      - '.github/workflows/hybrid-gate-verification.yml'
+permissions:
+  contents: read
+jobs:
+  offline_gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Syntax and regression tests (no live market requests)
+        run: |
+          python -m compileall -q experiments/hybrid_gate
+          python -m unittest discover -s experiments/hybrid_gate -p 'test_*.py' -v
+  live_three_markets:
+    needs: offline_gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    env:
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install live discovery and open-source compliance reference
+        run: |
+          set -euxo pipefail
+          python -m pip install --upgrade pip
+          git clone --depth 1 https://github.com/omkarcloud/google-finance-scraper.git /tmp/google-finance-scraper
+          git clone --depth 1 https://github.com/bamlhs/halal-stock-analyst.git /tmp/halal-stock-analyst
+          python -m pip install -r /tmp/google-finance-scraper/requirements.txt
+          python -m pip install yfinance pandas requests
+          cd /tmp/google-finance-scraper
+          nohup python run.py >/tmp/google-finance-server.log 2>&1 &
+          sleep 8
+          curl -fsS --max-time 20 http://127.0.0.1:8000/health
+      - name: Live market discovery -> eligibility -> gated experimental scoring
+        run: |
+          python -m experiments.hybrid_gate.run --limit-per-region 8 --output hybrid_gate_output
+      - name: Enforce minimum real coverage for all three markets
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          summary=json.loads(Path("hybrid_gate_output/summary.json").read_text())
+          assert set(summary["markets"]) == {"ABD", "BIST", "AVRUPA"}
+          for name, market in summary["markets"].items():
+              assert market["unique"] > 0, f"{name}: no discovered company"
+              assert market["screened"] == market["unique"], f"{name}: incomplete gate screening"
+              assert market["passed"]+market["rejected"]+market["unknown"] == market["unique"]
+              assert market["scored"] <= market["passed"]
+              print(name, market["unique"], market["passed"], market["scored"])
+          PY
+      - name: Preserve results for independent inspection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hybrid-gate-ABD-BIST-AVRUPA-source-evidence
+          path: |
+            hybrid_gate_output/
+          retention-days: 30
+          if-no-files-found: warn
