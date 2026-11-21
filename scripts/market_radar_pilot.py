@@ -45,6 +45,36 @@ def fetch_prices(stooq_symbol: str, timeout=12):
         raise ValueError("insufficient historical closes")
     return rows[-260:]
 
+def fetch_yahoo_chart(symbol: str, timeout=12):
+    """Read a bounded set of daily closes from the public Yahoo chart endpoint."""
+    path = urllib.parse.quote(symbol, safe="")
+    url = "https://query1.finance.yahoo.com/v8/finance/chart/" + path + "?range=2y&interval=1d"
+    req = urllib.request.Request(url, headers={
+        "User-Agent": "Mozilla/5.0 (compatible; radar-research/0.2)",
+        "Accept": "application/json",
+    })
+    with urllib.request.urlopen(req, timeout=timeout) as response:
+        payload = json.loads(response.read(4_000_000))
+    chart = (payload.get("chart", {}).get("result") or [None])[0]
+    if not chart:
+        raise ValueError("yahoo chart returned no result")
+    times = chart.get("timestamp", [])
+    close = chart.get("indicators", {}).get("quote", [{}])[0].get("close", [])
+    parsed = {}
+    for stamp, value in zip(times, close):
+        if value is None or not math.isfinite(float(value)) or float(value) <= 0:
+            continue
+        day = datetime.fromtimestamp(stamp, timezone.utc).date().isoformat()
+        parsed[day] = {"date": day, "close": float(value)}
+    rows = [parsed[day] for day in sorted(parsed)]
+    # Today's bar may be incomplete. Avoid recording intraday price as end-of-day.
+    if rows and rows[-1]["date"] == datetime.now(timezone.utc).date().isoformat() and datetime.now(timezone.utc).hour < 23:
+        rows.pop()
+    if len(rows) < 22:
+        raise ValueError("yahoo chart has insufficient completed daily closes")
+    return rows[-260:]
+
+
 def load_fixture(path):
     data = json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
     if not isinstance(data, dict):
@@ -111,17 +141,28 @@ def evaluate(old_predictions, current_prices):
 
 def run(fixture=None, prior=None, feed=None):
     history = load_fixture(fixture) if fixture else {}
-    source = "fixture" if fixture else "stooq_daily"
     errors = []
     coverage = {}
+    sources = {}
     for category, symbols in DEFAULT_WATCH.items():
         for symbol, provider_symbol in symbols.items():
+            if fixture and symbol in history:
+                sources[symbol] = "fixture"
             if symbol not in history and not fixture:
                 try:
-                    history[symbol] = fetch_prices(provider_symbol)
-                except Exception as exc:
-                    errors.append({"symbol": symbol, "reason": type(exc).__name__,
-                                   "note": "provider unavailable; no forecast"})
+                    history[symbol] = fetch_yahoo_chart(symbol)
+                    sources[symbol] = "yahoo_chart_daily"
+                except Exception as first_exc:
+                    try:
+                        history[symbol] = fetch_prices(provider_symbol)
+                        sources[symbol] = "stooq_daily"
+                    except Exception as second_exc:
+                        errors.append({
+                            "symbol": symbol, "reason": type(first_exc).__name__,
+                            "fallback_reason": type(second_exc).__name__,
+                            "providers": ["yahoo_chart_daily", "stooq_daily"],
+                            "note": "both sources unavailable; no forecast",
+                        })
             if symbol in history:
                 coverage[symbol] = category
     forecasts = []
@@ -129,7 +170,8 @@ def run(fixture=None, prior=None, feed=None):
         try:
             forecast = signal(history[symbol])
             forecast.update({"symbol": symbol, "asset_group": category,
-                             "source": source, "source_symbol": DEFAULT_WATCH[category][symbol]})
+                             "source": sources.get(symbol, "unknown"),
+                             "source_symbol": DEFAULT_WATCH[category][symbol]})
             forecasts.append(forecast)
         except (ValueError, KeyError, TypeError) as exc:
             errors.append({"symbol": symbol, "reason": type(exc).__name__,
