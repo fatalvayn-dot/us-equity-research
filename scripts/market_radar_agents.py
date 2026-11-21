@@ -142,7 +142,7 @@ def turkish_report(s):
     )
 
 
-def execute(outdir, prior_path, eval_path, fixture=None, rss=None):
+def execute(outdir, prior_path, eval_path, fixture=None, rss=None, universe=None):
     output = pathlib.Path(outdir)
     output.mkdir(parents=True, exist_ok=True)
     prior, old_evals = read_jsonl(prior_path), read_jsonl(eval_path)
@@ -154,7 +154,7 @@ def execute(outdir, prior_path, eval_path, fixture=None, rss=None):
     with tempfile.TemporaryDirectory() as tmp:
         path = pathlib.Path(tmp) / "pending.json"
         path.write_text(json.dumps(pending), encoding="utf-8")
-        raw = pilot.run(fixture=fixture, prior=str(path), feed=rss)
+        raw = pilot.run(fixture=fixture, prior=str(path), feed=rss, universe=universe)
     summary, predictions, outcomes = process(raw, prior, old_evals)
     write_jsonl(output / "predictions.jsonl", predictions)
     write_jsonl(output / "evaluations.jsonl", outcomes)
@@ -172,8 +172,9 @@ def main():
     parser.add_argument("--evaluations", default="radar-input/evaluations.jsonl")
     parser.add_argument("--fixture")
     parser.add_argument("--rss")
+    parser.add_argument("--universe", help="Public research list for observation only")
     args = parser.parse_args()
-    summary = execute(args.output, args.predictions, args.evaluations, args.fixture, args.rss)
+    summary = execute(args.output, args.predictions, args.evaluations, args.fixture, args.rss, args.universe)
     print(json.dumps({"status": summary["status"], "signals": summary["current_forecasts"],
                       "new_predictions": summary["new_predictions"],
                       "new_evaluations": summary["new_evaluations"]}, ensure_ascii=False))
