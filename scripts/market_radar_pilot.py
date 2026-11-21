@@ -17,8 +17,10 @@ DEFAULT_WATCH = {
     "ABD_HISSE": {"AAPL": "aapl.us", "MSFT": "msft.us"},
     "ABD_ETF": {"SPY": "spy.us", "QQQ": "qqq.us"},
     "EMTIA_VEKIL": {"GLD": "gld.us", "SLV": "slv.us", "USO": "uso.us"},
+    "BIST_HISSE_ORNEK": {"ASELS.IS": None},
+    "AVRUPA_HISSE_ORNEK": {"SAP.DE": None},
 }
-# Commodity ETF proxies are NOT physical spot quotes. BIST and Europe not claimed as covered.
+# Commodity ETFs are not physical spot quotes. BIST/Europe are representative samples, not full exchange coverage.
 KEYWORDS = {
     "risk": ("war", "conflict", "sanction", "pandemic", "earthquake", "attack", "tariff",
              "savaş", "çatışma", "yaptırım", "salgın", "deprem"),
@@ -44,6 +46,35 @@ def fetch_prices(stooq_symbol: str, timeout=12):
     if len(rows) < 22:
         raise ValueError("insufficient historical closes")
     return rows[-260:]
+
+def fetch_yfinance(symbol: str, timeout=12):
+    """Reuse the Apache-2.0 yfinance project's historical price adapter.
+
+    This is a separate optional provider; the existing Yahoo Chart and Stooq
+    adapters remain fallbacks. Do not treat an incomplete current-day bar as a close.
+    """
+    import yfinance as yf
+    frame = yf.Ticker(symbol).history(period="2y", interval="1d",
+                                      auto_adjust=False, timeout=timeout)
+    if frame is None or frame.empty:
+        raise ValueError("yfinance returned no daily prices")
+    by_day = {}
+    for stamp, values in frame.iterrows():
+        day = stamp.date().isoformat()
+        try:
+            close = float(values["Close"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        if close > 0 and math.isfinite(close):
+            by_day[day] = {"date": day, "close": close}
+    days = sorted(by_day)
+    today = datetime.now(timezone.utc).date().isoformat()
+    if days and days[-1] >= today:
+        days = [d for d in days if d < today]
+    if len(days) < 22:
+        raise ValueError("yfinance returned insufficient completed daily closes")
+    return [by_day[d] for d in days[-260:]]
+
 
 def fetch_yahoo_chart(symbol: str, timeout=12):
     """Read a bounded set of daily closes from the public Yahoo chart endpoint."""
@@ -149,20 +180,24 @@ def run(fixture=None, prior=None, feed=None):
             if fixture and symbol in history:
                 sources[symbol] = "fixture"
             if symbol not in history and not fixture:
-                try:
-                    history[symbol] = fetch_yahoo_chart(symbol)
-                    sources[symbol] = "yahoo_chart_daily"
-                except Exception as first_exc:
+                attempts = []
+                providers = [
+                    ("yfinance_daily", lambda s=symbol: fetch_yfinance(s)),
+                    ("yahoo_chart_daily", lambda s=symbol: fetch_yahoo_chart(s)),
+                ]
+                if provider_symbol:
+                    providers.append(("stooq_daily", lambda s=provider_symbol: fetch_prices(s)))
+                for provider_name, fetcher in providers:
                     try:
-                        history[symbol] = fetch_prices(provider_symbol)
-                        sources[symbol] = "stooq_daily"
-                    except Exception as second_exc:
-                        errors.append({
-                            "symbol": symbol, "reason": type(first_exc).__name__,
-                            "fallback_reason": type(second_exc).__name__,
-                            "providers": ["yahoo_chart_daily", "stooq_daily"],
-                            "note": "both sources unavailable; no forecast",
-                        })
+                        history[symbol] = fetcher()
+                        sources[symbol] = provider_name
+                        break
+                    except Exception as exc:
+                        attempts.append({"provider": provider_name,
+                                         "reason": type(exc).__name__})
+                if symbol not in history:
+                    errors.append({"symbol": symbol, "attempts": attempts,
+                                   "note": "no verified historical prices; no forecast"})
             if symbol in history:
                 coverage[symbol] = category
     forecasts = []
@@ -171,7 +206,7 @@ def run(fixture=None, prior=None, feed=None):
             forecast = signal(history[symbol])
             forecast.update({"symbol": symbol, "asset_group": category,
                              "source": sources.get(symbol, "unknown"),
-                             "source_symbol": DEFAULT_WATCH[category][symbol]})
+                             "source_symbol": symbol, "stooq_symbol": DEFAULT_WATCH[category][symbol]})
             forecasts.append(forecast)
         except (ValueError, KeyError, TypeError) as exc:
             errors.append({"symbol": symbol, "reason": type(exc).__name__,
@@ -188,7 +223,8 @@ def run(fixture=None, prior=None, feed=None):
             "forecast_status": "uncalibrated_research_only", "news": headlines,
             "forecasts": forecasts, "evaluation": review, "errors": errors,
             "coverage": {"forecast_count": len(forecasts), "requested": sum(map(len, DEFAULT_WATCH.values())),
-                         "bist": "not_implemented", "europe": "not_implemented",
+                         "bist": "sample_only" if "ASELS.IS" in coverage else "unavailable",
+                         "europe": "sample_only" if "SAP.DE" in coverage else "unavailable",
                          "global_equities_and_etfs": "not_implemented",
                          "physical_commodities": "not_implemented"},
             "restrictions": {"orders": False, "portfolio_access": False,
