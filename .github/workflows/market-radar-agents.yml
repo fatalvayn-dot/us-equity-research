@@ -3,6 +3,13 @@ on:
   schedule:
     - cron: '17 */3 * * *'
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/market_radar_agents.py'
+      - 'scripts/market_radar_pilot.py'
+      - '.github/workflows/market-radar-agents.yml'
   pull_request:
     paths:
       - 'scripts/market_radar_agents.py'
@@ -45,7 +52,7 @@ jobs:
           retention-days: 14
 
   scheduled:
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 12
     permissions:
