@@ -12,6 +12,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install upstream market-data adapter
+        run: python -m pip install --disable-pip-version-check -r requirements/market-radar.txt
       - name: Offline regression tests
         env:
           PYTHONPATH: .:src
