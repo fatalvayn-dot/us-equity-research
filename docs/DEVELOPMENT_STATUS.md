@@ -1,5 +1,28 @@
 # Development status
 
+## 21 Kasım 2026 — #136 eski finansal kohort fail-closed kapısı
+
+#136 için önceki canlı hatanın kök nedeni skor öncesinde kapatıldı. Yeni
+`scripts/verify_score_input_cohort.py`, finansal batch ile değerleme raporunun
+tam CIK + sembol kümesini karşılaştırır; boş, yinelenen, geçersiz veya farklı
+kohortta skor başlamadan hata verir. `first-live-score.yml` bu denetimi
+finansal ve değerleme artifact'leri indirildikten hemen sonra çalıştırır.
+Kaynak sırası, finansal fact eşlemesi, skor ağırlıkları ve yatırım kararı
+değişmedi.
+
+Yerel: `python -m unittest -v tests/test_verify_score_input_cohort.py`, 3/3
+başarılı. GitHub: PR #162'nin kod head'i `96fbfbc742d950d17bc61980119e1f3e58ed64d1`,
+Foundation run `44903708568`; Python 3.11/3.12/3.13 başarılı. Bu oturumda
+canlı SEC/değerleme taraması, MotherDuck yazımı veya yeni skor yapılmadı.
+Son doğrulanmış canlı sonuç değişmedi: yeni aktif kohortta 9/100 puanlı,
+91 puansız; 51 model dışı sektör, 22 finansal inceleme, 13 değerleme kanıtı,
+5 kritik finansal inceleme engeli.
+
+Sıradaki tek iş: aynı aktif 100 şirket kümesine ait finansal ve değerleme
+artifact'lerini ortak kaynak zincirinde üretip bu kapıdan geçirmek; ardından
+tek canlı skorlama ile şirket bazlı kalan #136 engellerini doğrulamak.
+
+
 ## 20 Kasım 2026 — #135 canlı skorlama kaynak kapısı kabul edildi
 
 En düşük açık zincir kapısı #135'in son koşulu gerçek `first-live-score.yml`
