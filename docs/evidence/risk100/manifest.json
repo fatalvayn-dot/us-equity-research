@@ -1,0 +1,36 @@
+{
+  "summary": {
+    "companies": 100,
+    "company_states": {
+      "review_required": 98,
+      "period_unresolved": 2
+    },
+    "accepted_facts": 843,
+    "arithmetic_results": 576,
+    "scored_companies": 0
+  },
+  "financial_review_summary": {
+    "no_screen_trigger": 52,
+    "unresolved": 44,
+    "critical_review_required": 4
+  },
+  "triggered_checks": {
+    "current_balance_shortfall": 20,
+    "balance_deficit": 4,
+    "operating_loss": 2
+  },
+  "new_network_requests": 0,
+  "fresh_live_acceptance": false,
+  "files": [
+    {
+      "file": "report.html",
+      "bytes": 746041,
+      "sha256": "3ed40cd8abb72c27485d6cc3bf10bfb3b606b66fad8b5da4e1643999f9d80433"
+    },
+    {
+      "file": "assessment.json.gz",
+      "bytes": 36868,
+      "sha256": "87caaf8b8d594e4b8fee0ad06a0c5cc552ceb113957eac64855ef3e4adb88c51"
+    }
+  ]
+}

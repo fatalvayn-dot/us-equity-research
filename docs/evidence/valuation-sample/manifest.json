@@ -1,0 +1,30 @@
+{
+  "input_batch": "docs/evidence/liquidity100/batch.json.gz",
+  "input_sha256": "75d6a55f8263322c2ceed0a1a8a57b5e43a369b2dda36146066ed5e3ea47b58f",
+  "source_observations": 13,
+  "source_bundle": "tests/fixtures/valuation-sources",
+  "financial_numerators": "retained_recorded_annual_batch_not_refreshed",
+  "fresh_100_company_acceptance": false,
+  "files": [
+    {
+      "file": "report.json.gz",
+      "bytes": 10293,
+      "sha256": "dd5ee52c3de8e38408a1c6a093b1aaf19e8261d0ca2dad69baffaa0a7609c688"
+    },
+    {
+      "file": "report.md",
+      "bytes": 32139,
+      "sha256": "34304d30633bbaee8e6818e9d5e8cbc9d6438a57f57d98d97feb5d6df4c2ca78"
+    },
+    {
+      "file": "audit.json",
+      "bytes": 1049,
+      "sha256": "5387aa180616a1f358ce12706336674d9f823eb656d0e5955f509062f325c8d8"
+    },
+    {
+      "file": "zero-work-resume.json",
+      "bytes": 332,
+      "sha256": "d1338dd70e3e83ae17a426aa517ae9d40481e15b2d92adfc5556c8c906bf11af"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "format": "gzip-jsonl-public-response-observations-v1",
+  "observations": 11,
+  "compressed_sha256": "0e581a6cce000afd65b851fb859552629796a96ef3d5fdfa7b60cc9ab68ffd3b",
+  "parts": [
+    {
+      "file": "sources.jsonl.gz.part0000",
+      "bytes": 524288,
+      "sha256": "c0d56bee472d7778e7e11d761cd81cc076fb0dc19d09c90e02f5352bee0b0bb0"
+    },
+    {
+      "file": "sources.jsonl.gz.part0001",
+      "bytes": 524288,
+      "sha256": "f5d16749052ed783f1dbfd1f293272a92a302e6240893d05ddf9145b619312ef"
+    },
+    {
+      "file": "sources.jsonl.gz.part0002",
+      "bytes": 524288,
+      "sha256": "7fd9823cc4d6c1d46b00b709c9c1c20b0ca1db002a61bea1abcc660664b5d8c9"
+    },
+    {
+      "file": "sources.jsonl.gz.part0003",
+      "bytes": 402108,
+      "sha256": "be68081559d6f9e08d5744be560c703b6e17bb8368128ac73cd17f04736cedbb"
+    }
+  ],
+  "headers_stored": false,
+  "credentials_stored": false
+}

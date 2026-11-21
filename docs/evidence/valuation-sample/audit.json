@@ -1,0 +1,38 @@
+{
+  "source_get_invocations": 9,
+  "collection": [
+    {
+      "symbol": "AAPL",
+      "issuer_id": "0000320193",
+      "status": "source_bodies_collected",
+      "share_date": "2026-07-17"
+    },
+    {
+      "symbol": "MSFT",
+      "issuer_id": "0000789019",
+      "status": "source_bodies_collected",
+      "share_date": "2026-10-22"
+    },
+    {
+      "symbol": "NVDA",
+      "issuer_id": "0001045810",
+      "status": "source_bodies_collected",
+      "share_date": "2026-08-21"
+    }
+  ],
+  "price_summary": {
+    "candidates": 3,
+    "collected_prices": 3,
+    "company_states": {
+      "collected": 3
+    },
+    "scored_companies": 0,
+    "new_price_get_invocations": 3
+  },
+  "new_price_get_invocations": 3,
+  "new_identity_get_invocations": 1,
+  "evidence_cutoff": "2026-11-02T20:00:15.589376+00:00",
+  "financial_input_mode": "retained_recorded_annual_batch_not_refreshed",
+  "fresh_100_company_acceptance": false,
+  "capture_correction": "top-level count copied from preserved nested price_summary; no source data or timestamps changed"
+}

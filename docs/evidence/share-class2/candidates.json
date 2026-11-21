@@ -1,0 +1,12 @@
+{
+  "companies": [
+    {
+      "symbol": "ORCL",
+      "issuer_id": "0001341439"
+    },
+    {
+      "symbol": "MCHP",
+      "issuer_id": "0000827054"
+    }
+  ]
+}

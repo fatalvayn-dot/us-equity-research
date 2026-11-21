@@ -1,0 +1,10 @@
+{
+  "command": "common-sample with README fixed cutoff and original source bundles",
+  "cutoff": "2026-11-03T00:57:20.163470+00:00",
+  "original_report_sha256": "174f597e0cca8a916e46342228db64ef5b51a8407c7b747b02cd7e3bf31dd2b5",
+  "replayed_report_sha256": "174f597e0cca8a916e46342228db64ef5b51a8407c7b747b02cd7e3bf31dd2b5",
+  "report_bytes_identical": true,
+  "candidate_plan_bytes_identical": true,
+  "new_network_requests": 0,
+  "mvp_accepted": false
+}

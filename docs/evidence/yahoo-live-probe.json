@@ -1,0 +1,7 @@
+{
+  "attempted_at": "2026-11-01T19:36:44.937384+00:00",
+  "url": "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/AAPL?symbol=AAPL&type=annualTotalAssets&period1=1735689600&period2=1793577600",
+  "status": "success",
+  "sha256": "bcd6c04b65ff3dbe67cb3b7a1d4298cd8958da5d789e5b6789e08db0f7922d73",
+  "retrieved_at": "2026-11-01T19:36:48.567072+00:00"
+}

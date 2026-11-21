@@ -1,0 +1,37 @@
+{
+  "source_commit": "3ff708b1dffe97d338d7f239d2ebea617f1602ad",
+  "source_tree": "de3be0af1f6ee68869da8d0b519c2383311a00ce",
+  "pr": "https://github.com/fatalvayn-dot/us-equity-research/pull/16",
+  "source_ci": "https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41576906725",
+  "source_jobs": [
+    {
+      "job": 125722422269,
+      "python": "test (3.13)",
+      "conclusion": "success",
+      "tests": [
+        "Ran 631 tests in 111.637s"
+      ]
+    },
+    {
+      "job": 125722422498,
+      "python": "test (3.11)",
+      "conclusion": "success",
+      "tests": [
+        "Ran 631 tests in 109.290s"
+      ]
+    },
+    {
+      "job": 125722422452,
+      "python": "test (3.12)",
+      "conclusion": "success",
+      "tests": [
+        "Ran 631 tests in 124.608s"
+      ]
+    }
+  ],
+  "final_local_tests": 632,
+  "final_local_seconds": 93.212,
+  "final_head_ci": "see PR checks and merge verification comment",
+  "mode": "offline_regression_and_raw_source_replay_not_CI_live_acceptance",
+  "mvp_accepted": false
+}

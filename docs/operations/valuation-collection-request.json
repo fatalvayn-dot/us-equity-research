@@ -1,0 +1,7 @@
+{
+  "requested_on": "2026-11-19",
+  "purpose": "PR #131 sonrası ana dal canlı 100 şirket değerleme veri testi",
+  "reason": "Mükerrer Yahoo hata sınıflandırması sadeleştirildi; mevcut fiyat/hisse/geçmiş veri engellerini 501 GET üst sınırıyla yeniden doğrula",
+  "maximum_get_invocations": 501,
+  "investment_orders": false
+}

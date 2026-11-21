@@ -1,0 +1,13 @@
+{
+  "recorded_at": "2026-11-01T17:58:33.157138+00:00",
+  "python": "3.12.14",
+  "tests_run": 60,
+  "failures": 0,
+  "errors": 0,
+  "command": "PYTHONPATH=src python3 -m unittest discover -s tests -q",
+  "code_commit": "07155884e4c3d81c604293dcd13c5f3faad9cbea",
+  "remote_actions_run": false,
+  "live_evidence": "docs/evidence/sec-directory-live.json",
+  "real_response_fixture": "tests/fixtures/sec-directory-recorded.json",
+  "real_financial_companies_validated": 0
+}

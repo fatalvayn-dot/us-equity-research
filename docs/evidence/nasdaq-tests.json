@@ -1,0 +1,17 @@
+{
+  "recorded_at": "2026-11-01T20:39:40.623592+00:00",
+  "code_commit": "6ff7771419446159ab80a46466f23709f04f2c45",
+  "python": "3.12.14",
+  "command": "PYTHONPATH=src python3 -m unittest discover -s tests -q",
+  "tests_run": 133,
+  "failures": 0,
+  "errors": 0,
+  "discovery_records": 6954,
+  "sec_exact_symbol_matches": 6560,
+  "sec_unmatched": 394,
+  "trader_directory_live_accepted": false,
+  "active_common_universe_accepted": false,
+  "nasdaq_financial_connection_accepted": false,
+  "remote_actions_run": false,
+  "initial_real_replay_test_failed_then_fixed": true
+}

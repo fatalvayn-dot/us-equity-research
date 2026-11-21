@@ -1,0 +1,12 @@
+{
+  "initial_new_get_invocations": 35,
+  "reserve_new_get_invocations": 2,
+  "warm_new_get_invocations": 0,
+  "reserve_and_warm_evidence_events_unchanged": true,
+  "archived_observations": 39,
+  "live_SEC_observations": 37,
+  "retained_Nasdaq_observations": 2,
+  "fresh_Nasdaq_diagnostic": "api_error before recorded fallback; individual endpoint outcomes not retained from failed preliminary attempt",
+  "source_dates_not_rewritten": true,
+  "full_financial_100_company_acceptance": false
+}

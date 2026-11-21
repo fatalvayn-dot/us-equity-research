@@ -1,0 +1,969 @@
+{
+  "mode": "offline_production_score_operands",
+  "run_id": 42455760184,
+  "sequence": 10,
+  "as_of": "2026-11-08T07:01:02.732506+00:00",
+  "new_http_requests": 0,
+  "companies": [
+    {
+      "symbol": "PLTR",
+      "issuer_id": "0001321655",
+      "annual_accession": "0001321655-26-000011",
+      "confirmed_fields": 9,
+      "checks": [
+        {
+          "status": "confirmed",
+          "field": "assets",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "Yahoo",
+          "selected_sha256": "9392cec74f77c68f39a033fbb7c4e61911e3bc3fd64afb784117b7eb8c81c0a6",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001321655.json",
+          "sec_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_retrieved_at": "2026-11-08T06:16:43.563613+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "liabilities",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001321655.json",
+          "sec_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_retrieved_at": "2026-11-08T06:16:43.563613+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_assets",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001321655.json",
+          "sec_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_retrieved_at": "2026-11-08T06:16:43.563613+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_liabilities",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001321655.json",
+          "sec_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_retrieved_at": "2026-11-08T06:16:43.563613+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "net_income",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001321655.json",
+          "sec_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_retrieved_at": "2026-11-08T06:16:43.563613+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_income",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001321655.json",
+          "sec_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_retrieved_at": "2026-11-08T06:16:43.563613+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_cash_flow",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001321655.json",
+          "sec_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_retrieved_at": "2026-11-08T06:16:43.563613+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "capital_expenditure",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001321655.json",
+          "sec_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_retrieved_at": "2026-11-08T06:16:43.563613+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "revenue",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001321655.json",
+          "sec_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8",
+          "sec_retrieved_at": "2026-11-08T06:16:43.563613+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "ADBE",
+      "issuer_id": "0000796343",
+      "annual_accession": "0000796343-26-000003",
+      "confirmed_fields": 8,
+      "checks": [
+        {
+          "status": "confirmed",
+          "field": "assets",
+          "period_start": null,
+          "period_end": "2025-11-28",
+          "selected_source": "SEC",
+          "selected_sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000796343.json",
+          "sec_sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "sec_retrieved_at": "2026-11-08T06:28:15.433776+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "liabilities",
+          "period_start": null,
+          "period_end": "2025-11-28",
+          "selected_source": "SEC",
+          "selected_sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000796343.json",
+          "sec_sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "sec_retrieved_at": "2026-11-08T06:28:15.433776+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_assets",
+          "period_start": null,
+          "period_end": "2025-11-28",
+          "selected_source": "SEC",
+          "selected_sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000796343.json",
+          "sec_sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "sec_retrieved_at": "2026-11-08T06:28:15.433776+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_liabilities",
+          "period_start": null,
+          "period_end": "2025-11-28",
+          "selected_source": "SEC",
+          "selected_sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000796343.json",
+          "sec_sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "sec_retrieved_at": "2026-11-08T06:28:15.433776+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "net_income",
+          "period_start": "2024-11-30",
+          "period_end": "2025-11-28",
+          "selected_source": "SEC",
+          "selected_sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000796343.json",
+          "sec_sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "sec_retrieved_at": "2026-11-08T06:28:15.433776+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_income",
+          "period_start": "2024-11-30",
+          "period_end": "2025-11-28",
+          "selected_source": "SEC",
+          "selected_sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000796343.json",
+          "sec_sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "sec_retrieved_at": "2026-11-08T06:28:15.433776+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_cash_flow",
+          "period_start": "2024-11-30",
+          "period_end": "2025-11-28",
+          "selected_source": "SEC",
+          "selected_sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000796343.json",
+          "sec_sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "sec_retrieved_at": "2026-11-08T06:28:15.433776+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "capital_expenditure",
+          "period_start": "2024-11-30",
+          "period_end": "2025-11-28",
+          "selected_source": "SEC",
+          "selected_sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000796343.json",
+          "sec_sha256": "86a5689aa9aa7b0f9e95be21b48b0305376e014c8dbf3b8bb3b4b131f1b6a0c4",
+          "sec_retrieved_at": "2026-11-08T06:28:15.433776+00:00"
+        },
+        {
+          "field": "revenue",
+          "status": "selected_fact_missing"
+        }
+      ]
+    },
+    {
+      "symbol": "INTU",
+      "issuer_id": "0000896878",
+      "annual_accession": "0000896878-26-000037",
+      "confirmed_fields": 9,
+      "checks": [
+        {
+          "status": "confirmed",
+          "field": "assets",
+          "period_start": null,
+          "period_end": "2026-07-31",
+          "selected_source": "Yahoo",
+          "selected_sha256": "d8c16c8567fca09c59e97729d192edf672d5392f18a8ea0d30dbc6ed8d276c6a",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000896878.json",
+          "sec_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_retrieved_at": "2026-11-08T06:28:16.307473+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "liabilities",
+          "period_start": null,
+          "period_end": "2026-07-31",
+          "selected_source": "SEC",
+          "selected_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000896878.json",
+          "sec_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_retrieved_at": "2026-11-08T06:28:16.307473+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_assets",
+          "period_start": null,
+          "period_end": "2026-07-31",
+          "selected_source": "SEC",
+          "selected_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000896878.json",
+          "sec_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_retrieved_at": "2026-11-08T06:28:16.307473+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_liabilities",
+          "period_start": null,
+          "period_end": "2026-07-31",
+          "selected_source": "SEC",
+          "selected_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000896878.json",
+          "sec_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_retrieved_at": "2026-11-08T06:28:16.307473+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "net_income",
+          "period_start": "2025-08-01",
+          "period_end": "2026-07-31",
+          "selected_source": "SEC",
+          "selected_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000896878.json",
+          "sec_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_retrieved_at": "2026-11-08T06:28:16.307473+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_income",
+          "period_start": "2025-08-01",
+          "period_end": "2026-07-31",
+          "selected_source": "SEC",
+          "selected_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000896878.json",
+          "sec_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_retrieved_at": "2026-11-08T06:28:16.307473+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_cash_flow",
+          "period_start": "2025-08-01",
+          "period_end": "2026-07-31",
+          "selected_source": "SEC",
+          "selected_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000896878.json",
+          "sec_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_retrieved_at": "2026-11-08T06:28:16.307473+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "capital_expenditure",
+          "period_start": "2025-08-01",
+          "period_end": "2026-07-31",
+          "selected_source": "SEC",
+          "selected_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000896878.json",
+          "sec_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_retrieved_at": "2026-11-08T06:28:16.307473+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "revenue",
+          "period_start": "2025-08-01",
+          "period_end": "2026-07-31",
+          "selected_source": "SEC",
+          "selected_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000896878.json",
+          "sec_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a",
+          "sec_retrieved_at": "2026-11-08T06:28:16.307473+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "NOW",
+      "issuer_id": "0001373715",
+      "annual_accession": "0001373715-26-000007",
+      "confirmed_fields": 9,
+      "checks": [
+        {
+          "status": "confirmed",
+          "field": "assets",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "Yahoo",
+          "selected_sha256": "0005e9e55e69922a68f5ef91d6ece5b15567d1d671f2d1ffafbd5fe31faa6340",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001373715.json",
+          "sec_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_retrieved_at": "2026-11-08T06:28:17.077611+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "liabilities",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001373715.json",
+          "sec_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_retrieved_at": "2026-11-08T06:28:17.077611+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_assets",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001373715.json",
+          "sec_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_retrieved_at": "2026-11-08T06:28:17.077611+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_liabilities",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001373715.json",
+          "sec_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_retrieved_at": "2026-11-08T06:28:17.077611+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "net_income",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001373715.json",
+          "sec_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_retrieved_at": "2026-11-08T06:28:17.077611+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_income",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001373715.json",
+          "sec_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_retrieved_at": "2026-11-08T06:28:17.077611+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_cash_flow",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001373715.json",
+          "sec_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_retrieved_at": "2026-11-08T06:28:17.077611+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "capital_expenditure",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001373715.json",
+          "sec_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_retrieved_at": "2026-11-08T06:28:17.077611+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "revenue",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001373715.json",
+          "sec_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e",
+          "sec_retrieved_at": "2026-11-08T06:28:17.077611+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "SNPS",
+      "issuer_id": "0000883241",
+      "annual_accession": "0000883241-25-000028",
+      "confirmed_fields": 9,
+      "checks": [
+        {
+          "status": "confirmed",
+          "field": "assets",
+          "period_start": null,
+          "period_end": "2025-10-31",
+          "selected_source": "Yahoo",
+          "selected_sha256": "964938ecf1ef8fb49a827e0a69dd433cf8cf561ec419e2daf4b0d726c3f39829",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000883241.json",
+          "sec_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_retrieved_at": "2026-11-08T06:28:17.789610+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "liabilities",
+          "period_start": null,
+          "period_end": "2025-10-31",
+          "selected_source": "SEC",
+          "selected_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000883241.json",
+          "sec_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_retrieved_at": "2026-11-08T06:28:17.789610+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_assets",
+          "period_start": null,
+          "period_end": "2025-10-31",
+          "selected_source": "SEC",
+          "selected_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000883241.json",
+          "sec_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_retrieved_at": "2026-11-08T06:28:17.789610+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_liabilities",
+          "period_start": null,
+          "period_end": "2025-10-31",
+          "selected_source": "SEC",
+          "selected_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000883241.json",
+          "sec_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_retrieved_at": "2026-11-08T06:28:17.789610+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "net_income",
+          "period_start": "2024-11-01",
+          "period_end": "2025-10-31",
+          "selected_source": "SEC",
+          "selected_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000883241.json",
+          "sec_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_retrieved_at": "2026-11-08T06:28:17.789610+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_income",
+          "period_start": "2024-11-01",
+          "period_end": "2025-10-31",
+          "selected_source": "SEC",
+          "selected_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000883241.json",
+          "sec_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_retrieved_at": "2026-11-08T06:28:17.789610+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_cash_flow",
+          "period_start": "2024-11-01",
+          "period_end": "2025-10-31",
+          "selected_source": "SEC",
+          "selected_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000883241.json",
+          "sec_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_retrieved_at": "2026-11-08T06:28:17.789610+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "capital_expenditure",
+          "period_start": "2024-11-01",
+          "period_end": "2025-10-31",
+          "selected_source": "SEC",
+          "selected_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000883241.json",
+          "sec_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_retrieved_at": "2026-11-08T06:28:17.789610+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "revenue",
+          "period_start": "2024-11-01",
+          "period_end": "2025-10-31",
+          "selected_source": "SEC",
+          "selected_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000883241.json",
+          "sec_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4",
+          "sec_retrieved_at": "2026-11-08T06:28:17.789610+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "MPWR",
+      "issuer_id": "0001280452",
+      "annual_accession": "0001437749-26-006113",
+      "confirmed_fields": 9,
+      "checks": [
+        {
+          "status": "confirmed",
+          "field": "assets",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "Yahoo",
+          "selected_sha256": "441e605bc0196dd51b51f5c53c2cb57669c109b1e09f2f413433d7988f37995f",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001280452.json",
+          "sec_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_retrieved_at": "2026-11-08T06:29:54.695893+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "liabilities",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001280452.json",
+          "sec_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_retrieved_at": "2026-11-08T06:29:54.695893+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_assets",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001280452.json",
+          "sec_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_retrieved_at": "2026-11-08T06:29:54.695893+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_liabilities",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001280452.json",
+          "sec_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_retrieved_at": "2026-11-08T06:29:54.695893+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "net_income",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001280452.json",
+          "sec_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_retrieved_at": "2026-11-08T06:29:54.695893+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_income",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001280452.json",
+          "sec_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_retrieved_at": "2026-11-08T06:29:54.695893+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_cash_flow",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001280452.json",
+          "sec_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_retrieved_at": "2026-11-08T06:29:54.695893+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "capital_expenditure",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001280452.json",
+          "sec_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_retrieved_at": "2026-11-08T06:29:54.695893+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "revenue",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001280452.json",
+          "sec_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608",
+          "sec_retrieved_at": "2026-11-08T06:29:54.695893+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "ON",
+      "issuer_id": "0001097864",
+      "annual_accession": "0001097864-26-000006",
+      "confirmed_fields": 9,
+      "checks": [
+        {
+          "status": "confirmed",
+          "field": "assets",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "Yahoo",
+          "selected_sha256": "6e71460ee936d337cbbfc05d94bf173eb4813c5f7dc37b95eaaaf9cb78e68ba4",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001097864.json",
+          "sec_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_retrieved_at": "2026-11-08T06:29:56.073832+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "liabilities",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001097864.json",
+          "sec_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_retrieved_at": "2026-11-08T06:29:56.073832+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_assets",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001097864.json",
+          "sec_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_retrieved_at": "2026-11-08T06:29:56.073832+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_liabilities",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001097864.json",
+          "sec_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_retrieved_at": "2026-11-08T06:29:56.073832+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "net_income",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001097864.json",
+          "sec_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_retrieved_at": "2026-11-08T06:29:56.073832+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_income",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001097864.json",
+          "sec_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_retrieved_at": "2026-11-08T06:29:56.073832+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_cash_flow",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001097864.json",
+          "sec_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_retrieved_at": "2026-11-08T06:29:56.073832+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "capital_expenditure",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001097864.json",
+          "sec_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_retrieved_at": "2026-11-08T06:29:56.073832+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "revenue",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001097864.json",
+          "sec_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881",
+          "sec_retrieved_at": "2026-11-08T06:29:56.073832+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "SWKS",
+      "issuer_id": "0000004127",
+      "annual_accession": "0000004127-25-000085",
+      "confirmed_fields": 9,
+      "checks": [
+        {
+          "status": "confirmed",
+          "field": "assets",
+          "period_start": null,
+          "period_end": "2025-10-03",
+          "selected_source": "SEC",
+          "selected_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000004127.json",
+          "sec_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_retrieved_at": "2026-11-08T06:29:56.863351+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "liabilities",
+          "period_start": null,
+          "period_end": "2025-10-03",
+          "selected_source": "SEC",
+          "selected_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000004127.json",
+          "sec_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_retrieved_at": "2026-11-08T06:29:56.863351+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_assets",
+          "period_start": null,
+          "period_end": "2025-10-03",
+          "selected_source": "SEC",
+          "selected_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000004127.json",
+          "sec_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_retrieved_at": "2026-11-08T06:29:56.863351+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_liabilities",
+          "period_start": null,
+          "period_end": "2025-10-03",
+          "selected_source": "SEC",
+          "selected_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000004127.json",
+          "sec_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_retrieved_at": "2026-11-08T06:29:56.863351+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "net_income",
+          "period_start": "2024-09-28",
+          "period_end": "2025-10-03",
+          "selected_source": "SEC",
+          "selected_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000004127.json",
+          "sec_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_retrieved_at": "2026-11-08T06:29:56.863351+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_income",
+          "period_start": "2024-09-28",
+          "period_end": "2025-10-03",
+          "selected_source": "SEC",
+          "selected_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000004127.json",
+          "sec_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_retrieved_at": "2026-11-08T06:29:56.863351+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_cash_flow",
+          "period_start": "2024-09-28",
+          "period_end": "2025-10-03",
+          "selected_source": "SEC",
+          "selected_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000004127.json",
+          "sec_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_retrieved_at": "2026-11-08T06:29:56.863351+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "capital_expenditure",
+          "period_start": "2024-09-28",
+          "period_end": "2025-10-03",
+          "selected_source": "SEC",
+          "selected_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000004127.json",
+          "sec_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_retrieved_at": "2026-11-08T06:29:56.863351+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "revenue",
+          "period_start": "2024-09-28",
+          "period_end": "2025-10-03",
+          "selected_source": "SEC",
+          "selected_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000004127.json",
+          "sec_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8",
+          "sec_retrieved_at": "2026-11-08T06:29:56.863351+00:00"
+        }
+      ]
+    },
+    {
+      "symbol": "TYL",
+      "issuer_id": "0000860731",
+      "annual_accession": "0000860731-26-000016",
+      "confirmed_fields": 9,
+      "checks": [
+        {
+          "status": "confirmed",
+          "field": "assets",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "Yahoo",
+          "selected_sha256": "f95612ed0331743274179118159bb19960d1ac61e58fb8c013fdfae9b498eee1",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000860731.json",
+          "sec_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_retrieved_at": "2026-11-08T06:30:29.844503+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "liabilities",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000860731.json",
+          "sec_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_retrieved_at": "2026-11-08T06:30:29.844503+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_assets",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000860731.json",
+          "sec_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_retrieved_at": "2026-11-08T06:30:29.844503+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "current_liabilities",
+          "period_start": null,
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000860731.json",
+          "sec_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_retrieved_at": "2026-11-08T06:30:29.844503+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "net_income",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000860731.json",
+          "sec_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_retrieved_at": "2026-11-08T06:30:29.844503+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_income",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000860731.json",
+          "sec_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_retrieved_at": "2026-11-08T06:30:29.844503+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "operating_cash_flow",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000860731.json",
+          "sec_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_retrieved_at": "2026-11-08T06:30:29.844503+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "capital_expenditure",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000860731.json",
+          "sec_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_retrieved_at": "2026-11-08T06:30:29.844503+00:00"
+        },
+        {
+          "status": "confirmed",
+          "field": "revenue",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "selected_source": "SEC",
+          "selected_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000860731.json",
+          "sec_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec",
+          "sec_retrieved_at": "2026-11-08T06:30:29.844503+00:00"
+        }
+      ]
+    }
+  ],
+  "scores_generated": false,
+  "mvp_accepted": false,
+  "artifact_id": 13608291162,
+  "artifact_sha256": "425b11a0eb6143e34a7cb937317b5e41814b0b8a3297483b8db7ff6e2baa0dfd"
+}

@@ -5,7 +5,7 @@
 
 ## Görev devri
 - **Müdür:** koşuyu yönetir, diğer işlevlerin durumlarını birleştirir.
-- **Veri işçisi:** öncelikle Yahoo Chart, gerekirse Stooq üzerinden yedi varlığın günlük tarihli fiyatlarını almayı dener.
+- **Veri işçisi:** mevcut Stooq pilotundan yedi varlığın günlük tarihli fiyatlarını almayı dener.
 - **Tahmin işçisi:** 5/20 işlem günü momentum yön sinyalleri üretir; güven olasılığı hesaplamaz.
 - **Haber işçisi:** isteğe bağlı \`MARKET_RSS_URL\` değişkeninden RSS başlıklarını kategoriler; fiyat sinyaline dahil etmez.
 - **Geçmiş denetçisi:** beş işlem gününü dolduran geçmiş tahminleri değerlendirir.

@@ -1,0 +1,37 @@
+{
+  "fact": {
+    "issuer_id": "0000320193",
+    "field": "assets",
+    "value": "359241000000",
+    "source": "SEC",
+    "period_start": null,
+    "period_end": "2025-09-27",
+    "currency": "USD",
+    "unit": "currency",
+    "retrieved_at": "2026-11-01T18:53:53.052462+00:00",
+    "available_at": "2026-08-01T05:00:00+00:00",
+    "accounting_definition": "us-gaap:Assets",
+    "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+    "filing_accession": "0000320193-26-000020",
+    "filed_on": "2026-07-31",
+    "raw_sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43"
+  },
+  "attempts": [
+    {
+      "source": "Yahoo",
+      "status": "not_configured",
+      "attempted_at": "2026-11-01T18:56:52.434171+00:00",
+      "detail": "",
+      "cached": false
+    },
+    {
+      "source": "SEC",
+      "status": "valid",
+      "attempted_at": "2026-11-01T18:56:52.434180+00:00",
+      "detail": "",
+      "cached": false
+    }
+  ],
+  "financial_acceptance": false,
+  "mode": "SEC diagnostic; upstream sources may be unconfigured"
+}

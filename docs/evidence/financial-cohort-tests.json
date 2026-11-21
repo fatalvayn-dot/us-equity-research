@@ -1,0 +1,38 @@
+{
+  "date_local": "2026-11-03",
+  "python": "3.12.14",
+  "command": "PYTHONPATH=src python -m unittest discover -s tests -q",
+  "tests": 632,
+  "new_tests": 18,
+  "errors": 0,
+  "failures": 0,
+  "seconds": 93.212,
+  "mode": "offline_unit_regression_source_replay_and_CLI_not_live_CI",
+  "fresh_financial_company_count": 17,
+  "selected_financial_facts": 186,
+  "selected_provider_counts": {
+    "SEC": 168,
+    "Yahoo": 14,
+    "Nasdaq": 4
+  },
+  "new_raw_observations": 42,
+  "first_public_GETs": 42,
+  "seeded_observations": 37,
+  "archived_body_reuses": 35,
+  "warm_public_GETs": 0,
+  "original_SEC_document_matches": 26,
+  "original_unavailable_selected_inputs": 1,
+  "mixed_company_count": 100,
+  "mixed_selected_by_source": {
+    "retained": 83,
+    "new": 17
+  },
+  "mixed_facts": 988,
+  "mixed_arithmetic_results": 704,
+  "full_new_100_live_run": false,
+  "mvp_accepted": false,
+  "initial_test_failure": "serialized request dates were not decoded by replay test; fixed fixture, original selected values unaffected",
+  "source_head_tests": 631,
+  "source_head_seconds": 94.134,
+  "cached_body_origin_and_size_guards": true
+}

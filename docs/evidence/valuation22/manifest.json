@@ -1,0 +1,12 @@
+{
+  "mode": "bounded_live_22_candidate_market_collection",
+  "source_bundle": "tests/fixtures/valuation22-sources",
+  "source_bundle_manifest_sha256": "fd0ede88389b7648764f4b36317c05655a1464c462e25badb02ffb4ca22f3f55",
+  "mvp_accepted": false,
+  "files": {
+    "resume-proof.json": "df0630329f432d74bf37a8347f007a7a85484e5ee8de9dc6bd6e266676e31aed",
+    "candidates.json": "7d8a18eab40ec216c47500302e0ada2db44c361ae5feee98993ff34d4416fb29",
+    "collection.json.gz": "f802abf21760280ece733e97b66e94081fb45ddf132b97c4908e0e4f579ff4ca",
+    "resume.json.gz": "c7207014582eb9fd30e3a6ce6c2130285f07d11d0acb01eb7e580794d31875eb"
+  }
+}

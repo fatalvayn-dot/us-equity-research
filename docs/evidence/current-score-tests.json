@@ -1,0 +1,27 @@
+{
+  "local_full": {
+    "passed": 658,
+    "failed": 0,
+    "seconds": 127.197,
+    "python": "3.12.14",
+    "mode": "offline_and_recorded_regression"
+  },
+  "previous_full": {
+    "passed": 655,
+    "failed": 0,
+    "seconds": 106.696
+  },
+  "initial_full": {
+    "passed": 652,
+    "failed": 1,
+    "total": 653,
+    "reason": "legacy golden report did not yet account for additive input provenance; old numeric evidence preserved"
+  },
+  "actual_recorded_integration": {
+    "passed": 2,
+    "seconds": 15.999
+  },
+  "fixed_cutoff_reproduction": "byte_identical_JSON_Markdown_HTML",
+  "live_collection": "separately recorded in valuation22",
+  "mvp_accepted": false
+}

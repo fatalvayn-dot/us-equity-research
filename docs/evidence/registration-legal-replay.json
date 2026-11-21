@@ -1,0 +1,134 @@
+{
+  "mode": "replay of two official issuer documents downloaded in this session",
+  "companies": [
+    {
+      "label": "bdc",
+      "issuer_id": "0001902649",
+      "document_type": "N-2/A",
+      "disclosure_date": "2026-08-21",
+      "context_ids": [
+        "c0"
+      ],
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1902649/000114036126034017/ef20080753_n2a.htm",
+      "raw_sha256": "17a7416296df1c071fadf9f00cd56081b48d89ae036b7b3705ba36b94dfc30a8",
+      "retrieved_at": "2026-11-02T10:54:43.972080+00:00",
+      "as_of": "2026-11-02T10:54:43.972080+00:00",
+      "disclosures": {
+        "investment_company_type": {
+          "status": "reported",
+          "value": "N-2",
+          "evidence": [
+            {
+              "context_id": "c0",
+              "concept": "dei:entityinvcompanytype",
+              "raw_text": "N-2",
+              "nil": null,
+              "format": null
+            }
+          ]
+        },
+        "business_development_company": {
+          "status": "reported",
+          "value": true,
+          "evidence": [
+            {
+              "context_id": "c0",
+              "concept": "cef:businessdevelopmentcompanyflag",
+              "raw_text": "\u2612",
+              "nil": null,
+              "format": "ixt-sec:boolballotbox"
+            }
+          ]
+        },
+        "registered_closed_end_fund": {
+          "status": "reported",
+          "value": false,
+          "evidence": [
+            {
+              "context_id": "c0",
+              "concept": "cef:registeredclosedendfundflag",
+              "raw_text": "\u2610",
+              "nil": null,
+              "format": "ixt-sec:boolballotbox"
+            }
+          ]
+        },
+        "reit": {
+          "status": "unsupported_requires_document_review",
+          "value": null,
+          "evidence": []
+        }
+      },
+      "legal_type_approved": false,
+      "scope_approved": false,
+      "investment_approved": false,
+      "fiscal_period_inferred": false,
+      "evidence_basis": "literal registration disclosures sharing issuer/document-type same-day duration context"
+    },
+    {
+      "label": "fund",
+      "issuer_id": "0002031545",
+      "document_type": "N-2",
+      "disclosure_date": "2026-10-01",
+      "context_ids": [
+        "C_20261001to20261001"
+      ],
+      "source_url": "https://www.sec.gov/Archives/edgar/data/2031545/000110465926112751/tm2626786d1_posex.htm",
+      "raw_sha256": "eb84fcf4adb053c2f04127d2534cb9407d31a36b8a2022b23cc4fbbfb97f7f6c",
+      "retrieved_at": "2026-11-02T10:54:55.767550+00:00",
+      "as_of": "2026-11-02T10:54:55.767550+00:00",
+      "disclosures": {
+        "investment_company_type": {
+          "status": "unknown",
+          "value": null,
+          "evidence": []
+        },
+        "business_development_company": {
+          "status": "reported",
+          "value": false,
+          "evidence": [
+            {
+              "context_id": "C_20261001to20261001",
+              "concept": "cef:businessdevelopmentcompanyflag",
+              "raw_text": "\u2610",
+              "nil": null,
+              "format": "ixt:fixed-false"
+            }
+          ]
+        },
+        "registered_closed_end_fund": {
+          "status": "reported",
+          "value": true,
+          "evidence": [
+            {
+              "context_id": "C_20261001to20261001",
+              "concept": "cef:registeredclosedendfundflag",
+              "raw_text": "\u2612",
+              "nil": null,
+              "format": "ixt:fixed-true"
+            }
+          ]
+        },
+        "reit": {
+          "status": "unsupported_requires_document_review",
+          "value": null,
+          "evidence": []
+        }
+      },
+      "legal_type_approved": false,
+      "scope_approved": false,
+      "investment_approved": false,
+      "fiscal_period_inferred": false,
+      "evidence_basis": "literal registration disclosures sharing issuer/document-type same-day duration context"
+    }
+  ],
+  "summary": {
+    "documents": 2,
+    "reported_flags": 4
+  },
+  "replay_network_requests": 0,
+  "original_document_downloads": 2,
+  "financial_values_validated": false,
+  "legal_type_approved": false,
+  "hundred_company_accepted": false
+}

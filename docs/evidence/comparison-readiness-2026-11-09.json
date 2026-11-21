@@ -1,0 +1,184 @@
+{
+  "mode": "read_only_production_comparison_plan_replay",
+  "financial_run_id": 42455760184,
+  "valuation_run_id": 42536567400,
+  "financial_artifact_id": 13608291162,
+  "valuation_artifact_id": 13640160185,
+  "archive_sha256": [
+    "425b11a0eb6143e34a7cb937317b5e41814b0b8a3297483b8db7ff6e2baa0dfd",
+    "e456d79332173096836285497dc5a74a381ed6708735e36538e39a242656a478"
+  ],
+  "financial_manifest_files_verified": 99,
+  "selected_symbols": [
+    "AAPL",
+    "MSFT",
+    "MU",
+    "AMAT",
+    "TXN",
+    "MRVL",
+    "CRM"
+  ],
+  "excluded_reasons": {
+    "nine_model_financial_facts_incomplete": 3,
+    "unsupported_sector_or_entity_type": 32,
+    "financial_review_required": 50,
+    "market_or_original_share_evidence_incomplete": 8
+  },
+  "comparison_evidence_market_pending": [
+    {
+      "symbol": "PLTR",
+      "issuer_id": "0001321655",
+      "current_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "prior_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "accession": "0001321655-26-000011",
+      "raw_sha256": "2065b0809667e777bd4d328054beef84f271da4ec2f29481765a63009f19f7f8"
+    },
+    {
+      "symbol": "INTU",
+      "issuer_id": "0000896878",
+      "current_period": [
+        "2025-08-01",
+        "2026-07-31"
+      ],
+      "prior_period": [
+        "2024-08-01",
+        "2025-07-31"
+      ],
+      "accession": "0000896878-26-000037",
+      "raw_sha256": "456f89ae1757bb5a6ee0990f8b759e3d694222b0107c33ee4b163ee85a478d8a"
+    },
+    {
+      "symbol": "NOW",
+      "issuer_id": "0001373715",
+      "current_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "prior_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "accession": "0001373715-26-000007",
+      "raw_sha256": "427e2a9a58b944b34e0c7bb9560fdb7183de326e4fa9d880b5957e3025a0687e"
+    },
+    {
+      "symbol": "SNPS",
+      "issuer_id": "0000883241",
+      "current_period": [
+        "2024-11-01",
+        "2025-10-31"
+      ],
+      "prior_period": [
+        "2023-11-01",
+        "2024-10-31"
+      ],
+      "accession": "0000883241-25-000028",
+      "raw_sha256": "7e9b6e13ac2481586b56f1db93af14b9b014a1b7f92af2a09075d7cbd51526d4"
+    },
+    {
+      "symbol": "MPWR",
+      "issuer_id": "0001280452",
+      "current_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "prior_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "accession": "0001437749-26-006113",
+      "raw_sha256": "40108f7c8e34dc73f41152eed82cd4326c115ed44b56dc1f1c2411018f7f6608"
+    },
+    {
+      "symbol": "ON",
+      "issuer_id": "0001097864",
+      "current_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "prior_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "accession": "0001097864-26-000006",
+      "raw_sha256": "034ea39734b6dc0a8ec0d32e5356e54cb827a07e5c6fde67aca515c39a0b6881"
+    },
+    {
+      "symbol": "SWKS",
+      "issuer_id": "0000004127",
+      "current_period": [
+        "2024-09-28",
+        "2025-10-03"
+      ],
+      "prior_period": [
+        "2023-09-30",
+        "2024-09-27"
+      ],
+      "accession": "0000004127-25-000085",
+      "raw_sha256": "fe97017d523d23be63ebcc6d002d596ff7e1e00e89944976731ca27b8303c1b8"
+    },
+    {
+      "symbol": "TYL",
+      "issuer_id": "0000860731",
+      "current_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "prior_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "accession": "0000860731-26-000016",
+      "raw_sha256": "a6869f8b01dfd86de5bcb8490d37d86432b278eb81b8ea990f4132a9de6e2aec"
+    }
+  ],
+  "target_candidate_results": [
+    {
+      "symbol": "ADBE",
+      "issuer_id": "0000796343",
+      "reason": "nine_model_financial_facts_incomplete"
+    },
+    {
+      "symbol": "INTU",
+      "issuer_id": "0000896878",
+      "reason": "market_or_original_share_evidence_incomplete"
+    },
+    {
+      "symbol": "NOW",
+      "issuer_id": "0001373715",
+      "reason": "market_or_original_share_evidence_incomplete"
+    },
+    {
+      "symbol": "SNPS",
+      "issuer_id": "0000883241",
+      "reason": "market_or_original_share_evidence_incomplete"
+    },
+    {
+      "symbol": "MPWR",
+      "issuer_id": "0001280452",
+      "reason": "market_or_original_share_evidence_incomplete"
+    },
+    {
+      "symbol": "ON",
+      "issuer_id": "0001097864",
+      "reason": "market_or_original_share_evidence_incomplete"
+    },
+    {
+      "symbol": "SWKS",
+      "issuer_id": "0000004127",
+      "reason": "market_or_original_share_evidence_incomplete"
+    },
+    {
+      "symbol": "TYL",
+      "issuer_id": "0000860731",
+      "reason": "market_or_original_share_evidence_incomplete"
+    }
+  ],
+  "mvp_accepted": false
+}

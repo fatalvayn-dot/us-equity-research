@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "report_sha256": "8dffa45e8d4b5dddff404e8371c464ed4d9daf0120aad182e3b3d2120d234e3b",
+  "stored_report_sha256": "e50a57387de1cce2067425b864f5914718174e7ff54eb215013434e74804e949",
+  "markdown_sha256": "2f924a30203d10b5d94c2327f69318876bbbcd3fd754116be3e026271897424c",
+  "source_manifest": "tests/fixtures/common-price100-sources/manifest.json",
+  "source_observations": 101,
+  "summary": {
+    "candidates": 100,
+    "collected_prices": 100,
+    "company_states": {
+      "collected": 100
+    },
+    "scored_companies": 0,
+    "new_price_get_invocations": 0
+  },
+  "new_identity_get_invocations": 0,
+  "all_selected_price_references_archived": true,
+  "mvp_accepted": false,
+  "scoring_accepted": false
+}

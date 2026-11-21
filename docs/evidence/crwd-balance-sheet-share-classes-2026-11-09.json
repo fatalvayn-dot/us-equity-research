@@ -1,0 +1,51 @@
+{
+  "cover": {
+    "issuer_id": "0001535527",
+    "symbol": "CRWD",
+    "report_end": "2026-07-31",
+    "document_type": "10-Q",
+    "raw_sha256": "0b5c8e7ae5cd2f48b38d71600e70c9aa8761879f283025297b7e21ec3bda9f54",
+    "registered_security": [
+      {
+        "context_id": "c-1",
+        "symbol": "CRWD",
+        "title": "Class A common stock, par value $0.0005 per share",
+        "exchange": "The Nasdaq Stock Market LLC"
+      }
+    ],
+    "explicit_common_share_title": true,
+    "entity_shell_labels": [
+      "☑"
+    ],
+    "investment_company_labels": [],
+    "legal_type_approved": false,
+    "scope_approved": false
+  },
+  "class_counts": [
+    {
+      "context_id": "c-5",
+      "member": "us-gaap:CommonClassAMember",
+      "member_namespace": "http://fasb.org/us-gaap/2026",
+      "disclosed_on": "2026-07-31",
+      "shares": 1023845000,
+      "decimals": "-3"
+    },
+    {
+      "context_id": "c-7",
+      "member": "us-gaap:CommonClassBMember",
+      "member_namespace": "http://fasb.org/us-gaap/2026",
+      "disclosed_on": "2026-07-31",
+      "shares": 0,
+      "decimals": "-3"
+    }
+  ],
+  "listed_class_member": "us-gaap:CommonClassAMember",
+  "valuation_eligible": false,
+  "scope_approved": false,
+  "mvp_accepted": false,
+  "class_count_concept": "us-gaap:CommonStockSharesOutstanding",
+  "source_url": "https://www.sec.gov/Archives/edgar/data/1535527/000153552726000031/crwd-20260731.htm",
+  "valuation_run_id": 42654072673,
+  "valuation_artifact_id": 13691815112,
+  "source_observed_at": "2026-11-09T16:24:14.000678+00:00"
+}

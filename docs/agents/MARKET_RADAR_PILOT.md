@@ -9,7 +9,7 @@ Bu sürüm **tüm piyasaları taramaz** ve **yapay zekâ ile eğitilmiş tahmin 
 - Sonuç: \`radar-pilot-report.json\` ve 7 günlük Actions artifact.
 
 ## Mevcut kapsam
-Öncelikle Yahoo Chart günlük JSON verisi, erişilemiyorsa Stooq CSV üzerinden AAPL, MSFT, SPY, QQQ ve emtia **ETF vekilleri** GLD, SLV, USO denenir. GLD/SLV/USO spot altın/gümüş/petrol fiyatı değildir. Her iki sağlayıcı da erişilemiyorsa eksik veri açıkça raporlanır. BIST, Avrupa, tüm hisse ve ETF evreni, haber akışı, bilanço, portföy, siyasi olay modellemesi ve model adaptasyonu bu sürümde tamamlanmış değildir. RSS girişi opsiyoneldir; başlık kategorilemesi öngörü modeline etki etmez.
+Stooq günlük CSV üzerinden AAPL, MSFT, SPY, QQQ ve emtia **ETF vekilleri** GLD, SLV, USO denenir. GLD/SLV/USO spot altın/gümüş/petrol fiyatı değildir. Sağlayıcı erişilemiyorsa eksik veri açıkça raporlanır. BIST, Avrupa, tüm hisse ve ETF evreni, haber akışı, bilanço, portföy, siyasi olay modellemesi ve model adaptasyonu bu sürümde tamamlanmış değildir. RSS girişi opsiyoneldir; başlık kategorilemesi öngörü modeline etki etmez.
 
 ## Ajana verilecek roller
 - Müdür: tek ana görev, kanıt kapısı, maliyet, Türkçe rapor.

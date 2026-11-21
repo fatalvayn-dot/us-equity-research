@@ -1,0 +1,150 @@
+"""Bounded valuation GET work must rotate fairly without changing report order."""
+import json
+import tempfile
+import unittest
+from dataclasses import replace
+from datetime import timedelta
+from pathlib import Path
+
+from equity_research.batch import BatchStore
+from equity_research.companyfacts import companyfacts_url
+from equity_research.response_archive import ResponseArchive
+from equity_research.valuation_collection import ValuationSourceCollector
+from equity_research.prices import price_url
+from equity_research.providers import ProviderFailure, Status
+from test_scoring import ASOF, history
+from test_valuation import cf, filing, identity, meta, price
+from test_valuation_collection import Transport
+
+
+MSFT='0000789019'
+PLAN=dict(companies=[
+    dict(symbol='AAPL',issuer_id='0000320193'),
+    dict(symbol='MSFT',issuer_id=MSFT),
+])
+
+
+class FairValuationCursorTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory()
+        root=Path(self.tmp.name)
+        self.archive=ResponseArchive(root/'responses.sqlite')
+        self.lock=BatchStore(root/'checkpoint.sqlite')
+        self.owner=self.lock.acquire(ASOF,timedelta(minutes=15))
+        directory=identity()
+        p=json.loads(directory.body)
+        p['data'].append([789019,'Synthetic Microsoft','MSFT','Nasdaq'])
+        directory=replace(directory,body=json.dumps(p).encode())
+        first=cf()
+        other=json.loads(first.body);other['cik']=789019
+        second=replace(first,url=companyfacts_url(MSFT),body=json.dumps(other).encode())
+        third=meta()
+        self.transport=Transport({directory.url:directory,first.url:first,second.url:second,third.url:third})
+    def tearDown(self):
+        self.lock.release(self.owner);self.lock.close();self.archive.close();self.tmp.cleanup()
+    def collector(self,budget):
+        return ValuationSourceCollector(self.archive,{host:self.transport for host in
+            ('www.sec.gov','data.sec.gov','query1.finance.yahoo.com')},
+            max_new_requests=budget,checkpoint=self.lock,owner=self.owner,clock=lambda:ASOF)
+
+    def test_partial_boundary_retries_once_then_rotates_without_permuting_reports(self):
+        one = self.collector(2).collect(PLAN)
+        self.assertEqual(one['summary']['new_get_invocations'], 2)
+        self.assertEqual(one['continuation'], dict(start_symbol='AAPL', next_symbol='AAPL'))
+        cursor = self.lock.read('valuation-candidate-cursor-v1')
+        self.assertTrue(cursor['retrying_partial'])
+        self.assertEqual(cursor['next_index'], 0)
+        requested_before = len(self.transport.calls)
+
+        two = self.collector(1).collect(PLAN)
+        self.assertEqual(two['summary']['new_get_invocations'], 1)
+        self.assertEqual(self.transport.calls[requested_before], meta().url)
+        self.assertEqual(two['continuation'], dict(start_symbol='AAPL', next_symbol='MSFT'))
+        self.assertFalse(self.lock.read('valuation-candidate-cursor-v1')['retrying_partial'])
+        requested_before = len(self.transport.calls)
+
+        three = self.collector(1).collect(PLAN)
+        self.assertEqual(three['summary']['new_get_invocations'], 1)
+        self.assertEqual(self.transport.calls[requested_before], companyfacts_url(MSFT))
+        self.assertEqual([c['symbol'] for c in three['companies']], ['AAPL', 'MSFT'])
+        self.assertFalse(three['mvp_accepted'])
+        self.assertTrue(all(c['total_score'] is None for c in three['companies']))
+
+    def test_priority_gets_are_bounded_and_normal_cursor_still_moves(self):
+        plan = dict(companies=list(reversed(PLAN['companies'])))
+        self.transport.responses.update({r.url: r for r in (filing(), price(), history())})
+        self.transport.responses[companyfacts_url(MSFT)] = ProviderFailure(Status.TIMEOUT)
+        self.transport.responses[price_url('MSFT')] = ProviderFailure(Status.TIMEOUT)
+        report = self.collector(10).collect(plan, priority_plan=dict(companies=[PLAN['companies'][0]]))
+        self.assertEqual(report['priority_symbols'], ['AAPL'])
+        self.assertEqual(self.transport.calls[1], companyfacts_url(PLAN['companies'][0]['issuer_id']))
+        self.assertEqual(self.transport.calls[6], companyfacts_url(MSFT))
+        self.assertEqual(report['summary']['new_get_invocations'], 8)
+        self.assertEqual([c['symbol'] for c in report['companies']], ['MSFT', 'AAPL'])
+        self.assertEqual(report['continuation']['next_symbol'], 'AAPL')
+        self.assertFalse(report['mvp_accepted'])
+
+    def test_priority_cursor_rotates_independently_of_normal_boundary(self):
+        self.transport.responses.update({r.url: r for r in (filing(), price(), history())})
+        self.transport.responses[companyfacts_url(MSFT)] = ProviderFailure(Status.TIMEOUT)
+        self.transport.responses[price_url('MSFT')] = ProviderFailure(Status.TIMEOUT)
+        reports = [self.collector(10).collect(PLAN, priority_plan=PLAN) for _ in range(3)]
+        self.assertEqual([r['priority_symbols'] for r in reports], [['AAPL'], ['MSFT'], ['AAPL']])
+        self.assertTrue(all(r['summary']['new_get_invocations'] <= 10 for r in reports))
+        self.assertTrue(all([c['symbol'] for c in r['companies']] == ['AAPL', 'MSFT']
+                            for r in reports))
+        self.assertEqual(reports[2]['summary']['new_get_invocations'], 0)
+
+    def test_priority_cursor_survives_zero_budget_and_rejects_changed_order(self):
+        self.transport.responses.update({r.url: r for r in (filing(), price(), history())})
+        self.transport.responses[companyfacts_url(MSFT)] = ProviderFailure(Status.TIMEOUT)
+        self.transport.responses[price_url('MSFT')] = ProviderFailure(Status.TIMEOUT)
+        key = 'valuation-priority-cursor-v1'
+        self.collector(10).collect(PLAN, priority_plan=PLAN)
+        saved = self.lock.read(key)
+        self.assertEqual(saved['next_index'], 1)
+        self.assertEqual(self.collector(0).collect(PLAN, priority_plan=PLAN)['priority_symbols'], [])
+        self.assertEqual(self.lock.read(key), saved)
+        changed = dict(companies=list(reversed(PLAN['companies'])))
+        report = self.collector(10).collect(changed, priority_plan=PLAN)
+        self.assertEqual(report['priority_symbols'], ['MSFT'])
+        self.assertNotEqual(self.lock.read(key)['fingerprint'], saved['fingerprint'])
+
+    def test_priority_symbol_cannot_override_issuer_identity(self):
+        with self.assertRaises(ValueError):
+            self.collector(10).collect(PLAN, priority_plan=dict(companies=[
+                dict(symbol='AAPL', issuer_id=MSFT)]))
+        self.assertEqual(self.transport.calls, [])
+
+    def test_zero_budget_never_advances_checkpoint(self):
+        self.collector(2).collect(PLAN)
+        before=self.lock.read('valuation-candidate-cursor-v1')
+        response_count=len(self.transport.calls)
+        replay=self.collector(0).collect(PLAN)
+        self.assertEqual(self.lock.read('valuation-candidate-cursor-v1'),before)
+        self.assertEqual(len(self.transport.calls),response_count)
+        self.assertEqual(replay['summary']['new_get_invocations'],0)
+
+    def test_changed_candidate_order_invalidates_old_cursor(self):
+        self.collector(2).collect(PLAN)
+        changed=dict(companies=list(reversed(PLAN['companies'])))
+        before=len(self.transport.calls)
+        result=self.collector(1).collect(changed)
+        self.assertEqual(self.transport.calls[before],companyfacts_url(MSFT))
+        self.assertEqual([c['symbol'] for c in result['companies']],['MSFT','AAPL'])
+
+    def test_corrupt_cursor_checksum_starts_from_head_safely(self):
+        self.collector(2).collect(PLAN)
+        with self.lock.db:
+            self.lock.db.execute(
+                "UPDATE batch_fields_v1 SET checksum=? WHERE key=?",
+                ('bad', 'valuation-candidate-cursor-v1'))
+        before=len(self.transport.calls)
+        self.collector(1).collect(PLAN)
+        # Cached AAPL Companyfacts makes its next request the missing metadata.
+        self.assertEqual(self.transport.calls[before],
+            'https://data.sec.gov/submissions/CIK0000320193.json')
+
+
+if __name__=='__main__':
+    unittest.main()

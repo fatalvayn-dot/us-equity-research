@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "file": "audit.json",
+      "bytes": 284276,
+      "sha256": "4dfe01257184cdb38005755ab716ecb773b2a105d114b69cbdc075760ed592f3"
+    },
+    {
+      "file": "current-batch.json.gz",
+      "bytes": 17888,
+      "sha256": "9d1a44d30a510098a592f474e38e765a9bb425a38a3549f129311e8a9621c611"
+    },
+    {
+      "file": "current-plan.json",
+      "bytes": 33701,
+      "sha256": "c4298f30acfe47a1b5db6f5113f296ce3aa44018f6927490b217f4f454596251"
+    },
+    {
+      "file": "prior-batch.json.gz",
+      "bytes": 17893,
+      "sha256": "f065d61bc6d8572474f4b698a31e7d828c7e71c4e6caa89714af56fe8fc03cd7"
+    },
+    {
+      "file": "prior-plan.json",
+      "bytes": 33701,
+      "sha256": "5e5f9076bbee6a06fdc9f994a68a10354e5ed943d95c0b67b6c1c81c6c240f62"
+    },
+    {
+      "file": "report.json.gz",
+      "bytes": 108697,
+      "sha256": "b93760bd5a6faf46b56f67f72ce28276a3a81e8f93fac8a2de25d15211e4a91b"
+    },
+    {
+      "file": "report.md",
+      "bytes": 37634,
+      "sha256": "88360c5136c67e41c26a2c7f44305c9f91c57bdf7707c460a839a481221dc537"
+    }
+  ],
+  "source_bundle": "tests/fixtures/mvp100-sources/manifest.json",
+  "evidence_mode": "offline_original_source_replay",
+  "new_http_requests": 0,
+  "mvp_accepted": false
+}

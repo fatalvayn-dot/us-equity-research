@@ -1,0 +1,17 @@
+{
+  "recorded_at": "2026-11-01T21:43:13.106314+00:00",
+  "code_commit": "43b288e4eac1f0811e50e3c59d0370c39445f98a",
+  "python": "3.12.14",
+  "command": "PYTHONPATH=src python3 -m unittest discover -s tests -q",
+  "tests_run": 154,
+  "failures": 0,
+  "errors": 0,
+  "finnhub_network_attempts": 0,
+  "finnhub_configured": false,
+  "finnhub_live_accepted": false,
+  "test_scope": "synthetic Finnhub contracts plus all prior recorded-source regressions",
+  "remote_actions_run": false,
+  "all_four_sources_accepted": false,
+  "active_universe_accepted": false,
+  "manual_workflow_executed": false
+}

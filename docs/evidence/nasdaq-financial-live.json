@@ -1,0 +1,410 @@
+{
+  "recorded_at": "2026-11-01T22:27:33.307256+00:00",
+  "companies": [
+    {
+      "symbol": "AAPL",
+      "url": "https://api.nasdaq.com/api/company/AAPL/financials?frequency=1",
+      "status": "downloaded",
+      "sha256": "a424b826d7bf153b8fc12825383119bae2955be277a78519b9e173b49fdc50dd",
+      "retrieved_at": "2026-11-01T22:24:36.440943+00:00",
+      "fixture": "tests/fixtures/nasdaq-financials-aapl.json.gz",
+      "unit_page": {
+        "url": "https://www.nasdaq.com/market-activity/stocks/aapl/financials",
+        "status": "downloaded",
+        "sha256": "9708502500bf7c8161a9d22bb9f56af3ef447fe4645a45bd3d92a53893937338",
+        "retrieved_at": "2026-11-01T22:25:46.065112+00:00",
+        "fixture": "tests/fixtures/nasdaq-unit-page-aapl.html.gz",
+        "bytes": 170375
+      },
+      "checks": [
+        {
+          "field": "assets",
+          "attempts": [
+            {
+              "source": "Yahoo",
+              "status": "not_configured",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            },
+            {
+              "source": "SEC",
+              "status": "not_configured",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            },
+            {
+              "source": "Nasdaq",
+              "status": "valid",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            }
+          ],
+          "fact": {
+            "issuer_id": "0000320193",
+            "field": "assets",
+            "value": "359241000000",
+            "source": "Nasdaq",
+            "period_start": null,
+            "period_end": "2025-09-27",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-01T22:25:46.065112+00:00",
+            "available_at": "2026-11-01T22:25:46.065112+00:00",
+            "accounting_definition": "us-gaap:Assets",
+            "source_url": "https://api.nasdaq.com/api/company/AAPL/financials?frequency=1",
+            "filing_accession": null,
+            "filed_on": null,
+            "raw_sha256": "a424b826d7bf153b8fc12825383119bae2955be277a78519b9e173b49fdc50dd",
+            "source_field": "Total Assets",
+            "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+            "identity_evidence_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+            "identity_observed_at": "2026-11-01T17:56:42.116453+00:00",
+            "unit_evidence_url": "https://www.nasdaq.com/market-activity/stocks/aapl/financials",
+            "unit_evidence_sha256": "9708502500bf7c8161a9d22bb9f56af3ef447fe4645a45bd3d92a53893937338",
+            "unit_observed_at": "2026-11-01T22:25:46.065112+00:00",
+            "data_observed_at": "2026-11-01T22:24:36.440943+00:00",
+            "source_multiplier": "1000"
+          },
+          "as_of": "2026-11-01T22:27:33.307256+00:00",
+          "original_filing_value": "359241000000",
+          "original_filing_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm",
+          "original_filing_fixture": "tests/fixtures/filing-aapl.html.gz",
+          "original_filing_sha256": "f401a1b076981ca791b9bebd8d20eae6a4edc6fc58d1ab7957bc2bbda7747025",
+          "matches_original_filing": true
+        },
+        {
+          "field": "liabilities",
+          "attempts": [
+            {
+              "source": "Yahoo",
+              "status": "not_configured",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            },
+            {
+              "source": "SEC",
+              "status": "not_configured",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            },
+            {
+              "source": "Nasdaq",
+              "status": "valid",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            }
+          ],
+          "fact": {
+            "issuer_id": "0000320193",
+            "field": "liabilities",
+            "value": "285508000000",
+            "source": "Nasdaq",
+            "period_start": null,
+            "period_end": "2025-09-27",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-01T22:25:46.065112+00:00",
+            "available_at": "2026-11-01T22:25:46.065112+00:00",
+            "accounting_definition": "us-gaap:Liabilities",
+            "source_url": "https://api.nasdaq.com/api/company/AAPL/financials?frequency=1",
+            "filing_accession": null,
+            "filed_on": null,
+            "raw_sha256": "a424b826d7bf153b8fc12825383119bae2955be277a78519b9e173b49fdc50dd",
+            "source_field": "Total Liabilities",
+            "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+            "identity_evidence_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+            "identity_observed_at": "2026-11-01T17:56:42.116453+00:00",
+            "unit_evidence_url": "https://www.nasdaq.com/market-activity/stocks/aapl/financials",
+            "unit_evidence_sha256": "9708502500bf7c8161a9d22bb9f56af3ef447fe4645a45bd3d92a53893937338",
+            "unit_observed_at": "2026-11-01T22:25:46.065112+00:00",
+            "data_observed_at": "2026-11-01T22:24:36.440943+00:00",
+            "source_multiplier": "1000"
+          },
+          "as_of": "2026-11-01T22:27:33.307256+00:00",
+          "original_filing_value": "285508000000",
+          "original_filing_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm",
+          "original_filing_fixture": "tests/fixtures/filing-aapl.html.gz",
+          "original_filing_sha256": "f401a1b076981ca791b9bebd8d20eae6a4edc6fc58d1ab7957bc2bbda7747025",
+          "matches_original_filing": true
+        }
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "url": "https://api.nasdaq.com/api/company/MSFT/financials?frequency=1",
+      "status": "downloaded",
+      "sha256": "a2e3e477f6c23c83e7c4d43eb7a4f9d4baf580339ac4106b7ba1a608a94be2ef",
+      "retrieved_at": "2026-11-01T22:24:38.957158+00:00",
+      "fixture": "tests/fixtures/nasdaq-financials-msft.json.gz",
+      "unit_page": {
+        "url": "https://www.nasdaq.com/market-activity/stocks/msft/financials",
+        "status": "downloaded",
+        "sha256": "7f586bbf3241ace70173d3a3bf372a51254815c54326f6eecf0d22ca4f906172",
+        "retrieved_at": "2026-11-01T22:25:48.772945+00:00",
+        "fixture": "tests/fixtures/nasdaq-unit-page-msft.html.gz",
+        "bytes": 170472
+      },
+      "checks": [
+        {
+          "field": "assets",
+          "attempts": [
+            {
+              "source": "Yahoo",
+              "status": "not_configured",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            },
+            {
+              "source": "SEC",
+              "status": "not_configured",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            },
+            {
+              "source": "Nasdaq",
+              "status": "valid",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            }
+          ],
+          "fact": {
+            "issuer_id": "0000789019",
+            "field": "assets",
+            "value": "758376000000",
+            "source": "Nasdaq",
+            "period_start": null,
+            "period_end": "2026-06-30",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-01T22:25:48.772945+00:00",
+            "available_at": "2026-11-01T22:25:48.772945+00:00",
+            "accounting_definition": "us-gaap:Assets",
+            "source_url": "https://api.nasdaq.com/api/company/MSFT/financials?frequency=1",
+            "filing_accession": null,
+            "filed_on": null,
+            "raw_sha256": "a2e3e477f6c23c83e7c4d43eb7a4f9d4baf580339ac4106b7ba1a608a94be2ef",
+            "source_field": "Total Assets",
+            "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+            "identity_evidence_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+            "identity_observed_at": "2026-11-01T17:56:42.116453+00:00",
+            "unit_evidence_url": "https://www.nasdaq.com/market-activity/stocks/msft/financials",
+            "unit_evidence_sha256": "7f586bbf3241ace70173d3a3bf372a51254815c54326f6eecf0d22ca4f906172",
+            "unit_observed_at": "2026-11-01T22:25:48.772945+00:00",
+            "data_observed_at": "2026-11-01T22:24:38.957158+00:00",
+            "source_multiplier": "1000"
+          },
+          "as_of": "2026-11-01T22:27:33.307256+00:00",
+          "original_filing_value": "758376000000",
+          "original_filing_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/msft-20260930.htm",
+          "original_filing_fixture": "tests/fixtures/filing-msft.html.gz",
+          "original_filing_sha256": "f580ba9d8effe824f8f167d198a51c60c8c6b030fb72945fe286ee2141b70e72",
+          "matches_original_filing": true
+        },
+        {
+          "field": "liabilities",
+          "attempts": [
+            {
+              "source": "Yahoo",
+              "status": "not_configured",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            },
+            {
+              "source": "SEC",
+              "status": "not_configured",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            },
+            {
+              "source": "Nasdaq",
+              "status": "valid",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            }
+          ],
+          "fact": {
+            "issuer_id": "0000789019",
+            "field": "liabilities",
+            "value": "315989000000",
+            "source": "Nasdaq",
+            "period_start": null,
+            "period_end": "2026-06-30",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-01T22:25:48.772945+00:00",
+            "available_at": "2026-11-01T22:25:48.772945+00:00",
+            "accounting_definition": "us-gaap:Liabilities",
+            "source_url": "https://api.nasdaq.com/api/company/MSFT/financials?frequency=1",
+            "filing_accession": null,
+            "filed_on": null,
+            "raw_sha256": "a2e3e477f6c23c83e7c4d43eb7a4f9d4baf580339ac4106b7ba1a608a94be2ef",
+            "source_field": "Total Liabilities",
+            "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+            "identity_evidence_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+            "identity_observed_at": "2026-11-01T17:56:42.116453+00:00",
+            "unit_evidence_url": "https://www.nasdaq.com/market-activity/stocks/msft/financials",
+            "unit_evidence_sha256": "7f586bbf3241ace70173d3a3bf372a51254815c54326f6eecf0d22ca4f906172",
+            "unit_observed_at": "2026-11-01T22:25:48.772945+00:00",
+            "data_observed_at": "2026-11-01T22:24:38.957158+00:00",
+            "source_multiplier": "1000"
+          },
+          "as_of": "2026-11-01T22:27:33.307256+00:00",
+          "original_filing_value": "315989000000",
+          "original_filing_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/msft-20260930.htm",
+          "original_filing_fixture": "tests/fixtures/filing-msft.html.gz",
+          "original_filing_sha256": "f580ba9d8effe824f8f167d198a51c60c8c6b030fb72945fe286ee2141b70e72",
+          "matches_original_filing": true
+        }
+      ]
+    },
+    {
+      "symbol": "NVDA",
+      "url": "https://api.nasdaq.com/api/company/NVDA/financials?frequency=1",
+      "status": "downloaded",
+      "sha256": "8c354eb7c942aaaf675a3b8e29c10dc03e438a4a6a62a64f7ca71131fbc3c95a",
+      "retrieved_at": "2026-11-01T22:24:41.121191+00:00",
+      "fixture": "tests/fixtures/nasdaq-financials-nvda.json.gz",
+      "unit_page": {
+        "url": "https://www.nasdaq.com/market-activity/stocks/nvda/financials",
+        "status": "downloaded",
+        "sha256": "575b4df20205f761fc430d3f9c313784d4208fbf2e2ab7310bb04a60f59e322b",
+        "retrieved_at": "2026-11-01T22:25:50.752991+00:00",
+        "fixture": "tests/fixtures/nasdaq-unit-page-nvda.html.gz",
+        "bytes": 170503
+      },
+      "checks": [
+        {
+          "field": "assets",
+          "attempts": [
+            {
+              "source": "Yahoo",
+              "status": "not_configured",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            },
+            {
+              "source": "SEC",
+              "status": "not_configured",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            },
+            {
+              "source": "Nasdaq",
+              "status": "valid",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            }
+          ],
+          "fact": {
+            "issuer_id": "0001045810",
+            "field": "assets",
+            "value": "206803000000",
+            "source": "Nasdaq",
+            "period_start": null,
+            "period_end": "2026-01-25",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-01T22:25:50.752991+00:00",
+            "available_at": "2026-11-01T22:25:50.752991+00:00",
+            "accounting_definition": "us-gaap:Assets",
+            "source_url": "https://api.nasdaq.com/api/company/NVDA/financials?frequency=1",
+            "filing_accession": null,
+            "filed_on": null,
+            "raw_sha256": "8c354eb7c942aaaf675a3b8e29c10dc03e438a4a6a62a64f7ca71131fbc3c95a",
+            "source_field": "Total Assets",
+            "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+            "identity_evidence_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+            "identity_observed_at": "2026-11-01T17:56:42.116453+00:00",
+            "unit_evidence_url": "https://www.nasdaq.com/market-activity/stocks/nvda/financials",
+            "unit_evidence_sha256": "575b4df20205f761fc430d3f9c313784d4208fbf2e2ab7310bb04a60f59e322b",
+            "unit_observed_at": "2026-11-01T22:25:50.752991+00:00",
+            "data_observed_at": "2026-11-01T22:24:41.121191+00:00",
+            "source_multiplier": "1000"
+          },
+          "as_of": "2026-11-01T22:27:33.307256+00:00",
+          "original_filing_value": "206803000000",
+          "original_filing_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+          "original_filing_fixture": "tests/fixtures/filing-nvda.html.gz",
+          "original_filing_sha256": "e4b3889df3886edb243df887fcc1677263ec800ecbe369fa5f7c8597d1fe5602",
+          "matches_original_filing": true
+        },
+        {
+          "field": "liabilities",
+          "attempts": [
+            {
+              "source": "Yahoo",
+              "status": "not_configured",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            },
+            {
+              "source": "SEC",
+              "status": "not_configured",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            },
+            {
+              "source": "Nasdaq",
+              "status": "valid",
+              "attempted_at": "2026-11-01T22:27:33.307256+00:00",
+              "detail": "",
+              "cached": false
+            }
+          ],
+          "fact": {
+            "issuer_id": "0001045810",
+            "field": "liabilities",
+            "value": "49510000000",
+            "source": "Nasdaq",
+            "period_start": null,
+            "period_end": "2026-01-25",
+            "currency": "USD",
+            "unit": "currency",
+            "retrieved_at": "2026-11-01T22:25:50.752991+00:00",
+            "available_at": "2026-11-01T22:25:50.752991+00:00",
+            "accounting_definition": "us-gaap:Liabilities",
+            "source_url": "https://api.nasdaq.com/api/company/NVDA/financials?frequency=1",
+            "filing_accession": null,
+            "filed_on": null,
+            "raw_sha256": "8c354eb7c942aaaf675a3b8e29c10dc03e438a4a6a62a64f7ca71131fbc3c95a",
+            "source_field": "Total Liabilities",
+            "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+            "identity_evidence_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+            "identity_observed_at": "2026-11-01T17:56:42.116453+00:00",
+            "unit_evidence_url": "https://www.nasdaq.com/market-activity/stocks/nvda/financials",
+            "unit_evidence_sha256": "575b4df20205f761fc430d3f9c313784d4208fbf2e2ab7310bb04a60f59e322b",
+            "unit_observed_at": "2026-11-01T22:25:50.752991+00:00",
+            "data_observed_at": "2026-11-01T22:24:41.121191+00:00",
+            "source_multiplier": "1000"
+          },
+          "as_of": "2026-11-01T22:27:33.307256+00:00",
+          "original_filing_value": "49510000000",
+          "original_filing_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+          "original_filing_fixture": "tests/fixtures/filing-nvda.html.gz",
+          "original_filing_sha256": "e4b3889df3886edb243df887fcc1677263ec800ecbe369fa5f7c8597d1fe5602",
+          "matches_original_filing": true
+        }
+      ]
+    }
+  ],
+  "financial_accepted": false,
+  "sample_instant_checks_accepted": true,
+  "scope_note": "Six instant balance-sheet values only; no duration models, full source or 100-company acceptance"
+}

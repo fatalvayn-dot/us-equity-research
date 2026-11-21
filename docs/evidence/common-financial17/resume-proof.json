@@ -1,0 +1,14 @@
+{
+  "initial_get_invocations": 42,
+  "warm_get_invocations": 0,
+  "seeded_public_observations": 37,
+  "archived_transport_reuses": 35,
+  "accepted_facts": 186,
+  "calculations": 141,
+  "accepted_fact_values_source_times_unchanged": true,
+  "new_raw_observations": 42,
+  "seed_bundle": "tests/fixtures/common-extra-sources",
+  "full_new_100_live_run": false,
+  "initial_as_of": "2026-11-03T03:50:01.038329+00:00",
+  "resume_as_of": "2026-11-03T03:55:14.787715+00:00"
+}

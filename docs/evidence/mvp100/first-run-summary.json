@@ -1,0 +1,42 @@
+{
+  "summary": {
+    "companies": 100,
+    "company_states": {
+      "review_required": 98,
+      "period_unresolved": 2
+    },
+    "accepted_facts": 450,
+    "arithmetic_results": 151,
+    "scored_companies": 0
+  },
+  "pipeline": {
+    "requested_candidates": 100,
+    "metadata_states": {
+      "metadata_available_legal_type_pending": 100
+    },
+    "annual_document_summary": {
+      "companies": 100,
+      "new_documents": 98,
+      "reused_documents": 0,
+      "periods": 88,
+      "registered_shares": 83
+    },
+    "financial_query_companies": 98,
+    "period_unresolved_companies": 2,
+    "deferred_duration_fields": 40,
+    "public_transport_get_calls": 482,
+    "call_measure": "public transport GET invocations, excluding internal retries and private Finnhub transport",
+    "all_financial_references_archived": true,
+    "archived_financial_facts": 450
+  },
+  "as_of": "2026-11-02T12:54:02.396179+00:00",
+  "raw_report_sha256": "aa193a44b339bcc2dfd9b3f5e997123c5afeb52eb9abbc60bb27b7fabe75bf16",
+  "mode": "fresh initial six-field live collection",
+  "report_stage_zero_network_counter_is_not_collection_counter": true,
+  "mvp_accepted": false,
+  "document_outcomes_observed_at_initial_completion": {
+    "source_available": 93,
+    "no_annual_in_recent_window": 2,
+    "invalid_data": 5
+  }
+}

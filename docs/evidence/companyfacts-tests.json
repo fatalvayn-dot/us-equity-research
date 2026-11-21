@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-11-01T18:57:30.527068+00:00",
+  "code_commit": "8b72d157b7fcc1678a42d07f2ce3c0c0dde0384c",
+  "python": "3.12.14",
+  "command": "PYTHONPATH=src python3 -m unittest discover -s tests -q",
+  "tests_run": 88,
+  "failures": 0,
+  "errors": 0,
+  "real_company_snapshots": 3,
+  "metrics_extracted": 16,
+  "requested_metrics": 18,
+  "assets_original_filing_matches": 3,
+  "remote_actions_run": false,
+  "hundred_company_acceptance": false,
+  "all_four_sources_accepted": false
+}

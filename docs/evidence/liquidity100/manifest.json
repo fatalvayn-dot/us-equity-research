@@ -1,0 +1,29 @@
+{
+  "files": [
+    {
+      "file": "additional-batch.json.gz",
+      "sha256": "4859c1c8aff22fb3d3e278a30a19887f823781bef5301ff536c453538f9362af",
+      "bytes": 19826
+    },
+    {
+      "file": "audit.json",
+      "sha256": "bb747f1e23ca18c2ccfd64fa3074abdb7ad6c6155aaa8fef7293c96b5c153d47",
+      "bytes": 30111
+    },
+    {
+      "file": "batch.json.gz",
+      "sha256": "75d6a55f8263322c2ceed0a1a8a57b5e43a369b2dda36146066ed5e3ea47b58f",
+      "bytes": 77083
+    },
+    {
+      "file": "report.json.gz",
+      "sha256": "513e8c9fc8fe3207da0141d82fda506505557c4e903ab2bbabfa9c678aaa624f",
+      "bytes": 215530
+    },
+    {
+      "file": "report.md",
+      "sha256": "c33875b4421a40b3a14dae0af6fb22a1f8365546a96cb43431b36f1939b6302d",
+      "bytes": 597544
+    }
+  ]
+}

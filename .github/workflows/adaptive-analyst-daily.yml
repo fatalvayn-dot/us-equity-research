@@ -1,0 +1,49 @@
+name: Adaptif yatırım uzmanı veri özeti
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/adaptive_daily_brief.py'
+      - 'scripts/adaptive_investment_assistant.py'
+      - 'data/analyst/public_research_universe.json'
+      - '.github/workflows/adaptive-analyst-daily.yml'
+      - 'scripts/build_analyst_handoff.py'
+  workflow_dispatch:
+  schedule:
+    - cron: '15 14 * * 1-5'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: adaptive-analyst-daily
+  cancel-in-progress: false
+
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Üç piyasa için salt-okunur günlük veri paketi
+        run: python scripts/adaptive_daily_brief.py
+      - name: ETF ve kripto araştırma gözlemleri
+        run: python -m scripts.adaptive_multiactive_watchlist
+      - name: Günlük yapay zekâ araştırma iş emri
+        run: python scripts/adaptive_investment_assistant.py
+      - name: Analist için veri ve araştırma devir paketi
+        run: python scripts/build_analyst_handoff.py
+      - name: Kısa özet
+        run: |
+          cat data/analyst-output/analyst-handoff.md >> "$GITHUB_STEP_SUMMARY"
+          echo '' >> "$GITHUB_STEP_SUMMARY"
+          cat data/analyst-output/analyst-work-order.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: adaptive-analyst-daily-evidence
+          path: data/analyst-output/
+          retention-days: 14

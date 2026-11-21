@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "format": "gzip-jsonl-public-response-observations-v1",
+  "observations": 35,
+  "compressed_sha256": "9251579c22d9572f299a852f8bb323a45b3f84e23fec89043aefec77e8dae7f6",
+  "parts": [
+    {
+      "file": "sources.jsonl.gz.part0000",
+      "bytes": 524288,
+      "sha256": "163424ae556536bee5a6e0e52d59ea5daec84db5d83c5df63f19de8a1020fd5c"
+    },
+    {
+      "file": "sources.jsonl.gz.part0001",
+      "bytes": 524288,
+      "sha256": "5571270dd11676e36826e900c831cfb40bc4bfee2ad075fa1f3b486e373427f9"
+    },
+    {
+      "file": "sources.jsonl.gz.part0002",
+      "bytes": 524288,
+      "sha256": "9e0fc782bcf8ac3c9f4c3df997ea54b861062ad9140ab4ca5d9e6912d686ed4b"
+    },
+    {
+      "file": "sources.jsonl.gz.part0003",
+      "bytes": 524288,
+      "sha256": "54fdbdac74374351cd92b74424c8bbc3f1cf4a4fda23a0a9a7d3aad237cfff15"
+    },
+    {
+      "file": "sources.jsonl.gz.part0004",
+      "bytes": 524288,
+      "sha256": "81c522efda7e67b5cc916f458ca66f531b15747618c62ba667d57278da623196"
+    },
+    {
+      "file": "sources.jsonl.gz.part0005",
+      "bytes": 524288,
+      "sha256": "b75f361a6833321f5800f241d938b8acacc159912457d21fd52135683b75eb74"
+    },
+    {
+      "file": "sources.jsonl.gz.part0006",
+      "bytes": 524288,
+      "sha256": "4ccfefbf7df2108a426fb8deb4bdf54cb316196993dcedf95aed4083ebcaf271"
+    },
+    {
+      "file": "sources.jsonl.gz.part0007",
+      "bytes": 524288,
+      "sha256": "32bc0286c0c63105139965a843caee92965f07a6a326332e4e03627b5be3db01"
+    },
+    {
+      "file": "sources.jsonl.gz.part0008",
+      "bytes": 524288,
+      "sha256": "9822391c54c1e902170c630ba86ae5a7498080c51913dfa50f3fab7044c878e3"
+    },
+    {
+      "file": "sources.jsonl.gz.part0009",
+      "bytes": 524288,
+      "sha256": "7c62eae3845040e200978eb52324db2d1313e725409f7a3f6a30cc235643a7c7"
+    },
+    {
+      "file": "sources.jsonl.gz.part0010",
+      "bytes": 524288,
+      "sha256": "a52c5a9c0e9b443cf655773ae1fb132c1aa3e38867926f1602012568083986a8"
+    },
+    {
+      "file": "sources.jsonl.gz.part0011",
+      "bytes": 356381,
+      "sha256": "bd712dfe9c816fda4f7c8d87a5282ce4ffbea529d81902002368d5964d72f969"
+    }
+  ],
+  "headers_stored": false,
+  "credentials_stored": false
+}

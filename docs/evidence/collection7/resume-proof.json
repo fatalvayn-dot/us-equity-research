@@ -1,0 +1,100 @@
+{
+  "initial_cutoff": "2026-11-02T23:25:34.073183+00:00",
+  "resume_cutoff": "2026-11-02T23:25:57.919952+00:00",
+  "initial_get_invocations": 32,
+  "resume_get_invocations": 0,
+  "all_share_price_history_evidence_unchanged": true,
+  "initial_summary": {
+    "candidates": 7,
+    "new_get_invocations": 32,
+    "get_invocations_by_host": {
+      "www.sec.gov": 6,
+      "data.sec.gov": 13,
+      "query1.finance.yahoo.com": 13
+    },
+    "identity_states": {
+      "exact_match": 7
+    },
+    "share_states": {
+      "verified_dated_share_class": 5,
+      "symbol_mismatch": 1,
+      "invalid_data": 1
+    },
+    "price_states": {
+      "valid": 7
+    },
+    "history_states": {
+      "valid": 6,
+      "not_started": 1
+    }
+  },
+  "resume_summary": {
+    "candidates": 7,
+    "new_get_invocations": 0,
+    "get_invocations_by_host": {},
+    "identity_states": {
+      "exact_match": 7
+    },
+    "share_states": {
+      "verified_dated_share_class": 5,
+      "symbol_mismatch": 1,
+      "invalid_data": 1
+    },
+    "price_states": {
+      "valid": 7
+    },
+    "history_states": {
+      "valid": 6,
+      "not_started": 1
+    }
+  },
+  "raw_source_observations": 35,
+  "fresh_100_company_acceptance": false,
+  "oracle_constraint": "SEC submissions lists ORCL and ORCL-PD; single-class model unavailable",
+  "salesforce_constraint": "Unselected 2011 fraction quarantined; 2026 count now independently reconciled against original quarterly filing; no scaling or substitution",
+  "recovery_cutoff": "2026-11-02T23:28:19.462633+00:00",
+  "final_resume_cutoff": "2026-11-02T23:28:34.914193+00:00",
+  "recovery_get_invocations": 3,
+  "final_resume_get_invocations": 0,
+  "post_fix_evidence_unchanged": true,
+  "recovery_summary": {
+    "candidates": 7,
+    "new_get_invocations": 3,
+    "get_invocations_by_host": {
+      "data.sec.gov": 1,
+      "www.sec.gov": 1,
+      "query1.finance.yahoo.com": 1
+    },
+    "identity_states": {
+      "exact_match": 7
+    },
+    "share_states": {
+      "verified_dated_share_class": 6,
+      "symbol_mismatch": 1
+    },
+    "price_states": {
+      "valid": 7
+    },
+    "history_states": {
+      "valid": 7
+    }
+  },
+  "final_resume_summary": {
+    "candidates": 7,
+    "new_get_invocations": 0,
+    "get_invocations_by_host": {},
+    "identity_states": {
+      "exact_match": 7
+    },
+    "share_states": {
+      "verified_dated_share_class": 6,
+      "symbol_mismatch": 1
+    },
+    "price_states": {
+      "valid": 7
+    },
+    "history_states": {
+      "valid": 7
+    }
+  }
+}

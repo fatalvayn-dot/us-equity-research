@@ -1,0 +1,60 @@
+{
+  "files": [
+    {
+      "logical_name": "metadata.json",
+      "file": "metadata.json",
+      "encoding": "identity",
+      "raw_bytes": 442112,
+      "raw_sha256": "e13d748be1417759cb006fed4761059fc10d0cb4199a2847f4fd4ef46cc6ca18",
+      "stored_sha256": "e13d748be1417759cb006fed4761059fc10d0cb4199a2847f4fd4ef46cc6ca18"
+    },
+    {
+      "logical_name": "documents.json",
+      "file": "documents.json",
+      "encoding": "identity",
+      "raw_bytes": 197380,
+      "raw_sha256": "8bfd65cd4fa0b154f6ad5d69cceef963fce802be00d2fb4bb6803cc3af2a3d66",
+      "stored_sha256": "8bfd65cd4fa0b154f6ad5d69cceef963fce802be00d2fb4bb6803cc3af2a3d66"
+    },
+    {
+      "logical_name": "plan.json",
+      "file": "plan.json",
+      "encoding": "identity",
+      "raw_bytes": 50978,
+      "raw_sha256": "21bea74e860672ef7182b38ce677b41956d735c6e8ace1f2de2499eac8586957",
+      "stored_sha256": "21bea74e860672ef7182b38ce677b41956d735c6e8ace1f2de2499eac8586957"
+    },
+    {
+      "logical_name": "batch.json",
+      "file": "batch.json.gz",
+      "encoding": "gzip",
+      "raw_bytes": 1751100,
+      "raw_sha256": "20f6a3e9456bd41f82afa1978164748552ef2dc57b31d8ddb7abd208a138aab2",
+      "stored_sha256": "91495b2d9bd95bc13cbc03df7e1563da8070316064a910d33998dc161086cae5"
+    },
+    {
+      "logical_name": "report.json",
+      "file": "report.json.gz",
+      "encoding": "gzip",
+      "raw_bytes": 3504636,
+      "raw_sha256": "41e537080400cbe58607c519709398acf264a5283a45b2acf46f13022eba3516",
+      "stored_sha256": "47f75b29e2644d16c50d0e38ac7d0cd22e37f8ab70c601468d51b13653270a7a"
+    },
+    {
+      "logical_name": "report.md",
+      "file": "report.md",
+      "encoding": "identity",
+      "raw_bytes": 391202,
+      "raw_sha256": "b9dde45f6a430f28ba9717fc05accdae62b8d73d48b8b81ef8f74bd21a5ce2b1",
+      "stored_sha256": "b9dde45f6a430f28ba9717fc05accdae62b8d73d48b8b81ef8f74bd21a5ce2b1"
+    },
+    {
+      "logical_name": "archive-coverage.json",
+      "file": "archive-coverage.json",
+      "encoding": "identity",
+      "raw_bytes": 268819,
+      "raw_sha256": "3cb092a5d825dd79e1d1b8d8fb3639a4b768ac536221df5d5d183f9da1bce139",
+      "stored_sha256": "3cb092a5d825dd79e1d1b8d8fb3639a4b768ac536221df5d5d183f9da1bce139"
+    }
+  ]
+}

@@ -1,0 +1,1895 @@
+{
+  "schema_version": 1,
+  "companies": [
+    {
+      "symbol": "NVDA",
+      "issuer_id": "0001045810",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-27",
+      "period_end": "2026-01-25",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "issuer_id": "0000320193",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2024-09-29",
+      "period_end": "2025-09-27",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "issuer_id": "0000789019",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-07-01",
+      "period_end": "2026-06-30",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "GOOGL",
+      "issuer_id": "0001652044",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "AMZN",
+      "issuer_id": "0001018724",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "AVGO",
+      "issuer_id": "0001730168",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2024-11-04",
+      "period_end": "2025-11-02",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "META",
+      "issuer_id": "0001326801",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "TSLA",
+      "issuer_id": "0001318605",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "LLY",
+      "issuer_id": "0000059478",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "MU",
+      "issuer_id": "0000723125",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-08-29",
+      "period_end": "2026-09-03",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "WMT",
+      "issuer_id": "0000104169",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-02-01",
+      "period_end": "2026-01-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "AMD",
+      "issuer_id": "0000002488",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2024-12-29",
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "JPM",
+      "issuer_id": "0000019617",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "JNJ",
+      "issuer_id": "0000200406",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2024-12-30",
+      "period_end": "2025-12-28",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "MA",
+      "issuer_id": "0001141391",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "ABBV",
+      "issuer_id": "0001551152",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "INTC",
+      "issuer_id": "0000050863",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2024-12-29",
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "PLTR",
+      "issuer_id": "0001321655",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "CVX",
+      "issuer_id": "0000093410",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "COST",
+      "issuer_id": "0000909832",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-09-01",
+      "period_end": "2026-08-30",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "CSCO",
+      "issuer_id": "0000858877",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-07-27",
+      "period_end": "2026-07-25",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "ORCL",
+      "issuer_id": "0001341439",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-06-01",
+      "period_end": "2026-05-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "KO",
+      "issuer_id": "0000021344",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "PG",
+      "issuer_id": "0000080424",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-07-01",
+      "period_end": "2026-06-30",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "UNH",
+      "issuer_id": "0000731766",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "MRK",
+      "issuer_id": "0000310158",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "BAC",
+      "issuer_id": "0000070858",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "AMAT",
+      "issuer_id": "0000006951",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2024-10-28",
+      "period_end": "2025-10-26",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "HD",
+      "issuer_id": "0000354950",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-02-03",
+      "period_end": "2026-02-01",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "PM",
+      "issuer_id": "0001413329",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "GE",
+      "issuer_id": "0000040545",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "LRCX",
+      "issuer_id": "0000707549",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-06-30",
+      "period_end": "2026-06-28",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "PANW",
+      "issuer_id": "0001327567",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-08-01",
+      "period_end": "2026-07-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "NVS",
+      "issuer_id": "0001114448",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": null,
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "assets",
+        "liabilities"
+      ]
+    },
+    {
+      "symbol": "DELL",
+      "issuer_id": "0001571996",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-02-01",
+      "period_end": "2026-01-30",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "MS",
+      "issuer_id": "0000895421",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "CAT",
+      "issuer_id": "0000018230",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "HSBC",
+      "issuer_id": "0001089113",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": null,
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "assets",
+        "liabilities"
+      ]
+    },
+    {
+      "symbol": "TXN",
+      "issuer_id": "0000097476",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "RY",
+      "issuer_id": "0001000275",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2024-11-01",
+      "period_end": "2025-10-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "AZN",
+      "issuer_id": "0000901832",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "GS",
+      "issuer_id": "0000886982",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "RTX",
+      "issuer_id": "0000101829",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "CRWD",
+      "issuer_id": "0001535527",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-02-01",
+      "period_end": "2026-01-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "TMO",
+      "issuer_id": "0000097745",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "MUFG",
+      "issuer_id": "0000067088",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-04-01",
+      "period_end": "2026-03-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "TM",
+      "issuer_id": "0001094517",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-04-01",
+      "period_end": "2026-03-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "NFLX",
+      "issuer_id": "0001065280",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "WFC",
+      "issuer_id": "0000072971",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": null,
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "assets",
+        "liabilities"
+      ]
+    },
+    {
+      "symbol": "AMGN",
+      "issuer_id": "0000318154",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "IBM",
+      "issuer_id": "0000051143",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": null,
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "assets",
+        "liabilities"
+      ]
+    },
+    {
+      "symbol": "GEV",
+      "issuer_id": "0001996810",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "ANET",
+      "issuer_id": "0001596532",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "LIN",
+      "issuer_id": "0001707925",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "KLAC",
+      "issuer_id": "0000319201",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-07-01",
+      "period_end": "2026-06-30",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "AXP",
+      "issuer_id": "0000004962",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "C",
+      "issuer_id": "0000831001",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": null,
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "assets",
+        "liabilities"
+      ]
+    },
+    {
+      "symbol": "ADI",
+      "issuer_id": "0000006281",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2024-11-03",
+      "period_end": "2025-11-01",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "TD",
+      "issuer_id": "0000947263",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": null,
+      "period_end": "2025-10-31",
+      "currency": "USD",
+      "fields": [
+        "assets",
+        "liabilities"
+      ]
+    },
+    {
+      "symbol": "GILD",
+      "issuer_id": "0000882095",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "TTE",
+      "issuer_id": "0000879764",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": null,
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "assets",
+        "liabilities"
+      ]
+    },
+    {
+      "symbol": "APH",
+      "issuer_id": "0000820313",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "QCOM",
+      "issuer_id": "0000804328",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2024-09-30",
+      "period_end": "2025-09-28",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "SNDK",
+      "issuer_id": "0002023554",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-06-28",
+      "period_end": "2026-07-03",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "DIS",
+      "issuer_id": "0001744489",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": null,
+      "period_end": "2025-09-27",
+      "currency": "USD",
+      "fields": [
+        "assets",
+        "liabilities"
+      ]
+    },
+    {
+      "symbol": "MRVL",
+      "issuer_id": "0001835632",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-02-02",
+      "period_end": "2026-01-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "CRM",
+      "issuer_id": "0001108524",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-02-01",
+      "period_end": "2026-01-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "PEP",
+      "issuer_id": "0000077476",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2024-12-29",
+      "period_end": "2025-12-27",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "BLK",
+      "issuer_id": "0002012383",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "MCD",
+      "issuer_id": "0000063908",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "VZ",
+      "issuer_id": "0000732712",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "ABT",
+      "issuer_id": "0000001800",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "COP",
+      "issuer_id": "0001163165",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "UNP",
+      "issuer_id": "0000100885",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "DE",
+      "issuer_id": "0000315189",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2024-10-28",
+      "period_end": "2025-11-02",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "NVO",
+      "issuer_id": "0000353278",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "NEE",
+      "issuer_id": "0000753308",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "WELL",
+      "issuer_id": "0000766704",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "PFE",
+      "issuer_id": "0000078003",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "DHR",
+      "issuer_id": "0000313616",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "ACN",
+      "issuer_id": "0001467373",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-09-01",
+      "period_end": "2026-08-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "SCCO",
+      "issuer_id": "0001001838",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "STX",
+      "issuer_id": "0001137789",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-06-28",
+      "period_end": "2026-07-03",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "TMUS",
+      "issuer_id": "0001283699",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "ISRG",
+      "issuer_id": "0001035267",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "TJX",
+      "issuer_id": "0000109198",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-02-02",
+      "period_end": "2026-01-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "SCHW",
+      "issuer_id": "0000316709",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "ETN",
+      "issuer_id": "0001551182",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "UBS",
+      "issuer_id": "0001610520",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": null,
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "assets",
+        "liabilities"
+      ]
+    },
+    {
+      "symbol": "LMT",
+      "issuer_id": "0000936468",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "WDC",
+      "issuer_id": "0000106040",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-06-28",
+      "period_end": "2026-07-03",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "BBVA",
+      "issuer_id": "0000842180",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": null,
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "assets",
+        "liabilities"
+      ]
+    },
+    {
+      "symbol": "CB",
+      "issuer_id": "0000896159",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "VRTX",
+      "issuer_id": "0000875320",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "BA",
+      "issuer_id": "0000012927",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "UBER",
+      "issuer_id": "0001543151",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "PGR",
+      "issuer_id": "0000080661",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    },
+    {
+      "symbol": "SPGI",
+      "issuer_id": "0000064040",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_common_share_and_sector_model_review_required",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "currency": "USD",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure",
+        "revenue_total",
+        "profit_loss",
+        "productive_asset_cash_payments"
+      ]
+    }
+  ]
+}

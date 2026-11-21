@@ -1,0 +1,10 @@
+{
+  "source_get_invocations": 0,
+  "price_get_invocations": 0,
+  "identity_get_invocations": 0,
+  "original_prices_counts_sources_times_and_indications_unchanged": true,
+  "before_cutoff": "2026-11-02T20:00:15.589376+00:00",
+  "after_cutoff": "2026-11-02T20:03:58.032435+00:00",
+  "companies": 3,
+  "fresh_live_acceptance": false
+}

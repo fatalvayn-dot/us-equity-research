@@ -1,0 +1,1142 @@
+{
+  "companies": [
+    {
+      "symbol": "NVDA",
+      "issuer_id": "0001045810",
+      "scope_approved": false,
+      "state": "source_available",
+      "cached": true,
+      "annual": {
+        "accession": "0001045810-26-000021",
+        "form": "10-K",
+        "filed_on": "2026-02-25",
+        "report_end": "2026-01-25",
+        "primary_document": "nvda-20260125.htm",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "acceptance_label": "2026-02-25T21:42:19.000Z",
+        "document_format": "html"
+      },
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "sha256": "d9135ae2801ec96e80398e2ddf0daa523b3a500ccf939ecf2ff150bdd13ab0dc",
+        "retrieved_at": "2026-11-02T02:12:31.172984+00:00",
+        "fixture": "tests/fixtures/annual/0001045810-0001045810-26-000021.html.gz"
+      },
+      "period": {
+        "issuer_id": "0001045810",
+        "document_type": "10-K",
+        "period_start": "2025-01-27",
+        "period_end": "2026-01-25",
+        "context_ids": [
+          "c-1"
+        ],
+        "raw_sha256": "d9135ae2801ec96e80398e2ddf0daa523b3a500ccf939ecf2ff150bdd13ab0dc",
+        "evidence_basis": "non-dimensional issuer duration shared by DocumentType, DocumentFiscalPeriodFocus=FY and DocumentPeriodEndDate",
+        "calendar_start_inferred": false,
+        "financial_values_validated": false,
+        "scope_approved": false
+      },
+      "registered_share": {
+        "issuer_id": "0001045810",
+        "symbol": "NVDA",
+        "report_end": "2026-01-25",
+        "document_type": "10-K",
+        "raw_sha256": "d9135ae2801ec96e80398e2ddf0daa523b3a500ccf939ecf2ff150bdd13ab0dc",
+        "registered_security": [
+          {
+            "context_id": "c-1",
+            "symbol": "NVDA",
+            "title": "Common Stock, $0.001 par value per share",
+            "exchange": "The Nasdaq Global Select Market"
+          }
+        ],
+        "explicit_common_share_title": true,
+        "entity_shell_labels": [
+          "\u2612"
+        ],
+        "investment_company_labels": [],
+        "legal_type_approved": false,
+        "scope_approved": false
+      },
+      "completed_at": "2026-11-02T03:28:12.015065+00:00"
+    },
+    {
+      "symbol": "AAPL",
+      "issuer_id": "0000320193",
+      "scope_approved": false,
+      "state": "source_available",
+      "cached": true,
+      "annual": {
+        "accession": "0000320193-25-000079",
+        "form": "10-K",
+        "filed_on": "2025-10-31",
+        "report_end": "2025-09-27",
+        "primary_document": "aapl-20250927.htm",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "acceptance_label": "2025-10-31T10:01:26.000Z",
+        "document_format": "html"
+      },
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "sha256": "056f733f13ff7407e64dc81fb96da3c3c55a6ba429bf094f57cb6bd472231f82",
+        "retrieved_at": "2026-11-02T02:12:34.616416+00:00",
+        "fixture": "tests/fixtures/annual/0000320193-0000320193-25-000079.html.gz"
+      },
+      "period": {
+        "issuer_id": "0000320193",
+        "document_type": "10-K",
+        "period_start": "2024-09-29",
+        "period_end": "2025-09-27",
+        "context_ids": [
+          "c-1"
+        ],
+        "raw_sha256": "056f733f13ff7407e64dc81fb96da3c3c55a6ba429bf094f57cb6bd472231f82",
+        "evidence_basis": "non-dimensional issuer duration shared by DocumentType, DocumentFiscalPeriodFocus=FY and DocumentPeriodEndDate",
+        "calendar_start_inferred": false,
+        "financial_values_validated": false,
+        "scope_approved": false
+      },
+      "registered_share": {
+        "issuer_id": "0000320193",
+        "symbol": "AAPL",
+        "report_end": "2025-09-27",
+        "document_type": "10-K",
+        "raw_sha256": "056f733f13ff7407e64dc81fb96da3c3c55a6ba429bf094f57cb6bd472231f82",
+        "registered_security": [
+          {
+            "context_id": "c-2",
+            "symbol": "AAPL",
+            "title": "Common Stock, $0.00001 par value per share",
+            "exchange": "The Nasdaq Stock Market LLC"
+          }
+        ],
+        "explicit_common_share_title": true,
+        "entity_shell_labels": [
+          "\u2610"
+        ],
+        "investment_company_labels": [],
+        "legal_type_approved": false,
+        "scope_approved": false
+      },
+      "completed_at": "2026-11-02T03:28:12.190819+00:00"
+    },
+    {
+      "symbol": "MSFT",
+      "issuer_id": "0000789019",
+      "scope_approved": false,
+      "state": "source_available",
+      "cached": true,
+      "annual": {
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "filed_on": "2026-07-29",
+        "report_end": "2026-06-30",
+        "primary_document": "msft-20260630.htm",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "acceptance_label": "2026-07-29T20:08:01.000Z",
+        "document_format": "html"
+      },
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "sha256": "a2e8af9a97a682ba3b408c9557ec6f0f3dbd4db6f600d310ae23ebe5b3c827a4",
+        "retrieved_at": "2026-11-02T02:12:38.475331+00:00",
+        "fixture": "tests/fixtures/annual/0000789019-0001193125-26-323660.html.gz"
+      },
+      "period": {
+        "issuer_id": "0000789019",
+        "document_type": "10-K",
+        "period_start": "2025-07-01",
+        "period_end": "2026-06-30",
+        "context_ids": [
+          "C_29985a27-1d12-4b7e-9a06-156523f6e71e"
+        ],
+        "raw_sha256": "a2e8af9a97a682ba3b408c9557ec6f0f3dbd4db6f600d310ae23ebe5b3c827a4",
+        "evidence_basis": "non-dimensional issuer duration shared by DocumentType, DocumentFiscalPeriodFocus=FY and DocumentPeriodEndDate",
+        "calendar_start_inferred": false,
+        "financial_values_validated": false,
+        "scope_approved": false
+      },
+      "registered_share": {
+        "issuer_id": "0000789019",
+        "symbol": "MSFT",
+        "report_end": "2026-06-30",
+        "document_type": "10-K",
+        "raw_sha256": "a2e8af9a97a682ba3b408c9557ec6f0f3dbd4db6f600d310ae23ebe5b3c827a4",
+        "registered_security": [
+          {
+            "context_id": "C_216fddfa-a999-4f27-93ca-784c3ed92065",
+            "symbol": "MSFT",
+            "title": "Common stock, $0.00000625 par value per share",
+            "exchange": "Nasdaq"
+          }
+        ],
+        "explicit_common_share_title": true,
+        "entity_shell_labels": [
+          "\u2612"
+        ],
+        "investment_company_labels": [],
+        "legal_type_approved": false,
+        "scope_approved": false
+      },
+      "completed_at": "2026-11-02T03:28:13.027811+00:00"
+    },
+    {
+      "symbol": "GOOGL",
+      "issuer_id": "0001652044",
+      "scope_approved": false,
+      "state": "source_available",
+      "cached": true,
+      "annual": {
+        "accession": "0001652044-26-000018",
+        "form": "10-K",
+        "filed_on": "2026-02-05",
+        "report_end": "2025-12-31",
+        "primary_document": "goog-20251231.htm",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm",
+        "acceptance_label": "2026-02-05T02:56:03.000Z",
+        "document_format": "html"
+      },
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm",
+        "sha256": "bab3d2601c394c4b603fa4ae30165a65e123a37087a172c8e4146dba0c80ab82",
+        "retrieved_at": "2026-11-02T03:26:34.535812+00:00",
+        "fixture": "tests/fixtures/annual-batch/bab3d2601c394c4b603fa4ae30165a65e123a37087a172c8e4146dba0c80ab82.html.gz"
+      },
+      "period": {
+        "issuer_id": "0001652044",
+        "document_type": "10-K",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "context_ids": [
+          "c-1"
+        ],
+        "raw_sha256": "bab3d2601c394c4b603fa4ae30165a65e123a37087a172c8e4146dba0c80ab82",
+        "evidence_basis": "non-dimensional issuer duration shared by DocumentType, DocumentFiscalPeriodFocus=FY and DocumentPeriodEndDate",
+        "calendar_start_inferred": false,
+        "financial_values_validated": false,
+        "scope_approved": false
+      },
+      "registered_share": {
+        "issuer_id": "0001652044",
+        "symbol": "GOOGL",
+        "report_end": "2025-12-31",
+        "document_type": "10-K",
+        "raw_sha256": "bab3d2601c394c4b603fa4ae30165a65e123a37087a172c8e4146dba0c80ab82",
+        "registered_security": [
+          {
+            "context_id": "c-2",
+            "symbol": "GOOGL",
+            "title": "Class A Common Stock, $0.001 par value",
+            "exchange": "Nasdaq Stock Market LLC"
+          }
+        ],
+        "explicit_common_share_title": true,
+        "entity_shell_labels": [
+          "\u2612"
+        ],
+        "investment_company_labels": [],
+        "legal_type_approved": false,
+        "scope_approved": false
+      },
+      "completed_at": "2026-11-02T03:28:13.313337+00:00"
+    },
+    {
+      "symbol": "AMZN",
+      "issuer_id": "0001018724",
+      "scope_approved": false,
+      "state": "source_available",
+      "cached": true,
+      "annual": {
+        "accession": "0001018724-26-000004",
+        "form": "10-K",
+        "filed_on": "2026-02-06",
+        "report_end": "2025-12-31",
+        "primary_document": "amzn-20251231.htm",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm",
+        "acceptance_label": "2026-02-05T23:44:31.000Z",
+        "document_format": "html"
+      },
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm",
+        "sha256": "3702599045ec83f3faca3186c42b62247d1ec0e3bdf47c7f8acc7305b858f139",
+        "retrieved_at": "2026-11-02T03:26:37.898566+00:00",
+        "fixture": "tests/fixtures/annual-batch/3702599045ec83f3faca3186c42b62247d1ec0e3bdf47c7f8acc7305b858f139.html.gz"
+      },
+      "period": {
+        "issuer_id": "0001018724",
+        "document_type": "10-K",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "context_ids": [
+          "c-1"
+        ],
+        "raw_sha256": "3702599045ec83f3faca3186c42b62247d1ec0e3bdf47c7f8acc7305b858f139",
+        "evidence_basis": "non-dimensional issuer duration shared by DocumentType, DocumentFiscalPeriodFocus=FY and DocumentPeriodEndDate",
+        "calendar_start_inferred": false,
+        "financial_values_validated": false,
+        "scope_approved": false
+      },
+      "registered_share": {
+        "issuer_id": "0001018724",
+        "symbol": "AMZN",
+        "report_end": "2025-12-31",
+        "document_type": "10-K",
+        "raw_sha256": "3702599045ec83f3faca3186c42b62247d1ec0e3bdf47c7f8acc7305b858f139",
+        "registered_security": [
+          {
+            "context_id": "c-1",
+            "symbol": "AMZN",
+            "title": "Common Stock, par value $.01 per share",
+            "exchange": "Nasdaq Global Select Market"
+          }
+        ],
+        "explicit_common_share_title": true,
+        "entity_shell_labels": [
+          "\u2612"
+        ],
+        "investment_company_labels": [],
+        "legal_type_approved": false,
+        "scope_approved": false
+      },
+      "completed_at": "2026-11-02T03:28:13.594889+00:00"
+    },
+    {
+      "symbol": "SPCX",
+      "issuer_id": "0001181412",
+      "scope_approved": false,
+      "state": "no_annual_in_recent_window",
+      "completed_at": "2026-11-02T03:28:13.598657+00:00"
+    },
+    {
+      "symbol": "AVGO",
+      "issuer_id": "0001730168",
+      "scope_approved": false,
+      "state": "source_available",
+      "cached": true,
+      "annual": {
+        "accession": "0001730168-25-000121",
+        "form": "10-K",
+        "filed_on": "2025-12-18",
+        "report_end": "2025-11-02",
+        "primary_document": "avgo-20251102.htm",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000121/avgo-20251102.htm",
+        "acceptance_label": "2025-12-18T21:04:47.000Z",
+        "document_format": "html"
+      },
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000121/avgo-20251102.htm",
+        "sha256": "789c977a9e365d8f6eb3d6b3e12cce52047fc0660128732643e6558d3422bfdb",
+        "retrieved_at": "2026-11-02T03:26:41.010589+00:00",
+        "fixture": "tests/fixtures/annual-batch/789c977a9e365d8f6eb3d6b3e12cce52047fc0660128732643e6558d3422bfdb.html.gz"
+      },
+      "period": {
+        "issuer_id": "0001730168",
+        "document_type": "10-K",
+        "period_start": "2024-11-04",
+        "period_end": "2025-11-02",
+        "context_ids": [
+          "c-1"
+        ],
+        "raw_sha256": "789c977a9e365d8f6eb3d6b3e12cce52047fc0660128732643e6558d3422bfdb",
+        "evidence_basis": "non-dimensional issuer duration shared by DocumentType, DocumentFiscalPeriodFocus=FY and DocumentPeriodEndDate",
+        "calendar_start_inferred": false,
+        "financial_values_validated": false,
+        "scope_approved": false
+      },
+      "registered_share": {
+        "issuer_id": "0001730168",
+        "symbol": "AVGO",
+        "report_end": "2025-11-02",
+        "document_type": "10-K",
+        "raw_sha256": "789c977a9e365d8f6eb3d6b3e12cce52047fc0660128732643e6558d3422bfdb",
+        "registered_security": [
+          {
+            "context_id": "c-1",
+            "symbol": "AVGO",
+            "title": "Common Stock, $0.001 par value",
+            "exchange": "The NASDAQ Global Select Market"
+          }
+        ],
+        "explicit_common_share_title": true,
+        "entity_shell_labels": [
+          "\u2610"
+        ],
+        "investment_company_labels": [],
+        "legal_type_approved": false,
+        "scope_approved": false
+      },
+      "completed_at": "2026-11-02T03:28:13.986552+00:00"
+    },
+    {
+      "symbol": "META",
+      "issuer_id": "0001326801",
+      "scope_approved": false,
+      "state": "source_available",
+      "cached": true,
+      "annual": {
+        "accession": "0001628280-26-003942",
+        "form": "10-K",
+        "filed_on": "2026-01-29",
+        "report_end": "2025-12-31",
+        "primary_document": "meta-20251231.htm",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/meta-20251231.htm",
+        "acceptance_label": "2026-01-29T00:13:46.000Z",
+        "document_format": "html"
+      },
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/meta-20251231.htm",
+        "sha256": "5c4096ceb780d0fb52f3e3da5164ead16c58030223b453b0386ef2eb1bad8011",
+        "retrieved_at": "2026-11-02T03:26:45.341532+00:00",
+        "fixture": "tests/fixtures/annual-batch/5c4096ceb780d0fb52f3e3da5164ead16c58030223b453b0386ef2eb1bad8011.html.gz"
+      },
+      "period": {
+        "issuer_id": "0001326801",
+        "document_type": "10-K",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "context_ids": [
+          "c-1"
+        ],
+        "raw_sha256": "5c4096ceb780d0fb52f3e3da5164ead16c58030223b453b0386ef2eb1bad8011",
+        "evidence_basis": "non-dimensional issuer duration shared by DocumentType, DocumentFiscalPeriodFocus=FY and DocumentPeriodEndDate",
+        "calendar_start_inferred": false,
+        "financial_values_validated": false,
+        "scope_approved": false
+      },
+      "registered_share": {
+        "issuer_id": "0001326801",
+        "symbol": "META",
+        "report_end": "2025-12-31",
+        "document_type": "10-K",
+        "raw_sha256": "5c4096ceb780d0fb52f3e3da5164ead16c58030223b453b0386ef2eb1bad8011",
+        "registered_security": [
+          {
+            "context_id": "c-1",
+            "symbol": "META",
+            "title": "Class A Common Stock, $0.000006 par value",
+            "exchange": "The Nasdaq Stock Market LLC"
+          }
+        ],
+        "explicit_common_share_title": true,
+        "entity_shell_labels": [
+          "\u2612"
+        ],
+        "investment_company_labels": [],
+        "legal_type_approved": false,
+        "scope_approved": false
+      },
+      "completed_at": "2026-11-02T03:28:14.240759+00:00"
+    },
+    {
+      "symbol": "TSLA",
+      "issuer_id": "0001318605",
+      "scope_approved": false,
+      "state": "source_available",
+      "cached": true,
+      "annual": {
+        "accession": "0001628280-26-003952",
+        "form": "10-K",
+        "filed_on": "2026-01-29",
+        "report_end": "2025-12-31",
+        "primary_document": "tsla-20251231.htm",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+        "acceptance_label": "2026-01-29T01:55:03.000Z",
+        "document_format": "html"
+      },
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+        "sha256": "6613b0ffabe8e9b2668eef50f40540756bd4ef03e2f633d489ca83aa58b99729",
+        "retrieved_at": "2026-11-02T03:26:48.334467+00:00",
+        "fixture": "tests/fixtures/annual-batch/6613b0ffabe8e9b2668eef50f40540756bd4ef03e2f633d489ca83aa58b99729.html.gz"
+      },
+      "period": {
+        "issuer_id": "0001318605",
+        "document_type": "10-K",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "context_ids": [
+          "c-1"
+        ],
+        "raw_sha256": "6613b0ffabe8e9b2668eef50f40540756bd4ef03e2f633d489ca83aa58b99729",
+        "evidence_basis": "non-dimensional issuer duration shared by DocumentType, DocumentFiscalPeriodFocus=FY and DocumentPeriodEndDate",
+        "calendar_start_inferred": false,
+        "financial_values_validated": false,
+        "scope_approved": false
+      },
+      "registered_share": {
+        "issuer_id": "0001318605",
+        "symbol": "TSLA",
+        "report_end": "2025-12-31",
+        "document_type": "10-K",
+        "raw_sha256": "6613b0ffabe8e9b2668eef50f40540756bd4ef03e2f633d489ca83aa58b99729",
+        "registered_security": [
+          {
+            "context_id": "c-1",
+            "symbol": "TSLA",
+            "title": "Common stock",
+            "exchange": "The Nasdaq Global Select Market"
+          }
+        ],
+        "explicit_common_share_title": true,
+        "entity_shell_labels": [
+          "x"
+        ],
+        "investment_company_labels": [],
+        "legal_type_approved": false,
+        "scope_approved": false
+      },
+      "completed_at": "2026-11-02T03:28:14.549637+00:00"
+    },
+    {
+      "symbol": "LLY",
+      "issuer_id": "0000059478",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.554027+00:00"
+    },
+    {
+      "symbol": "MU",
+      "issuer_id": "0000723125",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.557936+00:00"
+    },
+    {
+      "symbol": "WMT",
+      "issuer_id": "0000104169",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.561179+00:00"
+    },
+    {
+      "symbol": "AMD",
+      "issuer_id": "0000002488",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.565689+00:00"
+    },
+    {
+      "symbol": "JPM",
+      "issuer_id": "0000019617",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.568537+00:00"
+    },
+    {
+      "symbol": "XOM",
+      "issuer_id": "0002115436",
+      "scope_approved": false,
+      "state": "no_annual_in_recent_window",
+      "completed_at": "2026-11-02T03:28:14.571487+00:00"
+    },
+    {
+      "symbol": "JNJ",
+      "issuer_id": "0000200406",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.574317+00:00"
+    },
+    {
+      "symbol": "MA",
+      "issuer_id": "0001141391",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.577024+00:00"
+    },
+    {
+      "symbol": "ABBV",
+      "issuer_id": "0001551152",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.581375+00:00"
+    },
+    {
+      "symbol": "INTC",
+      "issuer_id": "0000050863",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.585718+00:00"
+    },
+    {
+      "symbol": "PLTR",
+      "issuer_id": "0001321655",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.588764+00:00"
+    },
+    {
+      "symbol": "CVX",
+      "issuer_id": "0000093410",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.593941+00:00"
+    },
+    {
+      "symbol": "COST",
+      "issuer_id": "0000909832",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.606336+00:00"
+    },
+    {
+      "symbol": "CSCO",
+      "issuer_id": "0000858877",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.616146+00:00"
+    },
+    {
+      "symbol": "ORCL",
+      "issuer_id": "0001341439",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.621023+00:00"
+    },
+    {
+      "symbol": "KO",
+      "issuer_id": "0000021344",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.624076+00:00"
+    },
+    {
+      "symbol": "PG",
+      "issuer_id": "0000080424",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.627827+00:00"
+    },
+    {
+      "symbol": "UNH",
+      "issuer_id": "0000731766",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.631889+00:00"
+    },
+    {
+      "symbol": "MRK",
+      "issuer_id": "0000310158",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.635646+00:00"
+    },
+    {
+      "symbol": "BAC",
+      "issuer_id": "0000070858",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.639847+00:00"
+    },
+    {
+      "symbol": "AMAT",
+      "issuer_id": "0000006951",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.644190+00:00"
+    },
+    {
+      "symbol": "HD",
+      "issuer_id": "0000354950",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.647942+00:00"
+    },
+    {
+      "symbol": "PM",
+      "issuer_id": "0001413329",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.650926+00:00"
+    },
+    {
+      "symbol": "GE",
+      "issuer_id": "0000040545",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.653977+00:00"
+    },
+    {
+      "symbol": "LRCX",
+      "issuer_id": "0000707549",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.656293+00:00"
+    },
+    {
+      "symbol": "PANW",
+      "issuer_id": "0001327567",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.659992+00:00"
+    },
+    {
+      "symbol": "NVS",
+      "issuer_id": "0001114448",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.662956+00:00"
+    },
+    {
+      "symbol": "DELL",
+      "issuer_id": "0001571996",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.665295+00:00"
+    },
+    {
+      "symbol": "MS",
+      "issuer_id": "0000895421",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.667681+00:00"
+    },
+    {
+      "symbol": "CAT",
+      "issuer_id": "0000018230",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.670090+00:00"
+    },
+    {
+      "symbol": "HSBC",
+      "issuer_id": "0001089113",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.672630+00:00"
+    },
+    {
+      "symbol": "TXN",
+      "issuer_id": "0000097476",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.675474+00:00"
+    },
+    {
+      "symbol": "RY",
+      "issuer_id": "0001000275",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.678645+00:00"
+    },
+    {
+      "symbol": "AZN",
+      "issuer_id": "0000901832",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.682667+00:00"
+    },
+    {
+      "symbol": "GS",
+      "issuer_id": "0000886982",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.685620+00:00"
+    },
+    {
+      "symbol": "RTX",
+      "issuer_id": "0000101829",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.689136+00:00"
+    },
+    {
+      "symbol": "CRWD",
+      "issuer_id": "0001535527",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.692052+00:00"
+    },
+    {
+      "symbol": "TMO",
+      "issuer_id": "0000097745",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.694908+00:00"
+    },
+    {
+      "symbol": "MUFG",
+      "issuer_id": "0000067088",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.697038+00:00"
+    },
+    {
+      "symbol": "TM",
+      "issuer_id": "0001094517",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.702328+00:00"
+    },
+    {
+      "symbol": "NFLX",
+      "issuer_id": "0001065280",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.708417+00:00"
+    },
+    {
+      "symbol": "WFC",
+      "issuer_id": "0000072971",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.710858+00:00"
+    },
+    {
+      "symbol": "AMGN",
+      "issuer_id": "0000318154",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.714231+00:00"
+    },
+    {
+      "symbol": "IBM",
+      "issuer_id": "0000051143",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.716772+00:00"
+    },
+    {
+      "symbol": "GEV",
+      "issuer_id": "0001996810",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.720518+00:00"
+    },
+    {
+      "symbol": "ANET",
+      "issuer_id": "0001596532",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.722964+00:00"
+    },
+    {
+      "symbol": "LIN",
+      "issuer_id": "0001707925",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.725140+00:00"
+    },
+    {
+      "symbol": "KLAC",
+      "issuer_id": "0000319201",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.728424+00:00"
+    },
+    {
+      "symbol": "AXP",
+      "issuer_id": "0000004962",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.732138+00:00"
+    },
+    {
+      "symbol": "C",
+      "issuer_id": "0000831001",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.734666+00:00"
+    },
+    {
+      "symbol": "ADI",
+      "issuer_id": "0000006281",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.737129+00:00"
+    },
+    {
+      "symbol": "TD",
+      "issuer_id": "0000947263",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.739470+00:00"
+    },
+    {
+      "symbol": "GILD",
+      "issuer_id": "0000882095",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.741989+00:00"
+    },
+    {
+      "symbol": "TTE",
+      "issuer_id": "0000879764",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.746347+00:00"
+    },
+    {
+      "symbol": "APH",
+      "issuer_id": "0000820313",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.749569+00:00"
+    },
+    {
+      "symbol": "QCOM",
+      "issuer_id": "0000804328",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.752639+00:00"
+    },
+    {
+      "symbol": "SNDK",
+      "issuer_id": "0002023554",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.757037+00:00"
+    },
+    {
+      "symbol": "DIS",
+      "issuer_id": "0001744489",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.760678+00:00"
+    },
+    {
+      "symbol": "MRVL",
+      "issuer_id": "0001835632",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.764766+00:00"
+    },
+    {
+      "symbol": "CRM",
+      "issuer_id": "0001108524",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.766898+00:00"
+    },
+    {
+      "symbol": "PEP",
+      "issuer_id": "0000077476",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.771029+00:00"
+    },
+    {
+      "symbol": "BLK",
+      "issuer_id": "0002012383",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.774796+00:00"
+    },
+    {
+      "symbol": "MCD",
+      "issuer_id": "0000063908",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.779067+00:00"
+    },
+    {
+      "symbol": "VZ",
+      "issuer_id": "0000732712",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.781432+00:00"
+    },
+    {
+      "symbol": "ABT",
+      "issuer_id": "0000001800",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.785741+00:00"
+    },
+    {
+      "symbol": "COP",
+      "issuer_id": "0001163165",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.787917+00:00"
+    },
+    {
+      "symbol": "UNP",
+      "issuer_id": "0000100885",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.791930+00:00"
+    },
+    {
+      "symbol": "DE",
+      "issuer_id": "0000315189",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.793745+00:00"
+    },
+    {
+      "symbol": "NVO",
+      "issuer_id": "0000353278",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.796709+00:00"
+    },
+    {
+      "symbol": "NEE",
+      "issuer_id": "0000753308",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.798815+00:00"
+    },
+    {
+      "symbol": "WELL",
+      "issuer_id": "0000766704",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.800979+00:00"
+    },
+    {
+      "symbol": "PFE",
+      "issuer_id": "0000078003",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.803013+00:00"
+    },
+    {
+      "symbol": "DHR",
+      "issuer_id": "0000313616",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.805050+00:00"
+    },
+    {
+      "symbol": "ACN",
+      "issuer_id": "0001467373",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.807128+00:00"
+    },
+    {
+      "symbol": "SCCO",
+      "issuer_id": "0001001838",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.809604+00:00"
+    },
+    {
+      "symbol": "STX",
+      "issuer_id": "0001137789",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.811755+00:00"
+    },
+    {
+      "symbol": "TMUS",
+      "issuer_id": "0001283699",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.813825+00:00"
+    },
+    {
+      "symbol": "ISRG",
+      "issuer_id": "0001035267",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.815953+00:00"
+    },
+    {
+      "symbol": "TJX",
+      "issuer_id": "0000109198",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.817703+00:00"
+    },
+    {
+      "symbol": "SCHW",
+      "issuer_id": "0000316709",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.819700+00:00"
+    },
+    {
+      "symbol": "ETN",
+      "issuer_id": "0001551182",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.821556+00:00"
+    },
+    {
+      "symbol": "UBS",
+      "issuer_id": "0001610520",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.823447+00:00"
+    },
+    {
+      "symbol": "LMT",
+      "issuer_id": "0000936468",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.825595+00:00"
+    },
+    {
+      "symbol": "WDC",
+      "issuer_id": "0000106040",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.827901+00:00"
+    },
+    {
+      "symbol": "BBVA",
+      "issuer_id": "0000842180",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.829989+00:00"
+    },
+    {
+      "symbol": "CB",
+      "issuer_id": "0000896159",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.832267+00:00"
+    },
+    {
+      "symbol": "VRTX",
+      "issuer_id": "0000875320",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.834489+00:00"
+    },
+    {
+      "symbol": "BA",
+      "issuer_id": "0000012927",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.836337+00:00"
+    },
+    {
+      "symbol": "UBER",
+      "issuer_id": "0001543151",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.840078+00:00"
+    },
+    {
+      "symbol": "PGR",
+      "issuer_id": "0000080661",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.843054+00:00"
+    },
+    {
+      "symbol": "SPGI",
+      "issuer_id": "0000064040",
+      "scope_approved": false,
+      "state": "not_started",
+      "completed_at": "2026-11-02T03:28:14.845611+00:00"
+    }
+  ],
+  "generated_at": "2026-11-02T03:28:14.847655+00:00",
+  "summary": {
+    "companies": 100,
+    "new_documents": 0,
+    "reused_documents": 8,
+    "periods": 8,
+    "registered_shares": 8
+  },
+  "checkpoint_events": [],
+  "scope_approved": false,
+  "hundred_company_accepted": false,
+  "investment_approved": false,
+  "transport_get_calls": 0,
+  "request_measure": "transport GET invocations, excluding internal retries; cached parser outcomes are recomputed from original bytes"
+}

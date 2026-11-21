@@ -1,0 +1,163 @@
+{
+  "recorded_at": "2026-11-01T19:40:06.700665+00:00",
+  "identity_source_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+  "companies": [
+    {
+      "symbol": "AAPL",
+      "cik": "0000320193",
+      "requested_period_end": "2025-09-27",
+      "attempts": [
+        {
+          "source": "Yahoo",
+          "status": "period_mismatch",
+          "attempted_at": "2026-11-01T19:39:58.052076+00:00",
+          "detail": "",
+          "cached": false
+        },
+        {
+          "source": "SEC",
+          "status": "valid",
+          "attempted_at": "2026-11-01T19:40:01.241511+00:00",
+          "detail": "",
+          "cached": false
+        }
+      ],
+      "as_of": "2026-11-01T19:40:01.305064+00:00",
+      "fact": {
+        "issuer_id": "0000320193",
+        "field": "assets",
+        "value": "359241000000",
+        "source": "SEC",
+        "period_start": null,
+        "period_end": "2025-09-27",
+        "currency": "USD",
+        "unit": "currency",
+        "retrieved_at": "2026-11-01T18:53:53.052462+00:00",
+        "available_at": "2026-08-01T05:00:00+00:00",
+        "accounting_definition": "us-gaap:Assets",
+        "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+        "filing_accession": "0000320193-26-000020",
+        "filed_on": "2026-07-31",
+        "raw_sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+        "source_field": null,
+        "identity_evidence_url": null,
+        "identity_evidence_sha256": null,
+        "identity_observed_at": null
+      },
+      "reference_filing": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm",
+      "matches_previous_original_filing": true,
+      "yahoo_response": {
+        "url": "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/AAPL?symbol=AAPL&type=annualTotalAssets&period1=1704067200&period2=1767225600",
+        "sha256": "f2bdef15cf63480d72088669aa3d54e4421a81a3a85d712f1da435631031abea",
+        "retrieved_at": "2026-11-01T19:40:01.241021+00:00",
+        "fixture": "tests/fixtures/yahoo-assets-aapl.json.gz"
+      }
+    },
+    {
+      "symbol": "MSFT",
+      "cik": "0000789019",
+      "requested_period_end": "2026-06-30",
+      "attempts": [
+        {
+          "source": "Yahoo",
+          "status": "valid",
+          "attempted_at": "2026-11-01T19:40:01.314885+00:00",
+          "detail": "",
+          "cached": false
+        }
+      ],
+      "as_of": "2026-11-01T19:40:04.019759+00:00",
+      "fact": {
+        "issuer_id": "0000789019",
+        "field": "assets",
+        "value": "7.58376E+11",
+        "source": "Yahoo",
+        "period_start": null,
+        "period_end": "2026-06-30",
+        "currency": "USD",
+        "unit": "currency",
+        "retrieved_at": "2026-11-01T19:40:04.019685+00:00",
+        "available_at": "2026-11-01T19:40:04.019685+00:00",
+        "accounting_definition": "us-gaap:Assets",
+        "source_url": "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/MSFT?symbol=MSFT&type=annualTotalAssets&period1=1735689600&period2=1798761600",
+        "filing_accession": null,
+        "filed_on": null,
+        "raw_sha256": "6fdcfe06a83eeb0f292979286c8503ae564da010ed25cb988ed04feae9d639df",
+        "source_field": "annualTotalAssets",
+        "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "identity_evidence_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+        "identity_observed_at": "2026-11-01T17:56:42.116453+00:00"
+      },
+      "reference_filing": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/msft-20260930.htm",
+      "matches_previous_original_filing": true,
+      "yahoo_response": {
+        "url": "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/MSFT?symbol=MSFT&type=annualTotalAssets&period1=1735689600&period2=1798761600",
+        "sha256": "6fdcfe06a83eeb0f292979286c8503ae564da010ed25cb988ed04feae9d639df",
+        "retrieved_at": "2026-11-01T19:40:04.019685+00:00",
+        "fixture": "tests/fixtures/yahoo-assets-msft.json.gz"
+      }
+    },
+    {
+      "symbol": "NVDA",
+      "cik": "0001045810",
+      "requested_period_end": "2026-01-25",
+      "attempts": [
+        {
+          "source": "Yahoo",
+          "status": "period_mismatch",
+          "attempted_at": "2026-11-01T19:40:04.020290+00:00",
+          "detail": "",
+          "cached": false
+        },
+        {
+          "source": "SEC",
+          "status": "valid",
+          "attempted_at": "2026-11-01T19:40:06.620289+00:00",
+          "detail": "",
+          "cached": false
+        }
+      ],
+      "as_of": "2026-11-01T19:40:06.692012+00:00",
+      "fact": {
+        "issuer_id": "0001045810",
+        "field": "assets",
+        "value": "206803000000",
+        "source": "SEC",
+        "period_start": null,
+        "period_end": "2026-01-25",
+        "currency": "USD",
+        "unit": "currency",
+        "retrieved_at": "2026-11-01T18:53:59.781720+00:00",
+        "available_at": "2026-08-27T05:00:00+00:00",
+        "accounting_definition": "us-gaap:Assets",
+        "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+        "filing_accession": "0001045810-26-000075",
+        "filed_on": "2026-08-26",
+        "raw_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+        "source_field": null,
+        "identity_evidence_url": null,
+        "identity_evidence_sha256": null,
+        "identity_observed_at": null
+      },
+      "reference_filing": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+      "matches_previous_original_filing": true,
+      "yahoo_response": {
+        "url": "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/NVDA?symbol=NVDA&type=annualTotalAssets&period1=1735689600&period2=1798761600",
+        "sha256": "e6491b3cd39b1d3fee6b7443c7e0d86b8ca3ea63aaae34214ffb3eba0fe3ab28",
+        "retrieved_at": "2026-11-01T19:40:06.620151+00:00",
+        "fixture": "tests/fixtures/yahoo-assets-nvda.json.gz"
+      }
+    }
+  ],
+  "full_acceptance": false,
+  "yahoo_supported_fields": [
+    "assets"
+  ],
+  "yahoo_http_requests": 3,
+  "sec_http_requests": 0,
+  "sec_cache_events": [
+    "disk_hit:0000320193",
+    "disk_hit:0001045810"
+  ],
+  "validation_note": "Values compared numerically as Decimal; exponential and integer formatting are equivalent. Yahoo AAPL/NVDA period mismatches preserved; no date alignment."
+}

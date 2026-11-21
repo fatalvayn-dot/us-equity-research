@@ -1,0 +1,1722 @@
+{
+  "schema_version": 1,
+  "selection": "first 100 unique SEC CIKs in recorded Nasdaq source order with explicit common/ordinary name hints; no representative or sector-balanced claim",
+  "source_evidence": [
+    "nasdaq-discovery-live.json",
+    "sec-directory-live.json"
+  ],
+  "source_hashes": {
+    "nasdaq": "846b0e6069d76d64e9e702202c9f42f4619304b0e2f5876e4aa88c90ef6e5c86",
+    "sec": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46"
+  },
+  "companies": [
+    {
+      "symbol": "NVDA",
+      "issuer_id": "0001045810",
+      "discovery_name": "NVIDIA Corporation Common Stock",
+      "sec_name": "NVIDIA CORP",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": "2025-01-27",
+      "period_end": "2026-01-25",
+      "period_status": "previously_checked_sample"
+    },
+    {
+      "symbol": "AAPL",
+      "issuer_id": "0000320193",
+      "discovery_name": "Apple Inc. Common Stock",
+      "sec_name": "Apple Inc.",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": "2024-09-29",
+      "period_end": "2025-09-27",
+      "period_status": "previously_checked_sample"
+    },
+    {
+      "symbol": "MSFT",
+      "issuer_id": "0000789019",
+      "discovery_name": "Microsoft Corporation Common Stock",
+      "sec_name": "MICROSOFT CORP",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": "2025-07-01",
+      "period_end": "2026-06-30",
+      "period_status": "previously_checked_sample"
+    },
+    {
+      "symbol": "GOOGL",
+      "issuer_id": "0001652044",
+      "discovery_name": "Alphabet Inc. Class A Common Stock",
+      "sec_name": "Alphabet Inc.",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "AMZN",
+      "issuer_id": "0001018724",
+      "discovery_name": "Amazon.com, Inc. Common Stock",
+      "sec_name": "AMAZON COM INC",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "SPCX",
+      "issuer_id": "0001181412",
+      "discovery_name": "Space Exploration Technologies Corp. Class A Common Stock",
+      "sec_name": "SPACE EXPLORATION TECHNOLOGIES CORP",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "AVGO",
+      "issuer_id": "0001730168",
+      "discovery_name": "Broadcom Inc. Common Stock",
+      "sec_name": "Broadcom Inc.",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "META",
+      "issuer_id": "0001326801",
+      "discovery_name": "Meta Platforms, Inc. Class A Common Stock",
+      "sec_name": "Meta Platforms, Inc.",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "TSLA",
+      "issuer_id": "0001318605",
+      "discovery_name": "Tesla, Inc. Common Stock",
+      "sec_name": "Tesla, Inc.",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "LLY",
+      "issuer_id": "0000059478",
+      "discovery_name": "Eli Lilly and Company Common Stock",
+      "sec_name": "ELI LILLY & Co",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "MU",
+      "issuer_id": "0000723125",
+      "discovery_name": "Micron Technology, Inc. Common Stock",
+      "sec_name": "MICRON TECHNOLOGY INC",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "WMT",
+      "issuer_id": "0000104169",
+      "discovery_name": "Walmart Inc. Common Stock",
+      "sec_name": "Walmart Inc.",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "AMD",
+      "issuer_id": "0000002488",
+      "discovery_name": "Advanced Micro Devices, Inc. Common Stock",
+      "sec_name": "ADVANCED MICRO DEVICES INC",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "JPM",
+      "issuer_id": "0000019617",
+      "discovery_name": "JP Morgan Chase & Co. Common Stock",
+      "sec_name": "JPMORGAN CHASE & CO",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "XOM",
+      "issuer_id": "0002115436",
+      "discovery_name": "ExxonMobil Holdings Corporation Common Stock",
+      "sec_name": "ExxonMobil Holdings Corp",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "JNJ",
+      "issuer_id": "0000200406",
+      "discovery_name": "Johnson & Johnson Common Stock",
+      "sec_name": "JOHNSON & JOHNSON",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "MA",
+      "issuer_id": "0001141391",
+      "discovery_name": "Mastercard Incorporated Common Stock",
+      "sec_name": "Mastercard Inc",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "ABBV",
+      "issuer_id": "0001551152",
+      "discovery_name": "AbbVie Inc. Common Stock",
+      "sec_name": "AbbVie Inc.",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "INTC",
+      "issuer_id": "0000050863",
+      "discovery_name": "Intel Corporation Common Stock",
+      "sec_name": "INTEL CORP",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "PLTR",
+      "issuer_id": "0001321655",
+      "discovery_name": "Palantir Technologies Inc. Class A Common Stock",
+      "sec_name": "Palantir Technologies Inc.",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "CVX",
+      "issuer_id": "0000093410",
+      "discovery_name": "Chevron Corporation Common Stock",
+      "sec_name": "CHEVRON CORP",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "COST",
+      "issuer_id": "0000909832",
+      "discovery_name": "Costco Wholesale Corporation Common Stock",
+      "sec_name": "COSTCO WHOLESALE CORP /NEW",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "CSCO",
+      "issuer_id": "0000858877",
+      "discovery_name": "Cisco Systems, Inc. Common Stock (DE)",
+      "sec_name": "CISCO SYSTEMS, INC.",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "ORCL",
+      "issuer_id": "0001341439",
+      "discovery_name": "Oracle Corporation Common Stock",
+      "sec_name": "ORACLE CORP",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "KO",
+      "issuer_id": "0000021344",
+      "discovery_name": "Coca-Cola Company (The) Common Stock",
+      "sec_name": "COCA COLA CO",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "PG",
+      "issuer_id": "0000080424",
+      "discovery_name": "Procter & Gamble Company (The) Common Stock",
+      "sec_name": "PROCTER & GAMBLE Co",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "UNH",
+      "issuer_id": "0000731766",
+      "discovery_name": "UnitedHealth Group Incorporated Common Stock (DE)",
+      "sec_name": "UNITEDHEALTH GROUP INC",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "MRK",
+      "issuer_id": "0000310158",
+      "discovery_name": "Merck & Company, Inc. Common Stock (new)",
+      "sec_name": "Merck & Co., Inc.",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "BAC",
+      "issuer_id": "0000070858",
+      "discovery_name": "Bank of America Corporation Common Stock",
+      "sec_name": "BANK OF AMERICA CORP /DE/",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "AMAT",
+      "issuer_id": "0000006951",
+      "discovery_name": "Applied Materials, Inc. Common Stock",
+      "sec_name": "APPLIED MATERIALS INC /DE",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "HD",
+      "issuer_id": "0000354950",
+      "discovery_name": "Home Depot, Inc. (The) Common Stock",
+      "sec_name": "HOME DEPOT, INC.",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "PM",
+      "issuer_id": "0001413329",
+      "discovery_name": "Philip Morris International Inc Common Stock",
+      "sec_name": "Philip Morris International Inc.",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "GE",
+      "issuer_id": "0000040545",
+      "discovery_name": "GE Aerospace Common Stock",
+      "sec_name": "GENERAL ELECTRIC CO",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "LRCX",
+      "issuer_id": "0000707549",
+      "discovery_name": "Lam Research Corporation Common Stock",
+      "sec_name": "LAM RESEARCH CORP",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "PANW",
+      "issuer_id": "0001327567",
+      "discovery_name": "Palo Alto Networks, Inc. Common Stock",
+      "sec_name": "Palo Alto Networks Inc",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "NVS",
+      "issuer_id": "0001114448",
+      "discovery_name": "Novartis AG Common Stock",
+      "sec_name": "NOVARTIS AG",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "DELL",
+      "issuer_id": "0001571996",
+      "discovery_name": "Dell Technologies Inc. Class C Common Stock ",
+      "sec_name": "Dell Technologies Inc.",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "MS",
+      "issuer_id": "0000895421",
+      "discovery_name": "Morgan Stanley Common Stock",
+      "sec_name": "MORGAN STANLEY",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "CAT",
+      "issuer_id": "0000018230",
+      "discovery_name": "Caterpillar, Inc. Common Stock",
+      "sec_name": "CATERPILLAR INC",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "HSBC",
+      "issuer_id": "0001089113",
+      "discovery_name": "HSBC Holdings, plc. Common Stock",
+      "sec_name": "HSBC HOLDINGS PLC",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "TXN",
+      "issuer_id": "0000097476",
+      "discovery_name": "Texas Instruments Incorporated Common Stock",
+      "sec_name": "TEXAS INSTRUMENTS INC",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "RY",
+      "issuer_id": "0001000275",
+      "discovery_name": "Royal Bank Of Canada Common Stock",
+      "sec_name": "ROYAL BANK OF CANADA",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "AZN",
+      "issuer_id": "0000901832",
+      "discovery_name": "AstraZeneca PLC Ordinary Shares",
+      "sec_name": "ASTRAZENECA PLC",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "GS",
+      "issuer_id": "0000886982",
+      "discovery_name": "Goldman Sachs Group, Inc. (The) Common Stock",
+      "sec_name": "GOLDMAN SACHS GROUP INC",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "RTX",
+      "issuer_id": "0000101829",
+      "discovery_name": "RTX Corporation Common Stock",
+      "sec_name": "RTX Corp",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "CRWD",
+      "issuer_id": "0001535527",
+      "discovery_name": "CrowdStrike Holdings, Inc. Class A Common Stock",
+      "sec_name": "CrowdStrike Holdings, Inc.",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "TMO",
+      "issuer_id": "0000097745",
+      "discovery_name": "Thermo Fisher Scientific Inc Common Stock",
+      "sec_name": "THERMO FISHER SCIENTIFIC INC.",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "MUFG",
+      "issuer_id": "0000067088",
+      "discovery_name": "Mitsubishi UFJ Financial Group, Inc. Common Stock",
+      "sec_name": "MITSUBISHI UFJ FINANCIAL GROUP INC",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "TM",
+      "issuer_id": "0001094517",
+      "discovery_name": "Toyota Motor Corporation Common Stock",
+      "sec_name": "TOYOTA MOTOR CORP/",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "NFLX",
+      "issuer_id": "0001065280",
+      "discovery_name": "Netflix, Inc. Common Stock",
+      "sec_name": "NETFLIX INC",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "WFC",
+      "issuer_id": "0000072971",
+      "discovery_name": "Wells Fargo & Company Common Stock",
+      "sec_name": "WELLS FARGO & COMPANY/MN",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "AMGN",
+      "issuer_id": "0000318154",
+      "discovery_name": "Amgen Inc. Common Stock",
+      "sec_name": "AMGEN INC",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "IBM",
+      "issuer_id": "0000051143",
+      "discovery_name": "International Business Machines Corporation Common Stock",
+      "sec_name": "INTERNATIONAL BUSINESS MACHINES CORP",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "GEV",
+      "issuer_id": "0001996810",
+      "discovery_name": "GE Vernova Inc. Common Stock",
+      "sec_name": "GE Vernova Inc.",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "ANET",
+      "issuer_id": "0001596532",
+      "discovery_name": "Arista Networks, Inc. Common Stock",
+      "sec_name": "Arista Networks, Inc.",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "LIN",
+      "issuer_id": "0001707925",
+      "discovery_name": "Linde plc Ordinary Shares",
+      "sec_name": "LINDE PLC",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "KLAC",
+      "issuer_id": "0000319201",
+      "discovery_name": "KLA Corporation Common Stock",
+      "sec_name": "KLA CORP",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "AXP",
+      "issuer_id": "0000004962",
+      "discovery_name": "American Express Company Common Stock",
+      "sec_name": "AMERICAN EXPRESS CO",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "C",
+      "issuer_id": "0000831001",
+      "discovery_name": "Citigroup, Inc. Common Stock",
+      "sec_name": "CITIGROUP INC",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "ADI",
+      "issuer_id": "0000006281",
+      "discovery_name": "Analog Devices, Inc. Common Stock",
+      "sec_name": "ANALOG DEVICES INC",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "TD",
+      "issuer_id": "0000947263",
+      "discovery_name": "Toronto Dominion Bank (The) Common Stock",
+      "sec_name": "TORONTO DOMINION BANK",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "GILD",
+      "issuer_id": "0000882095",
+      "discovery_name": "Gilead Sciences, Inc. Common Stock",
+      "sec_name": "GILEAD SCIENCES, INC.",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "TTE",
+      "issuer_id": "0000879764",
+      "discovery_name": "TotalEnergies SE Ordinary Shares",
+      "sec_name": "TotalEnergies SE",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "APH",
+      "issuer_id": "0000820313",
+      "discovery_name": "Amphenol Corporation Common Stock",
+      "sec_name": "AMPHENOL CORP /DE/",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "QCOM",
+      "issuer_id": "0000804328",
+      "discovery_name": "QUALCOMM Incorporated Common Stock",
+      "sec_name": "QUALCOMM INC/DE",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "SNDK",
+      "issuer_id": "0002023554",
+      "discovery_name": "Sandisk Corporation Common Stock",
+      "sec_name": "Sandisk Corp",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "DIS",
+      "issuer_id": "0001744489",
+      "discovery_name": "Walt Disney Company (The) Common Stock",
+      "sec_name": "Walt Disney Co",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "MRVL",
+      "issuer_id": "0001835632",
+      "discovery_name": "Marvell Technology, Inc. Common Stock",
+      "sec_name": "Marvell Technology, Inc.",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "CRM",
+      "issuer_id": "0001108524",
+      "discovery_name": "Salesforce, Inc. Common Stock",
+      "sec_name": "Salesforce, Inc.",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "PEP",
+      "issuer_id": "0000077476",
+      "discovery_name": "PepsiCo, Inc. Common Stock",
+      "sec_name": "PEPSICO INC",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "BLK",
+      "issuer_id": "0002012383",
+      "discovery_name": "BlackRock, Inc. Common Stock",
+      "sec_name": "BlackRock, Inc.",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "MCD",
+      "issuer_id": "0000063908",
+      "discovery_name": "McDonald's Corporation Common Stock",
+      "sec_name": "MCDONALDS CORP",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "VZ",
+      "issuer_id": "0000732712",
+      "discovery_name": "Verizon Communications Inc. Common Stock",
+      "sec_name": "VERIZON COMMUNICATIONS INC",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "ABT",
+      "issuer_id": "0000001800",
+      "discovery_name": "Abbott Laboratories Common Stock",
+      "sec_name": "ABBOTT LABORATORIES",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "COP",
+      "issuer_id": "0001163165",
+      "discovery_name": "ConocoPhillips Common Stock",
+      "sec_name": "CONOCOPHILLIPS",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "UNP",
+      "issuer_id": "0000100885",
+      "discovery_name": "Union Pacific Corporation Common Stock",
+      "sec_name": "UNION PACIFIC CORP",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "DE",
+      "issuer_id": "0000315189",
+      "discovery_name": "Deere & Company Common Stock",
+      "sec_name": "DEERE & CO",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "NVO",
+      "issuer_id": "0000353278",
+      "discovery_name": "Novo Nordisk A/S Common Stock",
+      "sec_name": "NOVO NORDISK A S",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "NEE",
+      "issuer_id": "0000753308",
+      "discovery_name": "NextEra Energy, Inc. Common Stock",
+      "sec_name": "NEXTERA ENERGY INC",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "WELL",
+      "issuer_id": "0000766704",
+      "discovery_name": "Welltower Inc. Common Stock",
+      "sec_name": "WELLTOWER INC.",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "PFE",
+      "issuer_id": "0000078003",
+      "discovery_name": "Pfizer, Inc. Common Stock",
+      "sec_name": "PFIZER INC",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "DHR",
+      "issuer_id": "0000313616",
+      "discovery_name": "Danaher Corporation Common Stock",
+      "sec_name": "DANAHER CORP /DE/",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "ACN",
+      "issuer_id": "0001467373",
+      "discovery_name": "Accenture plc Class A Ordinary Shares (Ireland)",
+      "sec_name": "Accenture plc",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "SCCO",
+      "issuer_id": "0001001838",
+      "discovery_name": "Southern Copper Corporation Common Stock",
+      "sec_name": "SOUTHERN COPPER CORP/",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "STX",
+      "issuer_id": "0001137789",
+      "discovery_name": "Seagate Technology Holdings PLC Ordinary Shares (Ireland)",
+      "sec_name": "Seagate Technology Holdings plc",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "TMUS",
+      "issuer_id": "0001283699",
+      "discovery_name": "T-Mobile US, Inc. Common Stock",
+      "sec_name": "T-Mobile US, Inc.",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "ISRG",
+      "issuer_id": "0001035267",
+      "discovery_name": "Intuitive Surgical, Inc. Common Stock",
+      "sec_name": "INTUITIVE SURGICAL INC",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "TJX",
+      "issuer_id": "0000109198",
+      "discovery_name": "TJX Companies, Inc. (The) Common Stock",
+      "sec_name": "TJX COMPANIES INC /DE/",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "SCHW",
+      "issuer_id": "0000316709",
+      "discovery_name": "Charles Schwab Corporation (The) Common Stock",
+      "sec_name": "SCHWAB CHARLES CORP",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "ETN",
+      "issuer_id": "0001551182",
+      "discovery_name": "Eaton Corporation, PLC Ordinary Shares",
+      "sec_name": "Eaton Corp plc",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "UBS",
+      "issuer_id": "0001610520",
+      "discovery_name": "UBS Group AG Registered Ordinary Shares",
+      "sec_name": "UBS Group AG",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "LMT",
+      "issuer_id": "0000936468",
+      "discovery_name": "Lockheed Martin Corporation Common Stock",
+      "sec_name": "LOCKHEED MARTIN CORP",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "WDC",
+      "issuer_id": "0000106040",
+      "discovery_name": "Western Digital Corporation Common Stock",
+      "sec_name": "WESTERN DIGITAL CORP",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "BBVA",
+      "issuer_id": "0000842180",
+      "discovery_name": "Banco Bilbao Vizcaya Argentaria S.A. Common Stock",
+      "sec_name": "BANCO BILBAO VIZCAYA ARGENTARIA, S.A.",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "CB",
+      "issuer_id": "0000896159",
+      "discovery_name": "Chubb Limited  Common Stock",
+      "sec_name": "Chubb Ltd",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "VRTX",
+      "issuer_id": "0000875320",
+      "discovery_name": "Vertex Pharmaceuticals Incorporated Common Stock",
+      "sec_name": "VERTEX PHARMACEUTICALS INC / MA",
+      "sec_exchange_label": "Nasdaq",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "BA",
+      "issuer_id": "0000012927",
+      "discovery_name": "Boeing Company (The) Common Stock",
+      "sec_name": "BOEING CO",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "UBER",
+      "issuer_id": "0001543151",
+      "discovery_name": "Uber Technologies, Inc. Common Stock",
+      "sec_name": "Uber Technologies, Inc",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "PGR",
+      "issuer_id": "0000080661",
+      "discovery_name": "Progressive Corporation (The) Common Stock",
+      "sec_name": "PROGRESSIVE CORP/OH/",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    },
+    {
+      "symbol": "SPGI",
+      "issuer_id": "0000064040",
+      "discovery_name": "S&P Global Inc. Common Stock",
+      "sec_name": "S&P Global Inc.",
+      "sec_exchange_label": "NYSE",
+      "scope_status": "pending_scope",
+      "missing_scope_evidence": [
+        "current primary listing",
+        "legal common-share class",
+        "ETF/fund exclusion",
+        "test/security activity status"
+      ],
+      "period_start": null,
+      "period_end": null,
+      "period_status": "not_verified"
+    }
+  ],
+  "summary": {
+    "candidates": 100,
+    "scope_approved": 0,
+    "explicit_periods": 3,
+    "financially_tested_as_batch100": 0
+  },
+  "active_universe_accepted": false,
+  "hundred_company_accepted": false
+}

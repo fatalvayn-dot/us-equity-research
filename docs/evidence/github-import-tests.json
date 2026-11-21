@@ -1,0 +1,12 @@
+{
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "command": "PYTHONPATH=src python3 -m unittest discover -s tests -q",
+  "tests_run": 329,
+  "failures": 0,
+  "errors": 0,
+  "scope": "local_offline_regression",
+  "checkpoint": "3d0c9b07b14ce788d5875ed82919d72730331cc8",
+  "preserved_pr": 1,
+  "base_main": "de31dcbeaf131ab641e58a2601ff5f4cc28bc191",
+  "live_financial_requests": 0
+}

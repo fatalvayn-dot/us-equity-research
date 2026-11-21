@@ -1,0 +1,188 @@
+{
+  "mode": "read_only_production_audit",
+  "production_commit": "08d2a4d9e068a4b1f12fb9154d7a5674ac91dffe",
+  "root_financial_run_id": 42223465006,
+  "financial_run_id": 42455760184,
+  "financial_sequence": 10,
+  "valuation_parent_run_id": 42536567400,
+  "valuation_run_id": 42598993077,
+  "score_run_id": 42599479886,
+  "artifacts": {
+    "valuation": {
+      "id": 13664443650,
+      "sha256": "465ebd3a23361b35183afc7afa1e027ee295a197fb1e06375fe1242f4fa0956b"
+    },
+    "score": {
+      "id": 13664797659,
+      "sha256": "16bf7e62bd2801369e18ce22a9fa15529559aaf35742b0136c54739d1adc7003"
+    }
+  },
+  "observations": {
+    "parent": 655,
+    "current": 755,
+    "lost": 0
+  },
+  "valuation_summary": {
+    "candidates": 100,
+    "new_get_invocations": 100,
+    "get_invocations_by_host": {
+      "www.sec.gov": 21,
+      "data.sec.gov": 43,
+      "query1.finance.yahoo.com": 36
+    },
+    "identity_states": {
+      "exact_match": 100
+    },
+    "share_states": {
+      "pending_source_collection": 77,
+      "invalid_data": 8,
+      "verified_dated_share_class": 15
+    },
+    "price_states": {
+      "pending_source_collection": 78,
+      "valid": 22
+    },
+    "history_states": {
+      "not_started": 86,
+      "valid": 14
+    }
+  },
+  "continuation": {
+    "start_symbol": "BLK",
+    "next_symbol": "TJX",
+    "fingerprint": "de79746f32940ed8df7d3de9868a6812207ae2a0a4791ac3eda9c42cad6d7d0b",
+    "next_index": 72,
+    "retrying_partial": true
+  },
+  "priority": [
+    {
+      "symbol": "INTU",
+      "issuer_id": "0000896878",
+      "new_gets": 5,
+      "share_filing_sha256": "c44ae576220966fd0776f127af0eeefdb99c27e219b6f900b91e16361340de6d",
+      "price_sha256": "607749d9a381d23544734fd7eb6efaef1636f2c8ca415ec44a01134d76bd48da",
+      "history_sha256": "c0f16d8bf82605b426f87fbc76009f4900f6a88ebb9914d348462846951809f8",
+      "market_at": "2026-11-06T21:00:01+00:00",
+      "history_last_session": "2026-11-05T14:30:00+00:00"
+    },
+    {
+      "symbol": "NOW",
+      "issuer_id": "0001373715",
+      "new_gets": 5,
+      "share_filing_sha256": "0d3ecbf63c4ec311988b2e311f8daee8bd6fa3ce04ef6d92461779e4e781e754",
+      "price_sha256": "75f066f4d2cdc7c9644bba012c74134ff0a98f2ace527547784b61a5c0f5af11",
+      "history_sha256": "9913981ce5026816f3b80eb4cf3e85c911faa679f82905a33f18d2268b619fe3",
+      "market_at": "2026-11-06T21:00:03+00:00",
+      "history_last_session": "2026-11-05T14:30:00+00:00"
+    },
+    {
+      "symbol": "SNPS",
+      "issuer_id": "0000883241",
+      "new_gets": 5,
+      "share_filing_sha256": "4421d383692c77b266237d9b49eb38ea7bd91cdcc47cbe11db09a58cf482b58f",
+      "price_sha256": "a9f15fcb3f64b5e5e69ddab902cd0a2eeaf7e88f3c445f33fe9950c4e719ef28",
+      "history_sha256": "175690516a828a678fc5fe97bb057e9171e9db1f885fe9833108cd0e02cb925f",
+      "market_at": "2026-11-06T21:00:01+00:00",
+      "history_last_session": "2026-11-05T14:30:00+00:00"
+    },
+    {
+      "symbol": "MPWR",
+      "issuer_id": "0001280452",
+      "new_gets": 5,
+      "share_filing_sha256": "ee229786f6fb83aaaac2575b24fdd9bb9df897dab8f9c1678ffb3bfed57735f4",
+      "price_sha256": "7a01864cbcc1f05b5d69ec00909e0169e0384ecc490c33ba5c2d1705b7060248",
+      "history_sha256": "f24b5a8fc9334eb1b24a0f3179c026831b338eabcc6745b2608650f6a3f7429d",
+      "market_at": "2026-11-06T21:00:01+00:00",
+      "history_last_session": "2026-11-05T14:30:00+00:00"
+    },
+    {
+      "symbol": "ON",
+      "issuer_id": "0001097864",
+      "new_gets": 5,
+      "share_filing_sha256": "c61fb355a32e826fb0e0101fda054c4f43b70410a2a1563ea5340740d406ada3",
+      "price_sha256": "d2ffa7bf5d437c65dcdddac20686868229f97ea0f9a56d17c6a6f99a9b35aca9",
+      "history_sha256": "fd8b18f607a5d6f86ad70f331872214c19f9790ed21ac13f16c6dc618127c0d0",
+      "market_at": "2026-11-06T21:00:01+00:00",
+      "history_last_session": "2026-11-05T14:30:00+00:00"
+    },
+    {
+      "symbol": "SWKS",
+      "issuer_id": "0000004127",
+      "new_gets": 5,
+      "share_filing_sha256": "bcb442b1a28c7633dc23d4fbca7f1927b817b35abd0c4809ce51a691546908da",
+      "price_sha256": "cdc9230da5c383d52faa2fd072a2143750237eda57c8de78c8401e00e910163a",
+      "history_sha256": "e737b3e910672cccc96e068bf6d7fa6a4f8f4f3cda73fcfc2c7f5326292b4e10",
+      "market_at": "2026-11-06T21:00:00+00:00",
+      "history_last_session": "2026-11-05T14:30:00+00:00"
+    },
+    {
+      "symbol": "TYL",
+      "issuer_id": "0000860731",
+      "new_gets": 5,
+      "share_filing_sha256": "b88b66d8dce8b071ed3885228b8fe5b0e1918ec1152fefc9f6f4f40ead31a068",
+      "price_sha256": "646533353d933f3fcd8799d6243107f19f6440579331e3dffd206186cb4b78fa",
+      "history_sha256": "42982bba5c389b24f0e8bb0dfccad51f33540ada06b3f09fb42d93d193d787f1",
+      "market_at": "2026-11-06T21:00:02+00:00",
+      "history_last_session": "2026-11-05T14:30:00+00:00"
+    }
+  ],
+  "score_as_of": "2026-11-09T10:17:39.519295+00:00",
+  "score_summary": {
+    "candidates": 100,
+    "critical_review": 2,
+    "scored_companies": 7,
+    "unscored": 93
+  },
+  "ranking": [
+    {
+      "issuer_id": "0000896878",
+      "model_id": "prepackaged_software_v1",
+      "rank": 1,
+      "score": "78.0",
+      "symbol": "INTU"
+    },
+    {
+      "issuer_id": "0001280452",
+      "model_id": "semiconductors_v1",
+      "rank": 2,
+      "score": "78",
+      "symbol": "MPWR"
+    },
+    {
+      "issuer_id": "0000004127",
+      "model_id": "semiconductors_v1",
+      "rank": 3,
+      "score": "68",
+      "symbol": "SWKS"
+    },
+    {
+      "issuer_id": "0001373715",
+      "model_id": "prepackaged_software_v1",
+      "rank": 4,
+      "score": "62",
+      "symbol": "NOW"
+    },
+    {
+      "issuer_id": "0000860731",
+      "model_id": "prepackaged_software_v1",
+      "rank": 5,
+      "score": "55.5",
+      "symbol": "TYL"
+    },
+    {
+      "issuer_id": "0000883241",
+      "model_id": "prepackaged_software_v1",
+      "rank": 6,
+      "score": "53.0",
+      "symbol": "SNPS"
+    },
+    {
+      "issuer_id": "0001097864",
+      "model_id": "semiconductors_v1",
+      "rank": 7,
+      "score": "51.5",
+      "symbol": "ON"
+    }
+  ],
+  "mvp_accepted": false
+}

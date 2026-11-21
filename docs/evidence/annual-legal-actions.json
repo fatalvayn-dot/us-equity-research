@@ -1,0 +1,31 @@
+{
+  "run_id": 41421812078,
+  "run_url": "https://github.com/fatalvayn-dot/us-equity-research/actions/runs/41421812078",
+  "head_sha": "54169db8a53b5e0ee2d2e240c9a7a491bdfde5cc",
+  "tree_sha": "2db428352cac3483973a325d2ad1a8808ebf66f2",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "python": "3.11",
+      "job_id": 125198878288,
+      "tests": 365,
+      "conclusion": "success",
+      "cli_status": "success"
+    },
+    {
+      "python": "3.12",
+      "job_id": 125198878606,
+      "tests": 365,
+      "conclusion": "success",
+      "cli_status": "success"
+    },
+    {
+      "python": "3.13",
+      "job_id": 125198878517,
+      "tests": 365,
+      "conclusion": "success",
+      "cli_status": "success"
+    }
+  ],
+  "scope": "remote_offline_regression_not_live_legal_or_financial_acceptance"
+}

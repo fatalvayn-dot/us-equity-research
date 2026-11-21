@@ -1,0 +1,22 @@
+{
+  "session_date_local": "2026-11-03",
+  "python": "3.12.14",
+  "command": "PYTHONPATH=src python -m unittest discover -s tests -q",
+  "tests": 595,
+  "new_tests": 18,
+  "errors": 0,
+  "failures": 0,
+  "seconds": 71.463,
+  "mode": "offline_unit_regression_recorded_sources_CLI_not_live_acceptance",
+  "new_collector_tests": 16,
+  "new_numeric_cohort_tests": 2,
+  "separate_live_companies": 7,
+  "live_source_observations": 35,
+  "live_share_reconciliations": 6,
+  "live_prices": 7,
+  "live_histories": 7,
+  "warm_resume_gets": 0,
+  "mvp_accepted": false,
+  "initial_test_failure": "synthetic stale-cache test reused expired lease; corrected test to acquire a new session lease",
+  "live_defect_found_and_fixed": "unselected 2011 fractional shares blocked current Salesforce count; historical numeric quarantine, no latest-invalid fallback"
+}

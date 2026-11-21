@@ -1,0 +1,53 @@
+{
+  "summary": {
+    "companies": 100,
+    "company_states": {
+      "review_required": 100
+    },
+    "accepted_facts": 988,
+    "arithmetic_results": 704,
+    "scored_companies": 0
+  },
+  "financial_cohort": {
+    "mode": "mixed_dated_inputs_no_network",
+    "sources": [
+      {
+        "source": 1,
+        "generated_at": "2026-11-02T17:53:25.335133+00:00",
+        "sha256": "0ccb8292096209f422dc91bfe4d7b8838fa9abc6d5365bc9510c5f883dc41a51"
+      },
+      {
+        "source": 2,
+        "generated_at": "2026-11-03T03:50:01.038329+00:00",
+        "sha256": "b11a4cfb2d65a3e2c47b6a44f3c8e83e9e5f128041c3ea5eb0b0b39d6d15dbd6"
+      }
+    ],
+    "selected_by_source": {
+      "1": 83,
+      "2": 17
+    },
+    "oldest_source_generated_at": "2026-11-02T17:53:25.335133+00:00",
+    "newest_source_generated_at": "2026-11-03T03:50:01.038329+00:00",
+    "all_new_100_live_run": false,
+    "per_fact_source_and_query_times_preserved": true
+  },
+  "mvp_accepted": false,
+  "files": [
+    {
+      "file": "batch.json.gz",
+      "sha256": "1352ec62596225309a8cfecf710cc70be749365583112a2bc95866818cfe269b"
+    },
+    {
+      "file": "report.html",
+      "sha256": "ae677fed46d1e3a94a3352f1be4a618ee2aa81a59630c0b74902e96f194a97f2"
+    },
+    {
+      "file": "report.json.gz",
+      "sha256": "b092330cff41f8f8f4c6584b6ff0e0c11bfc7f8402be8ce102c1836d0ec2fbc5"
+    },
+    {
+      "file": "report.md",
+      "sha256": "ebff9c571081a7d8f0badb51ecfebdaa0e2206c0c73b4f146265af5d50f16525"
+    }
+  ]
+}

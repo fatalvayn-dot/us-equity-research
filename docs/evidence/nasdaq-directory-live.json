@@ -1,0 +1,46 @@
+{
+  "recorded_at": "2026-11-01T20:30:53.523935+00:00",
+  "full_universe_accepted": false,
+  "initial_attempts": [
+    {
+      "name": "nasdaqlisted",
+      "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+      "status": "api_error"
+    },
+    {
+      "name": "otherlisted",
+      "url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+      "status": "api_error"
+    }
+  ],
+  "files": [
+    {
+      "name": "nasdaqlisted",
+      "url": "https://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt",
+      "status": "api_error"
+    },
+    {
+      "name": "otherlisted",
+      "url": "https://ftp.nasdaqtrader.com/SymbolDirectory/otherlisted.txt",
+      "status": "api_error"
+    }
+  ],
+  "diagnostic_attempts": [
+    {
+      "url": "https://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt",
+      "attempted_at": "2026-11-01T20:33:45.343189+00:00",
+      "status": "api_error",
+      "reason": "http",
+      "http_status": 503
+    },
+    {
+      "url": "https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=10&offset=0",
+      "attempted_at": "2026-11-01T20:33:55.093274+00:00",
+      "status": "success",
+      "bytes": 2296,
+      "sha256": "5451487580a73542a6b635ad9cc7e43dca861868b8005e8bd762b2a03b851208",
+      "retrieved_at": "2026-11-01T20:34:01.095769+00:00",
+      "fixture": "tests/fixtures/nasdaq-screener-probe.json.gz"
+    }
+  ]
+}

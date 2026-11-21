@@ -1,0 +1,403 @@
+{
+  "schema_version": 1,
+  "mode": "recorded_original_filing_balance_equation_confirmation",
+  "companies": [
+    {
+      "symbol": "ADI",
+      "issuer_id": "0000006281",
+      "selected": {
+        "accounting_definition": "us-gaap:Liabilities",
+        "available_at": "2026-11-02T12:46:55.036282+00:00",
+        "currency": "USD",
+        "data_observed_at": "2026-11-02T12:46:55.036282+00:00",
+        "field": "liabilities",
+        "filed_on": null,
+        "filing_accession": null,
+        "identity_evidence_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+        "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "identity_observed_at": "2026-11-02T12:35:29.540214+00:00",
+        "issuer_id": "0000006281",
+        "period_end": "2025-11-01",
+        "period_start": null,
+        "raw_sha256": "89b4001d5c995798cc9c961734d4b7a4689ca793ffad7834f196f9d6089a1c8c",
+        "retrieved_at": "2026-11-02T12:46:55.036282+00:00",
+        "source": "Nasdaq",
+        "source_field": "Total Liabilities",
+        "source_multiplier": "1000",
+        "source_url": "https://api.nasdaq.com/api/company/ADI/financials?frequency=1",
+        "unit": "currency",
+        "unit_evidence_sha256": "9143496c92fedcd1b38019abc30991c9c4f75b6709cd629d00e03964957e62d0",
+        "unit_evidence_url": "https://www.nasdaq.com/market-activity/stocks/adi/financials",
+        "unit_observed_at": "2026-11-02T12:46:49.148148+00:00",
+        "value": "14176957000"
+      },
+      "confirmation": {
+        "value": "14176957000",
+        "currency": "USD",
+        "period_end": "2025-11-01",
+        "formula": "LiabilitiesAndStockholdersEquity - total_equity",
+        "operands": [
+          {
+            "concept": "us-gaap:LiabilitiesAndStockholdersEquity",
+            "value": "47992712000"
+          },
+          {
+            "concept": "us-gaap:StockholdersEquity",
+            "value": "33815755000"
+          }
+        ],
+        "literal_liabilities_status": "concept_not_disclosed",
+        "excluded_scope_checks": [
+          {
+            "concept": "us-gaap:TemporaryEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:RedeemableNoncontrollingInterestEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:NoncontrollingInterestInConsolidatedEntity",
+            "status": "concept_not_disclosed",
+            "value": null
+          }
+        ],
+        "raw_sha256": "9850888d8913f971ee6e13595770035edd85e56456d152029412406aa861fe2f",
+        "automatic_substitution": false,
+        "scope_approved": false,
+        "source_url": "https://www.sec.gov/Archives/edgar/data/6281/000000628125000153/adi-20251101.htm",
+        "retrieved_at": "2026-11-02T12:32:31.520516+00:00"
+      },
+      "status": "matched"
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397",
+      "selected": {
+        "accounting_definition": "us-gaap:Liabilities",
+        "available_at": "2026-11-03T03:48:40.573666+00:00",
+        "currency": "USD",
+        "data_observed_at": "2026-11-03T03:48:40.573666+00:00",
+        "field": "liabilities",
+        "filed_on": null,
+        "filing_accession": null,
+        "identity_evidence_sha256": "67da093c67735ef6dd1182a5ab95040559c99456a8724b740196b7cd00e75f77",
+        "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "identity_observed_at": "2026-11-03T00:49:00.069601+00:00",
+        "issuer_id": "0000769397",
+        "period_end": "2026-01-31",
+        "period_start": null,
+        "raw_sha256": "be16ab1f07447ace1f11e7ca7cab1b952ff3f954475849611429738be257ed1b",
+        "retrieved_at": "2026-11-03T03:48:40.573666+00:00",
+        "source": "Nasdaq",
+        "source_field": "Total Liabilities",
+        "source_multiplier": "1000",
+        "source_url": "https://api.nasdaq.com/api/company/ADSK/financials?frequency=1",
+        "unit": "currency",
+        "unit_evidence_sha256": "07aee477f0f07341847708d8692f2f23cfedbb9469f0327cce9c87cbce9e0ae1",
+        "unit_evidence_url": "https://www.nasdaq.com/market-activity/stocks/adsk/financials",
+        "unit_observed_at": "2026-11-03T03:48:36.713528+00:00",
+        "value": "9422000000"
+      },
+      "confirmation": {
+        "value": "9422000000",
+        "currency": "USD",
+        "period_end": "2026-01-31",
+        "formula": "LiabilitiesAndStockholdersEquity - total_equity",
+        "operands": [
+          {
+            "concept": "us-gaap:LiabilitiesAndStockholdersEquity",
+            "value": "12467000000"
+          },
+          {
+            "concept": "us-gaap:StockholdersEquity",
+            "value": "3045000000"
+          }
+        ],
+        "literal_liabilities_status": "concept_not_disclosed",
+        "excluded_scope_checks": [
+          {
+            "concept": "us-gaap:TemporaryEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:RedeemableNoncontrollingInterestEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:NoncontrollingInterestInConsolidatedEntity",
+            "status": "concept_not_disclosed",
+            "value": null
+          }
+        ],
+        "raw_sha256": "a8d1e3f9b658bf2eed17740a0778b45b52c030230044eb2d726d28e9c252d7c4",
+        "automatic_substitution": false,
+        "scope_approved": false,
+        "source_url": "https://www.sec.gov/Archives/edgar/data/769397/000076939726000015/adsk-20260131.htm",
+        "retrieved_at": "2026-11-03T00:49:50.251064+00:00"
+      },
+      "status": "matched"
+    },
+    {
+      "symbol": "AMD",
+      "issuer_id": "0000002488",
+      "selected": {
+        "accounting_definition": "us-gaap:Liabilities",
+        "available_at": "2026-11-02T12:37:39.924260+00:00",
+        "currency": "USD",
+        "data_observed_at": "2026-11-02T12:37:39.924260+00:00",
+        "field": "liabilities",
+        "filed_on": null,
+        "filing_accession": null,
+        "identity_evidence_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+        "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "identity_observed_at": "2026-11-02T12:35:29.540214+00:00",
+        "issuer_id": "0000002488",
+        "period_end": "2025-12-27",
+        "period_start": null,
+        "raw_sha256": "8ccfaad88001453ca7b3f476e9f800afb85ae2023b4d1aba21d2df39eb2adb2d",
+        "retrieved_at": "2026-11-02T12:37:39.924260+00:00",
+        "source": "Nasdaq",
+        "source_field": "Total Liabilities",
+        "source_multiplier": "1000",
+        "source_url": "https://api.nasdaq.com/api/company/AMD/financials?frequency=1",
+        "unit": "currency",
+        "unit_evidence_sha256": "9c92502094595452f61ac205b62d0540dc61d13babdb5ba5b1fe51d56202d725",
+        "unit_evidence_url": "https://www.nasdaq.com/market-activity/stocks/amd/financials",
+        "unit_observed_at": "2026-11-02T12:37:36.520149+00:00",
+        "value": "13927000000"
+      },
+      "confirmation": {
+        "value": "13927000000",
+        "currency": "USD",
+        "period_end": "2025-12-27",
+        "formula": "LiabilitiesAndStockholdersEquity - total_equity",
+        "operands": [
+          {
+            "concept": "us-gaap:LiabilitiesAndStockholdersEquity",
+            "value": "76926000000"
+          },
+          {
+            "concept": "us-gaap:StockholdersEquity",
+            "value": "62999000000"
+          }
+        ],
+        "literal_liabilities_status": "concept_not_disclosed",
+        "excluded_scope_checks": [
+          {
+            "concept": "us-gaap:TemporaryEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:RedeemableNoncontrollingInterestEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:NoncontrollingInterestInConsolidatedEntity",
+            "status": "concept_not_disclosed",
+            "value": null
+          }
+        ],
+        "raw_sha256": "b9f1f0da5e92c001bda7b3048372b6e635dca961437fee0eef134de1a711098f",
+        "automatic_substitution": false,
+        "scope_approved": false,
+        "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "retrieved_at": "2026-11-02T12:29:08.292302+00:00"
+      },
+      "status": "matched"
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672",
+      "selected": {
+        "accounting_definition": "us-gaap:Liabilities",
+        "available_at": "2026-11-03T03:48:10.405584+00:00",
+        "currency": "USD",
+        "data_observed_at": "2026-11-03T03:48:10.405584+00:00",
+        "field": "liabilities",
+        "filed_on": null,
+        "filing_accession": null,
+        "identity_evidence_sha256": "67da093c67735ef6dd1182a5ab95040559c99456a8724b740196b7cd00e75f77",
+        "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "identity_observed_at": "2026-11-03T00:49:00.069601+00:00",
+        "issuer_id": "0000813672",
+        "period_end": "2025-12-31",
+        "period_start": null,
+        "raw_sha256": "880a9eca000d1eb74eca69f7ab9b013e89cd164ed94882749b71d1dd73a41c9e",
+        "retrieved_at": "2026-11-03T03:48:10.405584+00:00",
+        "source": "Nasdaq",
+        "source_field": "Total Liabilities",
+        "source_multiplier": "1000",
+        "source_url": "https://api.nasdaq.com/api/company/CDNS/financials?frequency=1",
+        "unit": "currency",
+        "unit_evidence_sha256": "d87745f228c202f0291c90f165c8d669b458fc2fcf74667da39e3dcd6446ff58",
+        "unit_evidence_url": "https://www.nasdaq.com/market-activity/stocks/cdns/financials",
+        "unit_observed_at": "2026-11-03T03:48:06.557469+00:00",
+        "value": "4678967000"
+      },
+      "confirmation": {
+        "value": "4678967000",
+        "currency": "USD",
+        "period_end": "2025-12-31",
+        "formula": "LiabilitiesAndStockholdersEquity - total_equity",
+        "operands": [
+          {
+            "concept": "us-gaap:LiabilitiesAndStockholdersEquity",
+            "value": "10153148000"
+          },
+          {
+            "concept": "us-gaap:StockholdersEquity",
+            "value": "5474181000"
+          }
+        ],
+        "literal_liabilities_status": "concept_not_disclosed",
+        "excluded_scope_checks": [
+          {
+            "concept": "us-gaap:TemporaryEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:RedeemableNoncontrollingInterestEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:NoncontrollingInterestInConsolidatedEntity",
+            "status": "concept_not_disclosed",
+            "value": null
+          }
+        ],
+        "raw_sha256": "80e2881357408a5df0f8054528cc5d6b66fd5ec493c5a8088e2dd9456dc9daf9",
+        "automatic_substitution": false,
+        "scope_approved": false,
+        "source_url": "https://www.sec.gov/Archives/edgar/data/813672/000081367226000016/cdns-20251231.htm",
+        "retrieved_at": "2026-11-03T00:49:33.023404+00:00"
+      },
+      "status": "matched"
+    },
+    {
+      "symbol": "INTC",
+      "issuer_id": "0000050863",
+      "selected": {
+        "accounting_definition": "us-gaap:Liabilities",
+        "available_at": "2026-11-02T12:38:43.308539+00:00",
+        "currency": "USD",
+        "data_observed_at": "2026-11-02T12:38:43.308539+00:00",
+        "field": "liabilities",
+        "filed_on": null,
+        "filing_accession": null,
+        "identity_evidence_sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+        "identity_evidence_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+        "identity_observed_at": "2026-11-02T12:35:29.540214+00:00",
+        "issuer_id": "0000050863",
+        "period_end": "2025-12-27",
+        "period_start": null,
+        "raw_sha256": "a422fdd2ddf07c38a4b0dcb5733d0f00663764f2b02b45cc9a4111f58ed1ccb3",
+        "retrieved_at": "2026-11-02T12:38:43.308539+00:00",
+        "source": "Nasdaq",
+        "source_field": "Total Liabilities",
+        "source_multiplier": "1000",
+        "source_url": "https://api.nasdaq.com/api/company/INTC/financials?frequency=1",
+        "unit": "currency",
+        "unit_evidence_sha256": "25abbd637168a6a204265f35c26884c9dceb8c26189fe3d3e4ef3ae6293176f1",
+        "unit_evidence_url": "https://www.nasdaq.com/market-activity/stocks/intc/financials",
+        "unit_observed_at": "2026-11-02T12:38:38.329815+00:00",
+        "value": "85069000000"
+      },
+      "confirmation": {
+        "value": "85069000000",
+        "currency": "USD",
+        "period_end": "2025-12-27",
+        "formula": "LiabilitiesAndStockholdersEquity - total_equity",
+        "operands": [
+          {
+            "concept": "us-gaap:LiabilitiesAndStockholdersEquity",
+            "value": "211429000000"
+          },
+          {
+            "concept": "us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+            "value": "126360000000"
+          },
+          {
+            "concept": "us-gaap:StockholdersEquity",
+            "value": "114281000000"
+          },
+          {
+            "concept": "us-gaap:MinorityInterest",
+            "value": "12079000000"
+          }
+        ],
+        "literal_liabilities_status": "period_or_scope_mismatch",
+        "excluded_scope_checks": [
+          {
+            "concept": "us-gaap:TemporaryEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:RedeemableNoncontrollingInterestEquityCarryingAmount",
+            "status": "concept_not_disclosed",
+            "value": null
+          },
+          {
+            "concept": "us-gaap:NoncontrollingInterestInConsolidatedEntity",
+            "status": "concept_not_disclosed",
+            "value": null
+          }
+        ],
+        "raw_sha256": "ba132c88123cc8be4e1da4773b45e3eb1672c88030b62cf2761430fab254b56e",
+        "automatic_substitution": false,
+        "scope_approved": false,
+        "source_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+        "retrieved_at": "2026-11-02T12:29:30.564362+00:00"
+      },
+      "status": "matched"
+    }
+  ],
+  "summary": {
+    "candidates": 5,
+    "matched": 5,
+    "rejected": 0
+  },
+  "new_http_requests": 0,
+  "source_bundle": {
+    "schema_version": 1,
+    "format": "gzip-jsonl-public-response-observations-v1",
+    "observations": 5,
+    "compressed_sha256": "b0d2bff3df1ecfa841b159c21299331cc49e0e7c8a145d1f71b0ed79ca4d32a4",
+    "parts": [
+      {
+        "file": "sources.jsonl.gz.part0000",
+        "bytes": 524288,
+        "sha256": "a4b0cefb7bedeb2b41fc38033e26cf7e2c05a54d1c6c96a10e75ace6111555c1"
+      },
+      {
+        "file": "sources.jsonl.gz.part0001",
+        "bytes": 524288,
+        "sha256": "4092a91d171d91a8956e82614d0a494e8bc67b4cdbd7c6af6c17ac2c0b1bc8e3"
+      },
+      {
+        "file": "sources.jsonl.gz.part0002",
+        "bytes": 524288,
+        "sha256": "5e9f6f096b6008ed214a187185f88cff751882309d31df4812cc26fbe799bf7a"
+      },
+      {
+        "file": "sources.jsonl.gz.part0003",
+        "bytes": 282109,
+        "sha256": "d5feb048a886bdafa15828827890aadba318e47ba13ed97dcefed5d3544139fe"
+      }
+    ],
+    "headers_stored": false,
+    "credentials_stored": false
+  },
+  "automatic_substitution": false,
+  "mvp_accepted": false,
+  "hundred_active_common_shares_accepted": false
+}

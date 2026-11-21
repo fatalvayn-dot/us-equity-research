@@ -1,0 +1,278 @@
+{
+  "recorded_at": "2026-11-01T18:55:22.079022+00:00",
+  "companies": [
+    {
+      "symbol": "AAPL",
+      "cik": "0000320193",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+      "retrieved_at": "2026-11-01T18:53:53.052462+00:00",
+      "sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+      "raw_bytes": 3789099,
+      "asset_candidate": {
+        "end": "2025-09-27",
+        "val": 359241000000,
+        "accn": "0000320193-25-000079",
+        "fy": 2025,
+        "fp": "FY",
+        "form": "10-K",
+        "filed": "2025-10-31"
+      },
+      "fixture": "tests/fixtures/companyfacts-aapl.json.gz",
+      "metrics": [
+        {
+          "field": "revenue",
+          "status": "extracted",
+          "value": "416161000000",
+          "period_start": "2024-09-29",
+          "period_end": "2025-09-27",
+          "currency": "USD",
+          "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "filing_accession": "0000320193-25-000079",
+          "filed_on": "2025-10-31"
+        },
+        {
+          "field": "assets",
+          "status": "extracted",
+          "value": "359241000000",
+          "period_start": null,
+          "period_end": "2025-09-27",
+          "currency": "USD",
+          "accounting_definition": "us-gaap:Assets",
+          "filing_accession": "0000320193-26-000020",
+          "filed_on": "2026-07-31"
+        },
+        {
+          "field": "liabilities",
+          "status": "extracted",
+          "value": "285508000000",
+          "period_start": null,
+          "period_end": "2025-09-27",
+          "currency": "USD",
+          "accounting_definition": "us-gaap:Liabilities",
+          "filing_accession": "0000320193-26-000020",
+          "filed_on": "2026-07-31"
+        },
+        {
+          "field": "net_income",
+          "status": "extracted",
+          "value": "112010000000",
+          "period_start": "2024-09-29",
+          "period_end": "2025-09-27",
+          "currency": "USD",
+          "accounting_definition": "us-gaap:NetIncomeLoss",
+          "filing_accession": "0000320193-25-000079",
+          "filed_on": "2025-10-31"
+        },
+        {
+          "field": "operating_cash_flow",
+          "status": "extracted",
+          "value": "111482000000",
+          "period_start": "2024-09-29",
+          "period_end": "2025-09-27",
+          "currency": "USD",
+          "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+          "filing_accession": "0000320193-25-000079",
+          "filed_on": "2025-10-31"
+        },
+        {
+          "field": "capital_expenditure",
+          "status": "extracted",
+          "value": "12715000000",
+          "period_start": "2024-09-29",
+          "period_end": "2025-09-27",
+          "currency": "USD",
+          "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+          "filing_accession": "0000320193-25-000079",
+          "filed_on": "2025-10-31"
+        }
+      ],
+      "filing_reconciliation": {
+        "status": "matched",
+        "field": "assets",
+        "value": "359241000000",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm",
+        "sha256": "f401a1b076981ca791b9bebd8d20eae6a4edc6fc58d1ab7957bc2bbda7747025",
+        "retrieved_at": "2026-11-01T18:55:06.944345+00:00",
+        "fixture": "tests/fixtures/filing-aapl.html.gz"
+      }
+    },
+    {
+      "symbol": "MSFT",
+      "cik": "0000789019",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+      "retrieved_at": "2026-11-01T18:53:56.536433+00:00",
+      "sha256": "464cc12cc4796c90a6a0c709eb4920788aa7d4d5eee8b44f2d11d7d44804ae37",
+      "raw_bytes": 4936836,
+      "asset_candidate": {
+        "end": "2026-06-30",
+        "val": 758376000000,
+        "accn": "0001193125-26-323660",
+        "fy": 2026,
+        "fp": "FY",
+        "form": "10-K",
+        "filed": "2026-07-29"
+      },
+      "fixture": "tests/fixtures/companyfacts-msft.json.gz",
+      "metrics": [
+        {
+          "field": "revenue",
+          "status": "extracted",
+          "value": "331839000000",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "currency": "USD",
+          "accounting_definition": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "filing_accession": "0001193125-26-323660",
+          "filed_on": "2026-07-29"
+        },
+        {
+          "field": "assets",
+          "status": "extracted",
+          "value": "758376000000",
+          "period_start": null,
+          "period_end": "2026-06-30",
+          "currency": "USD",
+          "accounting_definition": "us-gaap:Assets",
+          "filing_accession": "0001193125-26-436133",
+          "filed_on": "2026-10-28"
+        },
+        {
+          "field": "liabilities",
+          "status": "extracted",
+          "value": "315989000000",
+          "period_start": null,
+          "period_end": "2026-06-30",
+          "currency": "USD",
+          "accounting_definition": "us-gaap:Liabilities",
+          "filing_accession": "0001193125-26-436133",
+          "filed_on": "2026-10-28"
+        },
+        {
+          "field": "net_income",
+          "status": "extracted",
+          "value": "133749000000",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "currency": "USD",
+          "accounting_definition": "us-gaap:NetIncomeLoss",
+          "filing_accession": "0001193125-26-323660",
+          "filed_on": "2026-07-29"
+        },
+        {
+          "field": "operating_cash_flow",
+          "status": "extracted",
+          "value": "182935000000",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "currency": "USD",
+          "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+          "filing_accession": "0001193125-26-323660",
+          "filed_on": "2026-07-29"
+        },
+        {
+          "field": "capital_expenditure",
+          "status": "extracted",
+          "value": "115948000000",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "currency": "USD",
+          "accounting_definition": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+          "filing_accession": "0001193125-26-323660",
+          "filed_on": "2026-07-29"
+        }
+      ],
+      "filing_reconciliation": {
+        "status": "matched",
+        "field": "assets",
+        "value": "758376000000",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/msft-20260930.htm",
+        "sha256": "f580ba9d8effe824f8f167d198a51c60c8c6b030fb72945fe286ee2141b70e72",
+        "retrieved_at": "2026-11-01T18:55:13.409020+00:00",
+        "fixture": "tests/fixtures/filing-msft.html.gz"
+      }
+    },
+    {
+      "symbol": "NVDA",
+      "cik": "0001045810",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+      "retrieved_at": "2026-11-01T18:53:59.781720+00:00",
+      "sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "raw_bytes": 4092966,
+      "asset_candidate": {
+        "end": "2026-01-25",
+        "val": 206803000000,
+        "accn": "0001045810-26-000021",
+        "fy": 2026,
+        "fp": "FY",
+        "form": "10-K",
+        "filed": "2026-02-25"
+      },
+      "fixture": "tests/fixtures/companyfacts-nvda.json.gz",
+      "metrics": [
+        {
+          "field": "revenue",
+          "status": "no_exact_annual_observation"
+        },
+        {
+          "field": "assets",
+          "status": "extracted",
+          "value": "206803000000",
+          "period_start": null,
+          "period_end": "2026-01-25",
+          "currency": "USD",
+          "accounting_definition": "us-gaap:Assets",
+          "filing_accession": "0001045810-26-000075",
+          "filed_on": "2026-08-26"
+        },
+        {
+          "field": "liabilities",
+          "status": "extracted",
+          "value": "49510000000",
+          "period_start": null,
+          "period_end": "2026-01-25",
+          "currency": "USD",
+          "accounting_definition": "us-gaap:Liabilities",
+          "filing_accession": "0001045810-26-000075",
+          "filed_on": "2026-08-26"
+        },
+        {
+          "field": "net_income",
+          "status": "extracted",
+          "value": "120067000000",
+          "period_start": "2025-01-27",
+          "period_end": "2026-01-25",
+          "currency": "USD",
+          "accounting_definition": "us-gaap:NetIncomeLoss",
+          "filing_accession": "0001045810-26-000021",
+          "filed_on": "2026-02-25"
+        },
+        {
+          "field": "operating_cash_flow",
+          "status": "extracted",
+          "value": "102718000000",
+          "period_start": "2025-01-27",
+          "period_end": "2026-01-25",
+          "currency": "USD",
+          "accounting_definition": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+          "filing_accession": "0001045810-26-000021",
+          "filed_on": "2026-02-25"
+        },
+        {
+          "field": "capital_expenditure",
+          "status": "no_exact_annual_observation"
+        }
+      ],
+      "filing_reconciliation": {
+        "status": "matched",
+        "field": "assets",
+        "value": "206803000000",
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+        "sha256": "e4b3889df3886edb243df887fcc1677263ec800ecbe369fa5f7c8597d1fe5602",
+        "retrieved_at": "2026-11-01T18:55:21.876710+00:00",
+        "fixture": "tests/fixtures/filing-nvda.html.gz"
+      }
+    }
+  ],
+  "full_acceptance": false,
+  "validation_scope": "SEC extraction for three companies; Assets compared with original iXBRL filing when reachable; not 100-company acceptance"
+}

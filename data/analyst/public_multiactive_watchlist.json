@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "description": "Kamusal ETF/kripto araştırma evreni. Portföy, Midas erişimi veya katılım uygunluğu onayı değildir.",
+  "instruments": [
+    {
+      "symbol": "SPY",
+      "asset_class": "etf",
+      "currency": "USD"
+    },
+    {
+      "symbol": "QQQM",
+      "asset_class": "etf",
+      "currency": "USD"
+    },
+    {
+      "symbol": "SPUS",
+      "asset_class": "etf",
+      "currency": "USD"
+    },
+    {
+      "symbol": "BTC-USD",
+      "asset_class": "crypto",
+      "currency": "USD"
+    },
+    {
+      "symbol": "ETH-USD",
+      "asset_class": "crypto",
+      "currency": "USD"
+    }
+  ]
+}

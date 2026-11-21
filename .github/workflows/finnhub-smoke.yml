@@ -1,0 +1,44 @@
+name: Finnhub single-field diagnostic
+on:
+  workflow_dispatch:
+    inputs:
+      cik:
+        description: Exact ten-digit SEC issuer CIK
+        required: true
+        default: '0000320193'
+      period_end:
+        description: Exact annual balance sheet date (YYYY-MM-DD)
+        required: true
+        default: '2025-09-27'
+permissions:
+  contents: read
+concurrency:
+  group: finnhub-single-field
+  cancel-in-progress: false
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Collect one field with an existing credential
+        env:
+          PYTHONPATH: src
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          CHECK_CIK: ${{ inputs.cik }}
+          CHECK_PERIOD_END: ${{ inputs.period_end }}
+        run: >-
+          python -m equity_research finnhub-fact
+          --cik "$CHECK_CIK" --field assets --period-end "$CHECK_PERIOD_END"
+          > finnhub-smoke.json
+      - name: Preserve sanitized result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: finnhub-single-field-diagnostic
+          path: finnhub-smoke.json
+          if-no-files-found: error
+          retention-days: 7

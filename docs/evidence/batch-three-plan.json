@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "companies": [
+    {
+      "symbol": "AAPL",
+      "issuer_id": "0000320193",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure"
+      ],
+      "period_start": "2024-09-29",
+      "period_end": "2025-09-27",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_listing_and_legal_common_share_evidence_pending"
+    },
+    {
+      "symbol": "MSFT",
+      "issuer_id": "0000789019",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure"
+      ],
+      "period_start": "2025-07-01",
+      "period_end": "2026-06-30",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_listing_and_legal_common_share_evidence_pending"
+    },
+    {
+      "symbol": "NVDA",
+      "issuer_id": "0001045810",
+      "fields": [
+        "revenue",
+        "assets",
+        "liabilities",
+        "net_income",
+        "operating_cash_flow",
+        "capital_expenditure"
+      ],
+      "period_start": "2025-01-27",
+      "period_end": "2026-01-25",
+      "scope_status": "pending_scope",
+      "scope_reason": "active_listing_and_legal_common_share_evidence_pending"
+    }
+  ]
+}

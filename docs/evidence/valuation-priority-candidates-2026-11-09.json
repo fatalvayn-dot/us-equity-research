@@ -1,0 +1,216 @@
+{
+  "companies": [
+    {
+      "symbol": "INTU",
+      "issuer_id": "0000896878"
+    },
+    {
+      "symbol": "NOW",
+      "issuer_id": "0001373715"
+    },
+    {
+      "symbol": "SNPS",
+      "issuer_id": "0000883241"
+    },
+    {
+      "symbol": "MPWR",
+      "issuer_id": "0001280452"
+    },
+    {
+      "symbol": "ON",
+      "issuer_id": "0001097864"
+    },
+    {
+      "symbol": "SWKS",
+      "issuer_id": "0000004127"
+    },
+    {
+      "symbol": "TYL",
+      "issuer_id": "0000860731"
+    },
+    {
+      "symbol": "MU",
+      "issuer_id": "0000723125"
+    },
+    {
+      "symbol": "AAPL",
+      "issuer_id": "0000320193"
+    },
+    {
+      "symbol": "MSFT",
+      "issuer_id": "0000789019"
+    },
+    {
+      "symbol": "CRM",
+      "issuer_id": "0001108524"
+    },
+    {
+      "symbol": "MRVL",
+      "issuer_id": "0001835632"
+    },
+    {
+      "symbol": "TXN",
+      "issuer_id": "0000097476"
+    },
+    {
+      "symbol": "AMAT",
+      "issuer_id": "0000006951"
+    }
+  ],
+  "financial_run_id": 42455760184,
+  "valuation_run_id": 42598993077,
+  "score_run_id": 42599479886,
+  "valuation_artifact_id": 13664443650,
+  "score_artifact_id": 13664797659,
+  "observed_as_of": "2026-11-09T10:14:11.089044+00:00",
+  "market_blockers": [
+    {
+      "symbol": "PLTR",
+      "issuer_id": "0001321655",
+      "shares": "missing_disclosed_shares",
+      "price": "valid",
+      "history": "not_started",
+      "budget_deferred": []
+    },
+    {
+      "symbol": "CRWD",
+      "issuer_id": "0001535527",
+      "shares": "invalid_data",
+      "price": "valid",
+      "history": "not_started",
+      "budget_deferred": []
+    },
+    {
+      "symbol": "ADBE",
+      "issuer_id": "0000796343",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "INTU",
+      "issuer_id": "0000896878",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "NOW",
+      "issuer_id": "0001373715",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "SNPS",
+      "issuer_id": "0000883241",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "CDNS",
+      "issuer_id": "0000813672",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "ADSK",
+      "issuer_id": "0000769397",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "MCHP",
+      "issuer_id": "0000827054",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "MPWR",
+      "issuer_id": "0001280452",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "ON",
+      "issuer_id": "0001097864",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "SWKS",
+      "issuer_id": "0000004127",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    },
+    {
+      "symbol": "TYL",
+      "issuer_id": "0000860731",
+      "shares": "pending_source_collection",
+      "price": "pending_source_collection",
+      "history": "not_started",
+      "budget_deferred": [
+        "companyfacts",
+        "price"
+      ]
+    }
+  ],
+  "score_or_scope_approval": false,
+  "valuation_report_sha256": "aa5029b41c2d0d9b81ed6e31221d10576f652c5564403f75afc21c72db481d64",
+  "expanded_evidence": {
+    "first_score_run_id": 42536926634,
+    "first_score_artifact_id": 13639024015,
+    "second_score_run_id": 42599479886,
+    "second_score_artifact_id": 13664797659,
+    "source": "docs/evidence/double-snapshot-score-coverage-2026-11-09.json",
+    "purpose": "refresh 14 previously independently scored issuers in one bounded current market run; old scores never reused as current"
+  },
+  "market_blockers_run_id": 42536567400
+}

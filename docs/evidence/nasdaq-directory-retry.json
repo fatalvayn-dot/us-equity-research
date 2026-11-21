@@ -1,0 +1,20 @@
+{
+  "recorded_at": "2026-11-01T21:37:10.330080+00:00",
+  "files": [
+    {
+      "name": "nasdaqlisted",
+      "url": "https://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt",
+      "status": "api_error",
+      "reason": "http",
+      "http_status": 503
+    },
+    {
+      "name": "otherlisted",
+      "url": "https://ftp.nasdaqtrader.com/SymbolDirectory/otherlisted.txt",
+      "status": "api_error",
+      "reason": "http",
+      "http_status": 503
+    }
+  ],
+  "active_common_universe_accepted": false
+}

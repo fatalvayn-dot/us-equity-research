@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "format": "gzip-jsonl-public-response-observations-v1",
+  "observations": 5,
+  "compressed_sha256": "b0d2bff3df1ecfa841b159c21299331cc49e0e7c8a145d1f71b0ed79ca4d32a4",
+  "parts": [
+    {
+      "file": "sources.jsonl.gz.part0000",
+      "bytes": 524288,
+      "sha256": "a4b0cefb7bedeb2b41fc38033e26cf7e2c05a54d1c6c96a10e75ace6111555c1"
+    },
+    {
+      "file": "sources.jsonl.gz.part0001",
+      "bytes": 524288,
+      "sha256": "4092a91d171d91a8956e82614d0a494e8bc67b4cdbd7c6af6c17ac2c0b1bc8e3"
+    },
+    {
+      "file": "sources.jsonl.gz.part0002",
+      "bytes": 524288,
+      "sha256": "5e9f6f096b6008ed214a187185f88cff751882309d31df4812cc26fbe799bf7a"
+    },
+    {
+      "file": "sources.jsonl.gz.part0003",
+      "bytes": 282109,
+      "sha256": "d5feb048a886bdafa15828827890aadba318e47ba13ed97dcefed5d3544139fe"
+    }
+  ],
+  "headers_stored": false,
+  "credentials_stored": false
+}

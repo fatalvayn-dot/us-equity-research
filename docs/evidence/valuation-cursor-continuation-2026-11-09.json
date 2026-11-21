@@ -1,0 +1,141 @@
+{
+  "mode": "read_only_production_artifact_audit",
+  "financial_run_id": 42455760184,
+  "valuation_run_id": 42536567400,
+  "financial_artifact_id": 13608291162,
+  "valuation_artifact_id": 13640160185,
+  "artifact_sha256": {
+    "financial": "425b11a0eb6143e34a7cb937317b5e41814b0b8a3297483b8db7ff6e2baa0dfd",
+    "valuation": "e456d79332173096836285497dc5a74a381ed6708735e36538e39a242656a478"
+  },
+  "financial_lineage": {
+    "root_run_id": 42223465006,
+    "parent_run_id": 42453626663,
+    "run_id": 42455760184,
+    "sequence": 10
+  },
+  "financial_file_count": 110,
+  "financial_sqlite": {
+    "submissions.sqlite": {
+      "submissions_v1": 100
+    },
+    "run-lock.sqlite": {
+      "batch_fields_v1": 0,
+      "batch_lease_v1": 0
+    },
+    "responses.sqlite": {
+      "response_bodies_v1": 464,
+      "response_observations_v1": 1191
+    },
+    "financial.sqlite": {
+      "batch_fields_v1": 1400,
+      "batch_lease_v1": 0
+    },
+    "documents.sqlite": {
+      "batch_fields_v1": 100,
+      "batch_lease_v1": 0,
+      "filing_documents_v1": 100
+    }
+  },
+  "valuation_cursor": {
+    "fingerprint": "de79746f32940ed8df7d3de9868a6812207ae2a0a4791ac3eda9c42cad6d7d0b",
+    "next_index": 57
+  },
+  "valuation_next_symbol": "BLK",
+  "valuation_get_candidate_count": 57,
+  "valuation_boundary_symbol": "PEP",
+  "valuation_boundary_attempts": [
+    {
+      "stage": "companyfacts",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000077476.json",
+      "checked_at": "2026-11-08T23:47:40.206909+00:00",
+      "http_requested": true,
+      "cached": false,
+      "status": "body_available",
+      "raw_sha256": "4a734cc934f3cf9f129fc15657589d4c6c82138f1bd889023c11170d97990d8d",
+      "retrieved_at": "2026-11-08T23:47:41.088131+00:00"
+    },
+    {
+      "stage": "submissions",
+      "url": "https://data.sec.gov/submissions/CIK0000077476.json",
+      "checked_at": "2026-11-08T23:47:41.207119+00:00",
+      "http_requested": true,
+      "cached": false,
+      "status": "body_available",
+      "raw_sha256": "8a76bef3a85a8fd68951062bc5e578c4c947bd619dca7f1084548cb88116ab37",
+      "retrieved_at": "2026-11-08T23:47:41.256596+00:00"
+    },
+    {
+      "stage": "original_share_filing",
+      "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747626000048/pep-20260905.htm",
+      "checked_at": "2026-11-08T23:47:41.263439+00:00",
+      "http_requested": true,
+      "cached": false,
+      "status": "body_available",
+      "raw_sha256": "af9db2615f8901493ab43010843194eb9725ecbddc78a62769e308206a793def",
+      "retrieved_at": "2026-11-08T23:47:42.021962+00:00"
+    },
+    {
+      "stage": "price",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/PEP?interval=1d&range=5d",
+      "checked_at": "2026-11-08T23:47:42.330329+00:00",
+      "http_requested": true,
+      "cached": false,
+      "status": "body_available",
+      "raw_sha256": "979e191bea42c1d277d36bd1d1656abe115ea92a69bf42f8d66ce9ee990920cf",
+      "retrieved_at": "2026-11-08T23:47:42.553655+00:00"
+    }
+  ],
+  "priority_candidates": [
+    {
+      "symbol": "ADBE",
+      "issuer_id": "0000796343",
+      "offset": 26,
+      "missing_fields": [
+        "revenue"
+      ]
+    },
+    {
+      "symbol": "INTU",
+      "issuer_id": "0000896878",
+      "offset": 27,
+      "missing_fields": []
+    },
+    {
+      "symbol": "NOW",
+      "issuer_id": "0001373715",
+      "offset": 28,
+      "missing_fields": []
+    },
+    {
+      "symbol": "SNPS",
+      "issuer_id": "0000883241",
+      "offset": 29,
+      "missing_fields": []
+    },
+    {
+      "symbol": "MPWR",
+      "issuer_id": "0001280452",
+      "offset": 36,
+      "missing_fields": []
+    },
+    {
+      "symbol": "ON",
+      "issuer_id": "0001097864",
+      "offset": 37,
+      "missing_fields": []
+    },
+    {
+      "symbol": "SWKS",
+      "issuer_id": "0000004127",
+      "offset": 38,
+      "missing_fields": []
+    },
+    {
+      "symbol": "TYL",
+      "issuer_id": "0000860731",
+      "offset": 42,
+      "missing_fields": []
+    }
+  ]
+}

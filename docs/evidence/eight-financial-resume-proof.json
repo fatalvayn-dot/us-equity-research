@@ -1,0 +1,15 @@
+{
+  "exit_code": 2,
+  "transport_get_calls": 0,
+  "guard": "any transport GET would raise; no substitute responses supplied",
+  "summary": {
+    "companies": 8,
+    "field_states": {
+      "pending_data": 5,
+      "collected": 43
+    },
+    "new_fields": 0,
+    "reused_fields": 48
+  },
+  "hundred_company_accepted": false
+}

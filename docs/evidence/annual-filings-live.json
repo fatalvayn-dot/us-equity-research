@@ -1,0 +1,120 @@
+{
+  "recorded_at": "2026-11-02T02:12:39.356110+00:00",
+  "companies": [
+    {
+      "symbol": "NVDA",
+      "issuer_id": "0001045810",
+      "annual": {
+        "accession": "0001045810-26-000021",
+        "form": "10-K",
+        "filed_on": "2026-02-25",
+        "report_end": "2026-01-25",
+        "primary_document": "nvda-20260125.htm",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "acceptance_label": "2026-02-25T21:42:19.000Z",
+        "document_format": "html"
+      },
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "sha256": "d9135ae2801ec96e80398e2ddf0daa523b3a500ccf939ecf2ff150bdd13ab0dc",
+        "retrieved_at": "2026-11-02T02:12:31.172984+00:00",
+        "fixture": "tests/fixtures/annual/0001045810-0001045810-26-000021.html.gz"
+      },
+      "period": {
+        "issuer_id": "0001045810",
+        "document_type": "10-K",
+        "period_start": "2025-01-27",
+        "period_end": "2026-01-25",
+        "context_ids": [
+          "c-1"
+        ],
+        "raw_sha256": "d9135ae2801ec96e80398e2ddf0daa523b3a500ccf939ecf2ff150bdd13ab0dc",
+        "evidence_basis": "non-dimensional issuer duration shared by DocumentType, DocumentFiscalPeriodFocus=FY and DocumentPeriodEndDate",
+        "calendar_start_inferred": false,
+        "financial_values_validated": false,
+        "scope_approved": false
+      },
+      "registered_share_status": "invalid_data",
+      "status": "downloaded"
+    },
+    {
+      "symbol": "AAPL",
+      "issuer_id": "0000320193",
+      "annual": {
+        "accession": "0000320193-25-000079",
+        "form": "10-K",
+        "filed_on": "2025-10-31",
+        "report_end": "2025-09-27",
+        "primary_document": "aapl-20250927.htm",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "acceptance_label": "2025-10-31T10:01:26.000Z",
+        "document_format": "html"
+      },
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "sha256": "056f733f13ff7407e64dc81fb96da3c3c55a6ba429bf094f57cb6bd472231f82",
+        "retrieved_at": "2026-11-02T02:12:34.616416+00:00",
+        "fixture": "tests/fixtures/annual/0000320193-0000320193-25-000079.html.gz"
+      },
+      "period": {
+        "issuer_id": "0000320193",
+        "document_type": "10-K",
+        "period_start": "2024-09-29",
+        "period_end": "2025-09-27",
+        "context_ids": [
+          "c-1"
+        ],
+        "raw_sha256": "056f733f13ff7407e64dc81fb96da3c3c55a6ba429bf094f57cb6bd472231f82",
+        "evidence_basis": "non-dimensional issuer duration shared by DocumentType, DocumentFiscalPeriodFocus=FY and DocumentPeriodEndDate",
+        "calendar_start_inferred": false,
+        "financial_values_validated": false,
+        "scope_approved": false
+      },
+      "registered_share_status": "invalid_data",
+      "status": "downloaded"
+    },
+    {
+      "symbol": "MSFT",
+      "issuer_id": "0000789019",
+      "annual": {
+        "accession": "0001193125-26-323660",
+        "form": "10-K",
+        "filed_on": "2026-07-29",
+        "report_end": "2026-06-30",
+        "primary_document": "msft-20260630.htm",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "acceptance_label": "2026-07-29T20:08:01.000Z",
+        "document_format": "html"
+      },
+      "source_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "sha256": "a2e8af9a97a682ba3b408c9557ec6f0f3dbd4db6f600d310ae23ebe5b3c827a4",
+        "retrieved_at": "2026-11-02T02:12:38.475331+00:00",
+        "fixture": "tests/fixtures/annual/0000789019-0001193125-26-323660.html.gz"
+      },
+      "period": {
+        "issuer_id": "0000789019",
+        "document_type": "10-K",
+        "period_start": "2025-07-01",
+        "period_end": "2026-06-30",
+        "context_ids": [
+          "C_29985a27-1d12-4b7e-9a06-156523f6e71e"
+        ],
+        "raw_sha256": "a2e8af9a97a682ba3b408c9557ec6f0f3dbd4db6f600d310ae23ebe5b3c827a4",
+        "evidence_basis": "non-dimensional issuer duration shared by DocumentType, DocumentFiscalPeriodFocus=FY and DocumentPeriodEndDate",
+        "calendar_start_inferred": false,
+        "financial_values_validated": false,
+        "scope_approved": false
+      },
+      "registered_share_status": "invalid_data",
+      "status": "downloaded"
+    }
+  ],
+  "summary": {
+    "companies": 3,
+    "periods": 3,
+    "registered_shares": 0
+  },
+  "scope_approved": false,
+  "hundred_company_accepted": false
+}

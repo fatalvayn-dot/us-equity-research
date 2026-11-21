@@ -1,0 +1,10 @@
+{
+  "requested_on": "2026-11-19",
+  "purpose": "single_reviewed_financial_refresh",
+  "expected_parent_run_id": 42455760184,
+  "expected_parent_sha256": "425b11a0eb6143e34a7cb937317b5e41814b0b8a3297483b8db7ff6e2baa0dfd",
+  "max_new_documents": 25,
+  "max_new_fields": 1400,
+  "investment_orders": false,
+  "reason": "Update publicly filed annual SEC financial source evidence before the 100-company stage-3 acceptance test"
+}

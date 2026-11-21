@@ -1,0 +1,3251 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-02T00:54:15.207970+00:00",
+  "companies": [
+    {
+      "symbol": "NVDA",
+      "issuer_id": "0001045810",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "NVDA",
+            "aliases": [
+              "NVDA"
+            ],
+            "name": "NVIDIA Corporation - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001045810"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "AAPL",
+      "issuer_id": "0000320193",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "AAPL",
+            "aliases": [
+              "AAPL"
+            ],
+            "name": "Apple Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000320193"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "MSFT",
+      "issuer_id": "0000789019",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "MSFT",
+            "aliases": [
+              "MSFT"
+            ],
+            "name": "Microsoft Corporation - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000789019"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "GOOGL",
+      "issuer_id": "0001652044",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "GOOGL",
+            "aliases": [
+              "GOOGL"
+            ],
+            "name": "Alphabet Inc. - Class A Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001652044"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "AMZN",
+      "issuer_id": "0001018724",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "AMZN",
+            "aliases": [
+              "AMZN"
+            ],
+            "name": "Amazon.com, Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001018724"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "SPCX",
+      "issuer_id": "0001181412",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "SPCX",
+            "aliases": [
+              "SPCX"
+            ],
+            "name": "Space Exploration Technologies Corp. - Class A Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001181412"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "AVGO",
+      "issuer_id": "0001730168",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "AVGO",
+            "aliases": [
+              "AVGO"
+            ],
+            "name": "Broadcom Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001730168"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "META",
+      "issuer_id": "0001326801",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "META",
+            "aliases": [
+              "META"
+            ],
+            "name": "Meta Platforms, Inc. - Class A Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001326801"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "TSLA",
+      "issuer_id": "0001318605",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "TSLA",
+            "aliases": [
+              "TSLA"
+            ],
+            "name": "Tesla, Inc.  - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001318605"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "LLY",
+      "issuer_id": "0000059478",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "LLY",
+            "aliases": [
+              "LLY"
+            ],
+            "name": "Eli Lilly and Company Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000059478"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "MU",
+      "issuer_id": "0000723125",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "MU",
+            "aliases": [
+              "MU"
+            ],
+            "name": "Micron Technology, Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000723125"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "WMT",
+      "issuer_id": "0000104169",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "WMT",
+            "aliases": [
+              "WMT"
+            ],
+            "name": "Walmart Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000104169"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "AMD",
+      "issuer_id": "0000002488",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "AMD",
+            "aliases": [
+              "AMD"
+            ],
+            "name": "Advanced Micro Devices, Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000002488"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "JPM",
+      "issuer_id": "0000019617",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "JPM",
+            "aliases": [
+              "JPM"
+            ],
+            "name": "JP Morgan Chase & Co. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000019617"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "XOM",
+      "issuer_id": "0002115436",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "XOM",
+            "aliases": [
+              "XOM"
+            ],
+            "name": "ExxonMobil Holdings Corporation Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0002115436"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "JNJ",
+      "issuer_id": "0000200406",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "JNJ",
+            "aliases": [
+              "JNJ"
+            ],
+            "name": "Johnson & Johnson Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000200406"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "MA",
+      "issuer_id": "0001141391",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "MA",
+            "aliases": [
+              "MA"
+            ],
+            "name": "Mastercard Incorporated Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001141391"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "ABBV",
+      "issuer_id": "0001551152",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "ABBV",
+            "aliases": [
+              "ABBV"
+            ],
+            "name": "AbbVie Inc. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001551152"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "INTC",
+      "issuer_id": "0000050863",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "INTC",
+            "aliases": [
+              "INTC"
+            ],
+            "name": "Intel Corporation - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000050863"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "PLTR",
+      "issuer_id": "0001321655",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "PLTR",
+            "aliases": [
+              "PLTR"
+            ],
+            "name": "Palantir Technologies Inc. - Class A Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001321655"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "CVX",
+      "issuer_id": "0000093410",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "CVX",
+            "aliases": [
+              "CVX"
+            ],
+            "name": "Chevron Corporation Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000093410"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "COST",
+      "issuer_id": "0000909832",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "COST",
+            "aliases": [
+              "COST"
+            ],
+            "name": "Costco Wholesale Corporation - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000909832"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "CSCO",
+      "issuer_id": "0000858877",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "CSCO",
+            "aliases": [
+              "CSCO"
+            ],
+            "name": "Cisco Systems, Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000858877"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "ORCL",
+      "issuer_id": "0001341439",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "ORCL",
+            "aliases": [
+              "ORCL"
+            ],
+            "name": "Oracle Corporation Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001341439"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "KO",
+      "issuer_id": "0000021344",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "KO",
+            "aliases": [
+              "KO"
+            ],
+            "name": "Coca-Cola Company (The) Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000021344"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "PG",
+      "issuer_id": "0000080424",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "PG",
+            "aliases": [
+              "PG"
+            ],
+            "name": "Procter & Gamble Company (The) Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000080424"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "UNH",
+      "issuer_id": "0000731766",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "UNH",
+            "aliases": [
+              "UNH"
+            ],
+            "name": "UnitedHealth Group Incorporated Common Stock (DE)",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000731766"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "MRK",
+      "issuer_id": "0000310158",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "MRK",
+            "aliases": [
+              "MRK"
+            ],
+            "name": "Merck & Company, Inc. Common Stock (new)",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000310158"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "BAC",
+      "issuer_id": "0000070858",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "BAC",
+            "aliases": [
+              "BAC"
+            ],
+            "name": "Bank of America Corporation Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000070858"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "AMAT",
+      "issuer_id": "0000006951",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "AMAT",
+            "aliases": [
+              "AMAT"
+            ],
+            "name": "Applied Materials, Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000006951"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "HD",
+      "issuer_id": "0000354950",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "HD",
+            "aliases": [
+              "HD"
+            ],
+            "name": "Home Depot, Inc. (The) Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000354950"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "PM",
+      "issuer_id": "0001413329",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "PM",
+            "aliases": [
+              "PM"
+            ],
+            "name": "Philip Morris International Inc Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001413329"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "GE",
+      "issuer_id": "0000040545",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "GE",
+            "aliases": [
+              "GE"
+            ],
+            "name": "GE Aerospace Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000040545"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "LRCX",
+      "issuer_id": "0000707549",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "LRCX",
+            "aliases": [
+              "LRCX"
+            ],
+            "name": "Lam Research Corporation - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000707549"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "PANW",
+      "issuer_id": "0001327567",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "PANW",
+            "aliases": [
+              "PANW"
+            ],
+            "name": "Palo Alto Networks, Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001327567"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "NVS",
+      "issuer_id": "0001114448",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "NVS",
+            "aliases": [
+              "NVS"
+            ],
+            "name": "Novartis AG Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001114448"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "DELL",
+      "issuer_id": "0001571996",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "DELL",
+            "aliases": [
+              "DELL"
+            ],
+            "name": "Dell Technologies Inc. Class C Common Stock ",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001571996"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "MS",
+      "issuer_id": "0000895421",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "MS",
+            "aliases": [
+              "MS"
+            ],
+            "name": "Morgan Stanley Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000895421"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "CAT",
+      "issuer_id": "0000018230",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "CAT",
+            "aliases": [
+              "CAT"
+            ],
+            "name": "Caterpillar, Inc. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000018230"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "HSBC",
+      "issuer_id": "0001089113",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "HSBC",
+            "aliases": [
+              "HSBC"
+            ],
+            "name": "HSBC Holdings, plc. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001089113"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "TXN",
+      "issuer_id": "0000097476",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "TXN",
+            "aliases": [
+              "TXN"
+            ],
+            "name": "Texas Instruments Incorporated - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000097476"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "RY",
+      "issuer_id": "0001000275",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "RY",
+            "aliases": [
+              "RY"
+            ],
+            "name": "Royal Bank Of Canada Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001000275"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "AZN",
+      "issuer_id": "0000901832",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "AZN",
+            "aliases": [
+              "AZN"
+            ],
+            "name": "AstraZeneca PLC Ordinary Shares",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000901832"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "GS",
+      "issuer_id": "0000886982",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "GS",
+            "aliases": [
+              "GS"
+            ],
+            "name": "Goldman Sachs Group, Inc. (The) Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000886982"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "RTX",
+      "issuer_id": "0000101829",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "RTX",
+            "aliases": [
+              "RTX"
+            ],
+            "name": "RTX Corporation Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000101829"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "CRWD",
+      "issuer_id": "0001535527",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "CRWD",
+            "aliases": [
+              "CRWD"
+            ],
+            "name": "CrowdStrike Holdings, Inc. - Class A Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001535527"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "TMO",
+      "issuer_id": "0000097745",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "TMO",
+            "aliases": [
+              "TMO"
+            ],
+            "name": "Thermo Fisher Scientific Inc Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000097745"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "MUFG",
+      "issuer_id": "0000067088",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "MUFG",
+            "aliases": [
+              "MUFG"
+            ],
+            "name": "Mitsubishi UFJ Financial Group, Inc. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000067088"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "TM",
+      "issuer_id": "0001094517",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "TM",
+            "aliases": [
+              "TM"
+            ],
+            "name": "Toyota Motor Corporation Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001094517"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "NFLX",
+      "issuer_id": "0001065280",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "NFLX",
+            "aliases": [
+              "NFLX"
+            ],
+            "name": "Netflix, Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001065280"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "WFC",
+      "issuer_id": "0000072971",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "WFC",
+            "aliases": [
+              "WFC"
+            ],
+            "name": "Wells Fargo & Company Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000072971"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "AMGN",
+      "issuer_id": "0000318154",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "AMGN",
+            "aliases": [
+              "AMGN"
+            ],
+            "name": "Amgen Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000318154"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "IBM",
+      "issuer_id": "0000051143",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "IBM",
+            "aliases": [
+              "IBM"
+            ],
+            "name": "International Business Machines Corporation Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000051143"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "GEV",
+      "issuer_id": "0001996810",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "GEV",
+            "aliases": [
+              "GEV"
+            ],
+            "name": "GE Vernova Inc. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001996810"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "ANET",
+      "issuer_id": "0001596532",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "ANET",
+            "aliases": [
+              "ANET"
+            ],
+            "name": "Arista Networks, Inc. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001596532"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "LIN",
+      "issuer_id": "0001707925",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "LIN",
+            "aliases": [
+              "LIN"
+            ],
+            "name": "Linde plc - Ordinary Shares",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001707925"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "KLAC",
+      "issuer_id": "0000319201",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "KLAC",
+            "aliases": [
+              "KLAC"
+            ],
+            "name": "KLA Corporation  - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000319201"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "AXP",
+      "issuer_id": "0000004962",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "AXP",
+            "aliases": [
+              "AXP"
+            ],
+            "name": "American Express Company Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000004962"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "C",
+      "issuer_id": "0000831001",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "C",
+            "aliases": [
+              "C"
+            ],
+            "name": "Citigroup, Inc. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000831001"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "ADI",
+      "issuer_id": "0000006281",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "ADI",
+            "aliases": [
+              "ADI"
+            ],
+            "name": "Analog Devices, Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000006281"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "TD",
+      "issuer_id": "0000947263",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "TD",
+            "aliases": [
+              "TD"
+            ],
+            "name": "Toronto Dominion Bank (The) Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000947263"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "GILD",
+      "issuer_id": "0000882095",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "GILD",
+            "aliases": [
+              "GILD"
+            ],
+            "name": "Gilead Sciences, Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000882095"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "TTE",
+      "issuer_id": "0000879764",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "TTE",
+            "aliases": [
+              "TTE"
+            ],
+            "name": "TotalEnergies SE Ordinary Shares",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000879764"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "APH",
+      "issuer_id": "0000820313",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "APH",
+            "aliases": [
+              "APH"
+            ],
+            "name": "Amphenol Corporation Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000820313"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "QCOM",
+      "issuer_id": "0000804328",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "QCOM",
+            "aliases": [
+              "QCOM"
+            ],
+            "name": "QUALCOMM Incorporated - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000804328"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "SNDK",
+      "issuer_id": "0002023554",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "SNDK",
+            "aliases": [
+              "SNDK"
+            ],
+            "name": "Sandisk Corporation - Common Stock When-Issued",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0002023554"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "DIS",
+      "issuer_id": "0001744489",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "DIS",
+            "aliases": [
+              "DIS"
+            ],
+            "name": "Walt Disney Company (The) Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001744489"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "MRVL",
+      "issuer_id": "0001835632",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "MRVL",
+            "aliases": [
+              "MRVL"
+            ],
+            "name": "Marvell Technology, Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001835632"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "CRM",
+      "issuer_id": "0001108524",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "CRM",
+            "aliases": [
+              "CRM"
+            ],
+            "name": "Salesforce, Inc. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001108524"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "PEP",
+      "issuer_id": "0000077476",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "PEP",
+            "aliases": [
+              "PEP"
+            ],
+            "name": "PepsiCo, Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000077476"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "BLK",
+      "issuer_id": "0002012383",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "BLK",
+            "aliases": [
+              "BLK"
+            ],
+            "name": "BlackRock, Inc. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0002012383"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "MCD",
+      "issuer_id": "0000063908",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "MCD",
+            "aliases": [
+              "MCD"
+            ],
+            "name": "McDonald's Corporation Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000063908"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "VZ",
+      "issuer_id": "0000732712",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "VZ",
+            "aliases": [
+              "VZ"
+            ],
+            "name": "Verizon Communications Inc. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000732712"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "ABT",
+      "issuer_id": "0000001800",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "ABT",
+            "aliases": [
+              "ABT"
+            ],
+            "name": "Abbott Laboratories Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000001800"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "COP",
+      "issuer_id": "0001163165",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "COP",
+            "aliases": [
+              "COP"
+            ],
+            "name": "ConocoPhillips Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001163165"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "UNP",
+      "issuer_id": "0000100885",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "UNP",
+            "aliases": [
+              "UNP"
+            ],
+            "name": "Union Pacific Corporation Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000100885"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "DE",
+      "issuer_id": "0000315189",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "DE",
+            "aliases": [
+              "DE"
+            ],
+            "name": "Deere & Company Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000315189"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "NVO",
+      "issuer_id": "0000353278",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "NVO",
+            "aliases": [
+              "NVO"
+            ],
+            "name": "Novo Nordisk A/S Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000353278"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "NEE",
+      "issuer_id": "0000753308",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "NEE",
+            "aliases": [
+              "NEE"
+            ],
+            "name": "NextEra Energy, Inc. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000753308"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "WELL",
+      "issuer_id": "0000766704",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "WELL",
+            "aliases": [
+              "WELL"
+            ],
+            "name": "Welltower Inc. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000766704"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "PFE",
+      "issuer_id": "0000078003",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "PFE",
+            "aliases": [
+              "PFE"
+            ],
+            "name": "Pfizer, Inc. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000078003"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "DHR",
+      "issuer_id": "0000313616",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "DHR",
+            "aliases": [
+              "DHR"
+            ],
+            "name": "Danaher Corporation Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000313616"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "ACN",
+      "issuer_id": "0001467373",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "ACN",
+            "aliases": [
+              "ACN"
+            ],
+            "name": "Accenture plc Class A Ordinary Shares (Ireland)",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001467373"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "SCCO",
+      "issuer_id": "0001001838",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "SCCO",
+            "aliases": [
+              "SCCO"
+            ],
+            "name": "Southern Copper Corporation Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001001838"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "STX",
+      "issuer_id": "0001137789",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "STX",
+            "aliases": [
+              "STX"
+            ],
+            "name": "Seagate Technology Holdings PLC - Ordinary Shares (Ireland)",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001137789"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "TMUS",
+      "issuer_id": "0001283699",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "TMUS",
+            "aliases": [
+              "TMUS"
+            ],
+            "name": "T-Mobile US, Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001283699"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "ISRG",
+      "issuer_id": "0001035267",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "ISRG",
+            "aliases": [
+              "ISRG"
+            ],
+            "name": "Intuitive Surgical, Inc. - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001035267"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "TJX",
+      "issuer_id": "0000109198",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "TJX",
+            "aliases": [
+              "TJX"
+            ],
+            "name": "TJX Companies, Inc. (The) Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000109198"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "SCHW",
+      "issuer_id": "0000316709",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "SCHW",
+            "aliases": [
+              "SCHW"
+            ],
+            "name": "Charles Schwab Corporation (The) Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000316709"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "ETN",
+      "issuer_id": "0001551182",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "ETN",
+            "aliases": [
+              "ETN"
+            ],
+            "name": "Eaton Corporation, PLC Ordinary Shares",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001551182"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "UBS",
+      "issuer_id": "0001610520",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "UBS",
+            "aliases": [
+              "UBS"
+            ],
+            "name": "UBS Group AG Registered Ordinary Shares",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001610520"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "LMT",
+      "issuer_id": "0000936468",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "LMT",
+            "aliases": [
+              "LMT"
+            ],
+            "name": "Lockheed Martin Corporation Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000936468"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "WDC",
+      "issuer_id": "0000106040",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "WDC",
+            "aliases": [
+              "WDC"
+            ],
+            "name": "Western Digital Corporation - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000106040"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "BBVA",
+      "issuer_id": "0000842180",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "BBVA",
+            "aliases": [
+              "BBVA"
+            ],
+            "name": "Banco Bilbao Vizcaya Argentaria S.A. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000842180"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "CB",
+      "issuer_id": "0000896159",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "CB",
+            "aliases": [
+              "CB"
+            ],
+            "name": "Chubb Limited  Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000896159"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "VRTX",
+      "issuer_id": "0000875320",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+          "raw_sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+          "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "VRTX",
+            "aliases": [
+              "VRTX"
+            ],
+            "name": "Vertex Pharmaceuticals Incorporated - Common Stock",
+            "exchange": "NASDAQ",
+            "exchange_code": "Q",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": "N"
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000875320"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "BA",
+      "issuer_id": "0000012927",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "BA",
+            "aliases": [
+              "BA"
+            ],
+            "name": "Boeing Company (The) Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000012927"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "UBER",
+      "issuer_id": "0001543151",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "UBER",
+            "aliases": [
+              "UBER"
+            ],
+            "name": "Uber Technologies, Inc. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0001543151"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "PGR",
+      "issuer_id": "0000080661",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "PGR",
+            "aliases": [
+              "PGR"
+            ],
+            "name": "Progressive Corporation (The) Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000080661"
+        }
+      ],
+      "scope_approved": false
+    },
+    {
+      "symbol": "SPGI",
+      "issuer_id": "0000064040",
+      "scope_status": "listing_evidence_complete_legal_type_pending",
+      "scope_reason": "primary_listing_flags_and_exact_identity_match; fund_legal_type_not_independently_verified",
+      "evidence": [
+        {
+          "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+          "raw_sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+          "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+          "created_on": "2026-10-30",
+          "creation_label": "File Creation Time: 1030202618:01",
+          "listing": {
+            "symbol": "SPGI",
+            "aliases": [
+              "SPGI"
+            ],
+            "name": "S&P Global Inc. Common Stock",
+            "exchange": "NYSE",
+            "exchange_code": "N",
+            "etf": "N",
+            "test_issue": "N",
+            "nextshares": "N",
+            "financial_status": null
+          },
+          "listing_classification": "common_stock_candidate",
+          "classification_reason": "explicit_common_or_ordinary_share_description",
+          "matched_issuer_id": "0000064040"
+        }
+      ],
+      "scope_approved": false
+    }
+  ],
+  "identity_evidence": {
+    "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+    "sha256": "76b92fbacfc1a5a8715a32bb5f923df4c79a8062b615735542081ddff6977b46",
+    "retrieved_at": "2026-11-02T00:54:15.115444+00:00"
+  },
+  "summary": {
+    "companies": 100,
+    "states": {
+      "listing_evidence_complete_legal_type_pending": 100
+    },
+    "approved": 0
+  },
+  "active_universe_accepted": false,
+  "hundred_company_accepted": false,
+  "investment_approved": false,
+  "directory_partition": {
+    "rows": 13286,
+    "statuses": {
+      "excluded_instrument": 3245,
+      "common_stock_candidate": 4886,
+      "pending_classification": 405,
+      "pending_identity": 266,
+      "test_issue": 37,
+      "out_of_scope_exchange": 4447
+    }
+  },
+  "directory_snapshots": [
+    {
+      "name": "nasdaqlisted",
+      "rows": 5616,
+      "url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+      "sha256": "b160a2f2814e5df68d7e414fba70f808f7ad3d20cbbdd167a8a2e38a10044168",
+      "retrieved_at": "2026-11-02T00:53:59.905999+00:00",
+      "created_on": "2026-10-30"
+    },
+    {
+      "name": "otherlisted",
+      "rows": 7670,
+      "url": "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+      "sha256": "ee0a872edece98430f3ba5a1ed6e9c683d7a1bb4b2980bdc9743c6995f264398",
+      "retrieved_at": "2026-11-02T00:54:11.831691+00:00",
+      "created_on": "2026-10-30"
+    }
+  ],
+  "verification_mode": "recorded-primary-response replay at original observation time"
+}

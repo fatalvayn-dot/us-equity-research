@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "verified_archived_score_coverage_not_current_combined_ranking",
+  "previous": {
+    "run_id": 42536926634,
+    "artifact_id": 13639024015,
+    "zip_sha256": "f074881bc8eed094086edfe6257c983fee51a99d6961c8a0d63df9ecf1fdebbb",
+    "as_of": "2026-11-08T23:48:52.968671+00:00",
+    "scored": 7,
+    "symbols": [
+      "MU",
+      "AAPL",
+      "MSFT",
+      "CRM",
+      "MRVL",
+      "TXN",
+      "AMAT"
+    ]
+  },
+  "current": {
+    "run_id": 42599479886,
+    "artifact_id": 13664797659,
+    "zip_sha256": "16bf7e62bd2801369e18ce22a9fa15529559aaf35742b0136c54739d1adc7003",
+    "as_of": "2026-11-09T10:17:39.519295+00:00",
+    "scored": 7,
+    "symbols": [
+      "INTU",
+      "MPWR",
+      "SWKS",
+      "NOW",
+      "TYL",
+      "SNPS",
+      "ON"
+    ]
+  },
+  "coverage": {
+    "distinct_historically_scored": 14,
+    "both": 0,
+    "previous_only": 7,
+    "current_only": 7
+  },
+  "checks": {
+    "previous_manifest_all_three_sha256_verified": true,
+    "current_manifest_all_three_sha256_verified": true,
+    "model_version_both": "technology-research-v1"
+  },
+  "mvp_accepted": false,
+  "investment_approved": false,
+  "notes": "The two dated score snapshots must not be concatenated into a current 14-stock ranking. Prior quote and price histories can be expired at the later as-of."
+}

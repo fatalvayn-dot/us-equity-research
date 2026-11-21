@@ -1,0 +1,50 @@
+{
+  "run_date": "2026-11-05",
+  "retrieved_at_window": {
+    "first": "2026-11-04T22:44:05.147133+00:00",
+    "last": "2026-11-04T22:44:41.798655+00:00"
+  },
+  "initial_run": {
+    "new_get_invocations": 11,
+    "get_invocations_by_host": {
+      "www.sec.gov": 3,
+      "data.sec.gov": 4,
+      "query1.finance.yahoo.com": 4
+    },
+    "identity_states": {
+      "exact_match": 2
+    },
+    "share_states_before_cover_alias_policy": {
+      "invalid_data": 1,
+      "verified_dated_share_class": 1
+    },
+    "price_states": {
+      "valid": 2
+    },
+    "history_states": {
+      "valid": 2
+    }
+  },
+  "cache_only_replay": {
+    "as_of": "2026-11-04T22:46:26.643134+00:00",
+    "new_get_invocations": 0,
+    "share_states": {
+      "verified_dated_share_class": 2
+    },
+    "price_states": {
+      "valid": 2
+    },
+    "history_states": {
+      "valid": 2
+    }
+  },
+  "source_bundle": {
+    "observations": 11,
+    "compressed_sha256": "0e581a6cce000afd65b851fb859552629796a96ef3d5fdfa7b60cc9ab68ffd3b",
+    "headers_stored": false,
+    "credentials_stored": false
+  },
+  "scope": "two previously blocked supported-model common-share candidates",
+  "full_100_company_acceptance": false,
+  "mvp_accepted": false
+}

@@ -1,0 +1,12 @@
+{
+  "recorded_at": "2026-11-01T17:33:17.862961+00:00",
+  "python": "3.12.14",
+  "command": "PYTHONPATH=src python3 -m unittest discover -s tests -v",
+  "tests_run": 37,
+  "failures": 0,
+  "errors": 0,
+  "scope": "offline unit/regression and synthetic resolver/cache integration",
+  "real_companies_validated": 0,
+  "remote_actions_run": false,
+  "live_provider_acceptance": false
+}

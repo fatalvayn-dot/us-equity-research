@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "mode": "offline_original_source_replay",
+  "new_http_requests": 0,
+  "as_of": "2026-11-03T04:25:00+00:00",
+  "mvp_accepted": false,
+  "inputs": {
+    "docs/evidence/common100/candidates.json": "099c9c85df3534f948a99decf127cada9acacb0486381047e63a5cf276581a3d",
+    "docs/evidence/mvp100/documents.json": "8bfd65cd4fa0b154f6ad5d69cceef963fce802be00d2fb4bb6803cc3af2a3d66",
+    "docs/evidence/common-financial17/documents.json.gz": "ea5a9ef94d758d4a7d1cf979857d7cd7d700359354da8562d8dc517b4dcd8f9a",
+    "tests/fixtures/mvp100-sources/manifest.json": "b9b9b477149adefe2354079500e34bb27d569a5393fa62c6b988b43efa15a3e4",
+    "tests/fixtures/common-extra-sources/manifest.json": "c2bcddd0d03e297dbadab61d0040d4484b18022128183cc2dc47628e331d543f",
+    "tests/fixtures/common-financial17-sources/manifest.json": "db0e14f84a1c4a5f698ff4e21d8281ceb89a37a077d8279561aefe5400675727"
+  },
+  "outputs": {
+    "current-plan.json": "6ec46ec00b6bbb3268565b0be601ca5e2f1fcae29f8a12e9b24db1619d1d4ffb",
+    "report.json.gz": "b8809301c6ca9faa0c039cc69bb9609a4ab2e8409c07e7a9a936d633ce305bcd",
+    "prior-batch.json.gz": "f7cf414608556638ba87b46fe34c6678121f877bccf0370cdf73d57c240721ea",
+    "original-checks.json": "df59515ac82c2a7573aee3f43fd98ad12a0ad10d1aed4b89320f304e98f166b0",
+    "current-batch.json.gz": "2c312b6c2f097e054c8d881db9f2b921f0bdfabd8a75283f480251f9e17ac67c",
+    "reproduction-proof.json": "f8dc978e83038850010c843c167539d417838a31a7be8ef95911c1e8fdb7a9b8",
+    "report.md": "1c016be9df42793fecf07604c5af93b15ff0d94ff87893269b3c2e477721a9a3",
+    "audit.json": "b940460d1c30dd3fc70c05f3d1c7c5ee94015863585a8aaff9ddfbac80a3627a",
+    "prior-plan.json": "9c1101b1b6dbabbbc20821acff700776677ca8008737c0d748c3599183ed83e2"
+  }
+}

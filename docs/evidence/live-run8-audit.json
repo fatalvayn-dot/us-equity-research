@@ -1,0 +1,69 @@
+{
+  "run_id": 42240561663,
+  "parent_run_id": 42223465006,
+  "root_run_id": 42223465006,
+  "artifact_sha256": {
+    "state": "6da25da4eaea7b70723cb8e5bc6489f3254ef573194dd4e7e6b13b57cd83f4c8",
+    "evidence": "de02200543317779920665311c1ac7fd012ad2800a129e9bc0ba1bf1c85129ae"
+  },
+  "sqlite_counts": {
+    "documents.sqlite": {
+      "batch_fields_v1": 100,
+      "batch_lease_v1": 0,
+      "filing_documents_v1": 50
+    },
+    "submissions.sqlite": {
+      "submissions_v1": 100
+    },
+    "responses.sqlite": {
+      "response_bodies_v1": 249,
+      "response_observations_v1": 249
+    },
+    "run-lock.sqlite": {
+      "batch_fields_v1": 0,
+      "batch_lease_v1": 0
+    },
+    "financial.sqlite": {
+      "batch_fields_v1": 682,
+      "batch_lease_v1": 0
+    }
+  },
+  "source_observations": 249,
+  "preserved_parent_observations": 162,
+  "preserved_parent_facts": 182,
+  "summary": {
+    "companies": 100,
+    "company_states": {
+      "review_required": 100
+    },
+    "accepted_facts": 471,
+    "arithmetic_results": 346,
+    "scored_companies": 0
+  },
+  "pipeline": {
+    "requested_candidates": 100,
+    "metadata_states": {
+      "metadata_available_legal_type_pending": 100
+    },
+    "annual_document_summary": {
+      "companies": 100,
+      "new_documents": 25,
+      "reused_documents": 25,
+      "periods": 50,
+      "registered_shares": 50
+    },
+    "financial_query_companies": 100,
+    "companies_with_financial_facts": 48,
+    "period_unresolved_companies": 0,
+    "deferred_duration_fields": 450,
+    "public_transport_get_calls": 101,
+    "seeded_public_observations": 0,
+    "seed_observations_outside_freshness": 0,
+    "archived_transport_reuses": 13,
+    "call_measure": "public transport GET invocations, excluding internal retries and private Finnhub transport",
+    "all_financial_references_archived": true,
+    "archived_financial_facts": 471
+  },
+  "state_backup": "libfile_7d675bb9b70881919a91ba9ba0c6221b",
+  "evidence_backup": "libfile_2f1fcb464bdc8191933f1463db3a2479"
+}
