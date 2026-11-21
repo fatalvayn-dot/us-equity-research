@@ -11,8 +11,8 @@ import pathlib
 import re
 
 MAX_INPUT_BYTES = 100_000
-MAX_PUBLIC_EQUITIES = 40
-MAX_TOTAL_SYMBOLS = 50
+MAX_PUBLIC_EQUITIES = 5
+MAX_TOTAL_SYMBOLS = 14
 MARKETS = {
     "ABD": ("ABD_HISSE", "USD", re.compile(r"[A-Z0-9][A-Z0-9.-]{0,19}")),
     "BIST": ("BIST_HISSE_ORNEK", "TRY", re.compile(r"[A-Z0-9][A-Z0-9.-]{0,15}\.IS")),
