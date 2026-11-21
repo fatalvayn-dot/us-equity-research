@@ -36,7 +36,7 @@ class MarketRadarPilotTests(unittest.TestCase):
             path.write_text(json.dumps({}),encoding="utf-8")
             r=run(fixture=str(path))
             self.assertEqual(r["forecasts"],[])
-            self.assertEqual(r["coverage"]["bist"],"not_implemented")
+            self.assertEqual(r["coverage"]["bist"],"unavailable")
 
 if __name__ == "__main__":
     unittest.main()
