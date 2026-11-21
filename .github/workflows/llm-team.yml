@@ -1,0 +1,57 @@
+name: LLM manager team (opt-in)
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - scripts/llm_team.py
+      - tests/test_llm_team.py
+      - .github/workflows/llm-team.yml
+permissions:
+  contents: read
+jobs:
+  agent-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify agent contracts offline
+        env:
+          PYTHONPATH: .:src
+        run: python -m unittest tests.test_llm_team -v
+  llm-execution:
+    if: github.event_name == 'workflow_dispatch'
+    needs: agent-contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run opt-in research agent team
+        env:
+          PYTHONPATH: .:src
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          RADAR_LLM_APPROVED: ${{ vars.RADAR_LLM_APPROVED }}
+          RADAR_LLM_MODEL: ${{ vars.RADAR_LLM_MODEL }}
+        run: |
+          if [ "$RADAR_LLM_APPROVED" != "true" ] || [ -z "$OPENAI_API_KEY" ]; then
+            echo "LLM opt-in or API key missing: no charge, no execution"
+            exit 0
+          fi
+          if [ ! -f radar-input/latest.json ]; then
+            echo "No validated local radar report. Provide evidence to runner before activation."
+            exit 1
+          fi
+          python scripts/llm_team.py --input radar-input/latest.json --output llm-team-report.json
+      - name: Upload non-sensitive manager report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: llm-manager-report
+          path: llm-team-report.json
+          if-no-files-found: ignore
+          retention-days: 7
