@@ -1,0 +1,37 @@
+name: Unified radar single issuer proof
+on:
+  pull_request:
+    paths:
+      - scripts/unified_single_issuer.py
+      - tests/test_unified_single_issuer.py
+      - .github/workflows/unified-single-issuer-proof.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  single-issuer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install existing free research adapter
+        run: python -m pip install --disable-pip-version-check -r requirements/market-radar.txt
+      - name: Offline end-to-end and failure regression
+        env:
+          PYTHONPATH: .:src
+        run: python -m unittest -v tests.test_unified_single_issuer
+      - name: Live read-only AAPL one-source attempt
+        env:
+          PYTHONPATH: .:src
+        run: python scripts/unified_single_issuer.py --symbol AAPL --out unified-single-issuer.json
+      - name: Archive timestamped proof without secrets
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unified-aapl-proof
+          path: unified-single-issuer.json
+          if-no-files-found: ignore
+          retention-days: 7
