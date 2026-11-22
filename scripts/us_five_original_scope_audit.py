@@ -68,7 +68,9 @@ def googl_cover_classes(original_html):
         r"As of January 28, 2026,? there were", text, flags=re.I
     ))
     if len(markers) != 1:
-        raise ValueError("Alphabet original cover date absent or ambiguous")
+        nearby = [m.start() for m in list(re.finditer("January", text, flags=re.I))[:12]]
+        examples = [text[max(0, k-55):k+120] for k in nearby]
+        raise ValueError("Alphabet original cover date absent or ambiguous: " + repr((len(markers),examples)))
     excerpt = text[markers[0].end():markers[0].end() + 850]
     matches = list(re.finditer(
         r"([0-9][0-9,]*)\\s+million\\s+shares\\s+of\\s+"
