@@ -50,6 +50,26 @@ class ValuationBridgeTests(unittest.TestCase):
             self.assertEqual(fn.call_args.kwargs["max_new_requests"], 8)
             self.assertEqual(fn.call_args.kwargs["seed_bundles"], (str(p),))
 
+    def test_combined_radar_rejects_invented_valuation_score(self):
+        import json
+        from scripts import unified_single_issuer as radar
+        with tempfile.TemporaryDirectory() as tmp:
+            fixture = Path(tmp) / "aapl.json"
+            fixture.write_text(json.dumps({
+                "AAPL": [
+                    {"date": "2026-09-%02d" % day, "close": 100 + day}
+                    for day in range(1, 31)]
+            }))
+            summary = bridge.summarize(report(shares="pending_source_collection"))
+            with self.assertRaisesRegex(ValueError, "invent a score"):
+                radar.build("AAPL", fixture=str(fixture), financial_cik=bridge.CIK,
+                            valuation_summary=dict(summary, score=42))
+            result = radar.build("AAPL", fixture=str(fixture), financial_cik=bridge.CIK,
+                                 valuation_summary=summary)
+            self.assertEqual(result["valuation_research"]["status"], "incomplete_market_evidence")
+            self.assertIn("Değerleme kaynak durumu", radar.turkish_issuer_report(result))
+            self.assertFalse(result["eligible_for_trade"])
+
     def test_request_budget_hard_limit(self):
         with self.assertRaisesRegex(ValueError, "budget"):
             bridge.collect(state_dir="/tmp/x", user_agent="contact@example.com",
