@@ -165,20 +165,20 @@ def turkish_issuer_report(envelope):
     g = envelope["gates"]
     score = "Hesaplanmadı; tarihli değerleme ve karşılaştırma kanıtı eksik"
     return (
-        "# Birleşik Radar ve Adaptif Uzman — " + envelope["symbol"] + "\\n\\n"
-        + "- Piyasa verisi tarihi: " + str(envelope["as_of"]) + "\\n"
-        + "- Fiyat kaynağı: " + str(envelope["source"]) + "\\n"
+        "# Birleşik Radar ve Adaptif Uzman — " + envelope["symbol"] + "\n\n"
+        + "- Piyasa verisi tarihi: " + str(envelope["as_of"]) + "\n"
+        + "- Fiyat kaynağı: " + str(envelope["source"]) + "\n"
         + "- Momentum araştırması: " + str(envelope["forecast"]["direction"])
-        + " (kalibre edilmemiş referans sinyali)\\n"
-        + "- Finansal araştırma: " + str(f["status"]) + "\\n"
-        + "- Kabul edilen finansal veri alanı: " + str(f.get("accepted_fact_count", 0)) + "\\n"
-        + "- Mevcut hesaplayıcının sonuç sayısı: " + str(f.get("existing_calculation_count", 0)) + "\\n"
-        + "- Finansal risk kontrolü: " + str(f.get("financial_risk_gate") or "Doğrulanmadı") + "\\n"
-        + "- Katılım araştırması: " + str(p["status"]) + "\\n"
-        + "- Değerleme puanı: " + score + "\\n"
-        + "- Haber / olay analizi: " + str(g["news_event_model"]) + "\\n"
-        + "- LLM ajan ekibi: " + str(envelope["llm"]["status"]) + "\\n"
-        + "- Yatırım kararı: KAPALI. Katılım ve değerleme onayı yok.\\n"
+        + " (kalibre edilmemiş referans sinyali)\n"
+        + "- Finansal araştırma: " + str(f["status"]) + "\n"
+        + "- Kabul edilen finansal veri alanı: " + str(f.get("accepted_fact_count", 0)) + "\n"
+        + "- Mevcut hesaplayıcının sonuç sayısı: " + str(f.get("existing_calculation_count", 0)) + "\n"
+        + "- Finansal risk kontrolü: " + str(f.get("financial_risk_gate") or "Doğrulanmadı") + "\n"
+        + "- Katılım araştırması: " + str(p["status"]) + "\n"
+        + "- Değerleme puanı: " + score + "\n"
+        + "- Haber / olay analizi: " + str(g["news_event_model"]) + "\n"
+        + "- LLM ajan ekibi: " + str(envelope["llm"]["status"]) + "\n"
+        + "- Yatırım kararı: KAPALI. Katılım ve değerleme onayı yok.\n"
     )
 
 
@@ -205,6 +205,8 @@ def main():
                    financial_cik=args.financial_cik)
     Path(args.out).write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if args.markdown:
+        Path(args.markdown).write_text(turkish_issuer_report(report), encoding="utf-8")
     print(json.dumps({
         "symbol": report["symbol"], "source": report["source"],
         "price": report["gates"]["market_price"], "participation": report["gates"]["participation"],
