@@ -27,6 +27,20 @@ class LLMTeamTests(unittest.TestCase):
         self.assertNotIn("SECRET_NEWS_HEADLINE", str(clean))
         self.assertNotIn("https://secret.example", str(clean))
 
+    def test_http_error_status_without_provider_body_or_secret(self):
+        import os
+        import urllib.error
+        from unittest.mock import patch
+        response = urllib.error.HTTPError(
+            "https://openrouter.ai/api/v1/chat/completions", 401,
+            "private credential header", {}, None)
+        with patch.dict(os.environ, {"OPENROUTER_API_KEY": "secret_value"}):
+            with patch("scripts.llm_team.urllib.request.urlopen", side_effect=response):
+                with self.assertRaisesRegex(RuntimeError, "HTTP status: 401") as ctx:
+                    ask("manager", {})
+        self.assertNotIn("secret_value", str(ctx.exception))
+        self.assertNotIn("private credential header", str(ctx.exception))
+
     def test_unknown_role(self):
         with self.assertRaises(ValueError): ask("broker",{},transport=lambda _: {})
     def test_no_key(self):
