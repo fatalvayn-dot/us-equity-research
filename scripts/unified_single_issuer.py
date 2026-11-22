@@ -14,6 +14,7 @@ from datetime import datetime, timezone
 from scripts import market_radar_pilot as pilot
 from scripts import market_radar_agents as ledger
 from scripts import llm_team
+from equity_research.participation_screen import assess_participation
 
 
 def price_history(symbol, fixture=None):
@@ -39,7 +40,7 @@ def price_history(symbol, fixture=None):
     raise RuntimeError("no verified price history: " + ", ".join(failures))
 
 
-def build(symbol="AAPL", fixture=None, agent_transport=None, enable_llm=False):
+def build(symbol="AAPL", fixture=None, agent_transport=None, enable_llm=False, participation_evidence=None):
     """One entity, one market read, one evidence envelope.
 
     Fundamental, participation and news gates remain blocked until separately
@@ -66,9 +67,24 @@ def build(symbol="AAPL", fixture=None, agent_transport=None, enable_llm=False):
         "prediction": "uncalibrated_baseline",
         "investment_decision": "prohibited",
     }
+    participation = {"status": "bilinmiyor", "reason": "participation_source_evidence_missing",
+                     "investment_approved": False, "no_live_source_verification": True}
+    if participation_evidence is not None:
+        if not isinstance(participation_evidence, dict):
+            raise ValueError("participation evidence document must be an object")
+        issuer = participation_evidence.get("company")
+        if not isinstance(issuer, dict) or issuer.get("symbol") != symbol:
+            raise ValueError("issuer symbol mismatch; refusing cross-issuer research")
+        participation = assess_participation(
+            issuer, participation_evidence.get("rulebook"),
+            as_of=raw["generated_at_utc"])
+        # Existing screen checks reference metadata, not original bytes.
+        # Conditional pass is not index membership, certificate or order approval.
+        gates["participation"] = participation["status"]
     envelope = {
         "schema_version": 1, "symbol": symbol, "as_of": signal["as_of"],
         "source": source, "forecast": forecast, "gates": gates,
+        "participation_research": participation,
         "summary": summary, "research": raw, "llm": {"status": "disabled"},
         "investment_advice": False, "eligible_for_trade": False,
     }
@@ -87,16 +103,20 @@ def main():
     p.add_argument("--fixture")
     p.add_argument("--out", default="unified-single-issuer.json")
     p.add_argument("--llm", action="store_true")
+    p.add_argument("--participation-evidence", help="Externally reviewed company/rulebook JSON; not index certification")
     args = p.parse_args()
     if len(args.symbol) > 16 or not args.symbol or any(
         ch not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-" for ch in args.symbol):
         p.error("invalid ticker; use an explicit verified ticker")
-    report = build(args.symbol, args.fixture, enable_llm=args.llm)
+    evidence = (json.loads(Path(args.participation_evidence).read_text(encoding="utf-8"))
+                if args.participation_evidence else None)
+    report = build(args.symbol, args.fixture, enable_llm=args.llm,
+                   participation_evidence=evidence)
     Path(args.out).write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({
         "symbol": report["symbol"], "source": report["source"],
-        "price": report["gates"]["market_price"], "participation": "unknown",
+        "price": report["gates"]["market_price"], "participation": report["gates"]["participation"],
         "decision": "prohibited", "llm": report["llm"]["status"]
     }, ensure_ascii=False))
 
