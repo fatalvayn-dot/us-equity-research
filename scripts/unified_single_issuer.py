@@ -88,7 +88,7 @@ def financial_provenance(report, symbol, cik, cutoff):
 
 def build(symbol="AAPL", fixture=None, agent_transport=None, enable_llm=False,
           participation_evidence=None, financial_report=None, financial_cik=None,
-          valuation_summary=None):
+          valuation_summary=None, score_summary=None):
     """One entity, one market read, one evidence envelope.
 
     Fundamental, participation and news gates remain blocked until separately
@@ -160,11 +160,32 @@ def build(symbol="AAPL", fixture=None, agent_transport=None, enable_llm=False,
             "score_plan": valuation_summary.get("score_plan"),
         }
         gates["valuation"] = valuation["status"]
+    scoring = {"status": "not_attempted", "score": None, "blockers": []}
+    if score_summary is not None:
+        if (not isinstance(score_summary, dict)
+                or score_summary.get("symbol") != symbol
+                or score_summary.get("issuer_id") != financial_cik
+                or financial_cik != "0000320193"
+                or score_summary.get("investment_approved") is not False
+                or score_summary.get("eligible_for_trade") is not False):
+            raise ValueError("score report identity or trade-permission mismatch")
+        score = score_summary.get("score")
+        status = score_summary.get("score_status")
+        if (score is not None and status != "scored_research_hypothesis") or (
+                score is None and status == "scored_research_hypothesis"):
+            raise ValueError("unverified scoring result")
+        scoring = {
+            "status": status, "score": score,
+            "model_version": score_summary.get("model_version"),
+            "blockers": score_summary.get("blockers", []),
+        }
+        gates["valuation"] = ("scored_research_hypothesis_not_investment_approval"
+                              if score is not None else "score_blocked")
     envelope = {
         "schema_version": 1, "symbol": symbol, "as_of": signal["as_of"],
         "source": source, "forecast": forecast, "gates": gates,
         "participation_research": participation, "financial_research": financial,
-        "valuation_research": valuation,
+        "valuation_research": valuation, "scoring_research": scoring,
         "summary": summary, "research": raw, "llm": {"status": "disabled"},
         "investment_advice": False, "eligible_for_trade": False,
     }
@@ -188,7 +209,9 @@ def turkish_issuer_report(envelope):
     f = envelope["financial_research"]
     p = envelope["participation_research"]
     g = envelope["gates"]
-    score = "Hesaplanmadı; tarihli değerleme ve karşılaştırma kanıtı eksik"
+    scored = envelope.get("scoring_research", {})
+    score = (str(scored["score"]) + "/100 (yalnız araştırma skoru)"
+             if scored.get("score") is not None else "Hesaplanmadı; eksik kanıt veya skor engeli")
     return (
         "# Birleşik Radar ve Adaptif Uzman — " + envelope["symbol"] + "\n\n"
         + "- Piyasa verisi tarihi: " + str(envelope["as_of"]) + "\n"
@@ -203,6 +226,8 @@ def turkish_issuer_report(envelope):
         + "- Değerleme puanı: " + score + "\n"
         + "- Değerleme kaynak durumu: " + str(envelope.get("valuation_research", {}).get("status", "not_collected")) + "\n"
         + "- Değerleme engel sayısı: " + str(len(envelope.get("valuation_research", {}).get("blockers", []))) + "\n"
+        + "- Skor araştırma durumu: " + str(scored.get("status", "not_attempted")) + "\n"
+        + "- Skor engelleri: " + ", ".join(scored.get("blockers", [])) + "\n"
         + "- Haber / olay analizi: " + str(g["news_event_model"]) + "\n"
         + "- LLM ajan ekibi: " + str(envelope["llm"]["status"]) + "\n"
         + "- Yatırım kararı: KAPALI. Katılım ve değerleme onayı yok.\n"
@@ -220,6 +245,7 @@ def main():
     p.add_argument("--financial-report", help="Existing SEC MVP one-issuer report JSON, not a valuation approval")
     p.add_argument("--financial-cik", help="Exact SEC identity for --financial-report")
     p.add_argument("--valuation-summary", help="Existing bounded issuer valuation gate report JSON")
+    p.add_argument("--score-summary", help="Exact issuer existing research scoring summary JSON")
     args = p.parse_args()
     if len(args.symbol) > 16 or not args.symbol or any(
         ch not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-" for ch in args.symbol):
@@ -230,9 +256,12 @@ def main():
                  if args.financial_report else None)
     valuation = (json.loads(Path(args.valuation_summary).read_text(encoding="utf-8"))
                  if args.valuation_summary else None)
+    scoring = (json.loads(Path(args.score_summary).read_text(encoding="utf-8"))
+               if args.score_summary else None)
     report = build(args.symbol, args.fixture, enable_llm=args.llm,
                    participation_evidence=evidence, financial_report=financial,
-                   financial_cik=args.financial_cik, valuation_summary=valuation)
+                   financial_cik=args.financial_cik, valuation_summary=valuation,
+                   score_summary=scoring)
     Path(args.out).write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if args.markdown:
