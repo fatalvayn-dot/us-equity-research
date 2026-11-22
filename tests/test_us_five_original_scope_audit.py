@@ -49,6 +49,17 @@ class OriginalScopeAuditTests(unittest.TestCase):
         self.assertFalse(review["shares_approved"])
         self.assertIn("multi", review["status"])
 
+    def test_original_googl_cover_lists_three_classes_exactly(self):
+        review = self.by["GOOGL"]["security_class"]
+        self.assertEqual(review["cover_as_of"], "2026-01-28")
+        self.assertEqual(review["reported_units"], "million_shares")
+        self.assertEqual(review["reported_class_counts_million"], {
+            "A": 5822, "B": 837, "C": 5438,
+        })
+        self.assertTrue(review["counts_source_sha256_verified"])
+        self.assertFalse(review["shares_approved"])
+        self.assertFalse(review["valuation_approved"])
+
     def test_missing_original_archive_fails_closed(self):
         with tempfile.TemporaryDirectory() as tmp:
             with self.assertRaises(OSError):
