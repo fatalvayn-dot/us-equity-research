@@ -4,6 +4,10 @@ on:
     paths:
       - scripts/unified_single_issuer.py
       - tests/test_unified_single_issuer.py
+      - tests/test_unified_aapl_valuation.py
+      - scripts/unified_aapl_valuation.py
+      - scripts/unified_aapl_score_summary.py
+      - scripts/build_current_scores.py
       - .github/workflows/unified-single-issuer-proof.yml
   workflow_dispatch:
 permissions:
@@ -22,7 +26,7 @@ jobs:
       - name: Offline end-to-end and failure regression
         env:
           PYTHONPATH: .:src
-        run: python -m unittest -v tests.test_unified_single_issuer
+        run: python -m unittest -v tests.test_unified_single_issuer tests.test_unified_aapl_valuation
       - name: Live read-only AAPL one-source attempt
         env:
           PYTHONPATH: .:src
@@ -47,6 +51,84 @@ jobs:
             --financial-report unified-aapl-sec-report.json \
             --out unified-single-issuer-with-financials.json \
             --markdown unified-single-issuer-with-financials.md
+      - name: Reuse SEC documents for dated AAPL share and valuation source gates
+        if: success()
+        env:
+          PYTHONPATH: .:src
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        shell: bash
+        run: |
+          if [ -z "$SEC_USER_AGENT" ] || [ ! -f data/unified-aapl-sec/report.json ]; then
+            echo "No verified SEC batch; valuation source review not attempted"
+            exit 0
+          fi
+          python scripts/export_mvp_evidence.py \
+            --state-dir data/unified-aapl-sec \
+            --output data/unified-aapl-sec-export \
+            --sources data/unified-aapl-sec-seed
+          python scripts/unified_aapl_valuation.py \
+            --user-agent "$SEC_USER_AGENT" \
+            --state-dir data/unified-aapl-valuation \
+            --source-bundle data/unified-aapl-sec-seed \
+            --financial-batch data/unified-aapl-sec/batch.json \
+            --metadata data/unified-aapl-sec/metadata.json \
+            --companyfacts-dir data/unified-aapl-sec/companyfacts \
+            --out unified-aapl-valuation-summary.json
+          python scripts/unified_single_issuer.py \
+            --symbol AAPL \
+            --financial-cik 0000320193 \
+            --financial-report unified-aapl-sec-report.json \
+            --valuation-summary unified-aapl-valuation-summary.json \
+            --out unified-aapl-with-valuation-gates.json \
+            --markdown unified-aapl-with-valuation-gates.md
+      - name: Run existing AAPL comparison and source-backed scoring on verified plan
+        if: success()
+        env:
+          PYTHONPATH: .:src
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        shell: bash
+        run: |
+          if [ -z "$SEC_USER_AGENT" ] || [ ! -f unified-aapl-valuation-summary.score-plan.json ]; then
+            echo "SEC valuation source review unavailable; research score not attempted"
+            exit 0
+          fi
+          SELECTED=$(python -c 'import json;print(json.load(open("unified-aapl-valuation-summary.score-plan.json"))["selected"])')
+          if [ "$SELECTED" != "1" ]; then
+            echo "AAPL current/prior plan is not source-confirmed; score not attempted"
+            exit 0
+          fi
+          mkdir -p data/unified-aapl-score
+          python -m equity_research research-batch \
+            --plan unified-aapl-valuation-summary.current.json \
+            --cache-dir data/unified-aapl-sec/companyfacts \
+            --checkpoint data/unified-aapl-score/current.sqlite \
+            --output data/unified-aapl-score/current.json \
+            --user-agent "$SEC_USER_AGENT" --max-new-fields 1
+          python -m equity_research research-batch \
+            --plan unified-aapl-valuation-summary.prior.json \
+            --cache-dir data/unified-aapl-sec/companyfacts \
+            --checkpoint data/unified-aapl-score/prior.sqlite \
+            --output data/unified-aapl-score/prior.json \
+            --user-agent "$SEC_USER_AGENT" --max-new-fields 1
+          ASOF=$(python -c 'from datetime import datetime,timezone;print(datetime.now(timezone.utc).isoformat())')
+          python scripts/build_current_scores.py \
+            --financial data/unified-aapl-sec/batch.json \
+            --current data/unified-aapl-score/current.json \
+            --prior data/unified-aapl-score/prior.json \
+            --sources data/unified-aapl-valuation/source-bundle \
+            --financial-sources data/unified-aapl-sec-seed \
+            --output data/unified-aapl-score/scoring \
+            --as-of "$ASOF"
+          python scripts/unified_aapl_score_summary.py \
+            --input data/unified-aapl-score/scoring/report.json.gz \
+            --out unified-aapl-score-summary.json
+          python scripts/unified_single_issuer.py \
+            --symbol AAPL --financial-cik 0000320193 \
+            --financial-report unified-aapl-sec-report.json \
+            --valuation-summary unified-aapl-valuation-summary.json \
+            --score-summary unified-aapl-score-summary.json \
+            --out unified-aapl-full-pipeline.json \
+            --markdown unified-aapl-full-pipeline.md
       - name: Archive timestamped proof without secrets
         if: always()
         uses: actions/upload-artifact@v4
@@ -58,5 +140,13 @@ jobs:
             unified-single-issuer-with-financials.json
             unified-single-issuer-with-financials.md
             unified-aapl-sec-report.json
+            unified-aapl-valuation-summary.json
+            unified-aapl-valuation-summary.score-plan.json
+            unified-aapl-with-valuation-gates.json
+            unified-aapl-with-valuation-gates.md
+            unified-aapl-score-summary.json
+            unified-aapl-full-pipeline.json
+            unified-aapl-full-pipeline.md
+            data/unified-aapl-score/scoring/report.md
           if-no-files-found: ignore
           retention-days: 7
