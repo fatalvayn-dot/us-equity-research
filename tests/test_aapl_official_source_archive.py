@@ -34,6 +34,13 @@ class SourceArchiveTests(unittest.TestCase):
             self.assertFalse(result["issuer_financial_ratios_independently_verified"])
             self.assertFalse(result["investment_approved"])
 
+    def test_sec_real_api_padded_string_cik(self):
+        payload = json.dumps({"cik": "0000320193", "tickers": ["AAPL"],
+                              "name": "Apple Inc."}).encode()
+        proof = verify_bytes("sec_submissions", payload)
+        self.assertEqual(proof["validation"], "sec_issuer_identity_only")
+        self.assertFalse(proof["investment_approved"])
+
     def test_cik_identity_mismatch_rejected(self):
         wrong = json.dumps({"cik": 789019, "tickers": ["AAPL"]}).encode()
         with self.assertRaisesRegex(ValueError, "CIK identity mismatch"):
