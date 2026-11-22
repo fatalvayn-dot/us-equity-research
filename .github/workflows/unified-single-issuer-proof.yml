@@ -18,8 +18,15 @@ on:
       - scripts/build_current_scores.py
       - .github/workflows/unified-single-issuer-proof.yml
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/unified-single-issuer-proof.yml
 permissions:
   contents: read
+concurrency:
+  group: aapl-proof-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   single-issuer:
     runs-on: ubuntu-latest
@@ -141,7 +148,7 @@ jobs:
             --out unified-aapl-full-pipeline.json \
             --markdown unified-aapl-full-pipeline.md
       - name: Run free-only agent chain or record explicit missing configuration
-        if: success()
+        if: success() && github.event_name != 'pull_request'
         env:
           PYTHONPATH: .:src
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
