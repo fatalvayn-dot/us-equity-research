@@ -14,6 +14,7 @@ def audit(rows, symbol="AAPL", max_signals=200):
     if not isinstance(rows, list) or len(rows) < 27:
         return {"status": "insufficient_completed_bars", "symbol": symbol,
                 "horizon_sessions": 5, "eligible_samples": 0,
+                "performance_gate": "insufficient_completed_bars", "predictive_approved": False,
                 "direction_hit_rate": None, "benchmark_up_hit_rate": None,
                 "investment_approved": False}
     historical_indices = list(range(21, len(rows) - 5))[-max_signals:]
@@ -36,6 +37,10 @@ def audit(rows, symbol="AAPL", max_signals=200):
         "last_as_of": forecasts[-1]["as_of"],
         "total_signals": len(evaluated),
         "eligible_samples": count,
+        "performance_gate": ("insufficient_directional_sample" if count < 30
+                             else "not_better_than_naive_up" if directional_hits <= benchmark_hits
+                             else "historical_better_than_naive_unvalidated"),
+        "predictive_approved": False,
         "neutral_signals": len(evaluated) - count,
         "direction_hit_rate": round(directional_hits / count, 4) if count else None,
         "benchmark_up_hit_rate": round(benchmark_hits / count, 4) if count else None,
