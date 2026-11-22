@@ -9,6 +9,7 @@ on:
       - tests/test_unified_aapl_llm.py
       - scripts/unified_aapl_backtest.py
       - scripts/unified_aapl_llm.py
+      - scripts/llm_team.py
       - scripts/unified_aapl_valuation.py
       - scripts/unified_aapl_score_summary.py
       - scripts/build_current_scores.py
@@ -131,6 +132,7 @@ jobs:
             --financial-report unified-aapl-sec-report.json \
             --valuation-summary unified-aapl-valuation-summary.json \
             --score-summary unified-aapl-score-summary.json \
+            --aapl-news \
             --out unified-aapl-full-pipeline.json \
             --markdown unified-aapl-full-pipeline.md
       - name: Run free-only agent chain or record explicit missing configuration
