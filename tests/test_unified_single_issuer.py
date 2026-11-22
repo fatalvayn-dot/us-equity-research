@@ -122,6 +122,57 @@ class OneIssuer(unittest.TestCase):
             sec.collect_one(symbol="MSFT", state_dir="tmp/test-sec",
                             user_agent="Research Team contact: example@example.org")
 
+    def test_existing_financial_calculation_count_and_risk_gate(self):
+        proof = {
+            "as_of": "2026-11-20T11:00:00+00:00",
+            "companies": [{
+                "symbol": "AAPL", "issuer_id": "0000320193",
+                "accepted_fact_count": 11,
+                "financial_assessment": {"quantitative_gate": "no_screen_trigger"},
+                "calculations": [{"value": "1.25"}, {"value": None}, {"value": "2.4"}],
+            }],
+            "pipeline": {"all_financial_references_archived": True},
+        }
+        with tempfile.TemporaryDirectory() as root:
+            result = target.build("AAPL", fixture=self.fixture(root),
+                                  financial_report=proof, financial_cik="0000320193")
+        self.assertEqual(result["financial_research"]["existing_calculation_count"], 2)
+        self.assertEqual(result["financial_research"]["financial_risk_gate"], "no_screen_trigger")
+        text = target.turkish_issuer_report(result)
+        self.assertIn("11", text)
+        self.assertIn("Hesaplanmadı", text)
+        self.assertIn("Yatırım kararı: KAPALI", text)
+        self.assertIn("\n- Katılım", text)
+        self.assertFalse(result["eligible_for_trade"])
+
+    def test_financial_details_are_not_forwarded_to_llm(self):
+        import json as _json
+        from scripts import llm_team
+        proof = {
+            "as_of": "2026-11-20T11:00:00+00:00",
+            "companies": [{
+                "symbol": "AAPL", "issuer_id": "0000320193",
+                "accepted_fact_count": 11,
+                "financial_assessment": {"quantitative_gate": "no_screen_trigger"},
+                "calculations": [{"value": "1.25", "private": "SHOULD_NOT_LEAK"}],
+            }],
+            "pipeline": {"all_financial_references_archived": True},
+        }
+        captured = []
+        def fake(request):
+            captured.append(request)
+            return {"choices": [{"message": {"content": "research only"}}]}
+        with tempfile.TemporaryDirectory() as root:
+            result = target.build(
+                "AAPL", fixture=self.fixture(root),
+                financial_report=proof, financial_cik="0000320193",
+                enable_llm=True, agent_transport=fake)
+        contents = _json.dumps(captured)
+        self.assertNotIn("SHOULD_NOT_LEAK", contents)
+        self.assertNotIn("1.25", contents)
+        self.assertIn("no_screen_trigger", contents)
+        self.assertEqual(result["llm"]["llm_calls"], 5)
+
     def test_live_price_source_failure_fails_closed(self):
         with patch.object(target.pilot, "fetch_yfinance", side_effect=OSError("offline")), \
              patch.object(target.pilot, "fetch_yahoo_chart", side_effect=OSError("offline")), \

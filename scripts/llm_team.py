@@ -26,6 +26,31 @@ def sanitize(report):
            "symbols":[{"symbol":f.get("symbol"),"as_of":f.get("as_of"),
                        "source":f.get("source"),"direction":f.get("direction")}
                       for f in r.get("forecasts",[])[:12] if isinstance(f,dict)]}
+    # Public SEC research only: fixed scalar fields. Never forward raw company
+    # reports, arbitrary notes, private positions, URLs, financial tables.
+    finance = report.get("financial_research")
+    if isinstance(finance, dict):
+        allowed = ("status", "accepted_fact_count", "existing_calculation_count",
+                   "financial_risk_gate", "all_financial_references_archived")
+        clean["financial_research"] = {
+            key: finance.get(key)
+            for key in allowed
+            if type(finance.get(key)) in (str, int, bool, type(None))
+            and (not isinstance(finance.get(key), str) or len(finance[key]) <= 80)
+        }
+    participation = report.get("participation_research")
+    if isinstance(participation, dict):
+        clean["participation_status"] = (
+            participation.get("status") if participation.get("status")
+            in ("bilinmiyor", "uygunsuz", "kosullu_esik_gecisi") else "bilinmiyor")
+    gates = report.get("gates")
+    if isinstance(gates, dict):
+        clean["research_blockers"] = [
+            key for key in ("valuation", "participation", "news_event_model")
+            if isinstance(gates.get(key), str)
+            and (gates[key].startswith("blocked")
+                 or gates[key] in ("unknown", "bilinmiyor", "not_connected"))
+        ]
     if len(json.dumps(clean))>12000: raise ValueError("evidence too large")
     return clean
 

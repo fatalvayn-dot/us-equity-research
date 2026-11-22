@@ -63,11 +63,24 @@ def financial_provenance(report, symbol, cik, cutoff):
     if not isinstance(pipeline, dict):
         raise ValueError("financial pipeline evidence invalid")
     archived = pipeline.get("all_financial_references_archived") is True
+    assessment = record.get("financial_assessment")
+    gate = (assessment.get("quantitative_gate")
+            if isinstance(assessment, dict) else None)
+    if gate is not None and (not isinstance(gate, str) or len(gate) > 80):
+        raise ValueError("invalid financial risk assessment")
+    calculations = record.get("calculations", [])
+    if not isinstance(calculations, list):
+        raise ValueError("invalid existing calculated results")
+    calculation_count = sum(
+        type(item) is dict and item.get("value") is not None
+        for item in calculations)
     return {
         "status": "facts_observed_review_required" if count > 0 and archived else "incomplete_evidence",
         "symbol": symbol, "issuer_id": cik, "accepted_fact_count": count,
         "as_of": observed.isoformat(),
         "all_financial_references_archived": archived,
+        "existing_calculation_count": calculation_count if archived else 0,
+        "financial_risk_gate": gate if archived else None,
         "financial_valuation_complete": False,
         "investment_approved": False,
     }
@@ -135,8 +148,38 @@ def build(symbol="AAPL", fixture=None, agent_transport=None, enable_llm=False,
             raise RuntimeError("LLM explicit opt-in required")
         # Exactly the same evidence envelope: no second data/provider request.
         envelope["llm"] = llm_team.orchestrate(
-            {"summary": summary, "research": raw}, transport=agent_transport)
+            {"summary": summary, "research": raw,
+             "financial_research": financial,
+             "participation_research": participation,
+             "gates": gates}, transport=agent_transport)
     return envelope
+
+
+
+def turkish_issuer_report(envelope):
+    """Human-readable handoff from existing evidence, without guessed prices or scores."""
+    if not isinstance(envelope, dict) or envelope.get("schema_version") != 1:
+        raise ValueError("invalid unified evidence")
+    f = envelope["financial_research"]
+    p = envelope["participation_research"]
+    g = envelope["gates"]
+    score = "Hesaplanmadı; tarihli değerleme ve karşılaştırma kanıtı eksik"
+    return (
+        "# Birleşik Radar ve Adaptif Uzman — " + envelope["symbol"] + "\n\n"
+        + "- Piyasa verisi tarihi: " + str(envelope["as_of"]) + "\n"
+        + "- Fiyat kaynağı: " + str(envelope["source"]) + "\n"
+        + "- Momentum araştırması: " + str(envelope["forecast"]["direction"])
+        + " (kalibre edilmemiş referans sinyali)\n"
+        + "- Finansal araştırma: " + str(f["status"]) + "\n"
+        + "- Kabul edilen finansal veri alanı: " + str(f.get("accepted_fact_count", 0)) + "\n"
+        + "- Mevcut hesaplayıcının sonuç sayısı: " + str(f.get("existing_calculation_count", 0)) + "\n"
+        + "- Finansal risk kontrolü: " + str(f.get("financial_risk_gate") or "Doğrulanmadı") + "\n"
+        + "- Katılım araştırması: " + str(p["status"]) + "\n"
+        + "- Değerleme puanı: " + score + "\n"
+        + "- Haber / olay analizi: " + str(g["news_event_model"]) + "\n"
+        + "- LLM ajan ekibi: " + str(envelope["llm"]["status"]) + "\n"
+        + "- Yatırım kararı: KAPALI. Katılım ve değerleme onayı yok.\n"
+    )
 
 
 def main():
@@ -144,6 +187,7 @@ def main():
     p.add_argument("--symbol", default="AAPL")
     p.add_argument("--fixture")
     p.add_argument("--out", default="unified-single-issuer.json")
+    p.add_argument("--markdown", help="Dated Turkish research handoff path")
     p.add_argument("--llm", action="store_true")
     p.add_argument("--participation-evidence", help="Externally reviewed company/rulebook JSON; not index certification")
     p.add_argument("--financial-report", help="Existing SEC MVP one-issuer report JSON, not a valuation approval")
@@ -161,6 +205,8 @@ def main():
                    financial_cik=args.financial_cik)
     Path(args.out).write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if args.markdown:
+        Path(args.markdown).write_text(turkish_issuer_report(report), encoding="utf-8")
     print(json.dumps({
         "symbol": report["symbol"], "source": report["source"],
         "price": report["gates"]["market_price"], "participation": report["gates"]["participation"],
