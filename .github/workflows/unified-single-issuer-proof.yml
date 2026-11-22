@@ -14,6 +14,8 @@ on:
       - data/aapl-research/participation-gap-input.json
       - scripts/aapl_participation_gap_audit.py
       - tests/test_aapl_participation_gap_audit.py
+      - scripts/aapl_official_source_archive.py
+      - tests/test_aapl_official_source_archive.py
       - scripts/unified_aapl_backtest.py
       - scripts/unified_aapl_llm.py
       - scripts/llm_team.py
@@ -45,7 +47,7 @@ jobs:
       - name: Offline end-to-end and failure regression
         env:
           PYTHONPATH: .:src
-        run: python -m unittest -v tests.test_unified_single_issuer tests.test_unified_aapl_valuation tests.test_unified_aapl_backtest tests.test_unified_aapl_llm tests.test_unified_aapl_acceptance tests.test_market_radar_pilot tests.test_aapl_participation_gap_audit
+        run: python -m unittest -v tests.test_unified_single_issuer tests.test_unified_aapl_valuation tests.test_unified_aapl_backtest tests.test_unified_aapl_llm tests.test_unified_aapl_acceptance tests.test_market_radar_pilot tests.test_aapl_participation_gap_audit tests.test_aapl_official_source_archive
       - name: Live read-only AAPL one-source attempt
         env:
           PYTHONPATH: .:src
@@ -200,6 +202,20 @@ jobs:
             --input data/aapl-research/participation-gap-input.json \
             --out unified-aapl-participation-gaps.json \
             --markdown unified-aapl-participation-gaps.md
+      - name: Retrieve and hash official AAPL SEC identity and Sharia methodology source
+        if: always()
+        env:
+          PYTHONPATH: .:src
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        shell: bash
+        run: |
+          if [ -z "$SEC_USER_AGENT" ]; then
+            echo "SEC official identifying contact absent; original source archive not attempted"
+            exit 0
+          fi
+          python scripts/aapl_official_source_archive.py \
+            --destination data/unified-aapl-official-sources \
+            --user-agent "$SEC_USER_AGENT"
       - name: Archive timestamped proof without secrets
         if: always()
         uses: actions/upload-artifact@v4
@@ -224,5 +240,8 @@ jobs:
             unified-aapl-acceptance.md
             unified-aapl-participation-gaps.json
             unified-aapl-participation-gaps.md
+            data/unified-aapl-official-sources/source-manifest.json
+            data/unified-aapl-official-sources/sec_submissions.json
+            data/unified-aapl-official-sources/sp_shariah_methodology.pdf
           if-no-files-found: ignore
           retention-days: 7
