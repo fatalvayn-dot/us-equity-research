@@ -9,6 +9,8 @@ on:
       - scripts/unified_us_five_source_gaps.py
       - scripts/us_five_original_scope_audit.py
       - tests/test_us_five_original_scope_audit.py
+      - scripts/us_five_final_verdict.py
+      - tests/test_us_five_final_verdict.py
       - tests/test_unified_us_five.py
       - .github/workflows/unified-us-five-proof.yml
   workflow_dispatch:
@@ -36,7 +38,7 @@ jobs:
       - name: Verify exact issuer registry, no-trade guards and provider failure isolation
         env:
           PYTHONPATH: .:src
-        run: python -m unittest -v tests.test_unified_us_five tests.test_unified_us_five_scoring tests.test_unified_us_five_source_gaps tests.test_us_five_original_scope_audit tests.test_unified_single_issuer
+        run: python -m unittest -v tests.test_unified_us_five tests.test_unified_us_five_scoring tests.test_unified_us_five_source_gaps tests.test_us_five_original_scope_audit tests.test_us_five_final_verdict tests.test_unified_single_issuer
       - name: Five-issuer live read-only evidence collector (main or manual only)
         if: github.event_name != 'pull_request'
         env:
@@ -100,6 +102,24 @@ jobs:
             --root . \
             --out us-five-original-scope-audit.json \
             --markdown us-five-original-scope-audit.md
+      - name: Synthesize one fail-closed five-company expert acceptance verdict
+        if: always() && github.event_name != 'pull_request'
+        env:
+          PYTHONPATH: .:src
+        shell: bash
+        run: |
+          if [ ! -f us-five-with-scores.json ] || \
+             [ ! -f us-five-source-gaps.json ] || \
+             [ ! -f us-five-original-scope-audit.json ]; then
+            echo "Incomplete evidence files; final five-company acceptance withheld"
+            exit 0
+          fi
+          python scripts/us_five_final_verdict.py \
+            --scored us-five-with-scores.json \
+            --gaps us-five-source-gaps.json \
+            --original us-five-original-scope-audit.json \
+            --out us-five-final-verdict.json \
+            --markdown us-five-final-verdict.md
       - name: Archive bounded, non-sensitive research outputs
         if: always()
         uses: actions/upload-artifact@v4
@@ -114,6 +134,8 @@ jobs:
             us-five-source-gaps.md
             us-five-original-scope-audit.json
             us-five-original-scope-audit.md
+            us-five-final-verdict.json
+            us-five-final-verdict.md
             data/unified-us-five-scoring/score-plan.json
             data/unified-us-five-scoring/valuation-report.json
             data/unified-us-five-scoring/scoring/report.md
