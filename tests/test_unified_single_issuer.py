@@ -49,6 +49,29 @@ class OneIssuer(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "missing"):
                 target.build("MSFT", fixture=self.fixture(root))
 
+    def test_participation_wrong_issuer_is_rejected(self):
+        with tempfile.TemporaryDirectory() as root:
+            with self.assertRaisesRegex(ValueError, "symbol mismatch"):
+                target.build(
+                    "AAPL", fixture=self.fixture(root),
+                    participation_evidence={"company": {"symbol": "MSFT"}})
+
+    def test_existing_participation_engine_blocks_unverified_facts(self):
+        with tempfile.TemporaryDirectory() as root:
+            evidence = {
+                "company": {"issuer_key": "SEC:0000320193", "symbol": "AAPL"},
+                "rulebook": None,
+            }
+            result = target.build(
+                "AAPL", fixture=self.fixture(root),
+                participation_evidence=evidence)
+        self.assertEqual(result["participation_research"]["status"], "bilinmiyor")
+        self.assertIn("reviewed_standard_evidence_missing",
+                      result["participation_research"]["review_reasons"])
+        self.assertTrue(result["participation_research"]["no_live_source_verification"])
+        self.assertFalse(result["eligible_for_trade"])
+        self.assertFalse(result["investment_advice"])
+
     def test_live_price_source_failure_fails_closed(self):
         with patch.object(target.pilot, "fetch_yfinance", side_effect=OSError("offline")), \
              patch.object(target.pilot, "fetch_yahoo_chart", side_effect=OSError("offline")), \
