@@ -70,6 +70,42 @@ class ValuationBridgeTests(unittest.TestCase):
             self.assertIn("Değerleme kaynak durumu", radar.turkish_issuer_report(result))
             self.assertFalse(result["eligible_for_trade"])
 
+    def test_score_summary_blocks_unverified_and_keeps_score_null(self):
+        from scripts.unified_aapl_score_summary import summarize_score
+        sample = {"as_of": "2026-11-22T12:00:00+00:00",
+                  "companies": [{"symbol": "AAPL", "issuer_id": bridge.CIK,
+                                 "status": "review_required",
+                                 "total_score": None,
+                                 "blockers": ["comparison_evidence_missing"]}]}
+        out = summarize_score(sample)
+        self.assertIsNone(out["score"])
+        self.assertEqual(out["blockers"], ["comparison_evidence_missing"])
+        self.assertFalse(out["eligible_for_trade"])
+
+    def test_scored_hypothesis_remains_not_approved(self):
+        from scripts.unified_aapl_score_summary import summarize_score
+        sample = {"as_of": "2026-11-22T12:00:00+00:00",
+                  "companies": [{"symbol": "AAPL", "issuer_id": bridge.CIK,
+                                 "status": "scored_research_hypothesis",
+                                 "total_score": 72,
+                                 "model_version": "operating-sector-research-batch-v2",
+                                 "blockers": []}]}
+        out = summarize_score(sample)
+        self.assertEqual(out["score"], 72)
+        self.assertFalse(out["investment_approved"])
+
+    def test_score_summary_must_reject_cross_issuer_and_fabricated(self):
+        from scripts.unified_aapl_score_summary import summarize_score
+        sample = {"companies": [{"symbol": "MSFT", "issuer_id": bridge.CIK,
+                                 "status": "scored_research_hypothesis",
+                                 "total_score": 73}]}
+        with self.assertRaisesRegex(ValueError, "issuer mismatch"):
+            summarize_score(sample)
+        sample["companies"][0]["symbol"] = "AAPL"
+        sample["companies"][0]["status"] = "review_required"
+        with self.assertRaisesRegex(ValueError, "unsupported score"):
+            summarize_score(sample)
+
     def test_request_budget_hard_limit(self):
         with self.assertRaisesRegex(ValueError, "budget"):
             bridge.collect(state_dir="/tmp/x", user_agent="contact@example.com",
