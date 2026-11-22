@@ -12,6 +12,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/unified-us-five-proof.yml
+      - scripts/unified_us_five_scoring.py
 permissions:
   contents: read
 concurrency:
