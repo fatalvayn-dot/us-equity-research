@@ -173,6 +173,31 @@ class OneIssuer(unittest.TestCase):
         self.assertIn("no_screen_trigger", contents)
         self.assertEqual(result["llm"]["llm_calls"], 5)
 
+    def test_aapl_rss_is_public_keyword_observation_not_price_model(self):
+        public = {"status": "ok", "items": [{"title": "Test headline",
+                                            "categories": ["risk"],
+                                            "url": "https://news.example.test"}],
+                  "risk_count": 1}
+        with tempfile.TemporaryDirectory() as root:
+            with patch.object(target.pilot, "news_digest", return_value=public) as read:
+                result = target.build("AAPL", fixture=self.fixture(root),
+                                      enable_news=True)
+        read.assert_called_once_with(target.AAPL_RSS)
+        self.assertEqual(result["gates"]["news_event_model"],
+                         "rss_headlines_only_no_causal_model")
+        self.assertFalse(result["eligible_for_trade"])
+        self.assertIn("Haber anahtar kelimesi risk sayısı: 1",
+                      target.turkish_issuer_report(result))
+
+    def test_unavailable_rss_never_counts_as_live_causal_prediction(self):
+        with tempfile.TemporaryDirectory() as root:
+            with patch.object(target.pilot, "news_digest", side_effect=OSError("unavailable")):
+                result = target.build("AAPL", fixture=self.fixture(root),
+                                      enable_news=True)
+        self.assertEqual(result["research"]["news"]["status"], "unavailable")
+        self.assertEqual(result["gates"]["news_event_model"], "rss_source_unavailable")
+        self.assertFalse(result["eligible_for_trade"])
+
     def test_live_price_source_failure_fails_closed(self):
         with patch.object(target.pilot, "fetch_yfinance", side_effect=OSError("offline")), \
              patch.object(target.pilot, "fetch_yahoo_chart", side_effect=OSError("offline")), \
