@@ -47,7 +47,7 @@ def research_five(*, user_agent, state_dir, fixture=None,
     output = {"schema_version": 1, "cohort": "US_FIVE_V1",
               "as_of": datetime.now(timezone.utc).isoformat(),
               "requested": len(candidates), "companies": [],
-              "market_requests_per_issuer_max": 1,
+              "market_history_orchestrations_per_issuer": 1,
               "sec_batch_runs": 1,
               "llm_calls": 0, "real_orders": 0, "paid_api_enabled": False,
               "investment_approved": False}
