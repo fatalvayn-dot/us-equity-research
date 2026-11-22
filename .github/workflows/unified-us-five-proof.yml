@@ -18,7 +18,11 @@ on:
     branches: [main]
     paths:
       - .github/workflows/unified-us-five-proof.yml
+      - scripts/unified_us_five.py
       - scripts/unified_us_five_scoring.py
+      - scripts/unified_us_five_source_gaps.py
+      - scripts/us_five_original_scope_audit.py
+      - scripts/us_five_final_verdict.py
 permissions:
   contents: read
 concurrency:
