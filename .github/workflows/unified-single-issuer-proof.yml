@@ -7,6 +7,8 @@ on:
       - tests/test_unified_aapl_valuation.py
       - tests/test_unified_aapl_backtest.py
       - tests/test_unified_aapl_llm.py
+      - tests/test_unified_aapl_acceptance.py
+      - scripts/unified_aapl_acceptance.py
       - scripts/unified_aapl_backtest.py
       - scripts/unified_aapl_llm.py
       - scripts/llm_team.py
@@ -31,7 +33,7 @@ jobs:
       - name: Offline end-to-end and failure regression
         env:
           PYTHONPATH: .:src
-        run: python -m unittest -v tests.test_unified_single_issuer tests.test_unified_aapl_valuation tests.test_unified_aapl_backtest tests.test_unified_aapl_llm
+        run: python -m unittest -v tests.test_unified_single_issuer tests.test_unified_aapl_valuation tests.test_unified_aapl_backtest tests.test_unified_aapl_llm tests.test_unified_aapl_acceptance
       - name: Live read-only AAPL one-source attempt
         env:
           PYTHONPATH: .:src
@@ -153,6 +155,28 @@ jobs:
           python scripts/unified_aapl_llm.py \
             --input "$EVIDENCE" \
             --out unified-aapl-llm-readiness.json
+      - name: Synthesize final AAPL acceptance from same research and real agent outputs
+        if: always()
+        env:
+          PYTHONPATH: .:src
+        shell: bash
+        run: |
+          EVIDENCE=unified-aapl-full-pipeline.json
+          if [ ! -f "$EVIDENCE" ]; then
+            EVIDENCE=unified-aapl-with-valuation-gates.json
+          fi
+          if [ ! -f "$EVIDENCE" ]; then
+            EVIDENCE=unified-single-issuer-with-financials.json
+          fi
+          if [ ! -f "$EVIDENCE" ]; then
+            echo "No unified report created; no final approval"
+            exit 0
+          fi
+          python scripts/unified_aapl_acceptance.py \
+            --research "$EVIDENCE" \
+            --llm unified-aapl-llm-readiness.json \
+            --out unified-aapl-acceptance.json \
+            --markdown unified-aapl-acceptance.md
       - name: Archive timestamped proof without secrets
         if: always()
         uses: actions/upload-artifact@v4
@@ -173,5 +197,7 @@ jobs:
             unified-aapl-full-pipeline.md
             data/unified-aapl-score/scoring/report.md
             unified-aapl-llm-readiness.json
+            unified-aapl-acceptance.json
+            unified-aapl-acceptance.md
           if-no-files-found: ignore
           retention-days: 7
