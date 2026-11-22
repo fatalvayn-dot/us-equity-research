@@ -20,6 +20,8 @@ class WalkForwardTests(unittest.TestCase):
         self.assertEqual(result["direction_hit_rate"], 1)
         self.assertEqual(result["benchmark_up_hit_rate"], 1)
         self.assertTrue(result["eligible_samples"] > 20)
+        self.assertEqual(result["performance_gate"], "not_better_than_naive_up")
+        self.assertFalse(result["predictive_approved"])
         self.assertFalse(result["trained_model"])
         self.assertFalse(result["investment_approved"])
 
