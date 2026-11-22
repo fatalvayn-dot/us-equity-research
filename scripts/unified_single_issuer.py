@@ -207,6 +207,7 @@ def build(symbol="AAPL", fixture=None, agent_transport=None, enable_llm=False,
         scoring = {
             "status": status, "score": score,
             "model_version": score_summary.get("model_version"),
+            "score_components": score_summary.get("score_components", {}),
             "blockers": score_summary.get("blockers", []),
         }
         gates["valuation"] = ("scored_research_hypothesis_not_investment_approval"
