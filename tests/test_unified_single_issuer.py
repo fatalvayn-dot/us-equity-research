@@ -50,8 +50,8 @@ class OneIssuer(unittest.TestCase):
                 target.build("MSFT", fixture=self.fixture(root))
 
     def test_live_price_source_failure_fails_closed(self):
-        with patch.object(target.pilot, "fetch_yfinance", side_effect=OSError("offline")), \\
-             patch.object(target.pilot, "fetch_yahoo_chart", side_effect=OSError("offline")), \\
+        with patch.object(target.pilot, "fetch_yfinance", side_effect=OSError("offline")), \
+             patch.object(target.pilot, "fetch_yahoo_chart", side_effect=OSError("offline")), \
              patch.object(target.pilot, "fetch_prices", side_effect=OSError("offline")):
             with self.assertRaisesRegex(RuntimeError, "no verified price history"):
                 target.build("AAPL")
