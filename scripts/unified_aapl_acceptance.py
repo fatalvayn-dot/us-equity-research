@@ -43,6 +43,12 @@ def assess(report, llm=None):
                                and scoring.get("score") is not None,
         "rss_headlines": news.get("status") == "ok"
                          and gates.get("news_event_model") == "rss_headlines_only_no_causal_model",
+        "news_publication_provenance": news.get("status") == "ok"
+            and type(news.get("dated_items")) is int and news["dated_items"] > 0
+            and isinstance(news.get("source_sha256"), str)
+            and len(news["source_sha256"]) == 64
+            and isinstance(news.get("retrieved_at_utc"), str)
+            and news.get("future_dated_excluded") == 0,
         "llm_five_real_calls": isinstance(llm, dict)
                                and llm.get("status") == "completed"
                                and llm.get("real_api_tested") is True
@@ -64,7 +70,8 @@ def assess(report, llm=None):
     missing = [name for name, passed in evidence.items() if not passed]
     operational = all(evidence[x] for x in
                       ("live_price", "sec_financials", "four_market_sources",
-                       "comparative_scoring", "rss_headlines", "llm_five_real_calls"))
+                       "comparative_scoring", "rss_headlines",
+                       "news_publication_provenance", "llm_five_real_calls"))
     return {
         "schema_version": 1,
         "symbol": "AAPL",

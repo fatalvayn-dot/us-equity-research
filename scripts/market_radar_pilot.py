@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 import io
+import hashlib
 import json
 import math
 import os
@@ -11,6 +12,7 @@ import statistics
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
+from email.utils import parsedate_to_datetime
 from datetime import datetime, timezone
 
 DEFAULT_WATCH = {
@@ -118,17 +120,45 @@ def news_digest(url=None, timeout=10):
     req = urllib.request.Request(url, headers={"User-Agent": UA})
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         xml_bytes = resp.read(800_000)
+    retrieved_at = datetime.now(timezone.utc)
     root = ET.fromstring(xml_bytes)
     items = []
+    invalid_dates = 0
+    future_dated = 0
     for item in root.findall(".//item")[:30]:
         title = (item.findtext("title") or "").strip()[:300]
         if not title:
             continue
         low = title.casefold()
         categories = [name for name, terms in KEYWORDS.items() if any(x in low for x in terms)]
+        reported_time = (item.findtext("pubDate") or "").strip()
+        observed_time = None
+        if reported_time:
+            try:
+                published = parsedate_to_datetime(reported_time)
+                if published.tzinfo is not None:
+                    published = published.astimezone(timezone.utc)
+                    if published > retrieved_at:
+                        future_dated += 1
+                        continue
+                    observed_time = published.isoformat()
+                else:
+                    invalid_dates += 1
+            except (ValueError, TypeError, IndexError, OverflowError):
+                invalid_dates += 1
+        else:
+            invalid_dates += 1
         items.append({"title": title, "categories": categories,
-                      "url": (item.findtext("link") or "")[:500]})
-    return {"status": "ok", "items": items, "risk_count": sum("risk" in x["categories"] for x in items)}
+                      "url": (item.findtext("link") or "")[:500],
+                      "published_at_utc": observed_time})
+    return {"status": "ok", "items": items,
+            "retrieved_at_utc": retrieved_at.isoformat(),
+            "source_sha256": hashlib.sha256(xml_bytes).hexdigest(),
+            "dated_items": sum(x["published_at_utc"] is not None for x in items),
+            "undated_items": invalid_dates,
+            "future_dated_excluded": future_dated,
+            "event_price_impact_validated": False,
+            "risk_count": sum("risk" in x["categories"] for x in items)}
 
 def signal(rows):
     if len(rows) < 22:

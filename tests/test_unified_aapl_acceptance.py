@@ -25,7 +25,10 @@ def research():
             "eligible_samples": 143, "predictive_approved": False,
             "adaptive_optimization_verified": False},
         "research": {"forecasts": [], "news": {"status": "ok",
-                    "items": [{"title": "private raw title"}], "risk_count": 2}},
+                    "items": [{"title": "private raw title"}], "risk_count": 2,
+                    "dated_items": 1, "source_sha256": "a" * 64,
+                    "retrieved_at_utc": "2026-11-22T10:00:00+00:00",
+                    "future_dated_excluded": 0}},
         "summary": {"status": "live_attempt", "current_forecasts": 1},
         "participation_research": {"status": "bilinmiyor",
                                    "no_live_source_verification": True},
@@ -82,6 +85,14 @@ class AcceptanceTests(unittest.TestCase):
         self.assertEqual(clean["prediction_validation"]["predictive_approved"], False)
         self.assertNotIn("DO_NOT_SEND_PORTFOLIO", json.dumps(clean))
         self.assertNotIn("private raw title", json.dumps(clean))
+
+    def test_rss_without_provenance_cannot_clear_accepted_news_stage(self):
+        record = research()
+        record["research"]["news"].pop("source_sha256")
+        result = assess(record, llm())
+        self.assertFalse(result["evidence_gates"]["news_publication_provenance"])
+        self.assertIn("news_publication_provenance", result["missing_acceptance"])
+        self.assertEqual(result["status"], "research_chain_incomplete")
 
     def test_malformed_score_and_rate_not_shared(self):
         bad = research()

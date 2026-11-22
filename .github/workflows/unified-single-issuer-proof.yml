@@ -8,6 +8,8 @@ on:
       - tests/test_unified_aapl_backtest.py
       - tests/test_unified_aapl_llm.py
       - tests/test_unified_aapl_acceptance.py
+      - scripts/market_radar_pilot.py
+      - tests/test_market_radar_pilot.py
       - scripts/unified_aapl_acceptance.py
       - data/aapl-research/participation-gap-input.json
       - scripts/unified_aapl_backtest.py
@@ -41,7 +43,7 @@ jobs:
       - name: Offline end-to-end and failure regression
         env:
           PYTHONPATH: .:src
-        run: python -m unittest -v tests.test_unified_single_issuer tests.test_unified_aapl_valuation tests.test_unified_aapl_backtest tests.test_unified_aapl_llm tests.test_unified_aapl_acceptance
+        run: python -m unittest -v tests.test_unified_single_issuer tests.test_unified_aapl_valuation tests.test_unified_aapl_backtest tests.test_unified_aapl_llm tests.test_unified_aapl_acceptance tests.test_market_radar_pilot
       - name: Live read-only AAPL one-source attempt
         env:
           PYTHONPATH: .:src
