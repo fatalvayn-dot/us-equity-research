@@ -72,6 +72,56 @@ class OneIssuer(unittest.TestCase):
         self.assertFalse(result["eligible_for_trade"])
         self.assertFalse(result["investment_advice"])
 
+    def test_sec_report_handoff_with_exact_identity(self):
+        from datetime import datetime, timezone
+        proof = {
+            "as_of": "2026-11-20T11:00:00+00:00",
+            "companies": [{"symbol": "AAPL", "issuer_id": "0000320193",
+                           "accepted_fact_count": 9}],
+            "pipeline": {"all_financial_references_archived": True},
+        }
+        with patch.object(target, "price_history", return_value=(
+            [{"date": "2026-10-%02d" % i, "close": 100 + i} for i in range(1, 31)],
+            "fixture")):
+            result = target.build(
+                "AAPL", financial_report=proof, financial_cik="0000320193")
+        self.assertEqual(result["financial_research"]["accepted_fact_count"], 9)
+        self.assertEqual(result["gates"]["fundamentals"], "facts_observed_review_required")
+        self.assertEqual(result["gates"]["valuation"], "blocked_missing_fundamentals")
+        self.assertFalse(result["eligible_for_trade"])
+
+    def test_sec_handoff_rejects_mismatched_cik(self):
+        proof = {"as_of": "2026-11-20T11:00:00+00:00",
+                 "companies": [{"symbol": "AAPL", "issuer_id": "0000789019",
+                                "accepted_fact_count": 9}]}
+        with tempfile.TemporaryDirectory() as root:
+            with self.assertRaisesRegex(ValueError, "issuer identity mismatch"):
+                target.build("AAPL", fixture=self.fixture(root),
+                             financial_report=proof, financial_cik="0000320193")
+
+    def test_sec_handoff_does_not_approve_unarchived_sources(self):
+        proof = {"as_of": "2026-11-20T11:00:00+00:00",
+                 "companies": [{"symbol": "AAPL", "issuer_id": "0000320193",
+                                "accepted_fact_count": 9}],
+                 "pipeline": {"all_financial_references_archived": False}}
+        with tempfile.TemporaryDirectory() as root:
+            result = target.build("AAPL", fixture=self.fixture(root),
+                                  financial_report=proof, financial_cik="0000320193")
+        self.assertEqual(result["financial_research"]["status"], "incomplete_evidence")
+        self.assertFalse(result["eligible_for_trade"])
+
+    def test_sec_collection_wrapper_reuses_existing_mvp(self):
+        from scripts import unified_sec_one_issuer as sec
+        sample = {"companies": []}
+        with patch.object(sec, "run_mvp", return_value=sample) as collector:
+            output = sec.collect_one(state_dir="tmp/test-sec", user_agent="Research Team contact: example@example.org")
+        self.assertIs(output, sample)
+        self.assertEqual(collector.call_args.args[0]["companies"], [
+            {"symbol": "AAPL", "issuer_id": "0000320193"}])
+        with self.assertRaisesRegex(ValueError, "exact reviewed AAPL"):
+            sec.collect_one(symbol="MSFT", state_dir="tmp/test-sec",
+                            user_agent="Research Team contact: example@example.org")
+
     def test_live_price_source_failure_fails_closed(self):
         with patch.object(target.pilot, "fetch_yfinance", side_effect=OSError("offline")), \
              patch.object(target.pilot, "fetch_yahoo_chart", side_effect=OSError("offline")), \
