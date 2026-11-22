@@ -29,26 +29,27 @@ jobs:
     if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     needs: agent-contract
     runs-on: ubuntu-latest
-    timeout-minutes: 7
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run opt-in research agent team
+      - name: Build one source-backed AAPL technical research envelope
+        env:
+          PYTHONPATH: .:src
+        run: |
+          python -m pip install --disable-pip-version-check -r requirements/market-radar.txt
+          mkdir -p radar-input
+          python scripts/unified_single_issuer.py --symbol AAPL --out radar-input/aapl.json
+
+      - name: Test exact AAPL five-agent free-only provider or report missing configuration
         env:
           PYTHONPATH: .:src
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           RADAR_FREE_LLM_ENABLED: ${{ vars.RADAR_FREE_LLM_ENABLED }}
         run: |
-          if [ "$RADAR_FREE_LLM_ENABLED" != "true" ] || [ -z "$OPENROUTER_API_KEY" ]; then
-            echo "LLM opt-in or API key missing: no charge, no execution"
-            exit 0
-          fi
-          python -m pip install --disable-pip-version-check -r requirements/market-radar.txt
-          mkdir -p radar-input
-          python scripts/market_radar_agents.py --output radar-input
-          python scripts/llm_team.py --input radar-input/latest.json --output llm-team-report.json
+          python scripts/unified_aapl_llm.py --input radar-input/aapl.json --out llm-team-report.json
       - name: Upload non-sensitive manager report
         if: always()
         uses: actions/upload-artifact@v4
