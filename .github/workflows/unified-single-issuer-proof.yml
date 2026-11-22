@@ -9,6 +9,7 @@ on:
       - tests/test_unified_aapl_llm.py
       - tests/test_unified_aapl_acceptance.py
       - scripts/unified_aapl_acceptance.py
+      - data/aapl-research/participation-gap-input.json
       - scripts/unified_aapl_backtest.py
       - scripts/unified_aapl_llm.py
       - scripts/llm_team.py
@@ -55,6 +56,7 @@ jobs:
           python scripts/unified_single_issuer.py \
             --symbol AAPL \
             --financial-cik 0000320193 \
+            --participation-evidence data/aapl-research/participation-gap-input.json \
             --financial-report unified-aapl-sec-report.json \
             --out unified-single-issuer-with-financials.json \
             --markdown unified-single-issuer-with-financials.md
@@ -131,6 +133,7 @@ jobs:
             --out unified-aapl-score-summary.json
           python scripts/unified_single_issuer.py \
             --symbol AAPL --financial-cik 0000320193 \
+            --participation-evidence data/aapl-research/participation-gap-input.json \
             --financial-report unified-aapl-sec-report.json \
             --valuation-summary unified-aapl-valuation-summary.json \
             --score-summary unified-aapl-score-summary.json \
