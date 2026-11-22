@@ -94,3 +94,5 @@ ve erişim durumu aktarılır.
 Haber akışında güvenilir `pubDate` yayım/erişim zamanları, kaynak çapraz
 doğrulaması, olaya fiyat etkisi bağlantısı ve walk-forward olay modeli
 olmadığından canlı yatırım yön tahmini veya otomatik emir **açılmaz**.
+
+Bu kaynak taraması test akışında tek haber bağlantısıyla yapılır; ücretli haber servisi veya işlem erişimi gerektirmez.
