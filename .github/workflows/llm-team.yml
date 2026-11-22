@@ -1,11 +1,6 @@
 name: LLM manager team (opt-in)
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/llm-team.yml
-      - scripts/llm_team.py
   pull_request:
     paths:
       - scripts/llm_team.py
