@@ -75,6 +75,7 @@ def assess(report, llm=None):
         "missing_acceptance": missing,
         "score": scoring.get("score") if evidence["comparative_scoring"] else None,
         "score_model_version": scoring.get("model_version"),
+        "score_components": scoring.get("score_components", {}) if evidence["comparative_scoring"] else {},
         "prediction_baseline_hit_rate": backtest.get("benchmark_up_hit_rate"),
         "prediction_observed_hit_rate": backtest.get("direction_hit_rate"),
         "advisor_verdict": (
@@ -99,6 +100,13 @@ def markdown(result):
     ]
     for name, passed in result["evidence_gates"].items():
         lines.append("- " + ("GEÇTİ" if passed else "EKSİK") + ": " + name)
+    components = result.get("score_components", {})
+    if components:
+        lines.extend(["", "## Finansal skor bileşenleri"])
+        for key in ("financial_strength", "valuation", "growth", "profitability", "cash_flow", "risk"):
+            item = components.get(key)
+            if isinstance(item, dict):
+                lines.append("- " + key + ": " + str(item.get("score")) + " / " + str(item.get("max")))
     lines += ["", "## Son uzman değerlendirmesi",
               result.get("advisor_verdict") or "Gerçek beş ajanlı rapor henüz doğrulanmadı.",
               "", "## Kabul eksikleri",
