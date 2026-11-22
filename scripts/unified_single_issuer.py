@@ -62,7 +62,7 @@ def build(symbol="AAPL", fixture=None, agent_transport=None, enable_llm=False, p
         "market_price": "fixture" if fixture else "source_observed",
         "fundamentals": "blocked_missing_filing_evidence",
         "valuation": "blocked_missing_fundamentals",
-        "participation": report["gates"]["participation"],
+        "participation": "unknown",
         "news_event_model": "not_connected",
         "prediction": "uncalibrated_baseline",
         "investment_decision": "prohibited",
@@ -116,7 +116,7 @@ def main():
         json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({
         "symbol": report["symbol"], "source": report["source"],
-        "price": report["gates"]["market_price"], "participation": "unknown",
+        "price": report["gates"]["market_price"], "participation": report["gates"]["participation"],
         "decision": "prohibited", "llm": report["llm"]["status"]
     }, ensure_ascii=False))
 
