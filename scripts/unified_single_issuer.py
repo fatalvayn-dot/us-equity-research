@@ -118,6 +118,10 @@ def build(symbol="AAPL", fixture=None, agent_transport=None, enable_llm=False,
         "prediction": "uncalibrated_baseline",
         "investment_decision": "prohibited",
     }
+    if walkforward.get("performance_gate") == "not_better_than_naive_up":
+        gates["prediction"] = "blocked_no_edge_vs_naive_up"
+    elif walkforward.get("performance_gate") == "insufficient_directional_sample":
+        gates["prediction"] = "blocked_insufficient_backtest_sample"
     participation = {"status": "bilinmiyor", "reason": "participation_source_evidence_missing",
                      "investment_approved": False, "no_live_source_verification": True}
     if participation_evidence is not None:
@@ -235,6 +239,7 @@ def turkish_issuer_report(envelope):
         + "- Geçmiş yön tahmini doğrulaması: " + str(envelope.get("historical_prediction_check", {}).get("direction_hit_rate")) + "\n"
         + "- Geçmiş kontrol örneklemi: " + str(envelope.get("historical_prediction_check", {}).get("eligible_samples", 0)) + "\n"
         + "- Geçmiş yukarı yön kıyası: " + str(envelope.get("historical_prediction_check", {}).get("benchmark_up_hit_rate")) + "\n"
+        + "- Tahmin güven kapısı: " + str(g["prediction"]) + "\n"
         + "- Haber / olay analizi: " + str(g["news_event_model"]) + "\n"
         + "- LLM ajan ekibi: " + str(envelope["llm"]["status"]) + "\n"
         + "- Yatırım kararı: KAPALI. Katılım ve değerleme onayı yok.\n"
