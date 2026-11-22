@@ -23,7 +23,19 @@ def process(report, *, enabled, key_present, transport=None):
                 "missing_configuration": missing, "real_api_tested": False,
                 "paid_fallback": False, "investment_approved": False}
     # Called once using the already serialized research envelope.
-    result = llm_team.orchestrate(report, transport=transport)
+    try:
+        result = llm_team.orchestrate(report, transport=transport)
+    except RuntimeError as exc:
+        # Free provider quotas can reset later; do not retry on this job,
+        # buy capacity, or claim a five-agent success from partial calls.
+        if str(exc) == "LLM API HTTP status: 429":
+            return {"status": "blocked_free_provider_rate_limit",
+                    "reason": "HTTP_429",
+                    "real_api_tested": transport is None,
+                    "paid_fallback": False,
+                    "investment_approved": False,
+                    "llm_calls": None}
+        raise
     return {"status": "completed", "real_api_tested": transport is None,
             "provider": "openrouter/free" if transport is None else "mock_only",
             "paid_fallback": False, "investment_approved": False,
