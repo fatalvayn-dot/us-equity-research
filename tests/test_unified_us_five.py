@@ -46,6 +46,8 @@ class FiveIssuerTests(unittest.TestCase):
             self.assertIsNone(item["score"])
             self.assertFalse(item["eligible_for_trade"])
             self.assertEqual(item["participation"], "bilinmiyor")
+            self.assertIn("reviewed_standard_evidence_missing",
+                          item["participation_review_reasons"])
             self.assertIn("five_company_valuation_comparison_not_run", item["blockers"])
         self.assertIn("MSFT", cohort.render_markdown(result))
 
