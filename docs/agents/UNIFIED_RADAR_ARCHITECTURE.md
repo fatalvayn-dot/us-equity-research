@@ -49,3 +49,18 @@ Sonraki kabul: Orijinal belgelerin doğrulanmış hash'leriyle şirket kimliği,
 faizli borç/nakit, uygunsuz gelir, kullanılan standardın sürümü ve tarihleri aynı
 kanıt paketinde test edilmeli. BIST için XKTUM listesi ayrı, tarihli resmî üyelik
 kanıtı olmadan `uygun` sayılamaz.
+
+## SEC finansal kaynak bağlantısı (üçüncü aşama)
+
+AAPL için resmî SEC CIK `0000320193` ile tek şirketlik ve bütçesi sınırlı
+`scripts/unified_sec_one_issuer.py`, yeni muhasebe hesaplayıcısı yazmadan
+`equity_research.mvp.run_mvp()` fonksiyonunu kullanır. SEC User-Agent iletişim
+bilgisi secret üzerinden verilmelidir; eksikse Actions raporu açıkça SEC aşamasını
+atladığını söyler, başarılı finansal tarama iddia etmez.
+
+`scripts/unified_single_issuer.py --financial-report <SEC_JSON> --financial-cik 0000320193`
+seçeneği tek şirket CIK/sembol eşleşmesini, kaynak zamanını, kabul edilen fact
+sayısını ve kaynak arşivi kapsamını kontrol eder. Mevcut SEC toplayıcısının
+hesaplarının yerini almaz. `facts_observed_review_required` araştırma statüsüdür;
+güncel değerleme veya katılım onayı değildir. Kaynak arşivi eksikse
+`incomplete_evidence`. Sıfır veri kesinlikle sıfır finansal değer sayılmaz.
