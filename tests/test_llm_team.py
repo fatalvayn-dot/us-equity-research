@@ -41,6 +41,44 @@ class LLMTeamTests(unittest.TestCase):
         self.assertNotIn("secret_value", str(ctx.exception))
         self.assertNotIn("private credential header", str(ctx.exception))
 
+    def test_reasoning_length_retry_keeps_free_model(self):
+        seen = []
+        def fake(payload):
+            seen.append(payload)
+            if len(seen) == 1:
+                return {"choices": [{"finish_reason": "length",
+                                     "message": {"content": ""}}],
+                        "usage": {"completion_tokens": 900}}
+            return {"choices": [{"finish_reason": "stop",
+                                 "message": {"content": "Kanıt yetersiz; işlem yok."}}]}
+        answer = ask("manager", {"summary": "AAPL"}, transport=fake)
+        self.assertIn("Kanıt yetersiz", answer)
+        self.assertEqual([p["model"] for p in seen],
+                         ["openrouter/free", "openrouter/free"])
+        self.assertEqual([p["max_tokens"] for p in seen], [900, 2400])
+
+    def test_empty_stop_is_failure_without_retry_or_leak(self):
+        requests = []
+        def fake(payload):
+            requests.append(payload)
+            return {"choices": [{"finish_reason": "stop",
+                                 "message": {"content": "", "reasoning": "PRIVATE_PROVIDER_REASONING"}}],
+                    "usage": {"completion_tokens": 87}}
+        with self.assertRaisesRegex(RuntimeError, "finish=stop") as ctx:
+            ask("manager", {}, transport=fake)
+        self.assertEqual(len(requests), 1)
+        self.assertNotIn("PRIVATE_PROVIDER_REASONING", str(ctx.exception))
+
+    def test_length_retry_still_empty_remains_failure(self):
+        requests = []
+        def fake(payload):
+            requests.append(payload)
+            return {"choices": [{"finish_reason": "length", "message": {"content": None}}],
+                    "usage": {"completion_tokens": payload["max_tokens"]}}
+        with self.assertRaisesRegex(RuntimeError, "finish=length"):
+            ask("manager", {}, transport=fake)
+        self.assertEqual(len(requests), 2)
+
     def test_unknown_role(self):
         with self.assertRaises(ValueError): ask("broker",{},transport=lambda _: {})
     def test_no_key(self):
