@@ -142,7 +142,7 @@ class OneIssuer(unittest.TestCase):
         self.assertIn("11", text)
         self.assertIn("Hesaplanmadı", text)
         self.assertIn("Yatırım kararı: KAPALI", text)
-        self.assertIn("\\n- Katılım", text)
+        self.assertIn("\n- Katılım", text)
         self.assertFalse(result["eligible_for_trade"])
 
     def test_financial_details_are_not_forwarded_to_llm(self):
