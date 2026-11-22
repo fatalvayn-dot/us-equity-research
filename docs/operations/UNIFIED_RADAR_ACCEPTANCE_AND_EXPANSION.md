@@ -62,3 +62,16 @@ yorumları kaynak ve sayısal kabul kapılarını geçersiz kılamaz.
 Çalışma sürekliliği iş akışlarının açık olduğu varsayımıyla değil,
 gerçek son çalışma zamanı, sonuç kodu ve çıktı artefaktıyla ölçülmelidir.
 Ücretli LLM yönlendirmesi, kaldıraç, opsiyon ve gerçek alım otomasyonu yok.
+
+## AAPL RSS tarih ve kaynak denetimi
+
+RSS başlıkları artık orijinal yanıtın SHA-256 özeti, UTC erişim zamanı,
+`pubDate` UTC yayım zamanı, tarihsiz/gelecek tarihli sayılarıyla kaydedilir.
+Gelecekte yayımlanmış görünen başlıklar mevcut araştırmaya alınmaz.
+Eksik tarihli başlıklar bilgi amaçlı saklansa da tarihli kaynak kanıtı sayılmaz.
+Bu denetim `news_publication_provenance` kabul kapısını ayrı doğrular;
+haber-kaynak fiyat etkisi veya nedensellik modeli **değildir**.
+
+Kullanıcı için gecikmiş haber akışlarının fiyat hareketlerinden sonra
+yayınlanması nedeniyle olay etkisi çıkarımı yapmadan önce ileri tarihli
+haber günlüğü ve as-of kesme zamanı korunmalıdır.
