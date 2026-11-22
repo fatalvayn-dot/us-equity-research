@@ -1,0 +1,62 @@
+name: US five issuer evidence expansion
+on:
+  pull_request:
+    paths:
+      - scripts/unified_us_five.py
+      - tests/test_unified_us_five.py
+      - .github/workflows/unified-us-five-proof.yml
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/unified-us-five-proof.yml
+permissions:
+  contents: read
+concurrency:
+  group: us-five-proof-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+  us-five:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reuse existing environment dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements/market-radar.txt
+      - name: Verify exact issuer registry, no-trade guards and provider failure isolation
+        env:
+          PYTHONPATH: .:src
+        run: python -m unittest -v tests.test_unified_us_five tests.test_unified_single_issuer
+      - name: Five-issuer live read-only evidence collector (main or manual only)
+        if: github.event_name != 'pull_request'
+        env:
+          PYTHONPATH: .:src
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        shell: bash
+        run: |
+          if [ -z "$SEC_USER_AGENT" ]; then
+            echo "SEC identity contact missing; five-company live run NOT attempted"
+            exit 0
+          fi
+          python scripts/unified_us_five.py \
+            --state-dir data/unified-us-five-sec \
+            --user-agent "$SEC_USER_AGENT" \
+            --max-new-fields 70 \
+            --out us-five-research.json \
+            --markdown us-five-research.md
+      - name: Archive bounded, non-sensitive research outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: us-five-evidence
+          path: |
+            us-five-research.json
+            us-five-research.md
+            data/unified-us-five-sec/report.json
+            data/unified-us-five-sec/metadata.json
+            data/unified-us-five-sec/plan.json
+          if-no-files-found: ignore
+          retention-days: 7
