@@ -63,17 +63,17 @@ def googl_cover_classes(original_html):
     """Read explicitly dated A/B/C counts; this is NOT class-market valuation."""
     parser = _VisibleText()
     parser.feed(original_html.decode("utf-8"))
-    text = re.sub(r"\\s+", " ", " ".join(parser.parts))
+    text = re.sub(r"\s+", " ", " ".join(parser.parts))
     markers = list(re.finditer(
-        r"As of\\s+January\\s+28,\\s*2026\\s*,\\s*there\\s+wer\\s*e", text, flags=re.I
+        r"As of\s+January\s+28,\s*2026\s*,\s*there\s+wer\s*e", text, flags=re.I
     ))
     if len(markers) != 1:
         raise ValueError("Alphabet original cover date absent or ambiguous")
     excerpt = text[markers[0].end():markers[0].end() + 850]
     matches = list(re.finditer(
-        r"([0-9][0-9,]*)\\s+million\\s+shares\\s+of\\s+"
-        r"(?:(?:the\\s+)?Alphabet[\\u2019']s\\s+)?"
-        r"Class\\s+([ABC])\\s+(?:common\\s+|capital\\s+)?stock\\s+outstanding",
+        r"([0-9][0-9,]*)\s+million\s+shares\s+of\s+"
+        r"(?:(?:the\s+)?Alphabet[’']s\s+)?"
+        r"Class\s+([ABC])\s+(?:common\s+|capital\s+)?stock\s+outstanding",
         excerpt, re.I
     ))
     if [m.group(2).upper() for m in matches] != ["A", "B", "C"]:
