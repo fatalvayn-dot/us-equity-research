@@ -37,20 +37,23 @@ jobs:
             echo "SEC official contact not configured; financial stage not tested"
             exit 0
           fi
-          python scripts/unified_sec_one_issuer.py \\
-            --user-agent "$SEC_USER_AGENT" \\
-            --state-dir data/unified-aapl-sec \\
+          python scripts/unified_sec_one_issuer.py \
+            --user-agent "$SEC_USER_AGENT" \
+            --state-dir data/unified-aapl-sec \
             --out unified-aapl-sec-report.json
-          python scripts/unified_single_issuer.py \\
-            --symbol AAPL \\
-            --financial-cik 0000320193 \\
-            --financial-report unified-aapl-sec-report.json \\
+          python scripts/unified_single_issuer.py \
+            --symbol AAPL \
+            --financial-cik 0000320193 \
+            --financial-report unified-aapl-sec-report.json \
             --out unified-single-issuer-with-financials.json
       - name: Archive timestamped proof without secrets
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: unified-aapl-proof
-          path: |\n            unified-single-issuer.json\n            unified-single-issuer-with-financials.json\n            unified-aapl-sec-report.json
+          path: |
+            unified-single-issuer.json
+            unified-single-issuer-with-financials.json
+            unified-aapl-sec-report.json
           if-no-files-found: ignore
           retention-days: 7
