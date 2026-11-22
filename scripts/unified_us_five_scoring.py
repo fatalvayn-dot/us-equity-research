@@ -6,6 +6,7 @@ Sharia certification, paid services, LLM calls or broker actions.
 import argparse
 import json
 import subprocess
+from decimal import Decimal, InvalidOperation
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -15,6 +16,7 @@ from equity_research.valuation_collection import run_collection
 from scripts.prepare_first_score_plans import plans
 from scripts.build_current_scores import build as build_scores
 from scripts.unified_us_five import COHORT, validate_cohort
+from scripts.unified_aapl_score_summary import WEIGHTS
 
 EXPECTED = dict(COHORT)
 
@@ -77,9 +79,30 @@ def summarize(original, valuation, plan, scoring=None):
         candidate = scored.get(symbol, {})
         value = candidate.get("total_score")
         if candidate.get("status") == "scored_research_hypothesis" and value is not None:
-            if isinstance(value, bool) or not isinstance(value, (str, int, float)):
+            if isinstance(value, bool) or not isinstance(value, (str, int, float, Decimal)):
                 raise ValueError("score value malformed")
-            row["score"] = value
+            try:
+                total = Decimal(str(value))
+                if not total.is_finite() or not Decimal(0) <= total <= Decimal(100):
+                    raise ValueError("score value malformed")
+                parts = candidate.get("components")
+                if not isinstance(parts, dict) or set(parts) != set(WEIGHTS):
+                    raise ValueError("six scoring components missing")
+                evidence = {}
+                for component, limit in WEIGHTS.items():
+                    raw = parts[component]
+                    if not isinstance(raw, dict) or Decimal(str(raw.get("weight"))) != limit:
+                        raise ValueError("scoring component weight invalid")
+                    points = Decimal(str(raw.get("score")))
+                    if not points.is_finite() or not Decimal(0) <= points <= Decimal(limit):
+                        raise ValueError("scoring component points invalid")
+                    evidence[component] = {"score": str(points), "max": limit}
+                if sum(Decimal(item["score"]) for item in evidence.values()) != total:
+                    raise ValueError("six components do not reconcile to total")
+            except (InvalidOperation, TypeError, ArithmeticError):
+                raise ValueError("score value malformed") from None
+            row["score"] = str(total)
+            row["score_components"] = evidence
             row["score_status"] = "scored_research_hypothesis"
             row["blockers"] = [x for x in row["blockers"]
                                if x not in ("five_company_valuation_comparison_not_run",)]

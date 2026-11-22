@@ -1,5 +1,6 @@
 """Five-issuer score and participation read-only guards, deterministic offline."""
 import unittest
+from decimal import Decimal
 from scripts import unified_us_five_scoring as stage
 from scripts import unified_us_five as cohort
 
@@ -40,18 +41,40 @@ class FiveScoreTests(unittest.TestCase):
     def test_partial_scoring_keeps_unselected_unknown(self):
         scoring = {"companies": [
             {"symbol": "AAPL", "issuer_id": "0000320193",
-             "status": "scored_research_hypothesis", "total_score": "67.5"},
+             "status": "scored_research_hypothesis", "total_score": Decimal("67.5"),
+             "components": {
+                 name: {"weight": cap, "score": value}
+                 for name, cap, value in (
+                     ("financial_strength", 20, Decimal("7.5")),
+                     ("valuation", 20, Decimal("5")),
+                     ("growth", 20, Decimal("15")),
+                     ("profitability", 15, Decimal("15")),
+                     ("cash_flow", 15, Decimal("15")),
+                     ("risk", 10, Decimal("10"))) }},
             {"symbol": "MSFT", "issuer_id": "0000789019",
              "status": "review_required", "total_score": None},
         ]}
         r = stage.summarize(base(), valuation(), plan(), scoring=scoring)
         self.assertEqual(r["fully_scored"], 1)
         self.assertEqual(r["companies"][0]["score"], "67.5")
+        self.assertEqual(r["companies"][0]["score_components"]["valuation"]["score"], "5")
         self.assertNotIn("five_company_valuation_comparison_not_run",
                          r["companies"][0]["blockers"])
         for c in r["companies"]:
             self.assertEqual(c["participation"], "bilinmiyor")
             self.assertFalse(c["eligible_for_trade"])
+
+    def test_scoring_components_must_reconcile(self):
+        scored = {"companies": [{
+            "symbol": "AAPL", "issuer_id": "0000320193",
+            "status": "scored_research_hypothesis", "total_score": Decimal("67.5"),
+            "components": {
+                name: {"weight": cap, "score": 0}
+                for name, cap in (("financial_strength", 20), ("valuation", 20),
+                    ("growth", 20), ("profitability", 15), ("cash_flow", 15),
+                    ("risk", 10))}}]}
+        with self.assertRaisesRegex(ValueError, "do not reconcile"):
+            stage.summarize(base(), valuation(), plan(), scoring=scored)
 
     def test_reject_valuer_wrong_cik(self):
         v = valuation()
