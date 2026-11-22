@@ -15,6 +15,18 @@ class LLMTeamTests(unittest.TestCase):
         self.assertIn("step 1",calls[1]["messages"][1]["content"])
         self.assertIn("step 4",calls[4]["messages"][1]["content"])
         self.assertEqual(r["agents"]["manager_report"],"step 5")
+    def test_news_summary_is_numeric_only(self):
+        report = {"summary": {"status": "ok"},
+                  "research": {"forecasts": [], "news": {
+                      "status": "ok", "risk_count": 1,
+                      "items": [{"title": "SECRET_NEWS_HEADLINE",
+                                 "url": "https://secret.example"}]}}}
+        clean = sanitize(report)
+        self.assertEqual(clean["public_news_observation"]["headline_count"], 1)
+        self.assertEqual(clean["public_news_observation"]["risk_keyword_count"], 1)
+        self.assertNotIn("SECRET_NEWS_HEADLINE", str(clean))
+        self.assertNotIn("https://secret.example", str(clean))
+
     def test_unknown_role(self):
         with self.assertRaises(ValueError): ask("broker",{},transport=lambda _: {})
     def test_no_key(self):
