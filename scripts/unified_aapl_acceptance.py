@@ -78,7 +78,8 @@ def assess(report, llm=None):
         "score_components": scoring.get("score_components", {}) if evidence["comparative_scoring"] else {},
         "prediction_baseline_hit_rate": backtest.get("benchmark_up_hit_rate"),
         "prediction_observed_hit_rate": backtest.get("direction_hit_rate"),
-        "prediction_nonoverlapping": backtest.get("nonoverlapping"),
+        "prediction_nonoverlapping": (backtest.get("nonoverlapping")
+            if isinstance(backtest.get("nonoverlapping"), dict) else {}),
         "advisor_verdict": (
             llm["agents"]["manager_report"][:1800]
             if evidence["llm_five_real_calls"] else None),
