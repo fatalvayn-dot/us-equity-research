@@ -64,6 +64,12 @@ def sanitize(report):
             "risk_keyword_count": risk_count
                                   if type(risk_count) is int and 0 <= risk_count <= 30 else None,
             "price_impact_verified": False,
+            "dated_headline_count": news.get("dated_items")
+                if type(news.get("dated_items")) is int and 0 <= news["dated_items"] <= 30
+                else 0,
+            "future_dated_excluded": news.get("future_dated_excluded")
+                if type(news.get("future_dated_excluded")) is int
+                and 0 <= news["future_dated_excluded"] <= 30 else 0,
         }
     # Public, bounded and source-gated final AAPL research evidence.
     # No arbitrary commentary, private holdings, raw filing fields or URLs.
