@@ -81,6 +81,11 @@ def assess(report, llm=None):
         "advisor_verdict": (
             llm["agents"]["manager_report"][:1800]
             if evidence["llm_five_real_calls"] else None),
+        "participation_review_reasons": sorted([
+            reason for reason in participation.get("review_reasons", [])
+            if isinstance(reason, str) and len(reason) <= 80
+        ]) if isinstance(participation.get("review_reasons"), list) else [
+            "reviewed_standard_and_original_filing_evidence_missing"],
         "decision": "YENI_ALIM_IZNI_YOK",
         "investment_approved": False,
         "eligible_for_trade": False,
@@ -111,6 +116,8 @@ def markdown(result):
               result.get("advisor_verdict") or "Gerçek beş ajanlı rapor henüz doğrulanmadı.",
               "", "## Kabul eksikleri",
               ", ".join(result["missing_acceptance"]) or "Yok",
+              "", "Katılım veri eksikleri:",
+              ", ".join(result.get("participation_review_reasons", [])) or "Yok",
               "", "Bu sonuç yatırım talimatı değildir."]
     return "\n".join(lines) + "\n"
 
