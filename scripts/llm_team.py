@@ -85,6 +85,24 @@ def sanitize(report):
             "research_score_0_100": parsed_score,
             "investment_approved": False,
         }
+        caps = {"financial_strength": 20, "valuation": 20, "growth": 20,
+                "profitability": 15, "cash_flow": 15, "risk": 10}
+        pieces = scoring.get("score_components")
+        clean_components = {}
+        if parsed_score is not None and isinstance(pieces, dict):
+            for name, cap in caps.items():
+                part = pieces.get(name)
+                if not isinstance(part, dict) or part.get("max") != cap:
+                    continue
+                try:
+                    value = float(part.get("score"))
+                except (TypeError, ValueError, OverflowError):
+                    continue
+                if value == value and 0 <= value <= cap:
+                    clean_components[name] = {"score": round(value, 4), "max": cap}
+        if set(clean_components) == set(caps) and abs(sum(
+                x["score"] for x in clean_components.values()) - parsed_score) < 0.001:
+            clean["scoring_research"]["components"] = clean_components
     history = report.get("historical_prediction_check")
     if isinstance(history, dict):
         allowed = ("not_better_than_naive_up", "insufficient_directional_sample",
