@@ -1,5 +1,34 @@
 # Development status
 
+## 22 Kasım 2026 — #136 kohort kapısı canlı zincirde doğrulandı
+
+21 Kasım zamanlanmış [değerleme run 44926547883](https://github.com/fatalvayn-dot/us-equity-research/actions/runs/44926547883)
+başarıyla tamamlandı ve `valuation-source-state` artifact `14716514284`
+üretildi; GitHub digest'i
+`sha256:53c07e8eadd39ebf423347c575bf8d6cfe1a693890872c70949d8b1119167693`.
+Bu paket finansal kaynak olarak run `44526775886` kimliğini taşıdı.
+
+Bağlı [skor run 44928723229](https://github.com/fatalvayn-dot/us-equity-research/actions/runs/44928723229)
+gerçek artifact'leri indirdi. PR #162 ile eklenen kohort kapısı,
+`finansal=100`, `değerleme=100`, `değerlemede_eksik=100`,
+`değerlemede_fazla=100` sonucuyla fail-closed durdu. SEC staging,
+dönem planı, karşılaştırma, skorlama ve değerleme boşluk denetimi adımlarının
+tamamı atlandı. Yeni skor veya geçersiz 0/100 raporu üretilmedi; skor artifact'i
+yok. Bu, yerel fixture değil gerçek GitHub Actions/artifact zinciri
+doğrulamasıdır.
+
+Son geçerli canlı sonuç değişmedi: aktif yeni kohortta 9/100 puanlı,
+91/100 puansız; 51 model dışı sektör, 22 finansal inceleme,
+13 değerleme kanıtı ve 5 kritik finansal inceleme engeli. #136 kabul edilmedi.
+Bu oturumda yeni SEC isteği, toplayıcı, MotherDuck yazımı, ücretli servis
+ve yatırım işlemi yoktur.
+
+Sıradaki tek iş: aktif `common100` CIK+sembol kümesiyle birebir eşleşen
+yeni finansal state/evidence üretim yolunu, sequence sınırını veya eski
+checkpoint'i gevşetmeden tasarlayıp test etmek; ancak bundan sonra aynı
+kohorta ait değerleme ve tek canlı skorlama çalıştırılabilir.
+
+
 ## 21 Kasım 2026 — #136 eski finansal kohort fail-closed kapısı
 
 #136 için önceki canlı hatanın kök nedeni skor öncesinde kapatıldı. Yeni
