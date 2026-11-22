@@ -1,0 +1,267 @@
+{
+  "summary": {
+    "generated_at_utc": "2026-11-22T11:15:47.078155+00:00",
+    "status": "ok",
+    "mode": "live_attempt",
+    "agents": {
+      "proje_muduru": "tamamlandi",
+      "veri": "canli_deneme",
+      "tahmin": "referans_sinyal",
+      "haber": "not_configured",
+      "gerceklesme_denetimi": "tamamlandi",
+      "kalite_denetimi": "tamamlandi",
+      "raporlama": "tamamlandi"
+    },
+    "current_forecasts": 9,
+    "new_predictions": 0,
+    "total_predictions": 9,
+    "new_evaluations": 0,
+    "total_evaluations": 0,
+    "direction_hit_rate": null,
+    "direction_hit_sample": 0,
+    "errors": [],
+    "warnings": [],
+    "coverage": {
+      "forecast_count": 9,
+      "requested": 9,
+      "bist": "sample_only",
+      "europe": "sample_only",
+      "global_equities_and_etfs": "not_implemented",
+      "physical_commodities": "not_implemented"
+    },
+    "restrictions": {
+      "orders": false,
+      "portfolio_access": false,
+      "participation_approval": false,
+      "trading_recommendations": false,
+      "llm_agents_enabled": false
+    }
+  },
+  "research": {
+    "generated_at_utc": "2026-11-22T11:15:47.078155+00:00",
+    "mode": "live_attempt",
+    "forecast_status": "uncalibrated_research_only",
+    "news": {
+      "status": "not_configured",
+      "items": [],
+      "risk_count": null
+    },
+    "forecasts": [
+      {
+        "as_of": "2026-11-20",
+        "close": 342.55999755859375,
+        "momentum_5": -0.038482,
+        "momentum_20": -0.014868,
+        "direction": "asagi",
+        "horizon_sessions": 5,
+        "method": "5d_20d_momentum_baseline",
+        "confidence": null,
+        "eligibility": "bilinmiyor",
+        "investment_advice": false,
+        "symbol": "AAPL",
+        "asset_group": "ABD_HISSE",
+        "source": "yfinance_daily",
+        "source_symbol": "AAPL",
+        "stooq_symbol": "aapl.us"
+      },
+      {
+        "as_of": "2026-11-20",
+        "close": 484.5199890136719,
+        "momentum_5": -0.075132,
+        "momentum_20": -0.076243,
+        "direction": "asagi",
+        "horizon_sessions": 5,
+        "method": "5d_20d_momentum_baseline",
+        "confidence": null,
+        "eligibility": "bilinmiyor",
+        "investment_advice": false,
+        "symbol": "MSFT",
+        "asset_group": "ABD_HISSE",
+        "source": "yfinance_daily",
+        "source_symbol": "MSFT",
+        "stooq_symbol": "msft.us"
+      },
+      {
+        "as_of": "2026-11-20",
+        "close": 689.8099975585938,
+        "momentum_5": -0.085581,
+        "momentum_20": -0.092319,
+        "direction": "asagi",
+        "horizon_sessions": 5,
+        "method": "5d_20d_momentum_baseline",
+        "confidence": null,
+        "eligibility": "bilinmiyor",
+        "investment_advice": false,
+        "symbol": "SPY",
+        "asset_group": "ABD_ETF",
+        "source": "yfinance_daily",
+        "source_symbol": "SPY",
+        "stooq_symbol": "spy.us"
+      },
+      {
+        "as_of": "2026-11-20",
+        "close": 608.4500122070312,
+        "momentum_5": -0.105076,
+        "momentum_20": -0.136215,
+        "direction": "asagi",
+        "horizon_sessions": 5,
+        "method": "5d_20d_momentum_baseline",
+        "confidence": null,
+        "eligibility": "bilinmiyor",
+        "investment_advice": false,
+        "symbol": "QQQ",
+        "asset_group": "ABD_ETF",
+        "source": "yfinance_daily",
+        "source_symbol": "QQQ",
+        "stooq_symbol": "qqq.us"
+      },
+      {
+        "as_of": "2026-11-20",
+        "close": 322.8699951171875,
+        "momentum_5": -0.091659,
+        "momentum_20": -0.119309,
+        "direction": "asagi",
+        "horizon_sessions": 5,
+        "method": "5d_20d_momentum_baseline",
+        "confidence": null,
+        "eligibility": "bilinmiyor",
+        "investment_advice": false,
+        "symbol": "GLD",
+        "asset_group": "EMTIA_VEKIL",
+        "source": "yfinance_daily",
+        "source_symbol": "GLD",
+        "stooq_symbol": "gld.us"
+      },
+      {
+        "as_of": "2026-11-20",
+        "close": 36.970001220703125,
+        "momentum_5": -0.162248,
+        "momentum_20": -0.241174,
+        "direction": "asagi",
+        "horizon_sessions": 5,
+        "method": "5d_20d_momentum_baseline",
+        "confidence": null,
+        "eligibility": "bilinmiyor",
+        "investment_advice": false,
+        "symbol": "SLV",
+        "asset_group": "EMTIA_VEKIL",
+        "source": "yfinance_daily",
+        "source_symbol": "SLV",
+        "stooq_symbol": "slv.us"
+      },
+      {
+        "as_of": "2026-11-20",
+        "close": 139.6300048828125,
+        "momentum_5": -0.040871,
+        "momentum_20": -0.17637,
+        "direction": "asagi",
+        "horizon_sessions": 5,
+        "method": "5d_20d_momentum_baseline",
+        "confidence": null,
+        "eligibility": "bilinmiyor",
+        "investment_advice": false,
+        "symbol": "USO",
+        "asset_group": "EMTIA_VEKIL",
+        "source": "yfinance_daily",
+        "source_symbol": "USO",
+        "stooq_symbol": "uso.us"
+      },
+      {
+        "as_of": "2026-11-20",
+        "close": 327.0,
+        "momentum_5": -0.053546,
+        "momentum_20": -0.033259,
+        "direction": "asagi",
+        "horizon_sessions": 5,
+        "method": "5d_20d_momentum_baseline",
+        "confidence": null,
+        "eligibility": "bilinmiyor",
+        "investment_advice": false,
+        "symbol": "ASELS.IS",
+        "asset_group": "BIST_HISSE_ORNEK",
+        "source": "yfinance_daily",
+        "source_symbol": "ASELS.IS",
+        "stooq_symbol": null
+      },
+      {
+        "as_of": "2026-11-20",
+        "close": 183.67999267578125,
+        "momentum_5": -0.139471,
+        "momentum_20": -0.143284,
+        "direction": "asagi",
+        "horizon_sessions": 5,
+        "method": "5d_20d_momentum_baseline",
+        "confidence": null,
+        "eligibility": "bilinmiyor",
+        "investment_advice": false,
+        "symbol": "SAP.DE",
+        "asset_group": "AVRUPA_HISSE_ORNEK",
+        "source": "yfinance_daily",
+        "source_symbol": "SAP.DE",
+        "stooq_symbol": null
+      }
+    ],
+    "evaluation": [
+      {
+        "symbol": "AAPL",
+        "as_of": "2026-11-20",
+        "status": "pending"
+      },
+      {
+        "symbol": "MSFT",
+        "as_of": "2026-11-20",
+        "status": "pending"
+      },
+      {
+        "symbol": "SPY",
+        "as_of": "2026-11-20",
+        "status": "pending"
+      },
+      {
+        "symbol": "QQQ",
+        "as_of": "2026-11-20",
+        "status": "pending"
+      },
+      {
+        "symbol": "GLD",
+        "as_of": "2026-11-20",
+        "status": "pending"
+      },
+      {
+        "symbol": "SLV",
+        "as_of": "2026-11-20",
+        "status": "pending"
+      },
+      {
+        "symbol": "USO",
+        "as_of": "2026-11-20",
+        "status": "pending"
+      },
+      {
+        "symbol": "ASELS.IS",
+        "as_of": "2026-11-20",
+        "status": "pending"
+      },
+      {
+        "symbol": "SAP.DE",
+        "as_of": "2026-11-20",
+        "status": "pending"
+      }
+    ],
+    "errors": [],
+    "coverage": {
+      "forecast_count": 9,
+      "requested": 9,
+      "bist": "sample_only",
+      "europe": "sample_only",
+      "global_equities_and_etfs": "not_implemented",
+      "physical_commodities": "not_implemented"
+    },
+    "restrictions": {
+      "orders": false,
+      "portfolio_access": false,
+      "participation_approval": false,
+      "trading_recommendations": false
+    }
+  }
+}
