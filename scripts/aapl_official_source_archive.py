@@ -10,6 +10,7 @@ import os
 from datetime import datetime, timezone
 from pathlib import Path
 import urllib.request
+import urllib.error
 from urllib.parse import urlsplit
 
 from equity_research.mvp import save_json
@@ -18,7 +19,7 @@ OFFICIAL = {
     "sec_submissions": ("https://data.sec.gov/submissions/CIK0000320193.json", "json"),
     "sp_shariah_methodology": (
         "https://www.spglobal.com/spdji/en/documents/methodologies/"
-        "methodology-sp-shariah-indices.pdf", "pdf"),
+        "methodology-sp-shariah-indices.pdf?force_download=true", "pdf"),
 }
 MAX_BYTES = 12 * 1024 * 1024
 
@@ -30,7 +31,9 @@ def verify_bytes(source_name, payload):
         raise ValueError("original source bytes absent or over budget")
     if source_name == "sec_submissions":
         doc = json.loads(payload)
-        if not isinstance(doc, dict) or doc.get("cik") != 320193:
+        cik = doc.get("cik") if isinstance(doc, dict) else None
+        if (type(cik) not in (str, int) or not str(cik).isdigit()
+                or str(cik).zfill(10) != "0000320193"):
             raise ValueError("SEC CIK identity mismatch")
         if "AAPL" not in doc.get("tickers", []):
             raise ValueError("SEC AAPL ticker evidence missing")
@@ -84,7 +87,9 @@ def archive(destination, user_agent, transport=None):
             # response contents, Authorization or external error details.
             proof = {"source_name": source_name, "source_url": url,
                      "retrieved_at_utc": now, "status": "unavailable",
-                     "reason": type(exc).__name__,
+                     "reason": (
+                         "HTTP_" + str(exc.code) if isinstance(exc, urllib.error.HTTPError)
+                         else type(exc).__name__),
                      "publication_date_verified": False,
                      "investment_approved": False}
         results.append(proof)
