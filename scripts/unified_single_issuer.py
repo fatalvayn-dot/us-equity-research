@@ -10,12 +10,30 @@ import json
 import os
 from pathlib import Path
 from datetime import datetime, timezone
+from urllib.parse import urlencode
 
 from scripts import market_radar_pilot as pilot
 from scripts import market_radar_agents as ledger
 from scripts import llm_team
 from scripts import unified_aapl_backtest
 from equity_research.participation_screen import assess_participation
+
+# Public issuer-specific RSS; never accept arbitrary user-supplied network URLs.
+AAPL_RSS = "https://news.google.com/rss/search?" + urlencode({
+    "q": '"Apple Inc" AAPL when:7d',
+    "hl": "en-US", "gl": "US", "ceid": "US:en"})
+
+
+def observe_aapl_news():
+    try:
+        digest = pilot.news_digest(AAPL_RSS)
+    except Exception as exc:
+        return {"status": "unavailable", "items": [], "risk_count": None,
+                "reason": type(exc).__name__}
+    if not isinstance(digest, dict):
+        return {"status": "invalid", "items": [], "risk_count": None}
+    return digest
+
 
 
 def price_history(symbol, fixture=None):
@@ -89,7 +107,7 @@ def financial_provenance(report, symbol, cik, cutoff):
 
 def build(symbol="AAPL", fixture=None, agent_transport=None, enable_llm=False,
           participation_evidence=None, financial_report=None, financial_cik=None,
-          valuation_summary=None, score_summary=None):
+          valuation_summary=None, score_summary=None, enable_news=False):
     """One entity, one market read, one evidence envelope.
 
     Fundamental, participation and news gates remain blocked until separately
@@ -102,7 +120,8 @@ def build(symbol="AAPL", fixture=None, agent_transport=None, enable_llm=False,
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "mode": "historical_fixture" if fixture else "live_attempt",
         "forecasts": [forecast], "evaluation": [], "errors": [],
-        "news": {"status": "not_connected"},
+        "news": observe_aapl_news() if enable_news and symbol == "AAPL"
+                else {"status": "not_connected", "items": [], "risk_count": None},
         "coverage": {"requested": 1, "forecast_count": 1, "full_exchange": False},
     }
     summary, _, _ = ledger.process(raw, [], [])
@@ -118,6 +137,10 @@ def build(symbol="AAPL", fixture=None, agent_transport=None, enable_llm=False,
         "prediction": "uncalibrated_baseline",
         "investment_decision": "prohibited",
     }
+    if raw["news"].get("status") == "ok":
+        gates["news_event_model"] = "rss_headlines_only_no_causal_model"
+    elif enable_news:
+        gates["news_event_model"] = "rss_source_unavailable"
     if walkforward.get("performance_gate") == "not_better_than_naive_up":
         gates["prediction"] = "blocked_no_edge_vs_naive_up"
     elif walkforward.get("performance_gate") == "insufficient_directional_sample":
@@ -241,6 +264,8 @@ def turkish_issuer_report(envelope):
         + "- Geçmiş yukarı yön kıyası: " + str(envelope.get("historical_prediction_check", {}).get("benchmark_up_hit_rate")) + "\n"
         + "- Tahmin güven kapısı: " + str(g["prediction"]) + "\n"
         + "- Haber / olay analizi: " + str(g["news_event_model"]) + "\n"
+        + "- RSS haber başlığı: " + str(len(envelope.get("research", {}).get("news", {}).get("items", []))) + "\n"
+        + "- Haber anahtar kelimesi risk sayısı: " + str(envelope.get("research", {}).get("news", {}).get("risk_count")) + "\n"
         + "- LLM ajan ekibi: " + str(envelope["llm"]["status"]) + "\n"
         + "- Yatırım kararı: KAPALI. Katılım ve değerleme onayı yok.\n"
     )
@@ -253,6 +278,7 @@ def main():
     p.add_argument("--out", default="unified-single-issuer.json")
     p.add_argument("--markdown", help="Dated Turkish research handoff path")
     p.add_argument("--llm", action="store_true")
+    p.add_argument("--aapl-news", action="store_true", help="One public Google News RSS headline watch; not event prediction")
     p.add_argument("--participation-evidence", help="Externally reviewed company/rulebook JSON; not index certification")
     p.add_argument("--financial-report", help="Existing SEC MVP one-issuer report JSON, not a valuation approval")
     p.add_argument("--financial-cik", help="Exact SEC identity for --financial-report")
@@ -273,7 +299,7 @@ def main():
     report = build(args.symbol, args.fixture, enable_llm=args.llm,
                    participation_evidence=evidence, financial_report=financial,
                    financial_cik=args.financial_cik, valuation_summary=valuation,
-                   score_summary=scoring)
+                   score_summary=scoring, enable_news=args.aapl_news)
     Path(args.out).write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if args.markdown:

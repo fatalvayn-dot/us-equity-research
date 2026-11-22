@@ -80,3 +80,19 @@ portföy bilgileri, keyfi açıklamalar, hesap bakiyeleri, kaynak URL'leri veya
 SEC arşivindeki ham metinler gönderilmez. Ajanların beş çağrısı mock testte
 sınanır; **gerçek OpenRouter uç noktası başarılı denenmediği müddetçe**
 çalıştığı iddia edilmez. Varsayılan LLM ve alım kararı kapalıdır.
+
+## AAPL kamu haber RSS gözlemi (deneme)
+
+`scripts/unified_single_issuer.py --aapl-news` seçeneği sabit, herkese açık
+Google News AAPL RSS arama adresini **mevcut** `market_radar_pilot.news_digest`
+ile okur. Yeni veri toplama sağlayıcısı yazılmaz; kaynak başarısızsa
+`rss_source_unavailable`, başarılıysa `rss_headlines_only_no_causal_model`.
+Başlıkların sayısı ve sabit risk anahtar kelimelerinin kaç kez göründüğü
+Türkçe rapora aktarılır. Ham başlık/URL LLM'e gönderilmez; yalnız sayılar
+ve erişim durumu aktarılır.
+
+Haber akışında güvenilir `pubDate` yayım/erişim zamanları, kaynak çapraz
+doğrulaması, olaya fiyat etkisi bağlantısı ve walk-forward olay modeli
+olmadığından canlı yatırım yön tahmini veya otomatik emir **açılmaz**.
+
+Bu kaynak taraması test akışında tek haber bağlantısıyla yapılır; ücretli haber servisi veya işlem erişimi gerektirmez.

@@ -51,6 +51,19 @@ def sanitize(report):
             and (gates[key].startswith("blocked")
                  or gates[key] in ("unknown", "bilinmiyor", "not_connected"))
         ]
+    news = r.get("news")
+    if isinstance(news, dict):
+        headline_list = news.get("items")
+        risk_count = news.get("risk_count")
+        clean["public_news_observation"] = {
+            "status": news.get("status") if news.get("status") in
+                      ("ok", "unavailable", "not_connected", "invalid") else "unknown",
+            "headline_count": min(len(headline_list), 30)
+                              if isinstance(headline_list, list) else 0,
+            "risk_keyword_count": risk_count
+                                  if type(risk_count) is int and 0 <= risk_count <= 30 else None,
+            "price_impact_verified": False,
+        }
     if len(json.dumps(clean))>12000: raise ValueError("evidence too large")
     return clean
 
