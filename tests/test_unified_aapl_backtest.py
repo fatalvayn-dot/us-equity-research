@@ -20,6 +20,12 @@ class WalkForwardTests(unittest.TestCase):
         self.assertEqual(result["direction_hit_rate"], 1)
         self.assertEqual(result["benchmark_up_hit_rate"], 1)
         self.assertTrue(result["eligible_samples"] > 20)
+        independent = result["nonoverlapping"]
+        self.assertLessEqual(independent["eligible_samples"], result["total_signals"] // 5 + 1)
+        self.assertGreater(independent["eligible_samples"], 0)
+        self.assertEqual(independent["origin_spacing_sessions"], 5)
+        self.assertFalse(independent["price_lookahead_used"])
+        self.assertEqual(independent["status"], "insufficient_independent_samples")
         self.assertEqual(result["performance_gate"], "not_better_than_naive_up")
         self.assertFalse(result["predictive_approved"])
         self.assertFalse(result["trained_model"])
@@ -47,5 +53,6 @@ class WalkForwardTests(unittest.TestCase):
 
     def test_insufficient_data_and_wrong_symbol_fail_closed(self):
         self.assertIsNone(audit.audit(bars(22))["direction_hit_rate"])
+        self.assertEqual(audit.audit(bars(22))["nonoverlapping"]["eligible_samples"], 0)
         with self.assertRaisesRegex(ValueError, "AAPL-only"):
             audit.audit(bars(), symbol="MSFT")

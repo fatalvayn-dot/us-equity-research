@@ -120,6 +120,15 @@ def sanitize(report):
             "adaptive_optimization_verified": False,
             "predictive_approved": False,
         }
+        independent = history.get("nonoverlapping")
+        if isinstance(independent, dict):
+            n = independent.get("eligible_samples")
+            clean["prediction_validation"]["nonoverlapping"] = {
+                "eligible_samples": n if type(n) is int and 0 <= n <= 250 else 0,
+                "direction_hit_rate": rate(independent.get("direction_hit_rate")),
+                "naive_up_hit_rate": rate(independent.get("benchmark_up_hit_rate")),
+                "performance_validated": False,
+            }
     clean["investment_approved"] = False
     if len(json.dumps(clean))>12000: raise ValueError("evidence too large")
     return clean

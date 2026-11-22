@@ -78,6 +78,8 @@ def assess(report, llm=None):
         "score_components": scoring.get("score_components", {}) if evidence["comparative_scoring"] else {},
         "prediction_baseline_hit_rate": backtest.get("benchmark_up_hit_rate"),
         "prediction_observed_hit_rate": backtest.get("direction_hit_rate"),
+        "prediction_nonoverlapping": (backtest.get("nonoverlapping")
+            if isinstance(backtest.get("nonoverlapping"), dict) else {}),
         "advisor_verdict": (
             llm["agents"]["manager_report"][:1800]
             if evidence["llm_five_real_calls"] else None),
@@ -99,6 +101,8 @@ def markdown(result):
         "",
         "Araştırma zinciri: " + result["status"],
         "Araştırma puanı: " + str(result["score"]),
+        "Örtüşmeyen tahmin denetimi: " + str(result.get("prediction_nonoverlapping", {}).get("status", "not_tested")),
+        "Bağımsız örnek sayısı: " + str(result.get("prediction_nonoverlapping", {}).get("eligible_samples", 0)),
         "Yeni alım yetkisi: YOK",
         "",
         "## Aşama kontrolleri",
