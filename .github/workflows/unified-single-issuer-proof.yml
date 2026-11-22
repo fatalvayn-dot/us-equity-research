@@ -12,6 +12,8 @@ on:
       - tests/test_market_radar_pilot.py
       - scripts/unified_aapl_acceptance.py
       - data/aapl-research/participation-gap-input.json
+      - scripts/aapl_participation_gap_audit.py
+      - tests/test_aapl_participation_gap_audit.py
       - scripts/unified_aapl_backtest.py
       - scripts/unified_aapl_llm.py
       - scripts/llm_team.py
@@ -43,7 +45,7 @@ jobs:
       - name: Offline end-to-end and failure regression
         env:
           PYTHONPATH: .:src
-        run: python -m unittest -v tests.test_unified_single_issuer tests.test_unified_aapl_valuation tests.test_unified_aapl_backtest tests.test_unified_aapl_llm tests.test_unified_aapl_acceptance tests.test_market_radar_pilot
+        run: python -m unittest -v tests.test_unified_single_issuer tests.test_unified_aapl_valuation tests.test_unified_aapl_backtest tests.test_unified_aapl_llm tests.test_unified_aapl_acceptance tests.test_market_radar_pilot tests.test_aapl_participation_gap_audit
       - name: Live read-only AAPL one-source attempt
         env:
           PYTHONPATH: .:src
@@ -189,6 +191,15 @@ jobs:
             --llm unified-aapl-llm-readiness.json \
             --out unified-aapl-acceptance.json \
             --markdown unified-aapl-acceptance.md
+      - name: Derive exact AAPL compliance evidence tasks without external data guesses
+        if: always()
+        env:
+          PYTHONPATH: .:src
+        run: |
+          python scripts/aapl_participation_gap_audit.py \
+            --input data/aapl-research/participation-gap-input.json \
+            --out unified-aapl-participation-gaps.json \
+            --markdown unified-aapl-participation-gaps.md
       - name: Archive timestamped proof without secrets
         if: always()
         uses: actions/upload-artifact@v4
@@ -211,5 +222,7 @@ jobs:
             unified-aapl-llm-readiness.json
             unified-aapl-acceptance.json
             unified-aapl-acceptance.md
+            unified-aapl-participation-gaps.json
+            unified-aapl-participation-gaps.md
           if-no-files-found: ignore
           retention-days: 7
