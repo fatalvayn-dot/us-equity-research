@@ -169,7 +169,7 @@ def original_review(*, root):
                 }
         if symbol == "GOOGL":
             review["security_class"] = {
-                "status": "three_class_counts_verified_valuation_model_still_required",
+                "status": "multiple_class_counts_verified_valuation_model_still_required",
                 "classes": ("A", "B", "C"),
                 **googl_cover_classes(body),
                 "counts_source_sha256_verified": True,
