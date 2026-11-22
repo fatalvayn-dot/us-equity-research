@@ -7,6 +7,8 @@ import argparse
 import gzip
 import hashlib
 import json
+import re
+from html.parser import HTMLParser
 from datetime import date
 from pathlib import Path
 
@@ -43,6 +45,45 @@ LIMITATIONS = {
     "GOOGL": "Class A/B/C share counts and economic rights require a multi-class "
              "valuation model. A single class' price times aggregate shares is prohibited.",
 }
+
+
+
+class _VisibleText(HTMLParser):
+    """Collect visible filing text without guessing at XBRL class dimensions."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.parts = []
+
+    def handle_data(self, data):
+        self.parts.append(data)
+
+
+def googl_cover_classes(original_html):
+    """Read explicitly dated A/B/C counts; this is NOT class-market valuation."""
+    parser = _VisibleText()
+    parser.feed(original_html.decode("utf-8"))
+    text = re.sub(r"\\s+", " ", " ".join(parser.parts))
+    markers = list(re.finditer(
+        r"As of January 28, 2026,? there were", text, flags=re.I
+    ))
+    if len(markers) != 1:
+        raise ValueError("Alphabet original cover date absent or ambiguous")
+    excerpt = text[markers[0].end():markers[0].end() + 850]
+    matches = list(re.finditer(
+        r"([0-9][0-9,]*)\\s+million\\s+shares\\s+of\\s+"
+        r"(?:(?:the\\s+)?Alphabet[\\u2019']s\\s+)?"
+        r"Class\\s+([ABC])\\s+(?:common\\s+|capital\\s+)?stock\\s+outstanding",
+        excerpt, re.I
+    ))
+    if [m.group(2).upper() for m in matches] != ["A", "B", "C"]:
+        raise ValueError("Alphabet three-class share cover not proven")
+    counts = {m.group(2).upper(): int(m.group(1).replace(",", "")) for m in matches}
+    if any(count <= 0 or count > 100000 for count in counts.values()):
+        raise ValueError("Alphabet class count out of bounds")
+    return dict(cover_as_of="2026-01-28", reported_units="million_shares",
+                reported_class_counts_million=counts,
+                valuation_approved=False, shares_approved=False)
 
 
 def original_review(*, root):
@@ -128,8 +169,10 @@ def original_review(*, root):
                 }
         if symbol == "GOOGL":
             review["security_class"] = {
-                "status": "multiple_common_classes_require_original_class_model",
-                "classes": ("A", "B", "C"), "shares_approved": False,
+                "status": "three_class_counts_verified_valuation_model_still_required",
+                "classes": ("A", "B", "C"),
+                **googl_cover_classes(body),
+                "counts_source_sha256_verified": True,
             }
         output["issuer_reviews"].append(review)
     return output
@@ -160,8 +203,14 @@ def markdown(document):
                          + row["liabilities_equation"]["status"]
                          + " (doğrudan SEC Liabilities alanı değildir).")
         if row.get("security_class"):
+            classes = row["security_class"]
             lines.append("GOOGL A/B/C hisse sınıfı analizi: "
-                         + row["security_class"]["status"])
+                         + classes["status"])
+            lines.append("10-K kapak payları (" + classes["cover_as_of"] + ", milyon): "
+                         + ", ".join(c + "=" + str(n) for c, n in
+                                     classes["reported_class_counts_million"].items()))
+            lines.append("B sınıfı halka açık piyasa fiyatı yok; hisselerin toplamı "
+                         "GOOGL fiyatı ile çarpılıp değerleme yapılamaz.")
         lines.append("")
     lines.append("Sonuç: 3 şirkete otomatik puan ve alım yetkisi verilmedi.")
     return "\n".join(lines) + "\n"
