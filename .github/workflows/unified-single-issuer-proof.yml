@@ -4,6 +4,8 @@ on:
     paths:
       - scripts/unified_single_issuer.py
       - tests/test_unified_single_issuer.py
+      - tests/test_unified_aapl_valuation.py
+      - scripts/unified_aapl_valuation.py
       - .github/workflows/unified-single-issuer-proof.yml
   workflow_dispatch:
 permissions:
@@ -22,7 +24,7 @@ jobs:
       - name: Offline end-to-end and failure regression
         env:
           PYTHONPATH: .:src
-        run: python -m unittest -v tests.test_unified_single_issuer
+        run: python -m unittest -v tests.test_unified_single_issuer tests.test_unified_aapl_valuation
       - name: Live read-only AAPL one-source attempt
         env:
           PYTHONPATH: .:src
@@ -47,6 +49,29 @@ jobs:
             --financial-report unified-aapl-sec-report.json \
             --out unified-single-issuer-with-financials.json \
             --markdown unified-single-issuer-with-financials.md
+      - name: Reuse SEC documents for dated AAPL share and valuation source gates
+        if: success()
+        env:
+          PYTHONPATH: .:src
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        shell: bash
+        run: |
+          if [ -z "$SEC_USER_AGENT" ] || [ ! -f data/unified-aapl-sec/report.json ]; then
+            echo "No verified SEC batch; valuation source review not attempted"
+            exit 0
+          fi
+          python scripts/export_mvp_evidence.py \
+            --state-dir data/unified-aapl-sec \
+            --output data/unified-aapl-sec-export \
+            --sources data/unified-aapl-sec-seed
+          python scripts/unified_aapl_valuation.py \
+            --user-agent "$SEC_USER_AGENT" \
+            --state-dir data/unified-aapl-valuation \
+            --source-bundle data/unified-aapl-sec-seed \
+            --financial-batch data/unified-aapl-sec/batch.json \
+            --metadata data/unified-aapl-sec/metadata.json \
+            --companyfacts-dir data/unified-aapl-sec/companyfacts \
+            --out unified-aapl-valuation-summary.json
       - name: Archive timestamped proof without secrets
         if: always()
         uses: actions/upload-artifact@v4
@@ -58,5 +83,7 @@ jobs:
             unified-single-issuer-with-financials.json
             unified-single-issuer-with-financials.md
             unified-aapl-sec-report.json
+            unified-aapl-valuation-summary.json
+            unified-aapl-valuation-summary.score-plan.json
           if-no-files-found: ignore
           retention-days: 7
