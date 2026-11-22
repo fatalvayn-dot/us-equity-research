@@ -9,6 +9,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 from equity_research.mvp import run_mvp, save_json
+from equity_research.participation_screen import assess_participation
 from scripts import unified_single_issuer
 
 COHORT = (
@@ -114,6 +115,16 @@ def research_five(*, user_agent, state_dir, fixture=None,
             state["baseline_approved"] = False
         except Exception as exc:
             state["blockers"].append("market_" + type(exc).__name__)
+        participation_screen = assess_participation(
+            {"issuer_key": "SEC:" + cik, "symbol": symbol,
+             "instrument_type": "not_verified", "sector": {},
+             "activities": {}, "ratios": {}},
+            None, as_of=output["as_of"])
+        if participation_screen.get("status") != "bilinmiyor" or (
+                participation_screen.get("investment_approved") is not False):
+            raise ValueError("missing source cannot pass participation screen")
+        state["participation"] = participation_screen["status"]
+        state["participation_review_reasons"] = participation_screen["review_reasons"]
         state["blockers"].extend([
             "reviewed_sharia_source_and_ratio_evidence_missing",
             "five_company_valuation_comparison_not_run",
