@@ -72,6 +72,13 @@ jobs:
             --metadata data/unified-aapl-sec/metadata.json \
             --companyfacts-dir data/unified-aapl-sec/companyfacts \
             --out unified-aapl-valuation-summary.json
+          python scripts/unified_single_issuer.py \
+            --symbol AAPL \
+            --financial-cik 0000320193 \
+            --financial-report unified-aapl-sec-report.json \
+            --valuation-summary unified-aapl-valuation-summary.json \
+            --out unified-aapl-with-valuation-gates.json \
+            --markdown unified-aapl-with-valuation-gates.md
       - name: Archive timestamped proof without secrets
         if: always()
         uses: actions/upload-artifact@v4
@@ -85,5 +92,7 @@ jobs:
             unified-aapl-sec-report.json
             unified-aapl-valuation-summary.json
             unified-aapl-valuation-summary.score-plan.json
+            unified-aapl-with-valuation-gates.json
+            unified-aapl-with-valuation-gates.md
           if-no-files-found: ignore
           retention-days: 7
