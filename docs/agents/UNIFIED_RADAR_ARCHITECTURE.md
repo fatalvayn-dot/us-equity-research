@@ -64,3 +64,19 @@ sayısını ve kaynak arşivi kapsamını kontrol eder. Mevcut SEC toplayıcıs�
 hesaplarının yerini almaz. `facts_observed_review_required` araştırma statüsüdür;
 güncel değerleme veya katılım onayı değildir. Kaynak arşivi eksikse
 `incomplete_evidence`. Sıfır veri kesinlikle sıfır finansal değer sayılmaz.
+
+## Türkçe rapor ve ajan devri (dördüncü aşama)
+
+`--markdown unified-single-issuer.md` ile JSON yanında Türkçe araştırma özeti
+oluşturulur. Mevcut `equity_research.reporting.build_report` hesaplarını yeniden
+hesaplamaz; yalnız önceden doğrulanmış SEC raporundaki kabul edilen olgu sayısı,
+hesaplanan sonuç sayısı ve finansal risk ekranını taşır. Bu bir 0–100 yatırım
+skoru değildir: fiyat ve SEC finansallarının tarihli tek hisse sınıfı değerleme
+kanıtı, karşılaştırmalı dönem ve katılım standardı tamamlanmadı.
+
+İsteğe bağlı ücretsiz LLM takımına yalnız filtrelenmiş **kamusal** finansal
+araştırma durumları ve katılım sonucu iletilir. Ham finansal belgeler, fon/
+portföy bilgileri, keyfi açıklamalar, hesap bakiyeleri, kaynak URL'leri veya
+SEC arşivindeki ham metinler gönderilmez. Ajanların beş çağrısı mock testte
+sınanır; **gerçek OpenRouter uç noktası başarılı denenmediği müddetçe**
+çalıştığı iddia edilmez. Varsayılan LLM ve alım kararı kapalıdır.
