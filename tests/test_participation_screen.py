@@ -71,6 +71,35 @@ class ParticipationScreenTests(unittest.TestCase):
             self.assertIs(got[key], False)
         self.assertIs(got["no_live_source_verification"], True)
 
+    def test_explicit_two_screen_method_can_pass_research_only(self):
+        # This is a synthetic schema-compatibility test, NOT S&P approval.
+        policy = method()
+        policy["ratios"].pop("interest_cash_securities")
+        policy["not_applicable_rules"] = {
+            "interest_cash_securities": "not_applicable_in_reviewed_methodology"}
+        row = candidate()
+        result = assess_participation(row, policy, as_of=AS_OF)
+        self.assertEqual(result["status"], "kosullu_esik_gecisi")
+        self.assertEqual(result["applied_rules"],
+                         ["impermissible_income", "interest_debt"])
+        self.assertEqual(result["non_applicable_rules"],
+                         ["interest_cash_securities"])
+        self.assertFalse(result["investment_approved"])
+        self.assertTrue(result["no_live_source_verification"])
+
+    def test_missing_or_misdeclared_cash_exception_never_passes(self):
+        policy = method()
+        policy["ratios"].pop("interest_cash_securities")
+        for change in (None, {}, {"interest_cash_securities": "review_pending"}):
+            row = deepcopy(policy)
+            if change is not None:
+                row["not_applicable_rules"] = change
+            result = assess_participation(candidate(), row, as_of=AS_OF)
+            self.assertEqual(result["status"], "bilinmiyor")
+            self.assertIn("reviewed_standard_evidence_missing",
+                          result["review_reasons"])
+            self.assertFalse(result["investment_approved"])
+
     def test_missing_policy_and_limits_never_grant_eligibility(self):
         for changed in (None, {}, {"standard_id": "SYNTHETIC_TEST_ONLY"}):
             with self.subTest(policy=changed):

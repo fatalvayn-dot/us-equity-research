@@ -84,10 +84,22 @@ def _rulebook(rulebook, *, cutoff):
     if type(days) is not int or not 1 <= days <= 730:
         raise ValueError("bounded source freshness policy required")
     rules = rulebook.get("ratios")
-    if not isinstance(rules, dict) or set(rules) != set(RULES):
-        raise ValueError("all three explicitly defined ratio rules required")
+    if not isinstance(rules, dict):
+        raise ValueError("explicit reviewed ratio rules required")
+    selected = set(rules)
+    full = set(RULES)
+    without_cash = full - {"interest_cash_securities"}
+    if selected == without_cash:
+        # Some effective editions screen leverage and non-permitted income
+        # but NOT cash. An explicit policy declaration is required so a
+        # missing cash measurement cannot silently look compliant.
+        if rulebook.get("not_applicable_rules") != {
+                "interest_cash_securities": "not_applicable_in_reviewed_methodology"}:
+            raise ValueError("omitted cash rule requires explicit reviewed-methodology declaration")
+    elif selected != full:
+        raise ValueError("unsupported or incomplete selected ratio rules")
     parsed = {}
-    for name in RULES:
+    for name in sorted(selected):
         r = rules[name]
         if (not isinstance(r, dict) or not isinstance(r.get("numerator_definition"), str)
                 or not r["numerator_definition"].strip()
@@ -188,7 +200,7 @@ def assess_participation(company, rulebook=None, *, as_of):
 
     facts = company.get("ratios") if isinstance(company.get("ratios"), dict) else {}
     if rules is not None:
-        for name in RULES:
+        for name in sorted(rules):
             try:
                 result = _ratio(name, facts.get(name), rules[name], cutoff=cutoff,
                                 issuer_key=issuer_key, freshness_days=freshness)
@@ -209,7 +221,10 @@ def assess_participation(company, rulebook=None, *, as_of):
         status=status, rulebook_id=rulebook.get("standard_id") if isinstance(rulebook, dict) else None,
         rulebook_version=rulebook.get("version") if isinstance(rulebook, dict) else None,
         blockers=sorted(set(blockers)), review_reasons=sorted(set(reasons)),
-        ratios=ratios, evidence_scope="provided_sources_syntactic_validation_only",
+        ratios=ratios,
+        applied_rules=sorted(rules) if rules is not None else [],
+        non_applicable_rules=(sorted(set(RULES) - set(rules)) if rules is not None else []),
+        evidence_scope="provided_sources_syntactic_validation_only",
         qualified_for_investment=False, shariah_certified=False,
         investment_approved=False, eligible_for_automatic_order=False,
         no_live_source_verification=True,
