@@ -14,6 +14,7 @@ from datetime import datetime, timezone
 from scripts import market_radar_pilot as pilot
 from scripts import market_radar_agents as ledger
 from scripts import llm_team
+from scripts import unified_aapl_backtest
 from equity_research.participation_screen import assess_participation
 
 
@@ -105,6 +106,8 @@ def build(symbol="AAPL", fixture=None, agent_transport=None, enable_llm=False,
         "coverage": {"requested": 1, "forecast_count": 1, "full_exchange": False},
     }
     summary, _, _ = ledger.process(raw, [], [])
+    walkforward = (unified_aapl_backtest.audit(rows, symbol=symbol)
+                   if symbol == "AAPL" else {"status": "not_run_for_other_issuer"})
     gates = {
         "identity": "sample_symbol_only",
         "market_price": "fixture" if fixture else "source_observed",
@@ -115,6 +118,10 @@ def build(symbol="AAPL", fixture=None, agent_transport=None, enable_llm=False,
         "prediction": "uncalibrated_baseline",
         "investment_decision": "prohibited",
     }
+    if walkforward.get("performance_gate") == "not_better_than_naive_up":
+        gates["prediction"] = "blocked_no_edge_vs_naive_up"
+    elif walkforward.get("performance_gate") == "insufficient_directional_sample":
+        gates["prediction"] = "blocked_insufficient_backtest_sample"
     participation = {"status": "bilinmiyor", "reason": "participation_source_evidence_missing",
                      "investment_approved": False, "no_live_source_verification": True}
     if participation_evidence is not None:
@@ -186,6 +193,7 @@ def build(symbol="AAPL", fixture=None, agent_transport=None, enable_llm=False,
         "source": source, "forecast": forecast, "gates": gates,
         "participation_research": participation, "financial_research": financial,
         "valuation_research": valuation, "scoring_research": scoring,
+        "historical_prediction_check": walkforward,
         "summary": summary, "research": raw, "llm": {"status": "disabled"},
         "investment_advice": False, "eligible_for_trade": False,
     }
@@ -228,6 +236,10 @@ def turkish_issuer_report(envelope):
         + "- Değerleme engel sayısı: " + str(len(envelope.get("valuation_research", {}).get("blockers", []))) + "\n"
         + "- Skor araştırma durumu: " + str(scored.get("status", "not_attempted")) + "\n"
         + "- Skor engelleri: " + ", ".join(scored.get("blockers", [])) + "\n"
+        + "- Geçmiş yön tahmini doğrulaması: " + str(envelope.get("historical_prediction_check", {}).get("direction_hit_rate")) + "\n"
+        + "- Geçmiş kontrol örneklemi: " + str(envelope.get("historical_prediction_check", {}).get("eligible_samples", 0)) + "\n"
+        + "- Geçmiş yukarı yön kıyası: " + str(envelope.get("historical_prediction_check", {}).get("benchmark_up_hit_rate")) + "\n"
+        + "- Tahmin güven kapısı: " + str(g["prediction"]) + "\n"
         + "- Haber / olay analizi: " + str(g["news_event_model"]) + "\n"
         + "- LLM ajan ekibi: " + str(envelope["llm"]["status"]) + "\n"
         + "- Yatırım kararı: KAPALI. Katılım ve değerleme onayı yok.\n"

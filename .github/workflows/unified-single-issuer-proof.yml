@@ -5,6 +5,10 @@ on:
       - scripts/unified_single_issuer.py
       - tests/test_unified_single_issuer.py
       - tests/test_unified_aapl_valuation.py
+      - tests/test_unified_aapl_backtest.py
+      - tests/test_unified_aapl_llm.py
+      - scripts/unified_aapl_backtest.py
+      - scripts/unified_aapl_llm.py
       - scripts/unified_aapl_valuation.py
       - scripts/unified_aapl_score_summary.py
       - scripts/build_current_scores.py
@@ -26,7 +30,7 @@ jobs:
       - name: Offline end-to-end and failure regression
         env:
           PYTHONPATH: .:src
-        run: python -m unittest -v tests.test_unified_single_issuer tests.test_unified_aapl_valuation
+        run: python -m unittest -v tests.test_unified_single_issuer tests.test_unified_aapl_valuation tests.test_unified_aapl_backtest tests.test_unified_aapl_llm
       - name: Live read-only AAPL one-source attempt
         env:
           PYTHONPATH: .:src
@@ -129,6 +133,24 @@ jobs:
             --score-summary unified-aapl-score-summary.json \
             --out unified-aapl-full-pipeline.json \
             --markdown unified-aapl-full-pipeline.md
+      - name: Run free-only agent chain or record explicit missing configuration
+        if: success()
+        env:
+          PYTHONPATH: .:src
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          RADAR_FREE_LLM_ENABLED: ${{ vars.RADAR_FREE_LLM_ENABLED }}
+        shell: bash
+        run: |
+          EVIDENCE=unified-aapl-full-pipeline.json
+          if [ ! -f "$EVIDENCE" ]; then
+            EVIDENCE=unified-aapl-with-valuation-gates.json
+          fi
+          if [ ! -f "$EVIDENCE" ]; then
+            EVIDENCE=unified-single-issuer-with-financials.json
+          fi
+          python scripts/unified_aapl_llm.py \
+            --input "$EVIDENCE" \
+            --out unified-aapl-llm-readiness.json
       - name: Archive timestamped proof without secrets
         if: always()
         uses: actions/upload-artifact@v4
@@ -148,5 +170,6 @@ jobs:
             unified-aapl-full-pipeline.json
             unified-aapl-full-pipeline.md
             data/unified-aapl-score/scoring/report.md
+            unified-aapl-llm-readiness.json
           if-no-files-found: ignore
           retention-days: 7
