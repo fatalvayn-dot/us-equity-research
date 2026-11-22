@@ -65,12 +65,10 @@ def googl_cover_classes(original_html):
     parser.feed(original_html.decode("utf-8"))
     text = re.sub(r"\\s+", " ", " ".join(parser.parts))
     markers = list(re.finditer(
-        r"As of January 28, 2026,? there were", text, flags=re.I
+        r"As of\\s+January\\s+28,\\s*2026\\s*,\\s*there\\s+wer\\s*e", text, flags=re.I
     ))
     if len(markers) != 1:
-        nearby = [m.start() for m in list(re.finditer("January", text, flags=re.I))[:12]]
-        examples = [text[max(0, k-55):k+120] for k in nearby]
-        raise ValueError("Alphabet original cover date absent or ambiguous: " + repr((len(markers),examples)))
+        raise ValueError("Alphabet original cover date absent or ambiguous")
     excerpt = text[markers[0].end():markers[0].end() + 850]
     matches = list(re.finditer(
         r"([0-9][0-9,]*)\\s+million\\s+shares\\s+of\\s+"
