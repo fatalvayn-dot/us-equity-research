@@ -4,6 +4,7 @@ import json
 import os
 import pathlib
 import urllib.request
+import urllib.error
 
 ROLES = {
  "manager": "Türkçe proje müdürü. Tek ana görev, açık kabul ölçütü ve rapor üret.",
@@ -84,6 +85,10 @@ def ask(role, data, transport=None):
         try:
             with urllib.request.urlopen(req,timeout=25) as resp:
                 answer=json.loads(resp.read(100000))
+        except urllib.error.HTTPError as exc:
+            # The HTTP status is safe to report; never print response body,
+            # authorization header, token or provider request metadata.
+            raise RuntimeError("LLM API HTTP status: " + str(exc.code)) from None
         except Exception as exc:
             raise RuntimeError("LLM API failed: "+type(exc).__name__) from None
     result=answer["choices"][0]["message"]["content"]
