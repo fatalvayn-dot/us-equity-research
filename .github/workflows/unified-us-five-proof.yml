@@ -5,6 +5,8 @@ on:
       - scripts/unified_us_five.py
       - scripts/unified_us_five_scoring.py
       - tests/test_unified_us_five_scoring.py
+      - tests/test_unified_us_five_source_gaps.py
+      - scripts/unified_us_five_source_gaps.py
       - tests/test_unified_us_five.py
       - .github/workflows/unified-us-five-proof.yml
   workflow_dispatch:
@@ -32,7 +34,7 @@ jobs:
       - name: Verify exact issuer registry, no-trade guards and provider failure isolation
         env:
           PYTHONPATH: .:src
-        run: python -m unittest -v tests.test_unified_us_five tests.test_unified_us_five_scoring tests.test_unified_single_issuer
+        run: python -m unittest -v tests.test_unified_us_five tests.test_unified_us_five_scoring tests.test_unified_us_five_source_gaps tests.test_unified_single_issuer
       - name: Five-issuer live read-only evidence collector (main or manual only)
         if: github.event_name != 'pull_request'
         env:
@@ -69,6 +71,24 @@ jobs:
             --max-new-requests 26 \
             --out us-five-with-scores.json \
             --markdown us-five-with-scores.md
+      - name: Diagnose exact missing GAAP fields and share-class blockers from existing source evidence
+        if: always() && github.event_name != 'pull_request'
+        env:
+          PYTHONPATH: .:src
+        shell: bash
+        run: |
+          if [ ! -f data/unified-us-five-sec/report.json ] || \
+             [ ! -f data/unified-us-five-scoring/valuation-report.json ] || \
+             [ ! -f data/unified-us-five-scoring/score-plan.json ]; then
+            echo "Missing source artifact; no invented diagnostics"
+            exit 0
+          fi
+          python scripts/unified_us_five_source_gaps.py \
+            --sec-report data/unified-us-five-sec/report.json \
+            --valuation-report data/unified-us-five-scoring/valuation-report.json \
+            --score-plan data/unified-us-five-scoring/score-plan.json \
+            --out us-five-source-gaps.json \
+            --markdown us-five-source-gaps.md
       - name: Archive bounded, non-sensitive research outputs
         if: always()
         uses: actions/upload-artifact@v4
@@ -79,6 +99,8 @@ jobs:
             us-five-research.md
             us-five-with-scores.json
             us-five-with-scores.md
+            us-five-source-gaps.json
+            us-five-source-gaps.md
             data/unified-us-five-scoring/score-plan.json
             data/unified-us-five-scoring/valuation-report.json
             data/unified-us-five-scoring/scoring/report.md
