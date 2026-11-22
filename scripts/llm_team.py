@@ -65,6 +65,44 @@ def sanitize(report):
                                   if type(risk_count) is int and 0 <= risk_count <= 30 else None,
             "price_impact_verified": False,
         }
+    # Public, bounded and source-gated final AAPL research evidence.
+    # No arbitrary commentary, private holdings, raw filing fields or URLs.
+    scoring = report.get("scoring_research")
+    if isinstance(scoring, dict):
+        status = scoring.get("status")
+        raw_score = scoring.get("score")
+        parsed_score = None
+        if status == "scored_research_hypothesis" and type(raw_score) in (str, int, float):
+            try:
+                candidate = float(raw_score)
+                if candidate == candidate and 0 <= candidate <= 100:
+                    parsed_score = round(candidate, 4)
+            except (ValueError, OverflowError):
+                pass
+        clean["scoring_research"] = {
+            "status": status if status in
+                ("scored_research_hypothesis", "not_attempted", "review_required") else "unknown",
+            "research_score_0_100": parsed_score,
+            "investment_approved": False,
+        }
+    history = report.get("historical_prediction_check")
+    if isinstance(history, dict):
+        allowed = ("not_better_than_naive_up", "insufficient_directional_sample",
+                   "historical_better_than_naive_unvalidated",
+                   "insufficient_completed_bars")
+        gate = history.get("performance_gate")
+        def rate(value):
+            return round(value, 5) if type(value) in (int, float) and 0 <= value <= 1 else None
+        count = history.get("eligible_samples")
+        clean["prediction_validation"] = {
+            "performance_gate": gate if gate in allowed else "unknown",
+            "observed_hit_rate": rate(history.get("direction_hit_rate")),
+            "naive_up_hit_rate": rate(history.get("benchmark_up_hit_rate")),
+            "eligible_samples": count if type(count) is int and 0 <= count <= 250 else 0,
+            "adaptive_optimization_verified": False,
+            "predictive_approved": False,
+        }
+    clean["investment_approved"] = False
     if len(json.dumps(clean))>12000: raise ValueError("evidence too large")
     return clean
 
