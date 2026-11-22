@@ -26,7 +26,7 @@ jobs:
       - name: Live read-only AAPL one-source attempt
         env:
           PYTHONPATH: .:src
-        run: python scripts/unified_single_issuer.py --symbol AAPL --out unified-single-issuer.json
+        run: python scripts/unified_single_issuer.py --symbol AAPL --out unified-single-issuer.json --markdown unified-single-issuer.md
       - name: Reuse real SEC collector for AAPL if official contact is configured
         env:
           PYTHONPATH: .:src
@@ -45,7 +45,8 @@ jobs:
             --symbol AAPL \
             --financial-cik 0000320193 \
             --financial-report unified-aapl-sec-report.json \
-            --out unified-single-issuer-with-financials.json
+            --out unified-single-issuer-with-financials.json \
+            --markdown unified-single-issuer-with-financials.md
       - name: Archive timestamped proof without secrets
         if: always()
         uses: actions/upload-artifact@v4
@@ -53,7 +54,9 @@ jobs:
           name: unified-aapl-proof
           path: |
             unified-single-issuer.json
+            unified-single-issuer.md
             unified-single-issuer-with-financials.json
+            unified-single-issuer-with-financials.md
             unified-aapl-sec-report.json
           if-no-files-found: ignore
           retention-days: 7
