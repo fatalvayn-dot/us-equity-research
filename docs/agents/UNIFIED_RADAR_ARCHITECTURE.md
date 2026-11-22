@@ -33,3 +33,19 @@ Canlı fiyat denemesi (ücretsiz, salt okunur; kaynak erişilebilirliği garanti
 1. AAPL gerçek fiyat ve gerçek SEC finansal/valuation kanıtı, katılım belgesi ve veri tarihleri eklenir.
 2. Tek şirket başarılı çalışınca aynı kanıtlı akış 5 ABD şirketi ile test edilir; sonra BIST XKTUM ve Avrupa kanıt kapıları eklenir.
 3. Tarihli geçmiş tahminler en az 5 işlem günü sonra değerlendirilir; walk-forward ve kıyas sonuçları olmadan 'adaptif öğreniyor' denmez.
+
+## Katılım araştırma entegrasyonu — ikinci adım
+
+`--participation-evidence evidence.json` isteğe bağlı şirket/standart kanıtını doğrudan mevcut
+`equity_research.participation_screen.assess_participation()` modülüne aktarır.
+Yeni borç/gelir faiz oranı hesabı veya yeni Şeriat standardı yazılmadı.
+Sembol uyuşmazlığı sert hatadır. Kaynak metaverisi, tarih ve rapor dönemi kontrolleri
+ilgili modülde yapılır. Özgün SEC/KAP belge baytlarının SHA karşılaştırılması bu
+CLI içinde yapılmadığından `no_live_source_verification=true` kalır.
+`kosullu_esik_gecisi` sonucu bile yatırım izni veya resmî endeks üyeliği değildir.
+Veri verilmediğinde `bilinmiyor`; banka/sigorta dışlaması mevcut motorun görevidir.
+
+Sonraki kabul: Orijinal belgelerin doğrulanmış hash'leriyle şirket kimliği, faaliyet,
+faizli borç/nakit, uygunsuz gelir, kullanılan standardın sürümü ve tarihleri aynı
+kanıt paketinde test edilmeli. BIST için XKTUM listesi ayrı, tarihli resmî üyelik
+kanıtı olmadan `uygun` sayılamaz.
