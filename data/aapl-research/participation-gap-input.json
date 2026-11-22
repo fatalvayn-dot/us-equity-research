@@ -1,0 +1,15 @@
+{
+  "company": {
+    "issuer_key": "SEC:0000320193",
+    "symbol": "AAPL",
+    "instrument_type": "not_verified",
+    "sector": {},
+    "activities": {},
+    "ratios": {}
+  },
+  "rulebook": null,
+  "meta": {
+    "purpose": "run_existing_participation_screen_fail_closed",
+    "warning": "No reviewed standard or original source verification; never claim suitability"
+  }
+}

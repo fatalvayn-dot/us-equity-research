@@ -1,5 +1,6 @@
 import json
 import unittest
+from unittest.mock import patch
 from scripts import unified_aapl_llm as team
 
 
@@ -33,6 +34,16 @@ class LLMReadinessTests(unittest.TestCase):
         self.assertFalse(result["real_api_tested"])
         self.assertEqual([p["model"] for p in sent], ["openrouter/free"] * 5)
         self.assertNotIn("DO_NOT_SHARE", json.dumps(sent))
+
+    def test_free_quota_failure_is_explicit_incomplete_not_paid_fallback(self):
+        with patch.object(team.llm_team, "orchestrate",
+                          side_effect=RuntimeError("LLM API HTTP status: 429")):
+            result = team.process(packet(), enabled="true", key_present=True)
+        self.assertEqual(result["status"], "blocked_free_provider_rate_limit")
+        self.assertEqual(result["reason"], "HTTP_429")
+        self.assertIsNone(result["llm_calls"])
+        self.assertFalse(result["paid_fallback"])
+        self.assertFalse(result["investment_approved"])
 
     def test_user_portfolio_or_order_prematurely_enabled_is_rejected(self):
         bad = dict(packet(), eligible_for_trade=True)

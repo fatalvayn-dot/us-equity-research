@@ -89,9 +89,19 @@ class ValuationBridgeTests(unittest.TestCase):
                                  "status": "scored_research_hypothesis",
                                  "total_score": 72,
                                  "model_version": "operating-sector-research-batch-v2",
+                                 "components": {
+                                     name: {"weight": cap, "score": pts}
+                                     for name, cap, pts in (
+                                         ("financial_strength", 20, 10),
+                                         ("valuation", 20, 10),
+                                         ("growth", 20, 15),
+                                         ("profitability", 15, 12),
+                                         ("cash_flow", 15, 15),
+                                         ("risk", 10, 10))},
                                  "blockers": []}]}
         out = summarize_score(sample)
         self.assertEqual(out["score"], 72)
+        self.assertEqual(out["score_components"]["risk"]["score"], "10")
         self.assertFalse(out["investment_approved"])
 
     def test_score_summary_must_reject_cross_issuer_and_fabricated(self):
