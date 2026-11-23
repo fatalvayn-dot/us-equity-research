@@ -22,8 +22,8 @@ REGISTRY={
     "EU":{"primary":"ESEF","alternatives":["CompanyIR"]},
 }
 
-def _key(market,issuer,field,period):
-    value=json.dumps([market,issuer,field,period],separators=(",",":"),ensure_ascii=True)
+def _key(market,issuer,field,period,definition):
+    value=json.dumps([market,issuer,field,period,definition],separators=(",",":"),ensure_ascii=True)
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 def plan(report, *, previous=None, max_tasks=500):
@@ -68,7 +68,7 @@ def plan(report, *, previous=None, max_tasks=500):
             attempts=fact.get("source_attempts",[])
             if not isinstance(attempts,list) or any(not isinstance(x,dict) for x in attempts):
                 raise ValueError("invalid provider observations")
-            key=_key(market,issuer,field,period)
+            key=_key(market,issuer,field,period,definition)
             if key in unique:
                 old=unique[key]
                 if old["required_concept"]!=definition or old["symbol"]!=sym:
