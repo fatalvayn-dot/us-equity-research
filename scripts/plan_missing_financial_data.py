@@ -68,7 +68,9 @@ def plan(report, *, previous=None, max_tasks=500):
             attempts=fact.get("source_attempts",[])
             if not isinstance(attempts,list) or any(not isinstance(x,dict) for x in attempts):
                 raise ValueError("invalid provider observations")
-            key=_key(market,issuer,field,period,definition)
+            field_period=fact.get("period_end") or period
+            field_start=fact.get("period_start")
+            key=_key(market,issuer,field,field_period,definition+":"+str(field_start))
             if key in unique:
                 old=unique[key]
                 if old["required_concept"]!=definition or old["symbol"]!=sym:
@@ -86,7 +88,7 @@ def plan(report, *, previous=None, max_tasks=500):
                 route="source_discovery"
             unique[key]={
                 "task_id":key,"market":market,"symbol":sym,"issuer_id":issuer,
-                "field":field,"period_end":period,"required_concept":definition,
+                "field":field,"period_end":field_period,"period_start":field_start,"required_concept":definition,
                 "source_attempts":statuses,"route":route,
                 "primary_source":REGISTRY[market]["primary"],
                 "backup_sources":REGISTRY[market]["alternatives"],
