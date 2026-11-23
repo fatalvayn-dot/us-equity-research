@@ -14,6 +14,8 @@ on:
       - scripts/plan_missing_financial_data.py
       - scripts/run_sec_gap_recovery.py
       - tests/test_run_sec_gap_recovery.py
+      - scripts/audit_us_five_live_run.py
+      - tests/test_audit_us_five_live_run.py
       - tests/test_plan_missing_financial_data.py
       - tests/test_us_five_missing_data_agent.py
       - tests/test_us_five_final_verdict.py
@@ -32,7 +34,7 @@ on:
       - scripts/us_five_missing_data_agent.py
       - scripts/plan_missing_financial_data.py
       - scripts/run_sec_gap_recovery.py
-      - scripts/unified_us_five_source_gaps.py
+      - scripts/audit_us_five_live_run.py
 permissions:
   contents: read
 concurrency:
@@ -52,7 +54,7 @@ jobs:
       - name: Verify exact issuer registry, no-trade guards and provider failure isolation
         env:
           PYTHONPATH: .:src
-        run: python -m unittest -v tests.test_unified_us_five tests.test_unified_us_five_scoring tests.test_unified_us_five_source_gaps tests.test_us_five_original_scope_audit tests.test_us_five_final_verdict tests.test_us_five_missing_data_agent tests.test_plan_missing_financial_data tests.test_run_sec_gap_recovery tests.test_unified_single_issuer
+        run: python -m unittest -v tests.test_unified_us_five tests.test_unified_us_five_scoring tests.test_unified_us_five_source_gaps tests.test_us_five_original_scope_audit tests.test_us_five_final_verdict tests.test_us_five_missing_data_agent tests.test_plan_missing_financial_data tests.test_run_sec_gap_recovery tests.test_audit_us_five_live_run tests.test_unified_single_issuer
       - name: Five-issuer live read-only evidence collector (main or manual only)
         if: github.event_name != 'pull_request'
         env:
@@ -62,7 +64,7 @@ jobs:
         run: |
           if [ -z "$SEC_USER_AGENT" ]; then
             echo "SEC identity contact missing; five-company live run NOT attempted"
-            exit 0
+            exit 1
           fi
           python scripts/unified_us_five.py \
             --state-dir data/unified-us-five-sec \
@@ -181,6 +183,18 @@ jobs:
             --original us-five-original-scope-audit.json \
             --out us-five-final-verdict.json \
             --markdown us-five-final-verdict.md
+      - name: Assert real five-company evidence artifacts and record critical stage failures
+        if: always() && github.event_name != 'pull_request'
+        env:
+          PYTHONPATH: .:src
+        run: |
+          python scripts/audit_us_five_live_run.py \
+            --sec data/unified-us-five-sec/report.json \
+            --scored us-five-with-scores.json \
+            --gaps us-five-source-gaps.json \
+            --verdict us-five-final-verdict.json \
+            --recovery us-five-sec-recovery-observations.json \
+            --out us-five-stage-audit.json
       - name: Archive bounded, non-sensitive research outputs
         if: always()
         uses: actions/upload-artifact@v4
@@ -197,6 +211,7 @@ jobs:
             us-five-original-scope-audit.md
             us-five-final-verdict.json
             us-five-final-verdict.md
+            us-five-stage-audit.json
             us-five-missing-data-tasks.json
             us-five-missing-data-tasks.md
             us-five-generic-recovery-plan.json
