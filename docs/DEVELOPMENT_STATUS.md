@@ -1,5 +1,38 @@
 # Development status
 
+## 23 Kasım 2026 — #136 aynı-kohort canlı doğrulaması başlatıldı
+
+PR #198, `fresh100-live-request.json` dosyasını
+`fresh100-score-handoff-20261123-1` tek-seferlik istek kimliğiyle
+güncelledi. İş akışı yalnız `github.run_attempt == 1` olduğunda
+toplama yapar; eski koşuların Re-run işlemi veri toplamayı başlatamaz.
+Eski finansal checkpoint, sequence sınırı, kaynak sırası, skor modeli,
+katılım durumu ve yatırım kararı değiştirilmedi.
+
+İlk PR CI run `45186252848`, test dosyasına gerçek satır sonu yerine
+`\\n` metni yazıldığı için Python sözdiziminde başarısız oldu; canlı
+SEC adımına geçilmedi. Aynı dalda dosyalar main tabanından yeniden
+üretildi. Kesin head
+`90fa08ab18181457c5348b180bb30ff7a62e807f` için Foundation run
+`45186600025` Python 3.11/3.12/3.13 başarılı oldu. Squash merge
+`ac056f50b53c0f83c6f8802d333600525ea027f7`; main Foundation run
+`45187005795` aynı üç sürümde başarılıdır.
+
+Canlı/yerel ayrımı: canlı fresh100 run `45187005935` başlatıldı.
+100 yeni kimlik/0 eski kimlik kapısı geçti; bu kayıt yazılırken SEC
+finansal toplama adımı çalışıyordu. Henüz üç standart skor-devir
+artifact'i, bağlı `first-live-score` sonucu veya yeni skor
+gözlenmedi. Son kabul edilen sonuç 9/100 puanlı, 91/100 puansızdır;
+#136 kabul edilmedi.
+
+Sıradaki tek iş: run `45187005935` tamamlanınca
+`live-acceptance-state`, `live-acceptance-evidence` ve
+`valuation-source-state` artifact'lerinin aynı run ve tam 100
+CIK+sembol kohortunu taşıdığını doğrulamak; ardından yalnız otomatik
+tetiklenen tek `first-live-score` koşusunun sonucunu ve şirket bazlı
+engelleri kaydetmek.
+
+
 ## 23 Kasım 2026 — #136 fresh100 aynı-kohort skor devri hazır
 
 PR #196, aktif `common100` listesinin finansal batch, değerleme raporu ve
