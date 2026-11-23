@@ -43,6 +43,7 @@ class LiveStageAuditTests(unittest.TestCase):
     def test_recovery_is_not_counted_as_score(self):
         x=inputs();x["recovery"]={"observations":[{"status":"exact_candidate"}],"network_fetches":3}
         x["scored"]["fully_scored"]=2
+        for i in (2,3,4):x["scored"]["companies"][i]["score"]=None
         x["verdict"]["scores_generated"]=2;x["verdict"]["full_cohort_research_accepted"]=False
         r=audit(x)
         self.assertEqual(r["scored"],2)
