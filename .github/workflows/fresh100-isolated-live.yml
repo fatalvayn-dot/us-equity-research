@@ -167,6 +167,46 @@ jobs:
           with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as out: out.write('\n'.join(lines)+'\n')
           print('\n'.join(lines))
           PY
+      - name: Ayni kosunun finansal ve degerleme kanitlarini skor devrine hazirla
+        if: steps.financial.outcome == 'success' && steps.valuation.outcome == 'success'
+        env:
+          PYTHONPATH: src
+        run: |
+          python scripts/prepare_fresh100_score_handoff.py \
+            --candidates docs/evidence/common100/candidates.json \
+            --financial data/fresh100/financial \
+            --financial-sources data/fresh100/financial-sources \
+            --valuation data/fresh100/valuation \
+            --output data/fresh100/score-handoff \
+            --run-id "$GITHUB_RUN_ID"
+
+      - name: Ayni kohort finansal skor durumunu yayinla
+        if: steps.financial.outcome == 'success' && steps.valuation.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-acceptance-state
+          path: data/fresh100/score-handoff/financial
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Ayni kohort finansal kaynak kanitini yayinla
+        if: steps.financial.outcome == 'success' && steps.valuation.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-acceptance-evidence
+          path: data/fresh100/score-handoff/financial-evidence
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Ayni kohort degerleme skor durumunu yayinla
+        if: steps.financial.outcome == 'success' && steps.valuation.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: valuation-source-state
+          path: data/fresh100/score-handoff/valuation
+          if-no-files-found: error
+          retention-days: 90
+
       - name: Finansal SEC fiyat ve puanlama kanitlarini sakla
         if: always()
         uses: actions/upload-artifact@v4
