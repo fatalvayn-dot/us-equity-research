@@ -165,11 +165,8 @@ jobs:
               lines.append(f"- Tam puanli arastirma sayisi: {x.get('summary',{}).get('scored_companies')}")
           else:
               lines.append('- Tam puanli skor raporu henuz uretilemedi, engeller devam ediyor.')
-          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as out: out.write('
-'.join(lines)+'
-')
-          print('
-'.join(lines))
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as out: out.write('\n'.join(lines)+'\n')
+          print('\n'.join(lines))
           PY
       - name: Ayni kosunun finansal ve degerleme kanitlarini skor devrine hazirla
         if: steps.financial.outcome == 'success' && steps.valuation.outcome == 'success'
