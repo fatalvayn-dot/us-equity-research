@@ -36,7 +36,8 @@ jobs:
           new=validate_candidates(json.loads(body))
           old=validate_candidates(json.loads(Path('docs/evidence/archived100/candidates-2026-11-19.json').read_text()))
           if (request.get('purpose')!='single_new_100_us_cohort_live_financial_valuation'
-              or request.get('requested_on')!='2026-11-23'\n              or request.get('request_id')!='fresh100-score-handoff-20261123-1'
+              or request.get('requested_on')!='2026-11-23'
+              or request.get('request_id')!='fresh100-score-handoff-20261123-1'
               or request.get('target')!=100 or len(new)!=100 or len(old)!=100
               or request.get('candidate_sha256')!=hashlib.sha256(body).hexdigest()
               or request.get('investment_orders') is not False
@@ -164,8 +165,11 @@ jobs:
               lines.append(f"- Tam puanli arastirma sayisi: {x.get('summary',{}).get('scored_companies')}")
           else:
               lines.append('- Tam puanli skor raporu henuz uretilemedi, engeller devam ediyor.')
-          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as out: out.write('\n'.join(lines)+'\n')
-          print('\n'.join(lines))
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as out: out.write('
+'.join(lines)+'
+')
+          print('
+'.join(lines))
           PY
       - name: Ayni kosunun finansal ve degerleme kanitlarini skor devrine hazirla
         if: steps.financial.outcome == 'success' && steps.valuation.outcome == 'success'
