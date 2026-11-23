@@ -34,7 +34,7 @@ class Fresh100ActivationTests(unittest.TestCase):
         self.assertIn("docs/evidence/archived100/candidates-2026-11-19.json", new_live)
         self.assertIn("docs/operations/fresh100-live-request.json", new_live)
         self.assertIn("--state-dir data/fresh100/financial", new_live)
-        self.assertIn("--state-dir data/fresh100/valuation", new_live)
+        self.assertIn("--state-dir data/fresh100/valuation", new_live)\n        self.assertIn("github.run_attempt == 1", new_live)\n        request = json.loads((ROOT / "docs/operations/fresh100-live-request.json").read_text())\n        self.assertEqual(request["requested_on"], "2026-11-23")\n        self.assertEqual(request["request_id"], "fresh100-score-handoff-20261123-1")
 
 
     def test_fresh100_publishes_minimal_same_run_score_handoff(self):
