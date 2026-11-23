@@ -83,6 +83,22 @@ class FiveVerdictTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "contradicts source gaps"):
             verdict(scored, gaps, original)
 
+    def test_malformed_score_never_counts_as_valid_research(self):
+        for bad in ("not-a-score", "NaN", "Infinity", "-1", "101", "", True):
+            with self.subTest(bad=bad):
+                scored, gaps, original = evidence()
+                scored["companies"][0]["score"] = bad
+                with self.assertRaisesRegex(ValueError, "invalid research score"):
+                    verdict(scored, gaps, original)
+
+    def test_malformed_gap_collection_cannot_be_treated_as_cleared(self):
+        for bad in ("", {}, None):
+            with self.subTest(bad=bad):
+                scored, gaps, original = evidence()
+                gaps["companies"][2]["gaps"] = bad
+                with self.assertRaisesRegex(ValueError, "source gap list invalid"):
+                    verdict(scored, gaps, original)
+
     def test_missing_source_document_never_accepted(self):
         scored, gaps, original = evidence()
         original["issuer_reviews"].pop()
