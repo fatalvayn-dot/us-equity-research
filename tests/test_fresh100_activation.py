@@ -37,5 +37,15 @@ class Fresh100ActivationTests(unittest.TestCase):
         self.assertIn("--state-dir data/fresh100/valuation", new_live)
 
 
+    def test_fresh100_publishes_minimal_same_run_score_handoff(self):
+        workflow = (ROOT / ".github/workflows/fresh100-isolated-live.yml").read_text()
+        self.assertIn("prepare_fresh100_score_handoff.py", workflow)
+        self.assertIn("name: live-acceptance-state", workflow)
+        self.assertIn("name: live-acceptance-evidence", workflow)
+        self.assertIn("name: valuation-source-state", workflow)
+        self.assertIn("--run-id \"$GITHUB_RUN_ID\"", workflow)
+        self.assertNotIn("MAX_REVIEWED_SEQUENCE", workflow)
+
+
 if __name__ == "__main__":
     unittest.main()
