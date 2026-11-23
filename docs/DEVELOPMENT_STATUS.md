@@ -1,5 +1,39 @@
 # Development status
 
+## 23 Kasım 2026 — #136 fresh100 aynı-kohort skor devri hazır
+
+PR #196, aktif `common100` listesinin finansal batch, değerleme raporu ve
+aday dosyasındaki 100 CIK+sembolü birebir doğrulayan
+`prepare_fresh100_score_handoff.py` aracını ekledi. Aynı fresh100 koşusu
+artık yalnız skor için gereken üç sınırlı artifact'i yayımlayabilir:
+`live-acceptance-state`, `live-acceptance-evidence` ve
+`valuation-source-state`. Finansal run işareti aynı `GITHUB_RUN_ID`
+değeridir; eski sequence-11 checkpoint'i yeni kohorta taşınmaz.
+
+`first-live-score.yml`, yalnız main'deki fresh100 iş akışının ilk
+`run_attempt=1` sonucunu kabul eder. Eski commit Re-run işlemleri ve farklı
+kohortlar fail-closed kalır. Kaynak sırası, mali değerler, skor ağırlıkları,
+`MAX_REVIEWED_SEQUENCE`, katılım durumu ve yatırım kararı değişmedi.
+
+Yerel dar test: 5/5 başarılı. PR head
+`e1e6832b1f42d9cd955d11621eca2b6a827c9dae`; Foundation run
+`45178566556` Python 3.11/3.12/3.13 başarılı. Merge
+`594e08b6e76bee56bb20ba3b6647dcd0d43794a2`; main Foundation run
+`45179212522` aynı üç sürümde başarılı.
+
+Canlı/yerel ayrımı: bu oturumda yeni 100 şirket SEC/değerleme taraması
+başlatılmadı ve yeni artifact/skor üretilmedi. Son geçerli canlı sonuç
+9/100 puanlı, 91/100 puansızdır. #136 kabul edilmedi. Aynı günkü
+`US five issuer evidence expansion` run `45178797946` başarısızlığı,
+PR #195'in 2/5 kabulü yeşil göstermeme amaçlı fail-closed sonucudur ve bu
+100 şirket devir hattının CI sonucu değildir.
+
+Sıradaki tek iş: `fresh100-live-request.json` değerini yeni, açık bir
+tek-seferlik talep olarak güncelleyip ilk deneme fresh100 koşusunu başlatmak;
+üç artifact'in aynı run/100 kimlik zincirini ve ardından tek skorlama
+sonucunu doğrulamak.
+
+
 ## 23 Kasım 2026 — Beş şirket canlı tam zincir kabulü için yanlış-pozitif giderme
 
 `scripts/audit_us_five_live_run.py` beş şirketin gerçek SEC batch, skorlu rapor, eksik GAAP ve son kabul arşivlerinin aynı GitHub Actions çalışmasında üretilmesini açıkça kontrol eder. Eksik dosya, 5/5 dışında puan, tamamlanmamış karşılaştırma veya açık kaynak boşluğu için makine okunabilir `us-five-stage-audit.json` dosyası üretir ve iş akışını başarısız sonlandırır. Önceki iş akışındaki eksik SEC_USER_AGENT gizlisinin başarıyla atlanması engellenir. Geçmişten gelen ve beşli pilot için geçerli olmayan canlı test sayıları yeni puan diye gösterilmez.
@@ -17,8 +51,6 @@ Genel `plan_missing_financial_data.py` çıktısındaki ABD/SEC eksiklerini sın
 **Kabul durumu:** Bu commit için PR CI ve gerçek ana dal SEC çalıştırması henüz doğrulanmamıştır; canlı 5/5, 100 şirket veya otomatik tamamlama iddiası yok. GitHub Actions geçici çalışma diskindeki SQLite, sonraki Actions oturumuna otomatik geri yüklenmiyor; iş akışları arası kalıcı checkpoint için ayrı restore+kanıt veya onaylı kalıcı depo zorunlu. Testlerde ağsız sahte CompanyFacts yanıtı kullanıldı; bu canlı kaynak doğrulaması değildir.
 
 **Tek sonraki öncelik:** PR CI başarı, merge sonrası canlı SEC evidence artifact; sonra kontrollü checkpoint restore ve kaynaklı exact fact'lerin sürümlü doğrulama sözleşmesi. Katılım ve gerçek emir kapalı.
-
-# Development status
 
 ## 22 Kasım 2026 — #136 kohort kapısı canlı zincirde doğrulandı
 
