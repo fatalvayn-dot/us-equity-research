@@ -25,6 +25,12 @@ class RecoveryPlanTests(unittest.TestCase):
         a["period_end"]="2026-03-31"
         self.assertNotEqual(b,plan({"companies":[a]})["tasks"][0]["task_id"])
 
+    def test_change_in_accounting_definition_invalidates_recovery_cache(self):
+        a=issuer(1,["liabilities"])
+        before=plan({"companies":[a]})["tasks"][0]["task_id"]
+        a["missing_required_facts"][0]["required_concept"]="us-gaap:LiabilitiesAndStockholdersEquity"
+        self.assertNotEqual(before,plan({"companies":[a]})["tasks"][0]["task_id"])
+
     def test_verified_cache_skips_unneeded_research_but_never_fills_score(self):
         source={"companies":[issuer(1,["liabilities"])]}
         first=plan(source)["tasks"][0]
