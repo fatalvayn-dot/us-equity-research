@@ -39,6 +39,16 @@ def inputs():
 
 
 class SourceGapTests(unittest.TestCase):
+    def test_missing_source_period_is_carried_to_recovery_worker(self):
+        a,b,c=inputs()
+        query=a["companies"][2]["fields"][-1]["query"]
+        query.update(period_start="2025-01-26",period_end="2026-01-25")
+        report=analyze(a,b,c)
+        missing=next(f for f in report["companies"][2]["missing_required_facts"]
+                     if f["field"]=="revenue")
+        self.assertEqual(missing["period_start"],"2025-01-26")
+        self.assertEqual(missing["period_end"],"2026-01-25")
+
     def test_missing_fields_and_review_explanations(self):
         report = analyze(*inputs())
         by = {c["symbol"]: c for c in report["companies"]}
