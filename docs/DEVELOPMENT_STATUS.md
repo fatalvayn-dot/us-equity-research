@@ -1,5 +1,15 @@
 # Development status
 
+## 23 Kasım 2026 — Beş şirket canlı tam zincir kabulü için yanlış-pozitif giderme
+
+`scripts/audit_us_five_live_run.py` beş şirketin gerçek SEC batch, skorlu rapor, eksik GAAP ve son kabul arşivlerinin aynı GitHub Actions çalışmasında üretilmesini açıkça kontrol eder. Eksik dosya, 5/5 dışında puan, tamamlanmamış karşılaştırma veya açık kaynak boşluğu için makine okunabilir `us-five-stage-audit.json` dosyası üretir ve iş akışını başarısız sonlandırır. Önceki iş akışındaki eksik SEC_USER_AGENT gizlisinin başarıyla atlanması engellenir. Geçmişten gelen ve beşli pilot için geçerli olmayan canlı test sayıları yeni puan diye gösterilmez.
+
+**Test/kabul kanıtı:** PR CI, ana dal canlı koşum ve bunların arşivleri ayrı ayrı raporlanacak. Bu değişiklik tek başına NVDA/AMZN/GOOGL finansal kapsam / GOOGL çoklu hisse sınıfı modelini çözmez. Araştırma genişlemesiyle yatırım uygunluk onayı aynı şey değildir; hiçbir otomatik emir/katılım onayı eklenmedi.
+
+**Sonraki öncelik:** Canlı run artefaktlarından en dar gerçek engeli düzelt; gereksiz 14 alan toplama/karşılaştırma tekrarlarını önle; beşlik kritik kaynak ve skor zinciri kanıtlanmadan 25'in kabulünü ilan etme.
+
+# Development status
+
 ## 23 Kasım 2026 — genel SEC eksik-veri işçisi, araştırma kanıtı (PR / CI doğrulaması bekleniyor)
 
 Genel `plan_missing_financial_data.py` çıktısındaki ABD/SEC eksiklerini sınırlı CIK grupları halinde araştıran `run_sec_gap_recovery.py` eklendi. Mevcut `SecCompanyFacts` ve kısıtlı HTTP taşıyıcısı kullanılır; şirket başına bir CompanyFacts snapshot'ı, eski gözlemleri tekrar indirmemek için SQLite kayıtları, özgün yanıt SHA-256'sı, accession/filing tarihleri ve exact/scope/missing durumları bulunur. Bu ilk işçi SEC kaynaklarını sorgular, fakat değerleri skor motoruna yazmaz; BIST/EU işçileri henüz yoktur. `unified_us_five_source_gaps.py` kayıp alanın dönem başlangıç/bitişini yeniden taşır. `unified-us-five-proof.yml` ana dal canlı raporundan sonra araştırma kanıtını/artifact'ini saklayacak.
