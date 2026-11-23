@@ -4,6 +4,7 @@ This is a deterministic evidence report, not an LLM trading recommendation.
 Missing or issuer-mismatched source material fails closed.
 """
 import argparse
+from decimal import Decimal, InvalidOperation
 import json
 from pathlib import Path
 from equity_research.mvp import save_json
@@ -62,9 +63,15 @@ def verdict(scored, gaps, original):
                 or s.get("participation") != "bilinmiyor"):
             raise ValueError("source score/trade gate not fail-closed")
         score = s.get("score")
-        issues = list(g.get("gaps", []))
-        if not isinstance(issues, list) or any(not isinstance(x, str) for x in issues):
+        issues = g.get("gaps")
+        if not isinstance(issues, list) or any(not isinstance(x, str) or not x.strip() for x in issues):
             raise ValueError("source gap list invalid")
+        if score is not None:
+            try:
+                if isinstance(score, bool) or not (Decimal("0") <= Decimal(str(score)) <= Decimal("100")):
+                    raise ValueError("invalid research score")
+            except (InvalidOperation, TypeError, ValueError) as exc:
+                raise ValueError("invalid research score") from exc
         reviewer = by_original.get(symbol)
         if reviewer is not None:
             if (reviewer.get("source_hash_reverified") is not True
