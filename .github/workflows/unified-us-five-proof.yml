@@ -12,6 +12,8 @@ on:
       - scripts/us_five_final_verdict.py
       - scripts/us_five_missing_data_agent.py
       - scripts/plan_missing_financial_data.py
+      - scripts/run_sec_gap_recovery.py
+      - tests/test_run_sec_gap_recovery.py
       - tests/test_plan_missing_financial_data.py
       - tests/test_us_five_missing_data_agent.py
       - tests/test_us_five_final_verdict.py
@@ -28,6 +30,9 @@ on:
       - scripts/us_five_original_scope_audit.py
       - scripts/us_five_final_verdict.py
       - scripts/us_five_missing_data_agent.py
+      - scripts/plan_missing_financial_data.py
+      - scripts/run_sec_gap_recovery.py
+      - scripts/unified_us_five_source_gaps.py
 permissions:
   contents: read
 concurrency:
@@ -47,7 +52,7 @@ jobs:
       - name: Verify exact issuer registry, no-trade guards and provider failure isolation
         env:
           PYTHONPATH: .:src
-        run: python -m unittest -v tests.test_unified_us_five tests.test_unified_us_five_scoring tests.test_unified_us_five_source_gaps tests.test_us_five_original_scope_audit tests.test_us_five_final_verdict tests.test_us_five_missing_data_agent tests.test_plan_missing_financial_data tests.test_unified_single_issuer
+        run: python -m unittest -v tests.test_unified_us_five tests.test_unified_us_five_scoring tests.test_unified_us_five_source_gaps tests.test_us_five_original_scope_audit tests.test_us_five_final_verdict tests.test_us_five_missing_data_agent tests.test_plan_missing_financial_data tests.test_run_sec_gap_recovery tests.test_unified_single_issuer
       - name: Five-issuer live read-only evidence collector (main or manual only)
         if: github.event_name != 'pull_request'
         env:
@@ -141,6 +146,23 @@ jobs:
             --limit 500 \
             --out us-five-generic-recovery-plan.json \
             --markdown us-five-generic-recovery-plan.md
+      - name: Bounded SEC missing-field worker, verified candidate evidence only
+        if: always() && github.event_name != 'pull_request'
+        env:
+          PYTHONPATH: .:src
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        shell: bash
+        run: |
+          if [ ! -f us-five-generic-recovery-plan.json ] || [ -z "$SEC_USER_AGENT" ]; then
+            echo "Missing source plan or SEC contact; recovery not run"
+            exit 0
+          fi
+          python scripts/run_sec_gap_recovery.py \
+            --plan us-five-generic-recovery-plan.json \
+            --db data/us-five-recovery-checkpoint.sqlite \
+            --user-agent "$SEC_USER_AGENT" \
+            --max-issuers 5 \
+            --out us-five-sec-recovery-observations.json
       - name: Synthesize one fail-closed five-company expert acceptance verdict
         if: always() && github.event_name != 'pull_request'
         env:
@@ -179,6 +201,8 @@ jobs:
             us-five-missing-data-tasks.md
             us-five-generic-recovery-plan.json
             us-five-generic-recovery-plan.md
+            us-five-sec-recovery-observations.json
+            data/us-five-recovery-checkpoint.sqlite
             data/unified-us-five-scoring/score-plan.json
             data/unified-us-five-scoring/valuation-report.json
             data/unified-us-five-scoring/scoring/report.md
