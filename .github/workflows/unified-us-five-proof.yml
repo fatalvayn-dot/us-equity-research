@@ -10,6 +10,8 @@ on:
       - scripts/us_five_original_scope_audit.py
       - tests/test_us_five_original_scope_audit.py
       - scripts/us_five_final_verdict.py
+      - scripts/us_five_missing_data_agent.py
+      - tests/test_us_five_missing_data_agent.py
       - tests/test_us_five_final_verdict.py
       - tests/test_unified_us_five.py
       - .github/workflows/unified-us-five-proof.yml
@@ -23,6 +25,7 @@ on:
       - scripts/unified_us_five_source_gaps.py
       - scripts/us_five_original_scope_audit.py
       - scripts/us_five_final_verdict.py
+      - scripts/us_five_missing_data_agent.py
 permissions:
   contents: read
 concurrency:
@@ -42,7 +45,7 @@ jobs:
       - name: Verify exact issuer registry, no-trade guards and provider failure isolation
         env:
           PYTHONPATH: .:src
-        run: python -m unittest -v tests.test_unified_us_five tests.test_unified_us_five_scoring tests.test_unified_us_five_source_gaps tests.test_us_five_original_scope_audit tests.test_us_five_final_verdict tests.test_unified_single_issuer
+        run: python -m unittest -v tests.test_unified_us_five tests.test_unified_us_five_scoring tests.test_unified_us_five_source_gaps tests.test_us_five_original_scope_audit tests.test_us_five_final_verdict tests.test_us_five_missing_data_agent tests.test_unified_single_issuer
       - name: Five-issuer live read-only evidence collector (main or manual only)
         if: github.event_name != 'pull_request'
         env:
@@ -106,6 +109,21 @@ jobs:
             --root . \
             --out us-five-original-scope-audit.json \
             --markdown us-five-original-scope-audit.md
+      - name: Missing-data research worker creates bounded evidence-only task queue
+        if: always() && github.event_name != 'pull_request'
+        env:
+          PYTHONPATH: .:src
+        shell: bash
+        run: |
+          if [ ! -f us-five-source-gaps.json ] || [ ! -f us-five-original-scope-audit.json ]; then
+            echo "Research queue not generated: incomplete original source evidence"
+            exit 0
+          fi
+          python scripts/us_five_missing_data_agent.py \
+            --gaps us-five-source-gaps.json \
+            --original us-five-original-scope-audit.json \
+            --out us-five-missing-data-tasks.json \
+            --markdown us-five-missing-data-tasks.md
       - name: Synthesize one fail-closed five-company expert acceptance verdict
         if: always() && github.event_name != 'pull_request'
         env:
@@ -140,6 +158,8 @@ jobs:
             us-five-original-scope-audit.md
             us-five-final-verdict.json
             us-five-final-verdict.md
+            us-five-missing-data-tasks.json
+            us-five-missing-data-tasks.md
             data/unified-us-five-scoring/score-plan.json
             data/unified-us-five-scoring/valuation-report.json
             data/unified-us-five-scoring/scoring/report.md
