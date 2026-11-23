@@ -85,6 +85,8 @@ def analyze(sec_report, valuation_report, score_plan):
                     statuses.append({"source": source, "status": status})
             missing.append({
                 "field": name,
+                "period_start": row.get("query", {}).get("period_start") if row else None,
+                "period_end": row.get("query", {}).get("period_end") if row else None,
                 "required_concept": SPECS[name].accounting_definition,
                 "source_attempts": statuses,
                 "action": FOLLOWUPS.get(name, "Obtain the exact dated annual GAAP concept from original SEC facts."),
