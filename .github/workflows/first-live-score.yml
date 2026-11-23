@@ -2,7 +2,7 @@ name: İlk gerçek 100 puan araştırma skoru
 
 on:
   workflow_run:
-    workflows: ['Canlı değerleme kaynakları']
+    workflows: ['Canlı değerleme kaynakları', 'Yeni farkli 100 ABD sirketi canli finansal ve degerleme taramasi']
     types: [completed]
   workflow_dispatch:
     inputs:
@@ -42,6 +42,8 @@ jobs:
           VALUATION_RUN_INPUT: ${{ inputs.valuation_run_id }}
           TRIGGER_RUN: ${{ github.event.workflow_run.id }}
           EVENT_NAME: ${{ github.event_name }}
+          TRIGGER_WORKFLOW: ${{ github.event.workflow_run.name }}
+          TRIGGER_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
@@ -61,8 +63,17 @@ jobs:
             echo "::error::Değerleme kanıt paketi bulunamadı"
             exit 2
           fi
-          # An explicit or delayed trigger may point to an older package.
-          RUN=$(RESUME_RUN_INPUT="$RUN" python -m scripts.select_valuation_resume)
+          # Standard valuation triggers must use the newest safe continuation.
+          # A fresh100 trigger is already one isolated same-run cohort and must
+          # never be accepted from a GitHub rerun.
+          if [ "$EVENT_NAME" = "workflow_run" ] && [ "$TRIGGER_WORKFLOW" = "Yeni farkli 100 ABD sirketi canli finansal ve degerleme taramasi" ]; then
+            if [ "$TRIGGER_ATTEMPT" != "1" ]; then
+              echo "::error::fresh100 yeniden çalıştırması skor girdisi olamaz"
+              exit 2
+            fi
+          else
+            RUN=$(RESUME_RUN_INPUT="$RUN" python -m scripts.select_valuation_resume)
+          fi
           echo "ready=true" >> "$GITHUB_OUTPUT"
           echo "valuation_run=$RUN" >> "$GITHUB_OUTPUT"
 
