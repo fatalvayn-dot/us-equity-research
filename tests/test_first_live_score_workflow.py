@@ -13,7 +13,8 @@ class FirstLiveScoreWorkflowTests(unittest.TestCase):
 
     def test_live_source_handoff_and_main_guard(self):
         self.assertIn("workflow_run:",self.text)
-        self.assertIn("workflows: ['Canlı değerleme kaynakları']",self.text)
+        self.assertIn("'Canlı değerleme kaynakları'", self.text)
+        self.assertIn("'Yeni farkli 100 ABD sirketi canli finansal ve degerleme taramasi'", self.text)
         self.assertIn("types: [completed]",self.text)
         self.assertIn("head_branch == 'main'",self.text)
         self.assertIn("head_repository.full_name == github.repository",self.text)
@@ -30,6 +31,12 @@ class FirstLiveScoreWorkflowTests(unittest.TestCase):
                         self.text.index('echo "ready=true" >> "$GITHUB_OUTPUT"'))
         self.assertLess(self.text.index(selector),
                         self.text.index('name: Değerleme kaynak paketini indir'))
+
+    def test_fresh100_trigger_is_same_run_only_and_not_rerunnable(self):
+        self.assertIn("TRIGGER_WORKFLOW: ${{ github.event.workflow_run.name }}", self.text)
+        self.assertIn("TRIGGER_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}", self.text)
+        self.assertIn('if [ "$TRIGGER_ATTEMPT" != "1" ]; then', self.text)
+        self.assertIn("fresh100 yeniden çalıştırması skor girdisi olamaz", self.text)
 
     def test_financial_evidence_must_be_exactly_linked(self):
         self.assertIn("financial-source-run.json",self.text)
