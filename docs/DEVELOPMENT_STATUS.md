@@ -1,5 +1,15 @@
 # Development status
 
+## 23 Kasım 2026 — genel SEC eksik-veri işçisi, araştırma kanıtı (PR / CI doğrulaması bekleniyor)
+
+Genel `plan_missing_financial_data.py` çıktısındaki ABD/SEC eksiklerini sınırlı CIK grupları halinde araştıran `run_sec_gap_recovery.py` eklendi. Mevcut `SecCompanyFacts` ve kısıtlı HTTP taşıyıcısı kullanılır; şirket başına bir CompanyFacts snapshot'ı, eski gözlemleri tekrar indirmemek için SQLite kayıtları, özgün yanıt SHA-256'sı, accession/filing tarihleri ve exact/scope/missing durumları bulunur. Bu ilk işçi SEC kaynaklarını sorgular, fakat değerleri skor motoruna yazmaz; BIST/EU işçileri henüz yoktur. `unified_us_five_source_gaps.py` kayıp alanın dönem başlangıç/bitişini yeniden taşır. `unified-us-five-proof.yml` ana dal canlı raporundan sonra araştırma kanıtını/artifact'ini saklayacak.
+
+**Kabul durumu:** Bu commit için PR CI ve gerçek ana dal SEC çalıştırması henüz doğrulanmamıştır; canlı 5/5, 100 şirket veya otomatik tamamlama iddiası yok. GitHub Actions geçici çalışma diskindeki SQLite, sonraki Actions oturumuna otomatik geri yüklenmiyor; iş akışları arası kalıcı checkpoint için ayrı restore+kanıt veya onaylı kalıcı depo zorunlu. Testlerde ağsız sahte CompanyFacts yanıtı kullanıldı; bu canlı kaynak doğrulaması değildir.
+
+**Tek sonraki öncelik:** PR CI başarı, merge sonrası canlı SEC evidence artifact; sonra kontrollü checkpoint restore ve kaynaklı exact fact'lerin sürümlü doğrulama sözleşmesi. Katılım ve gerçek emir kapalı.
+
+# Development status
+
 ## 22 Kasım 2026 — #136 kohort kapısı canlı zincirde doğrulandı
 
 21 Kasım zamanlanmış [değerleme run 44926547883](https://github.com/fatalvayn-dot/us-equity-research/actions/runs/44926547883)
