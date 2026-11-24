@@ -10,7 +10,7 @@ from pathlib import Path
 
 from equity_research.fields import SPECS
 from equity_research.mvp import save_json
-from equity_research.scoring import REQUIRED
+from equity_research.scoring import ALTERNATE_DEFINITIONS, REQUIRED, V3_ALTERNATE_POLICY
 from scripts.unified_us_five import COHORT
 
 ISSUERS = dict(COHORT)
@@ -65,9 +65,20 @@ def analyze(sec_report, valuation_report, score_plan):
                 raise ValueError("duplicate/unregistered SEC accounting field")
             lookup[name] = field
         missing = []
+        alternates = []
         for name in REQUIRED:
             row = lookup.get(name)
             if row is not None and row.get("fact") is not None:
+                continue
+            # Model v3: a declared alternate concept with a collected fact covers the
+            # requirement, but only as an explicitly labeled non-equivalent definition.
+            alt = ALTERNATE_DEFINITIONS.get(name)
+            alt_row = lookup.get(alt) if alt else None
+            if alt_row is not None and alt_row.get("fact") is not None:
+                alternates.append({"required_field": name, "used_field": alt,
+                                   "required_concept": SPECS[name].accounting_definition,
+                                   "used_concept": SPECS[alt].accounting_definition,
+                                   "policy": V3_ALTERNATE_POLICY})
                 continue
             attempts = row.get("attempts", []) if row else []
             statuses = []
@@ -112,6 +123,7 @@ def analyze(sec_report, valuation_report, score_plan):
             "symbol": symbol, "issuer_id": cik,
             "missing_required_facts": missing,
             "missing_required_count": len(missing),
+            "alternate_definitions_used": alternates,
             "share_class_status": share_status,
             "risk_screen": risk_status,
             "unresolved_risk_checks": sorted(set(unresolved)),

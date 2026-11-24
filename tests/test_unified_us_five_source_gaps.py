@@ -63,6 +63,20 @@ class SourceGapTests(unittest.TestCase):
         self.assertFalse(report["investment_approved"])
         self.assertFalse(by["GOOGL"]["eligible_for_trade"])
 
+    def test_v3_alternate_with_collected_fact_covers_requirement_but_is_labeled(self):
+        sec,val,plan=inputs()
+        nvda=sec["companies"][2]["fields"]
+        nvda.append({"query":{"field":"revenue_total"},"fact":{"value":"100"},"attempts":[]})
+        nvda.append({"query":{"field":"productive_asset_cash_payments"},"fact":{"value":"5"},"attempts":[]})
+        by={c["symbol"]:c for c in analyze(sec,val,plan)["companies"]}
+        n=by["NVDA"]
+        self.assertEqual(n["missing_required_facts"],[])
+        self.assertEqual({a["required_field"]:a["used_field"] for a in n["alternate_definitions_used"]},
+            {"revenue":"revenue_total","capital_expenditure":"productive_asset_cash_payments"})
+        self.assertTrue(all(a["policy"]=="v3_declared_alternate_not_equivalent_to_required_definition" for a in n["alternate_definitions_used"]))
+        self.assertEqual({v["field"] for v in by["AMZN"]["missing_required_facts"]},{"capital_expenditure","liabilities"})
+        self.assertEqual(by["AMZN"]["alternate_definitions_used"],[])
+
     def test_cross_issuer_sec_evidence_rejected(self):
         a, b, c = inputs()
         a["companies"][1]["issuer_id"] = "0000320193"
