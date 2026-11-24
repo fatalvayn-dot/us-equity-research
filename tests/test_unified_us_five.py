@@ -146,6 +146,17 @@ class TransientRetryTests(unittest.TestCase):
         self.assertEqual(result["sec_batch_runs"], 2)
         self.assertEqual(result["transient_retry"], {"fields": 1, "attempted": True, "remaining": 1})
 
+    def test_budget_covers_every_factless_field_not_only_the_timed_out_one(self):
+        def collector(payload, **kwargs):
+            report = sec_with_gap("timeout")(payload)
+            report["companies"][2]["fields"] = [{"query": {"field": "revenue"}, "fact": None,
+                "attempts": [{"source": "SEC", "status": "missing"}]},
+                {"query": {"field": "capital_expenditure"}, "fact": None,
+                 "attempts": [{"source": "SEC", "status": "missing"}]}]
+            return report
+        _, runner, _ = self.run_case(collector)
+        self.assertEqual(runner.call_args_list[1].kwargs["max_new_fields"], 3)
+
     def test_resolved_after_retry_reports_no_remaining(self):
         calls = []
         def collector(payload, **kwargs):

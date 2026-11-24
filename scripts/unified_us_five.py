@@ -50,6 +50,13 @@ def transient_gaps(sec):
     return rows
 
 
+def factless_fields(sec):
+    """All fields without an accepted fact. The checkpoint queue treats every one of
+    them as eligible after the cooldown, so the retry budget must cover them all."""
+    return sum(1 for company in sec.get("companies", []) if isinstance(company, dict)
+               for field in company.get("fields", []) if isinstance(field, dict) and field.get("fact") is None)
+
+
 def research_five(*, user_agent, state_dir, fixture=None,
                   market_runner=None, sec_collector=None,
                   max_new_fields=70, sleep=time.sleep, retry_wait_seconds=45):
@@ -82,7 +89,7 @@ def research_five(*, user_agent, state_dir, fixture=None,
             sec = sec_collector({"companies": candidates},
                                 state_dir=state_dir, user_agent=user_agent,
                                 max_new_metadata=5, max_new_documents=5,
-                                max_new_fields=min(max_new_fields, len(retried)),
+                                max_new_fields=min(max_new_fields, max(len(retried), factless_fields(sec))),
                                 retry_delay=timedelta(seconds=retry_wait_seconds - 1))
             output["sec_batch_runs"] = 2
             output["transient_retry"]["attempted"] = True
