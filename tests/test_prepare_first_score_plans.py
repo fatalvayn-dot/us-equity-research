@@ -53,6 +53,32 @@ class FirstScorePlansTests(unittest.TestCase):
         self.assertEqual(prior["companies"][0]["fields"],["revenue"])
         self.assertFalse(report["full_scores_generated"])
         self.assertFalse(report["mvp_accepted"])
+    def _only_alternates(self):
+        """Issuer disclosing only Revenues and PaymentsToAcquireProductiveAssets."""
+        raw=json.loads(self.fact.body);g=raw["facts"]["us-gaap"]
+        g["Revenues"]=g.pop("RevenueFromContractWithCustomerExcludingAssessedTax")
+        g["PaymentsToAcquireProductiveAssets"]=g.pop("PaymentsToAcquirePropertyPlantAndEquipment")
+        body=json.dumps(raw).encode();self.write_cache(body);sha=hashlib.sha256(body).hexdigest()
+        rows=[]
+        for f in self.batch["companies"][0]["fields"]:
+            name=f["query"]["field"]
+            if name=="revenue":name="revenue_total"
+            elif name=="capital_expenditure":name="productive_asset_cash_payments"
+            from equity_research.fields import SPECS
+            f["query"]["field"]=f["fact"]["field"]=name
+            f["query"]["accounting_definition"]=f["fact"]["accounting_definition"]=SPECS[name].accounting_definition
+            if name=="revenue_total":f["fact"]["raw_sha256"]=sha
+            rows.append(f)
+    def test_v3_plans_alternate_revenue_only_when_declared(self):
+        self._only_alternates()
+        _,_,old=plans(self.batch,self.meta,self.valuation,self.root,maximum=1)
+        self.assertEqual(old["selected"],0)
+        self.assertIn("nine_model_financial_facts_incomplete",old["excluded_reasons"])
+        cur,pri,new=plans(self.batch,self.meta,self.valuation,self.root,maximum=1,v3=True)
+        self.assertEqual(new["selected"],1)
+        self.assertEqual(cur["companies"][0]["fields"],["revenue_total"])
+        self.assertEqual(pri["companies"][0]["fields"],["revenue_total"])
+        self.assertEqual(pri["companies"][0]["period_start"],"2024-01-01")
     def test_missing_prior_is_not_filled_or_guessed(self):
         raw=json.loads(self.fact.body)
         rows=raw["facts"]["us-gaap"]["RevenueFromContractWithCustomerExcludingAssessedTax"]["units"]["USD"]

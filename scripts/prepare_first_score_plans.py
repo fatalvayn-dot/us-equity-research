@@ -15,12 +15,13 @@ from equity_research.comparative import comparable_periods
 from equity_research.companyfacts import companyfacts_url
 from equity_research.mvp import save_json
 from equity_research.reporting import build_report
-from equity_research.scoring import MODELS, REQUIRED
+from equity_research.fields import SPECS
+from equity_research.scoring import ALTERNATE_DEFINITIONS, MODELS, REQUIRED
 from equity_research.sector_policy import excluded_banking_or_insurance
 from equity_research.transport import strict_json
 
 
-def revenue_periods(revenue, annual, companyfacts_dir, cik):
+def revenue_periods(revenue, annual, companyfacts_dir, cik, tag="RevenueFromContractWithCustomerExcludingAssessedTax"):
     """Return exact SEC periods or a reason the comparison cannot be planned."""
     if (not annual or revenue["period_end"] != annual[0]["report_end"]
             or revenue.get("filing_accession") != annual[0]["accession"]):
@@ -39,7 +40,7 @@ def revenue_periods(revenue, annual, companyfacts_dir, cik):
     if payload.get("cik") != int(cik):
         return None, "sec_issuer_identity_mismatch"
     rows = (payload.get("facts", {}).get("us-gaap", {})
-        .get("RevenueFromContractWithCustomerExcludingAssessedTax", {})
+        .get(tag, {})
         .get("units", {}).get("USD", []))
     current_start = date.fromisoformat(revenue["period_start"])
     current_end = date.fromisoformat(revenue["period_end"])
@@ -64,7 +65,7 @@ def revenue_periods(revenue, annual, companyfacts_dir, cik):
     return (current_rows[0], previous_rows[0]), None
 
 
-def plans(financial_batch, metadata, valuation, companyfacts_dir, *, maximum=None):
+def plans(financial_batch, metadata, valuation, companyfacts_dir, *, maximum=None, v3=False):
     # Default: consider every eligible input company. An explicit positive
     # maximum remains available only when a caller needs a bounded batch.
     if maximum is not None and (type(maximum) is not int or maximum < 1):
@@ -95,14 +96,18 @@ def plans(financial_batch, metadata, valuation, companyfacts_dir, *, maximum=Non
             reason = "unsupported_sector_or_entity_type"
         else:
             facts = {f["query"]["field"]: f["fact"] for f in company["fields"] if f.get("fact")}
-            if any(f not in facts for f in REQUIRED):
+            # v3 only: a declared alternate stands in for an absent required concept.
+            used = {f: (f if f in facts else ALTERNATE_DEFINITIONS.get(f) if v3 and ALTERNATE_DEFINITIONS.get(f) in facts else f)
+                    for f in REQUIRED}
+            rev = used["revenue"]
+            if any(used[f] not in facts for f in REQUIRED):
                 reason = "nine_model_financial_facts_incomplete"
-            elif facts["revenue"]["source"] != "SEC":
+            elif facts[rev]["source"] != "SEC":
                 reason = "current_revenue_sec_confirmation_pending"
             else:
                 annual = rowmeta["snapshot"].get("annual_filings", [])
                 try:
-                    periods, reason = revenue_periods(facts["revenue"], annual, companyfacts_dir, cik)
+                    periods, reason = revenue_periods(facts[rev], annual, companyfacts_dir, cik, SPECS[rev].tag)
                 except (OSError, ValueError, TypeError, KeyError, AttributeError, ArithmeticError):
                     periods, reason = None, "invalid_comparable_revenue_evidence"
                 if periods is not None:
@@ -115,12 +120,12 @@ def plans(financial_batch, metadata, valuation, companyfacts_dir, *, maximum=Non
                         market_pending.append(dict(symbol=symbol, issuer_id=cik,
                             current_period=[latest["start"], latest["end"]],
                             prior_period=[previous["start"], previous["end"]],
-                            accession=latest["accn"], raw_sha256=facts["revenue"]["raw_sha256"]))
+                            accession=latest["accn"], raw_sha256=facts[rev]["raw_sha256"]))
                     elif maximum is not None and len(current) >= maximum:
                         reason = "candidate_budget_exceeded"
                     else:
                         basis = dict(symbol=symbol, issuer_id=cik, currency="USD",
-                            fields=["revenue"], scope_status="pending_scope",
+                            fields=[rev], scope_status="pending_scope",
                             scope_reason="separate_security_sector_and_investment_review_pending")
                         current.append(dict(**basis, period_start=latest["start"], period_end=latest["end"]))
                         prior.append(dict(**basis, period_start=previous["start"], period_end=previous["end"]))

@@ -5502,3 +5502,11 @@ references persistent checkpoint libfile_c2f0ce03b15481918f6006f57cf4e7aa.
 No future run has been observed yet. Each trigger is a separate session, not
 continuous execution. Suppress identical blocker notifications. Repository
 creation remains the only requested user action; offline development can continue.
+
+## 2026-11-24 — Skor modeli v3: etiketli alternatif tanımlar (NVDA/AMZN/GOOGL ilk adım)
+
+Kök neden (canlı run 45178797946 ve özgün 10-K denetimi): NVDA sözleşme geliri ve PP&E alımını yayımlamıyor; yalnızca `Revenues` ve `PaymentsToAcquireProductiveAssets` var.
+Karar (sahip onaylı): `operating-sector-research-batch-v3`. Zorunlu kavram yoksa ve yalnızca o zaman, `revenue`→`revenue_total`, `capital_expenditure`→`productive_asset_cash_payments` kullanılır.
+Her kullanım satırda `alternate_definitions` ve `alternate_definitions_used_not_equivalent_to_required_concepts` ile etiketlenir; büyüme önceki yıl aynı kavramla hesaplanıp SEC ile doğrulanır; zorunlu kavram varsa alternatif yok sayılır.
+v2 (`ACTIVE_MODEL_VERSION`) davranışı değişmedi; üretim replay raporları aynı. Beşli akış (`unified_us_five_scoring.py`) v3 kullanır.
+Kapsam dışı (sonraki PR): AMZN literal `Liabilities` yok (türev etiketli taşınacak), GOOGL A/B/C sınıf değerleme modeli (B, A ekonomik hakkına endeksli varsayım). Bu PR'dan sonra beklenen canlı sonuç: NVDA skorlanabilir, AMZN ve GOOGL hâlâ puansız. Canlı doğrulama merge sonrası run'da yapılır; yatırım onayı yoktur.

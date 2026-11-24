@@ -18,7 +18,7 @@ from equity_research.score_html import render_score_html
 
 
 def build(*, financial, current, prior, sources, output, as_of, financial_sources=(),
-          sec_stage1=None, sec_raw_dir=None):
+          sec_stage1=None, sec_raw_dir=None, model_version=ACTIVE_MODEL_VERSION):
     output=Path(output).resolve()
     extra_source_labels=[str(Path(p)) for p in financial_sources]
     extra_sources=[Path(p).resolve() for p in financial_sources]
@@ -36,7 +36,7 @@ def build(*, financial, current, prior, sources, output, as_of, financial_source
                    if sec_stage1 is not None else None)
     responses=chain(read_bundle(inputs[3]),*(read_bundle(p) for p in extra_sources))
     report=build_score_report(financial_batch,current_batch,prior_batch,responses,as_of=as_of,
-                              model_version=ACTIVE_MODEL_VERSION)
+                              model_version=model_version)
     # Separate read-only corroboration is not a source selected by the resolver.
     if corroboration is not None:
         report['supplemental_sec_evidence']=corroboration

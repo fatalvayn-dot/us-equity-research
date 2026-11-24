@@ -14,6 +14,8 @@ from pathlib import Path
 from equity_research.mvp import save_json
 from equity_research.valuation_collection import run_collection
 from scripts.prepare_first_score_plans import plans
+from functools import partial
+from equity_research.scoring import V3_MODEL_VERSION
 from scripts.build_current_scores import build as build_scores
 from scripts.unified_us_five import COHORT, validate_cohort
 from scripts.unified_aapl_score_summary import WEIGHTS
@@ -143,8 +145,9 @@ def collect_and_score(*, input_report, sec_state, working_dir, user_agent,
         raise ValueError("completed SEC five-company batch evidence required")
     command = command or subprocess.run
     collector = collector or run_collection
-    planner = planner or plans
-    scorer = scorer or build_scores
+    # Five-company research uses model v3: declared, labeled alternates only.
+    planner = planner or partial(plans, v3=True)
+    scorer = scorer or partial(build_scores, model_version=V3_MODEL_VERSION)
     source_dir = root / "sec-seed"
     command([sys.executable, "scripts/export_mvp_evidence.py",
              "--state-dir", str(sec), "--output", str(root / "sec-export"),

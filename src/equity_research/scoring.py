@@ -27,6 +27,12 @@ from .sector_models import MODELS, PROFIT_BANDS
 MODEL_VERSION='technology-research-v1'
 OPERATING_MODEL_V1='operating-sector-research-v1'
 ACTIVE_MODEL_VERSION='operating-sector-research-batch-v2'
+# v3 = v2 arithmetic plus declared alternates, used only when the exact required
+# concept is absent. Every use is labeled; alternates are NOT equivalent concepts.
+V3_MODEL_VERSION='operating-sector-research-batch-v3'
+BATCH_MODELS=(ACTIVE_MODEL_VERSION,V3_MODEL_VERSION)
+ALTERNATE_DEFINITIONS=dict(revenue='revenue_total',capital_expenditure='productive_asset_cash_payments')
+V3_ALTERNATE_POLICY='v3_declared_alternate_not_equivalent_to_required_definition'
 # Batch artifacts are verified and transferred before scoring. This research
 # policy allows that processing delay; live collectors keep their 15-minute TTL.
 BATCH_MARKET_TTL=timedelta(hours=1)
@@ -79,7 +85,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
     verified inputs; critical review cannot be offset by any component points.
     """
     if not aware(as_of):raise ValueError('aware scoring cutoff required')
-    if model_version not in (MODEL_VERSION, OPERATING_MODEL_V1, ACTIVE_MODEL_VERSION):
+    if model_version not in (MODEL_VERSION, OPERATING_MODEL_V1, ACTIVE_MODEL_VERSION, V3_MODEL_VERSION):
         raise ValueError('unsupported model version')
     model_registry=LEGACY_MODELS if model_version==MODEL_VERSION else MODELS
     sources = {}
@@ -100,7 +106,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
             raise ValueError('future comparison')
         comparative = {c['issuer_id']: c for c in comparison['companies']}
     provenance=score_input_provenance(batch,current_comparison,prior_comparison,as_of=as_of)
-    market_ttl=BATCH_MARKET_TTL if model_version==ACTIVE_MODEL_VERSION else PRICE_TTL
+    market_ttl=BATCH_MARKET_TTL if model_version in BATCH_MODELS else PRICE_TTL
     valuations=build_valuation_report(batch,sources.values(),as_of=as_of,market_ttl=market_ttl)
     by_valuation={c['issuer_id']:c for c in valuations['companies']}
     companies=[]
@@ -167,7 +173,9 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
             if legal['blocked']:
                 row['blockers']=['fund_bdc_or_shell_disclosure_requires_specialized_review'];continue
             facts={f['query']['field']:Fact(**f['fact']) for f in company['fields'] if f['fact']}
-            missing=[f for f in REQUIRED if f not in facts]
+            alternates={f:a for f,a in ALTERNATE_DEFINITIONS.items() if model_version==V3_MODEL_VERSION and f not in facts and a in facts}
+            src=lambda f:alternates.get(f,f)
+            missing=[f for f in REQUIRED if f not in facts and f not in alternates]
             if missing or gate!='no_screen_trigger':
                 row.update(status='pending_model_inputs',blockers=['complete_financial_review_required'],missing_fields=missing);continue
             annual=snapshot.latest_annual()
@@ -179,20 +187,22 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
             cf=sources[companyfacts_url(cik)];payload=SecCompanyFacts._parse(cf,cik)[1];checks=[]
             for field in REQUIRED:
                 validation_stage='financial_confirmation.'+field
-                checks.append(confirm_score_field(facts[field], cf, payload, annual=annual,
+                checks.append(confirm_score_field(facts[src(field)], cf, payload, annual=annual,
                     original=sources.get(annual.source_url), as_of=as_of))
+                if field in alternates:checks[-1]['alternate_for']=field
             peer=comparative.get(cik)
             if peer is None or peer['symbol']!=symbol or peer['status']!='review_required':
                 row['blockers']=['comparable_revenue_required'];continue
-            growth=next((c for c in peer['calculations'] if c['field']=='revenue'),None)
+            rev=src('revenue')
+            growth=next((c for c in peer['calculations'] if c['field']==rev),None)
             if growth is None or growth['value'] is None:
                 row['blockers']=['comparable_revenue_required'];continue
             current,prior=(Fact(**f) for f in growth['inputs'])
-            if any(getattr(current,k)!=getattr(facts['revenue'],k) for k in ('issuer_id','period_start','period_end','currency','accounting_definition','value')):
+            if any(getattr(current,k)!=getattr(facts[rev],k) for k in ('issuer_id','period_start','period_end','currency','accounting_definition','value')):
                 row['blockers']=['growth_current_period_or_definition_conflict'];continue
-            request=FactRequest(cik,'revenue',prior.period_start,prior.period_end,'USD','currency',SPECS['revenue'].accounting_definition,as_of)
+            request=FactRequest(cik,rev,prior.period_start,prior.period_end,'USD','currency',SPECS[rev].accounting_definition,as_of)
             validation_stage='prior_revenue_confirmation'
-            check_prior=SecCompanyFacts(None)._extract(request,SPECS['revenue'].tag,cf,payload)
+            check_prior=SecCompanyFacts(None)._extract(request,SPECS[rev].tag,cf,payload)
             if check_prior is None or check_prior.value!=prior.value:raise ValueError('prior revenue confirmation mismatch')
             price=value['price'];shares=value['disclosed_shares']
             history=sources.get(history_url(symbol))
@@ -207,7 +217,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
                 row['blockers']=['quote_history_price_disagreement_requires_review'];continue
             if market['median_63_session_close_times_volume']<Decimal(5000000):
                 row['blockers']=['insufficient_observed_trading_liquidity'];continue
-            assets,liabilities,ca,cl,ni,oi,ocf,ppe,revenue=(facts[f].value for f in REQUIRED)
+            assets,liabilities,ca,cl,ni,oi,ocf,ppe,revenue=(facts[src(f)].value for f in REQUIRED)
             if assets<=0 or cl<=0 or revenue<=0 or ppe<0:
                 row['blockers']=['unsupported_ratio_base_or_payment_sign'];continue
             validation_stage='component_calculation'
@@ -246,6 +256,10 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
                         volatility_penalty=vol_penalty,liquidity_penalty=liquidity_penalty))
                 for name,basis in bases.items():row['components'][name]['basis']=basis
                 row['total_score']=sum(points.values())
+            if alternates:
+                row['alternate_definitions']=[dict(required_field=f,used_field=a,required_definition=SPECS[f].accounting_definition,
+                    used_definition=SPECS[a].accounting_definition,policy=V3_ALTERNATE_POLICY) for f,a in alternates.items()]
+                row['limitations']=row['limitations']+['alternate_definitions_used_not_equivalent_to_required_concepts']
             row.update(status='scored_research_hypothesis',model_scope_eligible=True,
                 evidence=dict(financial_confirmations=checks,prior_revenue_confirmation=asdict(check_prior),growth=growth),
                 metrics=dict(liabilities_to_assets=leverage,current_ratio=liquidity,operating_margin=margin,
@@ -263,7 +277,7 @@ def build_score_report(batch,current_comparison,prior_comparison,responses,*,as_
     ranking=[]
     for i,c in enumerate(ordered,1):
         c['rank']=i;ranking.append(dict(rank=i,symbol=c['symbol'],issuer_id=c['issuer_id'],score=c['total_score'],model_id=c['model_id']))
-    market_policy={} if model_version!=ACTIVE_MODEL_VERSION else dict(market_evidence_policy=dict(
+    market_policy={} if model_version not in BATCH_MODELS else dict(market_evidence_policy=dict(
         mode='dated_batch_research',maximum_response_age_seconds=int(market_ttl.total_seconds()),
         live_price_ttl_seconds=int(PRICE_TTL.total_seconds()),live_price_service=False))
     return dict(**market_policy,schema_version=1,model_version=model_version,as_of=as_of,score_weights=dict(SCORE_WEIGHTS),
