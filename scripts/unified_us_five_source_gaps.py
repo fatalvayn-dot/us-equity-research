@@ -153,8 +153,9 @@ def markdown(report):
     lines.extend(["", "## Gerekli kaynak araştırmaları"])
     for c in report["companies"]:
         for field in c["missing_required_facts"]:
+            seen = ", ".join(a["source"] + "=" + a["status"] for a in field["source_attempts"]) or "deneme kaydı yok"
             lines.append("- " + c["symbol"] + " / " + field["required_concept"]
-                         + ": " + field["action"])
+                         + ": " + field["action"] + " [sağlayıcı denemeleri: " + seen + "]")
         if c["share_class_status"] != "verified_dated_share_class":
             lines.append("- " + c["symbol"] + ": Orijinal SEC hisse sınıfı ve tarihli hisse adedi ayrıca doğrulanmalı.")
         if c["unresolved_risk_checks"]:
