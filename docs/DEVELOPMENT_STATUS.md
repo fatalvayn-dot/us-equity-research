@@ -1,5 +1,18 @@
 # Development status
 
+## 24 Kasım 2026 — #136 fresh100 skor devir giriş noktası düzeltildi
+
+Canlı fresh100 run [45187005935](https://github.com/fatalvayn-dot/us-equity-research/actions/runs/45187005935) tamamlandı fakat genel sonuç başarısızdır. Gerçek toplama adımları 100 yeni CIK+sembol için çalıştı: 98 şirkette SEC finansal fact, 100/100 geçerli fiyat, 79/100 doğrulanmış tarihli pay sınıfı ve 9/100 tam araştırma puanı gözlendi. Puansız 91 şirketin ana nedenleri: 59 finansal inceleme, 23 desteklenmeyen sektör/varlık türü, 8 dokuz-model finansal fact eksikliği ve 1 piyasa/pay kanıtı eksikliği. Bu 9/100 sonucu önceki kabul sayısını artırmaz.
+
+Devir adımı canlı veriden sonra `ModuleNotFoundError: No module named 'scripts'` ile durdu. Bu nedenle `live-acceptance-state`, `live-acceptance-evidence` ve `valuation-source-state` artifact'leri yayımlanmadı; bağlı `first-live-score` başlamadı. Korunan kanıt artifact'i `14825474340`, ZIP digest'i `sha256:42db775244bcefb4d0056f48769330a9d0633fd01528fa029520f771714d8db1`.
+
+PR [#204](https://github.com/fatalvayn-dot/us-equity-research/pull/204), doğrudan çalıştırılan devir betiğinin kardeş modül içe aktarımını düzeltti ve aynı çağrıyı kapsayan regresyon testi ekledi. Yerel odaklı testler 6/6 başarılı. Kesin head `78ef46bc89499a99760c996d9eb7765a4051a92f` için Foundation run `45393527971`, Python 3.11/3.12/3.13 başarılıdır. Squash merge `bc34a9e36d3cb7ccae42ad38f4e0934596ce7b7c`; main Foundation run `45394018289` aynı üç sürümde başarılıdır.
+
+Canlı/yerel ayrımı: bug düzeltmesi CI ve yerel testle doğrulandı; düzeltme sonrası yeni canlı SEC taraması veya yeni skor üretilmedi. Eski koşu Re-run edilmedi, ikinci toplayıcı başlatılmadı. #136 kalite kapısı henüz kabul edilmedi.
+
+Sıradaki tek iş: mevcut run `45187005935` kanıtını yeniden indirmeden kurtarabilen, ağ isteği yapmayan kontrollü bir artifact-recovery yolu tasarlayıp test etmek; aynı 100 kimlik ve SHA zincirinden üç standart devir artifact'ini üretip yalnız ardından tek `first-live-score` sonucunu doğrulamak.
+
+
 ## 23 Kasım 2026 — #136 aynı-kohort canlı doğrulaması başlatıldı
 
 PR #198, `fresh100-live-request.json` dosyasını
