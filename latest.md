@@ -1,6 +1,6 @@
 # Piyasa radarı — zamanlanmış araştırma
 
-- UTC zamanı: 2026-11-23T12:27:45.702091+00:00
+- UTC zamanı: 2026-11-24T02:11:16.934982+00:00
 - Durum: ok; kaynak kipi: live_attempt
 - Bu oturumdaki sinyal: 9
 - Yeni tahmin: 0; toplam: 9
