@@ -5,8 +5,9 @@ issuer; zero score never substitutes for missing evidence. No LLM calls here.
 """
 import argparse
 import json
+import time
 from pathlib import Path
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from equity_research.mvp import run_mvp, save_json
 from equity_research.participation_screen import assess_participation
@@ -34,9 +35,24 @@ def validate_cohort(companies):
     return [{"symbol": symbol, "issuer_id": cik} for symbol, cik in COHORT]
 
 
+TRANSIENT_STATUSES = frozenset({"timeout"})
+
+
+def transient_gaps(sec):
+    """Field rows with no fact whose only failures were transient provider timeouts."""
+    rows = []
+    for company in sec.get("companies", []) if isinstance(sec, dict) else []:
+        for field in company.get("fields", []) if isinstance(company, dict) else []:
+            attempts = field.get("attempts") if isinstance(field, dict) else None
+            if (isinstance(field, dict) and field.get("fact") is None and isinstance(attempts, list)
+                    and any(isinstance(a, dict) and a.get("status") in TRANSIENT_STATUSES for a in attempts)):
+                rows.append((company.get("symbol"), field.get("query", {}).get("field")))
+    return rows
+
+
 def research_five(*, user_agent, state_dir, fixture=None,
                   market_runner=None, sec_collector=None,
-                  max_new_fields=70):
+                  max_new_fields=70, sleep=time.sleep, retry_wait_seconds=45):
     if type(max_new_fields) is not int or not 0 <= max_new_fields <= 70:
         raise ValueError("five-issuer SEC field budget exceeds 70")
     if not isinstance(user_agent, str) or not user_agent.strip():
@@ -57,6 +73,20 @@ def research_five(*, user_agent, state_dir, fixture=None,
                             state_dir=state_dir, user_agent=user_agent,
                             max_new_metadata=5, max_new_documents=5,
                             max_new_fields=max_new_fields)
+        # One bounded second pass, only when a provider timed out: the checkpoint
+        # store reuses every collected fact and re-asks just the failed fields.
+        retried = transient_gaps(sec)
+        output["transient_retry"] = {"fields": len(retried), "attempted": False}
+        if retried and fixture is None:
+            sleep(retry_wait_seconds)
+            sec = sec_collector({"companies": candidates},
+                                state_dir=state_dir, user_agent=user_agent,
+                                max_new_metadata=5, max_new_documents=5,
+                                max_new_fields=min(max_new_fields, len(retried)),
+                                retry_delay=timedelta(seconds=retry_wait_seconds - 1))
+            output["sec_batch_runs"] = 2
+            output["transient_retry"]["attempted"] = True
+            output["transient_retry"]["remaining"] = len(transient_gaps(sec))
         if not isinstance(sec, dict):
             raise ValueError("SEC collector returned no report")
         sec_rows = sec.get("companies")

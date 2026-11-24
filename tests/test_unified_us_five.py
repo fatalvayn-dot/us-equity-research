@@ -114,3 +114,48 @@ class FiveIssuerTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def sec_with_gap(status, fact=None):
+    def run(payload, **kwargs):
+        report = sec(payload)
+        report["companies"][3]["fields"] = [{
+            "query": {"field": "liabilities"}, "fact": fact,
+            "attempts": [{"source": "Yahoo", "status": "unsupported_field"},
+                         {"source": "SEC", "status": "missing"},
+                         {"source": "Nasdaq", "status": status}]}]
+        return report
+    return run
+
+
+class TransientRetryTests(unittest.TestCase):
+    ARGS = dict(user_agent="Official research contact analyst@example.org", state_dir="x", market_runner=market)
+
+    def run_case(self, collector):
+        from unittest.mock import Mock
+        runner, sleeper = Mock(side_effect=collector), Mock()
+        result = cohort.research_five(sec_collector=runner, sleep=sleeper, **self.ARGS)
+        return result, runner, sleeper
+
+    def test_timeout_triggers_exactly_one_bounded_second_pass(self):
+        result, runner, sleeper = self.run_case(sec_with_gap("timeout"))
+        self.assertEqual(runner.call_count, 2);sleeper.assert_called_once_with(45)
+        second = runner.call_args_list[1].kwargs
+        self.assertEqual(second["max_new_fields"], 1)
+        self.assertLess(second["retry_delay"].total_seconds(), 45)
+        self.assertEqual(result["sec_batch_runs"], 2)
+        self.assertEqual(result["transient_retry"], {"fields": 1, "attempted": True, "remaining": 1})
+
+    def test_resolved_after_retry_reports_no_remaining(self):
+        calls = []
+        def collector(payload, **kwargs):
+            calls.append(kwargs)
+            return sec_with_gap("timeout")(payload) if len(calls) == 1 else sec(payload)
+        result, runner, _ = self.run_case(collector)
+        self.assertEqual(runner.call_count, 2);self.assertEqual(result["transient_retry"]["remaining"], 0)
+
+    def test_non_transient_gaps_and_clean_runs_are_never_retried(self):
+        for collector in (sec_with_gap("missing"), sec):
+            result, runner, sleeper = self.run_case(collector)
+            self.assertEqual(runner.call_count, 1);sleeper.assert_not_called()
+            self.assertEqual(result["sec_batch_runs"], 1);self.assertFalse(result["transient_retry"]["attempted"])

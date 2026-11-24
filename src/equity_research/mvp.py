@@ -100,7 +100,7 @@ def archive_coverage(batch, archive):
 
 
 def run_mvp(payload, *, state_dir, user_agent, max_new_metadata=None, max_new_documents=100,
-            max_new_fields=None, progress=None, seed_bundles=()):
+            max_new_fields=None, progress=None, seed_bundles=(), retry_delay=None):
     candidates=validate_candidates(payload)
     if ((max_new_metadata is not None and
          (type(max_new_metadata) is not int or not 0<=max_new_metadata<=100)) or
@@ -209,7 +209,7 @@ def run_mvp(payload, *, state_dir, user_agent, max_new_metadata=None, max_new_do
                 cache_dir=root/'companyfacts',response_archive=archive,transport_factory=http)
         store=BatchStore(root/'financial.sqlite')
         if plan['companies']:
-            batch=BatchRunner(store,factory).run(load_plan(plan),max_new_fields=max_new_fields)
+            batch=BatchRunner(store,factory,**({} if retry_delay is None else dict(retry_delay=retry_delay))).run(load_plan(plan),max_new_fields=max_new_fields)
         else:
             batch=dict(schema_version=1,generated_at=clock().isoformat(),companies=[],summary={})
         for c in batch['companies']:c['deferred_fields']=deferred.get(c['issuer_id'],[])
