@@ -1,4 +1,6 @@
 import json
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -7,6 +9,17 @@ from scripts.prepare_fresh100_score_handoff import prepare
 
 
 class Fresh100ScoreHandoffTests(unittest.TestCase):
+    def test_direct_script_entrypoint_loads_sibling_module(self):
+        script = Path(__file__).parents[1] / "scripts/prepare_fresh100_score_handoff.py"
+        result = subprocess.run(
+            [sys.executable, str(script), "--help"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("--run-id", result.stdout)
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name)
