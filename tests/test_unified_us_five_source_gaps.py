@@ -77,6 +77,16 @@ class SourceGapTests(unittest.TestCase):
         self.assertEqual({v["field"] for v in by["AMZN"]["missing_required_facts"]},{"capital_expenditure","liabilities"})
         self.assertEqual(by["AMZN"]["alternate_definitions_used"],[])
 
+    def test_markdown_lists_provider_attempt_statuses_for_missing_fields(self):
+        from scripts.unified_us_five_source_gaps import markdown
+        sec,val,plan=inputs()
+        report=analyze(sec,val,plan);text=markdown(report)
+        missing=[m for c in report["companies"] for m in c["missing_required_facts"]]
+        self.assertTrue(missing)
+        self.assertIn("sağlayıcı denemeleri:",text)
+        for m in missing:
+            for a in m["source_attempts"]:self.assertIn(a["source"]+"="+a["status"],text)
+
     def test_cross_issuer_sec_evidence_rejected(self):
         a, b, c = inputs()
         a["companies"][1]["issuer_id"] = "0000320193"
