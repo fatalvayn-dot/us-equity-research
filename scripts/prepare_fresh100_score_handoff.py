@@ -5,7 +5,10 @@ import json
 import shutil
 from pathlib import Path
 
-from scripts.verify_score_input_cohort import verify
+if __package__:
+    from .verify_score_input_cohort import verify
+else:
+    from verify_score_input_cohort import verify
 
 
 def digest(path: Path) -> str:
