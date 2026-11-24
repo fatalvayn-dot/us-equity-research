@@ -109,6 +109,12 @@ jobs:
             --score-plan data/unified-us-five-scoring/score-plan.json \
             --out us-five-source-gaps.json \
             --markdown us-five-source-gaps.md
+          echo "=== us-five-source-gaps.md (read-only log copy) ==="
+          cat us-five-source-gaps.md
+          if [ -f us-five-with-scores.md ]; then
+            echo "=== us-five-with-scores.md (read-only log copy) ==="
+            cat us-five-with-scores.md
+          fi
       - name: Reverify archived original NVDA AMZN GOOGL annual 10-K and GAAP scopes
         if: always() && github.event_name != 'pull_request'
         env:
