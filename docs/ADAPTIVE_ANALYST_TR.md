@@ -42,3 +42,18 @@ katılım onayı veya kendi kendini eğiten model üretmez.
 `python -m unittest tests.test_adaptive_daily_brief -v`
 
 Testler ağsızdır. Canlı piyasa verisi doğruluğu ayrıca izlenmelidir.
+
+## Tavsiye defteri ve sonuç doğrulaması
+
+`data/analyst/advice_ledger.jsonl` yalnızca eklenen, hash zincirli kayıtlardır (geçmiş tavsiye sessizce değiştirilemez; `verify` bozulmayı yakalar).
+Kayıt türleri: `advice` (görüş, referans fiyat ve tarihi, kıyas endeksi, ufuk, gerekçe, kanıt referansı, geçersiz kılma koşulu), `outcome` (ufuk dolunca ölçüm), `review` (hata sınıfı).
+
+Kurallar:
+- `AL` katılım uygunluğu bağımsız doğrulanmadan yazılamaz. Kayıt emir değildir (`investment_order=false`).
+- Fiyat gözlemi 4 günden eski veya gelecekte olamaz; ufuk dolmadan ve ufuk + 7 günden sonra sonuç ölçülmez (`gozlem_yok`).
+- Sonuç kıyas endeksine göre değerlendirilir (aşırı getiri). ±1 puan bandı `belirsiz`; `TUT/BEKLE` ölçülmez.
+- Her `yanlis` sonuç hata sınıfıyla işaretlenir: `veri`, `model`, `haber_yorumu`, `sans_belirsizlik`. `dogru` yalnızca doğru sonuca verilir.
+- Kalibrasyon raporu 25'ten az karara bağlanmış örnekte başarı oranı vermez (`yetersiz_ornek`); yeterli örnekte Wilson %95 aralığı verir ve yine avantaj kanıtı değildir.
+
+Komutlar: `python scripts/advice_ledger.py add|evaluate|review|report|verify`.
+Model veya eşik değişikliği yalnızca bu defterdeki hata sınıflarına dayanıp walk-forward testten geçince PR ile gelir.

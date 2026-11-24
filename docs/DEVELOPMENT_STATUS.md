@@ -5510,3 +5510,7 @@ Karar (sahip onaylı): `operating-sector-research-batch-v3`. Zorunlu kavram yoks
 Her kullanım satırda `alternate_definitions` ve `alternate_definitions_used_not_equivalent_to_required_concepts` ile etiketlenir; büyüme önceki yıl aynı kavramla hesaplanıp SEC ile doğrulanır; zorunlu kavram varsa alternatif yok sayılır.
 v2 (`ACTIVE_MODEL_VERSION`) davranışı değişmedi; üretim replay raporları aynı. Beşli akış (`unified_us_five_scoring.py`) v3 kullanır.
 Kapsam dışı (sonraki PR): AMZN literal `Liabilities` yok (türev etiketli taşınacak), GOOGL A/B/C sınıf değerleme modeli (B, A ekonomik hakkına endeksli varsayım). Bu PR'dan sonra beklenen canlı sonuç: NVDA skorlanabilir, AMZN ve GOOGL hâlâ puansız. Canlı doğrulama merge sonrası run'da yapılır; yatırım onayı yoktur.
+
+## 2026-11-24 — Tavsiye defteri ve sonuç doğrulaması
+
+`src/equity_research/advice_ledger.py` + `scripts/advice_ledger.py`: hash zincirli, yalnızca ekleme; `AL` katılım doğrulanmadan reddedilir; sonuç kıyas endeksine göre, ±1 puan belirsiz bandı; 25'ten az örnekte oran yok. 11 birim test. Henüz kayıt yok; ilk kayıtlar skorlu şirketlerden ve günlük özetin fiyat gözlemlerinden eklenecek. Günlük veri toplama zaten `adaptive-analyst-daily.yml` ile GitHub Actions'ta çalışır.
