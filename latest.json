@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at_utc": "2026-11-24T13:37:44.197893+00:00",
+    "generated_at_utc": "2026-11-24T23:52:57.153024+00:00",
     "status": "ok",
     "mode": "live_attempt",
     "agents": {
@@ -13,7 +13,7 @@
       "raporlama": "tamamlandi"
     },
     "current_forecasts": 9,
-    "new_predictions": 9,
+    "new_predictions": 0,
     "total_predictions": 18,
     "new_evaluations": 0,
     "total_evaluations": 0,
@@ -38,7 +38,7 @@
     }
   },
   "research": {
-    "generated_at_utc": "2026-11-24T13:37:44.197893+00:00",
+    "generated_at_utc": "2026-11-24T23:52:57.153024+00:00",
     "mode": "live_attempt",
     "forecast_status": "uncalibrated_research_only",
     "news": {
@@ -245,6 +245,51 @@
       {
         "symbol": "SAP.DE",
         "as_of": "2026-11-20",
+        "status": "pending"
+      },
+      {
+        "symbol": "AAPL",
+        "as_of": "2026-11-23",
+        "status": "pending"
+      },
+      {
+        "symbol": "MSFT",
+        "as_of": "2026-11-23",
+        "status": "pending"
+      },
+      {
+        "symbol": "SPY",
+        "as_of": "2026-11-23",
+        "status": "pending"
+      },
+      {
+        "symbol": "QQQ",
+        "as_of": "2026-11-23",
+        "status": "pending"
+      },
+      {
+        "symbol": "GLD",
+        "as_of": "2026-11-23",
+        "status": "pending"
+      },
+      {
+        "symbol": "SLV",
+        "as_of": "2026-11-23",
+        "status": "pending"
+      },
+      {
+        "symbol": "USO",
+        "as_of": "2026-11-23",
+        "status": "pending"
+      },
+      {
+        "symbol": "ASELS.IS",
+        "as_of": "2026-11-23",
+        "status": "pending"
+      },
+      {
+        "symbol": "SAP.DE",
+        "as_of": "2026-11-23",
         "status": "pending"
       }
     ],
