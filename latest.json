@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at_utc": "2026-11-24T02:11:16.934982+00:00",
+    "generated_at_utc": "2026-11-24T13:37:44.197893+00:00",
     "status": "ok",
     "mode": "live_attempt",
     "agents": {
@@ -13,8 +13,8 @@
       "raporlama": "tamamlandi"
     },
     "current_forecasts": 9,
-    "new_predictions": 0,
-    "total_predictions": 9,
+    "new_predictions": 9,
+    "total_predictions": 18,
     "new_evaluations": 0,
     "total_evaluations": 0,
     "direction_hit_rate": null,
@@ -38,7 +38,7 @@
     }
   },
   "research": {
-    "generated_at_utc": "2026-11-24T02:11:16.934982+00:00",
+    "generated_at_utc": "2026-11-24T13:37:44.197893+00:00",
     "mode": "live_attempt",
     "forecast_status": "uncalibrated_research_only",
     "news": {
@@ -48,11 +48,11 @@
     },
     "forecasts": [
       {
-        "as_of": "2026-11-20",
-        "close": 342.55999755859375,
-        "momentum_5": -0.038482,
-        "momentum_20": -0.014868,
-        "direction": "asagi",
+        "as_of": "2026-11-23",
+        "close": 349.0799865722656,
+        "momentum_5": -0.010488,
+        "momentum_20": 0.015033,
+        "direction": "kararsiz",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
         "confidence": null,
@@ -65,10 +65,10 @@
         "stooq_symbol": "aapl.us"
       },
       {
-        "as_of": "2026-11-20",
-        "close": 484.5199890136719,
-        "momentum_5": -0.075132,
-        "momentum_20": -0.076243,
+        "as_of": "2026-11-23",
+        "close": 492.5,
+        "momentum_5": -0.049209,
+        "momentum_20": -0.075291,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -82,10 +82,10 @@
         "stooq_symbol": "msft.us"
       },
       {
-        "as_of": "2026-11-20",
-        "close": 689.8099975585938,
-        "momentum_5": -0.085581,
-        "momentum_20": -0.092319,
+        "as_of": "2026-11-23",
+        "close": 722.2899780273438,
+        "momentum_5": -0.023867,
+        "momentum_20": -0.056287,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -99,10 +99,10 @@
         "stooq_symbol": "spy.us"
       },
       {
-        "as_of": "2026-11-20",
-        "close": 608.4500122070312,
-        "momentum_5": -0.105076,
-        "momentum_20": -0.136215,
+        "as_of": "2026-11-23",
+        "close": 651.030029296875,
+        "momentum_5": -0.016199,
+        "momentum_20": -0.085889,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -116,10 +116,10 @@
         "stooq_symbol": "qqq.us"
       },
       {
-        "as_of": "2026-11-20",
-        "close": 322.8699951171875,
-        "momentum_5": -0.091659,
-        "momentum_20": -0.119309,
+        "as_of": "2026-11-23",
+        "close": 333.0199890136719,
+        "momentum_5": -0.056413,
+        "momentum_20": -0.094612,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -133,10 +133,10 @@
         "stooq_symbol": "gld.us"
       },
       {
-        "as_of": "2026-11-20",
-        "close": 36.970001220703125,
-        "momentum_5": -0.162248,
-        "momentum_20": -0.241174,
+        "as_of": "2026-11-23",
+        "close": 38.90999984741211,
+        "momentum_5": -0.082095,
+        "momentum_20": -0.20037,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -150,10 +150,10 @@
         "stooq_symbol": "slv.us"
       },
       {
-        "as_of": "2026-11-20",
-        "close": 139.6300048828125,
-        "momentum_5": -0.040871,
-        "momentum_20": -0.17637,
+        "as_of": "2026-11-23",
+        "close": 133.36000061035156,
+        "momentum_5": -0.047633,
+        "momentum_20": -0.197738,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -167,10 +167,10 @@
         "stooq_symbol": "uso.us"
       },
       {
-        "as_of": "2026-11-20",
-        "close": 327.0,
-        "momentum_5": -0.053546,
-        "momentum_20": -0.033259,
+        "as_of": "2026-11-23",
+        "close": 325.5,
+        "momentum_5": -0.077904,
+        "momentum_20": -0.036982,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -184,10 +184,10 @@
         "stooq_symbol": null
       },
       {
-        "as_of": "2026-11-20",
-        "close": 183.67999267578125,
-        "momentum_5": -0.139471,
-        "momentum_20": -0.143284,
+        "as_of": "2026-11-23",
+        "close": 186.33999633789062,
+        "momentum_5": -0.126804,
+        "momentum_20": -0.122073,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
