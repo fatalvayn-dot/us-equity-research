@@ -1,5 +1,10 @@
 # Development status
 
+## 25 Kasım 2026 — kurtarma workflow adım çıktısı düzeltmesi
+
+Canlı run 45690183876 main üzerinde başarısız: source adımı kendi GITHUB_OUTPUT değerini aynı adımda tükettiği için artifact kimliği boş kaldı ve gh api HTTP 404 döndürdü. Uzak artifact doğrulaması sonraki adıma taşındı; boş ARTIFACT_ID açık hatayla reddedilir. Kimlik/digest/SHA kapıları korundu. Dört odaklı workflow testi yerelde geçti; canlı kurtarma ve yeni skor henüz doğrulanmadı. Sonraki iş: PR CI doğrulaması ardından main üzerinde tek yeni workflow_dispatch ve artifact/skor kontrolü.
+
+
 ## 25 Kasım 2026 — #136 mevcut fresh100 artifact’inden ağsız devir kurtarması
 
 PR [#211](https://github.com/fatalvayn-dot/us-equity-research/pull/211), fresh100 run [45187005935](https://github.com/fatalvayn-dot/us-equity-research/actions/runs/45187005935) tarafından üretilmiş mevcut artifact’i yeni SEC/değerleme isteği yapmadan doğrulayan kurtarma yolunu ekledi. Kaynak artifact kimliği `14825474340`, GitHub digest’i `sha256:42db775244bcefb4d0056f48769330a9d0633fd01528fa029520f771714d8db1` ve kaynak head `ac056f50b53c0f83c6f8802d333600525ea027f7` sabitlendi.

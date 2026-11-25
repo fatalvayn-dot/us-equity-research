@@ -48,7 +48,15 @@ jobs:
               out.write(f"artifact_id={pin['source_artifact_id']}\n")
               out.write(f"artifact_name={pin['source_artifact_name']}\n")
           PY
-          gh api "repos/$REPO/actions/artifacts/${{ steps.source.outputs.artifact_id }}" > artifact.json
+      - name: GitHub kaynak artifact kimliğini doğrula
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          ARTIFACT_ID: ${{ steps.source.outputs.artifact_id }}
+        run: |
+          set -euo pipefail
+          : "${ARTIFACT_ID:?Kaynak artifact kimliği boş}"
+          gh api "repos/$REPO/actions/artifacts/$ARTIFACT_ID" > artifact.json
           python - <<'PY'
           import json
           from pathlib import Path

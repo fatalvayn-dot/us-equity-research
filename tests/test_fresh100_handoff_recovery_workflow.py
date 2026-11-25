@@ -29,6 +29,14 @@ class Fresh100HandoffRecoveryWorkflowTests(unittest.TestCase):
         self.assertNotIn("collect-valuation-sources", self.text)
         self.assertNotIn("mvp-run", self.text)
 
+    def test_artifact_lookup_consumes_output_in_a_later_step(self):
+        source = self.text.split("        id: source\n", 1)[1].split("\n      - name:", 1)[0]
+        self.assertNotIn("steps.source.outputs", source)
+        self.assertNotIn("gh api", source)
+        self.assertIn("ARTIFACT_ID: ${{ steps.source.outputs.artifact_id }}", self.text)
+        self.assertIn(': "${ARTIFACT_ID:?Kaynak artifact kimliği boş}"', self.text)
+        self.assertIn('gh api "repos/$REPO/actions/artifacts/$ARTIFACT_ID"', self.text)
+
     def test_standard_three_artifacts_trigger_one_score_workflow(self):
         for name in ("live-acceptance-state", "live-acceptance-evidence",
                      "valuation-source-state"):
