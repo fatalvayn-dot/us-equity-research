@@ -2,7 +2,7 @@ name: İlk gerçek 100 puan araştırma skoru
 
 on:
   workflow_run:
-    workflows: ['Canlı değerleme kaynakları', 'Yeni farkli 100 ABD sirketi canli finansal ve degerleme taramasi']
+    workflows: ['Canlı değerleme kaynakları', 'Yeni farkli 100 ABD sirketi canli finansal ve degerleme taramasi', 'Fresh100 aynı-kohort artifact kurtarma']
     types: [completed]
   workflow_dispatch:
     inputs:
@@ -64,11 +64,14 @@ jobs:
             exit 2
           fi
           # Standard valuation triggers must use the newest safe continuation.
-          # A fresh100 trigger is already one isolated same-run cohort and must
-          # never be accepted from a GitHub rerun.
-          if [ "$EVENT_NAME" = "workflow_run" ] && [ "$TRIGGER_WORKFLOW" = "Yeni farkli 100 ABD sirketi canli finansal ve degerleme taramasi" ]; then
+          # Fresh100 and its pinned offline recovery are isolated same-cohort
+          # handoffs and must never be accepted from a GitHub rerun.
+          if [ "$EVENT_NAME" = "workflow_run" ] && {
+            [ "$TRIGGER_WORKFLOW" = "Yeni farkli 100 ABD sirketi canli finansal ve degerleme taramasi" ] ||
+            [ "$TRIGGER_WORKFLOW" = "Fresh100 aynı-kohort artifact kurtarma" ];
+          }; then
             if [ "$TRIGGER_ATTEMPT" != "1" ]; then
-              echo "::error::fresh100 yeniden çalıştırması skor girdisi olamaz"
+              echo "::error::fresh100 veya kurtarma yeniden çalıştırması skor girdisi olamaz"
               exit 2
             fi
           else
@@ -326,3 +329,4 @@ jobs:
       - name: Skor raporu üretilemediyse işi başarısız say
         if: steps.plan.outputs.ready == 'true' && steps.score.outcome != 'success'
         run: exit 1
+
