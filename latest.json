@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at_utc": "2026-11-24T23:52:57.153024+00:00",
+    "generated_at_utc": "2026-11-25T08:26:22.975080+00:00",
     "status": "ok",
     "mode": "live_attempt",
     "agents": {
@@ -13,8 +13,8 @@
       "raporlama": "tamamlandi"
     },
     "current_forecasts": 9,
-    "new_predictions": 0,
-    "total_predictions": 18,
+    "new_predictions": 7,
+    "total_predictions": 25,
     "new_evaluations": 0,
     "total_evaluations": 0,
     "direction_hit_rate": null,
@@ -38,7 +38,7 @@
     }
   },
   "research": {
-    "generated_at_utc": "2026-11-24T23:52:57.153024+00:00",
+    "generated_at_utc": "2026-11-25T08:26:22.975080+00:00",
     "mode": "live_attempt",
     "forecast_status": "uncalibrated_research_only",
     "news": {
@@ -48,11 +48,11 @@
     },
     "forecasts": [
       {
-        "as_of": "2026-11-23",
-        "close": 349.0799865722656,
-        "momentum_5": -0.010488,
-        "momentum_20": 0.015033,
-        "direction": "kararsiz",
+        "as_of": "2026-11-24",
+        "close": 354.07000732421875,
+        "momentum_5": 0.006138,
+        "momentum_20": 0.020081,
+        "direction": "yukari",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
         "confidence": null,
@@ -65,10 +65,10 @@
         "stooq_symbol": "aapl.us"
       },
       {
-        "as_of": "2026-11-23",
-        "close": 492.5,
-        "momentum_5": -0.049209,
-        "momentum_20": -0.075291,
+        "as_of": "2026-11-24",
+        "close": 496.1300048828125,
+        "momentum_5": -0.019971,
+        "momentum_20": -0.066249,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -82,10 +82,10 @@
         "stooq_symbol": "msft.us"
       },
       {
-        "as_of": "2026-11-23",
-        "close": 722.2899780273438,
-        "momentum_5": -0.023867,
-        "momentum_20": -0.056287,
+        "as_of": "2026-11-24",
+        "close": 718.780029296875,
+        "momentum_5": -0.01865,
+        "momentum_20": -0.066107,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -99,10 +99,10 @@
         "stooq_symbol": "spy.us"
       },
       {
-        "as_of": "2026-11-23",
-        "close": 651.030029296875,
-        "momentum_5": -0.016199,
-        "momentum_20": -0.085889,
+        "as_of": "2026-11-24",
+        "close": 638.0999755859375,
+        "momentum_5": -0.028693,
+        "momentum_20": -0.115286,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -116,10 +116,10 @@
         "stooq_symbol": "qqq.us"
       },
       {
-        "as_of": "2026-11-23",
-        "close": 333.0199890136719,
-        "momentum_5": -0.056413,
-        "momentum_20": -0.094612,
+        "as_of": "2026-11-24",
+        "close": 325.45001220703125,
+        "momentum_5": -0.076685,
+        "momentum_20": -0.125792,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -133,10 +133,10 @@
         "stooq_symbol": "gld.us"
       },
       {
-        "as_of": "2026-11-23",
-        "close": 38.90999984741211,
-        "momentum_5": -0.082095,
-        "momentum_20": -0.20037,
+        "as_of": "2026-11-24",
+        "close": 36.84000015258789,
+        "momentum_5": -0.136022,
+        "momentum_20": -0.25061,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -150,10 +150,10 @@
         "stooq_symbol": "slv.us"
       },
       {
-        "as_of": "2026-11-23",
-        "close": 133.36000061035156,
-        "momentum_5": -0.047633,
-        "momentum_20": -0.197738,
+        "as_of": "2026-11-24",
+        "close": 135.42999267578125,
+        "momentum_5": -0.034298,
+        "momentum_20": -0.173603,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
