@@ -9,6 +9,9 @@ on:
     paths:
       - 'scripts/market_radar_agents.py'
       - 'scripts/market_radar_pilot.py'
+      - 'data/analyst/radar_small_us_trial.json'
+      - 'tests/test_market_radar_universe.py'
+      - 'scripts/market_radar_universe.py'
       - 'requirements/market-radar.txt'
       - 'tests/test_market_radar_yfinance.py'
       - '.github/workflows/market-radar-agents.yml'
@@ -18,6 +21,9 @@ on:
       - 'tests/test_market_radar_agents.py'
       - '.github/workflows/market-radar-agents.yml'
       - 'scripts/market_radar_pilot.py'
+      - 'data/analyst/radar_small_us_trial.json'
+      - 'tests/test_market_radar_universe.py'
+      - 'scripts/market_radar_universe.py'
       - 'requirements/market-radar.txt'
       - 'tests/test_market_radar_yfinance.py'
 
@@ -43,11 +49,11 @@ jobs:
       - name: Offline pilot and agent regression
         env:
           PYTHONPATH: .:src
-        run: python -m unittest tests.test_market_radar_pilot tests.test_market_radar_agents tests.test_market_radar_yfinance -v
+        run: python -m unittest tests.test_market_radar_pilot tests.test_market_radar_agents tests.test_market_radar_yfinance tests.test_market_radar_universe -v
       - name: Live public-market-data smoke attempt
         env:
           PYTHONPATH: .:src
-        run: python scripts/market_radar_agents.py --output radar-output
+        run: python scripts/market_radar_agents.py --output radar-output --universe data/analyst/radar_small_us_trial.json
       - name: Preserve smoke report
         if: always()
         uses: actions/upload-artifact@v4
@@ -73,7 +79,7 @@ jobs:
       - name: Offline regression
         env:
           PYTHONPATH: .:src
-        run: python -m unittest tests.test_market_radar_pilot tests.test_market_radar_agents tests.test_market_radar_yfinance -v
+        run: python -m unittest tests.test_market_radar_pilot tests.test_market_radar_agents tests.test_market_radar_yfinance tests.test_market_radar_universe -v
       - name: Restore public forecast history
         shell: bash
         run: |
@@ -93,9 +99,9 @@ jobs:
           PUBLIC_RSS_URL: ${{ vars.MARKET_RSS_URL }}
         run: |
           if [ -n "$PUBLIC_RSS_URL" ]; then
-            python scripts/market_radar_agents.py --output radar-output --rss "$PUBLIC_RSS_URL"
+            python scripts/market_radar_agents.py --output radar-output --universe data/analyst/radar_small_us_trial.json --rss "$PUBLIC_RSS_URL"
           else
-            python scripts/market_radar_agents.py --output radar-output
+            python scripts/market_radar_agents.py --output radar-output --universe data/analyst/radar_small_us_trial.json
           fi
       - name: Upload evidence
         if: always()

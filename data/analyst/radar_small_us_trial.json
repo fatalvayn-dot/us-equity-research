@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "description": "Küçük deneme: mevcut 9 pilot korunur; yalnız 5 ek ABD adi hisse sembolünün fiyatı gözlemlenir. Resmi borsa/katılım uygunluğu değildir.",
+  "markets": {
+    "ABD": [
+      {
+        "symbol": "NVDA",
+        "currency": "USD"
+      },
+      {
+        "symbol": "AVGO",
+        "currency": "USD"
+      },
+      {
+        "symbol": "AMZN",
+        "currency": "USD"
+      },
+      {
+        "symbol": "GOOGL",
+        "currency": "USD"
+      },
+      {
+        "symbol": "META",
+        "currency": "USD"
+      }
+    ],
+    "BIST": [],
+    "AVRUPA": []
+  }
+}
