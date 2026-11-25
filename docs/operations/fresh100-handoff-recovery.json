@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "purpose": "fresh100_failed_handoff_artifact_recovery",
+  "source_run_id": 45187005935,
+  "source_run_head_sha": "ac056f50b53c0f83c6f8802d333600525ea027f7",
+  "source_artifact_name": "fresh100-first-live-financial-valuation-evidence",
+  "source_artifact_id": 14825474340,
+  "source_artifact_digest": "sha256:42db775244bcefb4d0056f48769330a9d0633fd01528fa029520f771714d8db1",
+  "candidate_sha256": "da247df01fb924960fa8a78fe8fd7c7a7075bbdf8f56c37393d8ae416d9e1a34",
+  "financial_observations": 398,
+  "financial_bundle_sha256": "13c95f3166ca1a362e31645df53e279026694151ce9f4bdf5e0f79e5eb43aa1f",
+  "valuation_observations": 661,
+  "valuation_bundle_sha256": "3dca987366ab992c078fcf51980ffb8266e50d3e2f9dbd2a2a59ee0021618c63",
+  "companyfacts_snapshots": 97,
+  "invalid_companyfacts_observations": 2,
+  "network_requests_allowed": false,
+  "investment_approved": false
+}
