@@ -1,5 +1,16 @@
 # Development status
 
+## 25 Kasım 2026 — fresh100 arşiv kesim zamanı ve güncel analiz ayrıldı
+
+PR #213 (merge 5a74abdc686c07bf286f535b0e075ae4cfbcb9f8) sonrası recovery run 45690963105 başarılıdır; dört artifact yayımlandı, 100 kimlik kohortu doğrulandı. Otomatik first-live-score run 45691125903 teknik olarak başarılı fakat 0/100 tam puan üretmiştir. Nihai ilk engeller: 42 stale_share_companyfacts, 2 diğer değerleme kanıtı, 51 sektör modeli, 5 kritik finansal inceleme. Ön elemedeki dokuz şirketin tamamı 23 Kasım snapshot'lerinin 25 Kasım kesiminde altı saat sınırını aşması nedeniyle durmuştur.
+
+Düzeltme: recovery artık özgün skor manifestinin SHA ile bağlı 2026-11-23T14:13:54.074758+00:00 kesiminde ayrı, sağlayıcı erişimsiz arşiv replay raporu üretir. Özgün Yahoo→SEC önceliği, gözlem tarihleri, şirket kimlikleri ve bütünlük kapıları korunur. Güncel skor akışı recovery olayından tetiklenmez; manuel recovery paketi de güncel skor girdisi olarak reddedilir. Altı saat sınırı gevşetilmedi. HTML/Markdown/JSON ve makbuz arşiv niteliğini açıkça gösterir.
+
+Gerçek arşiv ZIP SHA-256 değeri sabit digest ile eşleşti: 42db775244bcefb4d0056f48769330a9d0633fd01528fa029520f771714d8db1. Yerel gerçek-artifact yeniden hesaplamasında 9/100 puan, tüm sıralama ve şirket/puan eşleşmeleri özgün raporla aynıdır; 91 puansız kaldı. İlk eşitlik kontrolünde Decimal/JSON metin temsil farkı yakalandı; değerler değiştirilmeden standart JSON kodlamasıyla karşılaştırma düzeltildi. 23 odaklı regresyon/bütünlük/ayrım testi geçti. Fixture testleri canlı kabul değildir. GitHub CI ve yeni recovery workflow sonucu henüz doğrulanmadı; güncel yatırım çıktısı veya #136 kabulü yoktur.
+
+Sıradaki tek iş: PR CI sonrası doğrulanmış düzeltmeyi main'e almak ve tek yeni recovery workflow_dispatch ile fresh100-archived-score-replay artifact'ini doğrulamak. Daha sonraki güncel analiz, gerekli piyasa ve SEC kaynaklarının yeni gözlemlerini gerektirir.
+
+
 ## 25 Kasım 2026 — kurtarma workflow adım çıktısı düzeltmesi
 
 Canlı run 45690183876 main üzerinde başarısız: source adımı kendi GITHUB_OUTPUT değerini aynı adımda tükettiği için artifact kimliği boş kaldı ve gh api HTTP 404 döndürdü. Uzak artifact doğrulaması sonraki adıma taşındı; boş ARTIFACT_ID açık hatayla reddedilir. Kimlik/digest/SHA kapıları korundu. Dört odaklı workflow testi yerelde geçti; canlı kurtarma ve yeni skor henüz doğrulanmadı. Sonraki iş: PR CI doğrulaması ardından main üzerinde tek yeni workflow_dispatch ve artifact/skor kontrolü.

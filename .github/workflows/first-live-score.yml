@@ -2,7 +2,9 @@ name: İlk gerçek 100 puan araştırma skoru
 
 on:
   workflow_run:
-    workflows: ['Canlı değerleme kaynakları', 'Yeni farkli 100 ABD sirketi canli finansal ve degerleme taramasi', 'Fresh100 aynı-kohort artifact kurtarma']
+    # Arşiv kurtarması kendi özgün kesim zamanı ile ağsız doğrulanır;
+    # bugünün tarihiyle canlı puanlama tetiklemez.
+    workflows: ['Canlı değerleme kaynakları', 'Yeni farkli 100 ABD sirketi canli finansal ve degerleme taramasi']
     types: [completed]
   workflow_dispatch:
     inputs:
@@ -102,6 +104,8 @@ jobs:
               with Path(os.environ['GITHUB_OUTPUT']).open('a') as out:out.write('ready=false\n')
           else:
               raw=json.loads(marker.read_text())
+              if 'recovered_from_artifact_id' in raw:
+                  raise SystemExit('Arşiv kurtarma paketi güncel skor girdisi olamaz; fresh100-archived-score-replay raporunu kullanın.')
               run=raw['run_id']
               if type(run) is not int or run<=0:raise ValueError('invalid financial run identity')
               with Path(os.environ['GITHUB_OUTPUT']).open('a') as out:

@@ -18,7 +18,11 @@ from equity_research.score_html import render_score_html
 
 
 def build(*, financial, current, prior, sources, output, as_of, financial_sources=(),
-          sec_stage1=None, sec_raw_dir=None, model_version=ACTIVE_MODEL_VERSION):
+          sec_stage1=None, sec_raw_dir=None, model_version=ACTIVE_MODEL_VERSION,
+          mode='current_market_sources_with_recorded_financial_inputs'):
+    if mode not in ('current_market_sources_with_recorded_financial_inputs',
+                    'archived_source_replay_not_current_analysis'):
+        raise ValueError('unsupported score analysis mode')
     output=Path(output).resolve()
     extra_source_labels=[str(Path(p)) for p in financial_sources]
     extra_sources=[Path(p).resolve() for p in financial_sources]
@@ -37,6 +41,8 @@ def build(*, financial, current, prior, sources, output, as_of, financial_source
     responses=chain(read_bundle(inputs[3]),*(read_bundle(p) for p in extra_sources))
     report=build_score_report(financial_batch,current_batch,prior_batch,responses,as_of=as_of,
                               model_version=model_version)
+    if mode == 'archived_source_replay_not_current_analysis':
+        report['analysis_mode'] = mode
     # Separate read-only corroboration is not a source selected by the resolver.
     if corroboration is not None:
         report['supplemental_sec_evidence']=corroboration
@@ -54,7 +60,7 @@ def build(*, financial, current, prior, sources, output, as_of, financial_source
     save_text(output/'report.md',render_score_markdown(report))
     save_text(output/'report.html',render_score_html(report))
     save_json(output/'manifest.json',dict(as_of=as_of,summary=report['summary'],mvp_accepted=False,
-        mode='current_market_sources_with_recorded_financial_inputs',new_http_requests=0,
+        mode=mode,new_http_requests=0,
         source_bundle_manifest_sha256=hashlib.sha256((inputs[3]/'manifest.json').read_bytes()).hexdigest(),
         additional_financial_source_bundles=[dict(path=label,manifest_sha256=hashlib.sha256((p/'manifest.json').read_bytes()).hexdigest())
             for label,p in zip(extra_source_labels,extra_sources)],
