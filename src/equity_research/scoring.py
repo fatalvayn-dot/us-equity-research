@@ -294,6 +294,8 @@ def render_score_markdown(report):
     lines=['# ABD Hisse Araştırması — araştırma puanları','',f"Model: {cell(report['model_version'])}; kaynak verilerinin kesim zamanı: {cell(report['as_of'])}",'',
         'Puanlar araştırma varsayımlarıdır; yatırım onayı veya doğrulanmış getiri tahmini değildir. İlk sürümün (MVP) kabulü bekleniyor.','',
         '| Sıra | Sembol | Puan / 100 | Model |','| ---: | --- | ---: | --- |']
+    if report.get('analysis_mode') == 'archived_source_replay_not_current_analysis':
+        lines[2:2]=['Arşiv doğrulaması: kaynaklar özgün kesim zamanında yeniden hesaplandı. Güncel analiz veya bugüne ait yatırım önerisi değildir.', '']
     if report.get('input_provenance'):
         lines[4:4]=['Finansal ve karşılaştırma girdilerinin özgün kaynak tarihleri korunmuştur. Bu raporun üretilmesi 100 şirketin tüm finansal girdilerinin güncellendiği anlamına gelmez.', '']
         for name, source in report['input_provenance']['batches'].items():

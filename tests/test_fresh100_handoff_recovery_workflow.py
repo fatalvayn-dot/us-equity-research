@@ -37,11 +37,14 @@ class Fresh100HandoffRecoveryWorkflowTests(unittest.TestCase):
         self.assertIn(': "${ARTIFACT_ID:?Kaynak artifact kimliği boş}"', self.text)
         self.assertIn('gh api "repos/$REPO/actions/artifacts/$ARTIFACT_ID"', self.text)
 
-    def test_standard_three_artifacts_trigger_one_score_workflow(self):
+    def test_recovery_publishes_archived_replay_without_live_score_trigger(self):
         for name in ("live-acceptance-state", "live-acceptance-evidence",
                      "valuation-source-state"):
             self.assertIn(f"name: {name}", self.text)
-        self.assertIn("'Fresh100 aynı-kohort artifact kurtarma'", self.score)
+        triggers = self.score.split('    workflows:', 1)[1].split('\n', 1)[0]
+        self.assertNotIn('Fresh100 aynı-kohort artifact kurtarma', triggers)
+        self.assertIn('python -m scripts.replay_fresh100_archive', self.text)
+        self.assertIn('name: fresh100-archived-score-replay', self.text)
         self.assertIn('"Fresh100 aynı-kohort artifact kurtarma"', self.score)
         self.assertIn('if [ "$TRIGGER_ATTEMPT" != "1" ]; then', self.score)
 

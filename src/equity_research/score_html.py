@@ -6,6 +6,8 @@ from decimal import Decimal
 
 def render_score_html(report):
     def e(value):return escape(label(value),quote=True)
+    archive_notice = ('<p class="notice">Arşiv doğrulaması: kaynaklar özgün kesim zamanında yeniden hesaplandı. Güncel analiz veya bugüne ait yatırım önerisi değildir.</p>'
+                      if report.get('analysis_mode') == 'archived_source_replay_not_current_analysis' else '')
     def number(value,digits=6):return format(Decimal(str(value)),f'.{digits}f')
     ranked=''.join('<tr>'+''.join('<td>'+e(c[k])+'</td>' for k in ('rank','symbol','score','model_id'))+'</tr>' for c in report['ranking'])
     cards=[]
@@ -59,7 +61,7 @@ table{{border-collapse:collapse;width:100%;margin:12px 0}}td,th{{text-align:left
 summary{{cursor:pointer;font-weight:600}}label{{display:inline-block;margin:10px 16px 10px 0}}input,select{{padding:7px;font:inherit;max-width:100%}}
 [hidden]{{display:none!important}}a{{color:#075b9e}}
 </style></head><body><header><h1>ABD Hisse Araştırması</h1><p>Araştırma puanlama prototipi · Kaynak verilerinin kesim zamanı: {e(report['as_of'])}</p>
-{provenance}{market_policy}<p>{summary['candidates']} aday · {summary['scored_companies']} araştırma puanı · {summary['unscored']} puansız · {summary['critical_review']} kritik inceleme</p>
+{archive_notice}{provenance}{market_policy}<p>{summary['candidates']} aday · {summary['scored_companies']} araştırma puanı · {summary['unscored']} puansız · {summary['critical_review']} kritik inceleme</p>
 <p class="notice">100 aktif adi hisselik MVP henüz kabul edilmedi. Puanlar sınırlı sektör modelinin başlangıç hipotezidir;
 getiri başarısı, alım önerisi veya yatırım onayı değildir. Kayıtlı veriler canlı fiyat hizmeti olarak sunulmaz.</p>
 <h2>Puanlanabilen örnek şirketler</h2><div class="scroll"><table><thead><tr><th>Sıra</th><th>Sembol</th><th>Puan / 100</th><th>Model</th></tr></thead><tbody>{ranked}</tbody></table></div>

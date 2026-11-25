@@ -93,6 +93,23 @@ jobs:
             --output data/recovery/score-handoff \
             --publish-run-id "$GITHUB_RUN_ID"
 
+      - name: Arşiv skorunu özgün kesim zamanında ağsız doğrula
+        env:
+          PYTHONPATH: src
+        run: |
+          python -m scripts.replay_fresh100_archive \
+            --evidence data/recovery/source \
+            --recovered data/recovery/score-handoff \
+            --output data/recovery/archived-score
+
+      - name: Tarihli arşiv doğrulamasını yayımla
+        uses: actions/upload-artifact@v4
+        with:
+          name: fresh100-archived-score-replay
+          path: data/recovery/archived-score
+          if-no-files-found: error
+          retention-days: 90
+
       - name: Kurtarılan finansal skor durumunu yayımla
         uses: actions/upload-artifact@v4
         with:

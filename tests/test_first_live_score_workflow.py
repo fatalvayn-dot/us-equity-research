@@ -15,7 +15,8 @@ class FirstLiveScoreWorkflowTests(unittest.TestCase):
         self.assertIn("workflow_run:",self.text)
         self.assertIn("'Canlı değerleme kaynakları'", self.text)
         self.assertIn("'Yeni farkli 100 ABD sirketi canli finansal ve degerleme taramasi'", self.text)
-        self.assertIn("'Fresh100 aynı-kohort artifact kurtarma'", self.text)
+        triggers = self.text.split('    workflows:', 1)[1].split('\n', 1)[0]
+        self.assertNotIn('Fresh100 aynı-kohort artifact kurtarma', triggers)
         self.assertIn("types: [completed]",self.text)
         self.assertIn("head_branch == 'main'",self.text)
         self.assertIn("head_repository.full_name == github.repository",self.text)
@@ -46,6 +47,7 @@ class FirstLiveScoreWorkflowTests(unittest.TestCase):
         self.assertIn("prepare_first_score_plans.py",self.text)
         self.assertIn("--companyfacts-dir data/financial/companyfacts",self.text)
         self.assertIn("--cache-dir data/financial/companyfacts",self.text)
+        self.assertIn("if 'recovered_from_artifact_id' in raw:", self.text)
 
     def test_run_provenance_is_written_after_successful_score_without_push_trigger(self):
         self.assertNotIn("  push:", self.text)
