@@ -1,0 +1,118 @@
+name: Fresh100 aynı-kohort artifact kurtarma
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: fresh100-handoff-recovery
+  cancel-in-progress: false
+
+jobs:
+  recover:
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Sabitlenmiş kaynak artifact kimliğini doğrula
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          pin=json.loads(Path('docs/operations/fresh100-handoff-recovery.json').read_text())
+          if (pin.get('schema_version')!=1
+              or pin.get('purpose')!='fresh100_failed_handoff_artifact_recovery'
+              or pin.get('source_run_id')!=45187005935
+              or pin.get('source_run_head_sha')!='ac056f50b53c0f83c6f8802d333600525ea027f7'
+              or pin.get('source_artifact_name')!='fresh100-first-live-financial-valuation-evidence'
+              or pin.get('source_artifact_id')!=14825474340
+              or pin.get('source_artifact_digest')!='sha256:42db775244bcefb4d0056f48769330a9d0633fd01528fa029520f771714d8db1'
+              or pin.get('network_requests_allowed') is not False
+              or pin.get('investment_approved') is not False):
+              raise SystemExit('fresh100 recovery sabitlemesi değişmiş')
+          with Path(os.environ['GITHUB_OUTPUT']).open('a') as out:
+              out.write(f"run_id={pin['source_run_id']}\n")
+              out.write(f"artifact_id={pin['source_artifact_id']}\n")
+              out.write(f"artifact_name={pin['source_artifact_name']}\n")
+          PY
+          gh api "repos/$REPO/actions/artifacts/${{ steps.source.outputs.artifact_id }}" > artifact.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          pin=json.loads(Path('docs/operations/fresh100-handoff-recovery.json').read_text())
+          remote=json.loads(Path('artifact.json').read_text())
+          if (remote.get('id')!=pin['source_artifact_id']
+              or remote.get('name')!=pin['source_artifact_name']
+              or remote.get('digest')!=pin['source_artifact_digest']
+              or remote.get('expired') is not False
+              or remote.get('workflow_run',{}).get('id')!=pin['source_run_id']
+              or remote.get('workflow_run',{}).get('head_sha')!=pin['source_run_head_sha']):
+              raise SystemExit('GitHub artifact kimliği, digest veya kaynak commit uyuşmuyor')
+          PY
+
+      - name: Korunan canlı kanıt paketini indir
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SOURCE_RUN: ${{ steps.source.outputs.run_id }}
+          ARTIFACT_NAME: ${{ steps.source.outputs.artifact_name }}
+        run: |
+          set -euo pipefail
+          mkdir -p data/recovery/source
+          gh run download "$SOURCE_RUN" --repo "$REPO" \
+            --name "$ARTIFACT_NAME" --dir data/recovery/source
+
+      - name: Aynı kohort devir paketlerini ağsız kurtar
+        run: |
+          set -euo pipefail
+          python scripts/recover_fresh100_score_handoff.py \
+            --candidates docs/evidence/common100/candidates.json \
+            --recovery-manifest docs/operations/fresh100-handoff-recovery.json \
+            --evidence-root data/recovery/source \
+            --output data/recovery/score-handoff \
+            --publish-run-id "$GITHUB_RUN_ID"
+
+      - name: Kurtarılan finansal skor durumunu yayımla
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-acceptance-state
+          path: data/recovery/score-handoff/financial
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Kurtarılan finansal kaynak kanıtını yayımla
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-acceptance-evidence
+          path: data/recovery/score-handoff/financial-evidence
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Kurtarılan değerleme durumunu yayımla
+        uses: actions/upload-artifact@v4
+        with:
+          name: valuation-source-state
+          path: data/recovery/score-handoff/valuation
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Recovery makbuzunu sakla
+        uses: actions/upload-artifact@v4
+        with:
+          name: fresh100-handoff-recovery-receipt
+          path: data/recovery/score-handoff/valuation/cohort-handoff.json
+          if-no-files-found: error
+          retention-days: 90

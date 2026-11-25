@@ -15,6 +15,7 @@ class FirstLiveScoreWorkflowTests(unittest.TestCase):
         self.assertIn("workflow_run:",self.text)
         self.assertIn("'Canlı değerleme kaynakları'", self.text)
         self.assertIn("'Yeni farkli 100 ABD sirketi canli finansal ve degerleme taramasi'", self.text)
+        self.assertIn("'Fresh100 aynı-kohort artifact kurtarma'", self.text)
         self.assertIn("types: [completed]",self.text)
         self.assertIn("head_branch == 'main'",self.text)
         self.assertIn("head_repository.full_name == github.repository",self.text)
@@ -36,7 +37,8 @@ class FirstLiveScoreWorkflowTests(unittest.TestCase):
         self.assertIn("TRIGGER_WORKFLOW: ${{ github.event.workflow_run.name }}", self.text)
         self.assertIn("TRIGGER_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}", self.text)
         self.assertIn('if [ "$TRIGGER_ATTEMPT" != "1" ]; then', self.text)
-        self.assertIn("fresh100 yeniden çalıştırması skor girdisi olamaz", self.text)
+        self.assertIn("fresh100 veya kurtarma yeniden çalıştırması skor girdisi olamaz", self.text)
+        self.assertIn('[ "$TRIGGER_WORKFLOW" = "Fresh100 aynı-kohort artifact kurtarma" ]', self.text)
 
     def test_financial_evidence_must_be_exactly_linked(self):
         self.assertIn("financial-source-run.json",self.text)
@@ -90,3 +92,4 @@ class FirstLiveScoreWorkflowTests(unittest.TestCase):
 
 if __name__=="__main__":
     unittest.main()
+
