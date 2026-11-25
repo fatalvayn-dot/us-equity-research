@@ -115,6 +115,10 @@ jobs:
             echo "=== us-five-with-scores.md (read-only log copy) ==="
             cat us-five-with-scores.md
           fi
+          if [ -f us-five-with-scores.json ]; then
+            echo "=== us-five-daily-report.md (read-only log copy) ==="
+            python scripts/five_daily_report.py --scored us-five-with-scores.json --out us-five-daily-report.md
+          fi
       - name: Reverify archived original NVDA AMZN GOOGL annual 10-K and GAAP scopes
         if: always() && github.event_name != 'pull_request'
         env:
@@ -211,6 +215,7 @@ jobs:
             us-five-research.md
             us-five-with-scores.json
             us-five-with-scores.md
+            us-five-daily-report.md
             us-five-source-gaps.json
             us-five-source-gaps.md
             us-five-original-scope-audit.json
