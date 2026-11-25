@@ -1,5 +1,18 @@
 # Development status
 
+## 25 Kasım 2026 — #136 mevcut fresh100 artifact’inden ağsız devir kurtarması
+
+PR [#211](https://github.com/fatalvayn-dot/us-equity-research/pull/211), fresh100 run [45187005935](https://github.com/fatalvayn-dot/us-equity-research/actions/runs/45187005935) tarafından üretilmiş mevcut artifact’i yeni SEC/değerleme isteği yapmadan doğrulayan kurtarma yolunu ekledi. Kaynak artifact kimliği `14825474340`, GitHub digest’i `sha256:42db775244bcefb4d0056f48769330a9d0633fd01528fa029520f771714d8db1` ve kaynak head `ac056f50b53c0f83c6f8802d333600525ea027f7` sabitlendi.
+
+Yerel gerçek-artifact doğrulamasında 100 şirket kimliği, 398 finansal ve 661 değerleme gözlemi ile tüm parça/body SHA zinciri geçti. Özgün arşiv byte’larından 97 geçerli CompanyFacts önbelleği yeniden kuruldu. SEC şemasına uymayan iki CompanyFacts gözlemi otomatik fact/skor girdisi yapılmadı. Kurtarma makbuzu `network_requests=0`, `scores_generated=0`, `investment_approved=false` kaydetti. Odaklı regresyon paketi 20/20 başarılıdır.
+
+PR head `453976005abdfd3a78d8a28d21855b3878374783` için Foundation run `45619840897`, Python 3.11/3.12/3.13 başarılıdır. Squash merge `37dc285d391549c09063f07983ab8d52c3517a8a`. Eski run Re-run edilmedi, ikinci toplayıcı ve yeni SEC taraması başlatılmadı.
+
+Canlı/yerel ayrımı ve engel: kurtarma kodu gerçek artifact üzerinde yerelde ve PR CI’da doğrulandı; yeni `Fresh100 aynı-kohort artifact kurtarma` Actions koşusu henüz başlamadı. Bağlı GitHub erişimi workflow dispatch işlemi sunmuyor ve bulut tarayıcı GitHub oturumu girişsizdir. Güvenlik kapısını gevşetmek veya push ile dolaylı tetikleme eklemek yerine canlı kalite kapısı açık bırakıldı. Son gözlenen gerçek sonuç değişmedi: 9/100 puanlı, 91/100 puansız; yeni skor yoktur ve #136 kabul edilmedi.
+
+Sıradaki tek iş: main’de `Fresh100 aynı-kohort artifact kurtarma` workflow’unu bir kez `run_attempt=1` olarak çalıştırmak; üç standart artifact’in aynı 100 kimlik/SHA zincirini taşıdığını ve otomatik tek `first-live-score` sonucunu doğrulamak.
+
+
 ## 24 Kasım 2026 — #136 fresh100 skor devir giriş noktası düzeltildi
 
 Canlı fresh100 run [45187005935](https://github.com/fatalvayn-dot/us-equity-research/actions/runs/45187005935) tamamlandı fakat genel sonuç başarısızdır. Gerçek toplama adımları 100 yeni CIK+sembol için çalıştı: 98 şirkette SEC finansal fact, 100/100 geçerli fiyat, 79/100 doğrulanmış tarihli pay sınıfı ve 9/100 tam araştırma puanı gözlendi. Puansız 91 şirketin ana nedenleri: 59 finansal inceleme, 23 desteklenmeyen sektör/varlık türü, 8 dokuz-model finansal fact eksikliği ve 1 piyasa/pay kanıtı eksikliği. Bu 9/100 sonucu önceki kabul sayısını artırmaz.
