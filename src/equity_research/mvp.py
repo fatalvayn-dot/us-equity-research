@@ -27,6 +27,15 @@ FIELDS = ('revenue','assets','liabilities','net_income','operating_cash_flow','c
           'current_assets','current_liabilities','cash_equivalents','operating_income','gross_profit')
 
 
+NASDAQ_HOSTS=frozenset({'api.nasdaq.com','www.nasdaq.com'})
+
+
+def transport_limits(hosts):
+    """Nasdaq's balance-sheet endpoint is slow from cloud runners (10s read timeouts
+    left AMZN liabilities missing). Only Nasdaq gets a longer, still bounded window."""
+    return dict(timeout=20.0,budget=60.0) if set(hosts)<=NASDAQ_HOSTS else {}
+
+
 def save_json(path, payload):
     save_text(path, json.dumps(payload, default=encode, indent=2)+'\n')
 
@@ -143,7 +152,7 @@ def run_mvp(payload, *, state_dir, user_agent, max_new_metadata=None, max_new_do
         def http(hosts,accept='application/json'):
             group='sec' if set(hosts).issubset({'www.sec.gov','data.sec.gov'}) else ','.join(sorted(hosts))
             limiter=limiters.setdefault(group,RateLimiter())
-            return Recording(archive=archive,user_agent=user_agent,allowed_hosts=set(hosts),accept=accept,limiter=limiter)
+            return Recording(archive=archive,user_agent=user_agent,allowed_hosts=set(hosts),accept=accept,limiter=limiter,**transport_limits(hosts))
         client=SecSubmissions(http(['data.sec.gov']),cache_path=root/'submissions.sqlite')
         metadata=[]
         for row in candidates:
