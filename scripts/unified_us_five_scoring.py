@@ -105,6 +105,10 @@ def summarize(original, valuation, plan, scoring=None):
                 raise ValueError("score value malformed") from None
             row["score"] = str(total)
             row["score_components"] = evidence
+            risk = candidate.get("market_risk")
+            close = risk.get("latest_daily_close") if isinstance(risk, dict) else None
+            row["latest_daily_close"] = None if close is None else str(close)
+            row["alternate_definitions"] = candidate.get("alternate_definitions", [])
             row["score_status"] = "scored_research_hypothesis"
             row["blockers"] = [x for x in row["blockers"]
                                if x not in ("five_company_valuation_comparison_not_run",)]
