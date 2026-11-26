@@ -1,3 +1,18 @@
+# Kullanıcı tanımlı ürün akışı — 26 Kasım 2026
+
+Bu güncelleme, önceki katı “her finansal girdisi tamamlanmayan adaya hiç puan verme” yaklaşımını aşama bazında netleştirir. Eksik ama kritik olmayan bilgi ilk puanlamayı veya diğer şirketlerin taramasını durdurmaz. Güvenilir olmayan veriyi sıfırla doldurmak, kaynağı uydurmak veya belirsizliği gizlemek hâlâ yasaktır.
+
+1. Piyasa şirketlerini mümkün olduğunca keşfet; evren eksik olsa bile bulunan adaylarla ilerle.
+2. Katılımı uygun / uygun değil / belirsiz olarak sınıflandır. Uygun = kabul; uygun değil = ret; hızlıca çözülemeyen belirsiz = şartlı kabul olarak sonraki aşamaya geçer.
+3. Kabul ve şartlı kabul adaylara mevcut finansal veriler ve şirket haberleriyle basit ön puan ver. Eksikliği görünür kıl; ağır finansal sıkıntıyı ele, diğerlerini mevcut veriyle sırala.
+4. Üçüncü aşamadan geçenleri daha derin araştır; ayrı %0–%100 yatırım uygunluğu puanı üret. Kritik veri bulunamazsa alternatif kaynakları bir kez makul biçimde ara; yalnız ilgili şirketi derin puan/öneri dışında tut, diğerlerine devam et.
+5. Geçmiş dönemlerle geriye dönük backtest yapılmayacak.
+6. Erişilebilen şirket, haber, yatırımcı/fon, uzman, yatırım planı ve hedef verilerini araştır; önce kısa özet, istenirse ayrıntılı şirket raporu ver.
+7. Raporu olan şirket için gerekçeli AL / TUT / SAT / BEKLE seçeneği üret; gerçek emir verme.
+8. Üretilen kararları tarihli kaydet ve kısa/orta/uzun vadede ileriye dönük sonuç/isabet izle. Bu, tarihsel backtest değildir.
+
+İlk ve derin puan farklı alanlar olarak saklanır; kapsam, veri tarihi, yuvarlama ve belirsizlik açıkça gösterilir. Kullanıcının mevcut piyasa, katılım, maliyet ve kişisel veri sınırları aynen korunur. #134'teki 26.11.2026 ekinde ürün akışı, #135–#142 ise yazılım teslim issue'ları olarak ayrıştırılmıştır.
+
 # Araştırma ve geliştirme çalışma politikası
 Güncelleme: 14 Kasım 2026. Bu politika eski kapsam ve çalışma temposu hükümlerinin yerini alır; geçmiş kanıtları veya kabul sonuçlarını değiştirmez.
 

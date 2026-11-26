@@ -1,3 +1,17 @@
+## 26 Kasım 2026 — kullanıcı tanımlı 8 aşamalı akış ve mevcut artefakt denetimi
+
+Kullanıcı, ürün işleyişini 8 aşama olarak güncelledi: mümkün olduğunca geniş şirket keşfi; katılım uygun/ret/belirsiz ve çözülemeyene şartlı kabul; mevcut finansal veri/haberle eksik kritik olmayan girdileri tolere eden ön puan; kalanlar için ayrı derin %0–%100 puan; tarihsel backtest yok; erişilebilir tüm şirket/fon/haber/hedef kaynaklarıyla özetli araştırma; raporlu şirkete AL/TUT/SAT/BEKLE çıktısı; bu kararların tarihlenmiş kısa/orta/uzun vadeli ileriye dönük takibi. Ön puan ile derin puan farklı ürün alanlarıdır. Eksik veri sıfıra çevrilmez. Katılım ve güvenlik sınırları korunur.
+
+GitHub yönetimi: #134'e bu ürün akışı eklendi. Tarihsel Deepnote backtest isteği olan #138, kullanıcı kararıyla `not_planned` kapatıldı; bu test başarısı veya aşama kabulü sayılmıyor. #136 açık kaldı ve 3. aşama ön puanı ile 4. aşama derin puanını ayıracak şekilde güncellendi. #137 ve sonraki işler için kabul iddiası yok.
+
+Mevcut gerçek artefakt denetimi: canlı skor run [45691125903](https://github.com/fatalvayn-dot/us-equity-research/actions/runs/45691125903), artifact 15058947030, digest `sha256:72d32d2da1a49f8515a2d70db5f8e2c048ef82dd1e9f6dbee8d61d6be8bc7193`, veri kesimi 2026-11-25T20:03:24.483528Z. 100 aday, 0 derin model puanı, 100 puansız. Engeller örtüşüyor: 51 desteklenmeyen sektör modeli, 44 değerleme kaynak engeli (42 eski CompanyFacts pay verisi + 2 diğer kanıt), 5 kritik finansal inceleme. Bu mevcut tam-model sonucu, ön puanlamanın durması gerektiği anlamına gelmez.
+
+Arşiv replay run [45693968872](https://github.com/fatalvayn-dot/us-equity-research/actions/runs/45693968872), artifact 15059409362, digest `sha256:8e1df81eb3c8a729bc26da0a9bb57c90e07189fb1c070148e3f8fe5651914af5`, yalnızca 2026-11-23T14:13:54Z tarihli arşiv için ağsız tekrar üretimidir: 9/100 arşiv puanı, 91 puansız; güncel tarama/karar değildir. Kullanıcının ayrı 100 şirket ön puan/katılım raporunda 60 kabul, 37 ret, 3 bekle görünür; bu sayı canlı derin model sonucundan ayrıdır.
+
+Bu oturumda yeni SEC/finansal canlı tarama, yeni skor, yeni yatırım kararı veya kod değişikliği yapılmadı. Çalışma mevcut GitHub Actions artefaktını salt okunur inceledi; test çalıştırılmadı. Yapılan değişiklikler dokümantasyon/issue kapsamını kullanıcı tanımına uydurur.
+
+Tek sonraki iş: mevcut 100 şirket ön puan/katılım çıktısından derin araştırma sırasını kullan; şirket bazında kritik engelleri çözülemiyorsa yalnız o adayı çıkar ve diğerleri için erişilebilir verilerle detaylı puan/rapor üretimini ilerlet. Backtest başlatma.
+
 # Development status
 
 ## 25 Kasım 2026 — fresh100 arşiv kesim zamanı ve güncel analiz ayrıldı
