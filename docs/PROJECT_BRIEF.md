@@ -1,3 +1,18 @@
+# Kullanıcı tanımlı ürün akışı — 26 Kasım 2026
+
+Aşağıdaki akış bu brief içindeki daha eski aşama sıralamalarını ve katı puanlama ifadesini günceller; #135–#142 GitHub issue'ları teknik teslim listesidir, aşağıdaki kullanıcı akışıyla aynı numaralandırma değildir.
+
+1. İlgili piyasadaki şirketleri mümkün olduğunca listele; tam evren bulunamazsa bulunan adaylarla ilerle.
+2. Katılımı uygun/uygun değil/belirsiz olarak filtrele; çözülemeyen belirsizleri şartlı kabul olarak sonraki aşamaya taşı.
+3. Kabul ve şartlı kabul şirketlere mevcut finansal veri ve şirket haberleriyle toleranslı ön puan ver; kritik olmayan eksikler bekletmesin; ağır finansal sıkıntıyı ele.
+4. Kalanlara detaylı araştırma ve ayrı %0–%100 yatırım uygunluğu puanı uygula. Alternatif kaynaklarda bulunamayan kritik bilgi nedeniyle yalnız o şirket dışarıda kalır.
+5. Tarihsel backtest kaldırıldı.
+6. Erişilebilir haber, fon/yatırımcı hareketi, uzman görüşü, şirket planı ve hedefleriyle şirket raporu hazırla; önce özet, istenirse ayrıntı.
+7. Her raporlu şirket için gerekçeli AL/TUT/SAT/BEKLE üret.
+8. Kararları tarihleyerek sakla ve kısa/orta/uzun vadeli ileriye dönük sonuç/isabet takibi yap.
+
+Ön puan ile derin puan birbirinden ayrı tutulur. Eksik veri sıfırlanmaz; belirsizlik ve veri kapsamı puanla beraber görünür. Kaynak veya sonuç uydurulmaz. Ücretli servis, gerçek işlem, kaldıraç/opsiyon/marjin ve kamuya açık kişisel portföy verisi yoktur.
+
 # Güncel kapsam — 14 Kasım 2026
 
 [Çalışma politikası](RESEARCH_OPERATING_POLICY.md) güncel kapsam ve oturum kurallarını belirler. ABD/BIST/Avrupa araştırması kapsam içindedir; bankacılık ve sigortacılık kapsam dışıdır. Aşağıdaki eski kapsam kararları tarihsel kayıttır. Önceki kabul ve veri doğrulama eksikleri kendiliğinden kapanmış sayılmaz.
