@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at_utc": "2026-11-26T16:50:16.940702+00:00",
+    "generated_at_utc": "2026-11-27T01:42:39.490102+00:00",
     "status": "ok",
     "mode": "live_attempt",
     "agents": {
@@ -13,7 +13,7 @@
       "raporlama": "tamamlandi"
     },
     "current_forecasts": 9,
-    "new_predictions": 2,
+    "new_predictions": 0,
     "total_predictions": 36,
     "new_evaluations": 0,
     "total_evaluations": 0,
@@ -38,7 +38,7 @@
     }
   },
   "research": {
-    "generated_at_utc": "2026-11-26T16:50:16.940702+00:00",
+    "generated_at_utc": "2026-11-27T01:42:39.490102+00:00",
     "mode": "live_attempt",
     "forecast_status": "uncalibrated_research_only",
     "news": {
@@ -369,6 +369,16 @@
       },
       {
         "symbol": "USO",
+        "as_of": "2026-11-25",
+        "status": "pending"
+      },
+      {
+        "symbol": "ASELS.IS",
+        "as_of": "2026-11-25",
+        "status": "pending"
+      },
+      {
+        "symbol": "SAP.DE",
         "as_of": "2026-11-25",
         "status": "pending"
       }
