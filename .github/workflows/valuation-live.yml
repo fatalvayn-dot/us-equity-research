@@ -108,6 +108,22 @@ jobs:
               json.dumps(dict(run_id=int(os.environ['SOURCE_RUN'])))+'\n')
           PY
 
+      - name: Finansal kaynak kohortunu doğrula (dış kaynaktan önce)
+        if: steps.select.outputs.collect == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: live-acceptance-state
+          path: data/valuation-financial
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.select.outputs.source_run }}
+
+      - name: Finansal batch ile 100 adayın aynı kohort olduğunu doğrula
+        if: steps.select.outputs.collect == 'true'
+        run: |
+          python -m scripts.verify_financial_candidate_cohort \
+            --financial data/valuation-financial/batch.json \
+            --candidates docs/evidence/common100/candidates.json
+
       - name: Doğrulanmış finansal kaynak paketini indir
         if: steps.select.outputs.collect == 'true'
         uses: actions/download-artifact@v4
