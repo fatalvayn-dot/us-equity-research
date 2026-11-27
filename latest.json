@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at_utc": "2026-11-27T01:42:39.490102+00:00",
+    "generated_at_utc": "2026-11-27T12:10:06.878883+00:00",
     "status": "ok",
     "mode": "live_attempt",
     "agents": {
@@ -13,8 +13,8 @@
       "raporlama": "tamamlandi"
     },
     "current_forecasts": 9,
-    "new_predictions": 0,
-    "total_predictions": 36,
+    "new_predictions": 2,
+    "total_predictions": 38,
     "new_evaluations": 0,
     "total_evaluations": 0,
     "direction_hit_rate": null,
@@ -38,7 +38,7 @@
     }
   },
   "research": {
-    "generated_at_utc": "2026-11-27T01:42:39.490102+00:00",
+    "generated_at_utc": "2026-11-27T12:10:06.878883+00:00",
     "mode": "live_attempt",
     "forecast_status": "uncalibrated_research_only",
     "news": {
@@ -167,10 +167,10 @@
         "stooq_symbol": "uso.us"
       },
       {
-        "as_of": "2026-11-25",
-        "close": 313.75,
-        "momentum_5": -0.087273,
-        "momentum_20": -0.079237,
+        "as_of": "2026-11-26",
+        "close": 315.0,
+        "momentum_5": -0.065282,
+        "momentum_20": -0.121339,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -184,11 +184,11 @@
         "stooq_symbol": null
       },
       {
-        "as_of": "2026-11-25",
-        "close": 189.82000732421875,
-        "momentum_5": -0.021143,
-        "momentum_20": -0.101231,
-        "direction": "asagi",
+        "as_of": "2026-11-26",
+        "close": 194.13999938964844,
+        "momentum_5": 0.038071,
+        "momentum_20": -0.070656,
+        "direction": "kararsiz",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
         "confidence": null,
