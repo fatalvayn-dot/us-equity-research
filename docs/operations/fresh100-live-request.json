@@ -7,6 +7,6 @@
   "paid_sources": false,
   "source_discovery_run_id": 44550896092,
   "source_evidence_artifact_id": 14543976278,
-  "notes": "Isolated one-off user approved SEC financial and valuation research scan of fresh 100 with same-run scoring handoff; first run attempt only; old SQLite checkpoints not used; no Google Finance scraping or unlicensed ingestion.",
+  "notes": "Isolated user-authorized second Fresh100 scan on 2026-11-28 as a distinct Actions run; first attempt only; old SQLite checkpoints not used; same candidate SHA and no investment orders, paid sources, Google Finance scraping, or unlicensed ingestion.",
   "request_id": "fresh100-score-handoff-20261123-1"
 }
