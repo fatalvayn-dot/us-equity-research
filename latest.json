@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at_utc": "2026-11-27T21:13:24.054001+00:00",
+    "generated_at_utc": "2026-11-28T03:19:05.646630+00:00",
     "status": "ok",
     "mode": "live_attempt",
     "agents": {
@@ -13,8 +13,8 @@
       "raporlama": "tamamlandi"
     },
     "current_forecasts": 9,
-    "new_predictions": 0,
-    "total_predictions": 38,
+    "new_predictions": 7,
+    "total_predictions": 45,
     "new_evaluations": 0,
     "total_evaluations": 0,
     "direction_hit_rate": null,
@@ -38,7 +38,7 @@
     }
   },
   "research": {
-    "generated_at_utc": "2026-11-27T21:13:24.054001+00:00",
+    "generated_at_utc": "2026-11-28T03:19:05.646630+00:00",
     "mode": "live_attempt",
     "forecast_status": "uncalibrated_research_only",
     "news": {
@@ -48,10 +48,10 @@
     },
     "forecasts": [
       {
-        "as_of": "2026-11-25",
-        "close": 355.5799865722656,
-        "momentum_5": 0.008881,
-        "momentum_20": 0.034174,
+        "as_of": "2026-11-27",
+        "close": 358.5400085449219,
+        "momentum_5": 0.026717,
+        "momentum_20": 0.0276,
         "direction": "yukari",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -65,10 +65,10 @@
         "stooq_symbol": "aapl.us"
       },
       {
-        "as_of": "2026-11-25",
-        "close": 489.92999267578125,
-        "momentum_5": -0.036121,
-        "momentum_20": -0.077362,
+        "as_of": "2026-11-27",
+        "close": 492.8500061035156,
+        "momentum_5": -0.010937,
+        "momentum_20": -0.07034,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -82,11 +82,11 @@
         "stooq_symbol": "msft.us"
       },
       {
-        "as_of": "2026-11-25",
-        "close": 716.7000122070312,
-        "momentum_5": -0.018488,
-        "momentum_20": -0.072005,
-        "direction": "asagi",
+        "as_of": "2026-11-27",
+        "close": 728.3200073242188,
+        "momentum_5": 0.017391,
+        "momentum_20": -0.053343,
+        "direction": "kararsiz",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
         "confidence": null,
@@ -99,11 +99,11 @@
         "stooq_symbol": "spy.us"
       },
       {
-        "as_of": "2026-11-25",
-        "close": 633.9299926757812,
-        "momentum_5": -0.038786,
-        "momentum_20": -0.126349,
-        "direction": "asagi",
+        "as_of": "2026-11-27",
+        "close": 650.989990234375,
+        "momentum_5": 0.009224,
+        "momentum_20": -0.089957,
+        "direction": "kararsiz",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
         "confidence": null,
@@ -116,10 +116,10 @@
         "stooq_symbol": "qqq.us"
       },
       {
-        "as_of": "2026-11-25",
-        "close": 327.45001220703125,
-        "momentum_5": -0.040271,
-        "momentum_20": -0.123317,
+        "as_of": "2026-11-27",
+        "close": 334.3999938964844,
+        "momentum_5": -0.002327,
+        "momentum_20": -0.09271,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -133,10 +133,10 @@
         "stooq_symbol": "gld.us"
       },
       {
-        "as_of": "2026-11-25",
-        "close": 37.099998474121094,
-        "momentum_5": -0.088452,
-        "momentum_20": -0.243783,
+        "as_of": "2026-11-27",
+        "close": 39.400001525878906,
+        "momentum_5": -0.006054,
+        "momentum_20": -0.166667,
         "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
@@ -150,11 +150,11 @@
         "stooq_symbol": "slv.us"
       },
       {
-        "as_of": "2026-11-25",
-        "close": 139.88999938964844,
-        "momentum_5": 0.027772,
-        "momentum_20": -0.160173,
-        "direction": "kararsiz",
+        "as_of": "2026-11-27",
+        "close": 137.77000427246094,
+        "momentum_5": -0.002317,
+        "momentum_20": -0.180867,
+        "direction": "asagi",
         "horizon_sessions": 5,
         "method": "5d_20d_momentum_baseline",
         "confidence": null,
