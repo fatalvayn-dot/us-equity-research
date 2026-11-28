@@ -1,6 +1,7 @@
 name: Yeni farkli 100 ABD sirketi canli finansal ve degerleme taramasi
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths: ['docs/operations/fresh100-live-request.json']
